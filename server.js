@@ -8,6 +8,8 @@ mongoose.Promise = global.Promise;
 const {PORT, DATABASE_URL} = require('./config');
 //app.set('port', (process.env.PORT || 3001));
 
+const { Modules } = require('./models');
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
@@ -18,9 +20,32 @@ app.use(bp.urlencoded({
 app.use(bp.json());
 // app.use(express.static(__dirname + '/public'));
 
+const testObj = {
+  "function": "wifi",
+  "height": "50",
+  "width": "75"
+}
+
 app.get('/test', (req, res) => {
   console.log('mongo');
-  res.send({test:'mongo'});
+  res.send(testObj);
+});
+
+app.post('/test', (req, res) => {
+  console.log('post hit');
+  console.log(req.body)
+  
+  Modules
+    .create({
+      'function': req.body.function,
+      'height': req.body.height,
+      'width': req.body.width
+    })
+  .then(project => res.status(201).json(project))
+  .catch(err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
 });
 
 let server;
