@@ -15,12 +15,10 @@ app.use(bp.urlencoded({
 }));
 app.use(bp.json());
 
-
 app.get('/test', (req, res) => {
   console.log('hit');
   res.send({test:'success'});
 });
-
 
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
