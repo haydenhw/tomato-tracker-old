@@ -23,7 +23,6 @@ export default class Board extends Component {
                 stroke="#ccc"
                 onMouseMove={this.test.bind(this)}
               >
-                
               </Rect>
               <RectContainer />
           </Group>
