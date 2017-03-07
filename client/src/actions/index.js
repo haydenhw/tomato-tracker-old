@@ -5,13 +5,8 @@ export const fetchModulesSuccess = (modules) => ({
 });
 
 export function fetchModules(url) {
-
   return (dispatch) => {
-    
-    
-    fetch(
-      url,
-      {method: 'get'})
+    fetch(url)
     .then((res) => {
       return res.json();
     })

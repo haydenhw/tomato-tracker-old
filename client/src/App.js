@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { connect } from 'react-redux';
-import * as actions from './actions/index';
+import {Layer, Rect, Stage, Group} from 'react-konva';
+import Grid from './components/Grid';
+import MyRect from './components/Rect';
+import Container from './components/Container';
+import RectContainer from './components/RectContainer';
 
-class App extends Component {
-  
-    componentDidMount() {
-      //this.props.getData('modules');
+
+export default class App extends Component {
+  test() {
+    console.log(this.refs)
   }
-  
-  render() {
+  render () {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-        Heeeeelllllloooooo Wooooorrrrrrrlllllld 
-        </p>
-      </div>
-    );
-  }
+      <div>
+        <Stage ref="stage" width={700} height={700} onMouseMove={this.test.bind(this)}>
+            <Grid />
+            <Container />
+            <RectContainer/>
+        </Stage>
+    </div>
+     );
+   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      getData: (url) => dispatch(actions.fetchModules(url))
-  };
-};
-
-export default connect(null, mapDispatchToProps)(App);
