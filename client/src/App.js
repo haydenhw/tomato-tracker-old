@@ -1,23 +1,17 @@
-import React, { Component } from 'react';
-import {Layer, Rect, Stage, Group} from 'react-konva';
-import Grid from './components/Grid';
-import MyRect from './components/Rect';
-import Board from './components/Board';
-import RectContainer from './components/RectContainer';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import { Provider } from 'react-redux';
+import DesignTool from './components/DesignTool';
+import SelectMoudles from './components/SelectMoudles';
+import store from './store';
 
-
-export default class App extends Component {
-  test() {
-  
-  }
-  render () {
-    return (
-      <div>
-        <Stage ref="stage" width={5000} height={1000} onMouseMove={this.test.bind(this)}>
-            <Grid />
-            <Board />
-        </Stage>
-    </div>
-     );
-   }
-}
+ReactDOM.render(
+  <Provider store={ store }>
+    <Router history={hashHistory}>
+      <Route path="/" component ={SelectMoudles}/>
+      <Route path="/design" component={DesignTool}/> 
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);

@@ -20,7 +20,7 @@ class SelectMoudles extends Component {
               <ModuleContainer/>
             </div>
             <div>
-                <Link style={{"margin": "10px"}} to="/app">Next</Link>
+                <Link style={{"margin": "10px"}} to="/design">Next</Link>
             </div>
         </div>
     );

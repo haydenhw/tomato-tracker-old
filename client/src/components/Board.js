@@ -18,6 +18,7 @@ export default class Board extends Component {
             >
               <Rect
                 ref="board"
+                name={"board"}
                 width="500"
                 height="500"
                 fill="#e3e3e5"
