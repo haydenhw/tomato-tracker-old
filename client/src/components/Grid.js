@@ -5,11 +5,11 @@ export default function Grid() {
   const grid = 20;
   const gridLines = [];
   
-  for (var i = 0; i <= 2000/grid; i++) {
+  for (var i = 0; i <= 5000/grid; i++) {
     gridLines.push(
       <Line
         key={'horz'+i}
-        points={[ i * grid, 0, i * grid, 2000]}
+        points={[ i * grid, 0, i * grid, 5000]}
         stroke='#ccc'
         strokeWidth='.5'
       />
@@ -18,7 +18,7 @@ export default function Grid() {
     gridLines.push(
       <Line
         key={'vert'+i}
-        points={[ 0, i * grid, 2000, i * grid]}
+        points={[ 0, i * grid, 5000, i * grid]}
         stroke='#ccc'
         strokeWidth='.5'
       />

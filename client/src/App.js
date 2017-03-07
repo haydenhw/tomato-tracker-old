@@ -13,10 +13,9 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Stage ref="stage" width={1000} height={1000} onMouseMove={this.test.bind(this)}>
+        <Stage ref="stage" width={5000} height={1000} onMouseMove={this.test.bind(this)}>
             <Grid />
             <Board />
-            <RectContainer/>
         </Stage>
     </div>
      );

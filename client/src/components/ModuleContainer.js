@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-
+import { getModulesUrl } from '../config/endpointUrls.js';
 class SelectMoudles extends Component {
   
   componentDidMount() {
-    this.props.getData('modules');
+    this.props.getData(getModulesUrl);
   }
 
   render() {
@@ -24,7 +24,6 @@ class SelectMoudles extends Component {
     else {
       return <div></div>
     }
-    
   }
 };
 

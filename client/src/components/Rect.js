@@ -14,7 +14,6 @@ export default class MyRect extends React.Component {
         const width = Number(rect.width);
         const height = Number(rect.height);
         
-        
         let newX;
         
         const collisionObject = {

@@ -2,7 +2,7 @@ export default function collide(targetNode, nodeData) {
   let collision = false;
   
   const nodeBox = targetNode;
-  console.log(nodeBox)
+  // console.log(nodeBox)
   const nodeLeft = nodeBox.x;
   const nodeRight = nodeBox.x + nodeBox.width;
   const nodeTop = nodeBox.y;
