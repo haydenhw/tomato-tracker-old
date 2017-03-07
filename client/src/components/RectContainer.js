@@ -7,10 +7,11 @@ export default function RectContainer(props) {
   const squares = squareData.map((square, index) =>{
     console.log(square.id)
     return <MyRect key={index} id={square.id} x={square.x} y={square.y}/>
-  })
+  });
+  
   return (
-    <Layer>
+    <Group>
       {squares}
-    </Layer>
+    </Group>
   )
 }

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Grid from './components/Grid';
 import MyRect from './components/Rect';
-import Container from './components/Container';
+import Board from './components/Board';
 import RectContainer from './components/RectContainer';
 
 
 export default class App extends Component {
   test() {
-    console.log(this.refs)
+  
   }
   render () {
     return (
       <div>
-        <Stage ref="stage" width={700} height={700} onMouseMove={this.test.bind(this)}>
+        <Stage ref="stage" width={1000} height={1000} onMouseMove={this.test.bind(this)}>
             <Grid />
-            <Container />
+            <Board />
             <RectContainer/>
         </Stage>
     </div>

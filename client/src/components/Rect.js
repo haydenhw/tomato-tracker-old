@@ -27,7 +27,7 @@ export default class MyRect extends React.Component {
         
         collide(collisionObject, squareData)
         
-        if (posX > 500 - width) {
+        /*if (posX > 500 - width) {
           newX = 500-width; 
         } else if (posX < 0) {
           newX = 0;
@@ -37,7 +37,7 @@ export default class MyRect extends React.Component {
         
         this.refs.rect.attrs.x = newX
         this.refs.rect.attrs.y = posY
-        
+        */
     }
     render() {
       
