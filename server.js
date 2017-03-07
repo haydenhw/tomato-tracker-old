@@ -20,15 +20,24 @@ app.use(bp.urlencoded({
 app.use(bp.json());
 // app.use(express.static(__dirname + '/public'));
 
-const testObj = {
-  "function": "wifi",
-  "height": "50",
-  "width": "75"
-}
 
 app.get('/test', (req, res) => {
+  console.log('test hit');
+  res.send({test: 'success'});
+});
+
+app.get('/modules', (req, res) => {
   console.log('mongo');
-  res.send(testObj);
+  
+  Modules
+    .find()
+    .exec()
+    .then(modules => res.json({modules}))
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal Server Error'});
+      });
 });
 
 app.post('/test', (req, res) => {
