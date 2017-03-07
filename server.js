@@ -27,12 +27,11 @@ app.get('/test', (req, res) => {
 });
 
 app.get('/modules', (req, res) => {
-  console.log('mongo');
   
   Modules
     .find()
     .exec()
-    .then(modules => res.json({modules}))
+    .then(modules => res.json(modules))
     .catch(
       err => {
         console.error(err);

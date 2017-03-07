@@ -6,18 +6,7 @@ import * as actions from './actions/index';
 class App extends Component {
   
     componentDidMount() {
-    
-      this.props.getData('modules');
-
-      /*fetch('modules')
-      .then(function(response) { 
-    // Convert to JSON
-    return response.json();
-    })
-    .then(function(j) {
-    // Yay, `j` is a JavaScript object
-    console.log(j); 
-    });*/
+      //this.props.getData('modules');
   }
   
   render() {
