@@ -2,7 +2,7 @@
 import React from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import { squareData } from '../data';
-import collide from '../collide';
+import collide from '../helper-functions/collide';
 
 export default class MyRect extends React.Component {
 

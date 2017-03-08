@@ -1,4 +1,4 @@
-import * as actions from '../actions/index';
+import * as actions from '../actions/action-index';
   
 export const getModules = (state = [], action) => {
   

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import ModuleContainer from './components/ModuleContainer'
-import * as actions from './actions/index';
+import ModuleInventoryList from './ModuleInventoryList'
+import * as actions from '../actions/action-index';
 
 class SelectMoudles extends Component {
   
@@ -17,7 +17,7 @@ class SelectMoudles extends Component {
                 Select Your Components
             </h1>
             <div>
-              <ModuleContainer/>
+              <ModuleInventoryList/>
             </div>
             <div>
                 <Link style={{"margin": "10px"}} to="/design">Next</Link>

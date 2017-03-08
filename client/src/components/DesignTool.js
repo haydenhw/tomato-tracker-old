@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Layer, Rect, Stage, Group} from 'react-konva';
-import Grid from './components/Grid';
-import MyRect from './components/Rect';
-import Board from './components/Board';
-import RectContainer from './components/RectContainer';
+import { Layer, Rect, Stage, Group } from 'react-konva';
+import Grid from './Grid';
+import MyRect from './Rect';
+import Board from './Board';
+import RectContainer from './RectContainer';
 
 
 export default class App extends Component {

@@ -9,8 +9,8 @@ import store from './store';
 ReactDOM.render(
   <Provider store={ store }>
     <Router history={hashHistory}>
-      <Route path="/" component ={SelectMoudles}/>
       <Route path="/design" component={DesignTool}/> 
+      <Route path="/*" component ={SelectMoudles}/>
     </Router>
   </Provider>,
   document.getElementById('root')
