@@ -14,7 +14,7 @@ export default class App extends Component {
     return (
       <div>
         <Stage ref="stage" width={5000} height={1000} onMouseMove={this.test.bind(this)}>
-            <Grid />
+            <Grid gridWidth={5000}  cellWidth={20} />
             <Board />
         </Stage>
     </div>
