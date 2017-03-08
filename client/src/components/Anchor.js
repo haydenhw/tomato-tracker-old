@@ -45,16 +45,16 @@ export default class Anchor extends Component {
   render() {
     return <Circle
       ref="anchor"
-      x= {this.props.x}
-      y= {this.props.y}
-      stroke= '#666'
-      fill= '#ddd'
-      strokeWidth= "2"
-      radius= "8"
+      x={this.props.x}
+      y={this.props.y}
+      stroke='#666'
+      fill='#ddd'
+      strokeWidth="2"
+      radius="8"
       name= {this.props.name}
-      draggable= "true"
+      draggable="true"
       dragOnTop= "false"
-      onDragMove= {this.update.bind(this)}
+      onDragMove={this.update.bind(this)}
     />
             
   }

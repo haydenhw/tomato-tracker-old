@@ -7,6 +7,6 @@ import * as actions from './actions/action-index';
 
 
 export default createStore(
-  reducers.boardDimesnions, 
+  reducers.boardDimensions, 
   applyMiddleware(thunk, logger())
 );

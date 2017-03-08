@@ -11,29 +11,32 @@ class Board extends Component {
   test() {
     
   }
+  componentDidMount() {
+    //store.dispatch(actions.updateBoardDimensions({width: 300, height: 200}))
+  }
   
   render() {
-      //store.dispatch(actions.updateBoardDimensions({width: 300, height: 200}))
-    
+      //console.log(this.props)
       return (
         <Layer>
           <Group
             draggable="true"
             >
               <Rect
+                
                 ref="board"
                 name={"board"}
                 width={this.props.boardWidth}
-                height="300"
+                height={this.props.boardHeight}
                 fill="#e3e3e5"
                 opacity="0.5"
                 stroke="#ccc"
                 onMouseMove={this.test.bind(this)}
               />
               <Anchor x={0} y={0} name={"topLeft"} />
-              <Anchor x={500} y={0} name={"topRight"} />
-              <Anchor x={0} y={500} name={"bottomLeft"} />
-              <Anchor x={500} y={500} name={"bottomRight"} />
+              <Anchor x={this.props.boardWidth} y={0} name={"topRight"} />
+              <Anchor x={0} y={this.props.boardHeight} name={"bottomLeft"} />
+              <Anchor x={this.props.boardWidth} y={this.props.boardHeight} name={"bottomRight"} />
               
               <RectContainer />
           </Group>
@@ -43,8 +46,13 @@ class Board extends Component {
   }
 }
 
+/*x={100}
+y={25}
+*/
+
 const mapStateToProps = (state) => ({
-  boardWidth: state.width
+  boardWidth: state.width,
+  boardHeight: state.height
   // boardHeight: state.boardDimensions.height
 });
 

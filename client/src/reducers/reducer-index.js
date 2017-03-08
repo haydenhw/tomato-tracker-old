@@ -13,10 +13,14 @@ const defaultBoardDimensions = {
   width: 600,
   height: 300
 }
-export const boardDimesnions = (state = defaultBoardDimensions, action) => {
+export const boardDimensions = (state = defaultBoardDimensions, action) => {
 
   if (action.type === actions.UPDATE_BOARD_DIMENSIONS) {
-      return {boardDimesnions: action.dimensions};
+      return {
+        width: action.dimensions.width,
+        height: action.dimensions.height,
+        
+      };
     }
 
   return state;
