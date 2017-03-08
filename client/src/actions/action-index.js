@@ -1,3 +1,9 @@
+export const UPDATE_BOARD_DIMENSIONS = 'UPDATE_BOARD_DIMENSIONS'; 
+export const updateBoardDimensions = (dimensions) => ({
+  type: 'UPDATE_BOARD_DIMENSIONS',
+  dimensions
+});
+
 export const FETCH_MODULES_SUCCESS = 'FETCH_MODULES_SUCCESS'; 
 export const fetchModulesSuccess = (modules) => ({
   type: 'FETCH_MODULES_SUCCESS',

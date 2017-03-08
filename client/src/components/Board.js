@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Layer, Rect, Group} from 'react-konva';
+import { Layer, Rect, Group } from 'react-konva';
+import { connect } from 'react-redux';
+
 import RectContainer from './RectContainer';
 import Anchor from './Anchor';
 
@@ -19,8 +21,8 @@ export default class Board extends Component {
               <Rect
                 ref="board"
                 name={"board"}
-                width="500"
-                height="500"
+                width="600"
+                height="300"
                 fill="#e3e3e5"
                 opacity="0.5"
                 stroke="#ccc"
@@ -38,3 +40,10 @@ export default class Board extends Component {
       );
   }
 }
+
+/*const mapStateToProps = (state) => ({
+  boardWidth: state.boardDimensions.width,
+  boardHeight: state.boardDimensions.height
+});
+
+export default connect(mapStateToProps)(Board);*/
