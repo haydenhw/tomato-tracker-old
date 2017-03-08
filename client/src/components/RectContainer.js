@@ -1,17 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import MyRect from './Rect';

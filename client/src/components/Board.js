@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Group } from 'react-konva';
 import { connect } from 'react-redux';
-
 import RectContainer from './RectContainer';
 import Anchor from './Anchor';
+import * as actions from '../actions/action-index';
+import store from '../store';
 
-
-export default class Board extends Component {
+class Board extends Component {
   
   test() {
     
   }
   
   render() {
+      //store.dispatch(actions.updateBoardDimensions({width: 300, height: 200}))
+    
       return (
         <Layer>
           <Group
@@ -21,7 +23,7 @@ export default class Board extends Component {
               <Rect
                 ref="board"
                 name={"board"}
-                width="600"
+                width={this.props.boardWidth}
                 height="300"
                 fill="#e3e3e5"
                 opacity="0.5"
@@ -41,9 +43,9 @@ export default class Board extends Component {
   }
 }
 
-/*const mapStateToProps = (state) => ({
-  boardWidth: state.boardDimensions.width,
-  boardHeight: state.boardDimensions.height
+const mapStateToProps = (state) => ({
+  boardWidth: state.width
+  // boardHeight: state.boardDimensions.height
 });
 
-export default connect(mapStateToProps)(Board);*/
+export default connect(mapStateToProps)(Board);
