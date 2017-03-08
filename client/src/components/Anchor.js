@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Circle} from 'react-konva';
+import * as actions from '../actions/action-index';
+import store from '../store';
+
 
 export default class Anchor extends Component {
   
@@ -36,9 +39,11 @@ export default class Anchor extends Component {
     image.position(topLeft.position());
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
+    
     if(width && height) {
         image.width(width);
         image.height(height);
+        //store.dispatch(actions.updateBoardDimensions({width: width, height: height}))
     }
   }
   

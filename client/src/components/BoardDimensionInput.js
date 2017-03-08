@@ -6,38 +6,30 @@ import store from '../store';
 class BoardDimensionInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      width: '',
-      height: ''
-    };
+    this.state = {value: ''};
 
-    this.handleChange = this.handleWidthChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleWidthChange(event) {
+  handleChange(event) {
     this.setState({value: event.target.value});
-    store.dispatch(actions.updateBoardDimensions({width: event.target.value, height: this.props.boardHeight }))
-  }
-  
-  /*handleHeightChange(event) {
-    this.setState({value: event.target.value});
-    store.dispatch(actions.updateBoardDimensions({width: this.props.boardHeight, height: event.target.value }))
+    store.dispatch(actions.updateBoardDimensions({width: event.target.value, height: 200}))
   }
 
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-  }*/
+  }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Width: 
-          <input type="text" value={this.props.boardWidth} onChange={this.handleWidthChange} />
+          Width:
+          <input type="text" value={this.props.boardWidth} onChange={this.handleChange} />
         </label>
-         
+        <input type="submit" value="Submit" />
       </form>
     );
   }
