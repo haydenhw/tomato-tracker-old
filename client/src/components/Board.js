@@ -23,7 +23,7 @@ class Board extends Component {
             draggable="true"
             >
               <Rect
-                
+              
                 ref="board"
                 name={"board"}
                 width={this.props.boardWidth}
@@ -31,7 +31,7 @@ class Board extends Component {
                 fill="#e3e3e5"
                 opacity="0.5"
                 stroke="#ccc"
-                onMouseMove={this.test.bind(this)}
+              
               />
               <Anchor x={0} y={0} name={"topLeft"} />
               <Anchor x={this.props.boardWidth} y={0} name={"topRight"} />

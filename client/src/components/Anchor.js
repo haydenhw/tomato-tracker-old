@@ -14,9 +14,10 @@ export default class Anchor extends Component {
     const topRight = group.get('.topRight')[0];
     const bottomRight = group.get('.bottomRight')[0];
     const bottomLeft = group.get('.bottomLeft')[0];
-    const image = group.get('.board')[0];
+    const board = group.get('.board')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
+    console.log(anchorX, anchorY)
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -36,15 +37,30 @@ export default class Anchor extends Component {
             topLeft.setX(anchorX);
             break;
     }
-    image.position(topLeft.position());
+    board.position(topLeft.position());
+    
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
-    
+    //console.log(width, height)
+  
     if(width && height) {
-        image.width(width);
-        image.height(height);
-        //store.dispatch(actions.updateBoardDimensions({width: width, height: height}))
+      board.width(width);
+      board.height(height);
+      store.dispatch(actions.updateBoardDimensions(
+        {width: width, height: height})
+      );
     }
+  }
+  
+  moveToTop() {
+    const group = this.refs.anchor.getParent()
+    group.setDraggable(false);
+    this.refs.anchor.moveToTop();
+  }
+  
+  draggableOn() {
+    const group = this.refs.anchor.getParent()
+    group.setDraggable(true);
   }
   
   render() {
@@ -56,10 +72,12 @@ export default class Anchor extends Component {
       fill='#ddd'
       strokeWidth="2"
       radius="8"
-      name= {this.props.name}
+      name={this.props.name}
       draggable="true"
-      dragOnTop= "false"
+      dragOnTop="false"
+      onMouseDown={this.moveToTop.bind(this)}
       onDragMove={this.update.bind(this)}
+      onDragEnd={this.draggableOn.bind(this)} 
     />
             
   }
