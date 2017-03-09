@@ -14,7 +14,7 @@ class BoardDimensionInput extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
-    store.dispatch(actions.updateBoardDimensions({width: event.target.value, height: 200}))
+    store.dispatch(actions.updateBoardDimensions({width: Number(event.target.value), height: 200}))
   }
 
   handleSubmit(event) {
@@ -42,10 +42,8 @@ class BoardDimensionInput extends React.Component {
 <input type="submit" value="Submit" />*/
 
 const mapStateToProps = (state, props) => ({
-  boardWidth: state.width,
-  boardHeight: state.height
-  
-  
+  boardWidth: state.boardSpecs.width,
+  boardHeight: state.boardSpecs.height
 });
 
 export default connect(mapStateToProps)(BoardDimensionInput);

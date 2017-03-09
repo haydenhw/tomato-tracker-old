@@ -6,6 +6,33 @@ const moduleSchema = mongoose.Schema({
     width: Number
 });
 
-const Modules = mongoose.model('Modules', moduleSchema);
+const projectSchema = mongoose.Schema({
+    name: String,
+    boardSpecs: {
+      x: Number,
+      y: Number,
+      height: Number,
+      width: Number
+    },
+    moudles: [{  
+      x: Number,
+      y: Number,
+      name: String
+    }]
+});
 
-module.exports = {Modules};
+const Modules = mongoose.model('Modules', moduleSchema);
+const Projects = mongoose.model('Projects', projectSchema);
+
+module.exports = {Modules , Projects};
+/*
+{
+"name": "Test Project",
+"boardSpecs": {
+  "x": 50,
+  "y": 50,
+  "height": 300,
+  "width": 500
+},
+"moudles": []
+}*/

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {Circle} from 'react-konva';
+import { connect } from 'react-redux';
 import * as actions from '../actions/action-index';
 import store from '../store';
 
 
-export default class Anchor extends Component {
+class Anchor extends Component {
   
   update () {
     const activeAnchor = this.refs.anchor
@@ -17,7 +18,7 @@ export default class Anchor extends Component {
     const board = group.get('.board')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
-    console.log(anchorX, anchorY)
+    //console.log(anchorX, anchorY)
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -38,17 +39,18 @@ export default class Anchor extends Component {
             break;
     }
     board.position(topLeft.position());
-    
+    console.log(topLeft.position());
+    //console.log(topLeft.getX(), topRight.getX())
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
-    //console.log(width, height)
+    console.log(width)
   
     if(width && height) {
       board.width(width);
       board.height(height);
-      store.dispatch(actions.updateBoardDimensions(
+      /*store.dispatch(actions.updateBoardDimensions(
         {width: width, height: height})
-      );
+      );*/
     }
   }
   
@@ -75,10 +77,19 @@ export default class Anchor extends Component {
       name={this.props.name}
       draggable="true"
       dragOnTop="false"
-      onMouseDown={this.moveToTop.bind(this)}
+      //onMouseDown={this.moveToTop.bind(this)}
       onDragMove={this.update.bind(this)}
-      onDragEnd={this.draggableOn.bind(this)} 
+      //onDragEnd={this.draggableOn.bind(this)} 
     />
             
   }
 }
+
+const mapStateToProps = (state) => ({
+  width: state.boardSpecs.width,
+  height: state.boardSpecs.height,
+  boardX: state.boardSpecs.x,
+  boardY: state.boardSpecs.y
+});
+
+export default connect(mapStateToProps)(Anchor);
