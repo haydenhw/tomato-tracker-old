@@ -4,7 +4,16 @@ export const moduleList = (state = [], action) => {
   
   if (action.type === actions.FETCH_MODULES_SUCCESS) {
       return {modules: action.modules};
-    }
+  }
+  
+  return state;
+}
+
+export const projectList = (state = [], action) => {
+  
+  if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
+      return {modules: action.modules};
+  }
   
   return state;
 }

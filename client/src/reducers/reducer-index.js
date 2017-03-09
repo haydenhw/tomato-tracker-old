@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import { moduleList, boardSpecs } from './reducers';
+import { moduleList, projectList, boardSpecs } from './reducers';
 
 export default combineReducers({
     moduleList,
+    projectList,
     boardSpecs
 });
