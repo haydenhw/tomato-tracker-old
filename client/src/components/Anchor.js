@@ -18,7 +18,8 @@ class Anchor extends Component {
     const board = group.get('.board')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
-    //console.log(anchorX, anchorY)
+    // console.log(anchorX, anchorY)
+    // console.log(activeAnchor.getName())
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -38,19 +39,34 @@ class Anchor extends Component {
             topLeft.setX(anchorX);
             break;
     }
+    
+    const anchorPositions = {
+      topLeft: { x: topLeft.getX(), y: topLeft.getY() },
+      topRight: { x: topRight.getX(), y: topRight.getY() },
+      bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
+      bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() }
+    }
+  
+  store.dispatch(actions.updateAnchorPositions(anchorPositions))
+    
+
     board.position(topLeft.position());
-    console.log(topLeft.position());
+    
+    //console.log(topLeft.position());
+    //store.dispatch(actions.updateBoardPosition(topLeft.position()))
     //console.log(topLeft.getX(), topRight.getX())
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
-    console.log(width)
+    console.log(topLeft.position().x)
+    console.log('group',group.getX())
   
     if(width && height) {
+    
       board.width(width);
       board.height(height);
-      /*store.dispatch(actions.updateBoardDimensions(
+      store.dispatch(actions.updateBoardDimensions(
         {width: width, height: height})
-      );*/
+      );
     }
   }
   

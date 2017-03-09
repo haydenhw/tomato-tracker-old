@@ -20,8 +20,6 @@ app.use(bp.urlencoded({
 app.use(bp.json());
 // app.use(express.static(__dirname + '/public'));
 
-
-
 app.get('/modules', (req, res) => {
   
   Modules

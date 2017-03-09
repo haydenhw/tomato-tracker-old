@@ -12,7 +12,7 @@ export const moduleList = (state = [], action) => {
 export const projectList = (state = [], action) => {
   
   if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-      return {modules: action.modules};
+      return action.projects;
   }
   
   return state;
@@ -24,8 +24,8 @@ const defaultboardSpecs = {
   width: 600,
   height: 300
 }
-export const boardSpecs = (state = defaultboardSpecs, action) => {
 
+export const boardSpecs = (state = defaultboardSpecs, action) => {
    switch(action.type) {
      case actions.UPDATE_BOARD_DIMENSIONS:
         return {
@@ -44,4 +44,18 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
     default:
       return state;
   }
+  
+}
+const defaultAnchorPositions = {
+    topLeft: {x: 0, y: 0},
+    topRight: {x: null, y: 0},
+    bottomLeft: {x: 0, y: null},
+    bottomRight: {x: null, y: null}
+    
+}
+export const anchorPositions = (state=defaultAnchorPositions, action) => {
+  if(action.type === actions.UPDATE_ANCHOR_POSITIONS){
+    return action.positions;
+  }
+  return state;
 }

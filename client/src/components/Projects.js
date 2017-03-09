@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import ModuleInventoryList from './ModuleInventoryList'
+import ProjectList from './ProjectList'
 import * as actions from '../actions/action-index';
 
 class Projects extends Component {
@@ -52,6 +52,9 @@ class Projects extends Component {
               </label>
               <input type="submit" value="Submit" />
             </form>
+            <div>
+              <ProjectList />
+            </div>
             <div>
                 <Link style={{"margin": "10px"}} to="/design">Next</Link>
             </div>

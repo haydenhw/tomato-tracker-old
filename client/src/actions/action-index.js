@@ -1,5 +1,12 @@
 import { projectsUrl } from '../config/endpointUrls';
 
+
+export const UPDATE_ANCHOR_POSITIONS = 'UPDATE_ANCHOR_POSITIONS'; 
+export const updateAnchorPositions = (positions) => ({
+  type: 'UPDATE_ANCHOR_POSITIONS',
+  positions
+});
+
 export const UPDATE_BOARD_POSITION = 'UPDATE_BOARD_POSITION'; 
 export const updateBoardPosition = (position) => ({
   type: 'UPDATE_BOARD_POSITION',
@@ -39,7 +46,7 @@ export const fetchProjectsSuccess = (projects) => ({
   projects
 });
 
-export function fetchProjects(projectsUrl) {
+export function fetchProjects() {
   return (dispatch) => {
     fetch(projectsUrl)
     .then((res) => {

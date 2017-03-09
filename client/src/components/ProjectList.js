@@ -10,11 +10,11 @@ class ProjectList extends Component {
   }
 
   render() {
-    console.log(this.props.projects)
-    if (this.props.projects) {
-      
-      const projectList = this.props.modules.map((project, index) => {
-        return <li key={index}> {project.function} </li> 
+    const { projects } = this.props;
+    
+    if (projects) {
+      const projectList = projects.map((project, index) => {
+        return <li key={index}> {project.name} </li> 
       });
       
       return (
