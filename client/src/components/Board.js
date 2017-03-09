@@ -33,7 +33,7 @@ class Board extends Component {
       bottomRight
      } 
      = this.props;
-     console.log(Boolean(topRight), bottomLeft)
+     
     return (
       <Layer>
         <Group
@@ -80,8 +80,7 @@ const mapStateToProps = (state) => ({
   topLeft: state.anchorPositions.topLeft,
   topRight: state.anchorPositions.topRight,
   bottomLeft: state.anchorPositions.bottomLeft,
-  bottomRight: state.anchorPositions.bottomRight,
-  
+  bottomRight: state.anchorPositions.bottomRight
 });
 
 export default connect(mapStateToProps)(Board);
