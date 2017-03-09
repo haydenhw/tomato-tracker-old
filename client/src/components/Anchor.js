@@ -10,16 +10,15 @@ class Anchor extends Component {
   update () {
     const activeAnchor = this.refs.anchor
     const group = this.refs.anchor.getParent();
-    
+    const board = group.get('.board')[0];
+    const layer = group.getLayer();
     const topLeft = group.get('.topLeft')[0];
     const topRight = group.get('.topRight')[0];
     const bottomRight = group.get('.bottomRight')[0];
     const bottomLeft = group.get('.bottomLeft')[0];
-    const board = group.get('.board')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
-    // console.log(anchorX, anchorY)
-    // console.log(activeAnchor.getName())
+    
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -46,39 +45,40 @@ class Anchor extends Component {
       bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() }
     }
+    
+    store.dispatch(actions.updateAnchorPositions(anchorPositions))
+    board.position(topLeft.position());  
   
-  store.dispatch(actions.updateAnchorPositions(anchorPositions))
-    
-
-    board.position(topLeft.position());
-    
-    //console.log(topLeft.position());
-    //store.dispatch(actions.updateBoardPosition(topLeft.position()))
-    //console.log(topLeft.getX(), topRight.getX())
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
-    console.log(topLeft.position().x)
-    console.log('group',group.getX())
   
     if(width && height) {
-    
-      board.width(width);
-      board.height(height);
-      store.dispatch(actions.updateBoardDimensions(
-        {width: width, height: height})
-      );
+      // board.width(width);
+      // board.height(height);
+      const boardDimensions = {
+        width: width,
+        height: height
+      };
+      store.dispatch(actions.updateBoardDimensions(boardDimensions));
     }
+  
+    //layer.draw();
   }
   
   moveToTop() {
-    const group = this.refs.anchor.getParent()
+    const group = this.refs.anchor.getParent();
+    const layer = group.getLayer();
+    
     group.setDraggable(false);
     this.refs.anchor.moveToTop();
+    //layer.draw();
   }
   
   draggableOn() {
-    const group = this.refs.anchor.getParent()
+    const group = this.refs.anchor.getParent();
+    const layer = group.getLayer();
     group.setDraggable(true);
+    //layer.draw();
   }
   
   render() {
@@ -93,9 +93,9 @@ class Anchor extends Component {
       name={this.props.name}
       draggable="true"
       dragOnTop="false"
-      //onMouseDown={this.moveToTop.bind(this)}
+      onMouseDown={this.moveToTop.bind(this)}
       onDragMove={this.update.bind(this)}
-      //onDragEnd={this.draggableOn.bind(this)} 
+      onDragEnd={this.draggableOn.bind(this)} 
     />
             
   }
