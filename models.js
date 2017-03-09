@@ -14,7 +14,7 @@ const projectSchema = mongoose.Schema({
       height: Number,
       width: Number
     },
-    moudles: [{  
+    modules: [{  
       x: Number,
       y: Number,
       name: String

@@ -63,11 +63,27 @@ app.post('/projects', (req, res) => {
     });
 });
 
+app.put('/projects/:id', (req, res) => {
+  
+  const toUpdate = {
+    'name': req.body.projectName,
+    'position:': req.body.position
+  }
+
+  Projects
+    .findByIdAndUpdate(req.params.projectId, {$set: toUpdate})
+    .exec()
+    .then(project => res.status(204).end())
+    .catch(err => 
+      res.status(500).json({message: 'Internal server error'})
+  );
+})
+
+
 app.get('/test', (req, res) => {
   console.log('test hit');
   res.send({test: 'success'});
 });
-
 
 app.post('/test', (req, res) => {
   console.log('post hit');
@@ -85,8 +101,6 @@ app.post('/test', (req, res) => {
         res.status(500).json({message: 'Internal server error'});
     });
 });
-
-
 
 let server;
 
