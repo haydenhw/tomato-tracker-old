@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 import store from '../store';
 
 class BoardDimensionInput extends React.Component {
@@ -81,12 +81,6 @@ class BoardDimensionInput extends React.Component {
     );
   }
 }
-
-/*<label>
- Height: 
- <input type="text" value={this.props.boardHeight} onChange={this.handleHeightChange.bind(this)} />
-</label>
-<input type="submit" value="Submit" />*/
 
 const mapStateToProps = (state, props) => ({
   boardWidth: state.boardSpecs.width,

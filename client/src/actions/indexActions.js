@@ -91,8 +91,6 @@ export function postNewProject(projectsUrl) {
   }
 }
 
-
-
 export const SAVE_MODULE_POSITION_SUCCESS = 'SAVE_MODULE_POSITION_SUCCESS'; 
 export const saveModulePositionSuccess = (modules) => ({
   type: 'SAVE_MODULE_POSITION_SUCCESS',

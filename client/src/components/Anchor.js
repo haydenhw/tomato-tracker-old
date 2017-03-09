@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Circle} from 'react-konva';
 import { connect } from 'react-redux';
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 import store from '../store';
 
 

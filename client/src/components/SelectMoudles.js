@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ModuleInventoryList from './ModuleInventoryList'
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 
 class SelectMoudles extends Component {
-  
+  //this.props.params.projectId
   componentDidMount() {
     this.props.getData('modules');
   }

@@ -1,22 +1,4 @@
-import * as actions from '../actions/action-index';
-  
-export const moduleList = (state = [], action) => {
-  
-  if (action.type === actions.FETCH_MODULES_SUCCESS) {
-      return {modules: action.modules};
-  }
-  
-  return state;
-}
-
-export const projectList = (state = [], action) => {
-  
-  if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-      return action.projects;
-  }
-  
-  return state;
-}
+import * as actions from '../actions/indexActions';
 
 const defaultboardSpecs = {
   x:10,
@@ -46,6 +28,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
   }
   
 }
+
 const defaultAnchorPositions = {
     topLeft: {x: 0, y: 0},
     topRight: {x: null, y: 0},
@@ -53,9 +36,11 @@ const defaultAnchorPositions = {
     bottomRight: {x: null, y: null}
     
 }
+
 export const anchorPositions = (state=defaultAnchorPositions, action) => {
   if(action.type === actions.UPDATE_ANCHOR_POSITIONS){
     return action.positions;
   }
+  
   return state;
 }

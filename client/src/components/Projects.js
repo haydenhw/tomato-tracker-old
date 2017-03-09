@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Router, Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProjectList from './ProjectList'
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 
 class Projects extends Component {
   
@@ -32,6 +32,7 @@ class Projects extends Component {
         return res.json();
       })
       .then(data => {
+        hashHistory.push('/design')
         alert( JSON.stringify( data ));
       })
       .catch(err => {

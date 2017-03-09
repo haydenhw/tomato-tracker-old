@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 import store from '../store'
 
 export default class Toggle extends Component {

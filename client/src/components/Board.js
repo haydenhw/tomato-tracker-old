@@ -3,7 +3,7 @@ import { Layer, Rect, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import RectContainer from './RectContainer';
 import Anchor from './Anchor';
-import * as actions from '../actions/action-index';
+import * as actions from '../actions/indexActions';
 import store from '../store';
 
 class Board extends Component {
