@@ -73,7 +73,7 @@ app.post('/projects', (req, res) => {
     .create({
       name: req.body.name,
       boardSpecs: req.body.boardSpecs,
-      moudles: req.body.modules
+      modules: req.body.modules
     })
   .then(project => res.status(201).json(project))
   .catch(err => {
@@ -121,6 +121,17 @@ app.post('/test', (req, res) => {
         res.status(500).json({message: 'Internal server error'});
     });
 });
+
+function tearDownDb() {
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  });
+}
+
+ //tearDownDb()
 
 let server;
 

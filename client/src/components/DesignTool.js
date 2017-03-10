@@ -6,10 +6,9 @@ import store from '../store';
 import Grid from './Grid';
 import MyRect from './Rect';
 import Board from './Board';
-import RectContainer from './RectContainer';
+import ModuleContainer from './ModuleContainer';
 import BoardDimensionInput from './BoardDimensionInput';
 import SaveButton from './SaveButton';
-
 
 class DesignTool extends Component {
   componentWillMount() {

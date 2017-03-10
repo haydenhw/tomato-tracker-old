@@ -19,3 +19,36 @@ export const squareData = [
     height: 50,
   }
 ];
+
+
+const module  = {
+  "height": "50",
+  "width": "50",
+  "x": "25",
+  "y": "25",
+  "onBoard": "true",
+  "image": "http://konvajs.github.io/assets/yoda.jpg"
+}
+
+const modules = [
+  {
+    "height": 50,
+    "width": 50,
+    "x": 25,
+    "y": 25,
+    "onBoard": true,
+    "image": "http://konvajs.github.io/assets/yoda.jpg",
+    "id": 0
+  },
+  
+  {
+    "height": 50,
+    "width": 50,
+    "x": 75,
+    "y": 75,
+    "onBoard": true,
+    "image": "http://konvajs.github.io/assets/yoda.jpg",
+    "id": 1
+  }
+  
+]

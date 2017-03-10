@@ -17,7 +17,11 @@ const projectSchema = mongoose.Schema({
   modules: [{  
     x: Number,
     y: Number,
-    name: String
+    height: Number,
+    width: Number,
+    image: String,
+    onBoard: Boolean,
+    id: Number
   }]
 });
 

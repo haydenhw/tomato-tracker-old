@@ -15,8 +15,29 @@ class Projects extends Component {
         "height": 300,
         "width": 500
       },
-      "moudles": null
-    }
+      "modules":  [
+      {
+        "height": 50,
+        "width": 50,
+        "x": 25,
+        "y": 25,
+        "onBoard": true,
+        "image": "http://i68.tinypic.com/24oouoj.png",
+        "id": 0,
+        "_id": "58c330a771284629ecef4132"
+      },
+      {
+        "height": 50,
+        "width": 50,
+        "x": 125,
+        "y": 125,
+        "onBoard": true,
+        "image": "http://i65.tinypic.com/s4s0ah.png",
+        "id": 1,
+        "_id": "58c330a771284629ecef4131"
+      }
+    ]
+  }
     
     fetch(
       'projects',

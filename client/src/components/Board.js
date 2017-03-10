@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import RectContainer from './RectContainer';
+import ModuleContainer from './ModuleContainer';
 import Anchor from './Anchor';
 import * as actions from '../actions/indexActions';
 import store from '../store';
+import Module from './Module';
+
 
 class Board extends Component {
   
@@ -64,7 +66,7 @@ class Board extends Component {
             <Anchor x={bottomLeft.x} y={bottomLeft.y || height} name={"bottomLeft"} />
             <Anchor x={bottomRight.x || width} y={bottomRight.y ||height} name={"bottomRight"} />
             
-            <RectContainer />
+            <ModuleContainer />
             
         </Group>
       </Layer>

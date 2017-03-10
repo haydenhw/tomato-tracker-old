@@ -11,6 +11,7 @@ class SaveButton extends Component {
       height,
       x,
       y,
+      modules,
       projectName,
       id
     } = this.props;
@@ -22,7 +23,8 @@ class SaveButton extends Component {
         height,
         x,
         y
-      }
+      },
+      modules
     }
     console.log('update project', updatedProject.boardSpecs.x, updatedProject.boardSpecs.y,
     updatedProject.boardSpecs.width, updatedProject.boardSpecs.height
@@ -55,6 +57,7 @@ const mapStateToProps = (state) => ({
   height: state.boardSpecs.height,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
+  modules: state.currentProjectModules,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id
 });
