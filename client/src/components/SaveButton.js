@@ -5,7 +5,6 @@ import store from '../store';
 import projectsUrl from '../config/endpointUrls';
 
 class SaveButton extends Component {
-  
   saveProject() {
     const {
       width,
@@ -25,7 +24,9 @@ class SaveButton extends Component {
         y
       }
     }
-    
+    console.log('update project', updatedProject.boardSpecs.x, updatedProject.boardSpecs.y,
+    updatedProject.boardSpecs.width, updatedProject.boardSpecs.height
+  );
     const url = `${'projects'}/${id}`;
     fetch(url, {
       method: 'put',

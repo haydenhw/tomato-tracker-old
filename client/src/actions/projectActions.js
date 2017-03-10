@@ -37,8 +37,9 @@ export function fetchProjectById(projectId) {
       return res.json();
     })
     .then(data => {
+      console.log("get response", data.boardSpecs.x, data.boardSpecs.y, data.boardSpecs.height, data.boardSpecs.width)
       dispatch(fetchProjectByIdSuccess(data));
-      hashHistory.push('/design')
+      hashHistory.push(`/design/${projectId}`)
     })
     .catch(err => {
       console.error(err)

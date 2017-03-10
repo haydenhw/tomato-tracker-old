@@ -20,8 +20,8 @@ class Board extends Component {
     store.dispatch(actions.updateBoardPosition({x: x, y: y}))
     
   }
-  render() {
   
+  render() {
     const {
       x,
       y,
@@ -68,7 +68,6 @@ class Board extends Component {
             
         </Group>
       </Layer>
-          
       );
   }
 }

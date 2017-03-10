@@ -12,9 +12,9 @@ import SaveButton from './SaveButton';
 
 
 class DesignTool extends Component {
-  componentDidMount() {
+  componentWillMount() {
     if(!this.props.currentProjectName) {
-      
+      store.dispatch(actions.fetchProjectById(this.props.params.projectId));
     }
   }
   render () {
@@ -25,7 +25,7 @@ class DesignTool extends Component {
         <BoardDimensionInput />
         <Stage ref="stage" width={5000} height={1000}>
           <Grid gridWidth={5000}  cellWidth={20} />
-          <Board />
+        {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
         </Stage>
     </div>
      );

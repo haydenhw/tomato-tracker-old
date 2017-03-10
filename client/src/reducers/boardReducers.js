@@ -17,6 +17,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         };
         break;
     case actions.UPDATE_BOARD_POSITION:
+      // console.log(action.position.x, action.position.y)
        return {
          ...state,
          x: action.position.x,
@@ -35,7 +36,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
     default:
       return state;
   }
-  
 }
 
 const defaultAnchorPositions = {
@@ -43,7 +43,6 @@ const defaultAnchorPositions = {
     topRight: {x: null, y: 0},
     bottomLeft: {x: 0, y: null},
     bottomRight: {x: null, y: null}
-    
 }
 
 export const anchorPositions = (state=defaultAnchorPositions, action) => {

@@ -10,7 +10,6 @@ export const projectList = (state = [], action) => {
 
 export const currentProjectInfo = (state = {}, action) => {
   if (action.type === actions.FECTCH_PROJECT_BY_ID_SUCCESS) {
-      console.log(action.project)
       return {
         name: action.project.name,
         id: action.project._id
