@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/indexActions';
-
+import ProjectLink from './ProjectLink';
 
 class ProjectList extends Component {
   
@@ -13,14 +13,15 @@ class ProjectList extends Component {
     const { projects } = this.props;
     
     if (projects) {
+    
       const projectList = projects.map((project, index) => {
-        return <li key={index}> {project.name} </li> 
+        return <ProjectLink key={index} projectId={ project._id } projectName={project.name} /> 
       });
       
       return (
-          <ul>
-              {projectList}
-          </ul>
+        <div>
+          {projectList}
+        </div>
       );
     } 
     else {

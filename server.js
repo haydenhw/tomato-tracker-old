@@ -46,6 +46,17 @@ app.get('/projects', (req, res) => {
       });
 });
 
+app.get('/projects/:projectId', (req, res) => {
+  Projects
+    .findById(req.params.projectId)
+    .exec()
+    .then(project => res.json(project))
+    .catch(err => {
+        console.error(err);
+        res.status(404).json({message: 'Project Not Found'});
+      });
+});
+
 app.post('/projects', (req, res) => {
   console.log('post hit');
   console.log(req.body)
@@ -63,21 +74,22 @@ app.post('/projects', (req, res) => {
     });
 });
 
-app.put('/projects/:id', (req, res) => {
-  
+app.put('/projects/:projectId', (req, res) => {
+  console.log(req.body)
   const toUpdate = {
     'name': req.body.projectName,
-    'position:': req.body.position
+    'boardSpecs': req.body.boardSpecs,
+    'modules': req.body.modules
   }
-
+  console.log(toUpdate)
   Projects
     .findByIdAndUpdate(req.params.projectId, {$set: toUpdate})
     .exec()
     .then(project => res.status(204).end())
     .catch(err => 
       res.status(500).json({message: 'Internal server error'})
-  );
-})
+    );
+});
 
 
 app.get('/test', (req, res) => {

@@ -50,8 +50,10 @@ class Board extends Component {
             <Rect
               ref="board"
               name={"board"}
-              width={width}
-              height={height}
+              x={topLeft.x}
+              y={topLeft.y}
+              width={topRight.x - topLeft.x || width}
+              height={bottomLeft.y - topLeft.y || height }
               fill="#e3e3e5"
               opacity="0.5"
               stroke="#ccc"
@@ -70,7 +72,6 @@ class Board extends Component {
       );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   width: state.boardSpecs.width,

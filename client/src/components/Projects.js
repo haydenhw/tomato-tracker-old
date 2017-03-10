@@ -3,9 +3,9 @@ import { Router, Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ProjectList from './ProjectList'
 import * as actions from '../actions/indexActions';
+import store from '../store';
 
 class Projects extends Component {
-  
   handleSubmit(event) {
     const newProject = {
       "name": this.input.value,
@@ -15,7 +15,7 @@ class Projects extends Component {
         "height": 300,
         "width": 500
       },
-      "moudles": []
+      "moudles": null
     }
     
     fetch(
@@ -32,8 +32,12 @@ class Projects extends Component {
         return res.json();
       })
       .then(data => {
-        hashHistory.push('/design')
-        alert( JSON.stringify( data ));
+        console.log('New project saved')
+        const projectId = data._id;
+        console.log(projectId);
+        store.dispatch(
+          actions.fetchProjectById(projectId)
+        );
       })
       .catch(err => {
         console.error(err)

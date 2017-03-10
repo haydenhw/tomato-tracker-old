@@ -22,6 +22,15 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
          x: action.position.x,
          y: action.position.y,
        };
+       break;
+   case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+      const boardSpecs = action.project.boardSpecs;
+      return {
+        x: boardSpecs.x,
+        y: boardSpecs.y,
+        width: boardSpecs.width,
+        height: boardSpecs.height
+      };
        
     default:
       return state;
