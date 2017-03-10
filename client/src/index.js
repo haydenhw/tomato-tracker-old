@@ -11,8 +11,8 @@ ReactDOM.render(
   <Provider store={ store }>
     <Router history={hashHistory}>
       <Route path="/select_modules" component={SelectMoudles}/> 
-      <Route path="/design" component={DesignTool}/> 
-      <Route path="/*" component ={Projects}/>
+      <Route path="/design/:projectId" component={DesignTool}/> 
+      {/* <Route path="/*" component ={Projects}/> */}
     </Router>
   </Provider>,
   document.getElementById('root')

@@ -2,6 +2,8 @@ const express = require('express')
 const bp = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+var cookieParser = require('cookie-parser');
+
 
 mongoose.Promise = global.Promise;
 
@@ -18,7 +20,13 @@ app.use(bp.urlencoded({
   extended: true
 }));
 app.use(bp.json());
+app.use(cookieParser());
+
 // app.use(express.static(__dirname + '/public'));
+
+app.get('/cookie',function(req, res){
+     res.cookie(cookie_name , 'cookie_value').send('Cookie is set');
+});
 
 app.get('/modules', (req, res) => {
   

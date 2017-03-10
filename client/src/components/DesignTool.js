@@ -13,7 +13,9 @@ import SaveButton from './SaveButton';
 
 class DesignTool extends Component {
   componentDidMount() {
-    
+    if(!this.props.currentProjectName) {
+      
+    }
   }
   render () {
     return (
