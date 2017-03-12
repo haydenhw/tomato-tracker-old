@@ -39,30 +39,7 @@ class ProjectSubmitForm extends Component {
     ]
   }
     
-    fetch(
-      'projects',
-      {
-          method: "POST",
-          body: JSON.stringify(newProject),
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        })
-      })
-      .then((res) => {
-        return res.json();
-      })
-      .then(data => {
-        console.log('New project saved')
-        const projectId = data._id;
-        console.log(projectId);
-        store.dispatch(
-          actions.fetchProjectById(projectId)
-        );
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  store.dispatch(actions.postNewProject(newProject));  
   }
   
   render() {

@@ -58,13 +58,13 @@ export const postNewProjectSuccess = (modules) => ({
   modules
 });
 
-export function postNewProject(projectsUrl) {
+export function postNewProject(newProject) {
   return (dispatch) => {
     fetch(
       projectsUrl,
       {
           method: "POST",
-          body: JSON.stringify({position: [this.props.x, this.props.y]}),
+          body: JSON.stringify(newProject),
           headers: new Headers({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -74,7 +74,13 @@ export function postNewProject(projectsUrl) {
         return res.json();
       })
       .then(data => {
-        alert( JSON.stringify( data ));
+        console.log('New project saved')
+        const projectId = data._id;
+        console.log(projectId);
+        /*store.dispatch(
+          actions.fetchProjectById(projectId)*/
+          dispatch(fetchProjectById(projectId));
+        
       })
       .catch(err => {
         console.error(err)
