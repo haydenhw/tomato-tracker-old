@@ -18,7 +18,7 @@ class Anchor extends Component {
     const bottomLeft = group.get('.bottomLeft')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
-    
+    console.log(anchorX, anchorY)
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':

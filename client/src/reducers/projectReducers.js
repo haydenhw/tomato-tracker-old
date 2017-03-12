@@ -18,3 +18,14 @@ export const currentProjectInfo = (state = {}, action) => {
   
   return state;
 }
+
+/*
+export const projectList = (state = [], action) => {
+  switch(action.type){
+    case(actions.FETCH_PROJECTS_SUCCESS):
+      return action.projects;
+      break;
+    case(actions.DELETE_PROJECT_SUCCESS):
+      
+  }
+}*/

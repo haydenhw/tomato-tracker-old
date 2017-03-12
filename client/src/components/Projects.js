@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ProjectList from './ProjectList'
 import * as actions from '../actions/indexActions';
 import store from '../store';
+import { Button } from 'react-bootstrap';
 
 class Projects extends Component {
   handleSubmit(event) {
@@ -65,25 +66,33 @@ class Projects extends Component {
       })
   }
   
+  
   render() {
+    const labelStyle ={
+      "fontSize": "20px"
+    }
+    
+    const inputStyle ={
+      "marginLeft": "10px"
+    }
+    
     return (
         <div>
             <h1>
                 Projects
             </h1>
+            
             <form onSubmit={this.handleSubmit.bind(this)}>
-              <label>
-                New Project
-                <input type="text" ref={(input) => this.input = input} />
+              <label style={labelStyle}>
+                Create New Project: 
+                <input style={inputStyle} type="text" ref={(input) => this.input = input} />
               </label>
               <input type="submit" value="Submit" />
             </form>
             <div>
               <ProjectList />
             </div>
-            <div>
-                <Link style={{"margin": "10px"}} to="/design">Next</Link>
-            </div>
+          
         </div>
     );
   }

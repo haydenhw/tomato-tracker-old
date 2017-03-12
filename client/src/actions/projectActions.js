@@ -1,5 +1,6 @@
 import { projectsUrl } from '../config/endpointUrls';
 import { Route, hashHistory } from 'react-router';
+import store from '../store';
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({
@@ -14,6 +15,7 @@ export function fetchProjects() {
       return res.json();
     })
     .then(data => {
+      console.log(data)
       dispatch(fetchProjectsSuccess(data));
     })
     .catch(err => {
@@ -28,9 +30,8 @@ export const fetchProjectByIdSuccess = (project) => ({
   project
 });
 
-export function fetchProjectById(projectId) {
+export function fetchProjectById(projectId, currentRoute) {
   const projectUrl = `${projectsUrl}/${projectId}`
-  
   return (dispatch) => {
     fetch(projectUrl)
     .then((res) => {
@@ -39,7 +40,11 @@ export function fetchProjectById(projectId) {
     .then(data => {
       console.log("get response", data.boardSpecs.x, data.boardSpecs.y, data.boardSpecs.height, data.boardSpecs.width)
       dispatch(fetchProjectByIdSuccess(data));
-      hashHistory.push(`/design/${projectId}`)
+      const designRoute =`/design/${projectId}`;
+      
+      if(currentRoute !== designRoute){
+        hashHistory.push(designRoute)
+      }
     })
     .catch(err => {
       console.error(err)
@@ -98,6 +103,35 @@ export function updateProject(data, projectId) {
       })
       .then(data => {
         alert( JSON.stringify( data ));
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'; 
+export const deleteProjectSuccess = (projectId, projects) => ({
+  type: 'DELETE_PROJECT_SUCCESS',
+  projectId,
+  p
+});
+
+export function deleteProject(projectId, projects) {
+  const url = `${projectsUrl}/${projectId}`
+  return (dispatch) => {
+    fetch(
+      url,
+      {
+          method: "DELETE",
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        console.log('delete successful')
+        dispatch(fetchProjects());
       })
       .catch(err => {
         console.error(err)

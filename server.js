@@ -1,35 +1,26 @@
 const express = require('express')
-const bp = require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const app = express();
-var cookieParser = require('cookie-parser');
-
-
+const { PORT, DATABASE_URL } = require('./config');
+const { Modules, Projects } = require('./models');
+const projectRouter = require('./projectRouter');
 mongoose.Promise = global.Promise;
 
-const {PORT, DATABASE_URL} = require('./config');
+
 //app.set('port', (process.env.PORT || 3001));
-
-const { Modules, Projects } = require('./models');
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-app.use(bp.urlencoded({
+app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bp.json());
-app.use(cookieParser());
-
-// app.use(express.static(__dirname + '/public'));
-
-app.get('/cookie',function(req, res){
-     res.cookie(cookie_name , 'cookie_value').send('Cookie is set');
-});
+app.use(bodyParser.json());
+app.use('/projects', projectRouter);
 
 app.get('/modules', (req, res) => {
-  
   Modules
     .find()
     .exec()
@@ -40,65 +31,6 @@ app.get('/modules', (req, res) => {
         res.status(500).json({message: 'Internal Server Error'});
       });
 });
-
-app.get('/projects', (req, res) => {
-  console.log('hello from project get endpoint')
-  Projects
-    .find()
-    .exec()
-    .then(projects => res.json(projects))
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal Server Error'});
-      });
-});
-
-app.get('/projects/:projectId', (req, res) => {
-  Projects
-    .findById(req.params.projectId)
-    .exec()
-    .then(project => res.json(project))
-    .catch(err => {
-        console.error(err);
-        res.status(404).json({message: 'Project Not Found'});
-      });
-});
-
-app.post('/projects', (req, res) => {
-  console.log('post hit');
-  console.log(req.body)
-  
-  Projects
-    .create({
-      name: req.body.name,
-      boardSpecs: req.body.boardSpecs,
-      modules: req.body.modules
-    })
-  .then(project => res.status(201).json(project))
-  .catch(err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-    });
-});
-
-app.put('/projects/:projectId', (req, res) => {
-  console.log(req.body)
-  const toUpdate = {
-    'name': req.body.projectName,
-    'boardSpecs': req.body.boardSpecs,
-    'modules': req.body.modules
-  }
-  console.log(toUpdate)
-  Projects
-    .findByIdAndUpdate(req.params.projectId, {$set: toUpdate})
-    .exec()
-    .then(project => res.status(204).end())
-    .catch(err => 
-      res.status(500).json({message: 'Internal server error'})
-    );
-});
-
 
 app.get('/test', (req, res) => {
   console.log('test hit');

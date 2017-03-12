@@ -25,11 +25,12 @@ export default class Module extends Component {
         y: module.getY(),
         index: module.index
       }
+      console.log(newPosition.x,newPosition.y);
       store.dispatch(actions.updateModulePosition(newPosition))
     }
 
     render() {
-      const { x, y, height, width, index} = this.props;
+      const { x, y, height, width, index } = this.props;
         return (
             <Image
               ref="module"

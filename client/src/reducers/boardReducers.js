@@ -17,7 +17,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         };
         break;
     case actions.UPDATE_BOARD_POSITION:
-      // console.log(action.position.x, action.position.y)
+      console.log('reducer' , action.position.x, action.position.y)
        return {
          ...state,
          x: action.position.x,
@@ -26,6 +26,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
        break;
    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
+      
       return {
         x: boardSpecs.x,
         y: boardSpecs.y,

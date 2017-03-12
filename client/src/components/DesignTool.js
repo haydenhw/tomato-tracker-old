@@ -11,9 +11,11 @@ import BoardDimensionInput from './BoardDimensionInput';
 import SaveButton from './SaveButton';
 
 class DesignTool extends Component {
-  componentWillMount() {
+  componentDidMount() {
     if(!this.props.currentProjectName) {
-      store.dispatch(actions.fetchProjectById(this.props.params.projectId));
+      const projectId = this.props.params.projectId;
+      const currentRoute = this.props.location.pathname
+      store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
   }
   render () {

@@ -8,7 +8,6 @@ import Module from './Module';
 import { squareData } from '../data'
 
 function MoudleContainer(props) {
-  console.log(props.modules)
   const modules = props.modules.map((modules, index) =>{
     return <Module 
         key={index}

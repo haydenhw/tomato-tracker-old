@@ -6,6 +6,9 @@ import DesignTool from './components/DesignTool';
 import SelectMoudles from './components/SelectMoudles';
 import Projects from './components/Projects';
 import store from './store';
+// import './index.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap-theme.css';
 
 ReactDOM.render(
   <Provider store={ store }>

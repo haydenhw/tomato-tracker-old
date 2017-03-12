@@ -16,11 +16,10 @@ class Board extends Component {
   }
   
   updatePosition() {
-    const boardGroup = this.refs.boardGroup
+    const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
     store.dispatch(actions.updateBoardPosition({x: x, y: y}))
-    
   }
   
   render() {
@@ -38,6 +37,7 @@ class Board extends Component {
      
     return (
       <Layer>
+        
         <Group
           ref="boardGroup"
           x={x}

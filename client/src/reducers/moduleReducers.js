@@ -16,9 +16,7 @@ export const currentProjectModules = (state = [], action) => {
        break;
   
   case actions.UPDATE_MODULE_POSITION:
-  console.log(action.modulePosition)
     const { x, y, index } = action.modulePosition; 
-    console.log(y )
     return state.map((module, i) => {
       return i === index ? 
         {...module, 
@@ -27,8 +25,6 @@ export const currentProjectModules = (state = [], action) => {
         } :
         module;
     })
-      
-    
       
    default:
      return state;

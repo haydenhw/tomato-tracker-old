@@ -39,7 +39,6 @@ export default class MyRect extends React.Component {
         */
     }
     render() {
-      
         return (
             <Group>
                 <Rect

@@ -11,20 +11,28 @@ class SaveButton extends Component {
       height,
       x,
       y,
+      topLeftAnchorX,
+      topLeftAnchorY,
       modules,
       projectName,
       id
     } = this.props;
+    
+    const updatedModules = modules.map(module => {
+      const x = module.x - topLeftAnchorX;
+      const y = module.y - topLeftAnchorY;
+      return Object.assign({}, module, {x, y});
+    })
     
     const updatedProject = {
       projectName,
       "boardSpecs": {
         width,
         height,
-        x,
-        y
+        x: x + topLeftAnchorX,
+        y: y + topLeftAnchorY
       },
-      modules
+      "modules": updatedModules
     }
     console.log('update project', updatedProject.boardSpecs.x, updatedProject.boardSpecs.y,
     updatedProject.boardSpecs.width, updatedProject.boardSpecs.height
@@ -44,8 +52,11 @@ class SaveButton extends Component {
   }
 
   render() {
+    const style = {
+      "marginBottom": "13px"
+    }
     return (
-      <button onClick={this.saveProject.bind(this)}>
+      <button style={style} onClick={this.saveProject.bind(this)}>
         Save
       </button>
     );
@@ -57,6 +68,8 @@ const mapStateToProps = (state) => ({
   height: state.boardSpecs.height,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
+  topLeftAnchorX: state.anchorPositions.topLeft.x,
+  topLeftAnchorY: state.anchorPositions.topLeft.y,
   modules: state.currentProjectModules,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id
