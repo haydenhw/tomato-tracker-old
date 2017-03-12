@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Link, hashHistory } from 'react-router';
-import { connect } from 'react-redux';
 import * as actions from '../actions/indexActions';
 import store from '../store';
 
-
-class ProjectSubmitForm extends Component {
+export default class ProjectSubmitForm extends Component {
   handleSubmit(event) {
     const newProject = {
       "name": this.input.value,
@@ -62,15 +60,3 @@ class ProjectSubmitForm extends Component {
     );
   }
 };
-
-const mapStateToProps = (state, props) => ({
-  state: state
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-      getData: (url) => dispatch(actions.fetchModules(url))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmitForm);

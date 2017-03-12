@@ -15,7 +15,6 @@ export function fetchProjects() {
       return res.json();
     })
     .then(data => {
-      console.log(data)
       dispatch(fetchProjectsSuccess(data));
     })
     .catch(err => {
@@ -74,13 +73,9 @@ export function postNewProject(newProject) {
         return res.json();
       })
       .then(data => {
-        console.log('New project saved')
         const projectId = data._id;
-        console.log(projectId);
-        /*store.dispatch(
-          actions.fetchProjectById(projectId)*/
-          dispatch(fetchProjectById(projectId));
-        
+        console.log('New project saved');
+        dispatch(fetchProjectById(projectId));
       })
       .catch(err => {
         console.error(err)
@@ -119,8 +114,7 @@ export function updateProject(data, projectId) {
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'; 
 export const deleteProjectSuccess = (projectId, projects) => ({
   type: 'DELETE_PROJECT_SUCCESS',
-  projectId,
-  p
+  projectId
 });
 
 export function deleteProject(projectId, projects) {
