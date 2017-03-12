@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Link, hashHistory } from 'react-router';
-import * as actions from '../actions/indexActions';
-import store from '../store';
+import * as actions from '../../actions/indexActions';
+import store from '../../store';
 
-export default class ProjectSubmitForm extends Component {
+export default class ProjectsSubmitForm extends Component {
   handleSubmit(event) {
     const newProject = {
       "name": this.input.value,

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router';
-import DeleteButton from './DeleteButton';
-import * as actions from '../actions/indexActions';
-import store  from '../store';
-
+import DeleteButton from './ProjectsDeleteButton';
+import * as actions from '../../actions/indexActions';
+import store from '../../store';
 const style = {
   "cursor": "pointer",
   "width": "125px",

@@ -4,7 +4,7 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import { Provider } from 'react-redux';
 import DesignTool from './components/DesignTool';
 import SelectMoudles from './components/SelectMoudles';
-import Projects from './components/Projects';
+import Projects from './components/projects/Projects';
 import store from './store';
 // import './index.css';
 // import 'bootstrap/dist/css/bootstrap.css';

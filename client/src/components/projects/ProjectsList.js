@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/indexActions';
-import store from '../store';
-import ProjectLink from './ProjectLink';
+import * as actions from '../../actions/indexActions';
+import store from '../../store';
+import ProjectsItem from './ProjectsItem';
 
 class ProjectListContainer extends Component {
   
@@ -14,13 +14,13 @@ class ProjectListContainer extends Component {
     const { projects } = this.props;
     
     if (projects) {
-      const projectList = projects.map((project, index) => {
-        return <ProjectLink key={index} projectId={ project._id } projectName={project.name} /> 
+      const projectsList = projects.map((project, index) => {
+        return <ProjectsItem key={index} projectId={ project._id } projectName={project.name} /> 
       });
       
       return (
         <div>
-          {projectList}
+          {projectsList}
         </div>
       );
     } 

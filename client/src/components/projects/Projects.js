@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
-import ProjectListContainer from './ProjectListContainer'
-import ProjectSubmitForm from './ProjectSubmitForm'
-import * as actions from '../actions/indexActions';
-import store from '../store';
+import ProjectsList from './ProjectsList'
+import ProjectsSubmitForm from './ProjectsSubmitForm'
+import * as actions from '../../actions/indexActions';
+import store from '../../store';
 import { Button } from 'react-bootstrap';
 
 export default function Projects() {
@@ -13,8 +13,8 @@ export default function Projects() {
           <h1>
               Projects
           </h1>
-          <ProjectSubmitForm />
-          <ProjectListContainer />
+          <ProjectsSubmitForm />
+          <ProjectsList />
       </div>
     );
 };
