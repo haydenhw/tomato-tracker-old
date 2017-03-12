@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Router, Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
-import ProjectList from './ProjectList'
-import ProjectSubmitForm from './ProjectSubmitForm'
 import * as actions from '../actions/indexActions';
 import store from '../store';
-import { Button } from 'react-bootstrap';
 
-class Projects extends Component {
-/*  handleSubmit(event) {
+
+class ProjectSubmitForm extends Component {
+  handleSubmit(event) {
     const newProject = {
       "name": this.input.value,
       "boardSpecs": {
@@ -65,8 +63,7 @@ class Projects extends Component {
       .catch(err => {
         console.error(err)
       })
-  }*/
-  
+  }
   
   render() {
     const labelStyle ={
@@ -78,23 +75,13 @@ class Projects extends Component {
     }
     
     return (
-        <div>
-            <h1>
-                Projects
-            </h1>
-            <ProjectSubmitForm />
-            {/* <form onSubmit={this.handleSubmit.bind(this)}>
-              <label style={labelStyle}>
-                Create New Project: 
-                <input style={inputStyle} type="text" ref={(input) => this.input = input} />
-              </label>
-              <input type="submit" value="Submit" />
-            </form> */}
-            <div>
-              <ProjectList />
-            </div>
-          
-        </div>
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <label style={labelStyle}>
+          Create New Project: 
+          <input style={inputStyle} type="text" ref={(input) => this.input = input} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 };
@@ -109,4 +96,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmitForm);
