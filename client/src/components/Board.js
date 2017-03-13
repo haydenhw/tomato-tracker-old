@@ -49,7 +49,7 @@ class Board extends Component {
           width={width}
           height={height}
           draggable="true" 
-          onMouseMove={this.test.bind(this)}
+        
           onDragMove={this.reRender.bind(this)}
           onDragEnd={this.updatePosition.bind(this)}
           >

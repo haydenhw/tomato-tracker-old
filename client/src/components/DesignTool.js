@@ -12,6 +12,13 @@ import SaveButton from './SaveButton';
 import SideBar from './side-bar/SideBar';
 
 class DesignTool extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { 
+      x: 0,
+      y: 0
+    }
+  }
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -21,7 +28,9 @@ class DesignTool extends Component {
   }
   
   renderModule() {
-    console.log('hello'/*this.refs.stage.getStage()*/)
+    const { x, y } = this.refs.stage.getStage().getPointerPosition();
+    this.setState({x, y});
+    console.log(this.state)
   }
   
   render () {
@@ -36,9 +45,13 @@ class DesignTool extends Component {
         <div>
           <SideBar />
           <div style={stageStyle}>
-            <Stage style={stageStyle} ref="stage" width={750} height={500}>
+            <Stage style={stageStyle} onMouseMove={this.renderModule.bind(this)} ref="stage" width={750} height={500}>
+              
               <Grid  gridWidth={5000}  cellWidth={20} />
-            {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
+              {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
+              <Layer>
+                <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  /> 
+              </Layer>
             </Stage>
           </div>
         </div>

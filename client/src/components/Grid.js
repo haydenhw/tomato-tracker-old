@@ -29,6 +29,7 @@ export default function Grid(props) {
   
   return (
     <Layer>
+      <Rect width={750} height={500} />
       {gridLines}
     </Layer>
     
