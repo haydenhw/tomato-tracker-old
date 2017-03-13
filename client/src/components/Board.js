@@ -22,6 +22,10 @@ class Board extends Component {
     store.dispatch(actions.updateBoardPosition({x: x, y: y}))
   }
   
+  test() {
+    console.log('hello')
+  }
+  
   render() {
     const {
       x,
@@ -44,29 +48,30 @@ class Board extends Component {
           y={y}
           width={width}
           height={height}
-          draggable="true"
+          draggable="true" 
+          onMouseMove={this.test.bind(this)}
           onDragMove={this.reRender.bind(this)}
           onDragEnd={this.updatePosition.bind(this)}
           >
+      
+          <Rect
+            ref="board"
+            name={"board"}
+            x={topLeft.x}
+            y={topLeft.y}
+            width={topRight.x - topLeft.x || width}
+            height={bottomLeft.y - topLeft.y || height }
+            fill="#e3e3e5"
+            opacity="0.5"
+            stroke="#ccc"
+          />
             
-            <Rect
-              ref="board"
-              name={"board"}
-              x={topLeft.x}
-              y={topLeft.y}
-              width={topRight.x - topLeft.x || width}
-              height={bottomLeft.y - topLeft.y || height }
-              fill="#e3e3e5"
-              opacity="0.5"
-              stroke="#ccc"
-            />
-            
-            <Anchor x={topLeft.x} y={topLeft.y} name={"topLeft"} />
-            <Anchor x={topRight.x || width} y={topRight.y} name={"topRight"} />
-            <Anchor x={bottomLeft.x} y={bottomLeft.y || height} name={"bottomLeft"} />
-            <Anchor x={bottomRight.x || width} y={bottomRight.y ||height} name={"bottomRight"} />
-            
-            <ModuleContainer />
+          <Anchor x={topLeft.x} y={topLeft.y} name={"topLeft"} />
+          <Anchor x={topRight.x || width} y={topRight.y} name={"topRight"} />
+          <Anchor x={bottomLeft.x} y={bottomLeft.y || height} name={"bottomLeft"} />
+          <Anchor x={bottomRight.x || width} y={bottomRight.y ||height} name={"bottomRight"} />
+          
+          <ModuleContainer />
             
         </Group>
       </Layer>

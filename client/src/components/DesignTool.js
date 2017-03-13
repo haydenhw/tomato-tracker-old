@@ -9,6 +9,7 @@ import Board from './Board';
 import ModuleContainer from './ModuleContainer';
 import BoardDimensionInput from './BoardDimensionInput';
 import SaveButton from './SaveButton';
+import SideBar from './side-bar/SideBar';
 
 class DesignTool extends Component {
   componentDidMount() {
@@ -18,16 +19,29 @@ class DesignTool extends Component {
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
   }
+  
+  renderModule() {
+    console.log('hello'/*this.refs.stage.getStage()*/)
+  }
+  
   render () {
+    const stageStyle = {
+      "display": "inline-block"
+    }
     return (
       <div>
         <h1>{this.props.currentProjectName}</h1>
         <SaveButton/>
         <BoardDimensionInput />
-        <Stage ref="stage" width={5000} height={1000}>
-          <Grid gridWidth={5000}  cellWidth={20} />
-        {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
-        </Stage>
+        <div>
+          <SideBar />
+          <div style={stageStyle}>
+            <Stage style={stageStyle} ref="stage" width={750} height={500}>
+              <Grid  gridWidth={5000}  cellWidth={20} />
+            {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
+            </Stage>
+          </div>
+        </div>
     </div>
      );
    }

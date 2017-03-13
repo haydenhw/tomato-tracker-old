@@ -26,14 +26,13 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
        break;
    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
-      
       return {
         x: boardSpecs.x,
         y: boardSpecs.y,
         width: boardSpecs.width,
         height: boardSpecs.height
       };
-       
+      break;
     default:
       return state;
   }
@@ -47,9 +46,24 @@ const defaultAnchorPositions = {
 }
 
 export const anchorPositions = (state=defaultAnchorPositions, action) => {
+  switch(action.type){
+    case actions.UPDATE_ANCHOR_POSITIONS:
+      return action.positions;
+      break;
+      
+      case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+        return defaultAnchorPositions;
+        break;
+    default:
+      return state;
+  }
+  
+}
+
+/*export const anchorPositions = (state=defaultAnchorPositions, action) => {
   if(action.type === actions.UPDATE_ANCHOR_POSITIONS){
     return action.positions;
   }
   
   return state;
-}
+}*/
