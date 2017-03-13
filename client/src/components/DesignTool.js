@@ -49,9 +49,9 @@ class DesignTool extends Component {
               
               <Grid  gridWidth={5000}  cellWidth={20} />
               {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
-              <Layer>
+              {/* <Layer>
                 <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  /> 
-              </Layer>
+              </Layer> */}
             </Stage>
           </div>
         </div>

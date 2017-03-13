@@ -6,7 +6,10 @@ export default function SideBar(props) {
   const style = {
     "height": "100%",
     "width": "100px",
-    "display": "inline-block",
+    "position": "absolute",
+    "backgroundColor": "white",
+    "zIndex": "1", 
+    "left": "0px",
     "verticalAlign": "top"
   }
   
