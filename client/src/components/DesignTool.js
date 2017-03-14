@@ -16,24 +16,55 @@ class DesignTool extends Component {
     super(props)
     this.state = { 
       x: 0,
-      y: 0
+      y: 0,
+      isSideBarHidden:false,
+      isDraggingToBoard: false,
+      isMouseOverBoard: false,
+      iconParentId: null
     }
   }
+  
+  handleMouseUp() {
+    store.dispatch(actions.mouseDownOnIcon(false))
+    this.setState({isDraggingToBoard: false});
+
+  }
+  
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
+    
+    document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
   }
   
+  /*componentWillUnmount() {
+  document.body.removeEventListener('click', this.handleMouseUp);
+  }
+  */
   renderModule() {
     const { x, y } = this.refs.stage.getStage().getPointerPosition();
     this.setState({x, y});
-    console.log(this.state)
+    //console.log(this.state)
+  }
+  
+  toggleDraggingToBoard() {
+    console.log('hello')
+    debugger;
+    if (this.props.isMouseDownOnIcon){
+      this.setState({isDraggingToBoard: true});
+    } 
+    
   }
   
   render () {
+    const sideBar = this.state.isDraggingToBoard ? 
+    '' : 
+    <SideBar 
+      toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
+    />;
     const stageStyle = {
       "display": "inline-block"
     }
@@ -43,7 +74,7 @@ class DesignTool extends Component {
         <SaveButton/>
         <BoardDimensionInput />
         <div>
-          <SideBar />
+          {sideBar}
           <div style={stageStyle}>
             <Stage style={stageStyle} onMouseMove={this.renderModule.bind(this)} ref="stage" width={750} height={500}>
               
@@ -61,7 +92,8 @@ class DesignTool extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentProjectName: state.currentProjectInfo.name
+  currentProjectName: state.currentProjectInfo.name,
+  isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon
 });
 
 export default connect(mapStateToProps)(DesignTool);

@@ -40,6 +40,7 @@ export default class Module extends Component {
               height={height}
               width={width}
               image={this.state.image}
+              icon={this.state.image}
               draggable="true"
               onDragEnd={this.updatePosition.bind(this)}
             />

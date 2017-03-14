@@ -33,8 +33,9 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         height: boardSpecs.height
       };
       break;
-    default:
-      return state;
+      
+      default:
+        return state;
   }
 }
 

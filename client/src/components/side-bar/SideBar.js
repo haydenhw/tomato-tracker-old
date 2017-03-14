@@ -16,7 +16,10 @@ export default function SideBar(props) {
   return (
     <div style={style}>
       This is a side bar
-      <SideBarIconList />
+      <SideBarIconList 
+        toggleDraggingToBoard={props.toggleDraggingToBoard} 
+        toggleIsClicked={props.toggleIsClicked}
+      />
     </div>
   );
 }
