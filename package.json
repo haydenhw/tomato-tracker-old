@@ -6,10 +6,14 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
     "concurrently": "^3.4.0",
     "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "konva": "^1.4.0",
     "mongodb": "^2.2.24",
     "mongoose": "^4.8.6",
     "react": "^15.4.2",
@@ -20,6 +24,7 @@
   },
   "scripts": {
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
+    "server": "babel-node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
