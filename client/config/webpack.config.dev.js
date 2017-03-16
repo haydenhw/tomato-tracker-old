@@ -66,7 +66,6 @@ module.exports = {
     fallback: paths.nodePaths,
     root: path.resolve(__dirname, 'src'),
     alias: {
-      actions:'actions/indexActions.js',
       components: path.join(__dirname, '../src', 'components'),
      'react-native': 'react-native-web'
     },

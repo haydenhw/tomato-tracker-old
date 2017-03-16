@@ -22,6 +22,15 @@ const projectSchema = mongoose.Schema({
     image: String,
     onBoard: Boolean,
     id: Number
+  }],
+  moduleBank: [{
+    x: Number,
+    y: Number,
+    height: Number,
+    width: Number,
+    image: String,
+    onBoard: Boolean,
+    id: Number
   }]
 });
 

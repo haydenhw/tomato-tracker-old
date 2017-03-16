@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import actions from '../../actions/indexActions';
+import * as actions from '../../actions/indexActions';
 import store from '../../store';
-
 export default class SideBarIcon extends Component {
 
   render() {

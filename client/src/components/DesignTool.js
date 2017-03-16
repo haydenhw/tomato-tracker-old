@@ -52,7 +52,7 @@ class DesignTool extends Component {
   
   toggleDraggingToBoard() {
     console.log('hello')
-    debugger;
+    
     if (this.props.isMouseDownOnIcon){
       this.setState({isDraggingToBoard: true});
     } 
