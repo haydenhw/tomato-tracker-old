@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
-import { moduleList, currentProjectModules } from './moduleReducers';
+import {currentProjectModules, moduleBank , draggingModule } from './moduleReducers';
 import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 
 export default combineReducers({
-    moduleList,
     projectList,
     currentProjectInfo,
     currentProjectModules,
+    moduleBank,
+    draggingModule,
     boardSpecs,
     anchorPositions,
     mouseEvents

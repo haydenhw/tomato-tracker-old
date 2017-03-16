@@ -5,13 +5,12 @@ import store from '../../store';
 import SideBarIcon from './SideBarIcon';
 
 function SideBarIconList(props) {
-  const { modules } = props;
-  const iconList =  modules.map((module, index) => {
+  const { moduleBank } = props;
+  const iconList =  moduleBank.map((module, index) => {
     return (
       <SideBarIcon 
         key={index} 
-        parentId={ module._id } 
-        iconImage={ module.image } 
+        moduleData = {module}
         toggleDraggingToBoard = {props.toggleDraggingToBoard}
         toggleIsClicked={props.toggleIsClicked}
       /> 
@@ -31,7 +30,7 @@ function SideBarIconList(props) {
   
   
 const mapStateToProps = (state, props) => ({
-  modules: state.currentProjectModules
+  moduleBank: state.moduleBank
 });
 
 export default connect(mapStateToProps)(SideBarIconList);

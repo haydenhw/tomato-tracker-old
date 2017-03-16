@@ -37,7 +37,6 @@ export function fetchProjectById(projectId, currentRoute) {
       return res.json();
     })
     .then(data => {
-      console.log("get response", data.boardSpecs.x, data.boardSpecs.y, data.boardSpecs.height, data.boardSpecs.width)
       dispatch(fetchProjectByIdSuccess(data));
       const designRoute =`/design/${projectId}`;
       

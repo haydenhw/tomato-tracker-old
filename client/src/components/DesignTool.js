@@ -6,6 +6,7 @@ import store from '../store';
 import Grid from './Grid';
 import MyRect from './Rect';
 import Board from './Board';
+import Module from './Module';
 import ModuleContainer from './ModuleContainer';
 import BoardDimensionInput from './BoardDimensionInput';
 import SaveButton from './SaveButton';
@@ -27,7 +28,7 @@ class DesignTool extends Component {
   handleMouseUp() {
     store.dispatch(actions.mouseDownOnIcon(false))
     this.setState({isDraggingToBoard: false});
-
+    this.setState({x:0, y:0});
   }
   
   componentDidMount() {
@@ -45,13 +46,18 @@ class DesignTool extends Component {
   }
   */
   renderModule() {
-    const { x, y } = this.refs.stage.getStage().getPointerPosition();
-    this.setState({x, y});
-    //console.log(this.state)
+    if(this.state.isDraggingToBoard) {
+      const { x, y } = this.refs.stage.getStage().getPointerPosition();
+      this.setState({x, y});
+      console.log(this.state)
+    }
+    
+    /*const { x, y } = this.refs.stage.getStage().getPointerPosition();
+    this.setState({x, y});*/
+    
   }
   
   toggleDraggingToBoard() {
-    console.log('hello')
     
     if (this.props.isMouseDownOnIcon){
       this.setState({isDraggingToBoard: true});
@@ -61,10 +67,26 @@ class DesignTool extends Component {
   
   render () {
     const sideBar = this.state.isDraggingToBoard ? 
-    '' : 
-    <SideBar 
-      toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
-    />;
+      '' : 
+      <SideBar 
+        toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
+      />;
+    
+    const rect =  <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  />;
+    console.log(this.state.isDraggingToBoard)
+    /*if (this.state.isDraggingToBoard) {
+      draggingModule = '';
+    
+    } else {
+      draggingModule = <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  />
+      
+  }*/
+  /*  const draggingModule = //<Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  />
+    this.state.isDraggingToBoard ? 
+      <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  /> 
+      :
+      '';*/
+  //  console.log(draggingModule)
     const stageStyle = {
       "display": "inline-block"
     }
@@ -76,13 +98,20 @@ class DesignTool extends Component {
         <div>
           {sideBar}
           <div style={stageStyle}>
-            <Stage style={stageStyle} onMouseMove={this.renderModule.bind(this)} ref="stage" width={750} height={500}>
+            <Stage style={stageStyle} 
+              onMouseMove={this.renderModule.bind(this)} 
+              ref="stage" 
+              width={750} 
+              height={500}>
               
-              <Grid  gridWidth={5000}  cellWidth={20} />
-              {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
-              {/* <Layer>
-                <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  /> 
-              </Layer> */}
+                <Grid  gridWidth={5000}  cellWidth={20} />
+                {this.props.currentProjectName ? <Board /> : <Layer></Layer>}
+                
+                  {!this.state.isDraggingToBoard ? <Layer></Layer> : <Layer>{rect}</Layer> }
+              
+                {/* <Layer>
+                  <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  /> 
+                </Layer> */}
             </Stage>
           </div>
         </div>
