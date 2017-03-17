@@ -31,6 +31,19 @@ class DesignTool extends Component {
     //this.setState({x:, y:});
   }
   
+  handleMouseMove(evt) {
+    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+    const x = Number(evt.clientX) - stageOffsetX;
+    const y = Number(evt.clientY) - stageOffsetY;
+  
+    this.setState({x, y});
+    // console.log('state', this.state.x , this. state.y )
+  
+    
+  
+  }
+  
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -39,6 +52,8 @@ class DesignTool extends Component {
     }
     
     document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    document.body.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    
   }
   
   /*componentWillUnmount() {
@@ -47,13 +62,7 @@ class DesignTool extends Component {
   */
   renderModule(evt) {
     
-      const { x, y } = this.refs.stage.getStage().getPointerPosition();
-      this.setState({x, y});
-      console.log(this.state.x , this. state.y )
-      console.log(evt)
-      //console.log("client", evt.clientX, evt.clientY)
-    /*const { x, y } = this.refs.stage.getStage().getPointerPosition();
-    this.setState({x, y});*/
+    
     
   }
   
@@ -66,13 +75,13 @@ class DesignTool extends Component {
   }
   
   render () {
-    const { currentProjectName, draggingModuleData } = this.props;
+    const { currentProjectName, draggingModuleData , isMouseDownOnIcon } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard } = this.state;
     const draggingModule = 
       <Module 
-        x={x} 
-        y={y}
+        x={x - width/2} 
+        y={y - height/2}
         height={height}
         width={width}
         image={image}
@@ -88,11 +97,11 @@ class DesignTool extends Component {
       "display": "inline-block"
     }
     return (
-      <div>
+      <div onMouseMove={this.handleMouseMove.bind(this)}>
         <h1>{currentProjectName}</h1>
         <SaveButton/>
         <BoardDimensionInput />
-        <div>
+        <div ref={(node) => this.stageContainer = node} >
           {isDraggingToBoard ? '' : sideBar}
           <div style={stageStyle}>
             <Stage style={stageStyle} 
@@ -104,7 +113,7 @@ class DesignTool extends Component {
               
                 <Grid  gridWidth={5000}  cellWidth={20} />
                 {currentProjectName ? <Board /> : <Layer></Layer>}
-                {isDraggingToBoard ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
+                {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
                 
             </Stage>
           </div>

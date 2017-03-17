@@ -1,5 +1,12 @@
 import { projectsUrl } from '../config/endpointUrls';
 
+
+export const PUSH_TO_CURRENT_PROJECT_MODULES = 'PUSH_TO_CURRENT_PROJECT_MODULES'; 
+export const pushToCurrentProjectModules = (module) => ({
+  type: 'PUSH_TO_CURRENT_PROJECT_MODULES',
+  module
+});
+
 export const CHANGE_DRAGGING_MODULE = 'CHANGE_DRAGGING_MODULE'; 
 export const changeDraggingModule = (moduleData) => ({
   type: 'CHANGE_DRAGGING_MODULE',

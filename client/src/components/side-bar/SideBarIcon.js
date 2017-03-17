@@ -4,8 +4,12 @@ import store from '../../store';
 export default class SideBarIcon extends Component {
   
   handleMouseMovement() {
+    const newModule = this.props.moduleData;
+    newModule.x = 50;
+    newModule.y = 50;
     this.props.toggleDraggingToBoard();
     store.dispatch(actions.changeDraggingModule(this.props.moduleData));
+    store.dispatch(actions.pushToCurrentProjectModules(newModule))
   }
 
   render() {
