@@ -12,7 +12,6 @@ export const moduleList = (state = [], action) => {
 export const draggingModule = (state = [], action) => {
   switch(action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
-      console.log(action)
        return action.moduleData;
        break;
       

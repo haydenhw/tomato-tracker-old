@@ -26,9 +26,20 @@ class DesignTool extends Component {
   }
   
   handleMouseUp() {
-    store.dispatch(actions.mouseDownOnIcon(false))
+    const newModuleData = this.props.draggingModuleData;  
+    const newModuleCoordinates = {
+      x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
+      y: this.state.y - this.props.boardSpecs.y - newModuleData.height/2
+    }
+    
+    const newModule = Object.assign(newModuleCoordinates, newModuleData)
+    
+    if (this.state.isDraggingToBoard) {
+      store.dispatch(actions.pushToCurrentProjectModules(newModule));
+    }
+    
+    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 10 )
     this.setState({isDraggingToBoard: false});
-    //this.setState({x:, y:});
   }
   
   handleMouseMove(evt) {
@@ -36,8 +47,20 @@ class DesignTool extends Component {
     const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
     const x = Number(evt.clientX) - stageOffsetX;
     const y = Number(evt.clientY) - stageOffsetY;
-  
+    //const x = stageX - this.props.boardSpecs.x;
+    //const y = stageY - this.props.boardSpecs.y;
+    
     this.setState({x, y});
+    
+    /*KKif (this.state.isDraggingToBoard) {
+      const newPosition = {
+        x: x,
+        y: y,
+        index: this.props.currentProjectModules.length-1
+      }
+      console.log(newPosition)
+      store.dispatch(actions.updateModulePosition(newPosition))
+    }*/
     // console.log('state', this.state.x , this. state.y )
   
     
@@ -104,7 +127,8 @@ class DesignTool extends Component {
         <div ref={(node) => this.stageContainer = node} >
           {isDraggingToBoard ? '' : sideBar}
           <div style={stageStyle}>
-            <Stage style={stageStyle} 
+            <Stage 
+              style={stageStyle} 
               onMouseMove={this.renderModule.bind(this)} 
               ref="stage" 
               width={750} 
@@ -125,8 +149,11 @@ class DesignTool extends Component {
 
 const mapStateToProps = (state) => ({
   currentProjectName: state.currentProjectInfo.name,
+  currentProjectModules: state.currentProjectModules,
+  boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   draggingModuleData: state.draggingModule
+  
 });
 
 export default connect(mapStateToProps)(DesignTool);

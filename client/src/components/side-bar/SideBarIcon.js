@@ -4,12 +4,21 @@ import store from '../../store';
 export default class SideBarIcon extends Component {
   
   handleMouseMovement() {
-    const newModule = this.props.moduleData;
-    newModule.x = 50;
-    newModule.y = 50;
+    
     this.props.toggleDraggingToBoard();
+    
+  }
+  
+  handleMouseDown(evt) {
+    /*console.log(evt.clientX)
+    const newModule = this.props.moduleData;
+    newModule.x = -300;
+    newModule.y = 50;*/
+    
+    store.dispatch(actions.mouseDownOnIcon(true))
     store.dispatch(actions.changeDraggingModule(this.props.moduleData));
-    store.dispatch(actions.pushToCurrentProjectModules(newModule))
+    //store.dispatch(actions.pushToCurrentProjectModules(newModule));
+    
   }
 
   render() {
@@ -27,7 +36,7 @@ export default class SideBarIcon extends Component {
       style={style}
       ref={(module) => { this.selectedModule = module; }} 
       onMouseMove={ this.handleMouseMovement.bind(this) } 
-      onMouseDown={ () => store.dispatch(actions.mouseDownOnIcon(true)) }
+      onMouseDown={ this.handleMouseDown.bind(this) }
       onMouseOut={ () => store.dispatch(actions.mouseDownOnIcon(false)) }
       
     />
