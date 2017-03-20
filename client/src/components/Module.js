@@ -3,6 +3,7 @@ import {Layer, Stage, Image} from 'react-konva';
 import * as actions from '../actions/indexActions';
 import store from '../store';
 import collide from '../helper-functions/collide';
+import collideFromSideBar from '../helper-functions/collideFromSideBar';
 
 export default class Module extends Component {
     state = {
@@ -19,6 +20,21 @@ export default class Module extends Component {
       }
     }
     
+    componentDidUpdate() {
+      const draggingModule = this.refs.module;
+      const stage = draggingModule.getParent().getParent();
+      const moduleNodes = stage.get(".module");
+      const boardGroup = stage.get(".boardGroup")[0];
+      //console.log(stage)
+      //console.log(moduleNodes)
+      //console.log(boardGroup.getParent().getParent().get(".module"))
+      // console.log(collideFromSideBar)
+      if (boardGroup) {
+        collideFromSideBar(draggingModule, moduleNodes, boardGroup);
+      }
+      
+    }
+    
     updatePosition() {
       const module = this.refs.module
       const newPosition = {
@@ -33,6 +49,7 @@ export default class Module extends Component {
       const draggingModule = this.refs.module;
       const boardGroup = draggingModule.getParent();
       const moduleNodes = boardGroup.get(".module");
+      //console.log(boardGroup.getParent().getParent().get(".module"))
       
       collide(draggingModule, moduleNodes);
     }
