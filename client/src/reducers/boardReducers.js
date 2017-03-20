@@ -17,7 +17,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         };
         break;
     case actions.UPDATE_BOARD_POSITION:
-      console.log('reducer' , action.position.x, action.position.y)
        return {
          ...state,
          x: action.position.x,

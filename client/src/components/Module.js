@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Stage, Image} from 'react-konva';
 import * as actions from '../actions/indexActions';
 import store from '../store';
+import collide from '../helper-functions/collide';
 
 export default class Module extends Component {
     state = {
@@ -25,15 +26,22 @@ export default class Module extends Component {
         y: module.getY(),
         index: module.index
       }
-      console.log(newPosition.x,newPosition.y);
       store.dispatch(actions.updateModulePosition(newPosition))
     }
-
+    
+    checkBoundaries() {
+      const draggingModule = this.refs.module;
+      const boardGroup = draggingModule.getParent();
+      const moduleNodes = boardGroup.get(".module");
+      
+      collide(draggingModule, moduleNodes);
+    }
     render() {
       const { x, y, height, width, index } = this.props;
         return (
             <Image
               ref="module"
+              name="module"
               index={index}
               x={x}
               y={y}
@@ -43,6 +51,8 @@ export default class Module extends Component {
               icon={this.state.image}
               draggable="true"
               onDragEnd={this.updatePosition.bind(this)}
+              onDragMove={this.checkBoundaries.bind(this)}
+              
             />
         );
     }

@@ -8,10 +8,6 @@ import Module from './Module';
 import { squareData } from '../data';
 
 class MoudleContainer extends Component{
-  
-  checkBoundaries() {
-    console.log('hello')
-  }
 
   render() {
     const modules = this.props.modules.map((modules, index) =>{
@@ -23,7 +19,7 @@ class MoudleContainer extends Component{
           height={modules.height}
           width={modules.width}
           image={modules.image}
-          onDragMove={this.checkBoundaries.bind(this)}
+          
         />
     });
     
