@@ -44,7 +44,6 @@ class Board extends Component {
         
         <Group
           ref="boardGroup"
-          name="boardGroup"
           x={x}
           y={y}
           width={width}

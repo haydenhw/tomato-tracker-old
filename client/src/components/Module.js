@@ -15,7 +15,6 @@ export default class Module extends Component {
       stroke: null
     }
   }
-  
     
     componentWillMount() {
       console.log('will mount')
@@ -24,8 +23,11 @@ export default class Module extends Component {
     }
     
     componentDidMount() {
-      console.log('mounted')
-      this.setState({isNewModuleDropping: false});
+      const draggingModule = this.refs.module;
+      const boardGroup = draggingModule.getParent();
+      const moduleNodes = boardGroup.get(".module");
+      
+      collide(draggingModule, moduleNodes);
       
       const image = new window.Image();
       image.src = this.props.image;
@@ -50,6 +52,8 @@ export default class Module extends Component {
     
     
     updatePosition() {
+    
+      
       const module = this.refs.module
       const newPosition = {
         x: module.getX(),
