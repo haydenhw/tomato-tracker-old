@@ -3,31 +3,31 @@ import {Layer, Stage, Image} from 'react-konva';
 import * as actions from '../actions/indexActions';
 import store from '../store';
 import collide from '../helper-functions/collide';
-import collideFromSideBar from '../helper-functions/collideFromSideBar';
+import checkBounds from '../helper-functions/checkBounds';
+
 
 export default class Module extends Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = { 
+    state = {
       image: null,
-      isNewModuleDropping: false,
-      stroke: null
+      //isStrokeRed: true
     }
-  }
     
-    componentWillMount() {
-      console.log('will mount')
-      this.setState({isNewModuleDropping: true});
-      console.log(this.state.isNewModuleDropping)
+    checkCollision() {
+      // console.log('hello')
+      const draggingModuleNode = this.refs.module;
+      const boardGroup = draggingModuleNode.getParent();
+      const moduleNodes = boardGroup.get(".module");
+      collide(draggingModuleNode, moduleNodes);
+    }
+    
+    checkBoundaries(topCollidingNode) {
+      const draggingModuleNode = this.refs.module;
+      const boardGroup = draggingModuleNode.getParent().getParent();
+      
+      checkBounds(draggingModuleNode, boardGroup, topCollidingNode);
     }
     
     componentDidMount() {
-      const draggingModule = this.refs.module;
-      const boardGroup = draggingModule.getParent();
-      const moduleNodes = boardGroup.get(".module");
-      
-      collide(draggingModule, moduleNodes);
       
       const image = new window.Image();
       image.src = this.props.image;
@@ -36,24 +36,21 @@ export default class Module extends Component {
           image: image
         });
       }
+      
+      
+      const topCollidingNode = this.checkCollision();
+      console.log(/*this.checkCollision(),*/ topCollidingNode)
+      
+      // this.checkBoundaries(topCollidingNode);
+      //this.setState({isStrokeRed: !this.state.isStrokeRed})
     }
     
-    componentDidUpdate() {
-      console.log('did update')
-      const draggingModule = this.refs.module;
-      const stage = draggingModule.getParent().getParent();
-      const moduleNodes = stage.get(".module");
-      const boardGroup = stage.get(".boardGroup")[0];
-      
-      if (boardGroup) {
-        collideFromSideBar(draggingModule, moduleNodes, boardGroup, this.state.isNewModuleDropping);
-      }
+    handleDragMove() {
+      const topCollidingNode = this.checkCollision();
+      // this.checkBoundaries(topCollidingNode);
     }
     
-    
-    updatePosition() {
-    
-      
+    handleDragEnd() {
       const module = this.refs.module
       const newPosition = {
         x: module.getX(),
@@ -63,14 +60,6 @@ export default class Module extends Component {
       store.dispatch(actions.updateModulePosition(newPosition))
     }
     
-    checkBoundaries() {
-      const draggingModule = this.refs.module;
-      const boardGroup = draggingModule.getParent();
-      const moduleNodes = boardGroup.get(".module");
-      //console.log(boardGroup.getParent().getParent().get(".module"))
-      
-      collide(draggingModule, moduleNodes);
-    }
     render() {
       const { x, y, height, width, index } = this.props;
         return (
@@ -84,10 +73,10 @@ export default class Module extends Component {
               width={width}
               image={this.state.image}
               icon={this.state.image}
-              stroke={null}
+              //stroke={this.state.isStrokeRed ? 'red' : null}
               draggable="true"
-              onDragEnd={this.updatePosition.bind(this)}
-              onDragMove={this.checkBoundaries.bind(this)}
+              onDragEnd={this.handleDragEnd.bind(this)}
+              onDragMove={this.handleDragMove.bind(this)}
               
             />
         );
