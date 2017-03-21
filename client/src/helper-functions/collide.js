@@ -31,10 +31,11 @@ function checkCollision(otherNodes) {
         if (collideHoriz && collideVert) {
           
           otherBox.stroke = "red";
-          const existsInCollidingNodes = collidingNodes.findIndex((node) => node === otherNode );
+          collidingNodes.push(otherNode);
+        /*  const existsInCollidingNodes = collidingNodes.findIndex((node) => node === otherNode );
           
           if(existsInCollidingNodes === -1)
-          collidingNodes.push(otherNode);
+          collidingNodes.push(otherNode);*/
         } 
       }
     }  
@@ -48,9 +49,9 @@ export default function collide(targetNode, otherNodes, callback) {
   const collidingNodes = checkCollision(otherNodes);
   const notColliding = otherNodes.diff(collidingNodes);
   
-  /*notColliding.forEach((node) => {
+  notColliding.forEach((node) => {
     node.attrs.stroke = null;
-  })*/
+  })
   
   console.log('colliding', collidingNodes);
   console.log('not colliding', notColliding);
