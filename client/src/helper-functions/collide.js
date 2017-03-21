@@ -1,5 +1,7 @@
-export default function collide(targetNode, otherNodes) {
+export default function collide(targetNode, otherNodes, callback) {
   let result = null;
+  
+  //for (let i = 0; i < otherNodes.length-1; i++)
   
   const nodeBox = targetNode.attrs;
   const nodeLeft = nodeBox.x;
@@ -9,8 +11,8 @@ export default function collide(targetNode, otherNodes) {
   
   nodeBox.stroke = null;
   
-  otherNodes.forEach(otherNode => {
-    const otherBox = otherNode.attrs;
+  for (let j = 0; j < otherNodes.length-1; j++) {
+    const otherBox = otherNodes[j].attrs;
     
      if (nodeBox !== otherBox) {
       otherBox.stroke = null;
@@ -23,13 +25,14 @@ export default function collide(targetNode, otherNodes) {
       const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
 
       if (collideHoriz && collideVert) {
-      nodeBox.stroke = "red";
-      otherBox.stroke = "red";
-    
-      result = targetNode; 
-      } 
-   }  
-  });  
+        
+        //callback(nodeBox, otherBox) 
+        nodeBox.stroke = "red";
+        otherBox.stroke = "red";
+        
+      }
+    }
+  }  
+}  
           
-  return result;
-}
+  

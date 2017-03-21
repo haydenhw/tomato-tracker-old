@@ -42,13 +42,13 @@ export default class Module extends Component {
       const topCollidingNode = this.checkCollision();
       console.log(/*this.checkCollision(),*/ topCollidingNode)
       
-      this.checkBoundaries(topCollidingNode);
+      // this.checkBoundaries(topCollidingNode);
       //this.setState({isStrokeRed: !this.state.isStrokeRed})
     }
     
     handleDragMove() {
       const topCollidingNode = this.checkCollision();
-      this.checkBoundaries(topCollidingNode);
+      // this.checkBoundaries(topCollidingNode);
     }
     
     handleDragEnd() {
