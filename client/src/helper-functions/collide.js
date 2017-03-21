@@ -1,5 +1,5 @@
 export default function collide(targetNode, otherNodes) {
-  let collision = false;
+  let result = null;
   
   const nodeBox = targetNode.attrs;
   const nodeLeft = nodeBox.x;
@@ -23,13 +23,13 @@ export default function collide(targetNode, otherNodes) {
       const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
 
       if (collideHoriz && collideVert) {
-        collision = true; 
-      
-        nodeBox.stroke="red";
-        otherBox.stroke="red";
+      nodeBox.stroke = "red";
+      otherBox.stroke = "red";
+    
+      result = targetNode; 
       } 
    }  
   });  
           
-  return collision;
+  return result;
 }

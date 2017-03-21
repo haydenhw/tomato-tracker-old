@@ -3,18 +3,29 @@ import {Layer, Stage, Image} from 'react-konva';
 import * as actions from '../actions/indexActions';
 import store from '../store';
 import collide from '../helper-functions/collide';
+import checkBounds from '../helper-functions/checkBounds';
+
 
 export default class Module extends Component {
     state = {
-      image: null
+      image: null,
+      //isStrokeRed: true
     }
     
     checkCollision() {
-      const draggingModule = this.refs.module;
-      const boardGroup = draggingModule.getParent();
+      // console.log('hello')
+      const draggingModuleNode = this.refs.module;
+      const boardGroup = draggingModuleNode.getParent();
       const moduleNodes = boardGroup.get(".module");
+      console.log(collide(draggingModuleNode, moduleNodes));
+      return collide(draggingModuleNode, moduleNodes);
+    }
+    
+    checkBoundaries(topCollidingNode) {
+      const draggingModuleNode = this.refs.module;
+      const boardGroup = draggingModuleNode.getParent().getParent();
       
-      collide(draggingModule, moduleNodes);
+      checkBounds(draggingModuleNode, boardGroup, topCollidingNode);
     }
     
     componentDidMount() {
@@ -26,13 +37,18 @@ export default class Module extends Component {
           image: image
         });
       }
-      this.checkCollision();
       
+      
+      const topCollidingNode = this.checkCollision();
+      console.log(/*this.checkCollision(),*/ topCollidingNode)
+      
+      this.checkBoundaries(topCollidingNode);
+      //this.setState({isStrokeRed: !this.state.isStrokeRed})
     }
     
     handleDragMove() {
-      this.checkCollision();
-    
+      const topCollidingNode = this.checkCollision();
+      this.checkBoundaries(topCollidingNode);
     }
     
     handleDragEnd() {
@@ -44,8 +60,6 @@ export default class Module extends Component {
       }
       store.dispatch(actions.updateModulePosition(newPosition))
     }
-    
-    
     
     render() {
       const { x, y, height, width, index } = this.props;
@@ -60,6 +74,7 @@ export default class Module extends Component {
               width={width}
               image={this.state.image}
               icon={this.state.image}
+              //stroke={this.state.isStrokeRed ? 'red' : null}
               draggable="true"
               onDragEnd={this.handleDragEnd.bind(this)}
               onDragMove={this.handleDragMove.bind(this)}
