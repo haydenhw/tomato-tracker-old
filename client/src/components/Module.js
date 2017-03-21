@@ -10,6 +10,12 @@ export default class Module extends Component {
     }
     
     componentDidMount() {
+      const draggingModule = this.refs.module;
+      const boardGroup = draggingModule.getParent();
+      const moduleNodes = boardGroup.get(".module");
+      
+      collide(draggingModule, moduleNodes);
+      
       const image = new window.Image();
       image.src = this.props.image;
       image.onload = () => {
@@ -20,6 +26,8 @@ export default class Module extends Component {
     }
     
     updatePosition() {
+    
+      
       const module = this.refs.module
       const newPosition = {
         x: module.getX(),
