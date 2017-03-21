@@ -1,17 +1,21 @@
-export default function collideFromSideBar(targetNode, otherNodes, boardGroup, isModuleDropping) {
+export default function collideFromSideBar(targetNode, otherNodes, boardGroup) {
   let collision = false;
-  console.log('hello from side collide')
+  //console.log('hello')
+  // console.log(targetNode.getParent().getParent().get(".boardGroup"))
   const nodeBox = targetNode.attrs;
   const board = boardGroup.attrs;
   
-  const nodeLeft = nodeBox.x - board.x;
+  const nodeLeft = nodeBox.x - board.x //+ nodeBox.width/2;
   const nodeRight = nodeBox.x - board.x + nodeBox.width;
-  const nodeTop = nodeBox.y - board.y;
+  const nodeTop = nodeBox.y - board.y //+ nodeBox.hieght/2;
   const nodeBottom = nodeBox.y - board.y + nodeBox.height;
+   console.log(nodeBox.x , board.x)
+   console.log("nodeLeft", nodeLeft)
   nodeBox.stroke = null;
   
-  otherNodes.forEach((otherNode, index) => {
+  otherNodes.forEach(otherNode => {
     const otherBox = otherNode.attrs;
+    //console.log("other", otherBox.x)
     
      if (nodeBox !== otherBox) {
       otherBox.stroke = null;
@@ -19,18 +23,17 @@ export default function collideFromSideBar(targetNode, otherNodes, boardGroup, i
       const otherRight = otherBox.x + otherBox.width;
       const otherTop = otherBox.y;
       const otherBottom = otherBox.y + otherBox.height;
-      
       const collideHoriz = nodeLeft < otherRight && nodeRight > otherLeft;
       const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
-      const notIdenticalCoordinates = !(nodeLeft === otherLeft && nodeTop === otherTop);
-      console.log('from collision', isModuleDropping);
-      if (collideHoriz && collideVert && notIdenticalCoordinates) {
+
+      if (collideHoriz && collideVert) {
         collision = true; 
+      
         nodeBox.stroke="red";
         otherBox.stroke="red";
       } 
-    }
-  });
+   }  
+  });  
           
   return collision;
 }
