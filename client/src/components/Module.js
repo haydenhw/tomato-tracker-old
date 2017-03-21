@@ -17,8 +17,7 @@ export default class Module extends Component {
       const draggingModuleNode = this.refs.module;
       const boardGroup = draggingModuleNode.getParent();
       const moduleNodes = boardGroup.get(".module");
-      console.log(collide(draggingModuleNode, moduleNodes));
-      return collide(draggingModuleNode, moduleNodes);
+      collide(draggingModuleNode, moduleNodes);
     }
     
     checkBoundaries(topCollidingNode) {
