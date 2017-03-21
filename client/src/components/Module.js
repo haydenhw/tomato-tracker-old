@@ -44,7 +44,7 @@ export default class Module extends Component {
       const boardGroup = stage.get(".boardGroup")[0];
       
       if (boardGroup) {
-        //collideFromSideBar(draggingModule, moduleNodes, boardGroup, this.state.isNewModuleDropping);
+        collideFromSideBar(draggingModule, moduleNodes, boardGroup, this.state.isNewModuleDropping);
       }
     }
     
