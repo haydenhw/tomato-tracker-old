@@ -1,6 +1,6 @@
 export default function collideFromSideBar(targetNode, otherNodes, boardGroup, isModuleDropping) {
   let collision = false;
-  
+  console.log('hello from side collide')
   const nodeBox = targetNode.attrs;
   const board = boardGroup.attrs;
   
