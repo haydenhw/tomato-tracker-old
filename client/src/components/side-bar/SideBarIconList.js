@@ -28,7 +28,6 @@ function SideBarIconList(props) {
   )
 }  
   
-  
 const mapStateToProps = (state, props) => ({
   moduleBank: state.moduleBank
 });

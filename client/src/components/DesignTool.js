@@ -19,9 +19,7 @@ class DesignTool extends Component {
       x: 0,
       y: 0,
       isSideBarHidden:false,
-      isDraggingToBoard: false,
-      isMouseOverBoard: false,
-      iconParentId: null
+      isDraggingToBoard: false
     }
   }
   
@@ -34,11 +32,15 @@ class DesignTool extends Component {
     
     const newModule = Object.assign(newModuleCoordinates, newModuleData)
     
+    this.setState({isNewModuleDropping: true});
+    
     if (this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
     
-    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 10 )
+    this.setState({isNewModuleDropping: false});
+    
+    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
     this.setState({isDraggingToBoard: false});
   }
   
@@ -47,24 +49,8 @@ class DesignTool extends Component {
     const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
     const x = Number(evt.clientX) - stageOffsetX;
     const y = Number(evt.clientY) - stageOffsetY;
-    //const x = stageX - this.props.boardSpecs.x;
-    //const y = stageY - this.props.boardSpecs.y;
     
     this.setState({x, y});
-    
-    /*KKif (this.state.isDraggingToBoard) {
-      const newPosition = {
-        x: x,
-        y: y,
-        index: this.props.currentProjectModules.length-1
-      }
-      console.log(newPosition)
-      store.dispatch(actions.updateModulePosition(newPosition))
-    }*/
-    // console.log('state', this.state.x , this. state.y )
-  
-    
-  
   }
   
   componentDidMount() {
@@ -83,10 +69,10 @@ class DesignTool extends Component {
   document.body.removeEventListener('click', this.handleMouseUp);
   }
   */
-  renderModule(evt) {
-    
-    
-    
+  
+  toggleIsDraggingModuleMounted() {
+    console.log(this.state.isDraggingModuleMounted)
+    this.setState({isDraggingModuleMounted: !this.state.isDraggingModuleMounted})
   }
   
   toggleDraggingToBoard() {
@@ -102,7 +88,8 @@ class DesignTool extends Component {
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard } = this.state;
     const draggingModule = 
-      <Module 
+      <Module
+        toggleIsMounted={this.toggleIsDraggingModuleMounted.bind(this)}
         x={x - width/2} 
         y={y - height/2}
         height={height}
@@ -129,7 +116,6 @@ class DesignTool extends Component {
           <div style={stageStyle}>
             <Stage 
               style={stageStyle} 
-              onMouseMove={this.renderModule.bind(this)} 
               ref="stage" 
               width={750} 
               height={500}
