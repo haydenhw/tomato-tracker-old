@@ -9,12 +9,15 @@ export default class Module extends Component {
       image: null
     }
     
-    componentDidMount() {
+    checkCollision() {
       const draggingModule = this.refs.module;
       const boardGroup = draggingModule.getParent();
       const moduleNodes = boardGroup.get(".module");
       
       collide(draggingModule, moduleNodes);
+    }
+    
+    componentDidMount() {
       
       const image = new window.Image();
       image.src = this.props.image;
@@ -23,11 +26,16 @@ export default class Module extends Component {
           image: image
         });
       }
+      this.checkCollision();
+      
     }
     
-    updatePosition() {
+    handleDragMove() {
+      this.checkCollision();
     
-      
+    }
+    
+    handleDragEnd() {
       const module = this.refs.module
       const newPosition = {
         x: module.getX(),
@@ -37,13 +45,8 @@ export default class Module extends Component {
       store.dispatch(actions.updateModulePosition(newPosition))
     }
     
-    checkBoundaries() {
-      const draggingModule = this.refs.module;
-      const boardGroup = draggingModule.getParent();
-      const moduleNodes = boardGroup.get(".module");
-      
-      collide(draggingModule, moduleNodes);
-    }
+    
+    
     render() {
       const { x, y, height, width, index } = this.props;
         return (
@@ -58,8 +61,8 @@ export default class Module extends Component {
               image={this.state.image}
               icon={this.state.image}
               draggable="true"
-              onDragEnd={this.updatePosition.bind(this)}
-              onDragMove={this.checkBoundaries.bind(this)}
+              onDragEnd={this.handleDragEnd.bind(this)}
+              onDragMove={this.handleDragMove.bind(this)}
               
             />
         );
