@@ -73,9 +73,13 @@ module.exports = {
     fallback: paths.nodePaths,
     root: path.resolve(__dirname, 'src'),
     alias: {
-      actions:'actions/indexActions.js',
       components: path.join(__dirname, '../src', 'components'),
-     'react-native': 'react-native-web'
+      actions: path.join(__dirname, '../src', 'actions'),
+      reducers: path.join(__dirname, '../src', 'reducers'),
+      reduxFiles: path.join(__dirname, '../src', 'redux-files'),
+      config: path.join(__dirname, '../src', 'config'),
+      helpers: path.join(__dirname, '../src', 'helpers'),
+     'react-native': 'react-native-web',
     },
     extensions: ['', '.js', '.jsx']
   },
