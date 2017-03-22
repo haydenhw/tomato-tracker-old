@@ -43,7 +43,7 @@ function checkCollision(nodeArray) {
   return collidingNodes;
 }
 
-export default function collide(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
+export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
   const collidingNodes = checkCollision(nodeArray);
   const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes]
