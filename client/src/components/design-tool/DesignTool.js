@@ -23,25 +23,15 @@ class DesignTool extends Component {
     }
   }
   
-  handleMouseUp() {
-    const newModuleData = this.props.draggingModuleData;  
-    const newModuleCoordinates = {
-      x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
-      y: this.state.y - this.props.boardSpecs.y - newModuleData.height/2
+  componentDidMount() {
+    if(!this.props.currentProjectName) {
+      const projectId = this.props.params.projectId;
+      const currentRoute = this.props.location.pathname
+      store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
     
-    const newModule = Object.assign(newModuleCoordinates, newModuleData)
-    
-    this.setState({isNewModuleDropping: true});
-    
-    if (this.state.isDraggingToBoard) {
-      store.dispatch(actions.pushToCurrentProjectModules(newModule));
-    }
-    
-    this.setState({isNewModuleDropping: false});
-    
-    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
-    this.setState({isDraggingToBoard: false});
+    document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    document.body.addEventListener('mousemove', this.handleMouseMove.bind(this));
   }
   
   handleMouseMove(evt) {
@@ -53,59 +43,52 @@ class DesignTool extends Component {
     this.setState({x, y});
   }
   
-  componentDidMount() {
-    if(!this.props.currentProjectName) {
-      const projectId = this.props.params.projectId;
-      const currentRoute = this.props.location.pathname
-      store.dispatch(actions.fetchProjectById(projectId, currentRoute));
+  handleMouseUp() {
+    const newModuleData = this.props.draggingModuleData;  
+    const newModuleCoordinates = {
+      x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
+      y: this.state.y - this.props.boardSpecs.y - newModuleData.height/2
     }
     
-    document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
-    document.body.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    const newModule = Object.assign(newModuleCoordinates, newModuleData)
     
-  }
-  
-  /*componentWillUnmount() {
-  document.body.removeEventListener('click', this.handleMouseUp);
-  }
-  */
-  
-  toggleIsDraggingModuleMounted() {
-    console.log(this.state.isDraggingModuleMounted)
-    this.setState({isDraggingModuleMounted: !this.state.isDraggingModuleMounted})
+    if (this.state.isDraggingToBoard) {
+      store.dispatch(actions.pushToCurrentProjectModules(newModule));
+    }
+    
+    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
+    this.setState({isDraggingToBoard: false});
   }
   
   toggleDraggingToBoard() {
-    
     if (this.props.isMouseDownOnIcon){
       this.setState({isDraggingToBoard: true});
     } 
-    
   }
   
   render () {
     const { currentProjectName, draggingModuleData , isMouseDownOnIcon } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard } = this.state;
-    const draggingModule = 
+    
+    const draggingModule = ( 
       <Module
-        toggleIsMounted={this.toggleIsDraggingModuleMounted.bind(this)}
         x={x - width/2} 
         y={y - height/2}
         height={height}
         width={width}
         image={image}
       />
+    );
       
-    const sideBar = 
+    const sideBar = (
       <SideBar 
         toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
-      />; 
+      /> 
+    );
     
-    const rect =  <Rect x={this.state.x - 25} y={this.state.y - 25} height="50" width="50" fill="green"  />;
-    const stageStyle = {
-      "display": "inline-block"
-    }
+    const stageStyle = { "display": "inline-block" };
+    
     return (
       <div onMouseMove={this.handleMouseMove.bind(this)}>
         <h1>{currentProjectName}</h1>
@@ -120,11 +103,9 @@ class DesignTool extends Component {
               width={750} 
               height={500}
             >
-              
-                <Grid  gridWidth={5000}  cellWidth={20} />
-                {currentProjectName ? <Board /> : <Layer></Layer>}
-                {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
-                
+              <Grid  gridWidth={5000}  cellWidth={20} />
+              {currentProjectName ? <Board /> : <Layer></Layer>}
+              {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
             </Stage>
           </div>
         </div>
