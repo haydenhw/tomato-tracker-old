@@ -2,21 +2,22 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
 
-function checkCollision(otherNodes) {
+function checkCollision(nodeArray) {
   let collidingNodes = [];
-  
-  for (let i = 0; i < otherNodes.length; i++){
-    const node = otherNodes[i];
-    const nodeBox = otherNodes[i].attrs;
+  console.log(nodeArray)
+  for (let i = 0; i < nodeArray.length; i++){
+    const node = nodeArray[i];
+    const nodeBox = nodeArray[i].attrs;
+    
     const nodeLeft = nodeBox.x;
     const nodeRight = nodeBox.x + nodeBox.width;
     const nodeTop = nodeBox.y;
     const nodeBottom = nodeBox.y + nodeBox.height;
     
-    for (let j = 0; j < otherNodes.length; j++) {
+    for (let j = 0; j < nodeArray.length; j++) {
+      const otherNode = nodeArray[j];
+      const otherBox = nodeArray[j].attrs;
       
-      const otherNode = otherNodes[j];
-      const otherBox = otherNodes[j].attrs;
        if (nodeBox !== otherBox) {
         //otherBox.stroke = null;
         const otherLeft = otherBox.x;
@@ -42,10 +43,10 @@ function checkCollision(otherNodes) {
   return collidingNodes;
 }
 
-export default function collide(targetNode, otherNodes, callback) {
-  
-  const collidingNodes = checkCollision(otherNodes);
-  const notColliding = otherNodes.diff(collidingNodes);
+export default function collide(nodeArray) {
+  console.log(nodeArray)
+  //const collidingNodes = checkCollision(nodeArray);
+  const notColliding = nodeArray.diff(collidingNodes);
   
   notColliding.forEach((node) => {
     node.attrs.stroke = null;

@@ -7,26 +7,25 @@ import collide from 'helpers/collide';
 import checkBounds from 'helpers/checkBounds';
 
 
-export default class Module extends Component {
+export default class ModulesItem extends Component {
     state = {
       image: null,
-      //isStrokeRed: true
     }
     
     checkCollision() {
-      // console.log('hello')
       const draggingModuleNode = this.refs.module;
       const boardGroup = draggingModuleNode.getParent();
       const moduleNodes = boardGroup.get(".module");
-      collide(draggingModuleNode, moduleNodes);
+    
+      //collide(moduleNodes);
     }
     
-    checkBoundaries(topCollidingNode) {
+    /*checkBoundaries(topCollidingNode) {
       const draggingModuleNode = this.refs.module;
       const boardGroup = draggingModuleNode.getParent().getParent();
       
       checkBounds(draggingModuleNode, boardGroup, topCollidingNode);
-    }
+    }*/
     
     componentDidMount() {
       
@@ -38,17 +37,11 @@ export default class Module extends Component {
         });
       }
       
-      
-      const topCollidingNode = this.checkCollision();
-      console.log(/*this.checkCollision(),*/ topCollidingNode)
-      
-      // this.checkBoundaries(topCollidingNode);
-      //this.setState({isStrokeRed: !this.state.isStrokeRed})
+      this.checkCollision();
     }
     
     handleDragMove() {
-      const topCollidingNode = this.checkCollision();
-      // this.checkBoundaries(topCollidingNode);
+       this.checkCollision();
     }
     
     handleDragEnd() {
@@ -74,11 +67,9 @@ export default class Module extends Component {
               width={width}
               image={this.state.image}
               icon={this.state.image}
-              //stroke={this.state.isStrokeRed ? 'red' : null}
               draggable="true"
               onDragEnd={this.handleDragEnd.bind(this)}
               onDragMove={this.handleDragMove.bind(this)}
-              
             />
         );
     }
