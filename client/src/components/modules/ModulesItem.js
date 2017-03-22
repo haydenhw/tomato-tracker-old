@@ -4,20 +4,24 @@ import {Layer, Stage, Image} from 'react-konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import collide from 'helpers/collide';
-import checkBounds from 'helpers/checkBounds';
+//import checkBounds from 'helpers/checkBounds';
 
 
 export default class ModulesItem extends Component {
     state = {
-      image: null,
+      image: null
     }
     
     checkCollision() {
       const draggingModuleNode = this.refs.module;
       const boardGroup = draggingModuleNode.getParent();
       const moduleNodes = boardGroup.get(".module");
-    
-      collide(moduleNodes);
+      const boardNode = boardGroup.getParent().get(".board")[0];
+      
+      const redStroke = node => node.attrs.stroke = "red";
+      const nullStroke = node => node.attrs.stroke = null;
+      
+      collide(moduleNodes, boardNode, redStroke, nullStroke);
     }
     
     /*checkBoundaries(topCollidingNode) {

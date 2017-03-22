@@ -1,3 +1,6 @@
+import checkExceedsPerimter from './checkExceedsPerimeter';
+
+
 Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
@@ -5,55 +8,49 @@ Array.prototype.diff = function(a) {
 function checkCollision(nodeArray) {
   let collidingNodes = [];
   
-  // nodeArray.forEach
-  
-  for (let i = 0; i < nodeArray.length; i++){
-    const node = nodeArray[i];
-    const nodeBox = nodeArray[i].attrs;
+  nodeArray.forEach((node) => {
+    const nodeBox = node.attrs;
     const nodeLeft = nodeBox.x;
     const nodeRight = nodeBox.x + nodeBox.width;
     const nodeTop = nodeBox.y;
     const nodeBottom = nodeBox.y + nodeBox.height;
     
-    for (let j = 0; j < nodeArray.length; j++) {
-      
-      const otherNode = nodeArray[j];
-      const otherBox = nodeArray[j].attrs;
-      
-       if (nodeBox !== otherBox) {
-        const otherLeft = otherBox.x;
-        const otherRight = otherBox.x + otherBox.width;
-        const otherTop = otherBox.y;
-        const otherBottom = otherBox.y + otherBox.height;
-      
-        const collideHoriz = nodeLeft < otherRight && nodeRight > otherLeft;
-        const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
+    nodeArray.forEach((otherNode) => {
+       const otherBox = otherNode. attrs;
+       
+        if (nodeBox !== otherBox) {
+          const otherLeft = otherBox.x;
+          const otherRight = otherBox.x + otherBox.width;
+          const otherTop = otherBox.y;
+          const otherBottom = otherBox.y + otherBox.height;
+         
+          const collideHoriz = nodeLeft < otherRight && nodeRight > otherLeft;
+          const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
 
-        if (collideHoriz && collideVert) {
+          if (collideHoriz && collideVert) {
           
-          otherBox.stroke = "red";
-          collidingNodes.push(otherNode);
+            collidingNodes.push(otherNode);
           
-        /* const existsInCollidingNodes = collidingNodes.findIndex((node) => node === otherNode );
-          if(existsInCollidingNodes === -1)
-          collidingNodes.push(otherNode);*/
-        } 
-      }
-    }  
-  }
+           // prevents duplicates in collidingNodes array but is commented out at the moment to favor performance 
+         /* const existsInCollidingNodes = collidingNodes.findIndex((node) => node === otherNode );
+           if(existsInCollidingNodes === -1)
+           collidingNodes.push(otherNode);*/
+         } 
+       }
+     });
+  });
+  
   return collidingNodes;
 }
 
-export default function collide(nodeArray) {
-  
-  console.log(nodeArray)
+export default function collide(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
   const collidingNodes = checkCollision(nodeArray);
-  const notColliding = nodeArray.diff(collidingNodes);
+  const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode);
+  const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes]
+  const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
   
-  notColliding.forEach((node) => {
-    node.attrs.stroke = null;
-  })
-  
-  //console.log('colliding', collidingNodes);
-  //console.log('not colliding', notColliding);
+  ruleFollowingAction(perimeterNode)
+  ruleBreakingNodes.forEach((node) => ruleBreakingAction(node));
+  ruleFollowingNodes.forEach((node) => ruleFollowingAction(node));
+
 }  
