@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/indexActions';
-import store from '../../store';
+
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
 import ProjectsItem from './ProjectsItem';
 
 class ProjectListContainer extends Component {
-  
   componentDidMount() {
     console.log(actions)
     store.dispatch(actions.fetchProjects());

@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
-import * as actions from '../../actions/indexActions';
-import store from '../../store';
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
 export default class SideBarIcon extends Component {
   
   handleMouseMovement() {
-    
     this.props.toggleDraggingToBoard();
-    
   }
   
   handleMouseDown(evt) {
-    /*console.log(evt.clientX)
-    const newModule = this.props.moduleData;
-    newModule.x = -300;
-    newModule.y = 50;*/
-    
     store.dispatch(actions.mouseDownOnIcon(true))
     store.dispatch(actions.changeDraggingModule(this.props.moduleData));
-    //store.dispatch(actions.pushToCurrentProjectModules(newModule));
-    
   }
 
   render() {

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import * as actions from '../actions/indexActions';
-import store from '../store';
-import Grid from './Grid';
-import MyRect from './Rect';
-import Board from './Board';
-import Module from './Module';
-import ModuleContainer from './ModuleContainer';
-import BoardDimensionInput from './BoardDimensionInput';
-import SaveButton from './SaveButton';
-import SideBar from './side-bar/SideBar';
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+
+import Board from 'components/board/Board';
+import Module from 'components/modules/ModulesItem';
+import ModuleContainer from 'components/modules/Modules';
+import BoardDimensionInput from 'components/board/BoardDimensionForm';
+import SideBar from 'components/side-bar/SideBar';
+import SaveButton from './DesignToolSaveButton';
+import Grid from './DesignToolGrid';
 
 class DesignTool extends Component {
   constructor(props) {

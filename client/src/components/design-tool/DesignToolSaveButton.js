@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/indexActions';
-import store from '../store';
-import projectsUrl from '../config/endpointUrls';
+
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+import projectsUrl from 'config/endpointUrls';
 
 class SaveButton extends Component {
   saveProject() {

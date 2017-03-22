@@ -2,10 +2,9 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import * as actions from '../actions/indexActions';
-import store from '../store';
-import Module from './Module';
-import { squareData } from '../data';
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+import Module from './ModulesItem';
 
 class MoudleContainer extends Component{
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Layer, Stage, Image} from 'react-konva';
-import * as actions from '../actions/indexActions';
-import store from '../store';
-import collide from '../helper-functions/collide';
-import checkBounds from '../helper-functions/checkBounds';
+
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+import collide from 'helpers/collide';
+import checkBounds from 'helpers/checkBounds';
 
 
 export default class Module extends Component {

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router';
+
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
 import DeleteButton from './ProjectsDeleteButton';
-import * as actions from '../../actions/indexActions';
-import store from '../../store';
+
 const style = {
   "cursor": "pointer",
   "width": "125px",
   "marginBottom": "5px",
   "marginTop": "20px"
-  
 }
 
 function fectchProject(projectId) {

@@ -1,6 +1,6 @@
 import { projectsUrl } from '../config/endpointUrls';
 import { Route, hashHistory } from 'react-router';
-import store from '../store';
+import store from 'reduxFiles/store';
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({

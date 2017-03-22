@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/indexActions';
-import { getModulesUrl } from '../config/endpointUrls.js';
+
+import * as actions from 'actions/indexActions';
+import { getModulesUrl } from 'config/endpointUrls.js';
 
 class SelectMoudles extends Component {
   
