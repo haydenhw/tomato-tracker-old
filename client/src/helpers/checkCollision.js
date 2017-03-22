@@ -1,11 +1,4 @@
-import checkExceedsPerimter from './checkExceedsPerimeter';
-
-
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
-};
-
-function checkCollision(nodeArray) {
+export default function checkCollision(nodeArray) {
   let collidingNodes = [];
   
   nodeArray.forEach((node) => {
@@ -42,15 +35,3 @@ function checkCollision(nodeArray) {
   
   return collidingNodes;
 }
-
-export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
-  const collidingNodes = checkCollision(nodeArray);
-  const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode);
-  const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes]
-  const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
-  
-  ruleFollowingAction(perimeterNode)
-  ruleBreakingNodes.forEach((node) => ruleBreakingAction(node));
-  ruleFollowingNodes.forEach((node) => ruleFollowingAction(node));
-
-}  

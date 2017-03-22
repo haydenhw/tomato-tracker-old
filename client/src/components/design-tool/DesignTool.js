@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
@@ -96,18 +97,28 @@ class DesignTool extends Component {
         <BoardDimensionInput />
         <div ref={(node) => this.stageContainer = node} >
           {isDraggingToBoard ? '' : sideBar}
-          <div style={stageStyle}>
-            <Stage 
-              style={stageStyle} 
-              ref="stage" 
-              width={750} 
-              height={500}
-            >
-              <Grid  gridWidth={5000}  cellWidth={20} />
-              {currentProjectName ? <Board /> : <Layer></Layer>}
-              {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
-            </Stage>
-          </div>
+          
+        <ContextMenuTrigger
+          id={'MULTI'} 
+          name={'rect'}
+          holdToDisplay={1000}
+          >
+            <div style={stageStyle}>
+              <Stage 
+                style={stageStyle} 
+                ref="stage" 
+                width={750} 
+                height={500}
+              >
+                <Grid  gridWidth={5000}  cellWidth={20} />
+                {currentProjectName ? <Board /> : <Layer></Layer>}
+                {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
+              </Stage>
+            </div>
+        </ContextMenuTrigger>
+        <ContextMenu id={'MULTI'}>
+            <MenuItem onClick={this.handleContextMenuClick} data={{action: 'Removed'}}>Delete</MenuItem>
+        </ContextMenu>
         </div>
     </div>
      );

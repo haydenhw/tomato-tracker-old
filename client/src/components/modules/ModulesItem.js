@@ -3,7 +3,7 @@ import {Layer, Stage, Image} from 'react-konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import enforceRules from 'helpers/collide';
+import enforceRules from 'helpers/enforceRules';
 //import checkBounds from 'helpers/checkBounds';
 
 
