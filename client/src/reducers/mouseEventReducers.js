@@ -31,13 +31,9 @@ export const mouseEvents = (state = defaultMouseEvents, action) => {
         break;
         
         case actions.TOGGLE_IS_CONTEXT_MENU_OPEN:
-          console.log({
-            ...state,
-            isMouseOverModule: !state.isContextMenuOpen
-          })
           return {
             ...state,
-            isMouseOverModule: !state.isContextMenuOpen
+            isContextMenuOpen: action.isOpen
           }
           break;
         

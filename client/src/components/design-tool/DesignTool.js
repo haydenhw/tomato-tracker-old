@@ -39,6 +39,7 @@ class DesignTool extends Component {
   }
   
   dropDraggingModule() {
+    
     const newModuleData = this.props.draggingModuleData;  
     const newModuleCoordinates = {
       x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
@@ -46,7 +47,7 @@ class DesignTool extends Component {
     }
     
     const newModule = Object.assign(newModuleCoordinates, newModuleData)
-    
+    console.log(newModule)
     if (this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
@@ -56,8 +57,12 @@ class DesignTool extends Component {
   }
   
   handleKeyUp(evt) {
-    console.log(evt)
-    console.log(evt.which)
+    const {isMouseOverModule, selectedModuleIndex } = this.props;
+    
+    if(isMouseOverModule) {
+      store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
+    }
+    
   }
   
   handleMouseMove(evt) {
@@ -70,14 +75,32 @@ class DesignTool extends Component {
   }
   
   handleMouseDown(evt) {
-    console.log(evt)
-    // store.dispatch(actions.toggleIsContextMenuOpen());
-    store.dispatch(actions.toggleIsMouseDown());
+    // console.log(evt.which)
+     switch (evt.which){
+        case 3:
+          if (this.props.isMouseOverModule) {
+            store.dispatch(actions.toggleIsContextMenuOpen(true));
+          } else {
+            store.dispatch(actions.toggleIsContextMenuOpen(false));
+          }
+          break;
+        
+        case 1:
+          const contextMenuClass = event.target.getAttribute('class');
+          
+          if (!contextMenuClass) {
+            store.dispatch(actions.toggleIsContextMenuOpen(false));
+          }
+          
+          break;
+     }
+    
+    // store.dispatch(actions.toggleIsMouseDown());
   }
   
   handleMouseUp() {
     this.dropDraggingModule();
-    store.dispatch(actions.toggleIsMouseDown());
+    // store.dispatch(actions.toggleIsMouseDown());
   }
   
   toggleDraggingToBoard() {
@@ -129,7 +152,10 @@ const mapStateToProps = (state) => ({
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  draggingModuleData: state.draggingModule
+  isMouseOverModule: state.mouseEvents.isMouseOverModule,
+  draggingModuleData: state.draggingModule,
+  selectedModuleIndex: state.selectedModule.index,
+  
   
 });
 

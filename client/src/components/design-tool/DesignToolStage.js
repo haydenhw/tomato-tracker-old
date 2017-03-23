@@ -18,12 +18,13 @@ import DesignToolContextMenu from './DesignToolContextMenu';
   }
     
   render() {
+    
     const { 
       shouldRenderBoard, 
       draggingModule, 
       isMouseDownOnIcon,
       isMouseOverModule,
-      isMouseDown
+      isContextMenuOpen
      } = this.props;
      
     const contextMenu = (
@@ -33,7 +34,7 @@ import DesignToolContextMenu from './DesignToolContextMenu';
     );
     
     const stageStyle = { "display": "inline-block"}
-    //console.log(isMouseDown,  isMouseOverModule)
+    
     return (
       <div>
         <ContextMenuTrigger
@@ -56,7 +57,7 @@ import DesignToolContextMenu from './DesignToolContextMenu';
             </div>
         </ContextMenuTrigger>
       
-        {isMouseOverModule ? <DesignToolContextMenu/> : ''}
+        {isMouseOverModule || isContextMenuOpen ? contextMenu : ''}
       </div>
     )
   }
@@ -66,6 +67,7 @@ const mapStateToProps = (state) => ({
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,
+  isContextMenuOpen: state.mouseEvents.isContextMenuOpen,
   selectedModuleIndex: state.selectedModule.index,
 });
 

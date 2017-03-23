@@ -15,6 +15,7 @@ export const toggleIsMouseOverModule = () => ({
 });
 
 export const TOGGLE_IS_CONTEXT_MENU_OPEN = 'TOGGLE_IS_CONTEXT_MENU_OPEN'; 
-export const toggleIsContextMenuOpen = () => ({
-  type: 'TOGGLE_IS_CONTEXT_MENU_OPEN'
+export const toggleIsContextMenuOpen = (bool) => ({
+  type: 'TOGGLE_IS_CONTEXT_MENU_OPEN',
+  isOpen: bool
 });
