@@ -57,7 +57,7 @@ export default class ModulesItem extends Component {
       enforceRules(moduleNodes, boardNode, redStroke, nullStroke);
     }
     
-    handleMouseOver () {
+    handleMouseOver() {
       const moduleData = {
         index: this.attrs.index
       }
@@ -65,7 +65,7 @@ export default class ModulesItem extends Component {
       store.dispatch(actions.toggleIsMouseOverModule());
     }
     
-    handleMouseOut () {
+    handleMouseOut() {
       store.dispatch(actions.toggleIsMouseOverModule());
     }
     

@@ -56,6 +56,7 @@ class DesignTool extends Component {
   }
   
   handleKeyUp(evt) {
+    console.log(evt)
     console.log(evt.which)
   }
   
@@ -68,7 +69,9 @@ class DesignTool extends Component {
     this.setState({x, y});
   }
   
-  handleMouseDown() {
+  handleMouseDown(evt) {
+    console.log(evt)
+    // store.dispatch(actions.toggleIsContextMenuOpen());
     store.dispatch(actions.toggleIsMouseDown());
   }
   

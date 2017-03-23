@@ -8,6 +8,7 @@ import store from 'reduxFiles/store';
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
+import DesignToolContextMenu from './DesignToolContextMenu';
 
   class DesignToolStage extends Component {
     
@@ -32,7 +33,7 @@ import Grid from './DesignToolGrid';
     );
     
     const stageStyle = { "display": "inline-block"}
-    
+    //console.log(isMouseDown,  isMouseOverModule)
     return (
       <div>
         <ContextMenuTrigger
@@ -54,6 +55,8 @@ import Grid from './DesignToolGrid';
               </Stage>
             </div>
         </ContextMenuTrigger>
+      
+        {isMouseOverModule ? <DesignToolContextMenu/> : ''}
       </div>
     )
   }
@@ -61,7 +64,7 @@ import Grid from './DesignToolGrid';
 
 const mapStateToProps = (state) => ({
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  isMouseOverModule: state.mouseEvents.isMouseDownOnModule,
+  isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,
   selectedModuleIndex: state.selectedModule.index,
 });
