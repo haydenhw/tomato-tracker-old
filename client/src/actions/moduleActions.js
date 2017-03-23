@@ -19,6 +19,19 @@ export const updateModulePosition = (modulePosition) => ({
   modulePosition
 });
 
+export const UPDATE_SELECTED_MODULE = 'UPDATE_SELECTED_MODULE'; 
+export const updateSelectedModule = (moduleData) => ({
+  type: 'UPDATE_SELECTED_MODULE',
+  moduleData
+});
+
+export const DELETE_SELECTED_MODULE = 'DELETE_SELECTED_MODULE'; 
+export const deleteSelectedModule = (moduleIndex) => ({
+  type: 'DELETE_SELECTED_MODULE',
+  moduleIndex
+});
+
+
 export const SAVE_MODULE_POSITION_SUCCESS = 'SAVE_MODULE_POSITION_SUCCESS'; 
 export const saveModulePositionSuccess = (modules) => ({
   type: 'SAVE_MODULE_POSITION_SUCCESS',

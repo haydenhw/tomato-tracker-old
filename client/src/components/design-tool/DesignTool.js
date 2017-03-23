@@ -10,6 +10,7 @@ import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import SideBar from 'components/side-bar/SideBar';
+import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
 import Grid from './DesignToolGrid';
 
@@ -88,37 +89,17 @@ class DesignTool extends Component {
       /> 
     );
     
-    const stageStyle = { "display": "inline-block" };
-    
     return (
       <div onMouseMove={this.handleMouseMove.bind(this)}>
         <h1>{currentProjectName}</h1>
         <SaveButton/>
         <BoardDimensionInput />
         <div ref={(node) => this.stageContainer = node} >
-          {isDraggingToBoard ? '' : sideBar}
-          
-        <ContextMenuTrigger
-          id={'MULTI'} 
-          name={'rect'}
-          holdToDisplay={1000}
-          >
-            <div style={stageStyle}>
-              <Stage 
-                style={stageStyle} 
-                ref="stage" 
-                width={750} 
-                height={500}
-              >
-                <Grid  gridWidth={5000}  cellWidth={20} />
-                {currentProjectName ? <Board /> : <Layer></Layer>}
-                {isMouseDownOnIcon ? <Layer>{draggingModule}</Layer> : <Layer></Layer> }
-              </Stage>
-            </div>
-        </ContextMenuTrigger>
-        <ContextMenu id={'MULTI'}>
-            <MenuItem onClick={this.handleContextMenuClick} data={{action: 'Removed'}}>Delete</MenuItem>
-        </ContextMenu>
+          { isDraggingToBoard ? '' : sideBar }
+          <DesignToolStage 
+            shouldRenderBoard = { currentProjectName }
+            draggingModule = { draggingModule }
+          />  
         </div>
     </div>
      );

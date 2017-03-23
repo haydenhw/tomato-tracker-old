@@ -8,10 +8,20 @@ export const moduleList = (state = [], action) => {
   return state;
 }
 
-
 export const draggingModule = (state = [], action) => {
   switch(action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
+       return action.moduleData;
+       break;
+      
+   default:
+     return state;
+ }
+}
+
+export const selectedModule = (state = {}, action) => {
+  switch(action.type) {
+    case actions.UPDATE_SELECTED_MODULE:
        return action.moduleData;
        break;
       
@@ -44,6 +54,7 @@ export const currentProjectModules = (state = [], action) => {
   
     case actions.UPDATE_MODULE_POSITION:
       const { x, y, index } = action.modulePosition; 
+      
       return state.map((module, i) => {
         return i === index ? 
           {...module, 
@@ -51,7 +62,20 @@ export const currentProjectModules = (state = [], action) => {
             y: y
           } :
           module;
-      })
+      });
+      
+      break;
+      
+      case actions.DELETE_SELECTED_MODULE:
+        // console.log('index', action.moduleIndex)
+        // console.log('old state', state)
+        const newState = [
+          ...state.slice(0, action.moduleIndex),
+          ...state.slice(action.moduleIndex + 1)
+        ];
+        // console.log('new state', newState)
+        return newState;
+        break;
       
    default:
      return state;

@@ -24,24 +24,17 @@ export default class ModulesItem extends Component {
       enforceRules(moduleNodes, boardNode, redStroke, nullStroke);
     }
     
-    /*checkBoundaries(topCollidingNode) {
-      const draggingModuleNode = this.refs.module;
-      const boardGroup = draggingModuleNode.getParent().getParent();
-      
-      checkBounds(draggingModuleNode, boardGroup, topCollidingNode);
-    }*/
     
-    componentDidMount() {
-      
-      const image = new window.Image();
-      image.src = this.props.image;
-      image.onload = () => {
-        this.setState({
-          image: image
-        });
+    
+    handleMouseOver () {
+      const moduleData = {
+        index: this.attrs.index
       }
-      
-      this.checkCollision();
+      console.log(this.attrs.index, this.attrs.image.src)
+      store.dispatch(actions.updateSelectedModule(moduleData))
+    }
+    handleMouseOut () {
+      //store.dispatch(actions.updateSelectedModule({}))
     }
     
     handleDragMove() {
@@ -58,8 +51,51 @@ export default class ModulesItem extends Component {
       store.dispatch(actions.updateModulePosition(newPosition))
     }
     
+    componentDidUpdate(prevProps, prevState) {
+  
+      console.log('from did update', this.props.image)
+      console.log(prevState)
+      
+      if (prevState.image) {
+        const prevImageSrc = prevState.image.getAttribute("src")
+        
+        if (prevImageSrc !== this.props.image) {
+          const image = new window.Image();
+          image.src = this.props.image;
+          image.onload = () => {
+            this.setState({
+              image: image
+            });
+          }
+        }
+        
+      }
+      
+      /*const image = new window.Image();
+      image.src = this.props.image;
+      image.onload = () => {
+        this.setState({
+          image: image
+        });
+      }*/
+    }
+    
+    componentDidMount() {
+      console.log('component mounted')
+      const image = new window.Image();
+      image.src = this.props.image;
+      image.onload = () => {
+        this.setState({
+          image: image
+        });
+      }
+      
+      this.checkCollision();
+    }
+    
     render() {
       const { x, y, height, width, index } = this.props;
+      //console.log('from module item rerender', this.props.image)
         return (
             <Image
               ref="module"
@@ -74,6 +110,8 @@ export default class ModulesItem extends Component {
               draggable="true"
               onDragEnd={this.handleDragEnd.bind(this)}
               onDragMove={this.handleDragMove.bind(this)}
+              onMouseOver={this.handleMouseOver}
+              onMouseOut={this.handleMouseOut}
             />
         );
     }
