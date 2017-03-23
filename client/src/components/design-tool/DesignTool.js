@@ -12,7 +12,6 @@ import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import SideBar from 'components/side-bar/SideBar';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
-import Grid from './DesignToolGrid';
 
 class DesignTool extends Component {
   constructor(props) {
@@ -29,23 +28,17 @@ class DesignTool extends Component {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname
+      
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
     
+    document.body.addEventListener('mousedown', this.handleMouseDown.bind(this));
     document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
     document.body.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    document.body.addEventListener('keyup', this.handleKeyUp.bind(this))
   }
   
-  handleMouseMove(evt) {
-    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-    const x = Number(evt.clientX) - stageOffsetX;
-    const y = Number(evt.clientY) - stageOffsetY;
-    
-    this.setState({x, y});
-  }
-  
-  handleMouseUp() {
+  dropDraggingModule() {
     const newModuleData = this.props.draggingModuleData;  
     const newModuleCoordinates = {
       x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
@@ -60,6 +53,28 @@ class DesignTool extends Component {
     
     setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
     this.setState({isDraggingToBoard: false});
+  }
+  
+  handleKeyUp(evt) {
+    console.log(evt.which)
+  }
+  
+  handleMouseMove(evt) {
+    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+    const x = Number(evt.clientX) - stageOffsetX;
+    const y = Number(evt.clientY) - stageOffsetY;
+    
+    this.setState({x, y});
+  }
+  
+  handleMouseDown() {
+    store.dispatch(actions.toggleIsMouseDown());
+  }
+  
+  handleMouseUp() {
+    this.dropDraggingModule();
+    store.dispatch(actions.toggleIsMouseDown());
   }
   
   toggleDraggingToBoard() {

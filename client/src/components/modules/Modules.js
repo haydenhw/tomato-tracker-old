@@ -6,10 +6,9 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import Module from './ModulesItem';
 
-class MoudleContainer extends Component{
 
+class MoudleContainer extends Component{
   render() {
-    
     const modules = this.props.modules.map((modules, index) => {
       //console.log('rerendering from ModuleList', modules.image)
       return <Module 
@@ -20,7 +19,6 @@ class MoudleContainer extends Component{
           height={modules.height}
           width={modules.width}
           image={modules.image}
-          
         />
     });
     

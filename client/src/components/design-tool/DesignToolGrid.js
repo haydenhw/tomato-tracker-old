@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes} from 'react';
 import {Layer, Rect, Line } from 'react-konva';
 
 export default function Grid(props) {
@@ -32,6 +32,10 @@ export default function Grid(props) {
       <Rect width={750} height={500} />
       {gridLines}
     </Layer>
-    
   );
+}
+
+Grid.propTypes = {
+  gridWidth: PropTypes.number.isRequired,
+  cellWidth: PropTypes.number.isRequired
 }

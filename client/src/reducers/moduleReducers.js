@@ -64,16 +64,12 @@ export const currentProjectModules = (state = [], action) => {
           module;
       });
       
-      break;
       
       case actions.DELETE_SELECTED_MODULE:
-        // console.log('index', action.moduleIndex)
-        // console.log('old state', state)
         const newState = [
           ...state.slice(0, action.moduleIndex),
           ...state.slice(action.moduleIndex + 1)
         ];
-        // console.log('new state', newState)
         return newState;
         break;
       

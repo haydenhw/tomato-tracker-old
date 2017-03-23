@@ -17,13 +17,26 @@ import Grid from './DesignToolGrid';
   }
     
   render() {
-    const { shouldRenderBoard, draggingModule, isMouseDownOnIcon } = this.props;
+    const { 
+      shouldRenderBoard, 
+      draggingModule, 
+      isMouseDownOnIcon,
+      isMouseOverModule,
+      isMouseDown
+     } = this.props;
+     
+    const contextMenu = (
+      <ContextMenu id={'SIMPLE'}>
+          <MenuItem onClick={this.deleteModule.bind(this)} data={{action: 'Removed'}}>Delete</MenuItem>
+      </ContextMenu>
+    );
+    
     const stageStyle = { "display": "inline-block"}
     
     return (
       <div>
         <ContextMenuTrigger
-          id={'MULTI'} 
+          id={'SIMPLE'} 
           name={'rect'}
           holdToDisplay={1000}
           >
@@ -34,15 +47,13 @@ import Grid from './DesignToolGrid';
                 width={750} 
                 height={500}
               >
+                
                 <Grid  gridWidth={5000}  cellWidth={20} />
                 {shouldRenderBoard ? <Board /> : <Layer></Layer>}
                 {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer></Layer> }
               </Stage>
             </div>
         </ContextMenuTrigger>
-        <ContextMenu id={'MULTI'}>
-            <MenuItem onClick={this.deleteModule.bind(this)} data={{action: 'Removed'}}>Delete</MenuItem>
-        </ContextMenu>
       </div>
     )
   }
@@ -50,7 +61,9 @@ import Grid from './DesignToolGrid';
 
 const mapStateToProps = (state) => ({
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  selectedModuleIndex: state.selectedModule.index
+  isMouseOverModule: state.mouseEvents.isMouseDownOnModule,
+  isMouseDown: state.mouseEvents.isMouseDown,
+  selectedModuleIndex: state.selectedModule.index,
 });
 
 export default connect(mapStateToProps)(DesignToolStage);

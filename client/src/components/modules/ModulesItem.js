@@ -4,15 +4,48 @@ import {Layer, Stage, Image} from 'react-konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import enforceRules from 'helpers/enforceRules';
-//import checkBounds from 'helpers/checkBounds';
 
 
 export default class ModulesItem extends Component {
-    state = {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
       image: null
     }
+  }
     
-    checkCollision() {
+  componentDidUpdate(prevProps, prevState) {
+    // forces module image to update after a module is deleted
+    if (prevState.image) {
+      const prevImageSrc = prevState.image.getAttribute("src")
+      
+      if (prevImageSrc !== this.props.image) {
+        const image = new window.Image();
+        image.src = this.props.image;
+        image.onload = () => {
+          this.setState({
+            image: image
+          });
+        }
+      }
+    }
+  }
+    
+    componentDidMount() {
+      
+      const image = new window.Image();
+      image.src = this.props.image;
+      image.onload = () => {
+        this.setState({
+          image: image
+        });
+      }
+      
+      this.highlightRuleBreakingMoudles();
+    }
+    
+    highlightRuleBreakingMoudles() {
       const draggingModuleNode = this.refs.module;
       const boardGroup = draggingModuleNode.getParent();
       const moduleNodes = boardGroup.get(".module");
@@ -24,21 +57,20 @@ export default class ModulesItem extends Component {
       enforceRules(moduleNodes, boardNode, redStroke, nullStroke);
     }
     
-    
-    
     handleMouseOver () {
       const moduleData = {
         index: this.attrs.index
       }
-      console.log(this.attrs.index, this.attrs.image.src)
-      store.dispatch(actions.updateSelectedModule(moduleData))
+      store.dispatch(actions.updateSelectedModule(moduleData));
+      store.dispatch(actions.toggleIsMouseOverModule());
     }
+    
     handleMouseOut () {
-      //store.dispatch(actions.updateSelectedModule({}))
+      store.dispatch(actions.toggleIsMouseOverModule());
     }
     
     handleDragMove() {
-       this.checkCollision();
+       this.highlightRuleBreakingMoudles();
     }
     
     handleDragEnd() {
@@ -49,48 +81,6 @@ export default class ModulesItem extends Component {
         index: module.index
       }
       store.dispatch(actions.updateModulePosition(newPosition))
-    }
-    
-    componentDidUpdate(prevProps, prevState) {
-  
-      console.log('from did update', this.props.image)
-      console.log(prevState)
-      
-      if (prevState.image) {
-        const prevImageSrc = prevState.image.getAttribute("src")
-        
-        if (prevImageSrc !== this.props.image) {
-          const image = new window.Image();
-          image.src = this.props.image;
-          image.onload = () => {
-            this.setState({
-              image: image
-            });
-          }
-        }
-        
-      }
-      
-      /*const image = new window.Image();
-      image.src = this.props.image;
-      image.onload = () => {
-        this.setState({
-          image: image
-        });
-      }*/
-    }
-    
-    componentDidMount() {
-      console.log('component mounted')
-      const image = new window.Image();
-      image.src = this.props.image;
-      image.onload = () => {
-        this.setState({
-          image: image
-        });
-      }
-      
-      this.checkCollision();
     }
     
     render() {
