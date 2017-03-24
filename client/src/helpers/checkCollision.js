@@ -10,8 +10,6 @@ export default function checkCollision(nodeArray) {
     
     nodeArray.forEach((otherNode) => {
        const otherBox = otherNode. attrs ? otherNode.attrs : otherNode;
-        console.log(nodeBox)
-        console.log(otherBox)
         if (nodeBox !== otherBox) {
           const otherLeft = otherBox.x;
           const otherRight = otherBox.x + otherBox.width;

@@ -4,7 +4,6 @@ export default function checkExceedsPerimeter (nodeArray, perimeterNode) {
   
   nodeArray.forEach((moduleNode, index) => {
     const moduleBox = moduleNode.attrs ? moduleNode.attrs : moduleNode;
-    console.log(moduleBox, perimeterBox)
     const exceedsLeft = moduleBox.x < perimeterBox.x;
     const exceedsRight = moduleBox.x + moduleBox.width > perimeterBox.x + perimeterBox.width; 
     const exceedsTop = moduleBox.y < perimeterBox.y;

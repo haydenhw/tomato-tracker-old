@@ -50,7 +50,6 @@ class DesignTool extends Component {
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
      
     let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
-    console.log(isNewModuleOutOfBounds)  
     isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0 ? true : false;
      
      
