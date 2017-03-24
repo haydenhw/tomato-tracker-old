@@ -10,6 +10,7 @@ import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import SideBar from 'components/side-bar/SideBar';
+import checkCollision from 'helpers/checkCollision';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
 
@@ -39,16 +40,30 @@ class DesignTool extends Component {
   }
   
   dropDraggingModule() {
+    const { draggingModuleData, boardSpecs } = this.props;
     
-    const newModuleData = this.props.draggingModuleData;  
-    const newModuleCoordinates = {
-      x: this.state.x - this.props.boardSpecs.x - newModuleData.width/2,
-      y: this.state.y - this.props.boardSpecs.y - newModuleData.height/2
+    const testModuleCoordinates = {
+      x: this.state.x - draggingModuleData.width/2,
+      y: this.state.y - draggingModuleData.height/2
     }
     
-    const newModule = Object.assign(newModuleCoordinates, newModuleData)
-    console.log(newModule)
-    if (this.state.isDraggingToBoard) {
+    const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
+     
+    let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
+    console.log(isNewModuleOutOfBounds)  
+    isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0 ? true : false;
+     
+     
+    const adjustedModuleCoordinates = {
+      x: this.state.x - boardSpecs.x - draggingModuleData.width/2,
+      y: this.state.y - boardSpecs.y - draggingModuleData.height/2
+    }
+    
+    const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
+    
+  
+    
+    if (isNewModuleOutOfBounds && this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
     
@@ -90,6 +105,7 @@ class DesignTool extends Component {
           
           if (!contextMenuClass) {
             store.dispatch(actions.toggleIsContextMenuOpen(false));
+            store.dispatch(actions.toggleIsMouseDown())
           }
           
           break;
@@ -100,7 +116,7 @@ class DesignTool extends Component {
   
   handleMouseUp() {
     this.dropDraggingModule();
-    // store.dispatch(actions.toggleIsMouseDown());
+    store.dispatch(actions.toggleIsMouseDown());
   }
   
   toggleDraggingToBoard() {
@@ -152,6 +168,7 @@ const mapStateToProps = (state) => ({
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
+  isMouseDown: state.mouseEvents.isMouseDown,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,

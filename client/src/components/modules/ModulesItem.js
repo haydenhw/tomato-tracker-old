@@ -80,7 +80,8 @@ export default class ModulesItem extends Component {
         y: module.getY(),
         index: module.index
       }
-      store.dispatch(actions.updateModulePosition(newPosition))
+      store.dispatch(actions.updateModulePosition(newPosition));
+      
     }
     
     render() {

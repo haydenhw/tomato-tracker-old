@@ -2,15 +2,16 @@ export default function checkCollision(nodeArray) {
   let collidingNodes = [];
   
   nodeArray.forEach((node) => {
-    const nodeBox = node.attrs;
+    const nodeBox = node.attrs ? node.attrs : node;
     const nodeLeft = nodeBox.x;
     const nodeRight = nodeBox.x + nodeBox.width;
     const nodeTop = nodeBox.y;
     const nodeBottom = nodeBox.y + nodeBox.height;
     
     nodeArray.forEach((otherNode) => {
-       const otherBox = otherNode. attrs;
-       
+       const otherBox = otherNode. attrs ? otherNode.attrs : otherNode;
+        console.log(nodeBox)
+        console.log(otherBox)
         if (nodeBox !== otherBox) {
           const otherLeft = otherBox.x;
           const otherRight = otherBox.x + otherBox.width;

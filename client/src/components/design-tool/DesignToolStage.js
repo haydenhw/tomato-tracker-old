@@ -23,6 +23,7 @@ import DesignToolContextMenu from './DesignToolContextMenu';
       shouldRenderBoard, 
       draggingModule, 
       isMouseDownOnIcon,
+      isMouseDown,
       isMouseOverModule,
       isContextMenuOpen
      } = this.props;
@@ -57,7 +58,7 @@ import DesignToolContextMenu from './DesignToolContextMenu';
             </div>
         </ContextMenuTrigger>
       
-        {isMouseOverModule || isContextMenuOpen ? contextMenu : ''}
+        {(!isMouseDown && isMouseOverModule) || isContextMenuOpen ? contextMenu : ''}
       </div>
     )
   }
