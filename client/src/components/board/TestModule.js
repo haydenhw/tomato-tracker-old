@@ -13,8 +13,8 @@ export default class TestModule extends Component {
   componentDidMount() {
     
     const image = new window.Image();
-    console.log(this.props.imageSrc === 'images/untitled.svg')
-    image.src = require('images/circuit-board.png');
+    //console.log(this.props.imageSrc === 'images/untitled.svg')
+    image.src = require('images/circuit-board.svg');
     
     image.onload = () => {
       this.setState({
@@ -28,71 +28,107 @@ export default class TestModule extends Component {
   highlight() {
 
     this.refs.top.attrs.stroke = "black"
-    const groupRotation = this.refs.group.attrs.rotation ;
-    this.refs.group.rotation(groupRotation + 90);
+    const groupRotation = this.refs.group.attrs.rotation;
+    console.log(groupRotation)
+    if (groupRotation === 360) {
+      //this.refs.group.rotation(0);
+      
+    } else {
+      this.refs.group.rotation(groupRotation + 90);
+    }
     
-    console.log(this.refs.group.attrs)
-    const textRotation = this.refs.text.attrs.rotation ;
+    /*onsole.log(this.refs.group.attrs)
+    const textRotation = this.refs.text.attrs.rotation;
     
     this.refs.text.rotation(textRotation + 270)
-    console.log()
-    const x = this.refs.group.attrs.x;
+    console.log(this.refs.text)
+    this.refs.text.attrs.x = this.refs.text.attrs.x - this.refs.topLayer.attrs.height*/
+    const group = this.refs.group.attrs
+    const x = group.x;
+    const y = group.y;
+    const height = this.refs.topLayer.attrs.height
+    const width = this.refs.topLayer.attrs.width
+    // rotate module about the center
+    
+    switch(groupRotation) {
+      case 0: 
+        group.x = x + .5 * (width + height);
+        group.y = y + .5 * (height - width);
+        break;
+      case 90: 
+        group.x = x + .5 * (width - height);
+        group.y = y + .5 * (width + height);
+        break;
+      case 180: 
+        group.x = x - .5 * (width + height);
+        group.y = y + .5 * (width - height);
+        break;
+      case 270: 
+        group.x = x - .5 * (width - height);
+        group.y = y - .5 * (width + height);
+        this.refs.group.rotation(0);
+        break;
+      default:
+        console.log(groupRotation);
+    }
+    
   
-    if (groupRotation + 90 === 90)
-      this.refs.group.attrs.x = x + 200;
       
-  /*  if (groupRotation + 90 === 180)
+      
+  /*  if (groupRotation + 90 === 180y
       this.refs.group.attrs.y = this.refs.group.attrs.y - 300 ;*/
   }
   
   
   render() {
-    console.log(this.props)
     return (
-      
-      <Group
-        x={this.props.x || 0}
-        y={this.props.y || 0}
-        ref="group"
-        rotation={this.props.rotation}
-        onClick={this.highlight.bind(this)}
-        draggable="true"
-      >
+    <Group draggable="true">  
         <Text 
           ref="text"
-          x={this.props.textX}
-          y={this.props.textY}
+          x={0.5 * (this.props.width - 30) }
+          y={this.props.textY - 10}
+          rotation={0}
+          width={30}
           text={this.props.text}
-          fontSize={this.props.fontSize}this
+          fontSize={this.props.fontSize}
           fontFamily={this.props.fontFamily}
         /> 
-          
-        <Rect
-          ref="top-layer"
-          width={this.props.width} 
-          height={this.props.height}
-          fill={this.props.fill}
-          opacity={this.props.opacity}
-        />
-           
-        <Rect
-          name="module-border"
-          ref="top"
-          width={this.props.width} 
-          height={this.props.height}
-          stroke = {this.props.stroke}
-          strokeWidth = {this.props.strokeWidth}
-        />
-           
-        {/* <Image
-          ref="bottom-layer"
-          name="module"
-          x={this.props.imageX}
-          y={this.props.imageY}
-          height={this.props.imageHeight}
-          width={this.props.imageWidth}
-          image={this.state.image} 
-       /> */}
+        
+        <Group
+          x={this.props.x || 0}
+          y={this.props.y || 0}
+          ref="group"
+          rotation={this.props.rotation}
+          onClick={this.highlight.bind(this)}
+        >
+            
+          <Rect
+            ref="topLayer"
+            width={this.props.width} 
+            height={this.props.height}
+            fill={this.props.fill}
+            opacity={this.props.opacity}
+          />
+             
+          <Rect
+            name="module-border"
+            ref="top"
+            width={this.props.width} 
+            height={this.props.height}
+            stroke = {this.props.stroke}
+            strokeWidth = {this.props.strokeWidth}
+          />
+             
+          <Image
+            ref="bottom-layer"
+            name="module"
+            x={this.props.imageX}
+            y={this.props.imageY}
+            height={this.props.imageHeight}
+            width={this.props.imageWidth}
+            image={this.state.image} 
+         />
+      </Group>
     </Group>
     )
   }
