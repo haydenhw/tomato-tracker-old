@@ -13,7 +13,8 @@ export default class TestModule extends Component {
   componentDidMount() {
     
     const image = new window.Image();
-    image.src = require('images/untitled.svg');
+    console.log(this.props.imageSrc === 'images/untitled.svg')
+    image.src = require('images/circuit-board.png');
     
     image.onload = () => {
       this.setState({
@@ -46,51 +47,53 @@ export default class TestModule extends Component {
   
   
   render() {
+    console.log(this.props)
     return (
+      
       <Group
-        x={ 0 }
-        y={ 0 }
+        x={this.props.x || 0}
+        y={this.props.y || 0}
         ref="group"
-        rotation={0}
+        rotation={this.props.rotation}
         onClick={this.highlight.bind(this)}
         draggable="true"
       >
         <Text 
           ref="text"
-          x={300/2 - 100}
-          y={25}
-          text="Simple Text"
-          fontSize={10}
-          fontFamily="Calibri"
+          x={this.props.textX}
+          y={this.props.textY}
+          text={this.props.text}
+          fontSize={this.props.fontSize}this
+          fontFamily={this.props.fontFamily}
         /> 
           
-          <Rect
-            ref="top-layer"
-            x={0} y={0} width={300} height={100}
-            fill="red"
-            opacity={0.1}
-           />
+        <Rect
+          ref="top-layer"
+          width={this.props.width} 
+          height={this.props.height}
+          fill={this.props.fill}
+          opacity={this.props.opacity}
+        />
            
-           <Rect
-               name="module-border"
-               ref="top"
-               x={0} y={0} width={300} height={100}
-               stroke = "black"
-               strokeWidth = ".75"
-            />
+        <Rect
+          name="module-border"
+          ref="top"
+          width={this.props.width} 
+          height={this.props.height}
+          stroke = {this.props.stroke}
+          strokeWidth = {this.props.strokeWidth}
+        />
            
-            <Image
-              ref="bottom-layer"
-              name="module"
-              x={60}
-              y={25}
-              height={50}
-              width={50}
-              stroke={"grey"}
-              strokeWidth = ".75"
-              image={this.state.image}
-           />
-        </Group>
+        {/* <Image
+          ref="bottom-layer"
+          name="module"
+          x={this.props.imageX}
+          y={this.props.imageY}
+          height={this.props.imageHeight}
+          width={this.props.imageWidth}
+          image={this.state.image} 
+       /> */}
+    </Group>
     )
   }
 }

@@ -67,14 +67,6 @@ class Board extends Component {
             opacity="0.5"
             stroke="#ccc"
           />
-          
-          <Rect
-                ref="top"
-                x={10} y={10} width={50} height={50}
-                stroke = "grey"
-                strokeWidth = ".75"
-                draggable="true"
-           />
             
           <Anchor x={topLeft.x} y={topLeft.y} name={"topLeft"} />
           <Anchor x={topRight.x || width} y={topRight.y} name={"topRight"} />
@@ -82,7 +74,6 @@ class Board extends Component {
           <Anchor x={bottomRight.x || width} y={bottomRight.y ||height} name={"bottomRight"} />
           
           <Modules />
-          <TestModule />  
         </Group>
       </Layer>
       );

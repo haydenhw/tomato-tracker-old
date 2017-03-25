@@ -4,27 +4,71 @@ import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import Module from './ModulesItem';
-
+import TestModule from 'components/board/TestModule';
+import { testModuleObject } from './ModulesTestObject'
 
 class MoudleContainer extends Component{
-  render() {
-    const modules = this.props.modules.map((modules, index) => {
+
+  render() {  
+    
+    const module = testModuleObject; 
+    console.log(module.width)
+    /*const modules = testModule.map((module, index) => {
+      
       //console.log('rerendering from ModuleList', modules.image)
       return <Module 
           key={index}
           index={index}
-          x={modules.x} 
-          y={modules.y}
-          height={modules.height}
-          width={modules.width}
-          image={modules.image}
+          x={module.x}
+          y={module.y}
+          width={module.width}
+          height={module.height}
+          rotation={module.rotation}
+          text={module.text}
+          textX= {module.textX}
+          textY= {module.textY}
+          fontSize= {module.fontSize}
+          fontFamily={module.fontFamily}
+          fill={module.fill}
+          opacity={module.opacity}
+          stroke={module.stroke}
+          strokeWidth={module.strokeWidth}
+          imageX={module.imageX}
+          imageY={module.imageY}
+          imageWidth={module.imageWidth}
+          imageHeight={module.imageHeight}
+          imageSrc={module.imageSrc} 
+          iconSrc={module.iconSrc}
         />
     });
-    
+    console.log(modules)*/
     return (
       <Group>
-        {modules}
+        <TestModule 
+            x= {module.x }
+            key={1}
+            index={1}
+            x={module.x}
+            y={module.y}
+            width={module.width}
+            height={module.height}
+            rotation={module.rotation}
+            text={module.text}
+            textX= {module.textX}
+            textY= {module.textY}
+            fontSize= {module.fontSize}
+            fontFamily={module.fontFamily}
+            fill={module.fill}
+            opacity={module.opacity}
+            stroke={module.stroke}
+            strokeWidth={module.strokeWidth}
+            imageX={module.imageX}
+            imageY={module.imageY}
+            imageWidth={module.imageWidth}
+            imageHeight={module.imageHeight}
+            imageSrc={module.imageSrc} 
+            iconSrc={module.iconSrc}
+          />
       </Group>
     )
   }
