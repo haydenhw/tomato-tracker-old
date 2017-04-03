@@ -16,6 +16,7 @@ export default class ModulesItem extends Component {
   
   componentDidUpdate(prevProps, prevState) {
     // forces module image to update after a module is deleted
+    console.log(prevState)
     if (prevState.image) {
       const prevImageSrc = prevState.image.getAttribute("src");
       
@@ -42,7 +43,7 @@ export default class ModulesItem extends Component {
     }
   }
     
-    //this.highlightRuleBreakingMoudles();
+  this.highlightRuleBreakingMoudles();
   }
   
   rotate() {
@@ -93,27 +94,37 @@ export default class ModulesItem extends Component {
   
   highlightRuleBreakingMoudles() {
     
-    const draggingModuleNode = this.refs.moduleBorder;
+    const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
-    const moduleNodes = boardGroup.get(".moduleBorder");
-    const boardNode = boardGroup.getParent().getParent().getParent().get(".board")[0];
+    const moduleNodes = boardGroup.get(".moduleGroup");
+    const boardNode = boardGroup.getParent().get(".board")[0];
     
-    const redStroke = node => node.attrs.stroke = "red";
-    const nullStroke = node => node.attrs.stroke = "black";
+    const addRedStroke = node => {
+      node.attrs.name === "moduleGroup" 
+        ? node.get(".moduleBorder")[0].attrs.stroke = "red"
+        : node.attrs.stroke = "red";
+      
+    }
     
-    enforceRules(moduleNodes, boardNode, redStroke, nullStroke);
+    const removeRedStroke = node => {
+      node.attrs.name === "moduleGroup" 
+        ? node.get(".moduleBorder")[0].attrs.stroke = "black"
+        : node.attrs.stroke = null
+    }
+    
+    enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
   }
   
   handleMouseOver() {
     const moduleData = {
-      index: this.attrs.index
+      index: this.props.index
     }
     store.dispatch(actions.updateSelectedModule(moduleData));
-    store.dispatch(actions.toggleIsMouseOverModule());
+    store.dispatch(actions.toggleIsMouseOverModule(true));
   }
   
   handleMouseOut() {
-    store.dispatch(actions.toggleIsMouseOverModule());
+    store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
   handleDragMove() {
@@ -145,52 +156,55 @@ export default class ModulesItem extends Component {
     );
     
     return (
-    <Group 
-      draggable="true"
-      ref="moduleGroup"
-      x={this.props.x || 0}
-      y={this.props.y || 0}
-      onDragEnd={this.handleDragEnd.bind(this)}
-      onDragMove={this.handleDragMove.bind(this)}
-      onMouseOver={this.handleMouseOver}
-      onMouseOut={this.handleMouseOut}
-    >  
-        <Text 
-          ref="text"
-          x={this.props.textX}
-          y={this.props.textY}
-          rotation={0}
-          width={this.props.width}
-          text={this.props.text}
-          fontSize={this.props.fontSize}
-          fontFamily={this.props.fontFamily}
-        /> 
-        
-        <Group
-          rotation={this.props.rotation}
-          onClick={this.rotate.bind(this)}
-        >
-            
-          <Rect
-            ref="topLayer"
-            width={this.props.width} 
-            height={this.props.height}
-            fill={this.props.fill}
-            opacity={this.props.opacity}
-          />
-             
-          <Rect
-            name="moduleBorder"
-            ref="moduleBorder"
-            width={this.props.width} 
-            height={this.props.height}
-            stroke = {this.props.stroke}
-            strokeWidth = {this.props.strokeWidth}
-          />
-             
-          {this.props.imageSrc ? image: <Group></Group>}
+      <Group 
+        draggable="true"
+        ref="moduleGroup"
+        name="moduleGroup"
+        x={this.props.x}
+        y={this.props.y}
+        height={this.props.height}
+        width={this.props.width}
+        onDragEnd={this.handleDragEnd.bind(this)}
+        onDragMove={this.handleDragMove.bind(this)}
+        onMouseOver={this.handleMouseOver.bind(this)}
+        onMouseOut={this.handleMouseOut.bind(this)}
+      >  
+          <Text 
+            ref="text"
+            x={this.props.textX}
+            y={this.props.textY}
+            rotation={0}
+            width={this.props.width}
+            text={this.props.text}
+            fontSize={this.props.fontSize}
+            fontFamily={this.props.fontFamily}
+          /> 
+          
+          <Group
+            rotation={this.props.rotation}
+            // onClick={this.rotate.bind(this)}
+          >
+              
+            <Rect
+              ref="topLayer"
+              width={this.props.width} 
+              height={this.props.height}
+              fill={this.props.fill}
+              opacity={this.props.opacity}
+            />
+               
+            <Rect
+              name="moduleBorder"
+              ref="moduleBorder"
+              width={this.props.width} 
+              height={this.props.height}
+              stroke = {this.props.stroke}
+              strokeWidth = {this.props.strokeWidth}
+            />
+               
+            {this.props.imageSrc ? image: <Group></Group>}
+        </Group>
       </Group>
-    </Group>
     )
   }
 }

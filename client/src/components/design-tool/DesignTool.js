@@ -52,7 +52,6 @@ class DesignTool extends Component {
     let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
     isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0 ? true : false;
      
-     
     const adjustedModuleCoordinates = {
       x: this.state.x - boardSpecs.x - draggingModuleData.width/2,
       y: this.state.y - boardSpecs.y - draggingModuleData.height/2
@@ -60,7 +59,9 @@ class DesignTool extends Component {
     
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
-    if (isNewModuleOutOfBounds && this.state.isDraggingToBoard) {
+    
+    
+    if (/*isNewModuleOutOfBounds &&*/ this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
     
@@ -74,7 +75,6 @@ class DesignTool extends Component {
     if(isMouseOverModule) {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
-    
   }
   
   handleMouseMove(evt) {
@@ -131,9 +131,15 @@ class DesignTool extends Component {
       <Module
         x={x - width/2} 
         y={y - height/2}
-        height={height}
-        width={width}
-        image={image}
+        width={draggingModuleData.width}
+        height={draggingModuleData.height}
+        stroke={draggingModuleData.stroke}
+        strokeWidth={draggingModuleData.strokeWidth}
+        imageX={draggingModuleData.imageX}
+        imageY={draggingModuleData.imageY}
+        imageWidth={draggingModuleData.imageWidth}
+        imageHeight={draggingModuleData.imageHeight}
+        imageSrc={draggingModuleData.imageSrc} 
       />
     );
       

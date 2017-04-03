@@ -10,8 +10,9 @@ export const toggleIsMouseDown = () => ({
 });
 
 export const TOGGLE_IS_MOUSE_OVER_MODULE = 'TOGGLE_IS_MOUSE_OVER_MODULE'; 
-export const toggleIsMouseOverModule = () => ({
-  type: 'TOGGLE_IS_MOUSE_OVER_MODULE'
+export const toggleIsMouseOverModule = (bool) => ({
+  type: 'TOGGLE_IS_MOUSE_OVER_MODULE',
+  isOver: bool
 });
 
 export const TOGGLE_IS_CONTEXT_MENU_OPEN = 'TOGGLE_IS_CONTEXT_MENU_OPEN'; 

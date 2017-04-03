@@ -13,7 +13,6 @@ import DesignToolContextMenu from './DesignToolContextMenu';
   class DesignToolStage extends Component {
     
   deleteModule() {
-    console.log('hola')
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
   }
     
@@ -50,7 +49,6 @@ import DesignToolContextMenu from './DesignToolContextMenu';
                 width={750} 
                 height={500}
               >
-                
                 <Grid  gridWidth={5000}  cellWidth={20} />
                 {shouldRenderBoard ? <Board /> : <Layer></Layer>}
                 {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer></Layer> }

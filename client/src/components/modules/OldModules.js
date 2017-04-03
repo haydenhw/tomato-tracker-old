@@ -9,8 +9,9 @@ import { modulesData } from './modulesData'
 class MoudleContainer extends Component{
 
   render() {  
-    const modules = this.props.modules.map((module, index) => {
+    const modules = modulesData.map((module, index) => {
       
+      //console.log('rerendering from ModuleList', modules.image)
       return <ModulesItem 
           key={index}
           index={index}

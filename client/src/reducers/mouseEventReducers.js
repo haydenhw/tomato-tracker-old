@@ -26,7 +26,7 @@ export const mouseEvents = (state = defaultMouseEvents, action) => {
       case actions.TOGGLE_IS_MOUSE_OVER_MODULE:
         return {
           ...state,
-          isMouseOverModule: !state.isMouseOverModule
+          isMouseOverModule: action.isOver
         }
         break;
         

@@ -8,8 +8,6 @@ const imageDir = './modules-images';
 
 export const modulesData = [
   {
-    x: null,
-    y: null,
     width: 90,
     height: 110,
     rotation: 0,
@@ -33,8 +31,6 @@ export const modulesData = [
     info: null
   },
   {
-    x: null,
-    y: null,
     width: 75,
     height: 75,
     rotation: 0,
