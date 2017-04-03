@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { Rect, Group, Image, Text } from 'react-konva';
 
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+import enforceRules from 'helpers/enforceRules';
+
 export default class ModulesItem extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
       image: null
+    }
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    // forces module image to update after a module is deleted
+    if (prevState.image) {
+      const prevImageSrc = prevState.image.getAttribute("src");
+      
+      if (prevImageSrc !== this.props.imageSrc) {
+        const image = new window.Image();
+        image.src = this.props.image;
+        image.onload = () => {
+          this.setState({
+            image: image
+          });
+        }
+      }
     }
   }
   
@@ -17,14 +38,14 @@ export default class ModulesItem extends Component {
       image.onload = () => {
         this.setState({
           image: image
-        });
+      });
     }
-    }
+  }
     
     //this.highlightRuleBreakingMoudles();
   }
   
-  highlight() {
+  rotate() {
     this.refs.top.attrs.stroke = "black"
     const groupRotation = this.refs.group.attrs.rotation;
     if (groupRotation === 360) {
@@ -68,14 +89,47 @@ export default class ModulesItem extends Component {
       default:
         console.log(groupRotation);
     }
-    
-  
-      
-      
-  /*  if (groupRotation + 90 === 180y
-      this.refs.group.attrs.y = this.refs.group.attrs.y - 300 ;*/
   }
   
+  highlightRuleBreakingMoudles() {
+    
+    const draggingModuleNode = this.refs.moduleBorder;
+    const boardGroup = draggingModuleNode.getParent();
+    const moduleNodes = boardGroup.get(".moduleBorder");
+    const boardNode = boardGroup.getParent().getParent().getParent().get(".board")[0];
+    
+    const redStroke = node => node.attrs.stroke = "red";
+    const nullStroke = node => node.attrs.stroke = "black";
+    
+    enforceRules(moduleNodes, boardNode, redStroke, nullStroke);
+  }
+  
+  handleMouseOver() {
+    const moduleData = {
+      index: this.attrs.index
+    }
+    store.dispatch(actions.updateSelectedModule(moduleData));
+    store.dispatch(actions.toggleIsMouseOverModule());
+  }
+  
+  handleMouseOut() {
+    store.dispatch(actions.toggleIsMouseOverModule());
+  }
+  
+  handleDragMove() {
+     this.highlightRuleBreakingMoudles();
+  }
+  
+  handleDragEnd() {
+    const module = this.refs.moduleGroup;
+    const newPosition = {
+      x: module.getX(),
+      y: module.getY(),
+      index: module.index
+    }
+    store.dispatch(actions.updateModulePosition(newPosition));
+    
+  }
   
   render() {
     const image = (
@@ -91,7 +145,14 @@ export default class ModulesItem extends Component {
     );
     
     return (
-    <Group draggable="true">  
+    <Group 
+      draggable="true"
+      ref="moduleGroup"
+      onDragEnd={this.handleDragEnd.bind(this)}
+      onDragMove={this.handleDragMove.bind(this)}
+      onMouseOver={this.handleMouseOver}
+      onMouseOut={this.handleMouseOut}
+    >  
         <Text 
           ref="text"
           x={this.props.textX}
@@ -104,11 +165,8 @@ export default class ModulesItem extends Component {
         /> 
         
         <Group
-          x={this.props.x || 0}
-          y={this.props.y || 0}
-          ref="group"
           rotation={this.props.rotation}
-          onClick={this.highlight.bind(this)}
+          onClick={this.rotate.bind(this)}
         >
             
           <Rect
@@ -120,8 +178,8 @@ export default class ModulesItem extends Component {
           />
              
           <Rect
-            name="module-border"
-            ref="top"
+            name="moduleBorder"
+            ref="moduleBorder"
             width={this.props.width} 
             height={this.props.height}
             stroke = {this.props.stroke}

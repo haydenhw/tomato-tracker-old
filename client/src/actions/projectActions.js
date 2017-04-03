@@ -102,7 +102,7 @@ export function updateProject(data, projectId) {
         return res.json();
       })
       .then(data => {
-        alert( JSON.stringify( data ));
+        alert(JSON.stringify(data));
       })
       .catch(err => {
         console.error(err)

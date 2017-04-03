@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
@@ -14,7 +13,6 @@ class MoudleContainer extends Component{
       
       //console.log('rerendering from ModuleList', modules.image)
       return <ModulesItem 
-          x= {module.x }
           key={index}
           index={index}
           x={module.x}

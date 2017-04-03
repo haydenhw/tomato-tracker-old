@@ -4,6 +4,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import SideBarIcon from './SideBarIcon';
+import { modulesData } from 'components/modules/modulesData'
 
 function SideBarIconList(props) {
   const { moduleBank } = props;

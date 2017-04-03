@@ -27,8 +27,9 @@ export const modulesData = [
     imageWidth: 70,
     imageHeight: 100,
     imageSrc: require(`${imageDir}/barrel-connector.svg`),
-    iconSrc: null,
-    price: null
+    iconSrc: require(`${imageDir}/barrel-connector-icon.svg`),
+    price: null,
+    info: null
   },
   {
     x: null,
@@ -50,7 +51,8 @@ export const modulesData = [
     imageWidth: null,
     imageHeight: null,
     imageSrc: null,
-    iconSrc: null,
-    price: null
+    iconSrc: require(`${imageDir}/barrel-connector-icon.svg`),
+    price: null,
+    info: null
   }
 ]

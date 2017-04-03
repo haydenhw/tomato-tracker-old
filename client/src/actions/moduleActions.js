@@ -51,8 +51,6 @@ export function saveModulePosition(
       dispatch({  
         type: 'SAVE_MODULE_POSITION_SUCCESS',
         data});
-       
-      
     })
     .catch(err => {
       console.error(err)
