@@ -11,7 +11,6 @@ export default class TestModule extends Component {
   }
   
   componentDidMount() {
-    
     const image = new window.Image();
     image.src = require(this.props.imageSrc);
     image.onload = () => {
