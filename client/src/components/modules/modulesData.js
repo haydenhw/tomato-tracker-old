@@ -28,6 +28,7 @@ export const modulesData = [
     imageHeight: 100,
     imageSrc: require(`${imageDir}/barrel-connector.svg`),
     iconSrc: require(`${imageDir}/barrel-connector-icon.svg`),
+    iconHeight: "70px",
     price: null,
     info: null
   },
@@ -51,7 +52,8 @@ export const modulesData = [
     imageWidth: null,
     imageHeight: null,
     imageSrc: null,
-    iconSrc: require(`${imageDir}/barrel-connector-icon.svg`),
+    iconSrc: require(`${imageDir}/regulator-icon.svg`),
+    iconHeight: "55px",
     price: null,
     info: null
   }

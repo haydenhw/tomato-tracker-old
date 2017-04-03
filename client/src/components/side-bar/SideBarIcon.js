@@ -14,23 +14,28 @@ export default class SideBarIcon extends Component {
 
   render() {
     const style = {
-      "height": "30px",
-      "width": "30px",
-      "backgroundImage": `url(${this.props.moduleData.image})`,
-      "backgroundSize": "contain",
+      "height": this.props.moduleData.iconHeight,
+      "width": "auto",
       "margin": "0 auto",
+      "marginLeft": "10px",
       "marginBottom": "10px"
     }
     
     return (
       <div 
-      style={style}
-      ref={(module) => { this.selectedModule = module; }} 
-      onMouseMove={ this.handleMouseMovement.bind(this) } 
-      onMouseDown={ this.handleMouseDown.bind(this) }
-      onMouseOut={ () => store.dispatch(actions.mouseDownOnIcon(false)) }
-      
-    />
+        style={style}
+        ref={(module) => { this.selectedModule = module; }} 
+        onMouseMove={ this.handleMouseMovement.bind(this) } 
+        onMouseDown={ this.handleMouseDown.bind(this) }
+        onMouseOut={ () => store.dispatch(actions.mouseDownOnIcon(false)) }
+      >
+        <img
+          src={this.props.moduleData.iconSrc}
+          style={style}
+        />
+      </div>
+          
+    
     );
   }
 }

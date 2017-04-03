@@ -148,6 +148,8 @@ export default class ModulesItem extends Component {
     <Group 
       draggable="true"
       ref="moduleGroup"
+      x={this.props.x || 0}
+      y={this.props.y || 0}
       onDragEnd={this.handleDragEnd.bind(this)}
       onDragMove={this.handleDragMove.bind(this)}
       onMouseOver={this.handleMouseOver}
