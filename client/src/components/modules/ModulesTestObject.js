@@ -1,18 +1,19 @@
 const fontSize = 10;
 const fontFamily = "Calibri";
-const fill = "red";
+const fill = "green";
 const opacity = 0.1;
-const stroke = "grey";
-const strokeWidth = 0.75;
+const stroke = "black";
+const strokeWidth = 0.6;
+const imageDir = './modulesImages'
 
 export const testModuleObject = {
   x: null,
   y: null,
-  width: 300,
-  height: 100,
+  width: 90,
+  height: 110,
   rotation: 0,
-  text: "Simple Text",
-  textX: 50,
+  text: "Barrel Connector (20V 3A)",
+  textX: 10,
   textY: 25,
   fontSize,
   fontFamily,
@@ -20,10 +21,10 @@ export const testModuleObject = {
   opacity,
   stroke,
   strokeWidth,
-  imageX: 60,
-  imageY: 25,
-  imageWidth: 50,
-  imageHeight: 50,
-  imageSrc: 'images/untitled.svg',
+  imageX: 10,
+  imageY: 10,
+  imageWidth: 70,
+  imageHeight: 100,
+  imageSrc: `${imageDir}/barrel-connector.svg`,
   iconSrc: null
 }

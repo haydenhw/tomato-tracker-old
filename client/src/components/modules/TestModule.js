@@ -13,9 +13,7 @@ export default class TestModule extends Component {
   componentDidMount() {
     
     const image = new window.Image();
-    //console.log(this.props.imageSrc === 'images/untitled.svg')
-    image.src = require('images/circuit-board.svg');
-    
+    image.src = require(this.props.imageSrc);
     image.onload = () => {
       this.setState({
         image: image
@@ -85,10 +83,10 @@ export default class TestModule extends Component {
     <Group draggable="true">  
         <Text 
           ref="text"
-          x={0.5 * (this.props.width - 30) }
-          y={this.props.textY - 10}
+          x={this.props.textX}
+          y={this.props.textY}
           rotation={0}
-          width={30}
+          width={this.props.width}
           text={this.props.text}
           fontSize={this.props.fontSize}
           fontFamily={this.props.fontFamily}

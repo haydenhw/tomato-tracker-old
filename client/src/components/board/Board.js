@@ -7,8 +7,6 @@ import store from 'reduxFiles/store';
 import Modules from 'components/modules/Modules';
 import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
-import TestModule from './TestModule';
-
 
 class Board extends Component {
   

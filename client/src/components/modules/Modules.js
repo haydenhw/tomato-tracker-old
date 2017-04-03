@@ -4,7 +4,7 @@ import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import TestModule from 'components/board/TestModule';
+import TestModule from './TestModule';
 import { testModuleObject } from './ModulesTestObject'
 
 class MoudleContainer extends Component{
@@ -12,7 +12,6 @@ class MoudleContainer extends Component{
   render() {  
     
     const module = testModuleObject; 
-    console.log(module.width)
     /*const modules = testModule.map((module, index) => {
       
       //console.log('rerendering from ModuleList', modules.image)
