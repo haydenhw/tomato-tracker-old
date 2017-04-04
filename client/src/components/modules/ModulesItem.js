@@ -16,7 +16,6 @@ export default class ModulesItem extends Component {
   
   componentDidUpdate(prevProps, prevState) {
     // forces module image to update after a module is deleted
-    console.log(prevState)
     if (prevState.image) {
       const prevImageSrc = prevState.image.getAttribute("src");
       
