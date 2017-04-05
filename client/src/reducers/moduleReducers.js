@@ -1,4 +1,5 @@
 import * as actions from '../actions/indexActions';
+import rotate from 'helpers/rotate';
 
 export const moduleList = (state = [], action) => {
   if (action.type === actions.FETCH_MODULES_SUCCESS) {
@@ -53,15 +54,35 @@ export const currentProjectModules = (state = [], action) => {
       break;
   
     case actions.UPDATE_MODULE_POSITION:
-      const { x, y, index } = action.modulePosition; 
-      
       return state.map((module, i) => {
-        return i === index ? 
-          {...module, 
-            x: x,
-            y: y
-          } :
-          module;
+        let { x, y, index } = action.modulePosition;
+        const updatedModuleProps = { 
+          ...module, 
+          x,
+          y
+        } 
+        
+        return i === index ? updatedModuleProps : module;
+      });
+      break;
+        
+    case actions.ROTATE_SELECTED_MODULE:
+    
+      let { rotation, innerGroupX, innerGroupY, width, height, index } = action.moduleData; 
+      const newCoordinates = 
+        // returns an object with 90 degrees added to rotation and x and y values
+        // that are adjusted to rotate the module about its center
+        rotate(rotation, innerGroupX, innerGroupY, width, height); 
+    
+      return state.map((module, i) => {
+        const updatedModuleProps = { 
+          ...module,
+          innerGroupX: newCoordinates.x,
+          innerGroupY: newCoordinates.y,
+          rotation: newCoordinates.rotation
+        } 
+        
+        return i === index ? updatedModuleProps : module;
       });
       
       

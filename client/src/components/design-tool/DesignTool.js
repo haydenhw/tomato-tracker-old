@@ -59,8 +59,6 @@ class DesignTool extends Component {
     
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
-    
-    
     if (/*isNewModuleOutOfBounds &&*/ this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }

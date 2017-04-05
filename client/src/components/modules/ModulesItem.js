@@ -45,52 +45,6 @@ export default class ModulesItem extends Component {
   this.highlightRuleBreakingMoudles();
   }
   
-  rotate() {
-    this.refs.top.attrs.stroke = "black"
-    const groupRotation = this.refs.group.attrs.rotation;
-    if (groupRotation === 360) {
-      //this.refs.group.rotation(0);
-      
-    } else {
-      this.refs.group.rotation(groupRotation + 90);
-    }
-    
-    /*onsole.log(this.refs.group.attrs)
-    const textRotation = this.refs.text.attrs.rotation;
-    
-    this.refs.text.rotation(textRotation + 270)
-    console.log(this.refs.text)
-    this.refs.text.attrs.x = this.refs.text.attrs.x - this.refs.topLayer.attrs.height*/
-    const group = this.refs.group.attrs
-    const x = group.x;
-    const y = group.y;
-    const height = this.refs.topLayer.attrs.height
-    const width = this.refs.topLayer.attrs.width
-    // rotate module about the center
-    
-    switch(groupRotation) {
-      case 0: 
-        group.x = x + .5 * (width + height);
-        group.y = y + .5 * (height - width);
-        break;
-      case 90: 
-        group.x = x + .5 * (width - height);
-        group.y = y + .5 * (width + height);
-        break;
-      case 180: 
-        group.x = x - .5 * (width + height);
-        group.y = y + .5 * (width - height);
-        break;
-      case 270: 
-        group.x = x - .5 * (width - height);
-        group.y = y - .5 * (width + height);
-        this.refs.group.rotation(0);
-        break;
-      default:
-        console.log(groupRotation);
-    }
-  }
-  
   highlightRuleBreakingMoudles() {
     
     const draggingModuleNode = this.refs.moduleGroup;
@@ -115,10 +69,8 @@ export default class ModulesItem extends Component {
   }
   
   handleMouseOver() {
-    const moduleData = {
-      index: this.props.index
-    }
-    store.dispatch(actions.updateSelectedModule(moduleData));
+    console.log(this.props)
+    store.dispatch(actions.updateSelectedModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
   
@@ -138,14 +90,15 @@ export default class ModulesItem extends Component {
       index: module.index
     }
     store.dispatch(actions.updateModulePosition(newPosition));
-    
+  }
+  
+  handleDoubleClick() {
+    store.dispatch(actions.rotateSelectedModule(this.props))
   }
   
   render() {
     const image = (
       <Image
-        ref="bottom-layer"
-        name="module"
         x={this.props.imageX}
         y={this.props.imageY}
         height={this.props.imageHeight}
@@ -172,7 +125,6 @@ export default class ModulesItem extends Component {
             ref="text"
             x={this.props.textX}
             y={this.props.textY}
-            rotation={0}
             width={this.props.width}
             text={this.props.text}
             fontSize={this.props.fontSize}
@@ -180,8 +132,11 @@ export default class ModulesItem extends Component {
           /> 
           
           <Group
+            ref="innerGroup"
+            x={this.props.innerGroupX || 0}
+            y={this.props.innerGroupY || 0}
             rotation={this.props.rotation}
-            // onClick={this.rotate.bind(this)}
+            onDblClick={this.handleDoubleClick.bind(this)}
           >
               
             <Rect

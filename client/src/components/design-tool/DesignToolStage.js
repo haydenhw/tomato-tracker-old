@@ -8,16 +8,18 @@ import store from 'reduxFiles/store';
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
-import DesignToolContextMenu from './DesignToolContextMenu';
 
   class DesignToolStage extends Component {
     
   deleteModule() {
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
   }
+  
+  rotate() {
+    store.dispatch(actions.rotateSelectedModule(this.props.selectedModuleProps));
+  }
     
   render() {
-    
     const { 
       shouldRenderBoard, 
       draggingModule, 
@@ -29,7 +31,8 @@ import DesignToolContextMenu from './DesignToolContextMenu';
      
     const contextMenu = (
       <ContextMenu id={'SIMPLE'}>
-          <MenuItem onClick={this.deleteModule.bind(this)} data={{action: 'Removed'}}>Delete</MenuItem>
+          <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
+          <MenuItem onClick={this.rotate.bind(this)}>rotate</MenuItem>
       </ContextMenu>
     );
     
@@ -68,6 +71,7 @@ const mapStateToProps = (state) => ({
   isMouseDown: state.mouseEvents.isMouseDown,
   isContextMenuOpen: state.mouseEvents.isContextMenuOpen,
   selectedModuleIndex: state.selectedModule.index,
+  selectedModuleProps: state.selectedModule
 });
 
 export default connect(mapStateToProps)(DesignToolStage);

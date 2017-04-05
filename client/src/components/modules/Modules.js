@@ -9,7 +9,7 @@ import { modulesData } from './modulesData'
 class MoudleContainer extends Component{
 
   render() {  
-    const modules = this.props.modules.map((module, index) => {
+    const modules = this.props.modules/*modulesData*/.map((module, index) => {
       
       return <ModulesItem 
           key={index}
@@ -18,6 +18,8 @@ class MoudleContainer extends Component{
           y={module.y}
           width={module.width}
           height={module.height}
+          innerGroupX={module.innerGroupX}
+          innerGroupY={module.innerGroupY}
           rotation={module.rotation}
           text={module.text}
           textX= {module.textX}
