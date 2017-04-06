@@ -10,9 +10,10 @@ import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import SideBar from 'components/side-bar/SideBar';
-import checkCollision from 'helpers/checkCollision';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
+import checkCollision from 'helpers/checkCollision';
+import getPerimeterSide from 'helpers/getPerimeterSide';
 
 class DesignTool extends Component {
   constructor(props) {
@@ -39,23 +40,60 @@ class DesignTool extends Component {
     document.body.addEventListener('keyup', this.handleKeyUp.bind(this))
   }
   
+  calculateNewModuleCoordinates(coordinateData) {
+    const cd = coordinateData;
+    const boundToSide = getPerimeterSide(cd.boundToSideIndex)
+    switch(boundToSide) {
+      case "top":
+        return {
+          x: cd.moduleX - cd.boardX - cd.width/2,
+          y: 0
+        }
+        break;
+        
+        case "bottom":
+          return {
+            x: cd.moduleX - cd.boardX - cd.width/2,
+            y: cd.boardHeight - cd.height
+          }
+          break;
+      
+      case null:
+        return {
+          x: cd.moduleX - cd.boardX - cd.width/2,
+          y: cd.moduleY - cd.boardY - cd.height/2,
+        }
+        break;
+    }
+  }
+  
   dropDraggingModule() {
     const { draggingModuleData, boardSpecs } = this.props;
+    const { width, height, boundToSideIndex } = draggingModuleData;
+    const { x, y } = this.state;
     
+    const coordinateData = {
+      width,
+      height,
+      boundToSideIndex,
+      moduleX: x,
+      moduleY: y,
+      boardX: boardSpecs.x,
+      boardY: boardSpecs.y,
+      boardHeight: boardSpecs.height
+    }
+
     const testModuleCoordinates = {
-      x: this.state.x - draggingModuleData.width/2,
-      y: this.state.y - draggingModuleData.height/2
+      x: x - width/2,
+      y: y - height/2
     }
     
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
      
     let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
     isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0 ? true : false;
-     
-    const adjustedModuleCoordinates = {
-      x: this.state.x - boardSpecs.x - draggingModuleData.width/2,
-      y: this.state.y - boardSpecs.y - draggingModuleData.height/2
-    }
+    
+    const adjustedModuleCoordinates = this.calculateNewModuleCoordinates(coordinateData);
     
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     

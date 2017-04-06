@@ -18,6 +18,7 @@ class MoudleContainer extends Component{
           y={module.y}
           width={module.width}
           height={module.height}
+          boundToSideIndex={module.boundToSideIndex}
           innerGroupX={module.innerGroupX}
           innerGroupY={module.innerGroupY}
           rotation={module.rotation}

@@ -55,7 +55,7 @@ export const currentProjectModules = (state = [], action) => {
   
     case actions.UPDATE_MODULE_POSITION:
       return state.map((module, i) => {
-        let { x, y, index } = action.modulePosition;
+        const { x, y, index } = action.modulePosition;
         const updatedModuleProps = { 
           ...module, 
           x,
@@ -67,19 +67,32 @@ export const currentProjectModules = (state = [], action) => {
       break;
         
     case actions.ROTATE_SELECTED_MODULE:
+      console.log('hello from reducer')
     
-      let { rotation, innerGroupX, innerGroupY, width, height, index } = action.moduleData; 
+      let { 
+        rotation,
+        boundToSideIndex,
+        innerGroupX,
+        innerGroupY,
+        width,
+        height,
+        index
+      } = action.moduleData; 
       const newCoordinates = 
         // returns an object with 90 degrees added to rotation and x and y values
         // that are adjusted to rotate the module about its center
         rotate(rotation, innerGroupX, innerGroupY, width, height); 
-    
+      if (!isNaN(boundToSideIndex)) {
+        boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1; 
+      }
+      console.log(boundToSideIndex)
       return state.map((module, i) => {
         const updatedModuleProps = { 
           ...module,
+          boundToSideIndex,
           innerGroupX: newCoordinates.x,
           innerGroupY: newCoordinates.y,
-          rotation: newCoordinates.rotation
+          rotation: newCoordinates.rotation,
         } 
         
         return i === index ? updatedModuleProps : module;

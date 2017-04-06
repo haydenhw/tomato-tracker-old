@@ -8,15 +8,44 @@ import store from 'reduxFiles/store';
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
+import getPerimeterSide from 'helpers/getPerimeterSide';
+import bindToPerimeter from 'helpers/bindToPerimeter';
+
 
   class DesignToolStage extends Component {
     
   deleteModule() {
+    
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
   }
   
   rotate() {
     store.dispatch(actions.rotateSelectedModule(this.props.selectedModuleProps));
+    
+    const { boundToSideIndex, x, y, width, height } = this.props.selectedModuleProps;
+    console.log(boundToSideIndex)
+    let rotationAdjustedCoordinates;
+    
+    if(!isNaN(boundToSideIndex)){
+      const coordinateData = {
+        boundToSide: getPerimeterSide(boundToSideIndex),
+        moduleX: x,
+        moduleY: y,
+        moduleWidth: width,
+        moduleHeight: height, 
+        boardWidth: this.props.boardSpecs.width,
+        boardHeight: this.props.boardSpecs.height
+      }
+      rotationAdjustedCoordinates = bindToPerimeter(coordinateData);
+      console.log(coordinateData)
+      console.log(rotationAdjustedCoordinates)
+    }
+    
+    
+    
+    if(rotationAdjustedCoordinates) {
+      store.dispatch(actions.updateModulePosition(rotationAdjustedCoordinates));
+    }
   }
     
   render() {
@@ -37,7 +66,6 @@ import Grid from './DesignToolGrid';
     );
     
     const stageStyle = { "display": "inline-block"}
-    
     return (
       <div>
         <ContextMenuTrigger
@@ -71,7 +99,8 @@ const mapStateToProps = (state) => ({
   isMouseDown: state.mouseEvents.isMouseDown,
   isContextMenuOpen: state.mouseEvents.isContextMenuOpen,
   selectedModuleIndex: state.selectedModule.index,
-  selectedModuleProps: state.selectedModule
+  selectedModuleProps: state.selectedModule,
+  boardSpecs: state.boardSpecs
 });
 
 export default connect(mapStateToProps)(DesignToolStage);

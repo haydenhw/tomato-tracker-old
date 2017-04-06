@@ -4,6 +4,9 @@ import { Rect, Group, Image, Text } from 'react-konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import enforceRules from 'helpers/enforceRules';
+import getPerimeterSide from 'helpers/getPerimeterSide';
+import bindToPerimeter from 'helpers/bindToPerimeter';
+
 
 export default class ModulesItem extends Component {
   constructor(props) {
@@ -69,7 +72,6 @@ export default class ModulesItem extends Component {
   }
   
   handleMouseOver() {
-    console.log(this.props)
     store.dispatch(actions.updateSelectedModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
@@ -78,8 +80,61 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
+  bindToPerimeter (coordinateData) {
+  const cd = coordinateData;
+   
+   switch(cd.boundToSide) {
+    case "bottom":
+      return {
+        x: cd.moduleX,
+        y: cd.boardHeight - cd.moduleHeight
+      }
+      break;
+    case "left":
+      return {
+        x: 0 + 0.5 * (cd.moduleHeight - cd.moduleWidth),
+        y: cd.moduleY
+      }
+      break;
+    case "top":
+      return {
+        x: cd.moduleX,
+        y: 0
+      }
+      break;
+    case "right":
+      return {
+         x: cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
+         y: cd.moduleY
+      }
+      break;
+   }
+ }
+  
   handleDragMove() {
-     this.highlightRuleBreakingMoudles();
+    const { boundToSideIndex } = this.props;
+    
+    if(!isNaN(boundToSideIndex)){
+      const module =  this.refs.moduleGroup;
+      const board = module
+        .getParent()
+        .getParent()
+        .get(".board")[0]
+      
+      const coordinateData = {
+        boundToSide: getPerimeterSide(boundToSideIndex),
+        moduleX: module.attrs.x,
+        moduleY: module.attrs.y,
+        moduleWidth: module.attrs.width,
+        moduleHeight: module.attrs.height, 
+        boardWidth: board.attrs.width,
+        boardHeight: board.attrs.height
+      }
+    
+      module.attrs.x = this.bindToPerimeter(coordinateData).x;
+      module.attrs.y = this.bindToPerimeter(coordinateData).y;
+    }
+    this.highlightRuleBreakingMoudles();
   }
   
   handleDragEnd() {
@@ -120,6 +175,7 @@ export default class ModulesItem extends Component {
         onDragMove={this.handleDragMove.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
         onMouseOut={this.handleMouseOut.bind(this)}
+        
       >  
           <Text 
             ref="text"
