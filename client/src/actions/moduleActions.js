@@ -32,9 +32,9 @@ export const deleteSelectedModule = (moduleIndex) => ({
 });
 
 export const ROTATE_SELECTED_MODULE = 'ROTATE_SELECTED_MODULE'; 
-export const rotateSelectedModule = (moduleData) => ({
+export const rotateSelectedModule = (rotationData) => ({
   type: 'ROTATE_SELECTED_MODULE',
-  moduleData
+  rotationData
 });
 
 export const SAVE_MODULE_POSITION_SUCCESS = 'SAVE_MODULE_POSITION_SUCCESS'; 

@@ -10,6 +10,7 @@ import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
+import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 
   class DesignToolStage extends Component {
@@ -20,32 +21,50 @@ import bindToPerimeter from 'helpers/bindToPerimeter';
   }
   
   rotate() {
-    store.dispatch(actions.rotateSelectedModule(this.props.selectedModuleProps));
-    
-    const { boundToSideIndex, x, y, width, height } = this.props.selectedModuleProps;
-    console.log(boundToSideIndex)
-    let rotationAdjustedCoordinates;
+    const { 
+      index,
+      x,
+      y,
+      innerGroupX,
+      innerGroupY,
+      rotation,
+      width,
+      height
+    } = this.props.selectedModuleProps;
+    const { boardSpecs } = this.props;
+    let { boundToSideIndex } = this.props.selectedModuleProps;
+    let newParentGroupCoordinates;
+    let newInnerGroupCoordinates;
     
     if(!isNaN(boundToSideIndex)){
+      boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
       const coordinateData = {
         boundToSide: getPerimeterSide(boundToSideIndex),
         moduleX: x,
         moduleY: y,
         moduleWidth: width,
         moduleHeight: height, 
-        boardWidth: this.props.boardSpecs.width,
-        boardHeight: this.props.boardSpecs.height
+        boardWidth: boardSpecs.width,
+        boardHeight: boardSpecs.height
       }
-      rotationAdjustedCoordinates = bindToPerimeter(coordinateData);
-      console.log(coordinateData)
-      console.log(rotationAdjustedCoordinates)
+      newParentGroupCoordinates = bindToPerimeter(coordinateData);
     }
-    
-    
-    
-    if(rotationAdjustedCoordinates) {
-      store.dispatch(actions.updateModulePosition(rotationAdjustedCoordinates));
+   
+    newInnerGroupCoordinates = (
+      rotateAboutCenter(rotation, innerGroupX, innerGroupY, width, height)
+    );
+    const rotationData = {
+      boundToSideIndex,
+      index,
+      rotation: newInnerGroupCoordinates.rotation,
+      parentGroupX: newParentGroupCoordinates.x,
+      parentGroupY: newParentGroupCoordinates.y,
+      innerGroupX: newInnerGroupCoordinates.x,
+      innerGroupY: newInnerGroupCoordinates.y
     }
+     
+  store.dispatch(actions.rotateSelectedModule(rotationData));
+    
   }
     
   render() {

@@ -1,5 +1,5 @@
 import * as actions from '../actions/indexActions';
-import rotate from 'helpers/rotate';
+import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 export const moduleList = (state = [], action) => {
   if (action.type === actions.FETCH_MODULES_SUCCESS) {
@@ -67,32 +67,37 @@ export const currentProjectModules = (state = [], action) => {
       break;
         
     case actions.ROTATE_SELECTED_MODULE:
-      console.log('hello from reducer')
-    
-      let { 
+      
+      const { 
         rotation,
         boundToSideIndex,
+        parentGroupX,
+        parentGroupY,
         innerGroupX,
         innerGroupY,
         width,
         height,
         index
-      } = action.moduleData; 
-      const newCoordinates = 
-        // returns an object with 90 degrees added to rotation and x and y values
-        // that are adjusted to rotate the module about its center
-        rotate(rotation, innerGroupX, innerGroupY, width, height); 
-      if (!isNaN(boundToSideIndex)) {
-        boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1; 
-      }
-      console.log(boundToSideIndex)
+      } = action.rotationData; 
+      
+      console.log({ 
+        boundToSideIndex,
+        innerGroupX,
+        innerGroupY,
+        rotation,
+        x: parentGroupX,
+        y: parentGroupY
+      } )
+      
       return state.map((module, i) => {
         const updatedModuleProps = { 
           ...module,
           boundToSideIndex,
-          innerGroupX: newCoordinates.x,
-          innerGroupY: newCoordinates.y,
-          rotation: newCoordinates.rotation,
+          innerGroupX,
+          innerGroupY,
+          rotation,
+          x: parentGroupX,
+          y: parentGroupY
         } 
         
         return i === index ? updatedModuleProps : module;

@@ -148,7 +148,7 @@ export default class ModulesItem extends Component {
   }
   
   handleDoubleClick() {
-    store.dispatch(actions.rotateSelectedModule(this.props))
+    store.dispatch(actions.rotateAboutCenterSelectedModule(this.props))
   }
   
   render() {
@@ -189,8 +189,8 @@ export default class ModulesItem extends Component {
           
           <Group
             ref="innerGroup"
-            x={this.props.innerGroupX || 0}
-            y={this.props.innerGroupY || 0}
+            x={this.props.innerGroupX}
+            y={this.props.innerGroupY}
             rotation={this.props.rotation}
             onDblClick={this.handleDoubleClick.bind(this)}
           >

@@ -1,6 +1,5 @@
-export default function rotate(rotation, x, y, width, height) {
+export default function rotateAboutCenter(rotation, x, y, width, height) {
   rotation = rotation === 360 ? 0 : rotation;
-  // rotate module about the center
   switch(rotation) {
     case 0: 
       x = x + .5 * (width + height);
@@ -18,8 +17,6 @@ export default function rotate(rotation, x, y, width, height) {
       x = x - .5 * (width - height);
       y = y - .5 * (width + height);
       break;
-    default:
-      console.log(rotation);
   }
   
   rotation += 90;
