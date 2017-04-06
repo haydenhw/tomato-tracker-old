@@ -33,10 +33,11 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
     } = this.props.selectedModuleProps;
     const { boardSpecs } = this.props;
     let { boundToSideIndex } = this.props.selectedModuleProps;
+    let { topLeft } = this.props.anchorPositions;
     let newParentGroupCoordinates;
     let newInnerGroupCoordinates;
     
-    if(!isNaN(boundToSideIndex)){
+    if(Number.isInteger(boundToSideIndex)){
       boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
       const coordinateData = {
         boundToSide: getPerimeterSide(boundToSideIndex),
@@ -44,6 +45,8 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
         moduleY: y,
         moduleWidth: width,
         moduleHeight: height, 
+        topLeftAnchorX: topLeft.x,
+        topLeftAnchorY: topLeft.y,
         boardWidth: boardSpecs.width,
         boardHeight: boardSpecs.height
       }
@@ -53,14 +56,18 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
     newInnerGroupCoordinates = (
       rotateAboutCenter(rotation, innerGroupX, innerGroupY, width, height)
     );
+    
+    //console.log(isNaN(newParentGroupCoordinates.x))
+    
     const rotationData = {
       boundToSideIndex,
       index,
       rotation: newInnerGroupCoordinates.rotation,
-      parentGroupX: newParentGroupCoordinates.x || x,
-      parentGroupY: newParentGroupCoordinates.y || y,
       innerGroupX: newInnerGroupCoordinates.x,
-      innerGroupY: newInnerGroupCoordinates.y
+      innerGroupY: newInnerGroupCoordinates.y,
+      parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
+      parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
+    
     }
      
   store.dispatch(actions.rotateSelectedModule(rotationData));
@@ -119,7 +126,8 @@ const mapStateToProps = (state) => ({
   isContextMenuOpen: state.mouseEvents.isContextMenuOpen,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs
+  boardSpecs: state.boardSpecs,
+  anchorPositions: state.anchorPositions
 });
 
 export default connect(mapStateToProps)(DesignToolStage);

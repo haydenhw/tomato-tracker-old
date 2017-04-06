@@ -80,14 +80,14 @@ export const currentProjectModules = (state = [], action) => {
         index
       } = action.rotationData; 
       
-      console.log({ 
+      /*console.log({ 
         boundToSideIndex,
         innerGroupX,
         innerGroupY,
         rotation,
         x: parentGroupX,
         y: parentGroupY
-      } )
+      } )*/
       
       return state.map((module, i) => {
         const updatedModuleProps = { 

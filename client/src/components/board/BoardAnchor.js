@@ -7,7 +7,6 @@ import store from 'reduxFiles/store';
 
 
 class Anchor extends Component {
-  
   update () {
     const activeAnchor = this.refs.anchor
     const group = this.refs.anchor.getParent();
@@ -19,7 +18,6 @@ class Anchor extends Component {
     const bottomLeft = group.get('.bottomLeft')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
-    console.log(anchorX, anchorY)
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -54,8 +52,6 @@ class Anchor extends Component {
     const height = bottomLeft.getY() - topLeft.getY();
   
     if(width && height) {
-      // board.width(width);
-      // board.height(height);
       const boardDimensions = {
         width: width,
         height: height

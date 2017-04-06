@@ -7,7 +7,6 @@ import ProjectsItem from './ProjectsItem';
 
 class ProjectListContainer extends Component {
   componentDidMount() {
-    console.log(actions)
     store.dispatch(actions.fetchProjects());
   }
 

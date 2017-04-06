@@ -9,7 +9,7 @@ import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
 
 class Board extends Component {
-  
+  // improves performance
   reRender() {
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
@@ -19,11 +19,15 @@ class Board extends Component {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-    store.dispatch(actions.updateBoardPosition({x: x, y: y}))
+  
+    store.dispatch(actions.updateBoardPosition({
+      x: x, 
+      y: y
+    }))
   }
   
-  test() {
-    console.log('hello')
+  handleDragEnd() {
+    this.updatePosition();
   }
   
   render() {
@@ -51,7 +55,7 @@ class Board extends Component {
           draggable="true" 
         
           onDragMove={this.reRender.bind(this)}
-          onDragEnd={this.updatePosition.bind(this)}
+          onDragEnd={this.handleDragEnd.bind(this)}
           >
       
           <Rect

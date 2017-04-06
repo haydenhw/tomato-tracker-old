@@ -79,7 +79,7 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
-  bindToPerimeter (coordinateData) {
+  /*bindToPerimeter (coordinateData) {
   const cd = coordinateData;
    
    switch(cd.boundToSide) {
@@ -108,17 +108,18 @@ export default class ModulesItem extends Component {
       }
       break;
    }
- }
+ }*/
   
   handleDragMove() {
     const { boundToSideIndex } = this.props;
     
     if (Number.isInteger(boundToSideIndex)) {
       const module =  this.refs.moduleGroup;
-      const board = module
+      const boardGroup = module
         .getParent()
         .getParent()
-        .get(".board")[0]
+      const board = boardGroup.get('.board')[0];
+      const topLeftAnchor = boardGroup.get('.topLeft')[0];
       
       const coordinateData = {
         boundToSide: getPerimeterSide(boundToSideIndex),
@@ -126,12 +127,14 @@ export default class ModulesItem extends Component {
         moduleY: module.attrs.y,
         moduleWidth: module.attrs.width,
         moduleHeight: module.attrs.height, 
+        topLeftAnchorX: topLeftAnchor.attrs.x,
+        topLeftAnchorY: topLeftAnchor.attrs.y,
         boardWidth: board.attrs.width,
         boardHeight: board.attrs.height
       }
-    
-      module.attrs.x = this.bindToPerimeter(coordinateData).x;
-      module.attrs.y = this.bindToPerimeter(coordinateData).y;
+      
+      module.attrs.x = bindToPerimeter(coordinateData).x;
+      module.attrs.y = bindToPerimeter(coordinateData).y;
     }
     this.highlightRuleBreakingMoudles();
   }

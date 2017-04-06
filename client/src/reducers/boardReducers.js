@@ -59,11 +59,3 @@ export const anchorPositions = (state=defaultAnchorPositions, action) => {
   }
   
 }
-
-/*export const anchorPositions = (state=defaultAnchorPositions, action) => {
-  if(action.type === actions.UPDATE_ANCHOR_POSITIONS){
-    return action.positions;
-  }
-  
-  return state;
-}*/
