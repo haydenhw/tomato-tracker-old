@@ -57,8 +57,8 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
       boundToSideIndex,
       index,
       rotation: newInnerGroupCoordinates.rotation,
-      parentGroupX: newParentGroupCoordinates.x,
-      parentGroupY: newParentGroupCoordinates.y,
+      parentGroupX: newParentGroupCoordinates.x || x,
+      parentGroupY: newParentGroupCoordinates.y || y,
       innerGroupX: newInnerGroupCoordinates.x,
       innerGroupY: newInnerGroupCoordinates.y
     }

@@ -42,7 +42,9 @@ class DesignTool extends Component {
   
   calculateNewModuleCoordinates(coordinateData) {
     const cd = coordinateData;
-    const boundToSide = getPerimeterSide(cd.boundToSideIndex)
+    
+    const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
+    
     switch(boundToSide) {
       case "top":
         return {
@@ -58,7 +60,7 @@ class DesignTool extends Component {
           }
           break;
       
-      case null:
+      default:
         return {
           x: cd.moduleX - cd.boardX - cd.width/2,
           y: cd.moduleY - cd.boardY - cd.height/2,
@@ -97,7 +99,7 @@ class DesignTool extends Component {
     
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
-    if (/*isNewModuleOutOfBounds &&*/ this.state.isDraggingToBoard) {
+    if (isNewModuleOutOfBounds && this.state.isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
     

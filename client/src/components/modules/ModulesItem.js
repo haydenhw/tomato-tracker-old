@@ -7,7 +7,6 @@ import enforceRules from 'helpers/enforceRules';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 
-
 export default class ModulesItem extends Component {
   constructor(props) {
     super(props);
@@ -114,7 +113,7 @@ export default class ModulesItem extends Component {
   handleDragMove() {
     const { boundToSideIndex } = this.props;
     
-    if(!isNaN(boundToSideIndex)){
+    if (Number.isInteger(boundToSideIndex)) {
       const module =  this.refs.moduleGroup;
       const board = module
         .getParent()

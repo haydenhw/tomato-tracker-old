@@ -103,7 +103,6 @@ export const currentProjectModules = (state = [], action) => {
         return i === index ? updatedModuleProps : module;
       });
       
-      
       case actions.DELETE_SELECTED_MODULE:
         const newState = [
           ...state.slice(0, action.moduleIndex),
