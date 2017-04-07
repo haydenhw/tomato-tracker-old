@@ -9,10 +9,7 @@ function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
   } = selectedModuleProps;
   const { topLeft } = anchorPositions;
   let { boundToSideIndex } = selectedModuleProps;
-  
-  if (Number.isInteger(boundToSideIndex)) {
-    console.log(boundToSideIndex)
-    boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
+  if (true/*Number.isInteger(boundToSideIndex)*/) {
     
     const coordinateData = {
       boundToSide: getPerimeterSide(boundToSideIndex),
@@ -31,7 +28,6 @@ function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
 
 export default function bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs) {
   const cd = buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs);
-  // console.log(cd)
   switch(cd.boundToSide) {
     case "bottom":
       return {

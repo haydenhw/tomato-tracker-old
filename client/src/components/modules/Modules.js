@@ -14,7 +14,6 @@ class MoudleContainer extends Component{
       return <ModulesItem 
           key={index}
           index={index}
-          topLeftAnchor={this.props.topLeftAnchor}
           x={module.x}
           y={module.y}
           width={module.width}
@@ -38,6 +37,10 @@ class MoudleContainer extends Component{
           imageHeight={module.imageHeight}
           imageSrc={module.imageSrc} 
           iconSrc={module.iconSrc}
+          topLeftAnchor={this.props.topLeftAnchor}
+          selectedModuleProps={this.props.selectedModuleProps}
+          anchorPositions={this.props.anchorPositions}
+          boardSpecs={this.props.boardSpecs}
         />
     });
     return (
@@ -51,7 +54,10 @@ class MoudleContainer extends Component{
 
 const mapStateToProps = (state) => ({
    modules: state.currentProjectModules,
-   topLeftAnchor: state.anchorPositions.topLeft
+   topLeftAnchor: state.anchorPositions.topLeft,
+   selectedModuleProps: state.selectedModule,
+   boardSpecs: state.boardSpecs,
+   anchorPositions: state.anchorPositions
 });
 
 export default connect(mapStateToProps)(MoudleContainer);

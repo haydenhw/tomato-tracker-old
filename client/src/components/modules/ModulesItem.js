@@ -79,22 +79,36 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
+  /*const boardGroup = module
+    .getParent()
+    .getParent()
+  const board = boardGroup.get('.board')[0];
+  const topLeftAnchor = boardGroup.get('.topLeft')[0];*/
+  
+  // const newModuleCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
+  
+  // module.attrs.x = newModuleCoordinates.x
+  // module.attrs.y = newModuleCoordinates.y
+  
   handleDragMove() {
     const { boundToSideIndex } = this.props;
     
     if (Number.isInteger(boundToSideIndex)) {
-      const module =  this.refs.moduleGroup;
-      /*const boardGroup = module
-        .getParent()
-        .getParent()
-      const board = boardGroup.get('.board')[0];
-      const topLeftAnchor = boardGroup.get('.topLeft')[0];*/
       
-      rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
-      
-      module.attrs.x = bindToPerimeter(coordinateData).x;
-      module.attrs.y = bindToPerimeter(coordinateData).y;
+      const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     }
+    
+    const module =  this.refs.moduleGroup;
+    console.log(module.getPosition())
+        
+    const newPosition = {
+      x: module.getPosition().x,
+      y: module.getPosition().y,
+      index: this.props.index
+    }
+    
+    store.dispatch(actions.updateModulePosition(newPosition));
+    
     this.highlightRuleBreakingMoudles();
   }
   
@@ -113,6 +127,7 @@ export default class ModulesItem extends Component {
   }
   
   render() {
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
       <Image
         x={this.props.imageX}
@@ -128,8 +143,13 @@ export default class ModulesItem extends Component {
         draggable="true"
         ref="moduleGroup"
         name="moduleGroup"
-        x={/*this.props.topLeftAnchor ? this.props.topLeftAnchor.x : */this.props.x}
-        y={this.props.y}
+        x={ Boolean(anchorPositions)
+          ? bindToPerimeter(this.props, anchorPositions, boardSpecs).x
+          : this.props.x
+        }
+        y={Boolean(anchorPositions)
+          ? bindToPerimeter(this.props, anchorPositions, boardSpecs).y
+          : this.props.y}
         height={this.props.height}
         width={this.props.width}
         onDragEnd={this.handleDragEnd.bind(this)}
