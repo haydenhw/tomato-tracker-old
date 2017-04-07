@@ -10,6 +10,7 @@ testRouter.use(bodyParser.json());
 
 testRouter.get('/', (req, res) => {
   console.log('get request')
+  //res.send({testRouter: 'success'});
   TestData
     .find()
     .exec()
@@ -23,7 +24,7 @@ testRouter.get('/', (req, res) => {
 
 testRouter.get('/:projectId', (req, res) => {
   console.log('get project by id')
-  testData
+  TestData
     .findById(req.params.projectId)
     .exec()
     .then(project => res.json(project))
@@ -35,14 +36,11 @@ testRouter.get('/:projectId', (req, res) => {
 
 testRouter.post('/', (req, res) => {
   console.log(req.body)
-  testData
+  TestData
     .create({
-      name: req.body.name,
-      boardSpecs: req.body.boardSpecs,
-      modules: req.body.modules,
-      moduleBank: req.body.moduleBank
+      testData: req.body.testData
     })
-  .then(project => res.status(201).json(project))
+  .then(testObj => res.status(201).json(testObj))
   .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal server error'});

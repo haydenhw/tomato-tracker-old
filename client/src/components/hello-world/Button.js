@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default function Button(props) {
   function handleClick() {
-    {props.clickAction}
+    {props.clickAction()}
   }
   
   return (

@@ -2,7 +2,7 @@ import { projectsUrl } from '../config/endpointUrls';
 import { Route, hashHistory } from 'react-router';
 import store from 'reduxFiles/store';
 
-const testUrl = 'test';
+const url = 'testRouter';
 
 export const FETCH_TEST_DATA_SUCCESS = 'FETCH_TEST_DATA_SUCCESS'; 
 export const fetchTestDataSuccess = (testData) => ({

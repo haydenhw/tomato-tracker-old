@@ -1,10 +1,10 @@
 import * as actions from '../actions/indexActions';
 
 export const testData = (state = [], action) => {
-  if (action.type === actions.FETCH_TEST_DATA_SUCCESS) {
+  switch(action.type) {
+    case actions.FETCH_TEST_DATA_SUCCESS:
       return action.testData;
   }
-  
   return state;
 }
 

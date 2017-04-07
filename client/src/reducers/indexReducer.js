@@ -1,4 +1,5 @@
-import { testData, currentProjectInfo } from './ajaxReducers';
+import { combineReducers } from 'redux'
+import { testData } from './ajaxReducers';
 
 export default combineReducers({
     testData

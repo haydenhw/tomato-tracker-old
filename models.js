@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const moduleSchema = mongoose.Schema({
+const testSchema = mongoose.Schema({
   testData: String
 });
 
 
-const TestData = mongoose.model('Modules', moduleSchema);
+const TestData = mongoose.model('Modules', testSchema);
 //const Projects = mongoose.model('Projects', projectSchema);
 
 module.exports = {TestData /*, Projects*/};

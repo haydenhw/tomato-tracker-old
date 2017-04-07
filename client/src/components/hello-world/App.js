@@ -1,12 +1,25 @@
 import React from 'react';
 import Button from './Button'
+import { connect } from 'react-redux';
 
-export default function App(props) {
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+import List from './List';
+
+export function App(props) {
+  console.log(props.testData)
   return (
     <div>
       <h1>Hola Mundo</h1>
-      <Button clickAction={() => console.log('clicked!')} text={"Get Test Data"}/>
+      <Button clickAction={() => store.dispatch(actions.fetchTestData())} text={"Get Test Data"}/>
+      <List data={props.testData}/>
     </div>
   )
     
 }
+
+const mapStateToProps = (state) => ({
+  testData: state.testData
+});
+
+export default connect(mapStateToProps)(App);

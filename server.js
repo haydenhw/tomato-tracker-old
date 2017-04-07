@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-//app.use('/test', testRouter);
+app.use('/testRouter', testRouter);
 
-app.get('/modules', (req, res) => {
-  Modules
+app.get('/test', (req, res) => {
+  TestData
     .find()
     .exec()
     .then(modules => res.json(modules))
@@ -42,9 +42,7 @@ app.post('/test', (req, res) => {
   
   TestData
     .create({
-      'function': req.body.function,
-      'height': req.body.height,
-      'width': req.body.width
+      'testData': req.body.testData,
     })
   .then(project => res.status(201).json(project))
   .catch(err => {
