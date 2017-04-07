@@ -2,20 +2,22 @@ import { projectsUrl } from '../config/endpointUrls';
 import { Route, hashHistory } from 'react-router';
 import store from 'reduxFiles/store';
 
-export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
-export const fetchProjectsSuccess = (projects) => ({
-  type: 'FETCH_PROJECTS_SUCCESS',
-  projects
+const testUrl = 'test';
+
+export const FETCH_TEST_DATA_SUCCESS = 'FETCH_TEST_DATA_SUCCESS'; 
+export const fetchTestDataSuccess = (testData) => ({
+  type: 'FETCH_TEST_DATA_SUCCESS',
+  testData
 });
 
-export function fetchProjects() {
+export function fetchTestData() {
   return (dispatch) => {
-    fetch(projectsUrl)
+    fetch(url)
     .then((res) => {
       return res.json();
     })
     .then(data => {
-      dispatch(fetchProjectsSuccess(data));
+      dispatch(fetchTestDataSuccess(data));
     })
     .catch(err => {
       console.error(err)

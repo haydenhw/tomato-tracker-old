@@ -1,19 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Projects } = require('./models');
-const projectRouter = express.Router();
+const { TestData } = require('./models');
+const testRouter = express.Router();
 
-projectRouter.use(bodyParser.urlencoded({
+testRouter.use(bodyParser.urlencoded({
   extended: true
 }));
-projectRouter.use(bodyParser.json());
+testRouter.use(bodyParser.json());
 
-projectRouter.get('/', (req, res) => {
+testRouter.get('/', (req, res) => {
   console.log('get request')
-  Projects
+  TestData
     .find()
     .exec()
-    .then(projects => res.json(projects))
+    .then(data => res.json(data))
     .catch(
       err => {
         console.error(err);
@@ -21,9 +21,9 @@ projectRouter.get('/', (req, res) => {
       });
 });
 
-projectRouter.get('/:projectId', (req, res) => {
+testRouter.get('/:projectId', (req, res) => {
   console.log('get project by id')
-  Projects
+  testData
     .findById(req.params.projectId)
     .exec()
     .then(project => res.json(project))
@@ -33,9 +33,9 @@ projectRouter.get('/:projectId', (req, res) => {
       });
 });
 
-projectRouter.post('/', (req, res) => {
+testRouter.post('/', (req, res) => {
   console.log(req.body)
-  Projects
+  testData
     .create({
       name: req.body.name,
       boardSpecs: req.body.boardSpecs,
@@ -49,7 +49,7 @@ projectRouter.post('/', (req, res) => {
     });
 });
 
-projectRouter.put('/:projectId', (req, res) => {
+testRouter.put('/:projectId', (req, res) => {
   console.log(req.body)
   const toUpdate = {
     name: req.body.projectName,
@@ -58,7 +58,7 @@ projectRouter.put('/:projectId', (req, res) => {
     boardModules: req.body.boardModules
   }
   console.log(toUpdate)
-  Projects
+  testData
     .findByIdAndUpdate(req.params.projectId, {$set: toUpdate})
     .exec()
     .then(project => res.status(204).end())
@@ -67,66 +67,12 @@ projectRouter.put('/:projectId', (req, res) => {
     );
 });
 
-projectRouter.delete('/:projectId', (req, res) => {
-  Projects
+testRouter.delete('/:projectId', (req, res) => {
+  testData
     .findByIdAndRemove(req.params.projectId)
     .exec()
     .then(project => res.status(204).json(project))
     .catch(err => res.status(404).json({message: 'Not Found'}));
 });
 
-module.exports = projectRouter;
-
-/*
-{
-   "_id": "58c5b9bd3d1e06084fe05e24",
-   "name": "asdf",
-   "__v": 0,
-   "modules": [
-     {
-       "height": 50,
-       "width": 50,
-       "x": 25,
-       "y": 25,
-       "onBoard": true,
-       "image": "http://i68.tinypic.com/24oouoj.png",
-       "id": 0,
-       "_id": "58c330a771284629ecef4132"
-     },
-     {
-       "height": 50,
-       "width": 50,
-       "x": 125,
-       "y": 125,
-       "onBoard": true,
-       "image": "http://i65.tinypic.com/s4s0ah.png",
-       "id": 1,
-       "_id": "58c330a771284629ecef4131"
-     }
-   ],
-   "boardSpecs": {
-     "x": 50,
-     "y": 50,
-     "height": 300,
-     "width": 500
-   },
-   
-    "moduleBank": [
-    {
-       "height": 50,
-       "width": 50,
-
-       "onBoard": true,
-       "image": "http://i68.tinypic.com/24oouoj.png"
-
-     },
-     {
-       "height": 50,
-       "width": 50,
-       "onBoard": true,
-       "image": "http://i65.tinypic.com/s4s0ah.png"
-     }
-   ]
-   
-
- }*/
+module.exports = testRouter;

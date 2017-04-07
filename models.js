@@ -1,51 +1,11 @@
 const mongoose = require('mongoose');
 
 const moduleSchema = mongoose.Schema({
-  function: String,
-  height: Number,
-  width: Number
+  testData: String
 });
 
-const projectSchema = mongoose.Schema({
-  name: String,
-  boardSpecs: {
-    x: Number,
-    y: Number,
-    height: Number,
-    width: Number
-  },
-  modules: [{  
-    x: Number,
-    y: Number,
-    height: Number,
-    width: Number,
-    image: String,
-    onBoard: Boolean,
-    id: Number
-  }],
-  moduleBank: [{
-    height: Number,
-    width: Number,
-    image: String
-  }]
-});
 
-const userSchema = mongoose.Schema({
-  currentProjectId: String
-})
+const TestData = mongoose.model('Modules', moduleSchema);
+//const Projects = mongoose.model('Projects', projectSchema);
 
-const Modules = mongoose.model('Modules', moduleSchema);
-const Projects = mongoose.model('Projects', projectSchema);
-
-module.exports = {Modules , Projects};
-/*
-{
-"name": "Test Project",
-"boardSpecs": {
-  "x": 50,
-  "y": 50,
-  "height": 300,
-  "width": 500
-},
-"moudles": []
-}*/
+module.exports = {TestData /*, Projects*/};

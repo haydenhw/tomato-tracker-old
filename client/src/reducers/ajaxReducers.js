@@ -1,8 +1,8 @@
 import * as actions from '../actions/indexActions';
 
-export const projectList = (state = [], action) => {
-  if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-      return action.projects;
+export const testData = (state = [], action) => {
+  if (action.type === actions.FETCH_TEST_DATA_SUCCESS) {
+      return action.testData;
   }
   
   return state;
