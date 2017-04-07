@@ -79,59 +79,18 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
-  /*bindToPerimeter (coordinateData) {
-  const cd = coordinateData;
-   
-   switch(cd.boundToSide) {
-    case "bottom":
-      return {
-        x: cd.moduleX,
-        y: cd.boardHeight - cd.moduleHeight
-      }
-      break;
-    case "left":
-      return {
-        x: 0 + 0.5 * (cd.moduleHeight - cd.moduleWidth),
-        y: cd.moduleY
-      }
-      break;
-    case "top":
-      return {
-        x: cd.moduleX,
-        y: 0
-      }
-      break;
-    case "right":
-      return {
-         x: cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
-         y: cd.moduleY
-      }
-      break;
-   }
- }*/
-  
   handleDragMove() {
     const { boundToSideIndex } = this.props;
     
     if (Number.isInteger(boundToSideIndex)) {
       const module =  this.refs.moduleGroup;
-      const boardGroup = module
+      /*const boardGroup = module
         .getParent()
         .getParent()
       const board = boardGroup.get('.board')[0];
-      const topLeftAnchor = boardGroup.get('.topLeft')[0];
+      const topLeftAnchor = boardGroup.get('.topLeft')[0];*/
       
-      const coordinateData = {
-        boundToSide: getPerimeterSide(boundToSideIndex),
-        moduleX: module.attrs.x,
-        moduleY: module.attrs.y,
-        moduleWidth: module.attrs.width,
-        moduleHeight: module.attrs.height, 
-        topLeftAnchorX: topLeftAnchor.attrs.x,
-        topLeftAnchorY: topLeftAnchor.attrs.y,
-        boardWidth: board.attrs.width,
-        boardHeight: board.attrs.height
-      }
+      rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
       
       module.attrs.x = bindToPerimeter(coordinateData).x;
       module.attrs.y = bindToPerimeter(coordinateData).y;
@@ -169,7 +128,7 @@ export default class ModulesItem extends Component {
         draggable="true"
         ref="moduleGroup"
         name="moduleGroup"
-        x={this.props.x}
+        x={/*this.props.topLeftAnchor ? this.props.topLeftAnchor.x : */this.props.x}
         y={this.props.y}
         height={this.props.height}
         width={this.props.width}

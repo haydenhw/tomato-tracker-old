@@ -7,11 +7,13 @@ function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
     width,
     height
   } = selectedModuleProps;
+  const { topLeft } = anchorPositions;
   let { boundToSideIndex } = selectedModuleProps;
-  let { topLeft } = anchorPositions;
   
   if (Number.isInteger(boundToSideIndex)) {
+    console.log(boundToSideIndex)
     boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
+    
     const coordinateData = {
       boundToSide: getPerimeterSide(boundToSideIndex),
       moduleX: x,
@@ -23,36 +25,42 @@ function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
       boardWidth: boardSpecs.width,
       boardHeight: boardSpecs.height
     }
-    newParentGroupCoordinates = bindToPerimeter(coordinateData);
+    return coordinateData;
   }
 }
 
-export default function bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs)) {
-const cd = buildCoordinateData();
- switch(cd.boundToSide) {
-  case "bottom":
-    return {
-      x: cd.moduleX,
-      y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight
-    }
-    break;
-  case "left":
-    return {
-      x: cd.topLeftAnchorX + 0.5 * (cd.moduleHeight - cd.moduleWidth),
-      y: cd.moduleY
-    }
-    break;
-  case "top":
-    return {
-      x: cd.moduleX,
-      y: cd.topLeftAnchorY
-    }
-    break;
-  case "right":
-    return {
-       x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
-       y: cd.moduleY
-    }
-    break;
- }
+export default function bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs) {
+  const cd = buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs);
+  // console.log(cd)
+  switch(cd.boundToSide) {
+    case "bottom":
+      return {
+        x: cd.moduleX,
+        y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight
+      }
+      break;
+    case "left":
+      return {
+        x: cd.topLeftAnchorX + 0.5 * (cd.moduleHeight - cd.moduleWidth),
+        y: cd.moduleY
+      }
+      break;
+    case "top":
+      return {
+        x: cd.moduleX,
+        y: cd.topLeftAnchorY
+      }
+      break;
+    case "right":
+      return {
+         x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
+         y: cd.moduleY
+      }
+      break;
+    default:
+      return {
+        x,
+        y
+      }
+  }
 }

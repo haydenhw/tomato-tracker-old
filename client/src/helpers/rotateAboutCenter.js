@@ -1,4 +1,8 @@
-export default function rotateAboutCenter(rotation, x, y, width, height) {
+export default function rotateAboutCenter(boundToSideIndex, rotation, x, y, width, height) {
+  if (Number.isInteger(boundToSideIndex)) {
+    boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
+  }
+  
   rotation = rotation === 360 ? 0 : rotation;
   switch(rotation) {
     case 0: 
@@ -21,5 +25,5 @@ export default function rotateAboutCenter(rotation, x, y, width, height) {
   
   rotation += 90;
   
-  return { rotation, x, y } 
+  return { boundToSideIndex, rotation, x, y } 
 }

@@ -52,14 +52,12 @@ class DesignTool extends Component {
           y: 0
         }
         break;
-        
         case "bottom":
           return {
             x: cd.moduleX - cd.boardX - cd.width/2,
             y: cd.boardHeight - cd.height
           }
           break;
-      
       default:
         return {
           x: cd.moduleX - cd.boardX - cd.width/2,

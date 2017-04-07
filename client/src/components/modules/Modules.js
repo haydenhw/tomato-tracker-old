@@ -14,6 +14,7 @@ class MoudleContainer extends Component{
       return <ModulesItem 
           key={index}
           index={index}
+          topLeftAnchor={this.props.topLeftAnchor}
           x={module.x}
           y={module.y}
           width={module.width}
@@ -49,7 +50,8 @@ class MoudleContainer extends Component{
 }
 
 const mapStateToProps = (state) => ({
-   modules: state.currentProjectModules
+   modules: state.currentProjectModules,
+   topLeftAnchor: state.anchorPositions.topLeft
 });
 
 export default connect(mapStateToProps)(MoudleContainer);

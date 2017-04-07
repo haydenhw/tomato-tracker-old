@@ -23,55 +23,34 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
   rotate() {
     const { 
       index,
-      x,
-      y,
       innerGroupX,
       innerGroupY,
       rotation,
       width,
       height
     } = this.props.selectedModuleProps;
-    const { boardSpecs } = this.props;
+    const { topLeft } = this.props.anchorPositions;
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     let { boundToSideIndex } = this.props.selectedModuleProps;
-    let { topLeft } = this.props.anchorPositions;
     let newParentGroupCoordinates;
     let newInnerGroupCoordinates;
     
-    if(Number.isInteger(boundToSideIndex)){
-      boundToSideIndex = boundToSideIndex === 3 ? 0 : boundToSideIndex + 1;
-      const coordinateData = {
-        boundToSide: getPerimeterSide(boundToSideIndex),
-        moduleX: x,
-        moduleY: y,
-        moduleWidth: width,
-        moduleHeight: height, 
-        topLeftAnchorX: topLeft.x,
-        topLeftAnchorY: topLeft.y,
-        boardWidth: boardSpecs.width,
-        boardHeight: boardSpecs.height
-      }
-      newParentGroupCoordinates = bindToPerimeter(coordinateData);
-    }
-   
+    newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
     newInnerGroupCoordinates = (
-      rotateAboutCenter(rotation, innerGroupX, innerGroupY, width, height)
+      rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
     );
     
-    //console.log(isNaN(newParentGroupCoordinates.x))
-    
     const rotationData = {
-      boundToSideIndex,
       index,
+      boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex, 
       rotation: newInnerGroupCoordinates.rotation,
       innerGroupX: newInnerGroupCoordinates.x,
       innerGroupY: newInnerGroupCoordinates.y,
       parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
       parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
-    
     }
      
   store.dispatch(actions.rotateSelectedModule(rotationData));
-    
   }
     
   render() {
