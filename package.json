@@ -1,13 +1,17 @@
 {
-  "name": "my-react-starter",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "react-scripts": "0.8.5"
+  "name": "new-fullstack-boilerplate",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayden7913/new-fullstack-boilerplate.git"
   },
+  "devDependencies": {},
   "dependencies": {
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",
+    "body-parser": "^1.17.1",
     "concurrently": "^3.4.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
