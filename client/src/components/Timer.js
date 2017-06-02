@@ -5,8 +5,9 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     currentCount: 3,
-     intervalId: null
+      startCount: props.startCount,
+      currentCount: props.startCount,
+      intervalId: null
    };
   }
   
@@ -14,36 +15,37 @@ export default class Timer extends Component {
     if (nextProps.isTimerActive) {
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
-      this.setState({intervalId: intervalId});
+      this.setState({ intervalId });
     }
   }
   
   timer () {
-    const { currentCount, intervalId } = this.state; 
-    
-    
-    
-    this.setState(function (state, props) {
+    const { currentCount, intervalId, startCount } = this.state; 
+    const { toggleIsTimerActive } = this.props;
+    this.setState(function (state){
       return {
         currentCount: state.currentCount - 1
       }
     });
-    if (currentCount < 2) {
+    
+    if (currentCount < 1) {
       console.log('timer finished!');
-      clearInterval(intervalId)
+      clearInterval(intervalId);
+      this.setState({ currentCount: startCount});
+      toggleIsTimerActive();
     }
   }
   
   
   render() {
-    const { handleStartButtonClick, isTimerActive, task } = this.props;
+    const { toggleIsTimerActive, isTimerActive, task } = this.props;
     const seconds = this.state.currentCount;
     
     return (
       <div className="timer">
         <div>{task}</div>
         <div>{seconds}</div>
-        <button onClick={handleStartButtonClick}>{isTimerActive ? "Pause" : "Start"}</button>
+        <button onClick={toggleIsTimerActive}>{isTimerActive ? "Pause" : "Start"}</button>
       </div>
     );
   }

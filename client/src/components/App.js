@@ -10,9 +10,15 @@ export default class App extends Component {
     const { taskData } = props;
      this.state = {
       isTimerActive: false,
-      selectedTask: null,
+      selectedTaskId: null,
+      startCount: 3,
       tasks: taskData,
     }
+  }
+  
+  handleTaskChange(evt){
+    const selectedTaskId = evt.nativeEvent.target.value;
+    this.setState({ selectedTaskId: selectedTaskId });
   }
   
   toggleIsTimerActive() {
@@ -26,8 +32,12 @@ export default class App extends Component {
     
     return (
       <div className="countdown-timer">
-        <TaskSelect options={taskOptions} />
-        <Timer isTimerActive={isTimerActive} handleStartButtonClick={this.toggleIsTimerActive.bind(this)}/>
+        <TaskSelect handleChange={this.handleTaskChange.bind(this)} options={taskOptions} />
+        <Timer 
+          isTimerActive={isTimerActive} 
+          toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
+          startCount={3}
+        />
         <TaskList tasks={tasks} />
         <button onClick={this.toggleIsTimerActive.bind(this)}>Add New Project</button>
       </div>
