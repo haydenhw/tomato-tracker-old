@@ -89,7 +89,7 @@ export default class App extends Component {
           shouldRender={shouldRenderModal}
           text={"Add a new project"}
         >
-          <form>
+          <form onSubmit={(evt) => console.log(evt.target.value)}>
             <input type="text"/>
             <input type="submit"/>
           </form>

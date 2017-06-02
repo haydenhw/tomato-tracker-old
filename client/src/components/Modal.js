@@ -110,6 +110,7 @@ export default class Modal extends Component {
       rightButtonClass,
       rightButtonText,
       text,
+      style,
       title,
       shouldRender,
     } = this.props;
@@ -122,7 +123,7 @@ export default class Modal extends Component {
     
     return (
       <RootModal>
-        <div className={`modal-content ${modalClass}`}>
+        <div className={`modal-content ${modalClass}`} style={style}>
           <span className="modal-close" onClick={handleCloseButtonClick} role="button">&times;</span>
           <div className="modal-scroll-wrapper">
             <h2 className="modal-title">{title}</h2>
@@ -162,4 +163,5 @@ Modal.propTypes = {
   shouldRender: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   title: PropTypes.string,
+  style: PropTypes.object
 };
