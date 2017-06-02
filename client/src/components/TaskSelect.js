@@ -3,19 +3,19 @@ import shortid from 'shortid';
 import Select from './Select';
 
 export default function(props) {
-  const { handleChange, options } = props;
+  const { handleChange, tasks } = props;
   
-  const renderTaskOption = optionText => (
+  const renderTaskOption = task => (
     <option 
       key={shortid.generate()}
-      value={id}
+      value={task.id}
       >
-         {optionText}
+         {task.taskName}
       </option>
   );
   
   return (
     
-    <Select handleChange={handleChange} options={options} renderOption={renderTaskOption} />
+    <Select handleChange={handleChange} options={tasks} renderOption={renderTaskOption} />
   );
 }

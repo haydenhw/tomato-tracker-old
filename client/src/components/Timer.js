@@ -5,7 +5,6 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startCount: props.startCount,
       currentCount: props.startCount,
       intervalId: null
    };
@@ -20,8 +19,9 @@ export default class Timer extends Component {
   }
   
   timer () {
-    const { currentCount, intervalId, startCount } = this.state; 
-    const { toggleIsTimerActive } = this.props;
+    const { currentCount, intervalId } = this.state; 
+    const { startCount, toggleIsTimerActive } = this.props;
+    
     this.setState(function (state){
       return {
         currentCount: state.currentCount - 1
