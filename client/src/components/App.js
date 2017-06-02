@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 import Timer from './Timer';
 import TaskList from './TaskList';
 import TaskSelect from './TaskSelect';
@@ -12,6 +13,7 @@ export default class App extends Component {
     
      this.state = {
       isTimerActive: false,
+      shouldRenderModal: false,
       selectedTaskId: firstTaskId,
       timerStartCount: 10,
       tasks: taskData,
@@ -40,6 +42,21 @@ export default class App extends Component {
     this.setState({isTimerActive: !isTimerActive})
   }
   
+  toggleShouldRenderModal(modalType) {
+    const { shouldRenderModal } = this.state;
+    
+    let newModalState = { shouldRenderModal: !shouldRenderModal};
+    
+    if (modalType) { 
+      const updatedModalType = { modalType: modalType};
+      newModalState = Object.assign(newModalState, updatedModalType);
+    }
+    
+    this.setState(newModalState);
+    console.log(this.state.shouldRenderModal)
+  }
+    
+  
   handleTaskChange(evt){
     const selectedTaskId = evt.nativeEvent.target.value;
     this.setState({ selectedTaskId: selectedTaskId });
@@ -50,6 +67,7 @@ export default class App extends Component {
       isTimerActive,
       remainingTime,
       selectedTask,
+      shouldRenderModal,
       tasks,
       timerStartCount,
     } = this.state;
@@ -64,7 +82,18 @@ export default class App extends Component {
           startCount={timerStartCount}
         />
         <TaskList tasks={tasks} />
-        <button onClick={this.toggleIsTimerActive.bind(this)}>Add New Project</button>
+        <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
+        <Modal 
+          handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
+          rightButtonText="Submit"
+          shouldRender={shouldRenderModal}
+          text={"Add a new project"}
+        >
+          <form>
+            <input type="text"/>
+            <input type="submit"/>
+          </form>
+        </Modal> 
       </div>
     );
   }
