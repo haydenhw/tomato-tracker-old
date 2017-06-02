@@ -1,55 +1,44 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
 const app = express();
-const { PORT, DATABASE_URL } = require('./config');
-const { TestData } = require('./models');
-const testRouter = require('./testRouter');
+
+const {PORT, DATABASE_URL} = require('./server-files/config');
+const {Projects} = require('./server-files/models');
+const {sampleData} = require('./server-files/sampleData')
+
+const projectRouter = require('./server-files/routes/projectRouter');
+const taskRouter = require('./server-files/routes/taskRouter');
+
 mongoose.Promise = global.Promise;
 
-//app.set('port', (process.env.PORT || 3001));
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/dist'));
+
+projectRouter.use('/:id/tasks', taskRouter);
+app.use('/projects', projectRouter);
+app.use('*', function(req, res) {
+  res.status(404).json({message: 'Not Found'});
+});
+
+const seedSampleData = () => {
+  const seedData = sampleData.projects;
+  
+  return Projects.insertMany(seedData);
 }
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-app.use('/testRouter', testRouter);
-
-app.get('/test', (req, res) => {
-  TestData
-    .find()
-    .exec()
-    .then(modules => res.json(modules))
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal Server Error'});
-      });
-});
-
-app.get('/test', (req, res) => {
-  console.log('test hit');
-  res.send({test: 'success'});
-});
-
-app.post('/test', (req, res) => {
-  console.log('post hit');
-  console.log(req.body)
-  
-  TestData
-    .create({
-      'testData': req.body.testData,
-    })
-  .then(project => res.status(201).json(project))
-  .catch(err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-    });
-});
+(function resetDb() {
+  return new Promise((resolve, reject) => {
+    console.warn('Resetting database');
+    mongoose.connection.dropDatabase()
+      .then(result => { 
+      /*  seedSampleData(); */
+        resolve(result)
+      })
+      .catch(err => reject(err));
+  });
+})();
 
 function tearDownDb() {
   return new Promise((resolve, reject) => {
@@ -60,7 +49,7 @@ function tearDownDb() {
   });
 }
 
- //tearDownDb()
+ tearDownDb()
 
 let server;
 
