@@ -11,16 +11,23 @@ export default class Timer extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isTimerActive) {
+    if (this.props.isTimerActive !== nextProps.isTimerActive && nextProps.isTimerActive) {
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
       this.setState({ intervalId });
+    }
+    
+    if (this.props.isTimerActive !== nextProps.isTimerActive && !nextProps.isTimerActive) {
+        const { intervalId } = this.state;
+        clearInterval(intervalId);
     }
   }
   
   timer () {
     const { currentCount, intervalId } = this.state; 
-    const { startCount, toggleIsTimerActive } = this.props;
+    const { incrementTaskTime, startCount, toggleIsTimerActive } = this.props;
+    
+    incrementTaskTime();
     
     this.setState(function (state){
       return {

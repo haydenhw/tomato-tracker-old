@@ -8,16 +8,31 @@ export default class App extends Component {
     super(props);
     
     const { taskData } = props;
+    const firstTaskId = taskData[0].id;
+    
      this.state = {
       isTimerActive: false,
-      selectedTaskId: null,
-      timerStartCount: 2,
+      selectedTaskId: firstTaskId,
+      timerStartCount: 10,
       tasks: taskData,
     }
   }
   
   incrementTaskTime() {
-    
+    const { tasks, selectedTaskId } = this.state;
+      const updatedTasks = tasks.map(task => {
+        console.log(task.id, selectedTaskId)
+        if (selectedTaskId === task.id) {
+          const oldProps = task;
+          const updatedProp = { recordedTime: task.recordedTime + 1 };
+          
+          return Object.assign({}, oldProps, updatedProp);
+        }
+        
+        return task;
+      })
+      console.log(updatedTasks)
+      this.setState({ tasks: updatedTasks });
   }
   
   toggleIsTimerActive() {
@@ -43,6 +58,7 @@ export default class App extends Component {
       <div className="countdown-timer">
         <TaskSelect handleChange={this.handleTaskChange.bind(this)} tasks={tasks} />
         <Timer 
+          incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 
           toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
           startCount={timerStartCount}
