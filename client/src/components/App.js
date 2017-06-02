@@ -10,10 +10,14 @@ export default class App extends Component {
     const { taskData } = props;
      this.state = {
       isTimerActive: false,
-      remainingTime: 350,
-      selectedTask: null
+      selectedTask: null,
       tasks: taskData,
     }
+  }
+  
+  toggleIsTimerActive() {
+    const { isTimerActive } = this.state;
+    this.setState({isTimerActive: !isTimerActive})
   }
   
   render() {
@@ -23,9 +27,9 @@ export default class App extends Component {
     return (
       <div className="countdown-timer">
         <TaskSelect options={taskOptions} />
-        <Timer seconds={remainingTime} />
+        <Timer isTimerActive={isTimerActive} handleStartButtonClick={this.toggleIsTimerActive.bind(this)}/>
         <TaskList tasks={tasks} />
-        <button>{isTimerActive ? "Pause" : "Start"}</button>
+        <button onClick={this.toggleIsTimerActive.bind(this)}>Add New Project</button>
       </div>
     );
   }
