@@ -36,7 +36,6 @@ export default class Timer extends Component {
     });
     
     if (currentCount < 1) {
-      console.log('timer finished!');
       clearInterval(intervalId);
       this.setState({ currentCount: startCount});
       toggleIsTimerActive();

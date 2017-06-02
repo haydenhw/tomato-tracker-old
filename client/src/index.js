@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import shortid from 'shortid';
-import App from './components/App';
+import TimeTrackerPage from './containers/TimeTrackerPage';
 import './index.scss';
 
 render(
-    <App taskData={getTasks()} />,
+    <TimeTrackerPage />,
   document.getElementById('root')
 );
 

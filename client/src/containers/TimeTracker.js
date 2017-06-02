@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Modal from './Modal';
-import Timer from './Timer';
-import TaskList from './TaskList';
-import TaskSelect from './TaskSelect';
+import shortid from 'shortid';
 
-export default class App extends Component {
+import FormModal from '../components/FormModal';
+import Timer from '../components/Timer';
+import TaskList from '../components/TaskList';
+import TaskSelect from '../components/TaskSelect';
+
+export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
     
@@ -13,7 +15,7 @@ export default class App extends Component {
     
      this.state = {
       isTimerActive: false,
-      shouldRenderModal: false,
+      shouldRenderModal: true,
       selectedTaskId: firstTaskId,
       timerStartCount: 10,
       tasks: taskData,
@@ -55,7 +57,21 @@ export default class App extends Component {
     this.setState(newModalState);
     console.log(this.state.shouldRenderModal)
   }
+  
+  handleAddTaskSubmit(formValue) {
+    const { tasks } = this.state;
     
+    const newTask = {
+      taskName: formValue.name,
+      recordedTime: 0,
+      id: shortid.generate()
+    }
+    
+    const newTasks = [...tasks, newTask]
+    console.log(newTasks)
+    this.setState({tasks: newTasks});
+    this.setState({shouldRenderModal: false});
+  }
   
   handleTaskChange(evt){
     const selectedTaskId = evt.nativeEvent.target.value;
@@ -83,20 +99,12 @@ export default class App extends Component {
         />
         <TaskList tasks={tasks} />
         <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
-        <Modal 
+        <FormModal 
           handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-          rightButtonText="Submit"
-          shouldRender={shouldRenderModal}
-          text={"Add a new project"}
-        >
-          <form onSubmit={(evt) => console.log(evt.target.value)}>
-            <input type="text"/>
-            <input type="submit"/>
-          </form>
-        </Modal> 
+          hanldeFormSubmit={this.handleAddTaskSubmit.bind(this)}
+          shouldRenderModal={shouldRenderModal}
+        /> 
       </div>
     );
   }
 }
-
-
