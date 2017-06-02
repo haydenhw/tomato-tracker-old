@@ -16,6 +16,7 @@ export default class TimeTrackerPage extends Component {
   
   render() {
     const { tasks } = this.state; 
+    
     return (
       <TimeTracker tasks={tasks} />
     )

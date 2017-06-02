@@ -2,23 +2,24 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 
 import FormModal from '../components/FormModal';
-import Timer from '../components/Timer';
 import TaskList from '../components/TaskList';
 import TaskSelect from '../components/TaskSelect';
+import Timer from './Timer';
 
 export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
     
-    const { taskData } = props;
-    const firstTaskId = taskData[0].id;
+    const { tasks } = props;
+    
+    const firstTaskId = tasks.length > 0 ? tasks[0].id : null;
     
      this.state = {
       isTimerActive: false,
       shouldRenderModal: true,
       selectedTaskId: firstTaskId,
       timerStartCount: 10,
-      tasks: taskData,
+      tasks: tasks,
     }
   }
   

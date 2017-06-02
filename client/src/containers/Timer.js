@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 
+import TimeDisplay from '../components/TimeDisplay';
+
 export default class Timer extends Component {
   constructor(props) {
     super(props);
@@ -42,15 +44,13 @@ export default class Timer extends Component {
     }
   }
   
-  
   render() {
     const { toggleIsTimerActive, isTimerActive, task } = this.props;
     const seconds = this.state.currentCount;
     
     return (
-      <div className="timer">
-        <div>{task}</div>
-        <div>{seconds}</div>
+      <div>
+        <TimeDisplay time={seconds} title={task} />
         <button onClick={toggleIsTimerActive}>{isTimerActive ? "Pause" : "Start"}</button>
       </div>
     );
