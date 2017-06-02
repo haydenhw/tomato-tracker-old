@@ -23,6 +23,12 @@ export default class TimeTracker extends Component {
     }
   }
   
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.tasks !== this.props.tasks) {
+      this.setState({tasks: nextProps.tasks})
+    }
+  }
+  
   incrementTaskTime() {
     const { tasks, selectedTaskId } = this.state;
       const updatedTasks = tasks.map(task => {

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
+const shouldResetDb = true;
 const {PORT, DATABASE_URL} = require('./server-files/config');
 const {Projects} = require('./server-files/models');
 const {sampleData} = require('./server-files/sampleData')
@@ -28,18 +29,21 @@ const seedSampleData = () => {
   return Projects.insertMany(seedData);
 }
 
-(function resetDb() {
+function resetDb() {
   return new Promise((resolve, reject) => {
     console.warn('Resetting database');
     mongoose.connection.dropDatabase()
-      .then(result => { 
-      /*  seedSampleData(); */
-        resolve(result)
-      })
-      .catch(err => reject(err));
+    .then(result => { 
+      seedSampleData(); 
+      resolve(result)
+    })
+    .catch(err => reject(err));
   });
-})();
+}
 
+if (shouldResetDb === true) {
+  resetDb()
+}
 function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
@@ -48,8 +52,6 @@ function tearDownDb() {
       .catch(err => reject(err));
   });
 }
-
- tearDownDb()
 
 let server;
 

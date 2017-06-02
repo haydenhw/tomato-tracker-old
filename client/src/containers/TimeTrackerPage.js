@@ -7,7 +7,7 @@ export default class TimeTrackerPage extends Component {
     
     this.state = {
       tasks: [],
-      isFetching: false;
+      isFetching: false
     }
   }
   
@@ -17,9 +17,8 @@ export default class TimeTrackerPage extends Component {
     fetch('/projects')
       .then(res => res.json())
       .then((data) => {
-        console.log(data)
         this.setState({
-          tasks: data
+          tasks: data.projects[0].tasks,
           isFetching: false
         });
       })
@@ -31,7 +30,7 @@ export default class TimeTrackerPage extends Component {
   
   render() {
     const { tasks } = this.state; 
-    console.log(tasks)
+    
     return (
       <TimeTracker tasks={tasks} />
     )
