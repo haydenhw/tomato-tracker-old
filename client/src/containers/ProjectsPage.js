@@ -19,8 +19,10 @@ export default class ProjectsPage extends Component {
   
   renderProject (project){
     const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
+    // console.log(project.shortId)
+    console.log(project)
+    const handleMenuClick = () => hashHistory.push(`/projects/${project.shortId}`);
     
-    const handleMenuClick = (projectId) => hashHistory.push('/projects/5555');
     return (
       <Project 
         className="project"
@@ -50,6 +52,7 @@ function getProjects() {
   return ([
     {
       projectName: "Node Capstone",
+      shortId: shortid.generate(),
       tasks: [
         {
           taskName: 'user flows',
@@ -70,6 +73,7 @@ function getProjects() {
     },
     {
       projectName: "React Capstone",
+      shortId: shortid.generate(),
       tasks: [
         {
           taskName: 'user flows',
