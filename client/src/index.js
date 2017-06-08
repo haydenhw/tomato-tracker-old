@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './redux-files/store';
  
 import App from './containers/App';
+import ProjectForm from './components/ProjectForm';
 import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
 import './index.scss';
@@ -16,6 +17,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={TimeTrackerPage}/>
         <Route path="/projects" component={ProjectsPage}/>
+        <Route path="/edit" component={ProjectForm}/>
       </Route>  
     </Router>
   </Provider>

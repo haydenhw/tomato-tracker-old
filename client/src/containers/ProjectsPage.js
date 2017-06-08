@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import ProjectForm from '../components/ProjectForm';
@@ -19,9 +20,14 @@ export default class ProjectsPage extends Component {
   renderProject (project){
     const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
     
+    const handleMenuClick = (projectId) => {
+      console.log('hola')
+      hashHistory.push('/edit')
+    }
     return (
       <Project 
         className="project"
+        handleMenuClick={handleMenuClick}
         key={shortid.generate()}
         projectData={project}
         totalTime={Math.round(totalTime)}
@@ -34,7 +40,6 @@ export default class ProjectsPage extends Component {
       <div className='project-page-container'>
         <button className="add-project-button">Add Project</button>
         <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
-        <ProjectForm onSubmit={this.submit} />
       </div>
     )
   }
