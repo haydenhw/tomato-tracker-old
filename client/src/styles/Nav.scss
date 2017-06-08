@@ -1,0 +1,21 @@
+nav {
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+nav ul {
+  display: inline-block;
+}
+
+.logo-text {
+  display: inline-block;
+  margin-left: 25%;
+}
+
+.nav-link {
+  display: inline-block;
+  margin-right: 15px;
+}

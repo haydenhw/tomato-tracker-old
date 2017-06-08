@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Task(props) {
   const { taskData } = props;
@@ -10,4 +11,8 @@ export default function Task(props) {
       <span>{recordedTime}</span>
     </div>
   );
+}
+
+Task.propTypes = {
+  taskData: PropTypes.object.isRequired
 }

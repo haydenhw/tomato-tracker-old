@@ -39,7 +39,9 @@ export default class TimeTrackerPage extends Component {
     )); 
     
     return (
-      <TimeTracker tasks={tasksWithShortIds} />
+      <div className="time-tracker-page-container">
+        <TimeTracker tasks={tasksWithShortIds} />
+      </div>
     );
   }
 }

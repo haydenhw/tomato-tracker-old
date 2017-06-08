@@ -1,56 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Router, Route, hashHistory } from 'react-router'
 import shortid from 'shortid';
+
+import App from './containers/App';
+import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
 import './index.scss';
 
-render(
-    <TimeTrackerPage />,
-  document.getElementById('root')
-);
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <Route path="/timer" component={TimeTrackerPage}/>
+      <Route path="/projects" component={ProjectsPage}/>
+    </Route>  
+  </Router>
+),document.getElementById('root'));
 
-
-function getTasks() {
-  return [
-    {
-      projectName: "Node Capstone",
-      tasks: [
-        {
-          taskName: 'user flows',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mock up',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mvp',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-      ]
-    },
-    {
-      projectName: "React Capstone",
-      tasks: [
-        {
-          taskName: 'user flows',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mock up',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mvp',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        }
-      ]
-    },
-  ];
-}
