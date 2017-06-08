@@ -1,10 +1,13 @@
 import  React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 
+import { addTask } from '../actions/indexActions';
 import ProjectForm from '../components/ProjectForm';
+console.log(addTask);
 
-export default class ProjectFormPage extends Component {
+class ProjectFormPage extends Component {
   
   
   handleFormSubmit = (values) => {
@@ -30,6 +33,12 @@ export default class ProjectFormPage extends Component {
   }
   
   render() {
+    store.dispatch({
+      type:'ADD_TASK',
+      projectId: '123',
+      taskName: 'new task'
+    })
+    
     const { params } = this.props;
     const { projectId } = params;
     
@@ -45,8 +54,17 @@ export default class ProjectFormPage extends Component {
       />
     );
   }
+  
+  mapStateToProps = (state) => {
+    const { projects } = state;
+    
+    return {
+      projects
+    }
+  }
 }
 
+export default connect({ addTask })(ProjectFormPage);  
 
 function getProjects() {
   return ([

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import { testData } from './ajaxReducers';
+import { projects } from './projects';
 
 export default combineReducers({
-    testData,
+    projects,
     form: formReducer
 });
