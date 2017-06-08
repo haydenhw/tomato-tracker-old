@@ -1,7 +1,5 @@
 import  * as actions from '../actions/indexActions'
 import shortid from 'shortid';
-console.log(actions)
-
 
 export function projects(state=getProjects(), action) {
   switch(action.type) {

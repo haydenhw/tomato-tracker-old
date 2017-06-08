@@ -13,10 +13,9 @@ class ProjectFormPage extends Component {
     console.log(values)
   }
   
-  addTask = (evt) => {
-    evt.preventDefault();
+  addTask = (values) => {
+    console.log(values);
     this.props.addTask('123', 'new task');
-    console.log(evt.nativeEvent.target);
   }
   
   renderFormTask (task) {
@@ -33,7 +32,6 @@ class ProjectFormPage extends Component {
   }
   
   render() {
-    console.log(this.props.addTask);
     
     const { params } = this.props;
     const { projectId } = params;
@@ -45,7 +43,7 @@ class ProjectFormPage extends Component {
       <ProjectForm 
         project={activeProject}
         handleTaskSubmit={this.addTask}
-        handleSubmit={this.handleFormSubmit}
+        myHandleSubmit={this.handleFormSubmit}
         renderFormTask={this.renderFormTask}
       />
     );
