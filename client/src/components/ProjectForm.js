@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes form 'prop-types';
+import PropTypes from 'prop-types';
+
 import { Field, reduxForm } from 'redux-form';
+
+import List from './List';
 
 class ProjectForm extends Component {
   render() {
-    const { handleSubmit, projects } = this.props;
+    const { handleSubmit, handleTaskSubmit, project, renderFormTask } = this.props;
+    const { projectName, tasks } = project;
     
     return (
-      <form className="project-form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="projectName">Project Name</label>
-          <Field name="projectName" component="input" type="text"/>
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="email"/>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        <form className="project-form" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="projectName">Project </label>
+            <Field name="projectName" component={() => <input type="text" value={projectName}/>}/>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+        
+        <form onSubmit={handleTaskSubmit}>
+          <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
+          <label htmlFor="ad">Add Task</label>
+          <Field name="add-task" component="input" type="text"/>
+          <button type="submit">Add Task</button>
+        </form>
+      </div>
     );
   }
 }
@@ -30,5 +39,6 @@ ProjectForm = reduxForm({
 export default ProjectForm;
 
 ProjectForm.propTypes = {
-  
+  handleSubmit: PropTypes.func.isRequired,
+  project: PropTypes.object
 }

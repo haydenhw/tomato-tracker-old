@@ -1,3 +1,31 @@
 .project-form {
   margin-top: 100px;
 }
+
+.project-form input {
+  margin-bottom: 15px;
+}
+
+.form-task-list {
+  margin-bottom: 15px;
+}
+
+.form-task-list-item {
+  border: 1px solid #000;
+  width: 200px;
+  margin-bottom: 2px;
+  height: 30px;
+  padding: 4px;
+}
+
+.form-task-list span {
+  margin-bottom: 5px;
+  float: left;
+}
+
+.form-task-list .button-wrapper {
+  float: right;
+}
+
+.form-task-list button {
+}

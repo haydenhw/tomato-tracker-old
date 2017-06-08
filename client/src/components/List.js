@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function List(props) {
-  const { items, className, renderItem } = props;
+  const { className, items, renderItem } = props;
   
   const list = items.map(renderItem);
   

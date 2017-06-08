@@ -12,11 +12,6 @@ export default class ProjectsPage extends Component {
     projects: []
   }
   
-  submit = (values) => {
-   // Do something with the form values
-    console.log(values)
-  }
-  
   renderProject (project){
     const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
     const handleMenuClick = () => hashHistory.push(`/projects/${project.shortId}`);

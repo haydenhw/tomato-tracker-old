@@ -5,6 +5,30 @@ import shortid from 'shortid';
 import ProjectForm from '../components/ProjectForm';
 
 export default class ProjectFormPage extends Component {
+  
+  
+  handleFormSubmit = (values) => {
+    console.log(values)
+  }
+  
+  addTask = (evt) => {
+    evt.preventDefault();
+    console.log(evt.nativeEvent.target);
+  }
+  
+  renderFormTask (task) {
+    const { taskName } = task;
+     
+    return (
+      <div className="form-task-list-item" key={shortid.generate()}>
+        <span>{taskName}</span>
+        <div className="button-wrapper">
+          <button>&times;</button>
+        </div>
+      </div>
+    );
+  }
+  
   render() {
     const { params } = this.props;
     const { projectId } = params;
@@ -12,10 +36,13 @@ export default class ProjectFormPage extends Component {
     const data = getProjects();
     const activeProject = data.find(project => project.shortId = projectId);
     
-    console.log(activeProject);
-    
     return (
-      <ProjectForm project={activeProject} />
+      <ProjectForm 
+        project={activeProject}
+        handleTaskSubmit={this.addTask}
+        handleSubmit={this.handleFormSubmit}
+        renderFormTask={this.renderFormTask}
+      />
     );
   }
 }
@@ -25,7 +52,7 @@ function getProjects() {
   return ([
     {
       projectName: "Node Capstone",
-      shortId: shortid.generate(),
+      shortId: '123',
       tasks: [
         {
           taskName: 'user flows',
@@ -46,7 +73,7 @@ function getProjects() {
     },
     {
       projectName: "React Capstone",
-      shortId: shortid.generate(),
+      shortId: '456',
       tasks: [
         {
           taskName: 'user flows',
