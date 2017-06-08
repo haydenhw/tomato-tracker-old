@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes form 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
 class ProjectForm extends Component {
   render() {
-    const { handleSubmit, params } = this.props;
-    const { projectId } = params;
+    const { handleSubmit, projects } = this.props;
     
     return (
       <form className="project-form" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstName">First Name</label>
-          <Field name="firstName" component="input" type="text"/>
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <Field name="lastName" component="input" type="text"/>
+          <label htmlFor="projectName">Project Name</label>
+          <Field name="projectName" component="input" type="text"/>
         </div>
         <div>
           <label htmlFor="email">Email</label>
@@ -32,3 +28,7 @@ ProjectForm = reduxForm({
 })(ProjectForm);
 
 export default ProjectForm;
+
+ProjectForm.propTypes = {
+  
+}

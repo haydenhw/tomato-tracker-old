@@ -1,50 +1,25 @@
-import React, { Component } from 'react';
+import  React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import ProjectForm from '../components/ProjectForm';
-import List from '../components/List';
-import Project from '../components/Project';
 
-export default class ProjectsPage extends Component {
-  static defaultProps = {
-    projects: []
-  }
-  
-  submit = (values) => {
-   // Do something with the form values
-    console.log(values)
-  }
-  
-  renderProject (project){
-    const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
-    const handleMenuClick = () => hashHistory.push(`/projects/${project.shortId}`);
+export default class ProjectFormPage extends Component {
+  render() {
+    const { params } = this.props;
+    const { projectId } = params;
+    
+    const data = getProjects();
+    const activeProject = data.find(project => project.shortId = projectId);
+    
+    console.log(activeProject);
     
     return (
-      <Project 
-        className="project"
-        handleMenuClick={handleMenuClick}
-        key={shortid.generate()}
-        projectData={project}
-        totalTime={Math.round(totalTime)}
-      />
+      <ProjectForm project={activeProject} />
     );
-  } 
-  
-  render() {
-    return (
-      <div className='project-page-container'>
-        <button className="add-project-button">Add Project</button>
-        <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
-      </div>
-    )
   }
 }
 
-ProjectsPage.propTypes = {
-  projects: PropTypes.array.isRequired
-}
 
 function getProjects() {
   return ([
