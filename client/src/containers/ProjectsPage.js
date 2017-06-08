@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 import List from '../components/List';
 import Project from '../components/Project';
@@ -10,14 +11,23 @@ export default class ProjectsPage extends Component {
   }
   
   renderProject (project){
-    return <Project className="project" key={shortid.generate()} taskData={task} />
+    const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
+    
+    return (
+      <Project 
+        className="project"
+        key={shortid.generate()}
+        projectData={project}
+        totalTime={Math.round(totalTime)}
+      />
+    );
   } 
   
   render() {
     return (
       <div className='project-page-container'>
-        <button>Add Project</button>
-        <List className="project-list" items={this.props.projects} renderItem={this.renderProject}/>
+        <button className="add-project-button">Add Project</button>
+        <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
       </div>
     )
   }
@@ -25,4 +35,49 @@ export default class ProjectsPage extends Component {
 
 ProjectsPage.propTypes = {
   projects: PropTypes.array.isRequired
+}
+
+function getProjects() {
+  return ([
+    {
+      projectName: "Node Capstone",
+      tasks: [
+        {
+          taskName: 'user flows',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+        {
+          taskName: 'mock up',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+        {
+          taskName: 'mvp',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+      ]
+    },
+    {
+      projectName: "React Capstone",
+      tasks: [
+        {
+          taskName: 'user flows',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+        {
+          taskName: 'mock up',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+        {
+          taskName: 'mvp',
+          recordedTime: Math.random() * 100,
+          id: shortid.generate()
+        },
+      ]
+    },
+  ])
 }

@@ -6,7 +6,7 @@ export default function Task(props) {
   const { taskName, recordedTime } = taskData;
   
   return(
-    <div className="task">
+    <div className="list-item">
       <span>{taskName}</span>
       <span>{recordedTime}</span>
     </div>

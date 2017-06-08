@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Project(props) {
-  const { projectData } = props;
+  const { projectData, totalTime } = props;
   const { projectName } = projectData;
-  
+  console.log(totalTime)
   return(
-    <div className="project">
+    <div className="list-item">
       <span>{projectName}</span>
-      <span>{recordedTime}</span>
+      <span>{totalTime}</span>
     </div>
   );
 }
