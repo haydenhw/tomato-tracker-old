@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 
 import FormModal from '../components/FormModal';
-import TaskList from '../components/TaskList';
+import List from '../components/List';
+import Task from '../components/Task';
 import TaskSelect from '../components/TaskSelect';
 import Timer from './Timer';
 
@@ -11,7 +12,6 @@ export default class TimeTracker extends Component {
     super(props);
     
     const { tasks } = props;
-    
     const firstTaskId = tasks.length > 0 ? tasks[0].id : null;
     
      this.state = {
@@ -86,6 +86,11 @@ export default class TimeTracker extends Component {
     this.setState({ selectedTaskId: selectedTaskId });
   }
   
+  renderTask (task){
+    return <Task className="task" key={shortid.generate()} taskData={task} />
+  } 
+ 
+  
   render() {
     const { 
       isTimerActive,
@@ -105,7 +110,7 @@ export default class TimeTracker extends Component {
           toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
           startCount={timerStartCount}
         />
-        <TaskList tasks={tasks} />
+        <List className="task-list" items={tasks} renderItem={this.renderTask}/>
         <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
         <FormModal 
           handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}

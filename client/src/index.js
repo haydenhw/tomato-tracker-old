@@ -4,19 +4,16 @@ import shortid from 'shortid';
 import TimeTrackerPage from './containers/TimeTrackerPage';
 import './index.scss';
 
-console.log(getTasks())
-
 render(
     <TimeTrackerPage />,
   document.getElementById('root')
 );
 
-}
 
 function getTasks() {
-  return ([
+  return [
     {
-      projectName: "Node Capstone"
+      projectName: "Node Capstone",
       tasks: [
         {
           taskName: 'user flows',
@@ -36,7 +33,7 @@ function getTasks() {
       ]
     },
     {
-      projectName: "React Capstone"
+      projectName: "React Capstone",
       tasks: [
         {
           taskName: 'user flows',
@@ -52,7 +49,8 @@ function getTasks() {
           taskName: 'mvp',
           recordedTime: Math.random() * 100,
           id: shortid.generate()
-        },
+        }
       ]
     },
-  ])
+  ];
+}

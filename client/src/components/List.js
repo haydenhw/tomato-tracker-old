@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function List(props) {
-  const { items, wrapperClass, renderItem } = props;
+  const { items, className, renderItem } = props;
   
   const list = items.map(renderItem);
   
   return(
-    <div className={wrapperClass || ''} >
+    <div className={className || ''} >
       {list}
     </div>
   );

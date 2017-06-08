@@ -2,23 +2,25 @@ import React, {Component} from 'react';
 import shortid from 'shortid';
 
 import TimeTracker from './TimeTracker';
-
+import { tasks } from './data';
 export default class TimeTrackerPage extends Component {
   constructor(props){
     super(props);
     
     this.state = {
-      tasks: [],
+      tasks: tasks,
       isFetching: false
     }
   }
   
   componentDidMount() {
+    /*console.log('mounting')
     this.setState({isFetching: true});
     
     fetch('/projects')
       .then(res => res.json())
       .then((data) => {
+        console.log(data)
         this.setState({
           tasks: data.projects[0].tasks,
           isFetching: false
@@ -27,7 +29,7 @@ export default class TimeTrackerPage extends Component {
       .catch((err) => {
         this.setState({isFetching: false});
         console.error(err);
-      });
+      });*/
   }
   
   render() {
@@ -35,7 +37,7 @@ export default class TimeTrackerPage extends Component {
     const tasksWithShortIds = tasks.map(task => (
       Object.assign(task, {id: shortid.generate()})
     )); 
-
+    
     return (
       <TimeTracker tasks={tasksWithShortIds} />
     );
