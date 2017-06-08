@@ -3,9 +3,11 @@ import { Field, reduxForm } from 'redux-form';
 
 class ProjectForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, params } = this.props;
+    const { projectId } = params;
+    
     return (
-      <form onSubmit={handleSubmit}>
+      <form className="project-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="firstName">First Name</label>
           <Field name="firstName" component="input" type="text"/>

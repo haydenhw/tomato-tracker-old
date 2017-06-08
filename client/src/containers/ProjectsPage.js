@@ -20,10 +20,7 @@ export default class ProjectsPage extends Component {
   renderProject (project){
     const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
     
-    const handleMenuClick = (projectId) => {
-      console.log('hola')
-      hashHistory.push('/edit')
-    }
+    const handleMenuClick = (projectId) => hashHistory.push('/projects/5555');
     return (
       <Project 
         className="project"

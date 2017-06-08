@@ -17,7 +17,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={TimeTrackerPage}/>
         <Route path="/projects" component={ProjectsPage}/>
-        <Route path="/edit" component={ProjectForm}/>
+        <Route path="/projects/:projectId" component={ProjectForm}/>
       </Route>  
     </Router>
   </Provider>
