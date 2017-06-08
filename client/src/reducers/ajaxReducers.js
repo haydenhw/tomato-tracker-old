@@ -2,7 +2,8 @@ import * as actions from '../actions/indexActions';
 
 export const testData = (state = [], action) => {
   switch(action.type) {
-    case actions.FETCH_TEST_DATA_SUCCESS:
+    case "TEST":
+      console.log('hola from redurcer')
       return action.testData;
   }
   return state;

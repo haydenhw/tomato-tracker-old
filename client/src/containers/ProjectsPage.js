@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
+import ProjectForm from '../components/ProjectForm';
 import List from '../components/List';
 import Project from '../components/Project';
 
 export default class ProjectsPage extends Component {
   static defaultProps = {
     projects: []
+  }
+  
+  submit = (values) => {
+   // Do something with the form values
+    console.log(values)
   }
   
   renderProject (project){
@@ -28,6 +34,7 @@ export default class ProjectsPage extends Component {
       <div className='project-page-container'>
         <button className="add-project-button">Add Project</button>
         <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
+        <ProjectForm onSubmit={this.submit} />
       </div>
     )
   }
