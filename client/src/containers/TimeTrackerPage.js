@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import shortid from 'shortid';
+
 import TimeTracker from './TimeTracker';
 
 export default class TimeTrackerPage extends Component {
@@ -30,9 +32,12 @@ export default class TimeTrackerPage extends Component {
   
   render() {
     const { tasks } = this.state; 
-    
+    const tasksWithShortIds = tasks.map(task => (
+      Object.assign(task, {id: shortid.generate()})
+    )); 
+
     return (
-      <TimeTracker tasks={tasks} />
-    )
+      <TimeTracker tasks={tasksWithShortIds} />
+    );
   }
 }

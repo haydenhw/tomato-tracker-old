@@ -25,14 +25,16 @@ export default class TimeTracker extends Component {
   
   componentWillReceiveProps(nextProps) {
     if(nextProps.tasks !== this.props.tasks) {
-      this.setState({tasks: nextProps.tasks})
+      this.setState({
+        tasks: nextProps.tasks,
+        selectedTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
+      })
     }
   }
   
   incrementTaskTime() {
     const { tasks, selectedTaskId } = this.state;
       const updatedTasks = tasks.map(task => {
-        console.log(task.id, selectedTaskId)
         if (selectedTaskId === task.id) {
           const oldProps = task;
           const updatedProp = { recordedTime: task.recordedTime + 1 };
@@ -42,7 +44,7 @@ export default class TimeTracker extends Component {
         
         return task;
       })
-      console.log(updatedTasks)
+      // console.log(updatedTasks[0])
       this.setState({ tasks: updatedTasks });
   }
   
@@ -62,7 +64,6 @@ export default class TimeTracker extends Component {
     }
     
     this.setState(newModalState);
-    console.log(this.state.shouldRenderModal)
   }
   
   handleAddTaskSubmit(formValue) {
