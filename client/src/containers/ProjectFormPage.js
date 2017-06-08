@@ -5,7 +5,6 @@ import shortid from 'shortid';
 
 import { addTask } from '../actions/indexActions';
 import ProjectForm from '../components/ProjectForm';
-console.log(addTask);
 
 class ProjectFormPage extends Component {
   
@@ -16,6 +15,7 @@ class ProjectFormPage extends Component {
   
   addTask = (evt) => {
     evt.preventDefault();
+    this.props.addTask('123', 'new task');
     console.log(evt.nativeEvent.target);
   }
   
@@ -33,11 +33,7 @@ class ProjectFormPage extends Component {
   }
   
   render() {
-    store.dispatch({
-      type:'ADD_TASK',
-      projectId: '123',
-      taskName: 'new task'
-    })
+    console.log(this.props.addTask);
     
     const { params } = this.props;
     const { projectId } = params;
@@ -55,16 +51,17 @@ class ProjectFormPage extends Component {
     );
   }
   
-  mapStateToProps = (state) => {
+  }
+  
+  const mapStateToProps = (state) => {
     const { projects } = state;
     
     return {
       projects
     }
-  }
 }
 
-export default connect({ addTask })(ProjectFormPage);  
+export default connect(mapStateToProps, { addTask })(ProjectFormPage);  
 
 function getProjects() {
   return ([

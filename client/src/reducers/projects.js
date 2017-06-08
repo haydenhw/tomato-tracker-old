@@ -7,6 +7,7 @@ export function projects(state=getProjects(), action) {
   switch(action.type) {
     case actions.ADD_TASK:
       const { projectId, taskName } = action;
+      
       const newTask = {
         taskName,
         shortId: shortid.generate(),
@@ -16,8 +17,8 @@ export function projects(state=getProjects(), action) {
       const projectToUpdate = state.find((project) => project.shortId === projectId);
       const newProject = Object.assign({}, projectToUpdate, { tasks: [...projectToUpdate.tasks, newTask]} );
       
-      console.log(newProject.tasks)
-      return state
+      
+      return [...state, newProject];
       
       default:
       return state
