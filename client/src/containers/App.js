@@ -7,7 +7,7 @@ export default function App(props) {
       <nav>
         <h1 className="logo-text">PomTracker</h1>
         <ul role="nav">
-          <li className="nav-link"><Link to="/Timer">Timer</Link></li>
+          <li className="nav-link"><Link to="/">Timer</Link></li>
           <li className="nav-link"><Link to="/Projects">Projects</Link></li>
         </ul>
       </nav>
