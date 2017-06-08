@@ -7,14 +7,20 @@ import { addTask } from '../actions/indexActions';
 import ProjectForm from '../components/ProjectForm';
 
 class ProjectFormPage extends Component {
+  constructor() {
+    super()
+    
+    this.addNewTask = this.addNewTask.bind(this);
+  }
+  static defaultProps = {
+    projects: []
+  }
   
-  
-  handleFormSubmit = (values) => {
+  editProjectName (values) { 
     console.log(values)
   }
   
-  addTask = (values) => {
-    console.log(values);
+  addNewTask (values) {
     this.props.addTask('123', 'new task');
   }
   
@@ -32,7 +38,6 @@ class ProjectFormPage extends Component {
   }
   
   render() {
-    
     const { params } = this.props;
     const { projectId } = params;
     
@@ -42,21 +47,24 @@ class ProjectFormPage extends Component {
     return (
       <ProjectForm 
         project={activeProject}
-        handleTaskSubmit={this.addTask}
-        myHandleSubmit={this.handleFormSubmit}
+        handleEditTasksSubmit={this.addNewTask}
+        handleEditProjectSubmit={this.editProjectName}
         renderFormTask={this.renderFormTask}
       />
     );
   }
   
   }
-  
   const mapStateToProps = (state) => {
     const { projects } = state;
     
     return {
       projects
     }
+}
+
+ProjectFormPage.propTypes = {
+  projects: PropTypes.array
 }
 
 export default connect(mapStateToProps, { addTask })(ProjectFormPage);  

@@ -6,24 +6,27 @@ import { Field, reduxForm } from 'redux-form';
 import List from './List';
 
 class ProjectForm extends Component {
-  componentDidMount() {
-    console.log(this.form);
-  }
   
   render() {
-    const { myHandleSubmit, handleSubmit, handleTaskSubmit, project, renderFormTask } = this.props;
+    const { 
+      handleEditProjectSubmit,
+      handleSubmit,
+      handleEditTasksSubmit,
+      project,
+      renderFormTask
+    } = this.props;
     const { projectName, tasks } = project;
     
     return (
       <div>
-        <form id="project-form" className="project-form" onSubmit={handleSubmit(handleTaskSubmit.bind(this))}>
+        <form id="project-form" className="project-form" onSubmit={handleSubmit(handleEditProjectSubmit.bind(this))}>
           <div>
             <label htmlFor="projectName">Project </label>
             <Field name="projectName" component={() => <input type="text" value={projectName}/>}/>
           </div>
         </form>
         
-        <form onSubmit={handleSubmit(handleTaskSubmit.bind(this))}>
+        <form onSubmit={handleSubmit(handleEditTasksSubmit.bind(this))}>
           <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
           <label htmlFor="ad">Add Task</label>
           <Field name="add-task" component="input" type="text"/>
@@ -37,7 +40,7 @@ class ProjectForm extends Component {
 
 const validate = values => {
   if(values) {
-  
+    
   } else {
   }
 }

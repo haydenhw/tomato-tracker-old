@@ -1,25 +1,41 @@
 import  * as actions from '../actions/indexActions'
 import shortid from 'shortid';
 
+
+function tasks(state, action) {
+  switch(action.type) {
+    case actions.ADD_TASK:
+       return state.map(project => {
+          if (project.shortId === action.projectId) {
+            const newTask = {
+              taskName: action.taskName,
+              shortId: shortid.generate(),
+              recordedTime: 0,
+            }
+            
+            const newTasks = [...project.tasks, newTask];
+            
+            return {
+              ...project,
+              tasks: newTasks
+            }
+          }
+          
+          return project;
+        });
+      
+    default:
+      return state;
+  }
+}
+
 export function projects(state=getProjects(), action) {
   switch(action.type) {
     case actions.ADD_TASK:
-      const { projectId, taskName } = action;
+      return tasks(state, action);
       
-      const newTask = {
-        taskName,
-        shortId: shortid.generate(),
-        recordedTime: 0,
-      }
-      
-      const projectToUpdate = state.find((project) => project.shortId === projectId);
-      const newProject = Object.assign({}, projectToUpdate, { tasks: [...projectToUpdate.tasks, newTask]} );
-      
-      
-      return [...state, newProject];
-      
-      default:
-      return state
+    default:
+      return state;
   }
 }
 
