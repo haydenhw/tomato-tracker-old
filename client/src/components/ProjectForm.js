@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Field, reduxForm } from 'redux-form';
 
 import List from './List';
 
 class ProjectForm extends Component {
-  
   render() {
     const { 
       handleEditProjectSubmit,
@@ -22,14 +20,14 @@ class ProjectForm extends Component {
         <form id="project-form" className="project-form" onSubmit={handleSubmit(handleEditProjectSubmit.bind(this))}>
           <div>
             <label htmlFor="projectName">Project </label>
-            <Field name="projectName" component={() => <input type="text" value={projectName}/>}/>
+            <Field name="projectName" component="input"/>
           </div>
         </form>
         
         <form onSubmit={handleSubmit(handleEditTasksSubmit.bind(this))}>
           <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
           <label htmlFor="ad">Add Task</label>
-          <Field name="add-task" component="input" type="text"/>
+          <Field name="taskName" component="input" type="text"/>
           <button  type="submit">Add Task</button>
         </form>
         <button form="project-form" type="submit">Submit</button>
@@ -44,7 +42,7 @@ const validate = values => {
   } else {
   }
 }
-
+ 
 // Decorate the form component
 ProjectForm = reduxForm({
   form: 'project',

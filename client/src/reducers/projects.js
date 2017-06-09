@@ -1,7 +1,6 @@
 import  * as actions from '../actions/indexActions'
 import shortid from 'shortid';
 
-
 function tasks(state, action) {
   switch(action.type) {
     case actions.ADD_TASK:
