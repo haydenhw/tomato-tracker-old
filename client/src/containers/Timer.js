@@ -45,12 +45,12 @@ export default class Timer extends Component {
   }
   
   render() {
-    const { toggleIsTimerActive, isTimerActive, task } = this.props;
-    const seconds = this.state.currentCount;
+    const { isTimerActive, toggleIsTimerActive, startCount, task } = this.props;
+    const { currentCount} = this.state;
     
     return (
       <div>
-        <TimeDisplay time={seconds} title={task} />
+        <TimeDisplay startCount={startCount} time={currentCount} title={task} />
         <button onClick={toggleIsTimerActive}>{isTimerActive ? "Pause" : "Start"}</button>
       </div>
     );
