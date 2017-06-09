@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgressbar from 'react-circular-progressbar';
 
+import EditInlineText from '../containers/EditInlineText';
+
 export default function TimeDisplay(props) {
   const { startCount, title, time  } = props;
   const percentage = Math.round((1-(time/startCount))*100);
@@ -12,7 +14,7 @@ export default function TimeDisplay(props) {
       <div className="progress-bar-container"></div>
       {false && <CircularProgressbar percentage={percentage} textForPercentage={(pct)=>""}/>}
       <div>{title}</div>
-      <div>{time}</div>
+      <EditInlineText text={time.toString()} />
     </div>
   );
 }

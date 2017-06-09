@@ -1,0 +1,14 @@
+.editable-text {
+  color: black;
+}
+
+.editing {
+  font-family: sans-serif !important;
+  color: black !important; 
+  width: 125px;
+  text-align: center;
+}
+
+.editing:focus {
+  outline: 0;
+}
