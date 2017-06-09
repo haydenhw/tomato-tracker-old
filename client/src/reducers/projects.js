@@ -1,6 +1,23 @@
 import  * as actions from '../actions/indexActions'
 import shortid from 'shortid';
 
+Array.prototype.mapAndFindById = function (idKey, id, callback) {
+  return this.map((element, index) => {
+    if (element[idKey] === id) {
+      return callback(element, index)
+    }
+    
+    return element;
+  })
+}
+
+Array.prototype.sliceDelete = function(index) {
+  return [
+      ...this.slice(0, index),
+      ...this.slice(index + 1)
+    ]
+}
+
 function tasks(state, action) {
   switch(action.type) {
     case actions.ADD_TASK:
