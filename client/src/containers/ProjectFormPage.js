@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import { addTask } from '../actions/indexActions';
+import { addTask, deleteTask } from '../actions/indexActions';
 import ProjectForm from '../components/ProjectForm';
 
 class ProjectFormPage extends Component {
@@ -21,17 +21,22 @@ class ProjectFormPage extends Component {
   }
   
   addNewTask (values) {
+    console.log('hello')
     this.props.addTask('123', 'new task');
+  }
+  
+  deleteTask (taskId) {
+    this.props.deleteTask('123', '111');
   }
   
   renderFormTask (task) {
     const { taskName } = task;
-     
+    
     return (
       <div className="form-task-list-item" key={shortid.generate()}>
         <span>{taskName}</span>
         <div className="button-wrapper">
-          <button>&times;</button>
+          <button onClick={this.deleteTask.bind(this)}>&times;</button>
         </div>
       </div>
     );
@@ -47,9 +52,9 @@ class ProjectFormPage extends Component {
     return (
       <ProjectForm 
         project={activeProject}
-        handleEditTasksSubmit={this.addNewTask}
+        handleAddTaskSubmit={this.addNewTask}
         handleEditProjectSubmit={this.editProjectName}
-        renderFormTask={this.renderFormTask}
+        renderFormTask={this.renderFormTask.bind(this)}
       />
     );
   }
@@ -67,7 +72,7 @@ ProjectFormPage.propTypes = {
   projects: PropTypes.array
 }
 
-export default connect(mapStateToProps, { addTask })(ProjectFormPage);  
+export default connect(mapStateToProps, { addTask, deleteTask })(ProjectFormPage);  
 
 function getProjects() {
   return ([

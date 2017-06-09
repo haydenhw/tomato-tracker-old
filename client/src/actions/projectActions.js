@@ -6,3 +6,12 @@ export function addTask(projectId, taskName) {
     taskName
   }
 }
+
+export const DELETE_TASK = "DELETE_TASK";
+export function deleteTask(projectId, taskId) {
+  return {
+    type: DELETE_TASK,
+    projectId,
+    taskId
+  }
+}

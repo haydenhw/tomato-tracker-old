@@ -9,7 +9,7 @@ class ProjectForm extends Component {
     const { 
       handleEditProjectSubmit,
       handleSubmit,
-      handleEditTasksSubmit,
+      handleAddTaskSubmit,
       project,
       renderFormTask
     } = this.props;
@@ -24,8 +24,9 @@ class ProjectForm extends Component {
           </div>
         </form>
         
-        <form onSubmit={handleSubmit(handleEditTasksSubmit.bind(this))}>
-          <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
+        <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
+        
+        <form onSubmit={handleSubmit(handleAddTaskSubmit.bind(this))}>
           <label htmlFor="ad">Add Task</label>
           <Field name="taskName" component="input" type="text"/>
           <button  type="submit">Add Task</button>

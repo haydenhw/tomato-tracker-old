@@ -21,11 +21,9 @@ Array.prototype.sliceDelete = function(index) {
 function tasks(state, action) {
   switch(action.type) {
     case actions.ADD_TASK:
-      const {taskName, projectId } = action;
-      
-      return state.mapAndFindById('shortId', projectId, (project) => {
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
         const newTask = {
-          taskName,
+          taskName: action.taskName,
           shortId: shortid.generate(),
           recordedTime: 0,
         }
@@ -34,6 +32,16 @@ function tasks(state, action) {
         
         return Object.assign({}, project, {tasks: newTasks})
     });
+    case actions.DELETE_TASK:
+      const { projectId, taskId } = action;
+      
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        const deleteIndex = project.tasks.findIndex(task => task['shortId'] === action.taskId);
+        const newTasks = project.tasks.sliceDelete(deleteIndex);
+        
+        return Object.assign({}, project, {tasks: newTasks})
+      });
+      
     
     default:
     return state;
@@ -42,13 +50,22 @@ function tasks(state, action) {
 
 export function projects(state=getProjects(), action) {
   switch(action.type) {
+    case actions.ADD_PROJECT:
+      return [
+        ...state,
+        action.project
+      ]
+    case actions.DELETE_PROJECT:
+      return state.sliceDelete(action.index)
     case actions.ADD_TASK:
-    return tasks(state, action);
-    
+      return tasks(state, action);
+    case actions.DELETE_TASK: 
+      return tasks(state, action);
     default:
     return state;
   }
 }
+
 
 function getProjects() {
   return ([
@@ -59,7 +76,7 @@ function getProjects() {
         {
           taskName: 'user flows',
           recordedTime: Math.random() * 100,
-          shortId: shortid.generate()
+          shortId: '111'
         },
         {
           taskName: 'mock up',
