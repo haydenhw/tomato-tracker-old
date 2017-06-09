@@ -1,17 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 
+import { changeSelectedProject } from '../actions/indexActions';
+
 import TimeTracker from './TimeTracker';
-import { tasks } from './data';
-export default class TimeTrackerPage extends Component {
-  constructor(props){
-    super(props);
-    
-    this.state = {
-      tasks: tasks,
-      isFetching: false
-    }
-  }
+
+class TimeTrackerPage extends Component {
   
   componentDidMount() {
     /*console.log('mounting')
@@ -33,15 +29,29 @@ export default class TimeTrackerPage extends Component {
   }
   
   render() {
-    const { tasks } = this.state; 
-    const tasksWithShortIds = tasks.map(task => (
-      Object.assign(task, {id: shortid.generate()})
-    )); 
+    const { projects } = this.props;
+    const tasks = projects[0].tasks;
     
     return (
       <div className="time-tracker-page-container">
-        <TimeTracker tasks={tasksWithShortIds} />
+        <TimeTracker tasks={tasks} />
       </div>
     );
   }
+}
+
+const mapStateToProps = state => {
+  const { projects } = state;
+
+  return {
+    projects
+  }
+}
+
+export default connect(mapStateToProps, {
+  changeSelectedProject
+})(TimeTrackerPage);
+
+TimeTrackerPage.propTypes = {
+  projects: PropTypes.array
 }

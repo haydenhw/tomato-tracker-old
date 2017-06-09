@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
+import TaskSelect from '../containers/TaskSelect';
 import FormModal from '../components/FormModal';
 import List from '../components/List';
 import Task from '../components/Task';
-import TaskSelect from '../components/TaskSelect';
 import Timer from './Timer';
 
 export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
     
-    const { tasks } = props;
-    const firstTaskId = tasks.length > 0 ? tasks[0].id : null;
+    const { tasks } = this.props;
+    const firstTaskId = tasks.length > 0 ? tasks[0].shortId : null;
     
      this.state = {
       isTimerActive: false,
-      shouldRenderModal: true,
-      selectedTaskId: firstTaskId,
+      shouldRenderModal: false,
+      selectedTaskId: null,
       timerStartCount: 10,
       tasks: tasks,
     }
@@ -33,7 +34,8 @@ export default class TimeTracker extends Component {
   }
   
   incrementTaskTime() {
-    const { tasks, selectedTaskId } = this.state;
+    const { tasks } = this.props;
+    const { selectedTaskId } = this.state;
       const updatedTasks = tasks.map(task => {
         if (selectedTaskId === task.id) {
           const oldProps = task;
@@ -67,7 +69,7 @@ export default class TimeTracker extends Component {
   }
   
   handleAddTaskSubmit(formValue) {
-    const { tasks } = this.state;
+    const { tasks } = this.props;
     
     const newTask = {
       taskName: formValue.name,
@@ -83,6 +85,7 @@ export default class TimeTracker extends Component {
   
   handleTaskChange(evt){
     const selectedTaskId = evt.nativeEvent.target.value;
+    console.log(this.state.selectedTaskId);
     this.setState({ selectedTaskId: selectedTaskId });
   }
   
@@ -91,18 +94,21 @@ export default class TimeTracker extends Component {
   } 
  
   render() {
+    const { tasks } = this.props;
+    
     const { 
       isTimerActive,
-      remainingTime,
-      selectedTask,
+      selectedTaskId,
       shouldRenderModal,
-      tasks,
       timerStartCount,
     } = this.state;
     
+    
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    
     return (
       <div className="countdown-timer">
-        <TaskSelect handleChange={this.handleTaskChange.bind(this)} tasks={tasks} />
+        <TaskSelect handleOptionClick={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTask} />
         <Timer 
           incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 
@@ -120,4 +126,8 @@ export default class TimeTracker extends Component {
       </div>
     );
   }
+}
+
+TimeTracker.propTypes = {
+  tasks: PropTypes.array
 }

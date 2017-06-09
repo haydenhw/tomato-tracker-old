@@ -4,7 +4,6 @@ import Select from './Select';
 
 export default function(props) {
   const { handleChange, tasks } = props;
-  
   const renderTaskOption = task => (
     <option 
       key={shortid.generate()}

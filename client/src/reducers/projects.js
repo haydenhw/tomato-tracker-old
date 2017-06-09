@@ -56,7 +56,9 @@ export function projects(state=getProjects(), action) {
         action.project
       ]
     case actions.DELETE_PROJECT:
-      return state.sliceDelete(action.index)
+      return state.sliceDelete(action.index);
+    case actions.CHANGE_SELECTED_PROJECT:
+      return action.projectId;
     case actions.ADD_TASK:
       return tasks(state, action);
     case actions.DELETE_TASK: 

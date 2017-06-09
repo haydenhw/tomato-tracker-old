@@ -15,3 +15,11 @@ export function deleteTask(projectId, taskId) {
     taskId
   }
 }
+
+export const CHANGE_SELECTED_PROJECT = "CHANGE_SELECTED_PROJECT";
+export function changeSelectedProject(projectId) {
+  return {
+    type: CHANGE_SELECTED_PROJECT,
+    projectId,
+  }
+}

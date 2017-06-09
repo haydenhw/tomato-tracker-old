@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hashHistory } from 'react-router';
-import FontAwesome from 'react-fontawesome';
+import shortid from 'shortid';
 
 import Dropdown from '../components/Dropdown';
 import DropdownTrigger from '../components/DropdownTrigger';
 import DropdownContent from '../components/DropdownContent';
 
-export default class NavDropdown extends Component {
+export default class TaskSelect extends Component {
   constructor() {
     super();
 
@@ -16,6 +15,19 @@ export default class NavDropdown extends Component {
     };
 
     this.toggleIsActive = this.toggleIsActive.bind(this);
+  }
+  
+
+  renderOptions() {
+    const { tasks, handleOptionClick } = this.props;
+    console.log(handleOptionClick);
+    return tasks.map(task => {
+      return (
+        <li key={shortid.generate()} className='task-option' onClick={handleOptionClick}>
+          <span className='task-option-text'>{task.taskName}</span>
+        </li>
+      );
+    });
   }
 
   toggleIsActive() {
@@ -26,20 +38,26 @@ export default class NavDropdown extends Component {
 
   render() {
     const { isActive } = this.state;
-    const { children, className } = this.props;
-
+    const { selectedTask } = this.props;
+    
+    const selectedTaskName = selectedTask && selectedTask.name;
+    
     return (
-      <Dropdown className={className}>
+      <Dropdown className="task-select">
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <FontAwesome className="fa-pencil-square-o" name="fa-pencil-square-o" />
+            <span className="selected-task">{selectedTaskName || "Click to select a task..."}</span>
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
-            {children}
+            {this.renderOptions()}
           </DropdownContent>
         </div>
       </Dropdown>
     );
   }
+}
+
+TaskSelect.propTypes = {
+  tasks: PropTypes.array.isRequired
 }
 
