@@ -12,7 +12,7 @@ export default class NavDropdown extends Component {
     super();
 
     this.state = {
-      isActive: true,
+      isActive: false,
     };
 
     this.toggleIsActive = this.toggleIsActive.bind(this);
@@ -30,21 +30,16 @@ export default class NavDropdown extends Component {
 
   render() {
     const { isActive } = this.state;
-    const { className } = this.props;
+    const { children, className } = this.props;
 
     return (
       <Dropdown className={className}>
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <FontAwesome name="fa-bars" className="fa-bars" />
+            <FontAwesome className="fa-pencil-square-o" className="fa-pencil-square-o" />
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
-            <li className="dropdown-item" onClick={this.routeToHome}>
-              <a>Home</a>
-            </li>
-            <li onClick={() => alert('Sorry! the login feature is still under construction.')} className="dropdown-item">
-              <a>Sign Out</a>
-            </li>
+            {children}
           </DropdownContent>
         </div>
       </Dropdown>

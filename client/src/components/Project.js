@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import FontAwesome from 'react-fontawesome';
 import EditMenu from '../containers/EditMenu';
 
 export default function Project(props) {
@@ -11,7 +11,10 @@ export default function Project(props) {
     <div className="list-item">
       <span>{projectName}</span>
       <span>{totalTime}</span>
-      <EditMenu />
+      <EditMenu>
+        <li className="dropdown-item"><a>Edit</a></li>
+        <li className="dropdown-item"><a>Delete</a></li>
+      </EditMenu>
     </div>
   );
 }
