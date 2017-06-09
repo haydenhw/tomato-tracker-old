@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
+import EditMenu from './EditMenu'
 import ProjectForm from '../components/ProjectForm';
 import List from '../components/List';
 import Project from '../components/Project';
@@ -30,7 +31,6 @@ export default class ProjectsPage extends Component {
   render() {
     return (
       <div className='project-page-container'>
-        <button className="add-project-button">Add Project</button>
         <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
       </div>
     )
