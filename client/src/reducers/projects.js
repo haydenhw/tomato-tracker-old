@@ -13,45 +13,40 @@ Array.prototype.mapAndFindById = function (idKey, id, callback) {
 
 Array.prototype.sliceDelete = function(index) {
   return [
-      ...this.slice(0, index),
-      ...this.slice(index + 1)
-    ]
+    ...this.slice(0, index),
+    ...this.slice(index + 1)
+  ]
 }
 
 function tasks(state, action) {
   switch(action.type) {
     case actions.ADD_TASK:
-       return state.map(project => {
-          if (project.shortId === action.projectId) {
-            const newTask = {
-              taskName: action.taskName,
-              shortId: shortid.generate(),
-              recordedTime: 0,
-            }
-            
-            const newTasks = [...project.tasks, newTask];
-            
-            return {
-              ...project,
-              tasks: newTasks
-            }
-          }
-          
-          return project;
-        });
+      const {taskName, projectId } = action;
       
+      return state.mapAndFindById('shortId', projectId, (project) => {
+        const newTask = {
+          taskName,
+          shortId: shortid.generate(),
+          recordedTime: 0,
+        }
+        
+        const newTasks = [...project.tasks, newTask];
+        
+        return Object.assign({}, project, {tasks: newTasks})
+    });
+    
     default:
-      return state;
+    return state;
   }
 }
 
 export function projects(state=getProjects(), action) {
   switch(action.type) {
     case actions.ADD_TASK:
-      return tasks(state, action);
-      
+    return tasks(state, action);
+    
     default:
-      return state;
+    return state;
   }
 }
 
