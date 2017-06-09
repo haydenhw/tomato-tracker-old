@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
+import { Provider } from 'react-redux'
+
+import store from '../redux-files/store';
 
 export default class RootModal extends Component {
   componentDidMount() {
@@ -24,8 +27,10 @@ export default class RootModal extends Component {
     const { children } = this.props;
     
     ReactDOM.render(
-      <div>{children}</div>,
-      this.modalTarget
+    <Provider store={store}>
+      <div>{children}</div>
+    </Provider>,
+    this.modalTarget
     );
   }
 

@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Text } from 'react-form';
+
 import Modal from './Modal';
+import { Field, reduxForm } from 'redux-form';
+import AddProjectForm from './AddProjectForm';
 
 export default class FormModal extends Component {
+  
+  renderForm() {
+    if () {
+      return <AddProjectForm handleProjectSubmit={(values) => console.log(values)} />
+    }
+  }
   
   render() {
     const { hanldeFormSubmit, handleCloseButtonClick, shouldRenderModal } = this.props;
@@ -14,25 +23,7 @@ export default class FormModal extends Component {
         style={{width: "300px"}}
         text={"Add a new project"}
         >
-          <Form
-            onSubmit={(values) => {
-              hanldeFormSubmit(values)
-            }}
-            validate={({ name }) => {
-              return {
-                name: !name ? 'A name is required' : undefined
-              }
-            }}
-          >
-            {({submitForm}) => {
-              return (
-                <form onSubmit={submitForm}>
-                  <Text field='name' />
-                  <button type='submit'>Submit</button>
-                </form>
-              )
-            }}
-          </Form>
+          {this.renderForm()}
         </Modal> 
       );
     }

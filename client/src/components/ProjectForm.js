@@ -46,13 +46,16 @@ const validate = values => {
  
 // Decorate the form component
 ProjectForm = reduxForm({
-  form: 'project',
+  form: 'editProject',
   validate, // a unique name for this form,
 })(ProjectForm);
 
 export default ProjectForm;
 
 ProjectForm.propTypes = {
-  // handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleEditProjectSubmit: PropTypes.func.isRequired,
+  handleAddTaskSubmit: PropTypes.func.isRequired,
+  renderFormTask: PropTypes.func.isRequired,
   project: PropTypes.object
 }
