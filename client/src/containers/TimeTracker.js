@@ -83,10 +83,8 @@ export default class TimeTracker extends Component {
     this.setState({shouldRenderModal: false});
   }
   
-  handleTaskChange(evt){
-    const selectedTaskId = evt.nativeEvent.target.value;
-    console.log(this.state.selectedTaskId);
-    this.setState({ selectedTaskId: selectedTaskId });
+  handleTaskChange(taskId){
+    this.setState({ selectedTaskId: taskId });
   }
   
   renderTask (task){
@@ -108,7 +106,7 @@ export default class TimeTracker extends Component {
     
     return (
       <div className="countdown-timer">
-        <TaskSelect handleOptionClick={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTask} />
+        <TaskSelect updateSelectedTask={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTask} />
         <Timer 
           incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 

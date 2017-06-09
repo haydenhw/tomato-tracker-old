@@ -17,30 +17,38 @@ export default class TaskSelect extends Component {
     this.toggleIsActive = this.toggleIsActive.bind(this);
   }
   
-
-  renderOptions() {
-    const { tasks, handleOptionClick } = this.props;
-    console.log(handleOptionClick);
-    return tasks.map(task => {
-      return (
-        <li key={shortid.generate()} className='task-option' onClick={handleOptionClick}>
-          <span className='task-option-text'>{task.taskName}</span>
-        </li>
-      );
-    });
-  }
-
   toggleIsActive() {
     const { isActive } = this.state;
 
     this.setState({ isActive: !isActive });
   }
 
+  
+  handleOptionClick = (taskId) => () => {
+    const { updateSelectedTask } = this.props;
+    
+    updateSelectedTask(taskId);
+    this.toggleIsActive();
+  }
+  
+
+  renderOptions() {
+    const { tasks } = this.props;
+    
+    return tasks.map(task => {
+      return (
+        <li key={shortid.generate()} className='task-option' onClick={this.handleOptionClick(task.shortId)}>
+          <span className='task-option-text'>{task.taskName}</span>
+        </li>
+      );
+    });
+  }
+
   render() {
     const { isActive } = this.state;
     const { selectedTask } = this.props;
     
-    const selectedTaskName = selectedTask && selectedTask.name;
+    const selectedTaskName = selectedTask && selectedTask.taskName;
     
     return (
       <Dropdown className="task-select">
