@@ -90,7 +90,6 @@ export default class TimeTracker extends Component {
     return <Task className="task" key={shortid.generate()} taskData={task} />
   } 
  
-  
   render() {
     const { 
       isTimerActive,
@@ -112,7 +111,8 @@ export default class TimeTracker extends Component {
         />
         <List className="task-list" items={tasks} renderItem={this.renderTask}/>
         <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
-        <FormModal 
+        <FormModal
+          form="ADD_PROJECT"
           handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
           hanldeFormSubmit={this.handleAddTaskSubmit.bind(this)}
           shouldRenderModal={shouldRenderModal}

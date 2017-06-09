@@ -68,7 +68,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "test": "mocha",
+    "lint": "eslint --ext .js --ext .jsx client/src/ || exit 0",
+    "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/|| exit 0"
   },
   "jest": {
     "collectCoverageFrom": [

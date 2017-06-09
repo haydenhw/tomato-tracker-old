@@ -1,21 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Text } from 'react-form';
+import shortid from 'shortid';
 
 import Modal from './Modal';
-import { Field, reduxForm } from 'redux-form';
 import AddProjectForm from './AddProjectForm';
+import AddTasksForm from './AddTasksForm';
 
 export default class FormModal extends Component {
   
+  deleteTask (taskId) {
+    this.props.deleteTask('123', '111');
+  }
+  
+  renderFormTask (task) {
+    const { taskName } = task;
+    
+    return (
+      <div className="form-task-list-item" key={shortid.generate()}>
+        <span>{taskName}</span>
+        <div className="button-wrapper">
+          <button onClick={this.deleteTask.bind(this)}>&times;</button>
+        </div>
+      </div>
+    );
+  }
+  
   renderForm() {
-    if () {
-      return <AddProjectForm handleProjectSubmit={(values) => console.log(values)} />
+    const { form } = this.props;
+    switch (form) {
+      case "ADD_PROJECT": 
+        return <AddProjectForm handleProjectSubmit={(values) => console.log(values)} />
+      case "ADD_TASKS": 
+        return (
+          <AddTasksForm 
+            handleTaskSubmit={(values) => console.log(values)}
+            renderFormTask={this.renderFormTask.bind(this)}
+            tasks={['one', 'two', 'three']}
+          />
+        ); 
+      default:
+        return null;
     }
   }
   
   render() {
-    const { hanldeFormSubmit, handleCloseButtonClick, shouldRenderModal } = this.props;
+    const { handleCloseButtonClick, shouldRenderModal } = this.props;
     return (
       <Modal 
         handleCloseButtonClick={handleCloseButtonClick}

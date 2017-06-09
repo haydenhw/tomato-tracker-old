@@ -13,7 +13,8 @@ class ProjectForm extends Component {
       project,
       renderFormTask
     } = this.props;
-    const { projectName, tasks } = project;
+    
+    const { tasks } = project;
     
     return (
       <div>
