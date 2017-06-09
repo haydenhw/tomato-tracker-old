@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+
 import EditMenu from '../containers/EditMenu';
 
 export default function Project(props) {
