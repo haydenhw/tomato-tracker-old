@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
-import TaskSelect from '../containers/TaskSelect';
 import FormModal from '../components/FormModal';
 import List from '../components/List';
+import ProjectHeading from '../components/ProjectHeading';
 import Task from '../components/Task';
+import TaskSelect from './TaskSelect';
 import Timer from './Timer';
 
 export default class TimeTracker extends Component {
@@ -13,7 +14,6 @@ export default class TimeTracker extends Component {
     super(props);
     
     const { tasks } = this.props;
-    const firstTaskId = tasks.length > 0 ? tasks[0].shortId : null;
     
      this.state = {
       isTimerActive: false,
@@ -101,19 +101,28 @@ export default class TimeTracker extends Component {
       timerStartCount,
     } = this.state;
     
-    
+    const simplifiedTaskList = tasks.map(task => ({
+      name: task.taskName,
+      id: task.shortId
+    }));
+    console.log(simplifiedTaskList);
     const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTaskName = selectedTask && selectedTask.taskName;
+    const selectedTaskText = selectedTaskName || selectedTaskName || "Click to select a task...";
     
     return (
       <div className="countdown-timer">
-        <TaskSelect updateSelectedTask={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTask} />
+        <TaskSelect className={"task-select"} handleOptionClick={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTaskText} />
         <Timer 
           incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 
           toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
           startCount={timerStartCount}
         />
-        <List className="task-list" items={tasks} renderItem={this.renderTask}/>
+        <div className="timer-task-list">
+          <ProjectHeading text={"Project"} icon={"images/dots-menu.svg"} />
+          <List className="task-list" items={tasks} renderItem={this.renderTask}/>
+        </div>
         <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
         <FormModal
           form="ADD_PROJECT"

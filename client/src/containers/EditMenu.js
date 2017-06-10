@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hashHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 
 import Dropdown from '../components/Dropdown';
