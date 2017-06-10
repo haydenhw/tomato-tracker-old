@@ -6,7 +6,7 @@ import FormModal from '../components/FormModal';
 import List from '../components/List';
 import ProjectHeading from '../components/ProjectHeading';
 import Task from '../components/Task';
-import TaskSelect from './TaskSelect';
+import Select from './Select';
 import Timer from './Timer';
 
 export default class TimeTracker extends Component {
@@ -90,29 +90,71 @@ export default class TimeTracker extends Component {
   renderTask (task){
     return <Task className="task" key={shortid.generate()} taskData={task} />
   } 
+  
+  renderTaskSelect() {
+    const { tasks } = this.props;
+    const { selectedTaskId } = this.state; 
+    
+    const simplifiedTasks = tasks.map(task => ({
+      name: task.taskName,
+      id: task.shortId
+    }));
+    
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTaskName = selectedTask && selectedTask.taskName;
+    const taskSelectHeading = selectedTaskName || "Click to select a task...";
+    
+    return (
+      <Select 
+        className={"task-select"} 
+        handleOptionClick={this.handleTaskChange.bind(this)}
+        items={simplifiedTasks}
+        headingText={taskSelectHeading}
+      >
+        <span>{taskSelectHeading}</span>
+      </Select>
+    );
+  }
+  
+  renderProject() {
+    <ProjectHeading text={"Project"} icon={"images/dots-menu.svg"} />
+    
+    const { tasks } = this.props;
+    const { selectedTaskId } = this.state; 
+    
+    const simplifiedTasks = tasks.map(task => ({
+      name: task.taskName,
+      id: task.shortId
+    }));
+    
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTaskName = selectedTask && selectedTask.taskName;
+    const taskSelectHeading = selectedTaskName || "Click to select a task...";
+    
+    return (
+      <Select 
+        className={"task-select"} 
+        handleOptionClick={this.handleTaskChange.bind(this)}
+        items={simplifiedTasks}
+        headingText={taskSelectHeading}
+      >
+        <span>{taskSelectHeading}</span>
+      </Select>
+    );
+  }
  
   render() {
     const { tasks } = this.props;
     
     const { 
       isTimerActive,
-      selectedTaskId,
       shouldRenderModal,
       timerStartCount,
     } = this.state;
     
-    const simplifiedTaskList = tasks.map(task => ({
-      name: task.taskName,
-      id: task.shortId
-    }));
-    console.log(simplifiedTaskList);
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
-    const selectedTaskName = selectedTask && selectedTask.taskName;
-    const selectedTaskText = selectedTaskName || selectedTaskName || "Click to select a task...";
-    
     return (
       <div className="countdown-timer">
-        <TaskSelect className={"task-select"} handleOptionClick={this.handleTaskChange.bind(this)} tasks={tasks} selectedTask={selectedTaskText} />
+        {this.renderTaskSelect()}
         <Timer 
           incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 
@@ -120,7 +162,7 @@ export default class TimeTracker extends Component {
           startCount={timerStartCount}
         />
         <div className="timer-task-list">
-          <ProjectHeading text={"Project"} icon={"images/dots-menu.svg"} />
+          {this.renderProject()}
           <List className="task-list" items={tasks} renderItem={this.renderTask}/>
         </div>
         <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>

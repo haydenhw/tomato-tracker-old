@@ -19,26 +19,25 @@ export default class TaskSelect extends Component {
   
   toggleIsActive() {
     const { isActive } = this.state;
-
     this.setState({ isActive: !isActive });
   }
 
   
-  handleOptionClick = (taskId) => () => {
-    const { updateSelectedTask } = this.props;
+  handleOptionClick = (optionId) => () => {
+    const { handleOptionClick } = this.props;
     
-    updateSelectedTask(taskId);
+    handleOptionClick(optionId);
     this.toggleIsActive();
   }
   
 
   renderOptions() {
-    const { tasks } = this.props;
+    const { items, className } = this.props;
     
-    return tasks.map(task => {
+    return items.map(item=> {
       return (
-        <li key={shortid.generate()} className='task-option' onClick={this.handleOptionClick(task.shortId)}>
-          <span className='task-option-text'>{task.taskName}</span>
+        <li key={shortid.generate()} className={`${className || ""} option`} onClick={this.handleOptionClick(item.id)}>
+          <span className={`${className || ""} option-item`}>{item.name}</span>
         </li>
       );
     });
@@ -46,15 +45,14 @@ export default class TaskSelect extends Component {
 
   render() {
     const { isActive } = this.state;
-    const { selectedTask } = this.props;
+    const { className } = this.props;
     
-    const selectedTaskName = selectedTask && selectedTask.taskName;
     
     return (
-      <Dropdown className="task-select">
+      <Dropdown className={`${className || ""} select`}>
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <span className="selected-task">{selectedTaskName || "Click to select a task..."}</span>
+            {this.props.children}
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
             {this.renderOptions()}
@@ -66,6 +64,7 @@ export default class TaskSelect extends Component {
 }
 
 TaskSelect.propTypes = {
-  tasks: PropTypes.array.isRequired
+  className: PropTypes.string,
+  items: PropTypes.array.isRequired,
 }
 
