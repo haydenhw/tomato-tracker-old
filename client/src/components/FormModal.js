@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
+
+import { addProject, addTask } from '../actions/indexActions';
 
 import Modal from './Modal';
 import AddProjectForm from './AddProjectForm';
 import AddTasksForm from './AddTasksForm';
 
-export default class FormModal extends Component {
+class FormModal extends Component {
   
   deleteTask (taskId) {
     this.props.deleteTask('123', '111');
+  }
+  
+  handleAddProject = () => ({ projectName }) => {
+    const { addProject } = this.props;
+    addProject(projectName)
   }
   
   renderFormTask (task) {
@@ -29,7 +37,7 @@ export default class FormModal extends Component {
     const { form } = this.props;
     switch (form) {
       case "ADD_PROJECT": 
-        return <AddProjectForm handleProjectSubmit={(values) => console.log(values)} />
+        return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
       case "ADD_TASKS": 
         return (
           <AddTasksForm 
@@ -56,7 +64,17 @@ export default class FormModal extends Component {
         </Modal> 
       );
     }
-  }
+}
+  
+const mapStateToProps = () => {
+
+}
+
+export default connect(null, {
+  addProject,
+  addTask,
+})(FormModal);
+
     
 FormModal.propTypes = {
   hanldeFormSubmit: PropTypes.func,
