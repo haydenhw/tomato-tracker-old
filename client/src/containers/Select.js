@@ -6,7 +6,7 @@ import Dropdown from '../components/Dropdown';
 import DropdownTrigger from '../components/DropdownTrigger';
 import DropdownContent from '../components/DropdownContent';
 
-export default class TaskSelect extends Component {
+export default class Select extends Component {
   constructor() {
     super();
 
@@ -47,7 +47,6 @@ export default class TaskSelect extends Component {
     const { isActive } = this.state;
     const { className } = this.props;
     
-    
     return (
       <Dropdown className={`${className || ""} select`}>
         <div className="dropdown-wrapper">
@@ -63,7 +62,7 @@ export default class TaskSelect extends Component {
   }
 }
 
-TaskSelect.propTypes = {
+Select.propTypes = {
   className: PropTypes.string,
   items: PropTypes.array.isRequired,
 }

@@ -1,13 +1,14 @@
-.task-select {
+.select {
   position: relative;
   width: 300px;
   margin: 0 auto;
   text-align: center;
+  
+  .dropdown-content {
+    position: absolute;
+    left: 78px;
+    bottom: -21px;
+    z-index: 9999;
+  }
 }
 
-.task-select .dropdown-content {
-  position: absolute;
-  left: 78px;
-  bottom: -21px;
-
-}

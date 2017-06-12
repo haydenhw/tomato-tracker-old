@@ -117,28 +117,20 @@ export default class TimeTracker extends Component {
   }
   
   renderProjectSelect() {
-    <ProjectHeading text={"Project"} icon={"images/dots-menu.svg"} />
+    const { projects, selectedProject, setSelectedProject } = this.props;
     
-    const { projects } = this.props;
-    // const { selectedTaskId } = this.state; 
-    console.log(projects)
     const simplifiedProjects = projects.map(project => ({
       name: project.projectName,
       id: project.shortId
     }));
     
-    const selectedProject = projects[0].projectName //tasks.find(task => task.shortId === selectedProjectId);
-    const selectedProjectName = selectedProject && selectedProject.taskName;
-    const taskSelectHeading = selectedProjectName || "Click to select a task...";
-    
     return (
       <Select 
-        className={"task-select"} 
-        // handleOptionClick={this.handleProjectChange.bind(this)}
+        className={"project-select"} 
+        handleOptionClick={setSelectedProject}
         items={simplifiedProjects}
-        headingText={taskSelectHeading}
       >
-        <span>{taskSelectHeading}</span>
+        <ProjectHeading text={selectedProject.projectName} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }
