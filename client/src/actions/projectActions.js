@@ -23,6 +23,14 @@ export function addTask(projectId, taskName) {
   }
 }
 
+export const SET_ACTIVE_PROJECT = "SET_ACTIVE_PROJECT";
+export function setActiveProject(projectId) {
+  return {
+    type: "SET_ACTIVE_PROJECT",
+    projectId
+  }
+}
+
 export const DELETE_TASK = "DELETE_TASK";
 export function deleteTask(projectId, taskId) {
   return {
@@ -32,10 +40,3 @@ export function deleteTask(projectId, taskId) {
   }
 }
 
-export const CHANGE_SELECTED_PROJECT = "CHANGE_SELECTED_PROJECT";
-export function changeSelectedProject(projectId) {
-  return {
-    type: CHANGE_SELECTED_PROJECT,
-    projectId,
-  }
-}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { changeSelectedProject } from '../actions/indexActions';
+import { setActiveProject } from '../actions/indexActions';
 
 import TimeTracker from './TimeTracker';
 
@@ -11,7 +11,7 @@ class TimeTrackerPage extends Component {
     super();
     
     this.state = {
-      selectedProjectId: null
+      activeProjectId: null
     }
   }
   componentDidMount() {
@@ -33,25 +33,22 @@ console.error(err);
 });*/
 }
 
-setSelectedProject(projectId) {
-  console.log(this.state.selectedProjectId);
-  this.setState({selectedProjectId: projectId});
-}
+
 
 render() {
-  const { projects } = this.props;
+  const { projects, setActiveProject } = this.props;
   
-  const selectedProjectId = this.state.selectedProjectId || projects[0].shortId;
-  const selectedProjectIndex = projects.findIndex(project => project.shortId === selectedProjectId);
-  const selectedProject = projects[selectedProjectIndex];
-  const selectedTasks = selectedProject.tasks;
+  const activeProjectId = this.state.activeProjectId || projects[0].shortId;
+  const ActiveProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
+  const ActiveProject = projects[ActiveProjectIndex];
+  const selectedTasks = ActiveProject.tasks;
   
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
         projects={projects}
-        selectedProject={selectedProject}
-        setSelectedProject={this.setSelectedProject.bind(this)}
+        ActiveProject={ActiveProject}
+        setActiveProject={setActiveProject}
         tasks={selectedTasks}
       />
     </div>
@@ -68,7 +65,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  changeSelectedProject
+  setActiveProject
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

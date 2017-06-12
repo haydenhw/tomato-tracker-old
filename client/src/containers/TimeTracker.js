@@ -18,7 +18,7 @@ export default class TimeTracker extends Component {
      this.state = {
       isTimerActive: false,
       shouldRenderModal: false,
-      selectedTaskId: null,
+      activeTaskId: null,
       timerStartCount: 10,
       tasks: tasks,
     }
@@ -28,16 +28,16 @@ export default class TimeTracker extends Component {
     if(nextProps.tasks !== this.props.tasks) {
       this.setState({
         tasks: nextProps.tasks,
-        selectedTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
+        activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
       })
     }
   }
   
   incrementTaskTime() {
     const { tasks } = this.props;
-    const { selectedTaskId } = this.state;
+    const { activeTaskId } = this.state;
       const updatedTasks = tasks.map(task => {
-        if (selectedTaskId === task.id) {
+        if (activeTaskId === task.id) {
           const oldProps = task;
           const updatedProp = { recordedTime: task.recordedTime + 1 };
           
@@ -84,7 +84,7 @@ export default class TimeTracker extends Component {
   }
   
   handleTaskChange(taskId){
-    this.setState({ selectedTaskId: taskId });
+    this.setState({ activeTaskId: taskId });
   }
   
   renderTask (task){
@@ -93,14 +93,14 @@ export default class TimeTracker extends Component {
   
   renderTaskSelect() {
     const { tasks } = this.props;
-    const { selectedTaskId } = this.state; 
+    const { activeTaskId } = this.state; 
     
     const simplifiedTasks = tasks.map(task => ({
       name: task.taskName,
       id: task.shortId
     }));
     
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTask = tasks.find(task => task.shortId === activeTaskId);
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     
@@ -117,7 +117,7 @@ export default class TimeTracker extends Component {
   }
   
   renderProjectSelect() {
-    const { projects, selectedProject, setSelectedProject } = this.props;
+    const { projects, ActiveProject, setActiveProject } = this.props;
     
     const simplifiedProjects = projects.map(project => ({
       name: project.projectName,
@@ -127,10 +127,10 @@ export default class TimeTracker extends Component {
     return (
       <Select 
         className={"project-select"} 
-        handleOptionClick={setSelectedProject}
+        handleOptionClick={setActiveProject}
         items={simplifiedProjects}
       >
-        <ProjectHeading text={selectedProject.projectName} icon={"images/dots-menu.svg"} />
+        <ProjectHeading text={ActiveProject.projectName} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }
