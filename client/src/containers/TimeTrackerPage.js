@@ -7,13 +7,6 @@ import { setActiveProject } from '../actions/indexActions';
 import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
-  constructor() {
-    super();
-    
-    this.state = {
-      activeProjectId: null
-    }
-  }
   componentDidMount() {
     /*console.log('mounting')
     this.setState({isFetching: true});
@@ -37,8 +30,8 @@ console.error(err);
 
 render() {
   const { projects, setActiveProject } = this.props;
-  
-  const activeProjectId = this.state.activeProjectId || projects[0].shortId;
+
+  const activeProjectId = this.props.activeProjectId || projects[0].shortId;
   const ActiveProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
   const ActiveProject = projects[ActiveProjectIndex];
   const selectedTasks = ActiveProject.tasks;
@@ -57,9 +50,10 @@ render() {
 }
 
 const mapStateToProps = state => {
-  const { projects } = state;
+  const { activeProjectId, projects } = state;
   
   return {
+    activeProjectId,
     projects
   }
 }

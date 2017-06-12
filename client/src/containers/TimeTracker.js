@@ -17,7 +17,7 @@ export default class TimeTracker extends Component {
     
      this.state = {
       isTimerActive: false,
-      shouldRenderModal: false,
+      shouldRenderModal: true,
       activeTaskId: null,
       timerStartCount: 10,
       tasks: tasks,

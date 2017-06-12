@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -8,35 +8,44 @@ import { addTask } from '../actions/indexActions';
 
 import AddTasksForm from '../components/AddTasksForm';
 
-let AddTasksFormContainer = function(props) {
+let AddTasksFormContainer = class extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state= {
+      tasks: null
+    }
+  }
   
-  const renderFormTask = task => {
+  renderFormTask (task){
     const { taskName } = task;
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        <span>{taskName}</span>
         <div className="button-wrapper">
           <button onClick={() => console.log('deleting task')}>&times;</button>
         </div>
+        <span>{taskName}</span>
       </div>
     );
   }
   
-  const {
-    addTask,
-    handleSubmit,
-    tasks,
-  } = props;
-  
-  return (
-    <AddTasksForm 
-      handleSubmit={handleSubmit}
-      handleTaskSubmit={addTask}
-      renderFormTask={renderFormTask}
-      tasks={tasks}
-    />
-  );
+  render() {
+    const {
+      addTask,
+      handleSubmit,
+      tasks,
+    } = this.props;
+    
+    return (
+      <AddTasksForm 
+        handleSubmit={handleSubmit}
+        handleTaskSubmit={addTask}
+        renderFormTask={this.renderFormTask}
+        tasks={tasks}
+      />
+    );
+  }
 }  
 
 const validate = values => {
@@ -49,13 +58,15 @@ const validate = values => {
 const mapStateToProps = (state) => {
   const { projects } = state;
   
-  const tasks = projects[0].tasks;
+  const activeProjectId = state.activeProjectId || projects[0].shortId;
+  const activeProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
+  const activeProject = projects[activeProjectIndex];
+  const tasks = activeProject.tasks;
   
   return {
     tasks
   }
 }
-
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
   validate,
