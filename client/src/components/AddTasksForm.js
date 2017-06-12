@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 
 import List from './List';
 
-class AddTasksForm extends Component {
-  render() {
+export default function AddTasksForm(props) {
     const {
       handleTaskSubmit,
       handleSubmit,
+      renderFormTask,
       tasks,
-      renderFormTask
-    } = this.props;
+    } = props;
+    
     return (
       <div>
         <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
-        
-        <form onSubmit={handleSubmit(handleTaskSubmit.bind(this))}>
+        <form onSubmit={handleSubmit(handleTaskSubmit)}>
           <label htmlFor="ad">Add Task</label>
           <Field name="taskName" component="input" type="text"/>
         </form>
@@ -24,7 +23,6 @@ class AddTasksForm extends Component {
         <button  type="submit">Add Task</button>
     </div>
   );
-}
 }
 
 const validate = values => {
@@ -34,15 +32,15 @@ const validate = values => {
   }
 }
  
-AddTasksForm = reduxForm({
+/*AddTasksForm = reduxForm({
   form: 'addProjec',
   validate,
 })(AddTasksForm);
 
-export default AddTasksForm;
+export default AddTasksForm;*/
 
-AddTasksForm.propTypes = {
+/*AddTasksForm.propTypes = {
   handleProjectSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   tasks: PropTypes.array.isRequired,
-}
+}*/

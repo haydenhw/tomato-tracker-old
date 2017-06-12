@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
-import FormModal from '../components/FormModal';
+import FormModal from './FormModal';
 import List from '../components/List';
 import ProjectHeading from '../components/ProjectHeading';
 import Task from '../components/Task';
