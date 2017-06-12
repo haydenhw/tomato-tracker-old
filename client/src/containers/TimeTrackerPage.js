@@ -34,7 +34,7 @@ class TimeTrackerPage extends Component {
     
     return (
       <div className="time-tracker-page-container">
-        <TimeTracker tasks={tasks} />
+        <TimeTracker projects={projects} tasks={tasks} />
       </div>
     );
   }

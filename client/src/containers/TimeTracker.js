@@ -116,26 +116,26 @@ export default class TimeTracker extends Component {
     );
   }
   
-  renderProject() {
+  renderProjectSelect() {
     <ProjectHeading text={"Project"} icon={"images/dots-menu.svg"} />
     
-    const { tasks } = this.props;
-    const { selectedTaskId } = this.state; 
-    
-    const simplifiedTasks = tasks.map(task => ({
-      name: task.taskName,
-      id: task.shortId
+    const { projects } = this.props;
+    // const { selectedTaskId } = this.state; 
+    console.log(projects)
+    const simplifiedProjects = projects.map(project => ({
+      name: project.projectName,
+      id: project.shortId
     }));
     
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
-    const selectedTaskName = selectedTask && selectedTask.taskName;
-    const taskSelectHeading = selectedTaskName || "Click to select a task...";
+    const selectedProject = projects[0].projectName //tasks.find(task => task.shortId === selectedProjectId);
+    const selectedProjectName = selectedProject && selectedProject.taskName;
+    const taskSelectHeading = selectedProjectName || "Click to select a task...";
     
     return (
       <Select 
         className={"task-select"} 
-        handleOptionClick={this.handleTaskChange.bind(this)}
-        items={simplifiedTasks}
+        // handleOptionClick={this.handleProjectChange.bind(this)}
+        items={simplifiedProjects}
         headingText={taskSelectHeading}
       >
         <span>{taskSelectHeading}</span>
@@ -162,10 +162,10 @@ export default class TimeTracker extends Component {
           startCount={timerStartCount}
         />
         <div className="timer-task-list">
-          {this.renderProject()}
+          {this.renderProjectSelect()}
           <List className="task-list" items={tasks} renderItem={this.renderTask}/>
         </div>
-        <button onClick={this.toggleShouldRenderModal.bind(this)}> New Task</button>
+        <button onClick={this.toggleShouldRenderModal.bind(this)}>New Task</button>
         <FormModal
           form="ADD_PROJECT"
           handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
