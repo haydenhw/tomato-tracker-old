@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,8 +9,6 @@ import {
   addTask,
   changeModalType
 } from '../actions/indexActions';
-
-
 
 import Modal from '../components/Modal';
 import AddProjectForm from '../components/AddProjectForm';
@@ -24,7 +23,7 @@ class FormModal extends Component {
   handleAddProject = () => ({ projectName }) => {
     const { addProject, changeModalType } = this.props;
     addProject(projectName)
-    changeModalType('ADD_TASK');
+    changeModalType('ADD_TASKS');
   }
   
   renderFormTask (task) {
@@ -42,6 +41,7 @@ class FormModal extends Component {
   
   renderForm() {
     const { modalType } = this.props;
+    console.log(modalType);
     switch (modalType) {
       case "ADD_PROJECT": 
       return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
@@ -83,6 +83,7 @@ class FormModal extends Component {
   export default connect(mapStateToProps, {
     addProject,
     addTask,
+    changeModalType
   })(FormModal);
   
   

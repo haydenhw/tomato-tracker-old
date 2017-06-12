@@ -39,7 +39,7 @@ AddProjectForm = reduxForm({
 
 export default AddProjectForm;
 
-AddProjectForm.propTypes = {
-  handleProjectSubmit: PropTypes.func.isRequired,
+/*AddProjectForm.propTypes = {
+  handleProjectSubmit: PropTypes.func,
   handleSubmit: PropTypes.func,
-}
+}*/

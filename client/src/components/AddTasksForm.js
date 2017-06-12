@@ -11,7 +11,7 @@ export default function AddTasksForm(props) {
       renderFormTask,
       tasks,
     } = props;
-    
+    console.log(handleTaskSubmit)
     return (
       <div>
         <List className='form-task-list' items={tasks} renderItem={renderFormTask} />

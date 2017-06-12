@@ -9,6 +9,7 @@ import { addTask } from '../actions/indexActions';
 import AddTasksForm from '../components/AddTasksForm';
 
 let AddTasksFormContainer = function(props) {
+  
   const renderFormTask = task => {
     const { taskName } = task;
     
@@ -23,6 +24,7 @@ let AddTasksFormContainer = function(props) {
   }
   
   const {
+    addTask,
     handleSubmit,
     tasks,
   } = props;
@@ -30,7 +32,7 @@ let AddTasksFormContainer = function(props) {
   return (
     <AddTasksForm 
       handleSubmit={handleSubmit}
-      handleTaskSubmit={() => console.log('hola')}
+      handleTaskSubmit={addTask}
       renderFormTask={renderFormTask}
       tasks={tasks}
     />
@@ -45,8 +47,9 @@ const validate = values => {
 }
 
 const mapStateToProps = (state) => {
-  const projects = { state }
-  const tasks = [{taskName:'pickle'}, {taskName:'trickle'}];
+  const { projects } = state;
+  
+  const tasks = projects[0].tasks;
   
   return {
     tasks
@@ -63,7 +66,6 @@ export default AddTasksFormContainer = connect(mapStateToProps, {
 })(AddTasksFormContainer);
 
 AddTasksFormContainer.propTypes = {
-  handleProjectSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  tasks: PropTypes.array.isRequired,
+  // tasks: PropTypes.array.isRequired,
 }

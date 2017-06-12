@@ -10,8 +10,6 @@ export const toggleIsFormModalActive = () => ({
   type: 'TOGGLE_IS_FORM_MODAL_ACTIVE',
 });
 
-
-
 export const CHANGE_MODAL_TYPE = 'CHANGE_MODAL_TYPE';
 export const changeModalType = modalType => ({
   type: 'CHANGE_MODAL_TYPE',
