@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function DropdownTrigger(props) {
   const { children, isActive } = props;
@@ -20,7 +21,12 @@ export default function DropdownTrigger(props) {
 
   return (
     <div>
-      {renderContent()}
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
+        {renderContent()}
+      </ReactCSSTransitionGroup>
     </div>
   );
 }

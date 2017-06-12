@@ -9,11 +9,11 @@ import DropdownContent from '../components/DropdownContent';
 export default class Select extends Component {
   constructor() {
     super();
-
+    
     this.state = {
       isActive: false,
     };
-
+    
     this.toggleIsActive = this.toggleIsActive.bind(this);
   }
   
@@ -21,7 +21,7 @@ export default class Select extends Component {
     const { isActive } = this.state;
     this.setState({ isActive: !isActive });
   }
-
+  
   
   handleOptionClick = (optionId) => () => {
     const { handleOptionClick } = this.props;
@@ -30,7 +30,7 @@ export default class Select extends Component {
     this.toggleIsActive();
   }
   
-
+  
   renderOptions() {
     const { items, className } = this.props;
     
@@ -42,7 +42,16 @@ export default class Select extends Component {
       );
     });
   }
-
+  
+  renderTest() {
+    if (this.state.isActive) {
+      return <div className='trans-test'></div>
+    }
+    
+    return null;
+  }
+  
+  
   render() {
     const { isActive } = this.state;
     const { className } = this.props;

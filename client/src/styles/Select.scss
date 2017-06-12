@@ -1,0 +1,14 @@
+.example-enter {
+  opacity: 0;
+  transform:   translateY(200%) translateX(0%) scale(0.3);
+  // transform: translate3d(-250px,0,0);
+}
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease;
+  transform: translateY(-100%) translateX(-100%) scale(1);
+  transform: translate3d(0,0,0);
+  transition-property: transform, opacity;
+  transition-duration: 200ms;
+  // transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+}
