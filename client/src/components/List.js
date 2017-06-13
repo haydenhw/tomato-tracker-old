@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function List(props) {
-  const { className, items, renderItem } = props;
+  const { children, className, items, renderItem } = props;
   
   const list = items.map(renderItem);
   
   return(
     <div className={className || ''} >
+      {children}
       {list}
     </div>
   );

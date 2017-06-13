@@ -9,6 +9,6 @@ export function secondsToMSS(seconds) {
 export function secondsToHMMSS(seconds) {
   return moment().startOf('day')
     .seconds(seconds)
-    .format('h:mm:ss');
+    .format('H:mm:ss');
 }
 

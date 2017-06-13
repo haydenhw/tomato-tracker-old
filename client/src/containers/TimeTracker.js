@@ -4,6 +4,7 @@ import shortid from 'shortid';
 
 import FormModal from './FormModal';
 import List from '../components/List';
+import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import Task from '../components/Task';
 import Select from './Select';
@@ -16,7 +17,7 @@ export default class TimeTracker extends Component {
     const { tasks } = this.props;
     
      this.state = {
-      shouldRenderModal: true,
+      shouldRenderModal: false,
       activeTaskId: null,
       tasks: tasks,
     }
@@ -138,7 +139,9 @@ export default class TimeTracker extends Component {
         <Timer activeTaskId={activeTaskId} />
         <div className="timer-task-list">
           {this.renderProjectSelect()}
-          <List className="task-list" items={tasks} renderItem={this.renderTask}/>
+          <List className="task-list" items={tasks} renderItem={this.renderTask}>
+            <ListHeader col1Title="Task" col2Title="Time Logged" />
+          </List>
         </div>
         <button onClick={this.toggleShouldRenderModal.bind(this)}>New Task</button>
         <FormModal
