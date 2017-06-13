@@ -16,9 +16,24 @@ export const SET_START_TIME = "SET_START_TIME";
 export function setStartTime(startTime) {
   return {
     type: "SET_START_TIME",
-    startTime: Number(startTime) * 60 
+    startTime: Math.ceil(Number(startTime) * 60)  
   }
 }
+
+export const START_TIMER = "START_TIMER";
+export function startTimer() {
+  return {
+    type: "START_TIMER",
+  }
+}
+
+export const RESET_TIMER = "RESET_TIMER";
+export function resetTimer() {
+  return {
+    type: "RESET_TIMER",
+  }
+}
+
 
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
 export function incrementTaskTime(projectId, taskId) {

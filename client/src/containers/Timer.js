@@ -2,7 +2,14 @@ import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-import { decrementTimer, incrementTaskTime, setStartTime, toggleIsTimerActive } from '../actions/indexActions';
+import {
+  decrementTimer,
+  incrementTaskTime,
+  resetTimer,
+  setStartTime,
+  startTimer,
+  toggleIsTimerActive
+} from '../actions/indexActions';
 
 import TimeDisplay from '../components/TimeDisplay';
 
@@ -28,6 +35,12 @@ class Timer extends Component {
     }
   }
   
+  componentDidMount() {
+    const { resetTimer } = this.props;
+    console.log(this.props.resetTimer)
+    resetTimer(); 
+  }
+  
   timer () {
     const { 
       activeProjectId,
@@ -35,6 +48,7 @@ class Timer extends Component {
       decrementTimer,
       incrementTaskTime,
       remainingTime,
+      resetTimer,
       toggleIsTimerActive
     } = this.props;
     
@@ -46,6 +60,7 @@ class Timer extends Component {
     if (remainingTime < 1) {
       clearInterval(intervalId);
       toggleIsTimerActive();
+      resetTimer();
     }
   }
   
@@ -76,6 +91,8 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   decrementTimer,
   incrementTaskTime,
+  resetTimer,
   setStartTime,
+  startTimer,
   toggleIsTimerActive,
 })(Timer);
