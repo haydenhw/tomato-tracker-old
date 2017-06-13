@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setActiveProject } from '../actions/indexActions';
+import { decrementTimer, setActiveProject } from '../actions/indexActions';
 
 import TimeTracker from './TimeTracker';
 
@@ -29,7 +29,7 @@ console.error(err);
 
 
 render() {
-  const { projects, setActiveProject } = this.props;
+  const { decrementTimer, projects, setActiveProject } = this.props;
 
   const activeProjectId = this.props.activeProjectId || projects[0].shortId;
   const ActiveProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
@@ -39,8 +39,9 @@ render() {
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
-        projects={projects}
         ActiveProject={ActiveProject}
+        decrementTimer={decrementTimer}
+        projects={projects}
         setActiveProject={setActiveProject}
         tasks={selectedTasks}
       />
@@ -59,6 +60,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  decrementTimer,
   setActiveProject
 })(TimeTrackerPage);
 

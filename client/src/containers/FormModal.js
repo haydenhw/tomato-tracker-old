@@ -41,7 +41,7 @@ class FormModal extends Component {
   
   renderForm() {
     const { modalType } = this.props;
-    console.log(modalType);
+    
     switch (modalType) {
       case "ADD_PROJECT": 
       return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
@@ -56,7 +56,7 @@ class FormModal extends Component {
   
   render() {
     const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
-    console.log(isFormModalActive);
+    
     return (
       isFormModalActive &&
       <Modal 

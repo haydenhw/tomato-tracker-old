@@ -30,12 +30,14 @@ export default class Timer extends Component {
     const { incrementTaskTime, startCount, toggleIsTimerActive } = this.props;
     
     incrementTaskTime();
-    
-    this.setState(function (state){
+      const { decrementTimer } = this.props;
+      
+      decrementTimer();
+  /*  this.setState(function (state){
       return {
         currentCount: state.currentCount - 1
       }
-    });
+    });*/
     
     if (currentCount < 1) {
       clearInterval(intervalId);

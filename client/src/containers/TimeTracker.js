@@ -17,7 +17,7 @@ export default class TimeTracker extends Component {
     
      this.state = {
       isTimerActive: false,
-      shouldRenderModal: true,
+      shouldRenderModal: false,
       activeTaskId: null,
       timerStartCount: 10,
       tasks: tasks,
@@ -136,7 +136,7 @@ export default class TimeTracker extends Component {
   }
  
   render() {
-    const { tasks } = this.props;
+    const { decrementTimer, tasks } = this.props;
     
     const { 
       isTimerActive,
@@ -148,6 +148,7 @@ export default class TimeTracker extends Component {
       <div className="countdown-timer">
         {this.renderTaskSelect()}
         <Timer 
+          decrementTimer={decrementTimer}
           incrementTaskTime={this.incrementTaskTime.bind(this)}
           isTimerActive={isTimerActive} 
           toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
