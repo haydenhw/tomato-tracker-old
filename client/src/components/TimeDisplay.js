@@ -8,7 +8,7 @@ export default function TimeDisplay(props) {
   const { startCount, title, time  } = props;
   const percentage = Math.round((1-(time/startCount))*100);
   
-  
+  console.log(time)
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
