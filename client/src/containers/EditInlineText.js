@@ -15,7 +15,9 @@ export default class TopNavbarEditableText extends React.Component {
   }
 
   dataChanged(data) {
-    this.props.handleNameChange(data);
+    const { handleChange } = this.props;
+    console.log(handleChange)
+    handleChange(data.message);
     this.setState({ ...data });
   }
 
@@ -48,6 +50,6 @@ export default class TopNavbarEditableText extends React.Component {
 }
 
 TopNavbarEditableText.propTypes = {
-  handleNameChange: PropTypes.func,
+  handleChange: PropTypes.func,
   text: PropTypes.string,
 };

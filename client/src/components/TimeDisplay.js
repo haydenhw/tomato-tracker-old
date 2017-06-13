@@ -7,7 +7,7 @@ import { secondsToMSS } from '../helpers/time'
 import EditInlineText from '../containers/EditInlineText';
 
 export default function TimeDisplay(props) {
-  const { startCount, title, time  } = props;
+  const { setStartTime, startCount, title, time  } = props;
   const progressPercentage = Math.round((1-(time/startCount))*100);
   let displayTime = time || startCount; 
   
@@ -16,7 +16,7 @@ export default function TimeDisplay(props) {
       <div className="progress-bar-container"></div>
       {false && <CircularProgressbar percentage={progressPercentage} textForPercentage={(pct)=>""}/>}
       <div>{title}</div>
-      <EditInlineText text={secondsToMSS(displayTime)} />
+      <EditInlineText handleChange={setStartTime} text={secondsToMSS(displayTime)} />
     </div>
   );
 }

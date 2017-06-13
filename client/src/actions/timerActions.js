@@ -12,6 +12,14 @@ export function toggleIsTimerActive() {
   }
 }
 
+export const SET_START_TIME = "SET_START_TIME";
+export function setStartTime(startTime) {
+  return {
+    type: "SET_START_TIME",
+    startTime: Number(startTime) * 60 
+  }
+}
+
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
 export function incrementTaskTime(projectId, taskId) {
   return {

@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-import { decrementTimer, incrementTaskTime, toggleIsTimerActive } from '../actions/indexActions';
+import { decrementTimer, incrementTaskTime, setStartTime, toggleIsTimerActive } from '../actions/indexActions';
 
 import TimeDisplay from '../components/TimeDisplay';
 
@@ -50,11 +50,11 @@ class Timer extends Component {
   }
   
   render() {
-    const { isTimerActive, remainingTime, startTime, task, toggleIsTimerActive } = this.props;
+    const { isTimerActive, remainingTime, setStartTime, startTime, task, toggleIsTimerActive } = this.props;
     
     return (
       <div>
-        <TimeDisplay startCount={startTime} time={remainingTime} title={task} />
+        <TimeDisplay setStartTime={setStartTime} startCount={startTime} time={remainingTime} title={task} />
         <button onClick={toggleIsTimerActive}>{isTimerActive ? "Pause" : "Start"}</button>
       </div>
     );
@@ -76,5 +76,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   decrementTimer,
   incrementTaskTime,
-  toggleIsTimerActive
+  setStartTime,
+  toggleIsTimerActive,
 })(Timer);
