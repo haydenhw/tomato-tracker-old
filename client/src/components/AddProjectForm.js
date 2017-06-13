@@ -4,6 +4,23 @@ import { Field, reduxForm } from 'redux-form';
 
 import List from './List';
 
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label/>
+    <div>
+      <input {...input} placeholder="Project name" type={type} />
+      {touched &&
+        ((error && <div>{error}</div>) ||
+        (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+  );
+
 class AddProjectForm extends Component {
   render() {
     const {
@@ -13,23 +30,6 @@ class AddProjectForm extends Component {
       projectName,
       touched
     } = this.props;
-    
-    const renderField = ({
-      input,
-      label,
-      type,
-      meta: { touched, error, warning }
-    }) => (
-      <div>
-        <label/>
-        <div>
-          <input {...input} placeholder="Project name" type={type} />
-          {touched &&
-            ((error && <div>{error}</div>) ||
-            (warning && <span>{warning}</span>))}
-          </div>
-        </div>
-      )
       
       return (
         <div>
@@ -65,12 +65,10 @@ class AddProjectForm extends Component {
     
     const error = {};
     if (!hasAnyValue(projectName)) {
-      error.projectName = "Project name is required test test" 
+      error.projectName = "Project name is required test" 
     } else {
       
     }
-    
-    console.log(error)
     return error;
   }
   
