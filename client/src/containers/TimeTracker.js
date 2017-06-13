@@ -118,7 +118,7 @@ export default class TimeTracker extends Component {
   render() {
     const { tasks } = this.props;
     const {  activeTaskId, shouldRenderModal } = this.state;
-    const totalTime = tasks.map((task) => task.recordedTime).reduce((a,b) => a + b);
+    const totalTime = tasks.length ? tasks.map((task) => task.recordedTime).reduce((a,b) => a + b) : 0;
     
     return (
       <div className="countdown-timer">

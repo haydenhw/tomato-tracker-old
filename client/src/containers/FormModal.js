@@ -7,7 +7,8 @@ import shortid from 'shortid';
 import { 
   addProject,
   addTask,
-  changeModalType
+  changeModalType,
+  setActiveProject
 } from '../actions/indexActions';
 
 import Modal from '../components/Modal';
@@ -22,8 +23,15 @@ class FormModal extends Component {
   
   handleAddProject = () => ({ projectName }) => {
     const { addProject, changeModalType } = this.props;
+    
     addProject(projectName)
     changeModalType('ADD_TASKS');
+  }
+  
+  handleGetStarted() {
+    const { changeModalType } = this.props;
+    
+    changeModalType('ADD_PROJECT');
   }
   
   renderFormTask (task) {
@@ -43,6 +51,14 @@ class FormModal extends Component {
     const { modalType } = this.props;
     
     switch (modalType) {
+      case "WELCOME": 
+        return (
+          <div>
+            <h2>Welcome to PomTracker!</h2>
+            <p>Click below to add you first project</p>
+            <button onClick={this.handleGetStarted.bind(this)}>Get Started</button>
+          </div>
+        );
       case "ADD_PROJECT": 
         return (
           <div>
@@ -80,10 +96,16 @@ class FormModal extends Component {
   }
   
   const mapStateToProps = (state) => {
-    const { modal } = state;
+    const { activeProjectId, modal, projects } = state;
     const { isFormModalActive, modalType } = modal;
     
+    const activeProjectName = 
+      activeProjectId
+        ? projects.find(project => project.shortId === activeProjectId).projectName
+        : null;
+      
     return {
+      activeProjectName,
       isFormModalActive,
       modalType
     }
@@ -92,7 +114,8 @@ class FormModal extends Component {
   export default connect(mapStateToProps, {
     addProject,
     addTask,
-    changeModalType
+    changeModalType,
+    setActiveProject
   })(FormModal);
   
   
