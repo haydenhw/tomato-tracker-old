@@ -6,20 +6,20 @@ import EditInlineText from '../containers/EditInlineText';
 
 export default function TimeDisplay(props) {
   const { startCount, title, time  } = props;
-  const percentage = Math.round((1-(time/startCount))*100);
+  const progressPercentage = Math.round((1-(time/startCount))*100);
+  const displayTime = time || startCount; 
   
-  console.log(time)
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
-      {false && <CircularProgressbar percentage={percentage} textForPercentage={(pct)=>""}/>}
+      {false && <CircularProgressbar percentage={progressPercentage} textForPercentage={(pct)=>""}/>}
       <div>{title}</div>
-      <EditInlineText text={time.toString()} />
+      <EditInlineText text={displayTime.toString()} />
     </div>
   );
 }
 
 TimeDisplay.propTypes = {
   title: PropTypes.string,
-  time: PropTypes.number.isRequired
+  time: PropTypes.number
 }

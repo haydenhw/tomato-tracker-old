@@ -1,21 +1,23 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
-  remainingTime: 10,
+  isTimerActive: false,
+  remainingTime: null,
   startTime: 10
 }
 
 export const timer = (state=defaultState, action) => {
   switch(action.type) {
+    case actions.TOGGLE_IS_TIMER_ACTIVE:
+    return {
+      ...state,
+      isTimerActive: !state.isTimerActive,
+      remainingTime: state.startTime,
+    }
     case actions.DECREMENT_TIMER:
       return {
         ...state,
         remainingTime: state.remainingTime - 1
-      }
-    case actions.RESET_TIMER:
-      return {
-        ...state,
-        remainingTime: state.startTime
       }
   }
   

@@ -16,10 +16,8 @@ export default class TimeTracker extends Component {
     const { tasks } = this.props;
     
      this.state = {
-      isTimerActive: false,
       shouldRenderModal: false,
       activeTaskId: null,
-      timerStartCount: 10,
       tasks: tasks,
     }
   }
@@ -49,12 +47,7 @@ export default class TimeTracker extends Component {
       // console.log(updatedTasks[0])
       this.setState({ tasks: updatedTasks });
   }
-  
-  toggleIsTimerActive() {
-    const { isTimerActive } = this.state;
-    this.setState({isTimerActive: !isTimerActive})
-  }
-  
+    
   toggleShouldRenderModal(modalType) {
     const { shouldRenderModal } = this.state;
     
@@ -117,7 +110,7 @@ export default class TimeTracker extends Component {
   }
   
   renderProjectSelect() {
-    const { projects, ActiveProject, setActiveProject } = this.props;
+    const { projects, activeProject, setActiveProject } = this.props;
     
     const simplifiedProjects = projects.map(project => ({
       name: project.projectName,
@@ -130,30 +123,19 @@ export default class TimeTracker extends Component {
         handleOptionClick={setActiveProject}
         items={simplifiedProjects}
       >
-        <ProjectHeading text={ActiveProject.projectName} icon={"images/dots-menu.svg"} />
+        <ProjectHeading text={activeProject.projectName} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }
  
   render() {
-    const { decrementTimer, tasks } = this.props;
-    
-    const { 
-      isTimerActive,
-      shouldRenderModal,
-      timerStartCount,
-    } = this.state;
+    const { tasks } = this.props;
+    const {  activeTaskId, shouldRenderModal } = this.state;
     
     return (
       <div className="countdown-timer">
         {this.renderTaskSelect()}
-        <Timer 
-          decrementTimer={decrementTimer}
-          incrementTaskTime={this.incrementTaskTime.bind(this)}
-          isTimerActive={isTimerActive} 
-          toggleIsTimerActive={this.toggleIsTimerActive.bind(this)} 
-          startCount={timerStartCount}
-        />
+        <Timer activeTaskId={activeTaskId} />
         <div className="timer-task-list">
           {this.renderProjectSelect()}
           <List className="task-list" items={tasks} renderItem={this.renderTask}/>

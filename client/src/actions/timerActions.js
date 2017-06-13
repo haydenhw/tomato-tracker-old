@@ -5,9 +5,18 @@ export function decrementTimer() {
   }
 }
 
-export const RESET_TIMER = "RESET_TIMER";
-export function resetTimer() {
+export const TOGGLE_IS_TIMER_ACTIVE = "TOGGLE_IS_TIMER_ACTIVE";
+export function toggleIsTimerActive() {
   return {
-    type: "RESET_TIMER"
+    type: "TOGGLE_IS_TIMER_ACTIVE"
+  }
+}
+
+export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
+export function incrementTaskTime(projectId, taskId) {
+  return {
+    type: "INCREMENT_TASK_TIME",
+    projectId,
+    taskId
   }
 }
