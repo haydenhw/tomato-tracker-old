@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
+import { secondsToHMMSS } from 'helpers/time';
+
 import FormModal from './FormModal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
@@ -24,29 +26,12 @@ export default class TimeTracker extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    if(nextProps.tasks !== this.props.tasks) {
+  /*  if(nextProps.tasks !== this.props.tasks) {
       this.setState({
         tasks: nextProps.tasks,
         activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
       })
-    }
-  }
-  
-  incrementTaskTime() {
-    const { tasks } = this.props;
-    const { activeTaskId } = this.state;
-      const updatedTasks = tasks.map(task => {
-        if (activeTaskId === task.id) {
-          const oldProps = task;
-          const updatedProp = { recordedTime: task.recordedTime + 1 };
-          
-          return Object.assign({}, oldProps, updatedProp);
-        }
-        
-        return task;
-      })
-      // console.log(updatedTasks[0])
-      this.setState({ tasks: updatedTasks });
+    }*/
   }
     
   toggleShouldRenderModal(modalType) {
@@ -78,6 +63,7 @@ export default class TimeTracker extends Component {
   }
   
   handleTaskChange(taskId){
+    console.log('changing active task')
     this.setState({ activeTaskId: taskId });
   }
   
@@ -132,6 +118,7 @@ export default class TimeTracker extends Component {
   render() {
     const { tasks } = this.props;
     const {  activeTaskId, shouldRenderModal } = this.state;
+    const totalTime = tasks.map((task) => task.recordedTime).reduce((a,b) => a + b);
     
     return (
       <div className="countdown-timer">
@@ -142,6 +129,10 @@ export default class TimeTracker extends Component {
           <List className="task-list" items={tasks} renderItem={this.renderTask}>
             <ListHeader col1Title="Task" col2Title="Time Logged" />
           </List>
+          <div>
+            <span>Total</span>
+            <span>{secondsToHMMSS(totalTime)}</span>
+          </div>
         </div>
         <button onClick={this.toggleShouldRenderModal.bind(this)}>New Task</button>
         <FormModal
