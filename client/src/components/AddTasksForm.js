@@ -17,11 +17,11 @@ export default function AddTasksForm(props) {
       <div>
         <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
         <form onSubmit={handleSubmit(handleTaskSubmit)}>
-          <label htmlFor="ad">Add Task</label>
-          <Field name="taskName" component="input" type="text"/>
+          <label htmlFor="add-task-form" />
+          <Field name="taskName" component="input" placeholder="Task name"/>
         </form>
         
-        <button onClick={handleFormSubmit}>Submit</button>
+        <button className='add-task-form-submit' onClick={handleFormSubmit}>Submit</button>
     </div>
   );
 }

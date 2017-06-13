@@ -37,7 +37,6 @@ class Timer extends Component {
   
   componentDidMount() {
     const { resetTimer } = this.props;
-    console.log(this.props.resetTimer)
     resetTimer(); 
   }
   

@@ -44,11 +44,19 @@ class FormModal extends Component {
     
     switch (modalType) {
       case "ADD_PROJECT": 
-      return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
+        return (
+          <div>
+            <h2 className="project-form-title">Add a project</h2>
+            <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
+          </div>
+        );
       case "ADD_TASKS": 
-      return (
-        <AddTasksFormContainer />
-      ); 
+        return (
+          <div>
+            <h2 className="project-form-title">Add tasks</h2>
+            <AddTasksFormContainer />
+          </div>
+        ); 
       default:
       return null;
     }
@@ -63,7 +71,7 @@ class FormModal extends Component {
         handleCloseButtonClick={handleCloseButtonClick}
         shouldRender={shouldRenderModal}
         style={{width: "300px"}}
-        text={"Add a new project"}
+        text={""}
         >
           {this.renderForm()}
         </Modal> 
