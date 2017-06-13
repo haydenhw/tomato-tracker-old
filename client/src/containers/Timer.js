@@ -39,9 +39,8 @@ class Timer extends Component {
     } = this.props;
     
     const { intervalId } = this.state; 
-    console.log(activeProjectId, activeTaskId)
     
-    incrementTaskTime(activeProjectId, activeTaskId);
+    incrementTaskTime(activeProjectId, '111');
     decrementTimer();
     
     if (remainingTime < 1) {

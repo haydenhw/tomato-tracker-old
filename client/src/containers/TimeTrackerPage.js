@@ -10,7 +10,6 @@ class TimeTrackerPage extends Component {
   componentDidMount() {
     const { activeProjectId, projects, setActiveProject } = this.props;
      if (!activeProjectId) {
-       console.log(activeProjectId)
        setActiveProject(projects[0].shortId)
      }
     

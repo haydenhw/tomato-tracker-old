@@ -32,12 +32,12 @@ function tasks(state, action) {
         return Object.assign({}, project, {tasks: newTasks})
       });
     case actions.INCREMENT_TASK_TIME:
-    console.log(action)
       return state.mapAndFindById('shortId', action.projectId, (project) => {
-        const newTasks = mapAndFindById('shortId', action.taskId, (task) => {
+        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
           return Object.assign({}, task, { recordedTime: task.recordedTime + 1 });
-        })
-        return Object.assign({}, project, newTasks);
+        });
+        
+        return Object.assign({}, project, {tasks: newTasks});
       });
     default:
     return state;
@@ -53,8 +53,6 @@ export function projects(state=getProjects(), action) {
       ]
     case actions.DELETE_PROJECT:
       return state.sliceDelete(action.index);
-    case actions.CHANGE_SELECTED_PROJECT:
-      return action.projectId;
     case actions.UPDATE_TASKS:
       return tasks(state, action);
     case actions.DELETE_TASK: 
