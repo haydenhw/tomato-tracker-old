@@ -13,58 +13,75 @@ class AddProjectForm extends Component {
       projectName,
       touched
     } = this.props;
-    console.log(this.props)
-    return (
+    
+    const renderField = ({
+      input,
+      label,
+      type,
+      meta: { touched, error, warning }
+    }) => (
       <div>
-        <form id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
-          <div>
-            <label htmlFor="projectName"/>
-            <Field name="projectName" component="input" placeholder="Project name"/>
-            <button type="submit">Sumbit</button>
-            {/* {projectName.touched && error.projectName && <div>{error.projectName}</div> } */}
+        <label/>
+        <div>
+          <input {...input} placeholder="Project name" type={type} />
+          {touched &&
+            ((error && <div>{error}</div>) ||
+            (warning && <span>{warning}</span>))}
           </div>
-        </form>
-      </div>
-    );
+        </div>
+      )
+      
+      return (
+        <div>
+          <form id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
+            <div>
+              <label htmlFor="projectName"/>
+              <Field name="projectName" component={renderField} placeholder="Project name"/>
+              <button type="submit">Sumbit</button>
+              {/* {projectName.touched && error.projectName && <div>{error.projectName}</div> } */}
+            </div>
+          </form>
+        </div>
+      );
+    }
   }
-}
-
- function isUndefined(value) {
+  
+  function isUndefined(value) {
     if (typeof value === 'undefined' || value === undefined) {
-        return true;
+      return true;
     }
     return false;
-}
-
-function hasAnyValue(value) {
+  }
+  
+  function hasAnyValue(value) {
     if (isUndefined(value) || String(value).trim() === '') {
-        return false;
+      return false;
     }
     return true;
-}
-
-const validate = ({ projectName }) => {
+  }
   
-  
-  const error = {};
-  if (!hasAnyValue(projectName)) {
-      error.projectName = "Project name is required" 
+  const validate = ({ projectName }) => {
+    
+    
+    const error = {};
+    if (!hasAnyValue(projectName)) {
+      error.projectName = "Project name is required test test" 
     } else {
       
+    }
+    
+    console.log(error)
+    return error;
   }
-
-  console.log(error)
-  return error;
-}
- 
-AddProjectForm = reduxForm({
-  form: 'addProject',
-  validate,
-})(AddProjectForm);
-
-export default AddProjectForm;
-
-/*AddProjectForm.propTypes = {
+  
+  AddProjectForm = reduxForm({
+    form: 'addProject',
+    validate,
+  })(AddProjectForm);
+  
+  export default AddProjectForm;
+  
+  /*AddProjectForm.propTypes = {
   handleProjectSubmit: PropTypes.func,
   handleSubmit: PropTypes.func,
 }*/

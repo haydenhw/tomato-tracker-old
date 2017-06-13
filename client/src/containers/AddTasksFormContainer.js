@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { change, reduxForm } from 'redux-form';
 import shortid from 'shortid';
 
 import { toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
@@ -25,7 +25,7 @@ let AddTasksFormContainer = class extends Component {
   
   addTask({ taskName }) {
     const { tasks } = this.state;
-    
+        
     const newTask = {
       taskName,
       key: shortid.generate(),
@@ -35,6 +35,7 @@ let AddTasksFormContainer = class extends Component {
     }
     
     this.setState({ tasks: [...tasks, newTask] })
+    this.props.change('taskName', '')
   }
   
   toggleShouldDelete = (taskId) => () => {

@@ -16,7 +16,7 @@ export default function AddTasksForm(props) {
     return (
       <div>
         <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
-        <form onSubmit={handleSubmit(handleTaskSubmit)}>
+        <form autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
           <label htmlFor="add-task-form" />
           <Field name="taskName" component="input" placeholder="Task name"/>
         </form>
