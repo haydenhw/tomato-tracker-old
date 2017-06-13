@@ -9,17 +9,17 @@ export function addProject(projectName) {
   }
   
   return {
-    type: ADD_PROJECT,
+    type: "ADD_PROJECT",
     project: newProject
   }
 }
 
-export const ADD_TASK = "ADD_TASK";
-export function addTask(projectId, taskName) {
+export const UPDATE_TASKS = "UPDATE_TASKS";
+export function updateTasks(projectId, newTasks) {
   return {
-    type: ADD_TASK,
+    type: "UPDATE_TASKS",
     projectId,
-    taskName
+    newTasks
   }
 }
 

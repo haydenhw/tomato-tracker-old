@@ -20,20 +20,14 @@ Array.prototype.sliceDelete = function(index) {
 
 function tasks(state, action) {
   switch(action.type) {
-    case actions.ADD_TASK:
+    case actions.UPDATE_TASKS:
+      console.log(state.mapAndFindById('shortId', action.projectId, (project) => {
+        return Object.assign({}, project, {tasks: action.newTasks})
+      }))
       return state.mapAndFindById('shortId', action.projectId, (project) => {
-        const newTask = {
-          taskName: action.taskName,
-          shortId: shortid.generate(),
-          recordedTime: 0,
-        }
-        
-        const newTasks = [...project.tasks, newTask];
-        
-        return Object.assign({}, project, {tasks: newTasks})
-    });
+        return Object.assign({}, project, {tasks: action.newTasks})
+      });
     case actions.DELETE_TASK:
-      const { projectId, taskId } = action;
       
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         const deleteIndex = project.tasks.findIndex(task => task['shortId'] === action.taskId);
@@ -59,7 +53,7 @@ export function projects(state=getProjects(), action) {
       return state.sliceDelete(action.index);
     case actions.CHANGE_SELECTED_PROJECT:
       return action.projectId;
-    case actions.ADD_TASK:
+    case actions.UPDATE_TASKS:
       return tasks(state, action);
     case actions.DELETE_TASK: 
       return tasks(state, action);

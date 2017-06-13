@@ -6,6 +6,7 @@ import List from './List';
 
 export default function AddTasksForm(props) {
     const {
+      handleFormSubmit,
       handleTaskSubmit,
       handleSubmit,
       renderFormTask,
@@ -20,7 +21,7 @@ export default function AddTasksForm(props) {
           <Field name="taskName" component="input" type="text"/>
         </form>
         
-        <button  type="submit">Add Task</button>
+        <button onClick={handleFormSubmit}>Submit</button>
     </div>
   );
 }
