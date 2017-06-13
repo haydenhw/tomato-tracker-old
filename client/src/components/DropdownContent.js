@@ -14,9 +14,9 @@ export default function DropdownTrigger(props) {
           {children}
         </ul>
       );
-
-      return null;
     }
+    
+    return null;
   };
 
   return (
