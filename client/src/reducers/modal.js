@@ -3,7 +3,7 @@ import * as actions from 'actions/indexActions';
 const defaultState = {
   isModalActive: false,
   isFormModalActive: true,
-  modalType: 'ADD_TASKS',
+  modalType: 'ADD_PROJECT',
   modalProps: null,
 };
 
@@ -13,12 +13,12 @@ export const modal = (state = defaultState, action) => {
     case actions.DELETE_PROJECT_REQUEST:
       return {
         ...state,
-        shouldRenderModal: !state.shouldRenderModal,
+        isModalActive: !state.isModalActive,
       };
     case actions.TOGGLE_IS_FORM_MODAL_ACTIVE:
       return {
         ...state,
-        isFormModalActive: !state.shouldRenderModal,
+        isFormModalActive: !state.isFormModalActive,
       };
     case actions.CHANGE_MODAL_TYPE:
       return {

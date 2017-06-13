@@ -56,6 +56,7 @@ class FormModal extends Component {
   
   render() {
     const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
+    console.log(isFormModalActive);
     return (
       isFormModalActive &&
       <Modal 
