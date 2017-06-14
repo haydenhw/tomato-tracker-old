@@ -25,18 +25,9 @@ function tasks(state, action) {
         return Object.assign({}, project, { tasks: action.newTasks })
       });
     case actions.POST_TASK_SUCCESS:
-      console.log(state.mapAndFindById('shortId', action.projectId, (project) => {
+      return state.mapAndFindById('_id', action.projectId, (project) => {
         const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
-          return Object.assign(task, { _id: action.databaseId });
-        });
-        
-        return Object.assign({}, project, { tasks: [] });
-      }))
-      return state.mapAndFindById('shortId', action.projectId, (project) => {
-        console.log('hello')
-        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
-          console.log(Object.assign(task, { _id: action.databaseId }))
-          return Object.assign(task, { _id: action.databaseId });
+          return Object.assign({}, task, { _id: action.databaseId });
         });
         
         return Object.assign({}, project, { tasks: newTasks });
