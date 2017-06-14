@@ -58,7 +58,7 @@ projectRouter.route('/:projectId')
   })
   .post((req, res) => {
       const toUpdate = { tasks: req.body };
-      const requiredTaskFields = ['taskName', 'totalTime'];
+      const requiredTaskFields = ['taskName', 'recordedTime'];
 
       for (let j = 0; j < requiredTaskFields.length; j++) {
           const field = requiredTaskFields[j];

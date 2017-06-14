@@ -84,8 +84,35 @@ export function postProject(projectName) {
       .then(data => {
         const projectId = data.shortId;
         const databaseId = data._id;
-        console.log(projectId, databaseId)
+        
         dispatch(postProjectSuccess(projectId, databaseId))
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+export function postTask(projectId, task) {
+  console.log('called postTask')
+  return (dispatch) => {
+    console.log('fetching')
+    fetch(
+      `projects/${projectId}`,
+      {
+          method: "POST",
+          body: JSON.stringify(task),
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then(data => {
+          console.log('task add success')
+          console.log(data)
       })
       .catch(err => {
         console.error(err)

@@ -52,7 +52,6 @@ export function projects(state=[], action) {
         action.project
       ]
     case actions.POST_PROJECT_SUCCESS:
-    console.log(action)
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         return Object.assign({}, project, {_id: action.databaseId})
       })
