@@ -1,3 +1,7 @@
+@import './styles/global';
+@import './styles/reset';
+
+//component styles
 @import './styles/AddTasksForm';
 @import './styles/App';
 @import './styles/CircularProgressbar';
