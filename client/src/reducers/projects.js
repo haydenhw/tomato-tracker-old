@@ -22,14 +22,31 @@ function tasks(state, action) {
   switch(action.type) {
     case actions.UPDATE_TASKS:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
-        return Object.assign({}, project, {tasks: action.newTasks})
+        return Object.assign({}, project, { tasks: action.newTasks })
+      });
+    case actions.POST_TASK_SUCCESS:
+      console.log(state.mapAndFindById('shortId', action.projectId, (project) => {
+        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
+          return Object.assign(task, { _id: action.databaseId });
+        });
+        
+        return Object.assign({}, project, { tasks: [] });
+      }))
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        console.log('hello')
+        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
+          console.log(Object.assign(task, { _id: action.databaseId }))
+          return Object.assign(task, { _id: action.databaseId });
+        });
+        
+        return Object.assign({}, project, { tasks: newTasks });
       });
     case actions.DELETE_TASK:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         const deleteIndex = project.tasks.findIndex(task => task['shortId'] === action.taskId);
         const newTasks = project.tasks.sliceDelete(deleteIndex);
         
-        return Object.assign({}, project, {tasks: newTasks})
+        return Object.assign({}, project, { tasks: newTasks })
       });
     case actions.INCREMENT_TASK_TIME:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
@@ -37,7 +54,7 @@ function tasks(state, action) {
           return Object.assign({}, task, { recordedTime: task.recordedTime + 1 });
         });
         
-        return Object.assign({}, project, {tasks: newTasks});
+        return Object.assign({}, project, { tasks: newTasks });
       });
     default:
     return state;
@@ -53,12 +70,14 @@ export function projects(state=[], action) {
       ]
     case actions.POST_PROJECT_SUCCESS:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
-        return Object.assign({}, project, {_id: action.databaseId})
+        return Object.assign({}, project, { _id: action.databaseId })
       })
     case actions.DELETE_PROJECT:
       return state.sliceDelete(action.index);
     case actions.UPDATE_TASKS:
       return tasks(state, action);
+    case actions.POST_TASK_SUCCESS:
+      return tasks(state,action);
     case actions.DELETE_TASK: 
       return tasks(state, action);
     case actions.INCREMENT_TASK_TIME: 

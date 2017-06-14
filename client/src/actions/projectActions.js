@@ -57,6 +57,16 @@ export function postProjectSuccess(projectId, databaseId) {
   }
 }
 
+export const POST_TASK_SUCCESS = 'POST_TASK_SUCCESS'; 
+export function postTaskSuccess(projectId, taskId, databaseId) {
+  return {
+    type: 'POST_TASK_SUCCESS',
+    projectId,
+    taskId,
+    databaseId
+  }
+}
+
 export function postProject(projectName) {
   
   return (dispatch) => {
@@ -109,6 +119,10 @@ export function postTask(projectId, task) {
         return res.json();
       })
       .then(data => {
+        const taskId = data.shortId;
+        const databaseId = data._id;
+        
+        dispatch(postTaskSuccess(projectId, taskId, databaseId));
       })
       .catch(err => {
         console.error(err)

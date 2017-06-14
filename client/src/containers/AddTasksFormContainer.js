@@ -60,7 +60,6 @@ let AddTasksFormContainer = class extends Component {
     
     //save new tasks to database
     updateTasks(activeProjectId, newTasks);
-    console.log(activeProjectDatabaseId)
     const tasksToSave = newTasks.filter((task) => !task._id)
       .forEach((task) => postTask(activeProjectDatabaseId, task));
     //remove deleted tasks from database
