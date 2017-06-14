@@ -44,13 +44,18 @@ function tasks(state, action) {
   }
 }
 
-export function projects(state=getProjects(), action) {
+export function projects(state=[], action) {
   switch(action.type) {
-    case actions.ADD_PROJECT:
+    case actions.POST_PROJECT_REQUEST:
       return [
         ...state,
         action.project
       ]
+    case actions.POST_PROJECT_SUCCESS:
+    console.log(action)
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        return Object.assign({}, project, {_id: action.databaseId})
+      })
     case actions.DELETE_PROJECT:
       return state.sliceDelete(action.index);
     case actions.UPDATE_TASKS:

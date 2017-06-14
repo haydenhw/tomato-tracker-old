@@ -25,6 +25,10 @@ export default class TimeTracker extends Component {
     }
   }
   
+  static defaultProps = {
+    tasks: []
+  }
+  
   componentWillReceiveProps(nextProps) {
   /*  if(nextProps.tasks !== this.props.tasks) {
       this.setState({
@@ -110,7 +114,7 @@ export default class TimeTracker extends Component {
         handleOptionClick={setActiveProject}
         items={simplifiedProjects}
       >
-        <ProjectHeading text={activeProject.projectName} icon={"images/dots-menu.svg"} />
+        <ProjectHeading text={activeProject ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }

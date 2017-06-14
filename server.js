@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-const shouldResetDb = true;
+const shouldResetDb = false;
+const shouldDeleteDb = true;
+
 const { PORT, DATABASE_URL } = require('./server-files/config');
 const { Projects } = require('./server-files/models');
 const { sampleData } = require('./server-files/sampleData');
@@ -45,10 +47,6 @@ function resetDb() {
     .catch((err) => { return reject(err); });
     });
 }
-
-if (shouldResetDb === true) {
-    resetDb();
-}
 function tearDownDb() {
     return new Promise((resolve, reject) => {
         console.warn('Deleting database');
@@ -56,6 +54,14 @@ function tearDownDb() {
       .then((result) => { return resolve(result); })
       .catch((err) => { return reject(err); });
     });
+}
+
+if (shouldResetDb === true) {
+    resetDb();
+}
+
+if (shouldDeleteDb === true) {
+    tearDownDb();
 }
 
 let server;

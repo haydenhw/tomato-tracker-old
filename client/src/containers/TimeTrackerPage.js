@@ -9,7 +9,7 @@ import TimeTracker from './TimeTracker';
 class TimeTrackerPage extends Component {
   componentDidMount() {
     const { activeProjectId, projects, setActiveProject } = this.props;
-     if (!activeProjectId) {
+     if (!activeProjectId && projects.length) {
        setActiveProject(projects[0].shortId)
      }
     
@@ -35,21 +35,20 @@ console.error(err);
 
 
 render() {
-  const { decrementTimer, projects, setActiveProject } = this.props;
-
-  const activeProjectId = this.props.activeProjectId || projects[0].shortId;
-  const activeProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
-  const activeProject = projects[activeProjectIndex];
-  const selectedTasks = activeProject.tasks;
+  const { activeProjectId, decrementTimer, projects, setActiveProject } = this.props;
+  
+  const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
+  const activeProject = activeProjectIndex && projects[activeProjectIndex];
+  const selectedTasks = activeProject && activeProject.tasks;
   
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
-        activeProject={activeProject}
+        activeProject={activeProject || null}
         decrementTimer={decrementTimer}
         projects={projects}
         setActiveProject={setActiveProject}
-        tasks={selectedTasks}
+        tasks={selectedTasks || []}
       />
     </div>
   );

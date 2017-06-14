@@ -34,22 +34,31 @@ export function setActiveProject(projectId) {
 export const DELETE_TASK = "DELETE_TASK";
 export function deleteTask(projectId, taskId) {
   return {
-    type: DELETE_TASK,
+    type: 'DELETE_TASK',
     projectId,
     taskId
   }
 }
 
 export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST'; 
-export default function postProjectRequest(newProject) {
+export function postProjectRequest(project) {
   return {
-    type: POST_PROJECT_REQUEST,
-    newProject
+    type: 'POST_PROJECT_REQUEST',
+    project
   }
 }
+
 export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS'; 
+export function postProjectSuccess(projectId, databaseId) {
+  return {
+    type: 'POST_PROJECT_SUCCESS',
+    projectId,
+    databaseId
+  }
+}
 
 export function postProject(projectName) {
+  
   return (dispatch) => {
     const newProject = {
       projectName,
@@ -73,9 +82,10 @@ export function postProject(projectName) {
         return res.json();
       })
       .then(data => {
-        console.log(data)
-        const projectId = data._id;
-        console.log('New project saved');
+        const projectId = data.shortId;
+        const databaseId = data._id;
+        console.log(projectId, databaseId)
+        dispatch(postProjectSuccess(projectId, databaseId))
       })
       .catch(err => {
         console.error(err)
