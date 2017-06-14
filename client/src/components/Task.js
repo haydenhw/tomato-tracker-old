@@ -11,12 +11,18 @@ export default function Task(props) {
 
   return(
     <div className="list-item">
-      <span>{taskName}</span>
-      <span>{secondsToHMMSS(recordedTime)}</span>
-      <EditMenu>
-        <li className="dropdown-item"><a>Edit</a></li>
-        <li className="dropdown-item"><a>Delete</a></li>
-      </EditMenu>
+      <div className="list-item-col1 list-col">
+        <span>{taskName}</span>
+      </div>
+      <div className="list-item-col2 list-col">
+        <span>{secondsToHMMSS(recordedTime)}</span>
+      </div>
+      <div className="list-item-col3 list-col">
+        <EditMenu className='list-item-edit-menu'>
+          <li className="dropdown-item"><a>Edit</a></li>
+          <li className="dropdown-item"><a>Delete</a></li>
+        </EditMenu>
+      </div>
     </div>
   );
 }
