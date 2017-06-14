@@ -32,9 +32,9 @@ export default function AddTasksForm(props) {
     
     return (
       <div>
-        <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
-        <form autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-          <label htmlFor="add-task-form" />
+        <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
+        <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
+          <label htmlFor="taskName" />
           <Field name="taskName" component={renderField}/>
         </form>
         

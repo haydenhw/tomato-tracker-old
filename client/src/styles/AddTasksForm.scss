@@ -1,5 +1,45 @@
+$form-width: 300px;
+
+.add-tasks-form {
+  text-align: left;
+  width: $form-width;
+  margin: 0 auto;
+}
+
+.form-task-list {
+  margin: 50px auto;
+  width: $form-width;
+}
+
+.form-task-list-item {
+  border: 1px solid #000;
+  width: 200px;
+  margin-bottom: 2px;
+  height: 30px;
+}
+
+.form-task-list {
+  .button-wrapper {
+    width: 20%;
+    display: inline-block;
+    padding: 20px;
+    padding-left: 0;
+  }
+  
+  .name-wrapper {
+    width: 80%;
+    text-align: left;
+    padding: 20px;
+    padding-left: 20px;
+    display: inline-block;
+  }
+  
+}
+
 .add-task-form-submit {
+  font-size: .8em;
+  font-family: sans-serif;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 25px;
+  right: 25px;
 }

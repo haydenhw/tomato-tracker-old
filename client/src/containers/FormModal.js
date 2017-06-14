@@ -69,7 +69,7 @@ class FormModal extends Component {
       case "ADD_TASKS": 
         return (
           <div>
-            <h2 className="project-form-title">{`Add tasks for project ${activeProjectName}`}</h2>
+            <h2 className="project-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
             <AddTasksFormContainer />
           </div>
         ); 
@@ -86,7 +86,6 @@ class FormModal extends Component {
         <Modal 
           handleCloseButtonClick={handleCloseButtonClick}
           shouldRender={shouldRenderModal}
-          style={{width: "300px"}}
           text={""}
           >
           {this.renderForm()}
