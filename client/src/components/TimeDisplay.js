@@ -17,7 +17,7 @@ export default function TimeDisplay(props) {
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
-      {true && <CircularProgressbar
+      {false && <CircularProgressbar
         initialAnimation={true} 
         percentage={progressPercentage} 
         strokeWidth={4} 

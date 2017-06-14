@@ -40,3 +40,46 @@ export function deleteTask(projectId, taskId) {
   }
 }
 
+export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST'; 
+export default function postProjectRequest(newProject) {
+  return {
+    type: POST_PROJECT_REQUEST,
+    newProject
+  }
+}
+export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS'; 
+
+export function postProject(projectName) {
+  return (dispatch) => {
+    const newProject = {
+      projectName,
+      shortId: shortid.generate(),
+      tasks: []
+    }
+    
+    dispatch(postProjectRequest(newProject));
+    
+    fetch(
+      'projects',
+      {
+          method: "POST",
+          body: JSON.stringify(newProject),
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(data)
+        const projectId = data._id;
+        console.log('New project saved');
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+

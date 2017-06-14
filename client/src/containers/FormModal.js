@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 
 import { 
-  addProject,
   addTask,
   changeModalType,
-  setActiveProject
+  postProject,
+  setActiveProject,
 } from '../actions/indexActions';
 
 import Modal from '../components/Modal';
@@ -22,9 +22,9 @@ class FormModal extends Component {
   }
   
   handleAddProject = () => ({ projectName }) => {
-    const { addProject, changeModalType } = this.props;
+    const { changeModalType, postProject } = this.props;
     
-    addProject(projectName)
+    postProject(projectName)
     changeModalType('ADD_TASKS');
   }
   
@@ -83,12 +83,12 @@ class FormModal extends Component {
     
     return (
       isFormModalActive &&
-      <Modal 
-        handleCloseButtonClick={handleCloseButtonClick}
-        shouldRender={shouldRenderModal}
-        style={{width: "300px"}}
-        text={""}
-        >
+        <Modal 
+          handleCloseButtonClick={handleCloseButtonClick}
+          shouldRender={shouldRenderModal}
+          style={{width: "300px"}}
+          text={""}
+          >
           {this.renderForm()}
         </Modal> 
       );
@@ -112,9 +112,9 @@ class FormModal extends Component {
   }
   
   export default connect(mapStateToProps, {
-    addProject,
     addTask,
     changeModalType,
+    postProject,
     setActiveProject
   })(FormModal);
   

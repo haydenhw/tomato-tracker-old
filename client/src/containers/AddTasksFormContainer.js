@@ -65,7 +65,7 @@ let AddTasksFormContainer = class extends Component {
     const { shouldDelete, taskName, shortId } = task;
     
     return (
-      <div className="task-form-list-item" key={shortId}>
+      <div className="task-form-list-item" key={shortid.generate()}>
         <div className="button-wrapper">
           <button onClick={this.toggleShouldDelete(shortId)}>{shouldDelete ? 'restore' : 'X' /*&times;*/}</button>
         </div>
