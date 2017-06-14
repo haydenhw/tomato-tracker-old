@@ -4,6 +4,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import FontAwesome from 'react-fontawesome';
 
 import { secondsToMSS } from '../helpers/time'
+import { showProgressBar, devStyle } from '../config'
 
 import EditInlineText from '../containers/EditInlineText';
 
@@ -17,14 +18,14 @@ export default function TimeDisplay(props) {
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
-      {false && <CircularProgressbar
+      {showProgressBar && <CircularProgressbar
         initialAnimation={true} 
         percentage={progressPercentage} 
         strokeWidth={4} 
         textForPercentage={(pct)=> ""}
       />}
       <div>{title}</div>
-      <div className="timer-content">
+      <div style={devStyle || null} className="timer-content">
         <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} />
         <div className="timer-control">
           <div className="flip-button-container" onClick={handleButtonClick}>

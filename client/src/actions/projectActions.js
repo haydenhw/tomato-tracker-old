@@ -94,9 +94,7 @@ export function postProject(projectName) {
 }
 
 export function postTask(projectId, task) {
-  console.log('called postTask')
   return (dispatch) => {
-    console.log('fetching')
     fetch(
       `projects/${projectId}`,
       {
@@ -111,8 +109,6 @@ export function postTask(projectId, task) {
         return res.json();
       })
       .then(data => {
-          console.log('task add success')
-          console.log(data)
       })
       .catch(err => {
         console.error(err)

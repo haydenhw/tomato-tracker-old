@@ -36,9 +36,8 @@ console.error(err);
 
 render() {
   const { activeProjectId, decrementTimer, projects, setActiveProject } = this.props;
-  
   const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
-  const activeProject = activeProjectIndex && projects[activeProjectIndex];
+  const activeProject = !isNaN(activeProjectIndex) && projects[activeProjectIndex];
   const selectedTasks = activeProject && activeProject.tasks;
   
   return (

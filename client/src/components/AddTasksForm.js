@@ -4,6 +4,23 @@ import { Field } from 'redux-form';
 
 import List from './List';
 
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label/>
+    <div>
+      <input {...input} autoFocus placeholder="Task name" type={type} />
+      {touched &&
+        ((error && <div>{error}</div>) ||
+        (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+  );
+
 export default function AddTasksForm(props) {
     const {
       handleFormSubmit,
@@ -18,7 +35,7 @@ export default function AddTasksForm(props) {
         <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
         <form autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
           <label htmlFor="add-task-form" />
-          <Field name="taskName" component="input" placeholder="Task name"/>
+          <Field name="taskName" component={renderField}/>
         </form>
         
         <button className='add-task-form-submit' onClick={handleFormSubmit}>Submit</button>

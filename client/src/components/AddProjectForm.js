@@ -13,7 +13,7 @@ const renderField = ({
   <div>
     <label/>
     <div>
-      <input {...input} placeholder="Project name" type={type} />
+      <input {...input} autoFocus placeholder="Project name" type={type} />
       {touched &&
         ((error && <div>{error}</div>) ||
         (warning && <span>{warning}</span>))}

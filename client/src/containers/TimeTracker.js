@@ -51,21 +51,6 @@ export default class TimeTracker extends Component {
     this.setState(newModalState);
   }
   
-  handleAddTaskSubmit(formValue) {
-    const { tasks } = this.props;
-    
-    const newTask = {
-      taskName: formValue.name,
-      recordedTime: 0,
-      id: shortid.generate()
-    }
-    
-    const newTasks = [...tasks, newTask]
-    console.log(newTasks)
-    this.setState({tasks: newTasks});
-    this.setState({shouldRenderModal: false});
-  }
-  
   handleTaskChange(taskId){
     console.log('changing active task')
     this.setState({ activeTaskId: taskId });
@@ -114,14 +99,14 @@ export default class TimeTracker extends Component {
         handleOptionClick={setActiveProject}
         items={simplifiedProjects}
       >
-        <ProjectHeading text={activeProject ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
+        <ProjectHeading text={projects.length ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }
  
   render() {
     const { tasks } = this.props;
-    const {  activeTaskId, shouldRenderModal } = this.state;
+    const { activeTaskId, shouldRenderModal } = this.state;
     const totalTime = tasks.length ? tasks.map((task) => task.recordedTime).reduce((a,b) => a + b) : 0;
     
     return (
@@ -142,7 +127,6 @@ export default class TimeTracker extends Component {
         <FormModal
           form="ADD_PROJECT"
           handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-          hanldeFormSubmit={this.handleAddTaskSubmit.bind(this)}
           shouldRenderModal={shouldRenderModal}
         /> 
       </div>
