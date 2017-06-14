@@ -89,19 +89,19 @@ export default class TimeTracker extends Component {
   
   renderProjectSelect() {
     const { projects, activeProject, setActiveProject } = this.props;
-    console.log(projects);
+    
     const simplifiedProjects = projects.map(project => ({
       name: project.projectName,
       id: project.shortId
     }));
-    
+
     return (
       <Select 
         className={"project-select"} 
         handleOptionClick={setActiveProject}
         items={simplifiedProjects}
       >
-        <ProjectHeading text={projects.length ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
+        <ProjectHeading text={activeProject ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
       </Select>
     );
   }

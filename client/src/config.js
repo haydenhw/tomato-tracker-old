@@ -1,7 +1,7 @@
-const productionMode = false;
+const productionMode = true;
 
 export const renderModal = productionMode || true;
-export const showProgressBar = productionMode || false;
+export const showProgressBar = productionMode || true;
 export const devStyle = !productionMode && {
     position: 'static',
     width: '300px',
