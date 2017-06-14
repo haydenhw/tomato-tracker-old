@@ -1,8 +1,23 @@
+@import 'variables';
+
+.task-list {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
 .list-item {
-  width: 300px;
-  border: 1px solid #000;
-  margin: 3px;
+  margin: 0 auto;
+  width: 500px;
+  border-top: 1px solid $border-light-grey;
+  border-left: 1px solid $border-light-grey;
+  border-right: 1px solid $border-light-grey;
   position: relative;
+  padding : 20px 10px;
+}
+
+.list-item:last-child {
+  border-bottom: 1px solid $border-light-grey;
 }
 
 .list-item span {

@@ -1,3 +1,4 @@
+@import 'ProjectDropdown.scss';
 
 .dropdown {
   text-align: right;
@@ -14,7 +15,6 @@
 }
 
 .dropdown-trigger-wrapper {
-  height: 50px;
   padding: 9px 15px;
   display: inline-block;
 }
@@ -25,7 +25,7 @@
   display: inline-block;
 }
 
-.dropdown-trigger-wrapper:hover {
+.dropdown-trigger:hover {
   cursor: pointer;	 
 }
 
@@ -53,6 +53,7 @@
     text-decoration: none;
     color: black;
 }
+
 .dropdown-item:hover {
   width: 100%;
   background-color: #ddd;
