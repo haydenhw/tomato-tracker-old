@@ -28,24 +28,25 @@ export default class TopNavbarEditableText extends React.Component {
   render() {
     const { text } = this.props;
 
-    return (<div>
-      <InlineEdit
-        validate={this.customValidateText}
-        className="editable-text"
-        activeClassName="editing"
-        text={text || ''}
-        paramName="message"
-        change={this.dataChanged}
-        style={{
-          minWidth: 150,
-          display: 'inline-block',
-          margin: '13px 10px',
-          padding: 0,
-          fontSize: 20,
-          border: 0,
-        }}
-      />
-    </div>);
+    return (
+      
+        <InlineEdit
+          validate={this.customValidateText}
+          className="editable-text"
+          activeClassName="editing"
+          text={text || ''}
+          paramName="message"
+          change={this.dataChanged}
+          style={{
+            minWidth: 150,
+            display: 'inline-block',
+            margin: '13px 10px',
+            padding: 0,
+            fontSize: 20,
+            border: 0,
+          }}
+        />
+      );
   }
 }
 

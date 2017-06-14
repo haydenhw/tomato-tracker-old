@@ -48,7 +48,7 @@ class FormModal extends Component {
   }
   
   renderForm() {
-    const { modalType } = this.props;
+    const { activeProjectName, modalType } = this.props;
     
     switch (modalType) {
       case "WELCOME": 
@@ -69,7 +69,7 @@ class FormModal extends Component {
       case "ADD_TASKS": 
         return (
           <div>
-            <h2 className="project-form-title">Add tasks</h2>
+            <h2 className="project-form-title">{`Add tasks for project ${activeProjectName}`}</h2>
             <AddTasksFormContainer />
           </div>
         ); 

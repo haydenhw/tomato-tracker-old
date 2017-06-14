@@ -64,12 +64,18 @@ class Timer extends Component {
   }
   
   render() {
-    const { isTimerActive, remainingTime, setStartTime, startTime, task, toggleIsTimerActive } = this.props;
+    const { isTimerActive, remainingTime, setStartTime, startTime, startTimer, task } = this.props;
     
     return (
       <div>
-        <TimeDisplay setStartTime={setStartTime} startCount={startTime} time={remainingTime} title={task} />
-        <button onClick={toggleIsTimerActive}>{isTimerActive ? "Pause" : "Start"}</button>
+        <TimeDisplay
+          isTimerActive={isTimerActive}
+          setStartTime={setStartTime} 
+          startCount={startTime}
+          time={remainingTime}
+          title={task}
+          handleButtonClick={startTimer}
+        />
       </div>
     );
   }

@@ -1,7 +1,15 @@
 .timer {
+  position: relative;
   margin: 20px;
+  width: 225px;
+  border: 1px solid #000;
+  margin: 0 auto;
 }
 
-.timer div {
-  margin: 5px;
+
+.timer-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -62%);
 }

@@ -1,22 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgressbar from 'react-circular-progressbar';
+import FontAwesome from 'react-fontawesome';
 
 import { secondsToMSS } from '../helpers/time'
 
 import EditInlineText from '../containers/EditInlineText';
 
 export default function TimeDisplay(props) {
-  const { setStartTime, startCount, title, time  } = props;
+  const { handleButtonClick, isTimerActive, setStartTime, startCount, title, time  } = props;
   const progressPercentage = Math.round((1-(time/startCount))*100);
   let displayTime = time || startCount; 
   
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
-      {false && <CircularProgressbar percentage={progressPercentage} textForPercentage={(pct)=>""}/>}
+      {true && <CircularProgressbar
+         initialAnimation={true} 
+         percentage={progressPercentage} 
+         strokeWidth={4} 
+         textForPercentage={(pct)=>""}
+       />}
       <div>{title}</div>
-      <EditInlineText handleChange={setStartTime} text={secondsToMSS(displayTime)} />
+      <div className="timer-content">
+        <EditInlineText handleChange={setStartTime} text={secondsToMSS(displayTime)} />
+        <div onClick={handleButtonClick}>
+          <FontAwesome className="fa-play" name="fa-play" />
+        </div>
+      </div>
     </div>
   );
 }
