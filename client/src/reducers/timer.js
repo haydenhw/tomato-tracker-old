@@ -3,7 +3,7 @@ import * as actions from '../actions/indexActions';
 const defaultState = {
   isTimerActive: false,
   remainingTime: null,
-  startTime: 10
+  startTime: 25 * 60
 }
 
 export const timer = (state=defaultState, action) => {
@@ -32,8 +32,10 @@ export const timer = (state=defaultState, action) => {
     case actions.SET_START_TIME:
       return {
         ...state,
+        isTimerActive: true,
         startTime: action.startTime,
         remainingTime: action.startTime
+        
       }
     default:
       return state;
