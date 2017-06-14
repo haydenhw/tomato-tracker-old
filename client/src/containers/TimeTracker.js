@@ -12,6 +12,8 @@ import Task from '../components/Task';
 import Select from './Select';
 import Timer from './Timer';
 
+import { renderModal } from '../config'
+
 export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ export default class TimeTracker extends Component {
     const { tasks } = this.props;
     
      this.state = {
-      shouldRenderModal: true,
+      shouldRenderModal: renderModal,
       activeTaskId: null,
       tasks: tasks,
     }
@@ -87,7 +89,7 @@ export default class TimeTracker extends Component {
   
   renderProjectSelect() {
     const { projects, activeProject, setActiveProject } = this.props;
-    
+    console.log(projects);
     const simplifiedProjects = projects.map(project => ({
       name: project.projectName,
       id: project.shortId

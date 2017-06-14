@@ -31,10 +31,10 @@ export function setActiveProject(projectId) {
   }
 }
 
-export const DELETE_TASK = "DELETE_TASK";
-export function deleteTask(projectId, taskId) {
+export const DELETE_TASK_REQUEST = "DELETE_TASK_REQUEST";
+export function deleteTaskRequest(projectId, taskId) {
   return {
-    type: 'DELETE_TASK',
+    type: 'DELETE_TASK_REQUEST',
     projectId,
     taskId
   }
@@ -64,6 +64,30 @@ export function postTaskSuccess(projectId, taskId, databaseId) {
     projectId,
     taskId,
     databaseId
+  }
+}
+
+
+export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
+export const fetchProjectsSuccess = (projects) => ({
+  type: 'FETCH_PROJECTS_SUCCESS',
+  projects
+});
+
+export function fetchProjects() {
+  return (dispatch) => {
+    fetch('projects')
+    .then((res) => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data)
+      console.log(data.projects)
+      dispatch(fetchProjectsSuccess(data.projects));
+    })
+    .catch(err => {
+      console.error(err)
+    })
   }
 }
 
@@ -130,3 +154,25 @@ export function postTask(projectId, task) {
   }
 }
 
+export function deleteTask(projectId, taskId) {
+  const url = `projects/${projectId}/${taskId}`;
+  return (dispatch) => {
+    console.log('delete requested')
+    fetch(
+      url,
+      {
+          method: "DELETE",
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        console.log('delete successful')
+        
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}

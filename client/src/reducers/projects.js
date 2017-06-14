@@ -32,7 +32,7 @@ function tasks(state, action) {
         
         return Object.assign({}, project, { tasks: newTasks });
       });
-    case actions.DELETE_TASK:
+    case actions.DELETE_TASK_REQUEST:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         const deleteIndex = project.tasks.findIndex(task => task['shortId'] === action.taskId);
         const newTasks = project.tasks.sliceDelete(deleteIndex);
@@ -54,6 +54,8 @@ function tasks(state, action) {
 
 export function projects(state=[], action) {
   switch(action.type) {
+    case actions.FETCH_PROJECTS_SUCCESS:
+      return action.projects;
     case actions.POST_PROJECT_REQUEST:
       return [
         ...state,

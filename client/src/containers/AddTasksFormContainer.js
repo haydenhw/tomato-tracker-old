@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { change, reduxForm } from 'redux-form';
 import shortid from 'shortid';
 
-import {  postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
+import { deleteTask, postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
 
 import AddTasksForm from '../components/AddTasksForm';
 
@@ -58,12 +58,14 @@ let AddTasksFormContainer = class extends Component {
     
     const newTasks = tasks.filter((task) => !task.shouldDelete);
     
-    //save new tasks to database
     updateTasks(activeProjectId, newTasks);
-    const tasksToSave = newTasks.filter((task) => !task._id)
+    
+    newTasks.filter((task) => !task._id)
       .forEach((task) => postTask(activeProjectDatabaseId, task));
-    //remove deleted tasks from database
-    const tasksToDelete = tasks.filter 
+      
+    tasks.filter((task) => task.shouldDelete && task._id)
+      .forEach((task) => deleteTask(activeProjectDatabaseId, task));
+      
     toggleIsFormModalActive(false);
   }
   
@@ -125,6 +127,7 @@ AddTasksFormContainer = reduxForm({
 })(AddTasksFormContainer);
 
 export default AddTasksFormContainer = connect(mapStateToProps, {
+  deleteTask,
   postTask,
   toggleIsFormModalActive,
   updateTasks
