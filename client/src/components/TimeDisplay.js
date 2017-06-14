@@ -23,8 +23,8 @@ export default function TimeDisplay(props) {
        />}
       <div>{title}</div>
       <div className="timer-content">
-        <EditInlineText handleChange={setStartTime} text={secondsToMSS(displayTime)} />
-        <div onClick={handleButtonClick}>
+        <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} />
+        <div className="timer-control" onClick={handleButtonClick}>
           <FontAwesome className="fa-play" name="fa-play" />
         </div>
       </div>

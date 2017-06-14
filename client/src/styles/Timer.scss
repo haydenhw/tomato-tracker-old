@@ -2,7 +2,6 @@
   position: relative;
   margin: 20px;
   width: 225px;
-  border: 1px solid #000;
   margin: 0 auto;
 }
 
@@ -13,3 +12,12 @@
   left: 50%;
   transform: translate(-50%, -62%);
 }
+
+.timer-control {
+  font-size: 35px;
+}
+
+.edit-time {
+  font-size: 44px;
+}
+
