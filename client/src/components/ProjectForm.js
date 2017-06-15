@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import List from './List';
 
-class ProjectForm extends Component {
+let ProjectForm = class extends Component {
   render() {
     const { 
       handleEditProjectSubmit,
@@ -13,6 +14,8 @@ class ProjectForm extends Component {
       project,
       renderFormTask
     } = this.props;
+    
+    console.log(this.props.params);
     
     const { tasks } = project;
     
@@ -45,11 +48,20 @@ const validate = values => {
   }
 }
  
-// Decorate the form component
 ProjectForm = reduxForm({
   form: 'editProject',
-  validate, // a unique name for this form,
+  validate,
 })(ProjectForm);
+
+const mapStateToProps = state => {
+  const { projects } = state;
+  
+  return {
+    projects
+  };
+}
+
+ProjectForm = connect(mapStateToProps)(ProjectForm)
 
 export default ProjectForm;
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
@@ -11,14 +12,18 @@ import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
 
 
-export default class ProjectsPage extends Component {
+class ProjectsPage extends Component {
   static defaultProps = {
     projects: []
   }
   
   renderProject (project){
     const { projectName } = project;
-    const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
+    const totalTime = 
+      project.tasks.length 
+        ? project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b)
+        : 0;
+      
     const handleMenuClick = () => hashHistory.push(`/projects/${project.shortId}`);
     
     return (
@@ -35,13 +40,25 @@ export default class ProjectsPage extends Component {
   } 
   
   render() {
+    const { projects } = this.props;
+    console.log(projects);
     return (
       <div className='project-page-container'>
-        <List className="project-list" items={getProjects()} renderItem={this.renderProject}/>
+        <List className="project-list" items={projects} renderItem={this.renderProject}/>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  const { projects } = state;
+  
+  return {
+    projects
+  }
+}
+
+export default connect(mapStateToProps, null)(ProjectsPage);
 
 ProjectsPage.propTypes = {
   projects: PropTypes.array.isRequired
