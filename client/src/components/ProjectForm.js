@@ -15,10 +15,9 @@ let ProjectForm = class extends Component {
       renderFormTask
     } = this.props;
     
-    console.log(this.props.params);
     
     const { tasks } = project;
-    
+    console.log(this.props);
     return (
       <div>
         <form id="project-form" className="project-form" onSubmit={handleSubmit(handleEditProjectSubmit.bind(this))}>
@@ -28,14 +27,14 @@ let ProjectForm = class extends Component {
           </div>
         </form>
         
-        <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
+        {/* <List className='form-task-list' items={tasks} renderItem={renderFormTask} />
         
         <form onSubmit={handleSubmit(handleAddTaskSubmit.bind(this))}>
           <label htmlFor="ad">Add Task</label>
           <Field name="taskName" component="input" type="text"/>
           <button  type="submit">Add Task</button>
         </form>
-        <button form="project-form" type="submit">Submit</button>
+        <button form="project-form" type="submit">Submit</button> */}
       </div>
     );
   }
@@ -49,16 +48,23 @@ const validate = values => {
 }
  
 ProjectForm = reduxForm({
-  form: 'editProject',
+  form: 'ProjectForm',
   validate,
 })(ProjectForm);
 
 const mapStateToProps = state => {
-  const { projects } = state;
-  
+  const { activeProjectId, projects } = state;
+  const activeProjectName = 
+    activeProjectId 
+    ? projects.find(project => activeProjectId === project.shortId).projectName
+    : null
+    
   return {
-    projects
-  };
+    inititalValues: {
+      projectName: state.projects[0].projectName
+      
+    }
+  }
 }
 
 ProjectForm = connect(mapStateToProps)(ProjectForm)
@@ -66,7 +72,7 @@ ProjectForm = connect(mapStateToProps)(ProjectForm)
 export default ProjectForm;
 
 ProjectForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  // handleSubmit: PropTypes.func.isRequired,
   handleEditProjectSubmit: PropTypes.func.isRequired,
   handleAddTaskSubmit: PropTypes.func.isRequired,
   renderFormTask: PropTypes.func.isRequired,

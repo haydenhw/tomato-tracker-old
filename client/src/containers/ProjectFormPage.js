@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import { addTask, deleteTask } from '../actions/indexActions';
+import { addTask, deleteTask, setActiveProject } from '../actions/indexActions';
+
 import ProjectForm from '../components/ProjectForm';
 
 class ProjectFormPage extends Component {
@@ -14,6 +15,13 @@ class ProjectFormPage extends Component {
   }
   static defaultProps = {
     projects: []
+  }
+  
+  componentDidMount() {
+    const { params, setActiveProject } = this.props;
+    const { projectId } = params;
+    
+    setActiveProject(projectId);
   }
   
   editProjectName (values) { 
@@ -52,6 +60,7 @@ class ProjectFormPage extends Component {
     return (
       <ProjectForm 
         project={activeProject}
+        projectId={projectId}
         handleAddTaskSubmit={this.addNewTask}
         handleEditProjectSubmit={this.editProjectName}
         renderFormTask={this.renderFormTask.bind(this)}
@@ -72,7 +81,11 @@ ProjectFormPage.propTypes = {
   projects: PropTypes.array
 }
 
-export default connect(mapStateToProps, { addTask, deleteTask })(ProjectFormPage);  
+export default connect(mapStateToProps, { 
+  addTask,
+  deleteTask,
+  setActiveProject,
+})(ProjectFormPage);  
 
 function getProjects() {
   return ([

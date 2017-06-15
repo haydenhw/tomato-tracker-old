@@ -41,7 +41,6 @@ class ProjectsPage extends Component {
   
   render() {
     const { projects } = this.props;
-    console.log(projects);
     return (
       <div className='project-page-container'>
         <List className="project-list" items={projects} renderItem={this.renderProject}/>
