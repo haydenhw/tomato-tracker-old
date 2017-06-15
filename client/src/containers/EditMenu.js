@@ -34,7 +34,7 @@ export default class NavDropdown extends Component {
   
   handleBodyClick (evt) {
     const targetClassName = evt.target.className;
-    console.log(targetClassName)
+    
     if (
       targetClassName !== 'task-select option' &&
       targetClassName !==  'task-select option-item'

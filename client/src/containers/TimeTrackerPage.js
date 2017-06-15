@@ -8,7 +8,7 @@ import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
   componentDidMount() {
-    const { activeProjectId, projects, fetchProjects, setActiveProject } = this.props;
+    const { fetchProjects } = this.props;
 
     fetchProjects();
 }
