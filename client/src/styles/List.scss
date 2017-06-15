@@ -53,8 +53,6 @@
   margin-left: 20px;
 }
 
-.list-item-edit-menu {
-  position: absolute;
-  top: -21px;
-  right: 1px;
+.dropdown .list-item-edit-menu {
+  min-width: 0;
 }

@@ -69,7 +69,7 @@ class FormModal extends Component {
       case "ADD_TASKS": 
         return (
           <div>
-            <h2 className="project-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
+            <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
             <AddTasksFormContainer />
           </div>
         ); 

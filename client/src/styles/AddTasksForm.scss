@@ -1,14 +1,31 @@
 $form-width: 300px;
+$form-margin-left: 30%;
+
+.add-tasks-form-title {
+  margin-bottom: 30px; 
+}
+
+.add-tasks-form-title {
+  span {
+    font-weight: bold;
+  }
+}
+
+.form-task-list {
+  margin: 25px auto;
+  width: $form-width;
+  min-height: 100px;
+  max-height: 275px;
+  overflow-y: auto;
+  font-size: .75em;
+  margin-left: $form-margin-left;
+}
 
 .add-tasks-form {
   text-align: left;
   width: $form-width;
   margin: 0 auto;
-}
-
-.form-task-list {
-  margin: 50px auto;
-  width: $form-width;
+  margin-left: $form-margin-left;
 }
 
 .form-task-list-item {
@@ -22,16 +39,20 @@ $form-width: 300px;
   .button-wrapper {
     width: 20%;
     display: inline-block;
-    padding: 20px;
+    padding: 10px;
     padding-left: 0;
   }
   
   .name-wrapper {
     width: 80%;
     text-align: left;
-    padding: 20px;
+    padding: 10px;
     padding-left: 20px;
     display: inline-block;
+  }
+  
+  button {
+    margin: 0;
   }
   
 }
