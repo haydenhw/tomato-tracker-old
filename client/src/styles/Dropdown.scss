@@ -1,16 +1,26 @@
 @import 'ProjectDropdown.scss';
+@import 'variables';
 
 .dropdown {
-
+  position: relative;
+  display: inline-block;
+  min-width: 125px;
+  max-width: 300px;
+  text-align: center;
+  padding: 5px;
 }
 
 .dropdown-item {
-    clear: both;
+  clear: both;
 }
 
 .dropdown-trigger-wrapper {
-  padding: 9px 15px;
   display: inline-block;
+  width: 100%;
+}
+
+.dropdown-trigger {
+  width: 100%;
 }
 
 .projects-dropdown .dropdown-trigger-wrapper {
@@ -20,21 +30,20 @@
 }
 
 .dropdown-trigger:hover {
-  cursor: pointer;	 
+  cursor: pointer;
+  background-color: $border-light-grey;
 }
 
 .dropdown-content {
   min-width: 160px;
   display: block;
-  position: absolute;
-  left: 61px;
-  bottom: 20px;
   background-color: #f9f9f9;
   list-style-type: none;
-  padding: 0;
+  padding: 5px;
   margin: 0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   text-align: left;
+  z-index: 9999;
 }
 
 .projects-dropdown .dropdown-content {
@@ -42,10 +51,10 @@
 }
 
 .dropdown a {
-    display: inline-block;
-    padding: 8px 15px;
-    text-decoration: none;
-    color: black;
+  display: inline-block;
+  padding: 8px 15px;
+  text-decoration: none;
+  color: black;
 }
 
 .dropdown-item:hover {

@@ -6,6 +6,8 @@ export function activeProjectId(state=null, action) {
       return action.projectId;
     case actions.POST_PROJECT_REQUEST:
       return action.project.shortId;
+    case actions.FETCH_PROJECTS_SUCCESS:
+      return state ? state : action.projects[0].shortId;
     default:
       return state;
   }

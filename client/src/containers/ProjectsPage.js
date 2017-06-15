@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
-import EditMenu from './EditMenu'
-import ProjectForm from '../components/ProjectForm';
+import { secondsToHMMSS } from '../helpers/time'
+
+//import ProjectForm from '../components/ProjectForm';
 import List from '../components/List';
-import Project from '../components/Project';
+import ListHeader from '../components/ListHeader';
+import ListItem from '../components/ListItem';
+
 
 export default class ProjectsPage extends Component {
   static defaultProps = {
@@ -14,17 +17,20 @@ export default class ProjectsPage extends Component {
   }
   
   renderProject (project){
+    const { projectName } = project;
     const totalTime = project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b);
     const handleMenuClick = () => hashHistory.push(`/projects/${project.shortId}`);
     
     return (
-      <Project 
+      <ListItem 
         className="project"
-        handleMenuClick={handleMenuClick}
         key={shortid.generate()}
-        projectData={project}
-        totalTime={Math.round(totalTime)}
-      />
+        col1Text={projectName}
+        col2Text={secondsToHMMSS(Math.round(totalTime))}
+      >
+        <li className="dropdown-item" onClick={handleMenuClick}><a>Edit</a></li>
+        <li className="dropdown-item"><a>Delete</a></li>
+      </ListItem>
     );
   } 
   
@@ -40,6 +46,7 @@ export default class ProjectsPage extends Component {
 ProjectsPage.propTypes = {
   projects: PropTypes.array.isRequired
 }
+
 
 function getProjects() {
   return ([

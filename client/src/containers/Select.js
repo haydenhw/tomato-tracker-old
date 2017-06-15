@@ -14,12 +14,32 @@ export default class Select extends Component {
       isActive: false,
     };
     
+    this.handleBodyClick = this.handleBodyClick.bind(this);
     this.toggleIsActive = this.toggleIsActive.bind(this);
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isActive === true && this.state.isActive === false) {
+      document.body.removeEventListener('click', this.handleBodyClick);
+    }
   }
   
   toggleIsActive() {
     const { isActive } = this.state;
+    
+    document.body.addEventListener('click', this.handleBodyClick);
     this.setState({ isActive: !isActive });
+  }
+  
+  handleBodyClick (evt) {
+    const targetClassName = evt.target.className;
+    
+    if (
+      targetClassName !== 'task-select option' &&
+      targetClassName !==  'task-select option-item'
+    ) {
+      this.setState({ isActive: false });
+    }
   }
   
   
@@ -50,7 +70,6 @@ export default class Select extends Component {
     
     return null;
   }
-  
   
   render() {
     const { isActive } = this.state;

@@ -20,7 +20,7 @@
   border-radius: 2px;
   background-color: #fefefe;
   padding: 57px 45px;
-  padding-bottom: 125px;
+  padding-bottom: 75px;
   border: 1px solid #888;
   width: 600px;
   font-size: 22px;
@@ -32,13 +32,11 @@
 
 .modal-scroll-wrapper {
   max-height: 70vh;
-  overflow-y: auto; 
 }
 
 .modal-text-parent {
   font-size: 0.9em;
   line-height: 1.5;
-  margin-top: 40px;
 }
 
 .modal-text-child {
