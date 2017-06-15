@@ -42,6 +42,7 @@
   border-left: 1px solid $border-light-grey;
   border-right: 1px solid $border-light-grey;
   position: relative;
+  padding: 10px;
   padding-left: 20px;
 }
 
@@ -59,8 +60,7 @@
   text-align: left;
   position: relative;
   display: inline-block;
-  margin-bottom: 5px;
-  padding-top: 18px;
+  // padding-top: 18px;
 }
 
 .list-item-edit-menu {

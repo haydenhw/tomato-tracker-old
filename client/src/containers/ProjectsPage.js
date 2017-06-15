@@ -5,8 +5,7 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from '../helpers/time'
 
-import EditMenu from './EditMenu'
-import ProjectForm from '../components/ProjectForm';
+//import ProjectForm from '../components/ProjectForm';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
@@ -47,6 +46,7 @@ export default class ProjectsPage extends Component {
 ProjectsPage.propTypes = {
   projects: PropTypes.array.isRequired
 }
+
 
 function getProjects() {
   return ([
