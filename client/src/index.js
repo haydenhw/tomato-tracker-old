@@ -9,7 +9,9 @@ import App from './containers/App';
 import ProjectFormPage from './containers/ProjectFormPage';
 import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
+
 import './index.scss';
+import './styles/icons/styles.css';
 
 render((
   <Provider store={store}>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
+import Isvg from 'react-inlinesvg';
+
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -9,6 +12,7 @@ import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import ListItem from '../components/ListItem';
+import RoundButton from '../components/RoundButton';
 import Select from './Select';
 import Timer from './Timer';
 
@@ -115,7 +119,10 @@ export default class TimeTracker extends Component {
           handleOptionClick={setActiveProject}
           items={simplifiedProjects}
           >
-            <ProjectHeading text={activeProject ? activeProject.projectName : "No projects added yet"} icon={"images/dots-menu.svg"} />
+            <ProjectHeading 
+              text={activeProject ? activeProject.projectName : "No projects added yet"}
+              iconClass={"icon icon-dots-menu"} 
+            />
           </Select>
         );
       }
@@ -143,7 +150,12 @@ export default class TimeTracker extends Component {
                 <span>{secondsToHMMSS(totalTime)}</span>
               </div>
             </div>
-            <button>New Task</button>
+            
+            <RoundButton 
+              icon={''}
+              clickHandler={() => console.log('hello round')} 
+            />
+              
             <FormModal
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
