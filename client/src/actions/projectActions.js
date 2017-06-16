@@ -83,9 +83,6 @@ export function fetchProjects() {
     .then(data => {
       dispatch(fetchProjectsSuccess(data.projects));
     })
-    .catch(err => {
-      console.error(err)
-    })
   }
 }
 

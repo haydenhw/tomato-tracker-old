@@ -25,7 +25,7 @@ class ProjectsPage extends Component {
         : 0;
       
     const handleEdit = () => hashHistory.push(`/projects/${project.shortId}`);
-    const handleDelete = () => delteProject(project);
+    const handleDelete = () => deleteProject(project);
     
     return (
       <ListItem 
