@@ -36,10 +36,41 @@ export function resetTimer() {
 
 
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
-export function incrementTaskTime(projectId, taskId) {
-  return {
-    type: "INCREMENT_TASK_TIME",
-    projectId,
-    taskId
+export function incrementTaskTime(project, task) {
+  
+  return (dispatch) => {
+    const updatedTask = Object.assign({}, task, { recordedTime: task.recordedTime + 1 })
+    
+    dispatch({
+      type: "INCREMENT_TASK_TIME",
+      projectId: project.shortId,
+      taskId: task.shortId
+    });
+    
+    
+    fetch(`projects/${project._id}/tasks/${task._id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedTask),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then(data => {
+      console.log('update success')
+    })
+    .catch(err => {
+      console.error(err)
+    })
   }
+  
 }
+
+
+
+
+
+

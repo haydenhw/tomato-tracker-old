@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-export default function App(props) {
-  return (
-    <div>
-      <nav>
-        <h1 className="logo-text">PomTracker</h1>
-        <ul role="nav">
-          <li className="nav-link"><Link to="/">Timer</Link></li>
-          <li className="nav-link"><Link to="/Projects">Projects</Link></li>
-        </ul>
-      </nav>
-      {props.children}
-    </div>
-  );
+import { fetchProjects } from '../actions/indexActions';
+import store from '../redux-files/store';
+
+export default class App extends Component {
+  componentDidMount() {
+    store.dispatch(fetchProjects());
+  }
+  
+  render() {
+    return (
+      <div>
+        <nav>
+          <h1 className="logo-text">PomTracker</h1>
+          <ul role="nav">
+            <li className="nav-link"><Link to="/">Timer</Link></li>
+            <li className="nav-link"><Link to="/Projects">Projects</Link></li>
+          </ul>
+        </nav>
+        {this.props.children}
+      </div>
+    );
+  }
 }

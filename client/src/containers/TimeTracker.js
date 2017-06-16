@@ -54,13 +54,12 @@ export default class TimeTracker extends Component {
   }
 
   handleTaskChange(taskId){
-    console.log('changing active task')
     this.setState({ activeTaskId: taskId });
   }
 
   renderTask (task){
     const { taskName, recordedTime } = task;
-    console.log(ListItem)
+    
     return (
       <ListItem
         className="task"
@@ -121,7 +120,7 @@ export default class TimeTracker extends Component {
       render() {
         const { tasks } = this.props;
         const { activeTaskId, shouldRenderModal } = this.state;
-        const totalTime = tasks.length ? tasks.map((task) => task.recordedTime).reduce((a,b) => a + b) : 0;
+        const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
         
         return (
           <div className="countdown-timer">
@@ -132,7 +131,7 @@ export default class TimeTracker extends Component {
               <List className="task-list" items={tasks} renderItem={this.renderTask}>
                 <ListHeader col1Title="Task" col2Title="Time Logged" />
               </List>
-              <div>
+              <div className='total-time'>
                 <span>Total</span>
                 <span>{secondsToHMMSS(totalTime)}</span>
               </div>

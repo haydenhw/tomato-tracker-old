@@ -81,7 +81,6 @@ export function fetchProjects() {
       return res.json();
     })
     .then(data => {
-      console.log(data)
       dispatch(fetchProjectsSuccess(data.projects));
     })
     .catch(err => {
@@ -146,6 +145,35 @@ export function postTask(projectId, task) {
         const databaseId = data._id;
         
         dispatch(postTaskSuccess(projectId, taskId, databaseId));
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+}
+
+export const DELETE_PROJECT_REQUEST= 'DELETE_PROJECT_REQUEST';
+export function deleteProject(project) {
+  return (dispatch) => {
+    console.log('delete requested')
+    dispatch({
+      type: 'DELETE_PROJECT_REQUEST',
+      project
+    })
+    
+    console.log('delete requested')
+    fetch(
+      `projects/${project._id}`,
+      {
+          method: "DELETE",
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        console.log('delete successful')
+        
       })
       .catch(err => {
         console.error(err)

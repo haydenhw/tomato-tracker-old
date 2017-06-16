@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
     taskName: { type: String, required: true },
-    recordedTime: { type: String, required: true },
+    recordedTime: { type: Number, required: true },
     shortId: { type: String, required: true },
     log: [{
         startTime: String,
@@ -13,7 +13,7 @@ const taskSchema = mongoose.Schema({
 const projectSchema = mongoose.Schema({
     projectName: { type: String, required: true },
     position: Number,
-    shortId: { type: String, required: false },
+    shortId: { type: String, required: true },
     tasks: [taskSchema],
 });
 

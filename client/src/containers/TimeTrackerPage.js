@@ -7,11 +7,6 @@ import { decrementTimer, fetchProjects, setActiveProject } from '../actions/inde
 import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
-  componentDidMount() {
-    const { fetchProjects } = this.props;
-
-    fetchProjects();
-}
 
 render() {
   const { activeProjectId, decrementTimer, projects, setActiveProject } = this.props;

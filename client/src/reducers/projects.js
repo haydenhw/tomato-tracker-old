@@ -65,8 +65,10 @@ export function projects(state=[], action) {
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         return Object.assign({}, project, { _id: action.databaseId })
       })
-    case actions.DELETE_PROJECT:
-      return state.sliceDelete(action.index);
+    case actions.DELETE_PROJECT_REQUEST:
+      const projectIndex = state.findIndex(project => project.shortId === action.project.shortId);
+      console.log(projectIndex);
+      return state.sliceDelete(projectIndex);
     case actions.UPDATE_TASKS:
       return tasks(state, action);
     case actions.POST_TASK_SUCCESS:
