@@ -88,14 +88,15 @@ export default class TimeTracker extends Component {
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     
+    const headingClass = selectedTaskName ? "" : "grey"; 
+    
     return (
       <Select 
         className={"task-select"} 
         handleOptionClick={this.handleTaskChange.bind(this)}
         items={simplifiedTasks}
-        headingText={taskSelectHeading}
         >
-          <span>{taskSelectHeading}</span>
+          <span className={headingClass}>{taskSelectHeading}</span>
         </Select>
       );
     }

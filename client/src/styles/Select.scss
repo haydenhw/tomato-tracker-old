@@ -1,3 +1,13 @@
+@import 'variables';
+
+.select {
+  font-size: 1.5em;
+  
+  .grey {
+    color: $font-light-grey;
+  }
+}
+
 .example-enter {
   opacity: 0;
   width: 0;
