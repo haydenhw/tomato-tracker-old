@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { decrementTimer, fetchProjects, setActiveProject } from '../actions/indexActions';
+import { deleteTask, decrementTimer, fetchProjects, setActiveProject } from '../actions/indexActions';
 
 
 import TimeTracker from './TimeTracker';
@@ -9,7 +9,7 @@ import TimeTracker from './TimeTracker';
 class TimeTrackerPage extends Component {
 
 render() {
-  const { activeProjectId, decrementTimer, projects, setActiveProject } = this.props;
+  const { activeProjectId, decrementTimer, deleteTask, projects, setActiveProject } = this.props;
   const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
   const activeProject = !isNaN(activeProjectIndex) && projects[activeProjectIndex];
   const selectedTasks = activeProject && activeProject.tasks;
@@ -19,6 +19,7 @@ render() {
       <TimeTracker
         activeProject={activeProject || null}
         decrementTimer={decrementTimer}
+        deleteTask={deleteTask}
         projects={projects}
         setActiveProject={setActiveProject}
         tasks={selectedTasks || []}
@@ -38,6 +39,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  deleteTask,
   fetchProjects,
   decrementTimer,
   setActiveProject,

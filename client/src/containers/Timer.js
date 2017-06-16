@@ -41,7 +41,6 @@ class Timer extends Component {
   }
   
   timer () {
-    console.log('started');
     const { 
       activeProject,
       activeTaskId,

@@ -34,7 +34,6 @@ export function resetTimer() {
   }
 }
 
-
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
 export function incrementTaskTime(project, task) {
   
@@ -56,15 +55,7 @@ export function incrementTaskTime(project, task) {
         'Content-Type': 'application/json'
       }
     })
-    .then((res) => {
-      console.log(res)
-      // return res.json();
-    })
-    .then(data => {
-      console.log('update success')
-    })
   }
-  
 }
 
 

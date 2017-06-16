@@ -58,17 +58,19 @@ export default class TimeTracker extends Component {
   }
 
   renderTask (task){
+    const { activeProject, deleteTask } = this.props;
     const { taskName, recordedTime } = task;
     
+    const handleTaskDelete = () => deleteTask(activeProject, task, true);
     return (
       <ListItem
         className="task"
         key={shortid.generate()}
         col1Text={taskName}
         col2Text={secondsToHMMSS(recordedTime)} 
-        >
+      >
         <li className="dropdown-item"><a>Edit</a></li>
-        <li className="dropdown-item"><a>Delete</a></li>
+        <li className="dropdown-item" onClick={handleTaskDelete}><a>Delete</a></li>
       </ListItem>
     ); 
   } 
@@ -128,7 +130,7 @@ export default class TimeTracker extends Component {
             <Timer activeTaskId={activeTaskId} />
             <div className="timer-task-list">
               {this.renderProjectSelect()}
-              <List className="task-list" items={tasks} renderItem={this.renderTask}>
+              <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                 <ListHeader col1Title="Task" col2Title="Time Logged" />
               </List>
               <div className='total-time'>
@@ -136,7 +138,7 @@ export default class TimeTracker extends Component {
                 <span>{secondsToHMMSS(totalTime)}</span>
               </div>
             </div>
-            <button onClick={this.toggleShouldRenderModal.bind(this)}>New Task</button>
+            <button>New Task</button>
             <FormModal
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}

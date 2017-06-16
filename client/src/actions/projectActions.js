@@ -177,12 +177,14 @@ export function deleteProject(project) {
   }
 }
 
-export function deleteTask(projectId, taskId) {
-  const url = `projects/${projectId}/${taskId}`;
+export function deleteTask(project, task, shouldUpdateLocalState) {
   return (dispatch) => {
-    console.log('delete requested')
+    if (shouldUpdateLocalState) {
+      dispatch(deleteTaskRequest(project.shortId, task.shortId));
+    }
+    
     fetch(
-      url,
+      `projects/${project._id}/tasks/${task._id}`,
       {
           method: "DELETE",
           headers: new Headers({
@@ -192,10 +194,6 @@ export function deleteTask(projectId, taskId) {
       })
       .then((res) => {
         console.log('delete successful')
-        
-      })
-      .catch(err => {
-        console.error(err)
       })
   }
 }
