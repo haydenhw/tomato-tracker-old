@@ -1,4 +1,18 @@
-.time-tracker-page-container {
-  width: 50%;
-  margin: 100px auto;
+@import 'variables';
+
+.time-tracker {
+  text-align: center;
 }
+
+.timer-section {
+  padding: 40px;
+  background-color: $timer-background-light-gray;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.timer-container,
+.timer-task-list {
+  width: 50%;
+  margin: 0 auto;
+}
+

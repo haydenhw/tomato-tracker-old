@@ -126,9 +126,13 @@ export default class TimeTracker extends Component {
         const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
         
         return (
-          <div className="countdown-timer">
-            {this.renderTaskSelect()}
-            <Timer activeTaskId={activeTaskId} />
+          <div className="time-tracker">
+            <div className="timer-section">
+              <div className="timer-container">
+                {this.renderTaskSelect()}
+                <Timer activeTaskId={activeTaskId} />
+              </div>
+            </div>
             <div className="timer-task-list">
               {this.renderProjectSelect()}
               <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
