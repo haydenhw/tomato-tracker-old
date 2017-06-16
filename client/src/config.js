@@ -1,4 +1,4 @@
-const productionMode = true;
+const productionMode = false;
 
 export const renderModal = productionMode || false;
 export const showProgressBar = productionMode || false;

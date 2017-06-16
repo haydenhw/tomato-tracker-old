@@ -57,13 +57,11 @@ export function incrementTaskTime(project, task) {
       }
     })
     .then((res) => {
-      return res.json();
+      console.log(res)
+      // return res.json();
     })
     .then(data => {
       console.log('update success')
-    })
-    .catch(err => {
-      console.error(err)
     })
   }
   
