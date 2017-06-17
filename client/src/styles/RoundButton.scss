@@ -4,7 +4,7 @@
   right: 45px;
 }
 
-.round-button {
+.round-button-wrapper {
   position: absolute;
   bottom: 63px;
   right: 54px;
@@ -21,16 +21,14 @@
   overflow:hidden;
   background: #d23f31; 
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-  z-index: 200;
 }
 .round-button-circle:hover {
-  background: red;
+  background: #ef5350;
   cursor: pointer;
 }
 
 .icon-plus {
     position: absolute;
-    z-index: 300;
     color: white;
     font-size: 23px;
     margin-top: 2.9px;
