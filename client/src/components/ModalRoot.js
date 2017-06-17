@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 
 import store from '../redux-files/store';
 
-export default class RootModal extends Component {
+export default class ModalRoot extends Component {
   componentDidMount() {
     this.modalTarget = document.createElement('div');
     this.modalTarget.className = 'modal';
@@ -28,7 +28,11 @@ export default class RootModal extends Component {
     
     ReactDOM.render(
     <Provider store={store}>
-      <div>{children}</div>
+      <div className="one modal-container">
+        <div className="modal-background">
+          {children}
+        </div>
+      </div>
     </Provider>,
     this.modalTarget
     );
@@ -39,6 +43,6 @@ export default class RootModal extends Component {
   }
 }
 
-RootModal.propTypes = {
+ModalRoot.propTypes = {
   children: PropTypes.object.isRequired, 
 }

@@ -123,7 +123,7 @@ export default class Modal extends Component {
     
     return (
       <RootModal>
-        <div className={`modal-content ${modalClass}`} style={style}>
+        <div className={`modal ${modalClass}`} style={style}>
           <span className="modal-close" onClick={handleCloseButtonClick} role="button">&times;</span>
           <div className="modal-scroll-wrapper">
             <h2 className="modal-title">{title}</h2>

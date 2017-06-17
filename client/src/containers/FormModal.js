@@ -102,7 +102,7 @@ class FormModal extends Component {
         isFormModalActive &&
         <Modal 
           handleCloseButtonClick={handleCloseButtonClick}
-          modalClass={"animated slideInLeft"}
+          modalClass={""}
           shouldRender={shouldRenderModal}
           text={""}
           >
