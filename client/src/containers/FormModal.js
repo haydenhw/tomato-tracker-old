@@ -52,6 +52,7 @@ class FormModal extends Component {
     
     switch (modalType) {
       case "WELCOME": 
+        if(elementType)
       return (
         <div>
           <h2>Welcome to PomTracker!</h2>
@@ -78,7 +79,7 @@ class FormModal extends Component {
     }
   }
   
-  renderAnimatedForm() {
+  renderAnimatedElement() {
     const { modalType } = this.props;
     
     return (
