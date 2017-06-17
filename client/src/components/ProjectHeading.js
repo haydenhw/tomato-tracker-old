@@ -14,6 +14,6 @@ export default function ProjectHeading(props) {
 
 ProjectHeading.propTypes = {
   handleClick: PropTypes.string,
-  icon: PropTypes.string.isRequired,
+  iconClass: PropTypes.string,
   text: PropTypes.string.isRequired,
 };

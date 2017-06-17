@@ -21,5 +21,5 @@ export default function RoundButton(props) {
   
   RoundButton.propTypes = {
     clickHandler: PropTypes.func.isRequired,
-    icon: PropTypes.object.isRequired,
+    icon: PropTypes.string.isRequired,
   };

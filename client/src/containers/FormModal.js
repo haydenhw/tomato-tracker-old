@@ -1,7 +1,7 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import shortid from 'shortid';
 
 import { 
@@ -52,74 +52,92 @@ class FormModal extends Component {
     
     switch (modalType) {
       case "WELCOME": 
-        return (
-          <div>
-            <h2>Welcome to PomTracker!</h2>
-            <p>Click below to add you first project</p>
-            <button onClick={this.handleGetStarted.bind(this)}>Get Started</button>
-          </div>
-        );
+      return (
+        <div>
+          <h2>Welcome to PomTracker!</h2>
+          <p>Click below to add you first project</p>
+          <button onClick={this.handleGetStarted.bind(this)}>Get Started</button>
+        </div>
+      );
       case "ADD_PROJECT": 
-        return (
-          <div>
-            <h2 className="project-form-title">Add a project</h2>
-            <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
-          </div>
-        );
+      return (
+        <div>
+          <h2 className="project-form-title">Add a project</h2>
+          <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
+        </div>
+      );
       case "ADD_TASKS": 
-        return (
-          <div>
-            <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
-            <AddTasksFormContainer />
-          </div>
-        ); 
+      return (
+        <div>
+          <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
+          <AddTasksFormContainer />
+        </div>
+      ); 
       default:
       return null;
     }
   }
   
-  render() {
-    const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
+  renderAnimatedForm() {
+    const { modalType } = this.props;
     
     return (
-      isFormModalActive &&
+      <ReactCSSTransitionGroup 
+        transitionAppear={true}
+        transitionAppearTimeout={5000}
+        transitionEnter={false}
+        transitionLeave={false}
+        transitionName="bounceInDown"
+        key={modalType}
+        >
+          {this.renderForm()}			
+        </ReactCSSTransitionGroup>
+      )
+    }
+    
+    render() {
+      const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
+      
+      return (
+        isFormModalActive &&
         <Modal 
           handleCloseButtonClick={handleCloseButtonClick}
+          modalClass={"animated slideInLeft"}
           shouldRender={shouldRenderModal}
           text={""}
           >
-          {this.renderForm()}
-        </Modal> 
-      );
+            {this.renderAnimatedForm()}
+          </Modal> 
+        );
+      }
     }
-  }
-  
-  const mapStateToProps = (state) => {
-    const { activeProjectId, modal, projects } = state;
-    const { isFormModalActive, modalType } = modal;
     
-    const activeProjectName = 
-      activeProjectId
-        ? projects.find(project => project.shortId === activeProjectId).projectName
-        : null;
+    const mapStateToProps = (state) => {
+      const { activeProjectId, modal, projects } = state;
+      const { isFormModalActive, modalType } = modal;
       
-    return {
-      activeProjectName,
-      isFormModalActive,
-      modalType
+      const activeProjectName = 
+      activeProjectId
+      ? projects.find(project => project.shortId === activeProjectId).projectName
+      : null;
+      
+      return {
+        activeProjectName,
+        isFormModalActive,
+        modalType
+      }
     }
-  }
-  
-  export default connect(mapStateToProps, {
-    addTask,
-    changeModalType,
-    postProject,
-    setActiveProject
-  })(FormModal);
-  
-  
-  // FormModal.propTypes = {
-  //   hanldeFormSubmit: PropTypes.func,
-  //   handleCloseButtonClick: PropTypes.func.isRequired,
-  //   shouldRenderModal: PropTypes.bool.isRequired
-  // }
+    
+    export default connect(mapStateToProps, {
+      addTask,
+      changeModalType,
+      postProject,
+      setActiveProject
+    })(FormModal);
+    
+    
+    FormModal.propTypes = {
+      hanldeFormSubmit: PropTypes.func,
+      handleCloseButtonClick: PropTypes.func.isRequired,
+      shouldRenderModal: PropTypes.bool.isRequired
+    }
