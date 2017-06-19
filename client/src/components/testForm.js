@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 
 const colors = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet'];
 
-let EditProjectForm = props => {
+let InitializeFromStateForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -96,20 +96,20 @@ let EditProjectForm = props => {
 };
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-EditProjectForm = reduxForm({
+InitializeFromStateForm = reduxForm({
   form: 'initializeFromState', // a unique identifier for this form
-})(EditProjectForm);
+})(InitializeFromStateForm);
 
 // You have to connect() to any reducers that you wish to connect to yourself
-EditProjectForm = connect(
+InitializeFromStateForm = connect(
   state => {
+    console.log(state.projects)
     
      const firstName = state.projects.length ? state.projects[0].projectName : 'Loading...';
-     console.log(firstName)
     return ({
-    initialValues: {firstName: firstName, age: 22}, //state.account.data, // pull initial values from account reducer
+    initialValues: {firstName: state.activeProjectId, age: 22}, //state.account.data, // pull initial values from account reducer
   })}
   //{ load: loadAccount }, // bind account loading action creator
-)(EditProjectForm);
+)(InitializeFromStateForm);
 
-export default EditProjectForm;
+export default InitializeFromStateForm;

@@ -9,6 +9,7 @@ import App from './containers/App';
 import ProjectFormPage from './containers/ProjectFormPage';
 import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
+import testForm from './components/testForm';
 
 import './index.scss';
 import './styles/icons/styles.css';
@@ -19,6 +20,7 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={TimeTrackerPage}/>
         <Route path="/projects" component={ProjectsPage}/>
+        <Route path="/form" component={testForm}/>
         <Route path="/projects/:projectId" component={ProjectFormPage}/>
       </Route>  
     </Router>
