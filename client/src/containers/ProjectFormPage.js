@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import { addTask, deleteTask, setActiveProject } from '../actions/indexActions';
+import { addTask, deleteTask, editProjectName, setActiveProject } from '../actions/indexActions';
 
 import ProjectForm from '../components/ProjectForm';
 
@@ -24,8 +24,12 @@ class ProjectFormPage extends Component {
     setActiveProject(projectId);
   }
   
-  editProjectName (values) { 
-    console.log(values)
+  editProjectName (props, { projectName }) { 
+    console.log(props)
+    const { editProjectName } = props;
+    
+    console.log(editProjectName);
+    editProjectName(projectName);
   }
   
   addNewTask (values) {
@@ -51,17 +55,14 @@ class ProjectFormPage extends Component {
   }
   
   render() {
-    const { params } = this.props;
+    const { activeProject, editProjectName, params } = this.props;
     const { projectId } = params;
-    
-    const data = getProjects();
-    const activeProject = data.find(project => project.shortId = projectId);
     
     return (
       <ProjectForm 
         project={activeProject}
         projectId={projectId}
-        handleAddTaskSubmit={this.addNewTask}
+        editProjectName={editProjectName}
         handleEditProjectSubmit={this.editProjectName}
         renderFormTask={this.renderFormTask.bind(this)}
       />
@@ -70,9 +71,14 @@ class ProjectFormPage extends Component {
   
   }
   const mapStateToProps = (state) => {
-    const { projects } = state;
+    const { activeProjectId, projects } = state;
+    
+    const activeProject = state.projects.length && activeProjectId 
+    ? projects.find((project) => project.shortId === activeProjectId).projectName
+    : 'No Projects Loaded'
     
     return {
+      activeProject, 
       projects
     }
 }
@@ -84,52 +90,6 @@ ProjectFormPage.propTypes = {
 export default connect(mapStateToProps, { 
   addTask,
   deleteTask,
+  editProjectName, 
   setActiveProject,
 })(ProjectFormPage);  
-
-function getProjects() {
-  return ([
-    {
-      projectName: "Node Capstone",
-      shortId: '123',
-      tasks: [
-        {
-          taskName: 'user flows',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mock up',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mvp',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-      ]
-    },
-    {
-      projectName: "React Capstone",
-      shortId: '456',
-      tasks: [
-        {
-          taskName: 'user flows',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mock up',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-        {
-          taskName: 'mvp',
-          recordedTime: Math.random() * 100,
-          id: shortid.generate()
-        },
-      ]
-    },
-  ])
-}

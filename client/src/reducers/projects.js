@@ -65,6 +65,10 @@ export function projects(state=[], action) {
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         return Object.assign({}, project, { _id: action.databaseId })
       })
+    case actions.EDIT_PROJECT_NAME_REQUEST:
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        return Object.assign({}, project, { projectName: action.projectName })
+      })
     case actions.DELETE_PROJECT_REQUEST:
       const projectIndex = state.findIndex(project => project.shortId === action.project.shortId);
       return state.sliceDelete(projectIndex);

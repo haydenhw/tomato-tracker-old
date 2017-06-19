@@ -14,6 +14,15 @@ export function addProject(projectName) {
   }
 }
 
+export const EDIT_PROJECT_NAME_REQUEST = "EDIT_PROJECT_NAME_REQUEST";
+export function editProjectName(projectId, projectName) {
+  return {
+    type: "EDIT_PROJECT_NAME_REQUEST",
+    projectId,
+    projectName
+  }
+}
+
 export const UPDATE_TASKS = "UPDATE_TASKS";
 export function updateTasks(projectId, newTasks) {
   return {
