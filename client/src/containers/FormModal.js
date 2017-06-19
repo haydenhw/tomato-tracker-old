@@ -16,7 +16,13 @@ import AddProjectForm from '../components/AddProjectForm';
 import AddTasksFormContainer from './AddTasksFormContainer';
 
 class FormModal extends Component {
-  
+  constructor(){
+    super();
+    
+    this.state = {
+      isContentWaiting: true
+    }
+  }
   deleteTask (taskId) {
     this.props.deleteTask('123', '111');
   }
@@ -25,13 +31,21 @@ class FormModal extends Component {
     const { changeModalType, postProject } = this.props;
     
     postProject(projectName)
+    this.toggleIsContentWaiting();
     changeModalType('ADD_TASKS');
   }
   
   handleGetStarted() {
     const { changeModalType } = this.props;
     
+    this.toggleIsContentWaiting();
     changeModalType('ADD_PROJECT');
+  }
+  
+  toggleIsContentWaiting() {
+    const { isContentWaiting } = this.props;
+    
+    this.setState({isContentWaiting: true});
   }
   
   renderFormTask (task) {
@@ -47,98 +61,118 @@ class FormModal extends Component {
     );
   }
   
-  renderForm() {
+  renderFormElement(elementType) {
     const { activeProjectName, modalType } = this.props;
     
-    switch (modalType) {
-      case "WELCOME": 
-        if(elementType)
+    switch (true) {
+      case (modalType === "WELCOME") && (elementType === "TITLE"): 
+      return <h2>Welcome to PomTracker!</h2>;
+      
+      case (modalType === "WELCOME") && (elementType === "CONTENT"): 
       return (
         <div>
-          <h2>Welcome to PomTracker!</h2>
           <p>Click below to add you first project</p>
           <button onClick={this.handleGetStarted.bind(this)}>Get Started</button>
         </div>
       );
-      case "ADD_PROJECT": 
-      return (
-        <div>
-          <h2 className="project-form-title">Add a project</h2>
-          <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
-        </div>
-      );
-      case "ADD_TASKS": 
-      return (
-        <div>
-          <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
-          <AddTasksFormContainer />
-        </div>
-      ); 
+      
+      case (modalType === "ADD_PROJECT") && (elementType === "TITLE"): 
+      return <h2 className="project-form-title">Add a project</h2>;
+      
+      case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
+      return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
+      
+      case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
+      return <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
+      
+      case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
+      return <AddTasksFormContainer />
+      
       default:
       return null;
     }
   }
   
-  renderAnimatedElement() {
+  
+  renderAnimatedElement(elementType) {
     const { modalType } = this.props;
     
     return (
       <ReactCSSTransitionGroup 
         transitionAppear={true}
-        transitionAppearTimeout={5000}
+        transitionAppearTimeout={1000}
         transitionEnter={false}
         transitionLeave={false}
         transitionName="bounceInDown"
-        key={modalType}
+        key={modalType + elementType}
         >
-          {this.renderForm()}			
+          {this.renderFormElement(elementType)}			
         </ReactCSSTransitionGroup>
       )
     }
+  
+  renderAnimatedForm(){
+    const { isContentWaiting } = this.state;
+    const { modalType } = this.props;
     
-    render() {
-      const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
+    if (isContentWaiting === true) {
+      const timeoutDuration = modalType === "WELCOME" ? 1200 : 500;
       
-      return (
-        isFormModalActive &&
-        <Modal 
-          handleCloseButtonClick={handleCloseButtonClick}
-          modalClass={""}
-          shouldRender={shouldRenderModal}
-          text={""}
-          >
-            {this.renderAnimatedForm()}
-          </Modal> 
-        );
-      }
+      setTimeout(()=> this.setState({ isContentWaiting: false }), timeoutDuration);
     }
     
-    const mapStateToProps = (state) => {
-      const { activeProjectId, modal, projects } = state;
-      const { isFormModalActive, modalType } = modal;
-      
-      const activeProjectName = 
-      activeProjectId
-      ? projects.find(project => project.shortId === activeProjectId).projectName
-      : null;
-      
-      return {
-        activeProjectName,
-        isFormModalActive,
-        modalType
-      }
-    }
+    return (
+      <div>
+        {this.renderAnimatedElement("TITLE")}
+        {!isContentWaiting && this.renderAnimatedElement("CONTENT")}
+      </div>
+    )
+  }
+  
+  
+  render() {
+    const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
     
-    export default connect(mapStateToProps, {
-      addTask,
-      changeModalType,
-      postProject,
-      setActiveProject
-    })(FormModal);
-    
-    
-    FormModal.propTypes = {
-      hanldeFormSubmit: PropTypes.func,
-      handleCloseButtonClick: PropTypes.func.isRequired,
-      shouldRenderModal: PropTypes.bool.isRequired
-    }
+    return (
+      isFormModalActive &&
+      <Modal 
+        handleCloseButtonClick={handleCloseButtonClick}
+        modalClass={""}
+        shouldRender={shouldRenderModal}
+        text={""}
+      >
+        {this.renderAnimatedForm()}
+      </Modal> 
+    );
+  }
+}
+  
+const mapStateToProps = (state) => {
+  const { activeProjectId, modal, projects } = state;
+  const { isFormModalActive, modalType } = modal;
+  
+  const activeProjectName = 
+  activeProjectId
+  ? projects.find(project => project.shortId === activeProjectId).projectName
+  : null;
+  
+  return {
+    activeProjectName,
+    isFormModalActive,
+    modalType
+  }
+}
+
+export default connect(mapStateToProps, {
+  addTask,
+  changeModalType,
+  postProject,
+  setActiveProject
+})(FormModal);
+
+
+FormModal.propTypes = {
+  hanldeFormSubmit: PropTypes.func,
+  handleCloseButtonClick: PropTypes.func.isRequired,
+  shouldRenderModal: PropTypes.bool.isRequired
+}
