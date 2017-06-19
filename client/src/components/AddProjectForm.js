@@ -13,10 +13,10 @@ const renderField = ({
   <div>
     <label/>
     <div>
-      <input {...input} autoFocus placeholder="Project name" type={type} />
+      <input {...input} autoFocus className="fullscreen-input add-project-input" placeholder="Project name" type={type} />
       {touched &&
-        ((error && <div>{error}</div>) ||
-        (warning && <span>{warning}</span>))}
+        ((error && <div className="error">{error}</div>) ||
+        (warning && <span className="error">{warning}</span>))}
       </div>
     </div>
   );
@@ -33,11 +33,11 @@ class AddProjectForm extends Component {
       
       return (
         <div>
-          <form id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
+          <form autocomplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
             <div>
               <label htmlFor="projectName"/>
               <Field name="projectName" component={renderField} placeholder="Project name"/>
-              <button type="submit">Sumbit</button>
+              <button type="submit">Continue</button>
               {/* {projectName.touched && error.projectName && <div>{error.projectName}</div> } */}
             </div>
           </form>
@@ -60,12 +60,10 @@ class AddProjectForm extends Component {
     return true;
   }
   
-  const validate = ({ projectName }) => {
-    
-    
+  const validate = (testArg, { projectName }) => {
     const error = {};
     if (!hasAnyValue(projectName)) {
-      error.projectName = "Project name is required test" 
+      error.projectName = "Project name is required" 
     } else {
       
     }
@@ -74,7 +72,7 @@ class AddProjectForm extends Component {
   
   AddProjectForm = reduxForm({
     form: 'addProject',
-    validate,
+    validate: validate.bind(null,"hello"),
   })(AddProjectForm);
   
   export default AddProjectForm;

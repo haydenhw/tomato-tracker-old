@@ -122,7 +122,7 @@ class FormModal extends Component {
     }
     
     return (
-      <div>
+      <div className="fullscreen-form">
         {this.renderAnimatedElement("TITLE")}
         {!isContentWaiting && this.renderAnimatedElement("CONTENT")}
       </div>

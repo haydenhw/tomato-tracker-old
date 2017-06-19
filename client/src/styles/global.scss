@@ -6,3 +6,10 @@ body {
   font-weight: normal !important;
   margin: 0 !important;
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}

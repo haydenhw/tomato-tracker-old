@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -6,29 +6,35 @@ import { editProjectName } from '../actions/indexActions';
 
 
 
-let EditProjectForm = props => {
-  const { activeProjectId, handleSubmit , editProjectName } = props;
-    
-  const handleEditProjectSubmit = ({ projectName }) => {
-    editProjectName(activeProjectId, projectName);
+let EditProjectForm = class extends Component {
+  componentWillUnmount() {
+    const { reset } = this.props;
   }
   
-  return (
-    <form onSubmit={handleSubmit(handleEditProjectSubmit)}>
-      <div>
-        <label>Project Name</label>
+  render() {
+    const { activeProjectId, handleSubmit , editProjectName } = this.props;
+      
+    const handleEditProjectSubmit = ({ projectName }) => {
+      editProjectName(activeProjectId, projectName);
+    }
+    
+    return (
+      <form onSubmit={handleSubmit(handleEditProjectSubmit)}>
         <div>
-          <Field
-            name="projectName"
-            component="input"
-            type="text"
-            placeholder="Project Name"
-          />
-          <input type="submit"/>
+          <label>Project Name</label>
+          <div>
+            <Field
+              name="projectName"
+              component="input"
+              type="text"
+              placeholder="Project Name"
+            />
+            <input type="submit"/>
+          </div>
         </div>
-      </div>
-    </form>
-  );
+      </form>
+    );
+  }
 };
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
