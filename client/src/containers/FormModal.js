@@ -122,7 +122,7 @@ class FormModal extends Component {
     }
     
     return (
-      <div className="fullscreen-form">
+      <div className={`${modalType === "WELCOME" ? 'welcome' : '' } fullscreen-form`}>
         {this.renderAnimatedElement("TITLE")}
         {!isContentWaiting && this.renderAnimatedElement("CONTENT")}
       </div>
