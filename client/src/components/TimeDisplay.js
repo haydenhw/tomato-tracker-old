@@ -9,12 +9,12 @@ import { showProgressBar, devStyle } from '../config'
 import EditInlineText from '../containers/EditInlineText';
 
 export default function TimeDisplay(props) {
-  const { handleButtonClick, isTimerActive, setStartTime, startCount, title, time  } = props;
+  const { handleButtonClick, isTimerActive, isTimerControlActive, setStartTime, startCount, title, time  } = props;
   const progressPercentage = Math.round((1-(time/startCount))*100);
   let displayTime = time || startCount; 
   
   const flippedClass = isTimerActive ? "flip-button flipped" : "flip-button";
-  
+  console.log(isTimerControlActive);
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>
@@ -28,7 +28,10 @@ export default function TimeDisplay(props) {
       <div style={devStyle || null} className="timer-content">
         <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} />
         <div className="timer-control">
-          <div className="flip-button-container" onClick={handleButtonClick}>
+          <div 
+            className={`${isTimerControlActive ? "active": "" } flip-button-container`}  
+            onClick={isTimerControlActive && handleButtonClick}
+            >
             <div className={flippedClass}>
               <div className="side">
                 <FontAwesome className="fa-play" name="fa-play" />

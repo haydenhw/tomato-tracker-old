@@ -1,14 +1,21 @@
+@import 'variables';
+
 body {
   font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
   margin: 12px 0;
 }
 .flip-button-container {
-  cursor: pointer;
   height: 50px;
   perspective: 1000px;
   position: relative;
   width: 50px;
   margin: 0 auto;
+  opacity: .3;
+  
+  &.active {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 .flip-button {
   height: 100%;
@@ -32,17 +39,17 @@ body {
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg);
-  background: white;
+  background: $timer-background-light-gray;
 }
 
-.fa-play {
-  position: absolute;
-  top: 25%;
-  left: 32%;
-}
-
+.fa-play, 
 .fa-stop {
   position: absolute;
   top: 25%;
   left: 25%;
+
+}
+
+.fa-stop {
+  left: 32%;
 }

@@ -33,9 +33,6 @@ export default class Select extends Component {
   
   handleBodyClick (evt) {
     const targetClassNames = evt.target.className.split(' ');
-    console.log(targetClassNames);
-    console.log(targetClassNames.indexOf('option'));
-    console.log(targetClassNames.indexOf('option-item'));
     
     if (
       targetClassNames.indexOf('option') === -1 &&

@@ -24,7 +24,8 @@ export default function DropdownTrigger(props) {
       <ReactCSSTransitionGroup
         transitionName="example"
         transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}>
+        transitionLeaveTimeout={1}
+      >
         {renderContent()}
       </ReactCSSTransitionGroup>
     </div>

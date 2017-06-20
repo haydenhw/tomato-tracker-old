@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { change, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import shortid from 'shortid';
 
 import { deleteTask, postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
@@ -23,7 +23,7 @@ let AddTasksFormContainer = class extends Component {
     this.setState({ tasks });
   }
   
-  addTask({ taskName }) {
+  handleTaskSubmit({ taskName }) {
     const { tasks } = this.state;
         
     const newTask = {
@@ -95,7 +95,7 @@ let AddTasksFormContainer = class extends Component {
       <AddTasksForm 
         handleFormSubmit={this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
-        handleTaskSubmit={this.addTask.bind(this)}
+        handleTaskSubmit={this.handleTaskSubmit.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
         tasks={tasks}
       />
