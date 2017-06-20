@@ -32,11 +32,14 @@ export default class Select extends Component {
   }
   
   handleBodyClick (evt) {
-    const targetClassName = evt.target.className;
+    const targetClassNames = evt.target.className.split(' ');
+    console.log(targetClassNames);
+    console.log(targetClassNames.indexOf('option'));
+    console.log(targetClassNames.indexOf('option-item'));
     
     if (
-      targetClassName !== 'task-select option' &&
-      targetClassName !==  'task-select option-item'
+      targetClassNames.indexOf('option') === -1 &&
+      targetClassNames.indexOf('option-item') === -1
     ) {
       this.setState({ isActive: false });
     }

@@ -3,6 +3,11 @@
 .select {
   font-size: 1.5em;
   
+  .option:hover {
+    background-color: $border-light-grey;
+    cursor: pointer;
+  }
+  
   .grey {
     color: $font-light-grey;
   }
