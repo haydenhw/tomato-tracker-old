@@ -37,7 +37,7 @@ class AddProjectForm extends Component {
             <div>
               <label htmlFor="projectName"/>
               <Field name="projectName" component={renderField} placeholder="Project name"/>
-              <button type="submit">Continue</button>
+              <button className="form-button fullscreen-submit" type="submit">Continue</button>
               {/* {projectName.touched && error.projectName && <div>{error.projectName}</div> } */}
             </div>
           </form>

@@ -10,7 +10,7 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => (
-  <div>
+  <div className="input-wrapper">
     <label/>
     <div>
       <input {...input} autoFocus placeholder="Task name" type={type} />
@@ -38,7 +38,7 @@ export default function AddTasksForm(props) {
           <Field name="taskName" component={renderField}/>
         </form>
         
-        <button className='add-task-form-submit' onClick={handleFormSubmit}>Submit</button>
+        <button className='form-button fullscreen-submit' onClick={handleFormSubmit}>Finish</button>
     </div>
   );
 }

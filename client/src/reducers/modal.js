@@ -3,7 +3,7 @@ import * as actions from 'actions/indexActions';
 const defaultState = {
   isModalActive: false,
   isFormModalActive: true,
-  modalType: 'WELCOME',
+  modalType: 'ADD_TASKS',
   modalProps: null,
 };
 

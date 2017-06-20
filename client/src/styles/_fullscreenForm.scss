@@ -1,0 +1,84 @@
+@import 'variables';
+
+$heading-font-size: 28px;
+$placeholder-font-weight: bold;
+$placeholder-font-size: .75 * $heading-font-size; 
+
+.fullscreen-form {
+  width: 70%;
+  margin: 0 auto;
+  position: static;
+  margin-top: 25vh;
+  text-align: left;
+  font-family: $font-fullscreen-form-heading; 
+  font-weight: bold;
+  max-width: 960px;
+  
+  h2 {
+    font-size: $heading-font-size;
+    color: $heading-faded-black;
+    margin-bottom: 40px;
+  }
+  
+  input {
+    border: none;
+    border-bottom: 1px solid $heading-faded-black;
+    padding-bottom: 10px;
+    margin-bottom: 10px; 
+    width: 100%;
+    display: inline-block;
+    font-size: $placeholder-font-size;
+    font-family: $font-fullscreen-form-heading; 
+  }
+  
+  button {
+    border-radius: 40px;
+    background: none;
+    border: 2.2px solid #232529;
+    padding: 1em 1.9em;
+    font-size: 1.1em;
+    font-family: $font-fullscreen-form-heading; 
+    animation: fadeIn 1400ms ease-in;
+    font-weight: bold; 
+    
+    &.fullscreen-submit {
+      margin: 0 60px 40px 0;
+      padding: 0.7em 1.9em;
+      font-size: 1em;     
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  
+  .error {
+    color: $error-red;
+    font-size: 16px;
+  }
+  
+  input::-webkit-input-placeholder {
+    font-weight: $placeholder-font-weight;
+    font-size: $placeholder-font-size;
+    font-family: $font-fullscreen-form-heading;
+  }
+  
+  input::-moz-placeholder { /* Firefox 18- */
+    font-weight: $placeholder-font-weight;
+    font-size: $placeholder-font-size;
+    font-family: $font-fullscreen-form-heading;
+  }
+  
+  input::-moz-placeholder {  /* Firefox 19+ */
+    font-weight: $placeholder-font-weight;
+    font-size: $placeholder-font-size;
+    font-family: $font-fullscreen-form-heading;
+  }
+  
+  input::-ms-input-placeholder {  
+    font-weight: $placeholder-font-weight;
+    font-size: $placeholder-font-size;
+    font-family: $font-fullscreen-form-heading;
+  }
+  
+}
+

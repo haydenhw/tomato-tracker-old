@@ -72,7 +72,7 @@ class FormModal extends Component {
       return (
         <div>
           <p>Click below to add you first project</p>
-          <button onClick={this.handleGetStarted.bind(this)}>Get Started</button>
+          <button className="form-button" onClick={this.handleGetStarted.bind(this)}>Get Started</button>
         </div>
       );
       

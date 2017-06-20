@@ -44,3 +44,6 @@
 .icon-plus:before {
   content: "\62";
 }
+.icon-cancel:before {
+  content: "\63";
+}

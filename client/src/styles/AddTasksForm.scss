@@ -1,3 +1,5 @@
+@import 'fullscreenForm';
+
 $form-width: 300px;
 $form-margin-left: 30%;
 
@@ -14,33 +16,37 @@ $form-margin-left: 30%;
 .form-task-list {
   margin: 25px auto;
   width: $form-width;
-  min-height: 100px;
   max-height: 275px;
   overflow-y: auto;
   font-size: .75em;
   margin-left: $form-margin-left;
-}
-
-.add-tasks-form {
-  text-align: left;
-  width: $form-width;
-  margin: 0 auto;
-  margin-left: $form-margin-left;
-}
-
-.form-task-list-item {
-  border: 1px solid #000;
-  width: 200px;
-  margin-bottom: 2px;
-  height: 30px;
-}
-
-.form-task-list {
+  
   .button-wrapper {
     width: 20%;
     display: inline-block;
     padding: 10px;
     padding-left: 0;
+    
+    button {
+      animation: none;
+      -webkit-animation: none;
+      padding: 5px;
+      /*border-radius: 50px;
+      cursor: pointer;
+      height: 22px;
+      line-height: 0;
+      padding: 0;
+      width: 22px;
+      background: none;
+      border: 1px solid black;
+      */
+      i {
+        font-size: 17px;
+        padding: 3px;
+      }
+    }
+    
+  
   }
   
   .name-wrapper {
@@ -49,18 +55,26 @@ $form-margin-left: 30%;
     padding: 10px;
     padding-left: 20px;
     display: inline-block;
+    font-size: 1.5em;
   }
   
   button {
     margin: 0;
   }
-  
 }
 
-.add-task-form-submit {
-  font-size: .8em;
-  font-family: sans-serif;
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
+.add-tasks-form {
+  text-align: left;
+  
+  .input-wrapper {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.form-task-list-item {
+  border: 1px solid #000;
+  width: 200px;
+  margin-bottom: 2px;
+  height: 30px;
 }

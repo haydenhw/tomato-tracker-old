@@ -125,22 +125,7 @@ export default class Modal extends Component {
       <RootModal>
         <div className={`modal ${modalClass}`} style={style}>
           <span className="modal-close" onClick={handleCloseButtonClick} role="button">&times;</span>
-          <div className="modal-scroll-wrapper">
-            <h2 className="modal-title">{title}</h2>
-            {this.renderImage()}
-            <div className="modal-text-parent">
-              <div className="modal-text-child">
-                {text.split('\n').map(line => <p key={shortid.generate()}>{line}</p>)}
-              </div>
-            </div>
-            {this.renderList()}
-            {children}
-          </div>
-          <div className="modal-button-wrapper">
-            {this.renderLeftButton()}
-            {this.renderRightButton()}
-              {rightButtonText}
-          </div>
+          {children}
         </div>
       </RootModal>
     );
