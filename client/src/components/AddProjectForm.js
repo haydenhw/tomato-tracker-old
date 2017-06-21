@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
-import List from './List';
+import store from '../redux-files/store';
+import validate from '../helpers/validate';
+
 
 const renderField = ({
   input,
@@ -23,61 +25,30 @@ const renderField = ({
 
 class AddProjectForm extends Component {
   render() {
-    const {
-      error,
-      handleProjectSubmit,
-      handleSubmit,
-      projectName,
-      touched
-    } = this.props;
-      
-      return (
-        <div>
-          <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
-            <div>
-              <label htmlFor="projectName"/>
-              <Field name="projectName" component={renderField} placeholder="Project name"/>
-              <button className="form-button fullscreen-submit" type="submit">Continue</button>
-              {/* {projectName.touched && error.projectName && <div>{error.projectName}</div> } */}
-            </div>
-          </form>
-        </div>
-      );
-    }
+    const { handleProjectSubmit, handleSubmit, projects } = this.props;
+    
+    return (
+      <div>
+        <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
+          <div>
+            <label htmlFor="projectName"/>
+            <Field name="projectName" component={renderField} placeholder="Project name"/>
+            <button className="form-button fullscreen-submit" type="submit">Continue</button>
+          </div>
+        </form>
+      </div>
+    );
   }
+}
   
-  function isUndefined(value) {
-    if (typeof value === 'undefined' || value === undefined) {
-      return true;
-    }
-    return false;
-  }
+AddProjectForm = reduxForm({
+  form: 'addProject',
+  validate: validate(store.getState),
+})(AddProjectForm);
+
+export default AddProjectForm;
   
-  function hasAnyValue(value) {
-    if (isUndefined(value) || String(value).trim() === '') {
-      return false;
-    }
-    return true;
-  }
-  
-  const validate = (testArg, { projectName }) => {
-    const error = {};
-    if (!hasAnyValue(projectName)) {
-      error.projectName = "Project name is required" 
-    } else {
-      
-    }
-    return error;
-  }
-  
-  AddProjectForm = reduxForm({
-    form: 'addProject',
-    validate: validate.bind(null,"hello"),
-  })(AddProjectForm);
-  
-  export default AddProjectForm;
-  
-  /*AddProjectForm.propTypes = {
+AddProjectForm.propTypes = {
   handleProjectSubmit: PropTypes.func,
   handleSubmit: PropTypes.func,
-}*/
+}

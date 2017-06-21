@@ -1,6 +1,6 @@
-const productionMode = true;
+const productionMode = false;
 
-export const renderFormModal = productionMode || false;
+export const renderFormModal = productionMode || true;
 export const showProgressBar = productionMode || false;
 export const devStyle = !productionMode && {
     position: 'static',
@@ -8,3 +8,4 @@ export const devStyle = !productionMode && {
     margin: '0 auto',
     transform: 'translate(0, 0)'
   };
+

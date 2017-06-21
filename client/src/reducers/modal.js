@@ -5,7 +5,7 @@ import { renderFormModal } from '../config'
 const defaultState = {
   isModalActive: false,
   isFormModalActive: renderFormModal,
-  modalType: 'WELCOME',
+  modalType: 'ADD_PROJECT',
   modalProps: null,
 };
 

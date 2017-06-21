@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { change, reduxForm } from 'redux-form';
 import shortid from 'shortid';
 
 import { deleteTask, postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
@@ -23,7 +23,7 @@ let AddTasksFormContainer = class extends Component {
     this.setState({ tasks });
   }
   
-  handleTaskSubmit({ taskName }) {
+  addTask({ taskName }) {
     const { tasks } = this.state;
         
     const newTask = {
@@ -74,11 +74,8 @@ let AddTasksFormContainer = class extends Component {
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        <div className="button-wrapper" onClick={this.toggleShouldDelete(shortId)}>
-          {shouldDelete 
-            ? <button className="restore">Restore</button> 
-            : <button className="delete"><i className="icon icon-cancel"></i></button>
-          }
+        <div className="button-wrapper">
+          <button onClick={this.toggleShouldDelete(shortId)}>{shouldDelete ? 'restore' : 'X' /*&times;*/}</button>
         </div>
         <div className="name-wrapper">
           <span>{taskName}</span>
@@ -95,7 +92,7 @@ let AddTasksFormContainer = class extends Component {
       <AddTasksForm 
         handleFormSubmit={this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
-        handleTaskSubmit={this.handleTaskSubmit.bind(this)}
+        handleTaskSubmit={this.addTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
         tasks={tasks}
       />

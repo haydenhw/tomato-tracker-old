@@ -9,7 +9,7 @@ import {
   changeModalType,
   postProject,
   setActiveProject,
-  toggleIsFormModalActive
+  toggleIsModalActive
 } from '../actions/indexActions';
 
 import Modal from '../components/Modal';
@@ -44,8 +44,6 @@ class FormModal extends Component {
   }
   
   toggleIsContentWaiting() {
-    const { isContentWaiting } = this.props;
-    
     this.setState({isContentWaiting: true});
   }
   
@@ -63,14 +61,14 @@ class FormModal extends Component {
   }
   
   renderFormElement(elementType) {
-    const { activeProjectName, modalType } = this.props;
+    const { activeProjectName, modalType, projects } = this.props;
     
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
       return <h2>Welcome to PomTracker!</h2>;
       
       case (modalType === "WELCOME") && (elementType === "CONTENT"): 
-      return (
+        return (
         <div>
           <p>Click below to add you first project</p>
           <button className="form-button" onClick={this.handleGetStarted.bind(this)}>Get Started</button>
@@ -78,19 +76,19 @@ class FormModal extends Component {
       );
       
       case (modalType === "ADD_PROJECT") && (elementType === "TITLE"): 
-      return <h2 className="project-form-title">Add a project</h2>;
+        return <h2 className="project-form-title">Add a project</h2>;
       
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
-      return <AddProjectForm handleProjectSubmit={this.handleAddProject()} />
+        return <AddProjectForm handleProjectSubmit={this.handleAddProject()} projects={projects} />
       
       case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
-      return <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
+        return <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
       
       case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
-      return <AddTasksFormContainer />
+        return <AddTasksFormContainer />
       
       default:
-      return null;
+        return null;
     }
   }
   
@@ -132,12 +130,12 @@ class FormModal extends Component {
   
   
   render() {
-    const { isFormModalActive, toggleIsFormModalActive } = this.props;
+    const { isFormModalActive } = this.props;
     
     return (
       isFormModalActive &&
       <Modal 
-        handleCloseButtonClick={toggleIsFormModalActive}
+        handleCloseButtonClick={toggleIsModalActive}
         modalClass={""}
         shouldRender={isFormModalActive}
         text={""}
@@ -160,7 +158,8 @@ const mapStateToProps = (state) => {
   return {
     activeProjectName,
     isFormModalActive,
-    modalType
+    modalType,
+    projects
   }
 }
 
@@ -168,8 +167,8 @@ export default connect(mapStateToProps, {
   addTask,
   changeModalType,
   postProject,
-  setActiveProject,
-  toggleIsFormModalActive
+  setActiveProject, 
+  toggleIsModalActive
 })(FormModal);
 
 

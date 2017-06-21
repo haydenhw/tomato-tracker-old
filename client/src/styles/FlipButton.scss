@@ -27,14 +27,17 @@ body {
 .flipped {
   transform: rotateY(-180deg);
 }
+
 .flip-button .side {
   backface-visibility: hidden;
   border-radius: 6px;
   height: 100%;
   position: absolute;
-  overflow: hidden;
-  width: 100%;
+  overflow: hidden 100%;
 }
+
+
+
 .flip-button .back {
   line-height: 150px;
   text-align: center;
