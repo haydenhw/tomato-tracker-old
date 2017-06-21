@@ -5,13 +5,13 @@
 }
 
 .round-button-wrapper {
-  position: absolute;
-  bottom: 63px;
+  position: fixed;
+  bottom: 36px;
   right: 54px;
   width: 46px;
   z-index: 200;
-  
 }
+
 .round-button-circle {
   position: relative;
   width: 100%;

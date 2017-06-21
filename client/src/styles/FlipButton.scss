@@ -10,7 +10,7 @@ body {
   position: relative;
   width: 50px;
   margin: 0 auto;
-  opacity: .3;
+  opacity: .1;
   
   &.active {
     opacity: 1;
@@ -45,11 +45,7 @@ body {
 .fa-play, 
 .fa-stop {
   position: absolute;
-  top: 25%;
-  left: 25%;
-
-}
-
-.fa-stop {
-  left: 32%;
+  // top: 25%;
+  // left: 25%;
+  @include centerVertHoriz();
 }

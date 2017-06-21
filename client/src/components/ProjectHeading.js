@@ -6,8 +6,12 @@ export default function ProjectHeading(props) {
   
   return (
     <div className="project-heading-wrapper" onClick={handleClick}>
-      <h2 className="project-heading">{text}</h2>
-      <i className={iconClass}></i>
+      <h2 className="project-heading">
+        <span>
+          {text}
+          <i className={iconClass}></i>
+        </span>
+      </h2>
     </div>
   );
 }

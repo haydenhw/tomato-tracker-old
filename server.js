@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-const shouldResetDb = false;
 const shouldDeleteDb = false;
+const shouldResetDb = true;
 
 const { PORT, DATABASE_URL } = require('./server-files/config');
 const { Projects } = require('./server-files/models');

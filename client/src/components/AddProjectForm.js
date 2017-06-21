@@ -33,7 +33,7 @@ class AddProjectForm extends Component {
       
       return (
         <div>
-          <form autocomplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
+          <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
             <div>
               <label htmlFor="projectName"/>
               <Field name="projectName" component={renderField} placeholder="Project name"/>

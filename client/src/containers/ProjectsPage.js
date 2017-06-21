@@ -10,6 +10,7 @@ import { deleteProject } from '../actions/projectActions';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
+import TotalTime from '../components/TotalTime';
 
 class ProjectsPage extends Component {
   static defaultProps = {
@@ -24,8 +25,8 @@ class ProjectsPage extends Component {
         ? project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b)
         : 0;
       
-    const handleEdit = () => hashHistory.push(`/projects/${project.shortId}`);
-    const handleDelete = () => deleteProject(project);
+    const handleEdit = () => () => hashHistory.push(`/projects/${project.shortId}`);
+    const handleDelete = (project) => () => deleteProject(project);
     
     return (
       <ListItem 
@@ -34,8 +35,8 @@ class ProjectsPage extends Component {
         col1Text={projectName}
         col2Text={secondsToHMMSS(Math.round(totalTime))}
       >
-        <li className="dropdown-item" onClick={handleEdit}><a>Edit</a></li>
-        <li className="dropdown-item" onClick={handleDelete}><a>Delete</a></li>
+        <li className="dropdown-item" onClick={handleEdit()}><a>Edit</a></li>
+        <li className="dropdown-item" onClick={handleDelete(project)}><a>Delete</a></li>
       </ListItem>
     );
   } 
@@ -63,14 +64,13 @@ class ProjectsPage extends Component {
     
     return (
       <div className='project-page-container'>
-        <ListHeader col1Title="Project" col2Title="Logged Time" />
-        <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
-        <div className='total-time'>
-          <span>Total</span>
-          <span>{secondsToHMMSS(totalTime)}</span>
+        <div className="list-container">
+          <ListHeader col1Title="Project" col2Title="Logged Time" />
+          <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
+          <TotalTime time={secondsToHMMSS(totalTime)} />
         </div>
       </div>
-    )
+    );
   }
 }
 

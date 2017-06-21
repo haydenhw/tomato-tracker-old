@@ -36,7 +36,9 @@
 
 .dropdown-content {
   min-width: 160px;
-  display: block;
+  display: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(1);  
   background-color: #f9f9f9;
   list-style-type: none;
   padding: 5px;
@@ -67,3 +69,4 @@
   color: black;
   font-size: 33px;
 }
+

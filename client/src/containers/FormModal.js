@@ -9,6 +9,7 @@ import {
   changeModalType,
   postProject,
   setActiveProject,
+  toggleIsFormModalActive
 } from '../actions/indexActions';
 
 import Modal from '../components/Modal';
@@ -131,14 +132,14 @@ class FormModal extends Component {
   
   
   render() {
-    const { handleCloseButtonClick, isFormModalActive, shouldRenderModal } = this.props;
+    const { isFormModalActive, toggleIsFormModalActive } = this.props;
     
     return (
       isFormModalActive &&
       <Modal 
-        handleCloseButtonClick={handleCloseButtonClick}
+        handleCloseButtonClick={toggleIsFormModalActive}
         modalClass={""}
-        shouldRender={shouldRenderModal}
+        shouldRender={isFormModalActive}
         text={""}
       >
         {this.renderAnimatedForm()}
@@ -167,12 +168,13 @@ export default connect(mapStateToProps, {
   addTask,
   changeModalType,
   postProject,
-  setActiveProject
+  setActiveProject,
+  toggleIsFormModalActive
 })(FormModal);
 
 
 FormModal.propTypes = {
   hanldeFormSubmit: PropTypes.func,
   handleCloseButtonClick: PropTypes.func.isRequired,
-  shouldRenderModal: PropTypes.bool.isRequired
+  isFormModalActive: PropTypes.bool.isRequired
 }

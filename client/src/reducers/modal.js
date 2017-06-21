@@ -1,8 +1,10 @@
 import * as actions from 'actions/indexActions';
 
+import { renderFormModal } from '../config'
+
 const defaultState = {
   isModalActive: false,
-  isFormModalActive: true,
+  isFormModalActive: renderFormModal,
   modalType: 'WELCOME',
   modalProps: null,
 };

@@ -1,4 +1,5 @@
 @import 'fullscreenForm';
+@import 'variables'; 
 
 $form-width: 300px;
 $form-margin-left: 30%;
@@ -9,7 +10,8 @@ $form-margin-left: 30%;
 
 .add-tasks-form-title {
   span {
-    font-weight: bold;
+    font-weight: bolder;
+    color: $font-light-grey;
   }
 }
 

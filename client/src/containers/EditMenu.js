@@ -52,7 +52,7 @@ export default class NavDropdown extends Component {
       <Dropdown className={className}>
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <FontAwesome className="fa-pencil-square-o" name="fa-pencil-square-o" />
+            <FontAwesome className="edit-menu-icon fa-pencil-square-o" name="fa-pencil-square-o" />
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
             {children}

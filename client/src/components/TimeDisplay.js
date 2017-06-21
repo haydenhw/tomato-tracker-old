@@ -14,7 +14,7 @@ export default function TimeDisplay(props) {
   let displayTime = time || startCount; 
   
   const flippedClass = isTimerActive ? "flip-button flipped" : "flip-button";
-  console.log(isTimerControlActive);
+  
   return (
     <div className="timer">
       <div className="progress-bar-container"></div>

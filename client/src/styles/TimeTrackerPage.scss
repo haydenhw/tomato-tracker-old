@@ -1,5 +1,9 @@
 @import 'variables';
 
+.time-tracker-page-container {
+  padding-bottom: 50px;
+}
+
 .time-tracker {
   text-align: center;
 }
@@ -10,9 +14,8 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.timer-container,
-.timer-task-list {
-  width: 50%;
+.timer-container {
+  width: 60%;
   margin: 0 auto;
 }
 

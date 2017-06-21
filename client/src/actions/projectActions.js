@@ -160,13 +160,11 @@ export function postTask(projectId, task) {
 export const DELETE_PROJECT_REQUEST= 'DELETE_PROJECT_REQUEST';
 export function deleteProject(project) {
   return (dispatch) => {
-    console.log('delete requested')
     dispatch({
       type: 'DELETE_PROJECT_REQUEST',
       project
     })
     
-    console.log('delete requested')
     fetch(
       `projects/${project._id}`,
       {

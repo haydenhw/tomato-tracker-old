@@ -3,6 +3,10 @@
 .select {
   font-size: 1.5em;
   
+  .option {
+    padding: 7px;
+  }
+  
   .option:hover {
     background-color: $border-light-grey;
     cursor: pointer;
@@ -13,18 +17,33 @@
   }
 }
 
-.example-enter {
-  opacity: 0;
-  width: 0;
-  transform:   translateY(200%) translateX(100%) scale(0.3);
+@keyframes scaleTranslate{
+  from { opacity:0; }
 }
-.example-enter.example-enter-active {
+
+.dropdown-enter {
+  opacity: 0;
+  transform:   translateY(-40%) scale(0.9);
+
+}
+.dropdown-enter.dropdown-enter-active {
   opacity: 1;
-  transition: opacity 1s ease, width 1s ease;
-  transform: translateY(0) translateX(0) scale(1);
-  transform: translate3d(0,0,0);
+  transform:   translateY(-50%) scale(1);
   transition-property: transform, opacity, scale;
   transition-duration: 200ms;
-  // transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+  transition: opacity 0.4s, transform 0.4s;
+  // transition-timing-function: cubic-bezier(0.175, 0.665, 0.420, 1), linear;
+}
+
+
+.dropdown-leave {
+  opacity: 1;
+  transform:   translateY(-50%) scale(1);
+}
+
+.dropdown-leave.dropdown-leave-active {
+  opacity: 0;
+  transform:   translateY(-40%) scale(0.9);
+  transition: opacity 0.4s, transform 0.4s;
 }
 

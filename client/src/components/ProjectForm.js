@@ -12,9 +12,10 @@ let EditProjectForm = class extends Component {
   }
   
   render() {
-    const { activeProjectId, handleSubmit , editProjectName } = this.props;
-      
+    const { activeProjectId, change, handleSubmit , editProjectName } = this.props;
+            
     const handleEditProjectSubmit = ({ projectName }) => {
+      
       editProjectName(activeProjectId, projectName);
     }
     

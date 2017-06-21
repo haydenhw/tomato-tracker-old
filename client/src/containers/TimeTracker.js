@@ -13,10 +13,9 @@ import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import ListItem from '../components/ListItem';
 import RoundButton from '../components/RoundButton';
+import TotalTime from '../components/TotalTime';
 import Select from './Select';
 import Timer from './Timer';
-
-import { renderModal } from '../config'
 
 export default class TimeTracker extends Component {
   constructor(props) {
@@ -25,7 +24,6 @@ export default class TimeTracker extends Component {
     const { tasks } = this.props;
     
     this.state = {
-      shouldRenderModal: renderModal,
       activeTaskId: null,
       tasks: tasks,
     }
@@ -62,16 +60,19 @@ export default class TimeTracker extends Component {
   }
 
   renderTask (task){
-    const { activeProject, deleteTask } = this.props;
+    const { activeProject, deleteTask, isTimerActive } = this.props;
+    const { activeTaskId } = this.state;
     const { taskName, recordedTime } = task;
     
     const handleTaskDelete = () => deleteTask(activeProject, task, true);
+    
     return (
       <ListItem
         className="task"
         key={shortid.generate()}
         col1Text={taskName}
         col2Text={secondsToHMMSS(recordedTime)} 
+        isActive={(activeTaskId === task.shortId) && isTimerActive}
       >
         <li className="dropdown-item"><a>Edit</a></li>
         <li className="dropdown-item" onClick={handleTaskDelete}><a>Delete</a></li>
@@ -114,22 +115,25 @@ export default class TimeTracker extends Component {
       }));
       
       return (
-        <Select 
-          className={"project-select"} 
-          handleOptionClick={setActiveProject}
-          items={simplifiedProjects}
-          >
-            <ProjectHeading 
-              text={activeProject ? activeProject.projectName : "No projects added yet"}
-              iconClass={"icon icon-dots-menu"} 
-            />
-          </Select>
+        <div className="project-select-wrapper">
+          <span>Showing tasks for project: </span>
+          <Select 
+            className="project-select"
+            handleOptionClick={setActiveProject}
+            items={simplifiedProjects}
+            >
+              <ProjectHeading 
+                text={activeProject ? activeProject.projectName : "No projects added yet"}
+                iconClass={"icon icon-dots-menu"} 
+              />
+            </Select>
+        </div>
         );
       }
       
       render() {
         const { tasks } = this.props;
-        const { activeTaskId, shouldRenderModal } = this.state;
+        const { activeTaskId, isFormModalActive } = this.state;
         const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
         
         return (
@@ -140,15 +144,12 @@ export default class TimeTracker extends Component {
                 <Timer activeTaskId={activeTaskId} />
               </div>
             </div>
-            <div className="timer-task-list">
+            <div className="timer-task-list list-container">
               {this.renderProjectSelect()}
               <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                 <ListHeader col1Title="Task" col2Title="Time Logged" />
               </List>
-              <div className='total-time'>
-                <span>Total</span>
-                <span>{secondsToHMMSS(totalTime)}</span>
-              </div>
+              <TotalTime time={secondsToHMMSS(totalTime)} />
             </div>
             
             <RoundButton 
@@ -159,7 +160,7 @@ export default class TimeTracker extends Component {
             <FormModal
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-              shouldRenderModal={shouldRenderModal}
+              isActive={isFormModalActive}
             /> 
           </div>
         );
