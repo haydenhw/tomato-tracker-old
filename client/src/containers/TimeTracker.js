@@ -165,10 +165,7 @@ export default class TimeTracker extends Component {
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </div>
             
-            <RoundButton 
-              icon={''}
-              clickHandler={this.handleAddTasks.bind(this)} 
-            />
+            <button className="add-button material-button">ADD TASK</button> 
               
             <FormModal
               form="ADD_PROJECT"

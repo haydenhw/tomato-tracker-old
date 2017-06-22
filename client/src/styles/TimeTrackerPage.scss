@@ -1,4 +1,5 @@
 @import 'variables';
+@import '_materialButton';
 
 .time-tracker-page-container {
   padding-bottom: 50px;
@@ -19,3 +20,9 @@
   margin: 0 auto;
 }
 
+.add-button {
+  position: fixed;
+  bottom: 36px;
+  right: 54px;
+  z-index: 200;
+}
