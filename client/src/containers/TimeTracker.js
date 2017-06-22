@@ -146,7 +146,7 @@ export default class TimeTracker extends Component {
       
       render() {
         const { tasks } = this.props;
-        const { activeTaskId, isFormModalActive } = this.state;
+        const { activeTaskId, isModalActive } = this.state;
         const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
         
         return (
@@ -173,7 +173,7 @@ export default class TimeTracker extends Component {
             <FormModal
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-              isActive={isFormModalActive}
+              isActive={isModalActive}
             /> 
           </div>
         );

@@ -3,7 +3,7 @@ import * as actions from 'actions/indexActions';
 import { renderFormModal } from '../config'
 
 const defaultState = {
-  isFormModalActive: renderFormModal,
+  isModalActive: renderFormModal,
   isModalActive: false,
   isOnboardingActive: renderFormModal, 
   modalType: 'WELCOME',
@@ -19,22 +19,17 @@ export const modal = (state = defaultState, action) => {
         ...state,
         isModalActive: !state.isModalActive,
       };
-      case actions.TOGGLE_IS_FORM_MODAL_ACTIVE:
-      return {
-        ...state,
-        isFormModalActive: !state.isFormModalActive,
-      };
     case actions.TOGGLE_ONBOARD_MODE:
       return {
         ...state,
         rootModalClass: 'roadrunner',
-        isFormModalActive: !state.isFormModalActive,
+        isModalActive: !state.isModalActive,
         isOnboardingActive: !state.isOnboardingActive,
       };
     case actions.TOGGLE_ADD_TASKS_FORM:
       return {
         ...state,
-        isFormModalActive: !state.isFormModalActive,
+        isModalActive: !state.isModalActive,
         modalType: 'ADD_TASKS'
       };
     case actions.CHANGE_MODAL_TYPE:
