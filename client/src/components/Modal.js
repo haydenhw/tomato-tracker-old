@@ -106,6 +106,7 @@ export default class Modal extends Component {
       children, 
       handleCloseButtonClick,
       handleRightButtonClick,
+      rootModalClass,
       modalClass,
       rightButtonClass,
       rightButtonText,
@@ -122,7 +123,7 @@ export default class Modal extends Component {
     }
     
     return (
-      <RootModal>
+      <RootModal className={rootModalClass}>
         <div className={`modal ${modalClass}`} style={style}>
           <span className="modal-close" onClick={handleCloseButtonClick} role="button">&times;</span>
           {children}

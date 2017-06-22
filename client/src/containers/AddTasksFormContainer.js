@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 import { SubmissionError, reduxForm } from 'redux-form';
 
-import { deleteTask, postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
+import { deleteTask, postTask, toggleIsFormModalActive, toggleOnboardMode, updateTasks } from '../actions/indexActions';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
 import AddTasksForm from '../components/AddTasksForm';
@@ -66,7 +66,16 @@ let AddTasksFormContainer = class extends Component {
   
   
   handleFormSubmit (){
-    const { activeProjectId, activeProjectDatabaseId, postTask, updateTasks, toggleIsFormModalActive } = this.props;
+    const { 
+      activeProjectId,
+      activeProjectDatabaseId, 
+      isOnboardingActive,
+      postTask, 
+      updateTasks, 
+      toggleIsFormModalActive, 
+      toggleOnboardMode 
+    } = this.props;
+    
     const { tasks } = this.state;
     
     if (!tasks.length) {
@@ -84,7 +93,7 @@ let AddTasksFormContainer = class extends Component {
       tasks.filter((task) => task.shouldDelete && task._id)
         .forEach((task) => deleteTask(activeProjectDatabaseId, task));
         
-      toggleIsFormModalActive(false);
+      isOnboardingActive ? toggleOnboardMode() : toggleIsFormModalActive(false); 
   }
   
   renderFormTask (task){
@@ -119,7 +128,8 @@ let AddTasksFormContainer = class extends Component {
 }  
 
 const mapStateToProps = (state) => {
-  const { activeProjectId, projects } = state;
+  const { activeProjectId, modal, projects } = state;
+  const { isOnboardingActive } = modal;  
   
   const activeProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
   const activeProject = projects[activeProjectIndex];
@@ -130,6 +140,7 @@ const mapStateToProps = (state) => {
   return {
     activeProjectId,
     activeProjectDatabaseId,
+    isOnboardingActive,
     tasks
   }
 }
@@ -141,6 +152,7 @@ export default AddTasksFormContainer = connect(mapStateToProps, {
   deleteTask,
   postTask,
   toggleIsFormModalActive,
+  toggleOnboardMode,
   updateTasks
 })(AddTasksFormContainer);
 

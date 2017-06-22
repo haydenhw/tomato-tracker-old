@@ -130,12 +130,13 @@ class FormModal extends Component {
   
   
   render() {
-    const { isFormModalActive } = this.props;
+    const { isFormModalActive, rootModalClass } = this.props;
     
     return (
       isFormModalActive &&
       <Modal 
         handleCloseButtonClick={toggleIsModalActive}
+        rootModalClass={rootModalClass} 
         modalClass={""}
         shouldRender={isFormModalActive}
         text={""}
@@ -148,7 +149,7 @@ class FormModal extends Component {
   
 const mapStateToProps = (state) => {
   const { activeProjectId, modal, projects } = state;
-  const { isFormModalActive, modalType } = modal;
+  const { isFormModalActive, rootModalClass, modalType } = modal;
   
   const activeProjectName = 
   activeProjectId
@@ -158,6 +159,7 @@ const mapStateToProps = (state) => {
   return {
     activeProjectName,
     isFormModalActive,
+    rootModalClass,
     modalType,
     projects
   }

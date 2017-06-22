@@ -3,10 +3,12 @@ import * as actions from 'actions/indexActions';
 import { renderFormModal } from '../config'
 
 const defaultState = {
-  isModalActive: false,
   isFormModalActive: renderFormModal,
-  modalType: 'ADD_PROJECT',
+  isModalActive: false,
+  isOnboardingActive: renderFormModal, 
+  modalType: 'ADD_TASKS',
   modalProps: null,
+  rootModalClass: 'unfold'    
 };
 
 export const modal = (state = defaultState, action) => {
@@ -17,10 +19,17 @@ export const modal = (state = defaultState, action) => {
         ...state,
         isModalActive: !state.isModalActive,
       };
-    case actions.TOGGLE_IS_FORM_MODAL_ACTIVE:
+      case actions.TOGGLE_IS_FORM_MODAL_ACTIVE:
       return {
         ...state,
         isFormModalActive: !state.isFormModalActive,
+      };
+    case actions.TOGGLE_ONBOARD_MODE:
+      return {
+        ...state,
+        rootModalClass: 'roadrunner',
+        isModalActive: !state.isFormModalActive,
+        isOnboardingActive: !state.isOnboardingActive,
       };
     case actions.TOGGLE_ADD_TASKS_FORM:
       return {

@@ -24,11 +24,11 @@ export default class ModalRoot extends Component {
   }
 
   _render() {
-    const { children } = this.props;
+    const { children, className} = this.props;
     
     ReactDOM.render(
     <Provider store={store}>
-      <div className="unfold modal-container">
+      <div className={` ${'roadrunner' || className} modal-container`}>
         <div className="modal-background">
           {children}
         </div>

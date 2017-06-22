@@ -10,6 +10,11 @@ export const toggleIsFormModalActive = () => ({
   type: 'TOGGLE_IS_FORM_MODAL_ACTIVE',
 });
 
+export const TOGGLE_ONBOARD_MODE = 'TOGGLE_ONBOARD_MODE';
+export const toggleOnboardMode = () => ({
+  type: 'TOGGLE_ONBOARD_MODE',
+});
+
 export const TOGGLE_ADD_TASKS_FORM = 'TOGGLE_ADD_TASKS_FORM';
 export const toggleAddTasksForm = () => ({
   type: 'TOGGLE_ADD_TASKS_FORM',

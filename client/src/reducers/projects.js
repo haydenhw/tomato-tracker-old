@@ -21,12 +21,6 @@ Array.prototype.sliceDelete = function(index) {
 function tasks(state, action) {
   switch(action.type) {
     case actions.UPDATE_TASKS:
-      console.log(action)
-      console.log(
-        state.mapAndFindById('shortId', action.projectId, (project) => {
-        return Object.assign({}, project, { tasks: action.newTasks })
-      })[0].tasks
-)
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         return Object.assign({}, project, { tasks: action.newTasks })
       });
