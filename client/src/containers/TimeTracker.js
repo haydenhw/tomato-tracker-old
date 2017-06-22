@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import Isvg from 'react-inlinesvg';
-
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -53,6 +52,10 @@ export default class TimeTracker extends Component {
     }
     
     this.setState(newModalState);
+  }
+  
+  handleAddTasks() {
+    const { toggleAddTasksForm } = this.props;
   }
 
   handleTaskChange(taskId){
@@ -115,19 +118,19 @@ export default class TimeTracker extends Component {
       }));
       
       return (
-        <div className="project-select-wrapper">
-          <span>Showing tasks for project: </span>
-          <Select 
-            className="project-select"
-            handleOptionClick={setActiveProject}
-            items={simplifiedProjects}
-            >
-              <ProjectHeading 
-                text={activeProject ? activeProject.projectName : "No projects added yet"}
-                iconClass={"icon icon-dots-menu"} 
-              />
-            </Select>
-        </div>
+          <div className="project-select-wrapper">
+            <span>Showing tasks for project: </span>
+            <Select 
+              className="project-select"
+              handleOptionClick={setActiveProject}
+              items={simplifiedProjects}
+              >
+                <ProjectHeading 
+                  text={activeProject ? activeProject.projectName : "No projects added yet"}
+                  iconClass={"icon icon-dots-menu"} 
+                />
+              </Select>
+          </div>
         );
       }
       
@@ -154,7 +157,7 @@ export default class TimeTracker extends Component {
             
             <RoundButton 
               icon={''}
-              clickHandler={() => console.log('hello round')} 
+              clickHandler={this.handleAddTasks.bind(this)} 
             />
               
             <FormModal

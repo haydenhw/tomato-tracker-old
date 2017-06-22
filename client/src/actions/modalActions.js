@@ -10,6 +10,12 @@ export const toggleIsFormModalActive = () => ({
   type: 'TOGGLE_IS_FORM_MODAL_ACTIVE',
 });
 
+export const TOGGLE_ADD_TASKS_FORM = 'TOGGLE_ADD_TASKS_FORM';
+export const toggleAddTasksForm = () => ({
+  type: 'TOGGLE_ADD_TASKS_FORM',
+});
+
+
 export const CHANGE_MODAL_TYPE = 'CHANGE_MODAL_TYPE';
 export const changeModalType = modalType => ({
   type: 'CHANGE_MODAL_TYPE',

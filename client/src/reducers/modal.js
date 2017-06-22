@@ -22,6 +22,12 @@ export const modal = (state = defaultState, action) => {
         ...state,
         isFormModalActive: !state.isFormModalActive,
       };
+    case actions.TOGGLE_ADD_TASKS_FORM:
+      return {
+        ...state,
+        isFormModalActive: !state.isFormModalActive,
+        modalType: 'ADD_TASKS'
+      };
     case actions.CHANGE_MODAL_TYPE:
       return {
         ...state,

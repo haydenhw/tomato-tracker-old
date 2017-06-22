@@ -72,6 +72,10 @@
    }
 }
 
+.list-item:not(.list-item-header):hover {
+  background-color: #F5F5F5; 
+  cursor: pointer; 
+}
 .total {
   span {
     color: #808080;
