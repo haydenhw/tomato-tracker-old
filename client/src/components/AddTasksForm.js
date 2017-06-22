@@ -1,8 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field, SubmissionError } from 'redux-form';
 
 import List from './List';
+
+function submit(values) {
+
+    if (true) {
+      throw new SubmissionError({
+        taskName: 'User does not exist',
+        _error: 'Login failed!',
+      });
+    } else if (false) {
+      throw new SubmissionError({
+        password: 'Wrong password',
+        _error: 'Login failed!',
+      });
+    } else {
+      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+    }
+
+}
 
 const renderField = ({
   input,
@@ -15,14 +33,15 @@ const renderField = ({
     <div>
       <input {...input} autoFocus placeholder="Task name" type={type} />
       {touched &&
-        ((error && <div>{error}</div>) ||
-        (warning && <span>{warning}</span>))}
+        ((error && <div className="error">{error}</div>) ||
+        (warning && <span className="error">{warning}</span>))}
       </div>
     </div>
   );
 
 export default function AddTasksForm(props) {
     const {
+      error,
       handleFormSubmit,
       handleTaskSubmit,
       handleSubmit,
@@ -38,18 +57,11 @@ export default function AddTasksForm(props) {
           <Field name="taskName" component={renderField}/>
         </form>
         
-        <button className='form-button fullscreen-submit' onClick={handleFormSubmit}>Finish</button>
+        <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>Finish</button>
     </div>
   );
 }
 
-const validate = values => {
-  if(values) {
-    
-    } else {
-  }
-}
- 
 /*AddTasksForm = reduxForm({
   form: 'addProjec',
   validate,

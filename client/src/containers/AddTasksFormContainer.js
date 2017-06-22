@@ -1,10 +1,11 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { change, reduxForm } from 'redux-form';
 import shortid from 'shortid';
+import { SubmissionError, reduxForm } from 'redux-form';
 
 import { deleteTask, postTask, toggleIsFormModalActive, updateTasks } from '../actions/indexActions';
+import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
 import AddTasksForm from '../components/AddTasksForm';
 
@@ -23,9 +24,20 @@ let AddTasksFormContainer = class extends Component {
     this.setState({ tasks });
   }
   
-  addTask({ taskName }) {
+  handleAddTask({ taskName }) {
     const { tasks } = this.state;
-        
+    const taskNames = tasks.map(task => taskName);
+
+    if(!hasAnyValue(taskName)) {
+      return null;
+    };;
+    
+    if (isDuplicate(taskName, )) {
+      throw new SubmissionError({
+        taskName: `A task with the name '${taskName}' already exists`,
+      })
+    }    
+    
     const newTask = {
       taskName,
       key: shortid.generate(),
@@ -56,17 +68,22 @@ let AddTasksFormContainer = class extends Component {
     const { activeProjectId, activeProjectDatabaseId, postTask, updateTasks, toggleIsFormModalActive } = this.props;
     const { tasks } = this.state;
     
+    if (!tasks.length) {
+      throw new SubmissionError({
+        taskName: 'Please add at least one task',
+      })
+    }    
+    
     const newTasks = tasks.filter((task) => !task.shouldDelete);
-    
-    updateTasks(activeProjectId, newTasks);
-    
-    newTasks.filter((task) => !task._id)
-      .forEach((task) => postTask(activeProjectDatabaseId, task));
+      updateTasks(activeProjectId, newTasks);
       
-    tasks.filter((task) => task.shouldDelete && task._id)
-      .forEach((task) => deleteTask(activeProjectDatabaseId, task));
-      
-    toggleIsFormModalActive(false);
+      newTasks.filter((task) => !task._id)
+        .forEach((task) => postTask(activeProjectDatabaseId, task));
+        
+      tasks.filter((task) => task.shouldDelete && task._id)
+        .forEach((task) => deleteTask(activeProjectDatabaseId, task));
+        
+      toggleIsFormModalActive(false);
   }
   
   renderFormTask (task){
@@ -92,7 +109,7 @@ let AddTasksFormContainer = class extends Component {
       <AddTasksForm 
         handleFormSubmit={this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
-        handleTaskSubmit={this.addTask.bind(this)}
+        handleTaskSubmit={this.handleAddTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
         tasks={tasks}
       />
