@@ -9,7 +9,7 @@ import store from '../redux-files/store';
 export default class ModalRoot extends Component {
   componentDidMount() {
     this.modalTarget = document.createElement('div');
-    this.modalTarget.className = 'modal';
+    // this.modalTarget.className = 'modal';
     document.body.appendChild(this.modalTarget);
     this._render();
   }
