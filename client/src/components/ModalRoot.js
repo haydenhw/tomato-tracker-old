@@ -28,7 +28,7 @@ export default class ModalRoot extends Component {
     
     ReactDOM.render(
     <Provider store={store}>
-      <div className="one modal-container">
+      <div className="unfold modal-container">
         <div className="modal-background">
           {children}
         </div>

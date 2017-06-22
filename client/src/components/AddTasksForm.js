@@ -4,24 +4,6 @@ import { Field, SubmissionError } from 'redux-form';
 
 import List from './List';
 
-function submit(values) {
-
-    if (true) {
-      throw new SubmissionError({
-        taskName: 'User does not exist',
-        _error: 'Login failed!',
-      });
-    } else if (false) {
-      throw new SubmissionError({
-        password: 'Wrong password',
-        _error: 'Login failed!',
-      });
-    } else {
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-    }
-
-}
-
 const renderField = ({
   input,
   label,
