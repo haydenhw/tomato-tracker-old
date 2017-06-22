@@ -24,15 +24,29 @@ let AddTasksFormContainer = class extends Component {
     this.setState({ tasks });
   }
   
+  toggleShouldDelete = (taskId) => () => {
+    const { tasks } = this.state;
+    const newTasks = tasks.map(task => {
+      if (task.shortId === taskId) {
+        const shouldDelete = !task.shouldDelete;
+        return Object.assign({}, task, { shouldDelete })
+      }
+      
+      return task;
+    })
+    
+    this.setState({ tasks: newTasks })
+  }
+  
   handleAddTask({ taskName }) {
     const { tasks } = this.state;
-    const taskNames = tasks.map(task => taskName);
-
-    if(!hasAnyValue(taskName)) {
-      return null;
-    };;
+    const taskNames = tasks.map(task => task.taskName);
     
-    if (isDuplicate(taskName, )) {
+    if (!hasAnyValue(taskName)) {
+      return null;
+    }
+    
+    if (isDuplicate(taskName, taskNames)) {
       throw new SubmissionError({
         taskName: `A task with the name '${taskName}' already exists`,
       })
@@ -50,19 +64,6 @@ let AddTasksFormContainer = class extends Component {
     this.props.change('taskName', '')
   }
   
-  toggleShouldDelete = (taskId) => () => {
-    const { tasks } = this.state;
-    const newTasks = tasks.map(task => {
-      if (task.shortId === taskId) {
-        const shouldDelete = !task.shouldDelete;
-        return Object.assign({}, task, { shouldDelete })
-      }
-      
-      return task;
-    })
-    
-    this.setState({ tasks: newTasks })
-  }
   
   handleFormSubmit (){
     const { activeProjectId, activeProjectDatabaseId, postTask, updateTasks, toggleIsFormModalActive } = this.props;
@@ -117,17 +118,9 @@ let AddTasksFormContainer = class extends Component {
   }
 }  
 
-const validate = values => {
-  if(values) {
-    
-  } else {
-  }
-}
-
 const mapStateToProps = (state) => {
-  const { projects } = state;
+  const { activeProjectId, projects } = state;
   
-  const activeProjectId = projects[projects.length - 1].shortId;
   const activeProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
   const activeProject = projects[activeProjectIndex];
   const activeProjectDatabaseId = activeProject._id;
@@ -142,7 +135,6 @@ const mapStateToProps = (state) => {
 }
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
-  validate,
 })(AddTasksFormContainer);
 
 export default AddTasksFormContainer = connect(mapStateToProps, {

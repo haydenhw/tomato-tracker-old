@@ -56,6 +56,8 @@ export default class TimeTracker extends Component {
   
   handleAddTasks() {
     const { toggleAddTasksForm } = this.props;
+    
+    toggleAddTasksForm();
   }
 
   handleTaskChange(taskId){
