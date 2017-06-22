@@ -25,7 +25,9 @@ export default class NavDropdown extends Component {
     }
   }
 
-  toggleIsActive() {
+  toggleIsActive(e) {
+    e.stopPropagation();
+    
     const { isActive } = this.state;
     
     document.body.addEventListener('click', this.handleBodyClick);

@@ -28,7 +28,7 @@ export default class ModalRoot extends Component {
     
     ReactDOM.render(
     <Provider store={store}>
-      <div className={` ${'roadrunner' || className} modal-container`}>
+      <div className={` ${className} modal-container`}>
         <div className="modal-background">
           {children}
         </div>

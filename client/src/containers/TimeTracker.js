@@ -32,6 +32,14 @@ export default class TimeTracker extends Component {
     tasks: []
   }
   
+  componentDidMount() {
+    console.log()
+    if (!localStorage.getItem('isFirstUserVisit')) {
+      localStorage.setItem('isFirstUserVisit', 'true');
+    } else {
+      localStorage.removeItem('isFirstUserVisit');
+    }
+  }
   componentWillReceiveProps(nextProps) {
       /*  if(nextProps.tasks !== this.props.tasks) {
       this.setState({

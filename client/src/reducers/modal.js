@@ -6,7 +6,7 @@ const defaultState = {
   isFormModalActive: renderFormModal,
   isModalActive: false,
   isOnboardingActive: renderFormModal, 
-  modalType: 'ADD_TASKS',
+  modalType: 'WELCOME',
   modalProps: null,
   rootModalClass: 'unfold'    
 };
@@ -28,7 +28,7 @@ export const modal = (state = defaultState, action) => {
       return {
         ...state,
         rootModalClass: 'roadrunner',
-        isModalActive: !state.isFormModalActive,
+        isFormModalActive: !state.isFormModalActive,
         isOnboardingActive: !state.isOnboardingActive,
       };
     case actions.TOGGLE_ADD_TASKS_FORM:

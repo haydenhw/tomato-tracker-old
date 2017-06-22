@@ -24,7 +24,7 @@ let AddTasksFormContainer = class extends Component {
     this.setState({ tasks });
   }
   
-  toggleShouldDelete = (taskId) => () => {
+  toggleShouldDelete = (taskId) => (e) => {
     const { tasks } = this.state;
     const newTasks = tasks.map(task => {
       if (task.shortId === taskId) {
@@ -39,7 +39,7 @@ let AddTasksFormContainer = class extends Component {
   }
   
   handleAddTask({ taskName }) {
-    const { tasks } = this.state;
+    const { tasks } = this.state
     const taskNames = tasks.map(task => task.taskName);
     
     if (!hasAnyValue(taskName)) {

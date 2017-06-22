@@ -9,7 +9,7 @@ import {
   changeModalType,
   postProject,
   setActiveProject,
-  toggleIsModalActive
+  toggleIsFormModalActive
 } from '../actions/indexActions';
 
 import Modal from '../components/Modal';
