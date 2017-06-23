@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteTask, decrementTimer, fetchProjects, setActiveProject, toggleAddTasksForm  } from '../actions/indexActions';
+import { deleteTask, decrementTimer, fetchProjects, setActiveProject, toggleAddTasksForm, toggleEditTasksForm  } from '../actions/indexActions';
 
 
 import TimeTracker from './TimeTracker';
@@ -9,7 +9,16 @@ import TimeTracker from './TimeTracker';
 class TimeTrackerPage extends Component {
 
 render() {
-  const { activeProjectId, decrementTimer, deleteTask, isTimerActive, projects, setActiveProject, toggleAddTasksForm } = this.props;
+  const { 
+    activeProjectId,
+    decrementTimer,
+    deleteTask,
+    isTimerActive,
+    projects,
+    setActiveProject,
+    toggleAddTasksForm, 
+    toggleEditTasksForm
+  } = this.props;
   const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
   const activeProject = !isNaN(activeProjectIndex) && projects[activeProjectIndex];
   const selectedTasks = activeProject && activeProject.tasks;
@@ -25,6 +34,7 @@ render() {
         setActiveProject={setActiveProject}
         tasks={selectedTasks || []}
         toggleAddTasksForm={toggleAddTasksForm} 
+        toggleEditTasksForm={toggleEditTasksForm}
       />
     </div>
   );
@@ -47,7 +57,9 @@ export default connect(mapStateToProps, {
   fetchProjects,
   decrementTimer,
   setActiveProject,
-  toggleAddTasksForm 
+  toggleAddTasksForm,
+  toggleEditTasksForm 
+  
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

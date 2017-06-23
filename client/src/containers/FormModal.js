@@ -14,7 +14,9 @@ import {
 
 import Modal from '../components/Modal';
 import AddProjectForm from '../components/AddProjectForm';
+import EditTaskForm from '../components/EditTaskForm';
 import AddTasksFormContainer from './AddTasksFormContainer';
+
 
 class FormModal extends Component {
   constructor(){
@@ -61,7 +63,7 @@ class FormModal extends Component {
   }
   
   renderFormElement(elementType) {
-    const { activeProjectName, modalType, projects } = this.props;
+    const { activeProjectName, clickedTaskId, modalType, projects } = this.props;
     
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
@@ -86,7 +88,10 @@ class FormModal extends Component {
       
       case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
         return <AddTasksFormContainer />
-      
+        
+      case (modalType === "EDIT_TASK") &&  (elementType === "CONTENT"):
+          return <EditTaskForm clickedTaskId={clickedTaskId} />
+        
       default:
         return null;
     }

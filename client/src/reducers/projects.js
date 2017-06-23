@@ -1,5 +1,4 @@
 import  * as actions from '../actions/indexActions'
-import shortid from 'shortid';
 
 Array.prototype.mapAndFindById = function (idKey, id, callback) {
   return this.map((element, index) => {
@@ -47,6 +46,15 @@ function tasks(state, action) {
         
         return Object.assign({}, project, { tasks: newTasks });
       });
+
+    case actions.EDIT_TASK_REQUEST:
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
+          console.log(Object.assign({}, task, action.toUpdate))
+          return Object.assign({}, task, action.toUpdate);
+        });
+        return Object.assign({}, project, { tasks: newTasks });
+      });
     default:
     return state;
   }
@@ -76,6 +84,8 @@ export function projects(state=[], action) {
       return tasks(state, action);
     case actions.POST_TASK_SUCCESS:
       return tasks(state,action);
+    case actions.EDIT_TASK_REQUEST: 
+      return tasks(state, action);
     case actions.DELETE_TASK_REQUEST: 
       return tasks(state, action);
     case actions.INCREMENT_TASK_TIME: 

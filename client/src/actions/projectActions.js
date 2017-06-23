@@ -23,6 +23,16 @@ export function editProjectName(projectId, projectName) {
   }
 }
 
+export const EDIT_TASK_REQUEST = "EDIT_TASK_REQUEST";
+export function editTask(projectId, taskId, toUpdate) {
+  return {
+    type: "EDIT_TASK_REQUEST",
+    projectId,
+    taskId,
+    toUpdate
+  }
+}
+
 export const UPDATE_TASKS = "UPDATE_TASKS";
 export function updateTasks(projectId, newTasks) {
   return {

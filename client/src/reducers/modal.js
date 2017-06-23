@@ -4,9 +4,8 @@ import { renderFormModal } from '../config'
 
 const defaultState = {
   isModalActive: renderFormModal,
-  isModalActive: false,
   isOnboardingActive: renderFormModal, 
-  modalType: 'WELCOME',
+  modalType: 'EDIT_TASK',
   modalProps: null,
   rootModalClass: 'unfold'    
 };
@@ -31,6 +30,12 @@ export const modal = (state = defaultState, action) => {
         ...state,
         isModalActive: !state.isModalActive,
         modalType: 'ADD_TASKS'
+      };
+    case actions.TOGGLE_EDIT_TASK_FORM:
+      return {
+        ...state,
+        isModalActive: !state.isModalActive,
+        modalType: 'EDIT_TASK'
       };
     case actions.CHANGE_MODAL_TYPE:
       return {

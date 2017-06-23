@@ -24,6 +24,7 @@ export default class TimeTracker extends Component {
     
     this.state = {
       activeTaskId: null,
+      clickedTaskId: null,
       tasks: tasks,
     }
   }
@@ -33,7 +34,6 @@ export default class TimeTracker extends Component {
   }
   
   componentDidMount() {
-    console.log()
     if (!localStorage.getItem('isFirstUserVisit')) {
       localStorage.setItem('isFirstUserVisit', 'true');
     } else {
@@ -67,6 +67,13 @@ export default class TimeTracker extends Component {
     
     toggleAddTasksForm();
   }
+  
+  handleEditTask = (taskId) => () => {
+    const { toggleEditTasksForm } = this.props;
+    
+    toggleEditTasksForm();
+    this.setState({ clickedTaskId: taskId});
+  } 
 
   handleTaskChange(taskId){
     this.setState({ activeTaskId: taskId });
@@ -75,7 +82,7 @@ export default class TimeTracker extends Component {
   renderTask (task){
     const { activeProject, deleteTask, isTimerActive } = this.props;
     const { activeTaskId } = this.state;
-    const { taskName, recordedTime } = task;
+    const { shortId, taskName, recordedTime } = task;
     
     const handleTaskDelete = () => deleteTask(activeProject, task, true);
     
@@ -87,7 +94,7 @@ export default class TimeTracker extends Component {
         col2Text={secondsToHMMSS(recordedTime)} 
         isActive={(activeTaskId === task.shortId) && isTimerActive}
       >
-        <li className="dropdown-item"><a>Edit</a></li>
+        <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
         <li className="dropdown-item" onClick={handleTaskDelete}><a>Delete</a></li>
       </ListItem>
     ); 
@@ -146,9 +153,8 @@ export default class TimeTracker extends Component {
       
       render() {
         const { tasks } = this.props;
-        const { activeTaskId, isModalActive } = this.state;
+        const { activeTaskId, clickedTaskId, isModalActive } = this.state;
         const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
-        
         return (
           <div className="time-tracker">
             <div className="timer-section">
@@ -168,6 +174,7 @@ export default class TimeTracker extends Component {
             <button className="add-button material-button">ADD TASK</button> 
               
             <FormModal
+              clickedTaskId={clickedTaskId}
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
               isActive={isModalActive}

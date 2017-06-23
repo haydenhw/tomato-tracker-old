@@ -15,6 +15,11 @@ export const toggleAddTasksForm = () => ({
   type: 'TOGGLE_ADD_TASKS_FORM',
 });
 
+export const TOGGLE_EDIT_TASK_FORM = 'TOGGLE_EDIT_TASK_FORM';
+export const toggleEditTasksForm = () => ({
+  type: 'TOGGLE_EDIT_TASK_FORM',
+});
+
 
 export const CHANGE_MODAL_TYPE = 'CHANGE_MODAL_TYPE';
 export const changeModalType = modalType => ({

@@ -1,4 +1,4 @@
-const renderModal = true;
+const renderModal = true; 
 const productionMode = false;
 
 export const renderFormModal = productionMode || renderModal; 

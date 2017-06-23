@@ -6,7 +6,7 @@ import Dropdown from '../components/Dropdown';
 import DropdownTrigger from '../components/DropdownTrigger';
 import DropdownContent from '../components/DropdownContent';
 
-export default class NavDropdown extends Component {
+export default class EditMenu extends Component {
   constructor() {
     super();
 

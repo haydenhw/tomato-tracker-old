@@ -2,25 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { editProjectName } from '../actions/indexActions';
+import { editTask } from '../actions/indexActions';
 
-let EditProjectForm = class extends Component {
+let EditTaskForm = class extends Component {
   render() {
-    const handleEditProjectSubmit = ({ projectName }) => {
-      
-      editProjectName(activeProjectId, projectName);
+    const { activeProjectId, clickedTaskId, editTask, handleSubmit } = this.props;
+    
+    const handleEditTaskSubmit = ({ taskName }) => {
+      editTask(activeProjectId, clickedTaskId, { taskName });
     }
     
     return (
-      <form onSubmit={handleSubmit(handleEditProjectSubmit)}>
+      <form onSubmit={handleSubmit(handleEditTaskSubmit)}>
         <div>
-          <label>Project Name</label>
+          <label>Task Name</label>
           <div>
             <Field
-              name="projectName"
+              name="taskName"
               component="input"
               type="text"
-              placeholder="Project Name"
+              placeholder="Task Name"
             />
             <input type="submit"/>
           </div>
@@ -31,12 +32,12 @@ let EditProjectForm = class extends Component {
 };
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-EditProjectForm = reduxForm({
-  form: 'initializeFromState', // a unique identifier for this form
-})(EditProjectForm);
+EditTaskForm = reduxForm({
+  form: 'EditTaskForm', // a unique identifier for this form
+})(EditTaskForm);
 
 // You have to connect() to any reducers that you wish to connect to yourself
-EditProjectForm = connect(
+EditTaskForm = connect(
   state => {
     const { activeProjectId, projects } = state;
     
@@ -46,9 +47,8 @@ EditProjectForm = connect(
     
     return ({
       activeProjectId, 
-      initialValues: { projectName }, 
+      initialValues: { taskName: 'test' }, 
     })
-  }
-)(EditProjectForm);
+  }, { editTask })(EditTaskForm);
 
-export default EditProjectForm;
+export default EditTaskForm;
