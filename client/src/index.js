@@ -11,6 +11,7 @@ import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
 import testForm from './components/testForm';
 
+import './helpers/polyfill.js';
 import './index.scss';
 import './styles/icons/styles.css';
 

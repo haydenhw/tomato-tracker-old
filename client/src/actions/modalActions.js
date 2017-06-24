@@ -16,8 +16,14 @@ export const toggleAddTasksForm = () => ({
 });
 
 export const TOGGLE_EDIT_TASK_FORM = 'TOGGLE_EDIT_TASK_FORM';
-export const toggleEditTasksForm = () => ({
+export const toggleEditTaskForm = () => ({
   type: 'TOGGLE_EDIT_TASK_FORM',
+});
+
+export const CONFIRM_EDIT_TASK = 'CONFIRM_EDIT_TASK';
+export const confirmEditTask = (modalProps) => ({
+  type: 'CONFIRM_EDIT_TASK',
+  modalProps
 });
 
 

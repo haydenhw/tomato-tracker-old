@@ -7,14 +7,17 @@ import shortid from 'shortid';
 import { 
   addTask,
   changeModalType,
+  confirmEditTaskTime,
   postProject,
   setActiveProject,
   toggleIsModalActive
 } from '../actions/indexActions';
 
+
 import Modal from '../components/Modal';
 import AddProjectForm from '../components/AddProjectForm';
 import EditTaskForm from '../components/EditTaskForm';
+import ConfirmEditTask from './ConfirmEditTask';
 import AddTasksFormContainer from './AddTasksFormContainer';
 
 
@@ -63,8 +66,9 @@ class FormModal extends Component {
   }
   
   renderFormElement(elementType) {
-    const { activeProjectName, clickedTaskId, modalType, projects } = this.props;
+    const { activeProjectName, clickedTaskId, modalProps, modalType, projects } = this.props;
     
+    console.log(modalType, elementType)
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
       return <h2>Welcome to PomTracker!</h2>;
@@ -91,8 +95,16 @@ class FormModal extends Component {
         
       case (modalType === "EDIT_TASK") &&  (elementType === "CONTENT"):
           return <EditTaskForm clickedTaskId={clickedTaskId} />
-        
+          
+      case (modalType === "CONFIRM_EDIT_TASK ") &&  (elementType === "CONTENT"):
+          return <EditTaskForm clickedTaskId={clickedTaskId} />
+      
+      case (modalType === "CONFIRM_EDIT_TASK") && (elementType === "CONTENT" || elementType === "TITLE"):
+        console.log('holalala')
+        //return <ConfirmEditTask {...modalProps} /> 
+        return <div> Hello world</div>
       default:
+        console.log('returning null')
         return null;
     }
   }
@@ -154,7 +166,7 @@ class FormModal extends Component {
   
 const mapStateToProps = (state) => {
   const { activeProjectId, modal, projects } = state;
-  const { isModalActive, rootModalClass, modalType } = modal;
+  const { isModalActive, rootModalClass, modalProps, modalType } = modal;
   
   const activeProjectName = 
   activeProjectId
@@ -165,6 +177,7 @@ const mapStateToProps = (state) => {
     activeProjectName,
     isModalActive,
     rootModalClass,
+    modalProps, 
     modalType,
     projects
   }
@@ -172,6 +185,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   addTask,
+  confirmEditTaskTime,
   changeModalType,
   postProject,
   setActiveProject, 

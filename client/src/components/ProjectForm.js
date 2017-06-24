@@ -6,6 +6,7 @@ import { editProjectName } from '../actions/indexActions';
 
 let EditProjectForm = class extends Component {
   render() {
+    const { activeProjectId, handleSubmit } = this.props;
     const handleEditProjectSubmit = ({ projectName }) => {
       
       editProjectName(activeProjectId, projectName);

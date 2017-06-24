@@ -30,7 +30,10 @@ class ProjectsPage extends Component {
         ? project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b)
         : 0;
       
-    const handleEdit = () => () => hashHistory.push(`/projects/${project.shortId}`);
+    const handleEdit = () => (evt) => {
+      evt.stopPropagation()
+      hashHistory.push(`/projects/${project.shortId}`)
+    }
     const handleDelete = (project) => () => deleteProject(project);
     
     return (

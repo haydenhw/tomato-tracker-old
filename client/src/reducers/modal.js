@@ -4,8 +4,8 @@ import { renderFormModal } from '../config'
 
 const defaultState = {
   isModalActive: renderFormModal,
-  isOnboardingActive: renderFormModal, 
-  modalType: 'EDIT_TASK',
+  isOnboardingActive: true, 
+  modalType: 'CONFIRM_EDIT_TASK',
   modalProps: null,
   rootModalClass: 'unfold'    
 };
@@ -34,7 +34,7 @@ export const modal = (state = defaultState, action) => {
     case actions.TOGGLE_EDIT_TASK_FORM:
       return {
         ...state,
-        isModalActive: !state.isModalActive,
+        isModalActive: true,
         modalType: 'EDIT_TASK'
       };
     case actions.CHANGE_MODAL_TYPE:
@@ -51,6 +51,13 @@ export const modal = (state = defaultState, action) => {
       return {
         shouldRenderModal: true,
         modalType: 'CONFIRM',
+        modalProps: action.modalProps,
+      };
+    case actions.CONFIRM_EDIT_TASK:
+      console.log(action);
+      return {
+        isModalActive: true,
+        modalType: 'CONFIRM_EDIT_TASK',
         modalProps: action.modalProps,
       };
 

@@ -52,6 +52,7 @@
   "dependencies": {
     "dotenv": "2.0.0",
     "jquery": "^3.2.1",
+    "rc-time-picker": "^2.4.1",
     "react": "^15.4.2",
     "react-circular-progressbar": "^0.1.4",
     "react-dom": "^15.4.2",

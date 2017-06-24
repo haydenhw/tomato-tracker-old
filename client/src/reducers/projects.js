@@ -1,22 +1,5 @@
 import  * as actions from '../actions/indexActions'
 
-Array.prototype.mapAndFindById = function (idKey, id, callback) {
-  return this.map((element, index) => {
-    if (element[idKey] === id) {
-      return callback(element, index)
-    }
-    
-    return element;
-  })
-}
-
-Array.prototype.sliceDelete = function(index) {
-  return [
-    ...this.slice(0, index),
-    ...this.slice(index + 1)
-  ]
-}
-
 function tasks(state, action) {
   switch(action.type) {
     case actions.UPDATE_TASKS:
@@ -50,7 +33,7 @@ function tasks(state, action) {
     case actions.EDIT_TASK_REQUEST:
       return state.mapAndFindById('shortId', action.projectId, (project) => {
         const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
-          console.log(Object.assign({}, task, action.toUpdate))
+          
           return Object.assign({}, task, action.toUpdate);
         });
         return Object.assign({}, project, { tasks: newTasks });

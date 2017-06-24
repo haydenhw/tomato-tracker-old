@@ -6,6 +6,9 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
 
+import store from '../redux-files/store'
+import * as actions from '../actions/indexActions'
+
 import FormModal from './FormModal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
@@ -69,9 +72,9 @@ export default class TimeTracker extends Component {
   }
   
   handleEditTask = (taskId) => () => {
-    const { toggleEditTasksForm } = this.props;
+    const { toggleEditTaskForm } = this.props;
     
-    toggleEditTasksForm();
+    store.dispatch(actions.toggleAddTasksForm());
     this.setState({ clickedTaskId: taskId});
   } 
 
