@@ -53,17 +53,16 @@ const renderField = ({
         recordedTime: newTimeString
       } 
       
-      if (newTimeString !== initialValues.newTime)  {
-        console.log('not equal')
+      if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
         confirmEditTask({
+          taskName,
           payload:  [activeProjectId, clickedTaskId, toUpdate],
           oldTime: initialValues.newTime,
-          newTime: newTimeString
+          newTime: secondsToHMMSS(newTimeString) 
         })
       } else {
         editTask(activeProjectId, clickedTaskId, toUpdate);
       }
-      
     }
     
   render() {
@@ -113,7 +112,7 @@ const mapStateToProps = (state, ownProps) => {
   return ({
     activeProjectId,
     taskNames, 
-    clickedTaskId: 'rJlbaebj7b',
+    clickedTaskId: 'HkxDiNHsXW',
     initialValues: {
       taskName: 'harry' || selectedTask.taskName,
       newTime:'0:02:29' || secondsToHMMSS(selectedTask.recordedTime)

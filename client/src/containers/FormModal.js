@@ -68,7 +68,6 @@ class FormModal extends Component {
   renderFormElement(elementType) {
     const { activeProjectName, clickedTaskId, modalProps, modalType, projects } = this.props;
     
-    console.log(modalType, elementType)
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
       return <h2>Welcome to PomTracker!</h2>;
@@ -88,23 +87,17 @@ class FormModal extends Component {
         return <AddProjectForm handleProjectSubmit={this.handleAddProject()} projects={projects} />
       
       case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
-        return <h2 className="add-tasks-form-title">Add tasks for project  <span>{activeProjectName}</span></h2>
+        return <h2 className="add-tasks-form-title">Add tasks for project <span>{activeProjectName}</span></h2>
       
       case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
-        return <AddTasksFormContainer />
+       return <AddTasksFormContainer />
         
       case (modalType === "EDIT_TASK") &&  (elementType === "CONTENT"):
           return <EditTaskForm clickedTaskId={clickedTaskId} />
-          
-      case (modalType === "CONFIRM_EDIT_TASK ") &&  (elementType === "CONTENT"):
-          return <EditTaskForm clickedTaskId={clickedTaskId} />
       
-      case (modalType === "CONFIRM_EDIT_TASK") && (elementType === "CONTENT" || elementType === "TITLE"):
-        console.log('holalala')
-        //return <ConfirmEditTask {...modalProps} /> 
-        return <div> Hello world</div>
+      case (modalType === "CONFIRM_EDIT_TASK") && (elementType === "CONTENT"):
+        return <ConfirmEditTask {...modalProps} /> 
       default:
-        console.log('returning null')
         return null;
     }
   }
