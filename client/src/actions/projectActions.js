@@ -167,6 +167,25 @@ export function postTask(projectId, task) {
   }
 }
 
+export function updateTask(project, task, toUpdate) {
+  return (dispatch) => {
+    dispatch(editTask(project.shortId, task.shortId, toUpdate))
+    fetch(
+      `projects/${project._id}/tasks/${task._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(toUpdate),
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        'console log update success'
+      })
+    }    
+}
+
 export const DELETE_PROJECT_REQUEST= 'DELETE_PROJECT_REQUEST';
 export function deleteProject(project) {
   return (dispatch) => {

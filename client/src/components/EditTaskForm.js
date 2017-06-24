@@ -4,7 +4,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 import { secondsToHMMSS, timeStringToSeconds } from '../helpers/time';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
-import { editTask , confirmEditTask } from '../actions/indexActions';
+import { confirmEditTask, updateTask } from '../actions/indexActions';
 
 import 'rc-time-picker/assets/index.css';
 
@@ -27,7 +27,16 @@ const renderField = ({
   
   let EditTaskForm = class extends Component {
     handleEditTaskSubmit ({ taskName, newTime }) {
-      const {  activeProjectId, clickedTaskId, confirmEditTask, editTask, initialValues, taskNames } = this.props
+      const {
+        activeProjectId,
+        clickedTaskId,
+        confirmEditTask,
+        updateTask,
+        initialValues,
+        selectedProject,
+        selectedTask,
+        taskNames,
+      } = this.props
       const newTimeString = timeStringToSeconds(newTime);
       
       if (taskName !== initialValues.taskName && isDuplicate(taskName, taskNames)){
@@ -52,16 +61,16 @@ const renderField = ({
         taskName,
         recordedTime: newTimeString
       } 
-      
+      console.log(selectedTask)
       if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
         confirmEditTask({
           taskName,
-          payload:  [activeProjectId, clickedTaskId, toUpdate],
+          payload:  [selectedProject, selectedTask, toUpdate],
           oldTime: initialValues.newTime,
           newTime: secondsToHMMSS(newTimeString) 
         })
-      } else {
-        editTask(activeProjectId, clickedTaskId, toUpdate);
+      } else if (taskName !== initialValues.taskName) {
+        updateTask(selectedProject, selectedTask, toUpdate);
       }
     }
     
@@ -102,17 +111,20 @@ EditTaskForm = reduxForm({
 
 const mapStateToProps = (state, ownProps) => {
   const { activeProjectId, projects } = state;
-  const { clickedTaskId } = ownProps;
+  //const { clickedTaskId } = ownProps;
   
-  const taskNames = projects.find((project) => project.shortId === activeProjectId).tasks
-  .map((task) => task.taskName);
-  
+  // change this
+  const clickedTaskId = 'rJgV_UIjXW';
+  const selectedProject = projects.find((project) => project.shortId === activeProjectId);  
+  const taskNames = selectedProject.tasks.map((task) => task.taskName);
   const selectedTask = projects.concatMap((project) => project.tasks).find((task) => clickedTaskId === task.shortId) 
   
   return ({
     activeProjectId,
+    clickedTaskId, 
+    selectedProject,
+    selectedTask,
     taskNames, 
-    clickedTaskId: 'HkxDiNHsXW',
     initialValues: {
       taskName: 'harry' || selectedTask.taskName,
       newTime:'0:02:29' || secondsToHMMSS(selectedTask.recordedTime)
@@ -121,8 +133,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditTaskForm = connect( mapStateToProps, { 
-  editTask,
-  confirmEditTask
+  confirmEditTask,
+  updateTask
  })(EditTaskForm);
 
 export default EditTaskForm;

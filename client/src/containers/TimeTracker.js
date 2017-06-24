@@ -74,7 +74,7 @@ export default class TimeTracker extends Component {
   handleEditTask = (taskId) => () => {
     const { toggleEditTaskForm } = this.props;
     
-    store.dispatch(actions.confirmEditTask());
+    toggleEditTaskForm();
     this.setState({ clickedTaskId: taskId});
   } 
 
