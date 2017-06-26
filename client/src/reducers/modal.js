@@ -1,7 +1,7 @@
 import * as actions from 'actions/indexActions';
 
 import { modalType, renderFormModal } from '../config'
-console.log(modalType)
+
 const defaultState = {
   isModalActive: renderFormModal,
   isOnboardingActive: false, 
@@ -12,7 +12,7 @@ const defaultState = {
 
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.TOGGLE_IS_MODAL_ACTIVE:
+    case actions.TOGGLE_MODAL:
     case actions.DELETE_PROJECT_REQUEST:
       return {
         ...state,

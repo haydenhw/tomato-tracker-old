@@ -35,7 +35,12 @@ class ProjectsPage extends Component {
     hashHistory.push(`/projects/${project.shortId}`)
   }
   
-  handleDeleteOptionClick = (project) => () => deleteProject(project);
+  handleDeleteOptionClick = (project) => (evt) => {
+    evt.stopPropagation();
+    
+    const { deleteProject } = this.props;
+    deleteProject(project);
+  }
   
   renderProject (project){
     const { deleteProject } = this.props;

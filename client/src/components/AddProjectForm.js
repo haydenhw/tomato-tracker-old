@@ -25,15 +25,17 @@ const renderField = ({
 
 class AddProjectForm extends Component {
   render() {
-    const { handleProjectSubmit, handleSubmit } = this.props;
+    const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = this.props;
       
     return (
       <div>
-        <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>
+        <form autoComplete="off" id="project-form" className="project-form" /*onSubmit={handleSubmit(handleProjectSubmit.bind(this))}*/>
           <div>
             <label htmlFor="projectName"/>
             <Field name="projectName" component={renderField} placeholder="Project name"/>
-            <button className="form-button fullscreen-submit" type="submit">Continue</button>
+            {shouldRenderSubmitButton && 
+              <button className="form-button fullscreen-submit" type="submit">Continue</button>
+            }
           </div>
         </form>
       </div>

@@ -1,8 +1,8 @@
 
 
-export const TOGGLE_IS_MODAL_ACTIVE = 'TOGGLE_IS_MODAL_ACTIVE';
-export const toggleIsModalActive = () => ({
-  type: 'TOGGLE_IS_MODAL_ACTIVE',
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const toggleModal = () => ({
+  type: 'TOGGLE_MODAL',
 });
 
 export const TOGGLE_ONBOARD_MODE = 'TOGGLE_ONBOARD_MODE';

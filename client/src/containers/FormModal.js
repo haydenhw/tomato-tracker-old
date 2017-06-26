@@ -10,7 +10,7 @@ import {
   confirmEditTaskTime,
   postProject,
   setActiveProject,
-  toggleIsModalActive
+  toggleModal
 } from '../actions/indexActions';
 
 
@@ -84,8 +84,14 @@ class FormModal extends Component {
         return <h2 className="project-form-title">Add a project</h2>;
       
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
-        return <AddProjectForm handleProjectSubmit={this.handleAddProject()} projects={projects} />
-      
+        return (
+          <AddProjectForm
+            handleProjectSubmit={this.handleAddProject()}
+            projects={projects}
+            shouldRenderSubmitButton={true}
+          />
+        );
+         
       case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
         return <h2 className="add-tasks-form-title">Add tasks for project <span>{activeProjectName}</span></h2>
       
@@ -140,12 +146,12 @@ class FormModal extends Component {
   
   
   render() {
-    const { isModalActive, rootModalClass, toggleIsModalActive } = this.props;
+    const { isModalActive, rootModalClass, toggleModal } = this.props;
     
     return (
       isModalActive &&
       <Modal 
-        handleCloseButtonClick={toggleIsModalActive}
+        handleCloseButtonClick={toggleModal}
         rootModalClass={rootModalClass} 
         modalClass={""}
         shouldRender={isModalActive}
@@ -182,7 +188,7 @@ export default connect(mapStateToProps, {
   changeModalType,
   postProject,
   setActiveProject, 
-  toggleIsModalActive
+  toggleModal
 })(FormModal);
 
 

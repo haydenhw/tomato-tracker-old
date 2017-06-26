@@ -88,7 +88,11 @@ let AddTasksFormContainer = class extends Component {
       updateTasks(activeProjectId, newTasks);
       
       newTasks.filter((task) => !task._id)
-        .forEach((task) => postTask(activeProjectDatabaseId, task));
+        .forEach((task) => {
+          activeProjectDatabaseId 
+            ? postTask(activeProjectDatabaseId, task)
+            : console.error('database id has not yet updated')
+        });
         
       tasks.filter((task) => task.shouldDelete && task._id)
         .forEach((task) => deleteTask(activeProjectDatabaseId, task));
@@ -131,8 +135,7 @@ const mapStateToProps = (state) => {
   const { activeProjectId, modal, projects } = state;
   const { isOnboardingActive } = modal;  
   
-  const activeProjectIndex = projects.findIndex(project => project.shortId === activeProjectId);
-  const activeProject = projects[activeProjectIndex];
+  const activeProject = projects.find(project => project.shortId === activeProjectId);
   const activeProjectDatabaseId = activeProject._id;
   
   const tasks = activeProject.tasks.map(task => Object.assign(task, { shouldDelete: false }));
