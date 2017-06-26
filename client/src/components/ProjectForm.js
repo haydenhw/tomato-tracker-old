@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { editProjectName } from '../actions/indexActions';
+import { updateProject } from '../actions/indexActions';
 
 let EditProjectForm = class extends Component {
   render() {
-    const { activeProjectId, handleSubmit } = this.props;
+    const { handleSubmit, project, updateProject } = this.props;
     const handleEditProjectSubmit = ({ projectName }) => {
       
-      editProjectName(activeProjectId, projectName);
+      updateProject(project, projectName);
     }
     
     return (
@@ -31,25 +31,25 @@ let EditProjectForm = class extends Component {
   }
 };
 
-// Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 EditProjectForm = reduxForm({
   form: 'initializeFromState', // a unique identifier for this form
 })(EditProjectForm);
 
-// You have to connect() to any reducers that you wish to connect to yourself
 EditProjectForm = connect(
   state => {
     const { activeProjectId, projects } = state;
     
+    const activeProject = projects.find((project) => project.shortId === activeProjectId); 
+     
     const projectName = state.projects.length && activeProjectId 
-    ? projects.find((project) => project.shortId === activeProjectId).projectName
+    ? activeProject.name
     : 'No Projects Loaded'
     
     return ({
       activeProjectId, 
-      initialValues: { projectName }, 
+      initialValues: { projectName: 'default' }, 
+      project: activeProject
     })
-  }
-)(EditProjectForm);
+  }, { updateProject})(EditProjectForm);
 
 export default EditProjectForm;

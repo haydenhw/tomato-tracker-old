@@ -144,7 +144,7 @@ export default class TimeTracker extends Component {
               className="project-select"
               handleOptionClick={setActiveProject}
               items={simplifiedProjects}
-              >
+            >
                 <ProjectHeading 
                   text={activeProject ? activeProject.projectName : "No projects added yet"}
                   iconClass={"icon icon-dots-menu"} 

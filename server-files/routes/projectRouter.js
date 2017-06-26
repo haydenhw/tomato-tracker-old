@@ -91,11 +91,13 @@ projectRouter.route('/:projectId')
       });
   })
    .put((req, res) => {
-       if (!((req.params.projectId && req.body._id) && (req.params.projectId === req.body._id))) {
-           const message = (`Request path id (${req.params.projectId}) and request body id (${req.body._id}) must match`);
-           console.error(message);
-           res.status(400).json({ message });
-       }
+       console.log(req.body);
+
+      //  if (!((req.params.projectId && req.body._id) && (req.params.projectId === req.body._id))) {
+      //      const message = (`Request path id (${req.params.projectId}) and request body id (${req.body._id}) must match`);
+      //      console.error(message);
+      //      res.status(400).json({ message });
+      //  }
 
        if (!('projectName' in req.body && req.body.projectName)) {
            return res.status(400).json({ message: 'Must specify value for projectName' });

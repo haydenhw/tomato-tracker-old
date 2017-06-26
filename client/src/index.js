@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import store from './redux-files/store';
  
 import App from './containers/App';
-import ProjectFormPage from './containers/ProjectFormPage';
+import AddProjectPage from './containers/AddProjectPage';
+import EditProjectPage  from './containers/EditProjectPage';
 import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
 import testForm from './components/testForm';
@@ -22,7 +23,8 @@ render((
         <IndexRoute component={TimeTrackerPage}/>
         <Route path="/projects" component={ProjectsPage}/>
         <Route path="/form" component={testForm}/>
-        <Route path="/projects/:projectId" component={ProjectFormPage}/>
+        <Route path="/projects/new" component={AddProjectPage}/>
+        <Route path="/projects/:projectId" component={EditProjectPage}/>
       </Route>  
     </Router>
   </Provider>

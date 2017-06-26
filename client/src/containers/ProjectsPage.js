@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from '../helpers/time';
-import { deleteProject, setActiveProject } from '../actions/projectActions';
+import { addProject, deleteProject, setActiveProject, updateProject } from '../actions/projectActions';
 //import ProjectForm from '../components/ProjectForm';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
@@ -16,12 +16,27 @@ class ProjectsPage extends Component {
   static defaultProps = {
     projects: []
   }
+  
+  handleAddProject() {
+    const { addProject } = this.props;
+    console.log(addProject)
+  
+  }
+  
   handleListItemClick = (projectId) => () => {
     const { setActiveProject } = this.props;
     
     setActiveProject(projectId);
     hashHistory.push(`/`);
   }  
+  
+  handleEditOptionClick = (project) => (evt) => {
+    evt.stopPropagation()
+    hashHistory.push(`/projects/${project.shortId}`)
+  }
+  
+  handleDeleteOptionClick = (project) => () => deleteProject(project);
+  
   renderProject (project){
     const { deleteProject } = this.props;
     const { projectName, shortId } = project;
@@ -30,11 +45,6 @@ class ProjectsPage extends Component {
         ? project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b)
         : 0;
       
-    const handleEdit = () => (evt) => {
-      evt.stopPropagation()
-      hashHistory.push(`/projects/${project.shortId}`)
-    }
-    const handleDelete = (project) => () => deleteProject(project);
     
     return (
       <ListItem 
@@ -44,8 +54,8 @@ class ProjectsPage extends Component {
         col2Text={secondsToHMMSS(Math.round(totalTime))}
         handleClick={this.handleListItemClick(shortId)}
       >
-        <li className="dropdown-item" onClick={handleEdit()}><a>Edit</a></li>
-        <li className="dropdown-item" onClick={handleDelete(project)}><a>Delete</a></li>
+        <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
+        <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
       </ListItem>
     );
   } 
@@ -78,20 +88,26 @@ class ProjectsPage extends Component {
           <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
           <TotalTime time={secondsToHMMSS(totalTime)} />
         </div>
+        <button onClick={this.handleAddProject.bind(this)}></button>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { projects } = state;
+  const { projects } = state; 
   
   return {
     projects
   }
 }
 
-export default connect(mapStateToProps, { deleteProject, setActiveProject })(ProjectsPage);
+export default connect(mapStateToProps, { 
+  addProject,
+  deleteProject,
+  setActiveProject,
+  updateProject
+})(ProjectsPage);
 
 ProjectsPage.propTypes = {
   projects: PropTypes.array.isRequired

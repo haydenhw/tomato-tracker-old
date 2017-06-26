@@ -25,8 +25,8 @@ const renderField = ({
 
 class AddProjectForm extends Component {
   render() {
-    const { handleProjectSubmit, handleSubmit, projects } = this.props;
-    
+    const { handleProjectSubmit, handleSubmit } = this.props;
+      
     return (
       <div>
         <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit(handleProjectSubmit.bind(this))}>

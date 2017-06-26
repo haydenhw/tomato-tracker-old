@@ -140,6 +140,27 @@ export function postProject(projectName) {
   }
 }
 
+export function updateProject(project, newName) {
+  return (dispatch) => {
+    // console.log(project, newName)
+    dispatch(editProjectName(project.shortId, newName)); 
+      
+    fetch(
+      `projects/${project._id}`,
+      {
+          method: "PUT",
+          body: JSON.stringify({ projectName: newName,  }),
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        })
+      })
+      .then((res) => {
+        console.log('update success')
+      })
+  }
+}
+
 export function postTask(projectId, task) {
   return (dispatch) => {
     fetch(

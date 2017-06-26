@@ -7,7 +7,7 @@ import { addTask, deleteTask, editProjectName, setActiveProject } from '../actio
 
 import ProjectForm from '../components/ProjectForm';
 
-class ProjectFormPage extends Component {
+class EditProjectPage extends Component {
   constructor() {
     super()
     
@@ -83,7 +83,7 @@ class ProjectFormPage extends Component {
     }
 }
 
-ProjectFormPage.propTypes = {
+EditProjectPage.propTypes = {
   projects: PropTypes.array
 }
 
@@ -92,4 +92,4 @@ export default connect(mapStateToProps, {
   deleteTask,
   editProjectName, 
   setActiveProject,
-})(ProjectFormPage);  
+})(EditProjectPage);  

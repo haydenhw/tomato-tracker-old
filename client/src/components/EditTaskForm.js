@@ -111,13 +111,11 @@ EditTaskForm = reduxForm({
 
 const mapStateToProps = (state, ownProps) => {
   const { activeProjectId, projects } = state;
-  //const { clickedTaskId } = ownProps;
+  const { clickedTaskId } = ownProps;
   
-  // change this
-  const clickedTaskId = 'rJgV_UIjXW';
   const selectedProject = projects.find((project) => project.shortId === activeProjectId);  
-  const taskNames = selectedProject.tasks.map((task) => task.taskName);
   const selectedTask = projects.concatMap((project) => project.tasks).find((task) => clickedTaskId === task.shortId) 
+  const taskNames = selectedProject.tasks.map((task) => task.taskName);
   
   return ({
     activeProjectId,
@@ -126,8 +124,8 @@ const mapStateToProps = (state, ownProps) => {
     selectedTask,
     taskNames, 
     initialValues: {
-      taskName: 'harry' || selectedTask.taskName,
-      newTime:'0:02:29' || secondsToHMMSS(selectedTask.recordedTime)
+      taskName: selectedTask.taskName,
+      newTime: secondsToHMMSS(selectedTask.recordedTime)
     },
   })
 }

@@ -1,11 +1,11 @@
 import * as actions from 'actions/indexActions';
 
-import { renderFormModal } from '../config'
-
+import { modalType, renderFormModal } from '../config'
+console.log(modalType)
 const defaultState = {
   isModalActive: renderFormModal,
   isOnboardingActive: false, 
-  modalType: 'EDIT_TASK',
+  modalType: modalType,
   modalProps: null,
   rootModalClass: 'unfold'    
 };

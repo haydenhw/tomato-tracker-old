@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 import { SubmissionError, reduxForm } from 'redux-form';
 
-import { deleteTask, postTask, toggleisModalActive, toggleOnboardMode, updateTasks } from '../actions/indexActions';
+import { deleteTask, postTask, toggleModal, toggleOnboardMode, updateTasks } from '../actions/indexActions';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
 import AddTasksForm from '../components/AddTasksForm';
@@ -72,7 +72,7 @@ let AddTasksFormContainer = class extends Component {
       isOnboardingActive,
       postTask, 
       updateTasks, 
-      toggleisModalActive, 
+      toggleModal, 
       toggleOnboardMode 
     } = this.props;
     
@@ -93,7 +93,7 @@ let AddTasksFormContainer = class extends Component {
       tasks.filter((task) => task.shouldDelete && task._id)
         .forEach((task) => deleteTask(activeProjectDatabaseId, task));
         
-      isOnboardingActive ? toggleOnboardMode() : toggleisModalActive(false); 
+      isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
   
   renderFormTask (task){
@@ -151,7 +151,7 @@ AddTasksFormContainer = reduxForm({
 export default AddTasksFormContainer = connect(mapStateToProps, {
   deleteTask,
   postTask,
-  toggleisModalActive,
+  toggleModal,
   toggleOnboardMode,
   updateTasks
 })(AddTasksFormContainer);

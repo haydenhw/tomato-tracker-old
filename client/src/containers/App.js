@@ -17,7 +17,7 @@ export default class App extends Component {
           <h1 className="logo-text">PomTracker</h1>
           <ul role="nav">
             <li className="nav-link"><Link to="/">Timer</Link></li>
-            <li className="nav-link"><Link to="/Projects">Projects</Link></li>
+            <li className="nav-link"><Link to="/projects">Projects</Link></li>
           </ul>
         </nav>
         {this.props.children}
