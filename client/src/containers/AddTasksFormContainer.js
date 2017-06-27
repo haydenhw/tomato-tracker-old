@@ -40,6 +40,7 @@ let AddTasksFormContainer = class extends Component {
   
   handleAddTask({ taskName }) {
     const { tasks } = this.state
+    
     const taskNames = tasks.map(task => task.taskName);
     
     if (!hasAnyValue(taskName)) {
@@ -116,12 +117,12 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, handleFormSubmit } = this.props;
     const { tasks } = this.state;
     
     return (
       <AddTasksForm 
-        handleFormSubmit={this.handleFormSubmit.bind(this)}
+        handleFormSubmit={handleFormSubmit(tasks) || this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
         handleTaskSubmit={this.handleAddTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
@@ -136,10 +137,12 @@ const mapStateToProps = (state) => {
   const { isOnboardingActive } = modal;  
   
   const activeProject = projects.find(project => project.shortId === activeProjectId);
-  const activeProjectDatabaseId = activeProject._id;
+  const activeProjectDatabaseId = activeProject && activeProject._id;
   
-  const tasks = activeProject.tasks.map(task => Object.assign(task, { shouldDelete: false }));
-  
+  const tasks = activeProject 
+    ? activeProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
+    : [];
+    
   return {
     activeProjectId,
     activeProjectDatabaseId,

@@ -9,22 +9,22 @@ import AddProjectForm from '../components/AddProjectForm';
 import AddTasksFormContainer from './AddTasksFormContainer';
 
 let AddProjectPage = class extends Component {
-  handleProjectSubmit() {
+  handleProjectSubmit = (tasks) => () => {
     const { submit, postProject } = this.props;
     submit('addProject')
+    console.log(tasks)
   // postProject('new prefdsafdsa').then(() => console.log('hello'))
-    
   }
   
   render() {
-    const { handleSubmit, submit } = this.props;
+    const { dispatch, handleSubmit } = this.props;
     
     return(
       <div>
           <h2>Project Name</h2>
           <AddProjectForm shouldRenderSubmitButton={false}/>
-          {/* <AddTasksFormContainer /> */}
-          <button className="parent" onClick={() => submit('addProject')}>Parent Submit</button>
+          <AddTasksFormContainer handleFormSubmit={this.handleProjectSubmit}/>
+          <button className="parent" onClick={() => dispatch(submit('addProject'))}>Parent Submit</button>
       </div>
     );
   }

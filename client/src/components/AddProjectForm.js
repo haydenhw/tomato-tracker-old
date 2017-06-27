@@ -16,8 +16,8 @@ const renderField = ({
   meta: { touched, error, warning }
 }) => (
   <div>
-    <label/>
     <div>
+      <label /> 
       <input {...input} autoFocus className="fullscreen-input add-project-input" placeholder="Project name" type={type} />
       {touched &&
         ((error && <div className="error">{error}</div>) ||
@@ -34,8 +34,7 @@ class AddProjectForm extends Component {
       <div>
         <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="projectName"/>
-            <Field name="projectName" component={renderField} placeholder="Project name"/>
+            <Field name="projectName" component={renderField} label="projectName" placeholder="Project name"/>
             {shouldRenderSubmitButton && 
               <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
             }
