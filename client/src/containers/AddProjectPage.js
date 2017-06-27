@@ -11,8 +11,9 @@ import AddTasksFormContainer from './AddTasksFormContainer';
 let AddProjectPage = class extends Component {
   handleProjectSubmit = (tasks) => () => {
     const { submit, postProject } = this.props;
-    submit('addProject')
+    console.log('submitting')
     console.log(tasks)
+    submit('addProjectForm')
     // postProject('new prefdsafdsa').then(() => console.log('hello'))
   }
   testSubmit(){
@@ -27,8 +28,8 @@ let AddProjectPage = class extends Component {
       <div>
         <h2>Project Name</h2>
         <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer />  
-        <button onClick={() => submit('addProjectForm')}>Submit</button>
+        <AddTasksFormContainer handleFormSubmit={this.handleProjectSubmit} />  
+        {/* <button onClick={this.handleProjectSubmit}>Submit</button> */}
         </div>
       );
     }
