@@ -28,11 +28,7 @@ let AddProjectPage = class extends Component {
         <h2>Project Name</h2>
         <AddProjectForm shouldRenderSubmitButton={false} />
         <AddTasksFormContainer />  
-        <button
-          onClick={() => submit('addProjectForm')}
-          >
-            Submit
-          </button>
+        <button onClick={() => submit('addProjectForm')}>Submit</button>
         </div>
       );
     }
