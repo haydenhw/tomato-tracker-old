@@ -44,7 +44,8 @@ function tasks(state, action) {
 }
 
 const defaultState = {
-  items: []
+  items: [],
+  queue: null 
 }
 
 export function projects(state=defaultState, action) {
@@ -82,6 +83,11 @@ export function projects(state=defaultState, action) {
       return {
         ...state,
         items: state.items.sliceDelete(projectIndex)
+      }
+    case actions.QUEUE_NEW_PROJECT:
+      return {
+        ...state,
+        queue: action.projectName
       }
     case actions.UPDATE_TASKS:
     case actions.POST_TASK_SUCCESS:

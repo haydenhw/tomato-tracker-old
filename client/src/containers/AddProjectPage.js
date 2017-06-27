@@ -9,12 +9,28 @@ import AddProjectForm from '../components/AddProjectForm';
 import AddTasksFormContainer from './AddTasksFormContainer';
 
 let AddProjectPage = class extends Component {
+  constructor() {
+    super() 
+      this.state = {
+        newTasks: []
+      }
+  }
+  
+  componentDidUpdate(prevProps) {
+    
+    if (prevProps.queuedProject !== this.props.queuedProject) {
+      const { postProject, queuedProject } = this.props;
+      const { newTasks } = this.state;
+      console.log('diff')
+      console.log(this.state.newTasks)
+      postProject(queuedProject, newTasks)
+    }
+  }
+  
   handleProjectSubmit = (tasks) => () => {
-    const { submit, postProject } = this.props;
-    console.log('submitting')
-    console.log(tasks)
-    submit('addProjectForm')
-    // postProject('new prefdsafdsa').then(() => console.log('hello'))
+    const { submit } = this.props;
+    
+    this.setState({ newTasks: tasks}, () => submit('addProjectForm'));
   }
   testSubmit(){
     const { submit, postProject } = this.props;
@@ -35,10 +51,14 @@ let AddProjectPage = class extends Component {
     }
   }
   const mapStateToProps = state => {
+    const { projects } = state;
     
+    return {
+      queuedProject: projects.queue
+    }
   }
 
-  export default AddProjectPage = connect(null, {
+  export default AddProjectPage = connect(mapStateToProps, {
     postProject,
     submit
   })(AddProjectPage);

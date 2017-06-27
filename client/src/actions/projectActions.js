@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-
+import { submit } from 'redux-form';
 export const ADD_PROJECT = "ADD_PROJECT";
 export function addProject(projectName) {
   const newProject = {
@@ -19,6 +19,14 @@ export function editProjectName(projectId, projectName) {
   return {
     type: "EDIT_PROJECT_NAME_REQUEST",
     projectId,
+    projectName
+  }
+}
+
+export const QUEUE_NEW_PROJECT = "QUEUE_NEW_PROJECT";
+export function queueNewProject(projectName) {
+  return {
+    type: "QUEUE_NEW_PROJECT",
     projectName
   }
 }
@@ -107,10 +115,11 @@ export function fetchProjects() {
 export function postProject(projectName, tasks) {
   
   return (dispatch) => {
+    
     const newProject = {
       projectName,
       shortId: shortid.generate(),
-      tasks: []
+      tasks: tasks || []
     }
     
     dispatch(postProjectRequest(newProject));
@@ -136,6 +145,17 @@ export function postProject(projectName, tasks) {
         dispatch(postProjectSuccess(projectId, databaseId))
       })
       
+  }
+}
+
+export function postProjectWithTasks(tasks) {
+  return (dispatch, getState) => {
+    //dispatch(submit('addProjectForm')).then(() => console.log('hello'))
+    
+    // const newProjectName = getState().projects.queue;
+    // console.log(newProjectName);
+    // console.log(tasks)
+    // dispatch(postProject(newProjectName, tasks));
   }
 }
 

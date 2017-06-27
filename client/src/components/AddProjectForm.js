@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
-import { postProject } from '../actions/indexActions';
+import { queueNewProject } from '../actions/indexActions';
 import store from '../redux-files/store';
 
 import validate from '../helpers/validate';
 
-const submit = ({ projectName }) => {console.log('submitting...'); store.dispatch(postProject(projectName))}
-
+const submit = ({ projectName }) => {console.log('submitting...'); return store.dispatch(queueNewProject(projectName))}
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -43,8 +42,8 @@ function AddProjectForm(props) {
 }
 
 export default reduxForm({
-  form: 'addProjectForm', // a unique identifier for this form
-  onSubmit: submit, // submit function must be passed to onSubmit
+  form: 'addProjectForm', 
+  onSubmit: submit, 
   validate: validate(store.getState),
 })(AddProjectForm)
   
