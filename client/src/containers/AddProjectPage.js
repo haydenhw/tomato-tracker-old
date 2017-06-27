@@ -21,7 +21,7 @@ let AddProjectPage = class extends Component {
   }
   
   render() {
-    const { dispatch, handleSubmit, submit } = this.props;
+    const { submit } = this.props;
     
     return(
       <div>
@@ -40,11 +40,7 @@ let AddProjectPage = class extends Component {
   const mapStateToProps = state => {
     
   }
-  
-  AddProjectPage = reduxForm({
-    form: "addProject"
-  })(AddProjectPage);
-  
+
   export default AddProjectPage = connect(null, {
     postProject,
     submit
