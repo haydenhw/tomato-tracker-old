@@ -19,8 +19,9 @@ render() {
     toggleAddTasksForm, 
     toggleEditTaskForm
   } = this.props;
+  
   const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
-  const activeProject = !isNaN(activeProjectIndex) && projects[activeProjectIndex];
+  const activeProject = (activeProjectIndex !== null && !isNaN(activeProjectIndex)) && projects[activeProjectIndex];
   const selectedTasks = activeProject && activeProject.tasks;
   
   return (
@@ -48,7 +49,7 @@ const mapStateToProps = state => {
   return {
     activeProjectId,
     isTimerActive, 
-    projects
+    projects: projects.items
   }
 }
 

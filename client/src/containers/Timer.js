@@ -88,14 +88,14 @@ class Timer extends Component {
 const mapStateToProps = state => {
   const { activeProjectId, projects, timer } = state;
   const { isTimerActive, remainingTime, startTime } = timer;
-  const activeProject = projects.find(project => project.shortId === activeProjectId);
+  const activeProject = projects.items.find(project => project.shortId === activeProjectId);
   
   return {
     activeProject,
-    projects,
     isTimerActive,
     remainingTime,
-    startTime
+    startTime,
+    projects: projects.items
   }
 }
 

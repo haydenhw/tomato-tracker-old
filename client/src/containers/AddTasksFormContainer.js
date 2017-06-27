@@ -136,7 +136,7 @@ const mapStateToProps = (state) => {
   const { activeProjectId, modal, projects } = state;
   const { isOnboardingActive } = modal;  
   
-  const activeProject = projects.find(project => project.shortId === activeProjectId);
+  const activeProject = projects.items.find(project => project.shortId === activeProjectId);
   const activeProjectDatabaseId = activeProject && activeProject._id;
   
   const tasks = activeProject 

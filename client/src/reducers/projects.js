@@ -43,36 +43,55 @@ function tasks(state, action) {
   }
 }
 
-export function projects(state=[], action) {
+const defaultState = {
+  items: []
+}
+
+export function projects(state=defaultState, action) {
   switch(action.type) {
     case actions.FETCH_PROJECTS_SUCCESS:
-      return action.projects;
-    case actions.POST_PROJECT_REQUEST:
-      return [
+      return {
         ...state,
-        action.project
-      ]
+        items: action.projects
+      } 
+    case actions.POST_PROJECT_REQUEST:
+      return {
+        ...state,
+        items: [
+          ...state,
+          action.project
+        ]
+      }       
     case actions.POST_PROJECT_SUCCESS:
-      return state.mapAndFindById('shortId', action.projectId, (project) => {
-        return Object.assign({}, project, { _id: action.databaseId })
-      })
+      return {
+        ...state,
+        items: state.items.mapAndFindById('shortId', action.projectId, (project) => {
+          return Object.assign({}, project, { _id: action.databaseId })
+        })
+      }       
     case actions.EDIT_PROJECT_NAME_REQUEST:
-      return state.mapAndFindById('shortId', action.projectId, (project) => {
-        return Object.assign({}, project, { projectName: action.projectName })
-      })
+      return {
+        ...state,
+        items: state.items.mapAndFindById('shortId', action.projectId, (project) => {
+          return Object.assign({}, project, { projectName: action.projectName })
+        })
+      } 
     case actions.DELETE_PROJECT_REQUEST:
-      const projectIndex = state.findIndex(project => project.shortId === action.project.shortId);
-      return state.sliceDelete(projectIndex);
+      const projectIndex = state.items.findIndex(project => project.shortId === action.project.shortId);
+        
+      return {
+        ...state,
+        items: state.items.sliceDelete(projectIndex)
+      }
     case actions.UPDATE_TASKS:
-      return tasks(state, action);
     case actions.POST_TASK_SUCCESS:
-      return tasks(state,action);
     case actions.EDIT_TASK_REQUEST: 
-      return tasks(state, action);
     case actions.DELETE_TASK_REQUEST: 
-      return tasks(state, action);
     case actions.INCREMENT_TASK_TIME: 
-      return tasks(state, action);
+      return {
+        ...state,
+        items: tasks(state.items, action)
+      }
     default:
     return state;
   }

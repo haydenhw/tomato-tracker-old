@@ -23,7 +23,7 @@
   export default function validate(getState) {
     return ({ projectName }) => {
       
-      const projectNames = getState().projects.map(project => project.projectName);
+      const projectNames = getState().projects.items.map(project => project.projectName);
       const error = {};
       if (!hasAnyValue(projectName)) {
         error.projectName = "Project name is required" 

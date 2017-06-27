@@ -103,7 +103,7 @@ const mapStateToProps = state => {
   const { projects } = state; 
   
   return {
-    projects
+    projects: projects.items
   }
 }
 

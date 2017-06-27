@@ -170,7 +170,7 @@ const mapStateToProps = (state) => {
   
   const activeProjectName = 
   activeProjectId
-  ? projects.find(project => project.shortId === activeProjectId).projectName
+  ? projects.items.find(project => project.shortId === activeProjectId).projectName
   : null;
   
   return {
@@ -179,7 +179,7 @@ const mapStateToProps = (state) => {
     rootModalClass,
     modalProps, 
     modalType,
-    projects
+    projects: projects.items
   }
 }
 
