@@ -104,7 +104,7 @@ export function fetchProjects() {
   }
 }
 
-export function postProject(projectName) {
+export function postProject(projectName, tasks) {
   
   return (dispatch) => {
     const newProject = {
@@ -129,14 +129,13 @@ export function postProject(projectName) {
         return res.json();
       })
       .then(data => {
+        console.log(data)
         const projectId = data.shortId;
         const databaseId = data._id;
-        
+        console.log('post success');
         dispatch(postProjectSuccess(projectId, databaseId))
       })
-      .catch(err => {
-        console.error(err)
-      })
+      
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, submit } from 'redux-form';
 
 import { postProject } from '../actions/indexActions';
 
@@ -9,26 +9,24 @@ import AddProjectForm from '../components/AddProjectForm';
 import AddTasksFormContainer from './AddTasksFormContainer';
 
 let AddProjectPage = class extends Component {
+  handleProjectSubmit() {
+    const { submit, postProject } = this.props;
+    //submit('addProject')
+    postProject('new prefdsafdsa')//.then(() => console.log('hello'))
     
-  handleSubmit() {
-    this.AddProjectForm.submit()
-  }  
-  
-  handleAddProject = (handleSubmit) => handleSubmit((values) => {
-    console.log(values)
-    const { postProject } = this.props;
-//    postProject(projectName)
-  })
+  }
   
   render() {
     const { handleSubmit } = this.props;
-    console.log(handleSubmit)
+    
     return(
       <div>
-        <h2>Project Name</h2>
-        <AddProjectForm ref={node => this.AddProjectForm = node} onSubmit={this.handleAddProject(handleSubmit)} shouldRenderSubmitButton={false}/>
-        {/* <AddTasksFormContainer /> */}
-        <button className="parent" onClick={this.handleSubmit.bind(this)}>Parent Submit</button>
+        <form onSubmit={handleSubmit(this.handleProjectSubmit.bind(this))}>
+          <h2>Project Name</h2>
+          <AddProjectForm shouldRenderSubmitButton={false}/>
+          {/* <AddTasksFormContainer /> */}
+          <button className="parent" type="submit">Parent Submit</button>
+        </form>
       </div>
     );
   }
@@ -37,13 +35,15 @@ const mapStateToProps = state => {
 
 }
 
-AddProjectPage = connect(null, {
-  postProject
+AddProjectPage = reduxForm({
+  form: "addProject"
 })(AddProjectPage);
 
-export default reduxForm({
-  form: 'addProjectPage'
-})(AddProjectPage)
+export default AddProjectPage = connect(null, {
+  postProject,
+  submit
+})(AddProjectPage);
+
 
 AddProjectPage.propTypes = {
   //taskData: PropTypes.object.isRequired

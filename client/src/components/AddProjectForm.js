@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
+import { postProject } from '../actions/indexActions';
 import store from '../redux-files/store';
+
 import validate from '../helpers/validate';
 
+const submit = ({ projectName }) => {store.dispatch(postProject(projectName))}
 
 const renderField = ({
   input,
@@ -29,15 +32,15 @@ class AddProjectForm extends Component {
       
     return (
       <div>
-        <form autoComplete="off" id="project-form" className="project-form" /*onSubmit={handleSubmit(handleProjectSubmit.bind(this))}*/>
+        {/* <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit}> */}
           <div>
             <label htmlFor="projectName"/>
             <Field name="projectName" component={renderField} placeholder="Project name"/>
             {shouldRenderSubmitButton && 
-              <button className="form-button fullscreen-submit" type="submit">Continue</button>
+              <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
             }
           </div>
-        </form>
+        {/* </form> */}
       </div>
     );
   }
@@ -46,6 +49,7 @@ class AddProjectForm extends Component {
 AddProjectForm = reduxForm({
   form: 'addProject',
   validate: validate(store.getState),
+  onSubmit: submit
 })(AddProjectForm);
 
 export default AddProjectForm;

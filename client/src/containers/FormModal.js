@@ -34,6 +34,7 @@ class FormModal extends Component {
   }
   
   handleAddProject = () => ({ projectName }) => {
+    console.log('hello world')
     const { changeModalType, postProject } = this.props;
     
     postProject(projectName)
