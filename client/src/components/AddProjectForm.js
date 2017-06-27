@@ -32,7 +32,7 @@ class AddProjectForm extends Component {
       
     return (
       <div>
-        {/* <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit}> */}
+        <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="projectName"/>
             <Field name="projectName" component={renderField} placeholder="Project name"/>
@@ -40,7 +40,7 @@ class AddProjectForm extends Component {
               <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
             }
           </div>
-        {/* </form> */}
+        </form>
       </div>
     );
   }
