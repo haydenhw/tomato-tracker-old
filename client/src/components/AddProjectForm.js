@@ -7,53 +7,48 @@ import store from '../redux-files/store';
 
 import validate from '../helpers/validate';
 
-const submit = ({ projectName }) => {store.dispatch(postProject(projectName))}
+const submit = ({ projectName }) => {console.log('submitting...'); store.dispatch(postProject(projectName))}
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error, warning }
-}) => (
+
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <div>
-      <label /> 
-      <input {...input} autoFocus className="fullscreen-input add-project-input" placeholder="Project name" type={type} />
-      {touched &&
-        ((error && <div className="error">{error}</div>) ||
-        (warning && <span className="error">{warning}</span>))}
-      </div>
-    </div>
-  );
+    <label />
+    <input
+      {...input} 
+      autoFocus 
+      className="fullscreen-input add-project-input" 
+      placeholder="Project name" 
+      type={type} 
+    />
+    {touched && error && <div className="error">{error}</div>}
+  </div>
+)
 
-class AddProjectForm extends Component {
-  render() {
-    const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = this.props;
-      
-    return (
-      <div>
-        <form autoComplete="off" id="project-form" className="project-form" onSubmit={handleSubmit}>
-          <div>
-            <Field name="projectName" component={renderField} label="projectName" placeholder="Project name"/>
-            {shouldRenderSubmitButton && 
-              <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
-            }
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+function AddProjectForm(props) {
+  const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = props;
   
-AddProjectForm = reduxForm({
-  form: 'addProject',
+  return (
+    <form onSubmit={handleSubmit}>
+      <Field
+        name="projectName"
+        type="text"
+        component={renderField}
+        label="projectName"
+      />
+      {shouldRenderSubmitButton && 
+        <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
+      }
+    </form>
+  )
+}
+
+export default reduxForm({
+  form: 'addProjectForm', // a unique identifier for this form
+  onSubmit: submit, // submit function must be passed to onSubmit
   validate: validate(store.getState),
-  onSubmit: submit
-})(AddProjectForm);
-
-export default AddProjectForm;
+})(AddProjectForm)
   
-AddProjectForm.propTypes = {
-  handleProjectSubmit: PropTypes.func,
-  handleSubmit: PropTypes.func,
-}
+// AddProjectForm.propTypes = {
+//   handleProjectSubmit: PropTypes.func,
+//   handleSubmit: PropTypes.func,
+// }

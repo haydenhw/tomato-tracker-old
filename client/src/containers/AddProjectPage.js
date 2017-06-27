@@ -13,36 +13,44 @@ let AddProjectPage = class extends Component {
     const { submit, postProject } = this.props;
     submit('addProject')
     console.log(tasks)
-  // postProject('new prefdsafdsa').then(() => console.log('hello'))
+    // postProject('new prefdsafdsa').then(() => console.log('hello'))
+  }
+  testSubmit(){
+    const { submit, postProject } = this.props;
+    submit('addProjectForm')  
   }
   
   render() {
-    const { dispatch, handleSubmit } = this.props;
+    const { dispatch, handleSubmit, submit } = this.props;
     
     return(
       <div>
-          <h2>Project Name</h2>
-          <AddProjectForm shouldRenderSubmitButton={false}/>
-          <AddTasksFormContainer handleFormSubmit={this.handleProjectSubmit}/>
-          <button className="parent" onClick={() => dispatch(submit('addProject'))}>Parent Submit</button>
-      </div>
-    );
+        <h2>Project Name</h2>
+        <AddProjectForm shouldRenderSubmitButton={false} />
+        <AddTasksFormContainer />  
+        <button
+          onClick={() => submit('addProjectForm')}
+          >
+            Submit
+          </button>
+        </div>
+      );
+    }
   }
-}
-const mapStateToProps = state => {
-
-}
-
-AddProjectPage = reduxForm({
-  form: "addProject"
-})(AddProjectPage);
-
-export default AddProjectPage = connect(null, {
-  postProject,
-  submit
-})(AddProjectPage);
-
-
-AddProjectPage.propTypes = {
-  //taskData: PropTypes.object.isRequired
-}
+  const mapStateToProps = state => {
+    
+  }
+  
+  AddProjectPage = reduxForm({
+    form: "addProject"
+  })(AddProjectPage);
+  
+  export default AddProjectPage = connect(null, {
+    postProject,
+    submit
+  })(AddProjectPage);
+  
+  
+  AddProjectPage.propTypes = {
+    //taskData: PropTypes.object.isRequired
+  }

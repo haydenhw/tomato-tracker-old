@@ -122,7 +122,7 @@ let AddTasksFormContainer = class extends Component {
     
     return (
       <AddTasksForm 
-        handleFormSubmit={handleFormSubmit(tasks) || this.handleFormSubmit.bind(this)}
+        handleFormSubmit={handleFormSubmit ? handleFormSubmit(tasks) : this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
         handleTaskSubmit={this.handleAddTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
