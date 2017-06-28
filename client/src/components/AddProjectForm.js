@@ -7,8 +7,6 @@ import store from '../redux-files/store';
 
 import validate from '../helpers/validate';
 
-const submit = ({ projectName }) => {console.log('submitting...'); return store.dispatch(queueNewProject(projectName))}
-
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label />
@@ -40,6 +38,8 @@ function AddProjectForm(props) {
     </form>
   )
 }
+
+const submit = ({ projectName }) =>  store.dispatch(queueNewProject(projectName));
 
 export default reduxForm({
   form: 'addProjectForm', 

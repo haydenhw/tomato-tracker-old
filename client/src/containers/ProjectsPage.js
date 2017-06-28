@@ -6,7 +6,7 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from '../helpers/time';
 import { addProject, deleteProject, setActiveProject, updateProject } from '../actions/projectActions';
-//import ProjectForm from '../components/ProjectForm';
+
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
@@ -18,9 +18,7 @@ class ProjectsPage extends Component {
   }
   
   handleAddProject() {
-    const { addProject } = this.props;
-    console.log(addProject)
-  
+    hashHistory.push('/projects/new');
   }
   
   handleListItemClick = (projectId) => () => {
@@ -93,7 +91,7 @@ class ProjectsPage extends Component {
           <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
           <TotalTime time={secondsToHMMSS(totalTime)} />
         </div>
-        <button onClick={this.handleAddProject.bind(this)}></button>
+        <button className="add-button material-button" onClick={this.handleAddProject.bind(this)}>ADD PROJECT</button>
       </div>
     );
   }

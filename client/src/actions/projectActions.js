@@ -138,11 +138,10 @@ export function postProject(projectName, tasks) {
         return res.json();
       })
       .then(data => {
-        console.log(data)
         const projectId = data.shortId;
         const databaseId = data._id;
-        console.log('post success');
-        dispatch(postProjectSuccess(projectId, databaseId))
+        
+        dispatch(postProjectSuccess(projectId, databaseId));
       })
       
   }

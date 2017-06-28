@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { reduxForm, submit } from 'redux-form';
+import { submit, SubmissionError } from 'redux-form';
 
 import { postProject } from '../actions/indexActions';
 
@@ -17,20 +17,26 @@ let AddProjectPage = class extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    
     if (prevProps.queuedProject !== this.props.queuedProject) {
       const { postProject, queuedProject } = this.props;
       const { newTasks } = this.state;
-      console.log('diff')
-      console.log(this.state.newTasks)
+      
       postProject(queuedProject, newTasks)
     }
   }
   
   handleProjectSubmit = (tasks) => () => {
     const { submit } = this.props;
+    if (!tasks.length) {
+      throw new SubmissionError({
+        taskName: 'Please add at least one task'
+      })
+    }    
     
-    this.setState({ newTasks: tasks}, () => submit('addProjectForm'));
+    this.setState({ 
+      newTasks: tasks.filter(task => !task.shouldDelete)
+    }, 
+    () => submit('addProjectForm'));
   }
   testSubmit(){
     const { submit, postProject } = this.props;
@@ -38,14 +44,12 @@ let AddProjectPage = class extends Component {
   }
   
   render() {
-    const { submit } = this.props;
     
     return(
       <div>
-        <h2>Project Name</h2>
+        <label>Project Name</label>
         <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer handleFormSubmit={this.handleProjectSubmit} />  
-        {/* <button onClick={this.handleProjectSubmit}>Submit</button> */}
+        <AddTasksFormContainer  handleFormSubmit={this.handleProjectSubmit} showTasksForActiveProject={false}/>  
         </div>
       );
     }

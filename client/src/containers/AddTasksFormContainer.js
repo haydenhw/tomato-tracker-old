@@ -81,7 +81,7 @@ let AddTasksFormContainer = class extends Component {
     
     if (!tasks.length) {
       throw new SubmissionError({
-        taskName: 'Please add at least one task',
+        taskName: 'Please add at least one task'
       })
     }    
     
@@ -132,14 +132,14 @@ let AddTasksFormContainer = class extends Component {
   }
 }  
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const { activeProjectId, modal, projects } = state;
   const { isOnboardingActive } = modal;  
   
   const activeProject = projects.items.find(project => project.shortId === activeProjectId);
   const activeProjectDatabaseId = activeProject && activeProject._id;
   
-  const tasks = activeProject 
+  const tasks = activeProject && ownProps.showTasksForActiveProject !== false
     ? activeProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
     

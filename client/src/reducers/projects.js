@@ -59,7 +59,7 @@ export function projects(state=defaultState, action) {
       return {
         ...state,
         items: [
-          ...state,
+          ...state.items,
           action.project
         ]
       }       
