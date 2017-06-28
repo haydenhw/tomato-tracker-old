@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import EditMenu from '../containers/EditMenu';
 
 export default function ListItem(props) {
-  const { col1Text, col2Text, isActive, handleClick } = props;
+  const { col1Text, col2Text, handleClick, isActive, isSelected  } = props;
 
   return(
-    <div className={`list-item ${isActive ? 'active' : ''}`} onClick={handleClick}>
+    <div className={`list-item ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
       <div className="list-item-col1 list-col">
         <span>{col1Text}</span>
       </div>

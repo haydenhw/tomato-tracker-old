@@ -59,6 +59,10 @@
     background-color: rgba(165, 214 , 167, 0.3);
   }
   
+  &.selected {
+    background-color: #F5F5F5;  
+  }
+  
   &.total-time {
     border: none;
   }
@@ -72,10 +76,12 @@
    }
 }
 
-.list-item:not(.list-item-header):hover {
-  background-color: #F5F5F5; 
+.list-item:not(.list-item-header):not(.total-time):hover
+{
+  background-color: #FAFAFA; 
   cursor: pointer; 
 }
+
 .total {
   span {
     color: #808080;

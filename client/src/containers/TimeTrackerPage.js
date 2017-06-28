@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteTask, decrementTimer, fetchProjects, setActiveProject, toggleAddTasksForm, toggleEditTaskForm  } from '../actions/indexActions';
+import {
+  deleteTask,
+  decrementTimer,
+  fetchProjects,
+  setActiveProject,
+  toggleAddTasksForm,
+  toggleEditTaskForm 
+} from '../actions/indexActions';
 
 
 import TimeTracker from './TimeTracker';

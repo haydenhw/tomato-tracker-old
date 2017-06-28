@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { fetchProjects } from '../actions/indexActions';
-import store from '../redux-files/store';
 
-export default class App extends Component {
+class App extends Component {
   componentDidMount() {
-    store.dispatch(fetchProjects());
+    const { dispatch } = this.props;
+    
+    dispatch(fetchProjects());
   }
   
   render() {
@@ -24,3 +26,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect()(App);

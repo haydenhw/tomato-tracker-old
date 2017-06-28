@@ -6,9 +6,6 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
 
-import store from '../redux-files/store'
-import * as actions from '../actions/indexActions'
-
 import FormModal from './FormModal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
@@ -28,6 +25,7 @@ export default class TimeTracker extends Component {
     this.state = {
       activeTaskId: null,
       clickedTaskId: null,
+      selectedTaskId: null, 
       tasks: tasks,
     }
   }
@@ -65,6 +63,12 @@ export default class TimeTracker extends Component {
     this.setState(newModalState);
   }
   
+  handleAddButtonClick() {
+    const { toggleAddTasksForm } = this.props
+    
+    toggleAddTasksForm();
+  }
+  
   handleAddTasks() {
     const { toggleAddTasksForm } = this.props;
     
@@ -81,24 +85,34 @@ export default class TimeTracker extends Component {
   handleTaskChange(taskId){
     this.setState({ activeTaskId: taskId });
   }
-
+  
+  handleTaskDelete = (activeProject, task) => () => {
+    const { deleteTask } = this.props;
+    
+    deleteTask(activeProject, task, true);  
+  }
+  
+  handleTaskItemClick = (taskId) => () => {
+    this.setState({ selectedTaskId: taskId });
+  }
+  
   renderTask (task){
     const { activeProject, deleteTask, isTimerActive } = this.props;
-    const { activeTaskId } = this.state;
+    const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
-    
-    const handleTaskDelete = () => deleteTask(activeProject, task, true);
     
     return (
       <ListItem
-        className="task"
         key={shortid.generate()}
+        className="task"
         col1Text={taskName}
         col2Text={secondsToHMMSS(recordedTime)} 
-        isActive={(activeTaskId === task.shortId) && isTimerActive}
+        handleClick={this.handleTaskItemClick(shortId)}
+        isActive={(activeTaskId === shortId) && isTimerActive}
+        isSelected={selectedTaskId === shortId}
       >
         <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
-        <li className="dropdown-item" onClick={handleTaskDelete}><a>Delete</a></li>
+        <li className="dropdown-item" onClick={this.handleTaskDelete(activeProject, task)}><a>Delete</a></li>
       </ListItem>
     ); 
   } 
@@ -174,7 +188,7 @@ export default class TimeTracker extends Component {
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </div>
             
-            <button className="add-button material-button">ADD TASK</button> 
+            <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASK</button> 
               
             <FormModal
               clickedTaskId={clickedTaskId}

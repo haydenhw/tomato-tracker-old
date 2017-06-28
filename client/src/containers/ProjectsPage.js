@@ -17,7 +17,7 @@ class ProjectsPage extends Component {
     projects: []
   }
   
-  handleAddProject() {
+  handleAddButtonClick() {
     hashHistory.push('/projects/new');
   }
   
@@ -91,7 +91,7 @@ class ProjectsPage extends Component {
           <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
           <TotalTime time={secondsToHMMSS(totalTime)} />
         </div>
-        <button className="add-button material-button" onClick={this.handleAddProject.bind(this)}>ADD PROJECT</button>
+        <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
       </div>
     );
   }
