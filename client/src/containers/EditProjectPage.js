@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import { addTask, deleteTask, editProjectName, setActiveProject } from '../actions/indexActions';
+import { addTask, deleteTask, editProjectName, setSelectedProject } from '../actions/indexActions';
 
 import ProjectForm from '../components/ProjectForm';
 
@@ -18,10 +18,10 @@ class EditProjectPage extends Component {
   }
   
   componentDidMount() {
-    const { params, setActiveProject } = this.props;
+    const { params, setSelectedProject } = this.props;
     const { projectId } = params;
     
-    setActiveProject(projectId);
+    setSelectedProject(projectId);
   }
   
   editProjectName (props, { projectName }) { 
@@ -55,12 +55,12 @@ class EditProjectPage extends Component {
   }
   
   render() {
-    const { activeProject, editProjectName, params } = this.props;
+    const { selectedProject, editProjectName, params } = this.props;
     const { projectId } = params;
     
     return (
       <ProjectForm 
-        project={activeProject}
+        project={selectedProject}
         projectId={projectId}
         editProjectName={editProjectName}
         handleEditProjectSubmit={this.editProjectName}
@@ -71,14 +71,14 @@ class EditProjectPage extends Component {
   
   }
   const mapStateToProps = (state) => {
-    const { activeProjectId, projects } = state;
+    const { selectedProjectId, projects } = state;
     
-    const activeProject = state.projects.length && activeProjectId 
-    ? projects.find((project) => project.shortId === activeProjectId).projectName
+    const selectedProject = state.projects.length && selectedProjectId 
+    ? projects.find((project) => project.shortId === selectedProjectId).projectName
     : 'No Projects Loaded'
     
     return {
-      activeProject, 
+      selectedProject, 
       projects
     }
 }
@@ -91,5 +91,5 @@ export default connect(mapStateToProps, {
   addTask,
   deleteTask,
   editProjectName, 
-  setActiveProject,
+  setSelectedProject,
 })(EditProjectPage);  

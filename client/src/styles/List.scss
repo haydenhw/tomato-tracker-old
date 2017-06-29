@@ -63,6 +63,10 @@
     background-color: #F5F5F5;  
   }
   
+  &.selected:hover {
+    background-color: #F5F5F5;  
+  }
+  
   &.total-time {
     border: none;
   }
@@ -76,11 +80,14 @@
    }
 }
 
+
+
 .list-item:not(.list-item-header):not(.total-time):hover
 {
   background-color: #FAFAFA; 
   cursor: pointer; 
 }
+
 
 .total {
   span {

@@ -37,18 +37,18 @@ EditProjectForm = reduxForm({
 
 EditProjectForm = connect(
   state => {
-    const { activeProjectId, projects } = state;
+    const { selectedProjectId, projects } = state;
     
-    const activeProject = projects.find((project) => project.shortId === activeProjectId); 
+    const selectedProject = projects.find((project) => project.shortId === selectedProjectId); 
      
-    const projectName = state.projects.length && activeProjectId 
-    ? activeProject.name
+    const projectName = state.projects.length && selectedProjectId 
+    ? selectedProject.name
     : 'No Projects Loaded'
     
     return ({
-      activeProjectId, 
+      selectedProjectId, 
       initialValues: { projectName: 'default' }, 
-      project: activeProject
+      project: selectedProject
     })
   }, { updateProject})(EditProjectForm);
 

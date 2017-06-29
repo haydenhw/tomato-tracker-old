@@ -107,7 +107,7 @@ InitializeFromStateForm = connect(
     
      const firstName = state.projects.length ? state.projects[0].projectName : 'Loading...';
     return ({
-    initialValues: {firstName: state.activeProjectId, age: 22}, //state.account.data, // pull initial values from account reducer
+    initialValues: {firstName: state.selectedProjectId, age: 22}, //state.account.data, // pull initial values from account reducer
   })}
   //{ load: loadAccount }, // bind account loading action creator
 )(InitializeFromStateForm);

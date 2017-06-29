@@ -50,10 +50,10 @@ export function updateTasks(projectId, newTasks) {
   }
 }
 
-export const SET_ACTIVE_PROJECT = "SET_ACTIVE_PROJECT";
-export function setActiveProject(projectId) {
+export const SET_SELECTED_PROJECT = "SET_SELECTED_PROJECT";
+export function setSelectedProject(projectId) {
   return {
-    type: "SET_ACTIVE_PROJECT",
+    type: "SET_SELECTED_PROJECT",
     projectId
   }
 }

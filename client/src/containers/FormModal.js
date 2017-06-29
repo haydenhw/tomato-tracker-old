@@ -9,12 +9,12 @@ import {
   changeModalType,
   confirmEditTaskTime,
   postProject,
-  setActiveProject,
+  setSelectedProject,
   toggleModal
 } from '../actions/indexActions';
 
 
-import Modal from '../components/Modal';
+import Modal from './Modal';
 import AddProjectForm from '../components/AddProjectForm';
 import EditTaskForm from '../components/EditTaskForm';
 import ConfirmEditTask from './ConfirmEditTask';
@@ -66,7 +66,7 @@ class FormModal extends Component {
   }
   
   renderFormElement(elementType) {
-    const { activeProjectName, clickedTaskId, modalProps, modalType, projects } = this.props;
+    const { selectedProjectName, clickedTaskId, modalProps, modalType, projects } = this.props;
     
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
@@ -93,7 +93,7 @@ class FormModal extends Component {
         );
          
       case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
-        return <h2 className="add-tasks-form-title">Add tasks for project <span>{activeProjectName}</span></h2>
+        return <h2 className="add-tasks-form-title">Add tasks for project <span>{selectedProjectName}</span></h2>
       
       case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
        return <AddTasksFormContainer />
@@ -164,16 +164,16 @@ class FormModal extends Component {
 }
   
 const mapStateToProps = (state) => {
-  const { activeProjectId, modal, projects } = state;
+  const { selectedProjectId, modal, projects } = state;
   const { isModalActive, rootModalClass, modalProps, modalType } = modal;
   
-  const activeProjectName = 
-  activeProjectId
-  ? projects.items.find(project => project.shortId === activeProjectId).projectName
+  const selectedProjectName = 
+  selectedProjectId
+  ? projects.items.find(project => project.shortId === selectedProjectId).projectName
   : null;
   
   return {
-    activeProjectName,
+    selectedProjectName,
     isModalActive,
     rootModalClass,
     modalProps, 
@@ -187,7 +187,7 @@ export default connect(mapStateToProps, {
   confirmEditTaskTime,
   changeModalType,
   postProject,
-  setActiveProject, 
+  setSelectedProject, 
   toggleModal
 })(FormModal);
 

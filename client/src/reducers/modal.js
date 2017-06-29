@@ -37,6 +37,12 @@ export const modal = (state = defaultState, action) => {
         isModalActive: true,
         modalType: 'EDIT_TASK'
       };
+    case actions.TOGGLE_PROJECT_NAG_MODAL:
+      return {
+        ...state,
+        isModalActive: true,
+        modalType: 'PROJECT_NAG'
+      };
     case actions.CONFIRM_EDIT_TASK:
       return {
         ...state,

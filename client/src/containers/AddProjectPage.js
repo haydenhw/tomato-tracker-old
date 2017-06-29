@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import { submit, SubmissionError } from 'redux-form';
 
 import { postProject } from '../actions/indexActions';
@@ -27,6 +28,9 @@ let AddProjectPage = class extends Component {
   
   handleProjectSubmit = (tasks) => () => {
     const { submit } = this.props;
+    
+    
+    
     if (!tasks.length) {
       throw new SubmissionError({
         taskName: 'Please add at least one task'
@@ -37,7 +41,11 @@ let AddProjectPage = class extends Component {
       newTasks: tasks.filter(task => !task.shouldDelete)
     }, 
     () => submit('addProjectForm'));
+    
+    
+    
   }
+  
   testSubmit(){
     const { submit, postProject } = this.props;
     submit('addProjectForm')  
@@ -49,7 +57,7 @@ let AddProjectPage = class extends Component {
       <div>
         <label>Project Name</label>
         <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer  handleFormSubmit={this.handleProjectSubmit} showTasksForActiveProject={false}/>  
+        <AddTasksFormContainer  handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
         </div>
       );
     }

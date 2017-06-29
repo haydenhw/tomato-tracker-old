@@ -68,8 +68,8 @@ let AddTasksFormContainer = class extends Component {
   
   handleFormSubmit (){
     const { 
-      activeProjectId,
-      activeProjectDatabaseId, 
+      selectedProjectId,
+      selectedProjectDatabaseId, 
       isOnboardingActive,
       postTask, 
       updateTasks, 
@@ -86,17 +86,17 @@ let AddTasksFormContainer = class extends Component {
     }    
     
     const newTasks = tasks.filter((task) => !task.shouldDelete);
-      updateTasks(activeProjectId, newTasks);
+      updateTasks(selectedProjectId, newTasks);
       
       newTasks.filter((task) => !task._id)
         .forEach((task) => {
-          activeProjectDatabaseId 
-            ? postTask(activeProjectDatabaseId, task)
+          selectedProjectDatabaseId 
+            ? postTask(selectedProjectDatabaseId, task)
             : console.error('database id has not yet updated')
         });
         
       tasks.filter((task) => task.shouldDelete && task._id)
-        .forEach((task) => deleteTask(activeProjectDatabaseId, task));
+        .forEach((task) => deleteTask(selectedProjectDatabaseId, task));
         
       isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
@@ -133,19 +133,19 @@ let AddTasksFormContainer = class extends Component {
 }  
 
 const mapStateToProps = (state, ownProps) => {
-  const { activeProjectId, modal, projects } = state;
+  const { selectedProjectId, modal, projects } = state;
   const { isOnboardingActive } = modal;  
   
-  const activeProject = projects.items.find(project => project.shortId === activeProjectId);
-  const activeProjectDatabaseId = activeProject && activeProject._id;
+  const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
+  const selectedProjectDatabaseId = selectedProject && selectedProject._id;
   
-  const tasks = activeProject && ownProps.showTasksForActiveProject !== false
-    ? activeProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
+  const tasks = selectedProject && ownProps.showTasksForSelectedProject !== false
+    ? selectedProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
     
   return {
-    activeProjectId,
-    activeProjectDatabaseId,
+    selectedProjectId,
+    selectedProjectDatabaseId,
     isOnboardingActive,
     tasks
   }

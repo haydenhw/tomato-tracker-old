@@ -5,7 +5,7 @@ import {
   deleteTask,
   decrementTimer,
   fetchProjects,
-  setActiveProject,
+  setSelectedProject,
   toggleAddTasksForm,
   toggleEditTaskForm 
 } from '../actions/indexActions';
@@ -17,29 +17,29 @@ class TimeTrackerPage extends Component {
 
 render() {
   const { 
-    activeProjectId,
+    selectedProjectId,
     decrementTimer,
     deleteTask,
     isTimerActive,
     projects,
-    setActiveProject,
+    setSelectedProject,
     toggleAddTasksForm, 
     toggleEditTaskForm
   } = this.props;
   
-  const activeProjectIndex = activeProjectId && projects.findIndex(project => project.shortId === activeProjectId);
-  const activeProject = (activeProjectIndex !== null && !isNaN(activeProjectIndex)) && projects[activeProjectIndex];
-  const selectedTasks = activeProject && activeProject.tasks;
+  const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
+  const selectedProject = (selectedProjectIndex !== null && !isNaN(selectedProjectIndex)) && projects[selectedProjectIndex];
+  const selectedTasks = selectedProject && selectedProject.tasks;
   
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
-        activeProject={activeProject || null}
+        selectedProject={selectedProject || null}
         decrementTimer={decrementTimer}
         deleteTask={deleteTask}
         projects={projects}
         isTimerActive={isTimerActive}
-        setActiveProject={setActiveProject}
+        setSelectedProject={setSelectedProject}
         tasks={selectedTasks || []}
         toggleAddTasksForm={toggleAddTasksForm} 
         toggleEditTaskForm={toggleEditTaskForm}
@@ -50,11 +50,11 @@ render() {
 }
 
 const mapStateToProps = state => {
-  const { activeProjectId, projects, timer } = state;
+  const { selectedProjectId, projects, timer } = state;
   const { isTimerActive } = timer;
   
   return {
-    activeProjectId,
+    selectedProjectId,
     isTimerActive, 
     projects: projects.items
   }
@@ -64,7 +64,7 @@ export default connect(mapStateToProps, {
   deleteTask,
   fetchProjects,
   decrementTimer,
-  setActiveProject,
+  setSelectedProject,
   toggleAddTasksForm,
   toggleEditTaskForm 
   

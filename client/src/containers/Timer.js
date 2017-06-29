@@ -42,7 +42,7 @@ class Timer extends Component {
   
   timer () {
     const { 
-      activeProject,
+      selectedProject,
       activeTaskId,
       decrementTimer,
       projects,
@@ -54,9 +54,9 @@ class Timer extends Component {
     
     const { intervalId } = this.state; 
     
-    const activeTask = activeProject.tasks.find(task => task.shortId === activeTaskId);
+    const activeTask = selectedProject.tasks.find(task => task.shortId === activeTaskId);
     
-    incrementTaskTime(activeProject, activeTask);
+    incrementTaskTime(selectedProject, activeTask);
     decrementTimer();
     
     if (remainingTime < 1) {
@@ -86,12 +86,12 @@ class Timer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { activeProjectId, projects, timer } = state;
+  const { selectedProjectId, projects, timer } = state;
   const { isTimerActive, remainingTime, startTime } = timer;
-  const activeProject = projects.items.find(project => project.shortId === activeProjectId);
+  const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   
   return {
-    activeProject,
+    selectedProject,
     isTimerActive,
     remainingTime,
     startTime,

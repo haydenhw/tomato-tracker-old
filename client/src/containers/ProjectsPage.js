@@ -5,8 +5,14 @@ import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from '../helpers/time';
-import { addProject, deleteProject, setActiveProject, updateProject } from '../actions/projectActions';
+import {
+  addProject,
+  deleteProject,
+  setSelectedProject,
+  updateProject
+} from '../actions/projectActions';
 
+import ProjectNagModal from './ProjectNagModal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
@@ -22,9 +28,9 @@ class ProjectsPage extends Component {
   }
   
   handleListItemClick = (projectId) => () => {
-    const { setActiveProject } = this.props;
+    const { setSelectedProject } = this.props;
     
-    setActiveProject(projectId);
+    setSelectedProject(projectId);
     hashHistory.push(`/`);
   }  
   
@@ -41,7 +47,7 @@ class ProjectsPage extends Component {
   }
   
   renderProject (project){
-    const { deleteProject } = this.props;
+    const { selectedProjectId } = this.props;
     const { projectName, shortId } = project;
     const totalTime = 
       project.tasks.length 
@@ -56,6 +62,7 @@ class ProjectsPage extends Component {
         col1Text={projectName}
         col2Text={secondsToHMMSS(Math.round(totalTime))}
         handleClick={this.handleListItemClick(shortId)}
+        isSelected={selectedProjectId === shortId}
       >
         <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
         <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
@@ -86,29 +93,40 @@ class ProjectsPage extends Component {
     
     return (
       <div className='project-page-container'>
-        <div className="list-container">
-          <ListHeader col1Title="Project" col2Title="Logged Time" />
-          <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
-          <TotalTime time={secondsToHMMSS(totalTime)} />
-        </div>
-        <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+        { projects.length
+        ? <div>
+            <div className="list-container">
+                <ListHeader col1Title="Project" col2Title="Logged Time" />
+                <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
+                <TotalTime time={secondsToHMMSS(totalTime)} />
+              </div>
+            <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+          </div> 
+          
+        : <div className="list-container">
+            <p>No projects exist yet. Create one to get started</p>
+            <button className="material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+            <ProjectNagModal />
+          </div>
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { projects } = state; 
+  const { projects, selectedProjectId } = state; 
   
   return {
-    projects: projects.items
+    projects: projects.items,
+    selectedProjectId
   }
 }
 
 export default connect(mapStateToProps, { 
   addProject,
   deleteProject,
-  setActiveProject,
+  setSelectedProject,
   updateProject
 })(ProjectsPage);
 

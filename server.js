@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const shouldDeleteDb = true;
-const shouldResetDb = true;
+const shouldDeleteDb = false;
+const shouldResetDb = false;
 
 const { PORT, DATABASE_URL } = require('./server-files/config');
 const { Projects } = require('./server-files/models');
