@@ -44,16 +44,25 @@ function tasks(state, action) {
 }
 
 const defaultState = {
+  hasFetched: false, 
+  isFetching: false, 
   items: [],
   queue: null 
 }
 
 export function projects(state=defaultState, action) {
   switch(action.type) {
+    case actions.TOGGLE_FETCHING:
+    return {
+      ...state,
+      isFetching: !state.isFetching,
+    } 
     case actions.FETCH_PROJECTS_SUCCESS:
       return {
         ...state,
-        items: action.projects
+        items: action.projects,
+        hasFetched: true, 
+        isFetching: false
       } 
     case actions.POST_PROJECT_REQUEST:
       return {

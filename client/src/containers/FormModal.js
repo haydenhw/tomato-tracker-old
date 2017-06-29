@@ -151,6 +151,7 @@ class FormModal extends Component {
     return (
       isModalActive &&
       <Modal 
+        areChildrenActive={true}
         handleCloseButtonClick={toggleModal}
         rootModalClass={rootModalClass} 
         modalClass={""}

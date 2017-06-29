@@ -12,15 +12,19 @@ import {
   updateProject
 } from '../actions/projectActions';
 
-import ProjectNagModal from './ProjectNagModal';
+import Modal from './Modal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
 import TotalTime from '../components/TotalTime';
 
 class ProjectsPage extends Component {
+  constructor(){
+    super();
+  }
+  
   static defaultProps = {
-    projects: []
+    projects: ['filler']
   }
   
   handleAddButtonClick() {
@@ -88,12 +92,16 @@ class ProjectsPage extends Component {
   }
   
   render() {
-    const { projects } = this.props;
+    const { hasFetched, projects } = this.props;
     const totalTime = this.getTotalTime();
+    
+    if (!hasFetched){
+      return <div> Loading...</div>
+    }
     
     return (
       <div className='project-page-container'>
-        { projects.length
+        { projects.length 
         ? <div>
             <div className="list-container">
                 <ListHeader col1Title="Project" col2Title="Logged Time" />
@@ -106,20 +114,22 @@ class ProjectsPage extends Component {
         : <div className="list-container">
             <p>No projects exist yet. Create one to get started</p>
             <button className="material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
-            <ProjectNagModal />
-          </div>
-        }
-      </div>
+            <Modal rootModalClass="roadrunner" />  
+        </div>
+      }
+    </div>
     );
   }
 }
 
 const mapStateToProps = state => {
   const { projects, selectedProjectId } = state; 
+  const { hasFetched } = projects;
   
   return {
+    hasFetched, 
+    selectedProjectId,
     projects: projects.items,
-    selectedProjectId
   }
 }
 

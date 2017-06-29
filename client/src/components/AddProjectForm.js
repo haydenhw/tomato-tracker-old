@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { hashHistory } from 'react-router';
 
 import { queueNewProject } from '../actions/indexActions';
 import store from '../redux-files/store';
@@ -13,6 +14,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
     <input
       {...input} 
       autoFocus 
+      autoComplete="off"
       className="fullscreen-input add-project-input" 
       placeholder="Project name" 
       type={type} 
@@ -36,10 +38,12 @@ function AddProjectForm(props) {
         <button className="form-button fullscreen-submit" onClick={handleSubmit(handleProjectSubmit.bind(this))}>Continue</button>
       }
     </form>
-  )
+  );
 }
 
-const submit = ({ projectName }) =>  store.dispatch(queueNewProject(projectName));
+const submit = ({ projectName }) =>  {
+  store.dispatch(queueNewProject(projectName));
+};
 
 export default reduxForm({
   form: 'addProjectForm', 

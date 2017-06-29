@@ -191,6 +191,7 @@ export default class TimeTracker extends Component {
             <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASK</button> 
               
             <FormModal
+              
               clickedTaskId={clickedTaskId}
               form="ADD_PROJECT"
               handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}

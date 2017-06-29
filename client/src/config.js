@@ -2,7 +2,7 @@ const renderModal = false;
 const productionMode = false;
 
 export const renderFormModal = productionMode || renderModal;
-export const modalType = productionMode ? "WELCOME" : "ADD_PROJECT";  
+export const modalType = productionMode ? "WELCOME" : "PROJECT_NAG";  
 export const showProgressBar = productionMode || false;
 export const devStyle = !productionMode && {
     position: 'static',

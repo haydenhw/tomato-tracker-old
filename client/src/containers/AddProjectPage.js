@@ -22,7 +22,8 @@ let AddProjectPage = class extends Component {
       const { postProject, queuedProject } = this.props;
       const { newTasks } = this.state;
       
-      postProject(queuedProject, newTasks)
+      postProject(queuedProject, newTasks);
+      hashHistory.push('/projects');
     }
   }
   
@@ -41,9 +42,6 @@ let AddProjectPage = class extends Component {
       newTasks: tasks.filter(task => !task.shouldDelete)
     }, 
     () => submit('addProjectForm'));
-    
-    
-    
   }
   
   testSubmit(){
