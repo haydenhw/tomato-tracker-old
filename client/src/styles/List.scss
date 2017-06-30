@@ -116,9 +116,11 @@
     position: absolute;
     top: 1px;
     padding: 7px 12px;
+    opacity: 0.5;
   }
   .edit-menu-icon:hover {
-    background-color: #EEEEEE    
+    background-color: #EEEEEE;
+    opacity: 1;   
   }
   
   .edit-menu-icon:before {
