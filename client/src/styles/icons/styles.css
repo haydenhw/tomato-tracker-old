@@ -47,3 +47,6 @@
 .icon-cancel:before {
   content: "\63";
 }
+.icon-edit:before {
+  content: "\64";
+}

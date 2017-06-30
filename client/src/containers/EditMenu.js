@@ -54,7 +54,7 @@ export default class EditMenu extends Component {
       <Dropdown className={className}>
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <FontAwesome className="edit-menu-icon fa-pencil-square-o" name="fa-pencil-square-o" />
+            <div className="edit-menu-icon icon-edit"></div>
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
             {children}

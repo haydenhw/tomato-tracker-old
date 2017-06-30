@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
+
 import {
   deleteTask,
   decrementTimer,
@@ -14,18 +16,30 @@ import {
 import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
+  
+componentWillMount() {
+  const { hasFetched, projects } = this.props;
+  if (hasFetched && !projects.length) {
+    hashHistory.push('/projects')
+  }
+}
 
 render() {
   const { 
     selectedProjectId,
     decrementTimer,
     deleteTask,
+    hasFetched,
     isTimerActive,
     projects,
     setSelectedProject,
     toggleAddTasksForm, 
     toggleEditTaskForm
   } = this.props;
+  
+  if (!hasFetched) {
+    return <div>Loading...</div>
+  }
   
   const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
   const selectedProject = (selectedProjectIndex !== null && !isNaN(selectedProjectIndex)) && projects[selectedProjectIndex];
@@ -51,10 +65,12 @@ render() {
 
 const mapStateToProps = state => {
   const { selectedProjectId, projects, timer } = state;
+  const { hasFetched } = projects;
   const { isTimerActive } = timer;
   
   return {
     selectedProjectId,
+    hasFetched, 
     isTimerActive, 
     projects: projects.items
   }

@@ -117,7 +117,7 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { handleSubmit, handleFormSubmit } = this.props;
+    const { handleSubmit, handleFormSubmit, shouldSubmit, shouldRenderSubmitButton } = this.props;
     const { tasks } = this.state;
     
     return (
@@ -126,6 +126,8 @@ let AddTasksFormContainer = class extends Component {
         handleSubmit={handleSubmit}
         handleTaskSubmit={this.handleAddTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
+        shouldRenderSubmitButton={shouldRenderSubmitButton}
+        shouldSubmit={shouldSubmit}
         tasks={tasks}
       />
     );

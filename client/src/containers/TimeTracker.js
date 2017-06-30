@@ -182,13 +182,15 @@ export default class TimeTracker extends Component {
             </div>
             <div className="timer-task-list list-container">
               {this.renderProjectSelect()}
+              <div className="add-button-wrapper">
+                <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASK</button> 
+              </div>
               <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                 <ListHeader col1Title="Task" col2Title="Time Logged" />
               </List>
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </div>
             
-            <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASK</button> 
               
             <FormModal
               

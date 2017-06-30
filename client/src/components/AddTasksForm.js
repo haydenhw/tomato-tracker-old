@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, SubmissionError } from 'redux-form';
+import { Field } from 'redux-form';
 
 import List from './List';
 
@@ -21,15 +21,25 @@ const renderField = ({
     </div>
   );
 
-export default function AddTasksForm(props) {
+export default class AddTasksForm extends Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
+      const { handleSubmit, handleFormSubmit } = this.props;
+      
+      handleSubmit(handleFormSubmit)();    
+    }
+  }  
+  
+  render() {
     const {
-      error,
+      submitButtonText, 
       handleFormSubmit,
       handleTaskSubmit,
       handleSubmit,
+      shouldRenderSubmitButton,
       renderFormTask,
       tasks,
-    } = props;
+    } = this.props;
     
     return (
       <div>
@@ -38,21 +48,17 @@ export default function AddTasksForm(props) {
           <label htmlFor="taskName" />
           <Field name="taskName" component={renderField}/>
         </form>
-        
-        <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>Finish</button>
-    </div>
-  );
-}
+        { !(shouldRenderSubmitButton === false) && 
+          <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+        }
+      </div>
+    );
+  }
+}  
 
-/*AddTasksForm = reduxForm({
-  form: 'addProjec',
-  validate,
-})(AddTasksForm);
-
-export default AddTasksForm;*/
-
-/*AddTasksForm.propTypes = {
-  handleProjectSubmit: PropTypes.func.isRequired,
+ 
+AddTasksForm.propTypes = {
+  handleFormSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
   tasks: PropTypes.array.isRequired,
-}*/
+}

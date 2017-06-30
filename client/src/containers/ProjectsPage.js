@@ -21,6 +21,10 @@ import TotalTime from '../components/TotalTime';
 class ProjectsPage extends Component {
   constructor(){
     super();
+    
+    this.state = {
+      isProjectSelectTipActive: true
+    }
   }
   
   static defaultProps = {
@@ -48,6 +52,10 @@ class ProjectsPage extends Component {
     
     const { deleteProject } = this.props;
     deleteProject(project);
+  }
+  
+  toggleProjectSelectTip() {
+    this.setState({ isProjectSelectTipActive: false });
   }
   
   renderProject (project){
@@ -93,6 +101,7 @@ class ProjectsPage extends Component {
   
   render() {
     const { hasFetched, projects } = this.props;
+    const { isProjectSelectTipActive } = this.state;
     const totalTime = this.getTotalTime();
     
     if (!hasFetched){
@@ -100,24 +109,33 @@ class ProjectsPage extends Component {
     }
     
     return (
-      <div className='project-page-container'>
+      <div className='projects-page-container'>
+        { (isProjectSelectTipActive && projects.length > 1) && 
+          <div className="project-select-tip-wrapper">
+            <div className="project-select-tip">
+              <span>To track time for a different project, simply select it from the list below.</span>
+              <button onClick={this.toggleProjectSelectTip.bind(this)}>&times;</button>
+            </div>
+          </div>  
+        }
         { projects.length 
-        ? <div>
-            <div className="list-container">
+          ? <div>
+              <div className="list-container">
+                <div className="add-button-wrapper">
+                  <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>NEW PROJECT</button>
+                </div>                
                 <ListHeader col1Title="Project" col2Title="Logged Time" />
                 <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
-            <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
-          </div> 
-          
-        : <div className="list-container">
-            <p>No projects exist yet. Create one to get started</p>
-            <button className="material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
-            <Modal rootModalClass="roadrunner" />  
-        </div>
-      }
-    </div>
+            </div> 
+          : <div className="list-container">
+              <span>No projects exist yet. Create one to get started</span>
+              <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+              <Modal rootModalClass="roadrunner" />  
+            </div>
+        }
+      </div>
     );
   }
 }

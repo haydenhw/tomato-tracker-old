@@ -168,10 +168,10 @@ const mapStateToProps = (state) => {
   const { selectedProjectId, modal, projects } = state;
   const { isModalActive, rootModalClass, modalProps, modalType } = modal;
   
-  const selectedProjectName = 
-  selectedProjectId
-  ? projects.items.find(project => project.shortId === selectedProjectId).projectName
-  : null;
+  const selectedProject = selectedProjectId 
+    && projects.items.find(project => project.shortId === selectedProjectId);
+  
+  const selectedProjectName = selectedProject && selectedProject.name;
   
   return {
     selectedProjectName,

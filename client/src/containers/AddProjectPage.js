@@ -13,7 +13,8 @@ let AddProjectPage = class extends Component {
   constructor() {
     super() 
       this.state = {
-        newTasks: []
+        newTasks: [],
+        shouldSubmit: false
       }
   }
   
@@ -27,10 +28,12 @@ let AddProjectPage = class extends Component {
     }
   }
   
+  routeToProjects() {
+    hashHistory.push('/projects')
+  }
+  
   handleProjectSubmit = (tasks) => () => {
     const { submit } = this.props;
-    
-    
     
     if (!tasks.length) {
       throw new SubmissionError({
@@ -44,9 +47,10 @@ let AddProjectPage = class extends Component {
     () => submit('addProjectForm'));
   }
   
-  testSubmit(){
-    const { submit, postProject } = this.props;
-    submit('addProjectForm')  
+  toggleShouldSubmit() {
+    const { shouldSubmit } = this.props;
+    console.log('toggling')
+    this.setState({ shouldSubmit: !shouldSubmit});
   }
   
   render() {
@@ -55,8 +59,10 @@ let AddProjectPage = class extends Component {
       <div>
         <label>Project Name</label>
         <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer  handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
-        </div>
+        <AddTasksFormContainer shouldSubmit={this.state.shouldSubmit} shouldRenderSubmitButton={false} handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
+        <button onClick={this.toggleShouldSubmit.bind(this)}>Submit</button>
+        <button onClick={this.routeToProjects}>Cancel</button>
+      </div>
       );
     }
   }
@@ -75,5 +81,5 @@ let AddProjectPage = class extends Component {
   
   
   AddProjectPage.propTypes = {
-    //taskData: PropTypes.object.isRequired
+    queuedProject: PropTypes.string
   }

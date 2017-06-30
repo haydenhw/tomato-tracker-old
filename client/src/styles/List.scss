@@ -60,11 +60,11 @@
   }
   
   &.selected {
-    background-color: #F5F5F5;  
+    background-color: #FAFAFA;  
   }
   
   &.selected:hover {
-    background-color: #F5F5F5;  
+    background-color: #FAFAFA;  
   }
   
   &.total-time {
@@ -80,14 +80,10 @@
    }
 }
 
-
-
-.list-item:not(.list-item-header):not(.total-time):hover
-{
-  background-color: #FAFAFA; 
+.list-item:not(.list-item-header):not(.total-time):hover {
+  background-color: #FAFAFA;
   cursor: pointer; 
 }
-
 
 .total {
   span {
@@ -118,5 +114,16 @@
   
   .edit-menu-icon {
     position: absolute;
+    top: 1px;
+    padding: 7px 12px;
+  }
+  .edit-menu-icon:hover {
+    background-color: #EEEEEE    
+  }
+  
+  .edit-menu-icon:before {
+    position: relative;
+    top: 3px;
+    left: 1px;
   }
 }
