@@ -7,65 +7,45 @@ import { submit, SubmissionError } from 'redux-form';
 import { postProject } from '../actions/indexActions';
 
 import AddProjectForm from '../components/AddProjectForm';
-import AddTasksFormContainer from './AddTasksFormContainer';
+import ProjectTaskForm from '../components/ProjectTaskForm';
+
+
 
 let AddProjectPage = class extends Component {
-  constructor() {
-    super() 
-      this.state = {
-        newTasks: [],
-        shouldSubmit: false
-      }
-  }
-  
-  componentDidUpdate(prevProps) {
+  handleComponentUpdate(prevProps) {
+    console.log(prevProps.queuedProject, this.props.queuedProject)
     if (prevProps.queuedProject !== this.props.queuedProject) {
       const { postProject, queuedProject } = this.props;
       const { newTasks } = this.state;
-      
+      console.log(newTasks)
       postProject(queuedProject, newTasks);
-      this.routeToProjects();
+     //routeToProjects();
     }
   }
   
-  routeToProjects() {
-    hashHistory.push('/projects')
-  }
-  
-  handleProjectSubmit = (tasks) => () => {
+  handleAddProject() {
     const { submit } = this.props;
-    
-    if (tasks.length === 0) {
-      throw new SubmissionError({
-        taskName: 'Please add at least one task'
-      })
-    }    
-    
-    this.setState({ 
-      newTasks: tasks.filter(task => !task.shouldDelete)
-    }, 
-    () => submit('addProjectForm'));
-  }
-  
-  toggleShouldSubmit() {
-    const { shouldSubmit } = this.state;
-    
-    this.setState({ shouldSubmit: !shouldSubmit});
+    submit('addProjectForm');  
   }
   
   render() {
+    const { postProject, queuedProject } = this.props; 
     
     return(
       <div>
-        <label>Project Name</label>
-        <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer shouldSubmit={this.state.shouldSubmit} shouldRenderSubmitButton={false} handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
-        <button onClick={this.toggleShouldSubmit.bind(this)}>Submit</button>
-        <button onClick={this.routeToProjects}>Cancel</button>
+        <ProjectTaskForm 
+          handleComponentUpdate={this.handleComponentUpdate}
+          handleProjectSubmit={this.handleAddProject.bind(this)}
+          postProject={postProject}
+          queuedProject={queuedProject}
+        >
+          <AddProjectForm shouldRenderSubmitButton={false} />
+        </ProjectTaskForm>  
       </div>
       );
     }
   }
+  
   const mapStateToProps = state => {
     const { projects } = state;
     

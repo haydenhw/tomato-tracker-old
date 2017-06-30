@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
+import { submit, SubmissionError } from 'redux-form';
 
 import AddTasksFormContainer from '../containers/AddTasksFormContainer';
 
@@ -18,8 +19,22 @@ export default class ProjectTaskForm extends Component {
   componentDidUpdate(prevProps) {
     const { handleComponentUpdate } = this.props;
     
-    handleComponentUpdate(prevProps);  
+    handleComponentUpdate.call(this, prevProps);  
   }
+  
+  handleFormSubmit = (tasks) => () => {
+    const { handleProjectSubmit } = this.props;
+    
+    if (tasks.length === -1) {
+      throw new SubmissionError({
+        taskName: 'Please add at least one task'
+      })
+    }    
+    console.log('proj submit')
+    this.setState({ 
+      newTasks: tasks.filter(task => !task.shouldDelete)
+    }, handleProjectSubmit);
+  }  
   
   toggleShouldSubmit() {
     const { shouldSubmit } = this.state;
@@ -28,14 +43,14 @@ export default class ProjectTaskForm extends Component {
   }
   
   render() {
-    const { children, handleProjectSubmit } = this.props;
+    const { children } = this.props;
     const { shouldSubmit } = this.state;  
     return(
       <div>
         <label>Project Name</label>
         {children}
         <AddTasksFormContainer
-          handleFormSubmit={handleProjectSubmit}
+          handleFormSubmit={this.handleFormSubmit}
           shouldSubmit={shouldSubmit}
           shouldRenderSubmitButton={false}
           showTasksForSelectedProject={false}
