@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { hashHistory } from 'react-router';
 
 import { updateProject } from '../actions/indexActions';
 
 let EditProjectForm = class extends Component {
+  componentWillMount() {
+    const { selectedProject } = this.props;
+    
+    if (!selectedProject) {
+    //  hashHistory.push('/projects'); 
+    }
+    }
+    
   render() {
     const { handleSubmit, project, updateProject } = this.props;
     const handleEditProjectSubmit = ({ projectName }) => {
@@ -23,7 +32,6 @@ let EditProjectForm = class extends Component {
               type="text"
               placeholder="Project Name"
             />
-            <input type="submit"/>
           </div>
         </div>
       </form>
@@ -32,22 +40,19 @@ let EditProjectForm = class extends Component {
 };
 
 EditProjectForm = reduxForm({
-  form: 'initializeFromState', // a unique identifier for this form
+  form: 'EditProjectForm', // a unique identifier for this form
 })(EditProjectForm);
 
 EditProjectForm = connect(
   state => {
     const { selectedProjectId, projects } = state;
     
-    const selectedProject = projects.find((project) => project.shortId === selectedProjectId); 
-     
-    const projectName = state.projects.length && selectedProjectId 
-    ? selectedProject.name
-    : 'No Projects Loaded'
+    const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId); 
+    const projectName = (projects.items.length > 0 && selectedProjectId) && selectedProject.projectName;
     
     return ({
       selectedProjectId, 
-      initialValues: { projectName: 'default' }, 
+      initialValues: { projectName: /*'tester'*/ projectName }, 
       project: selectedProject
     })
   }, { updateProject})(EditProjectForm);

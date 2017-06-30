@@ -11,8 +11,13 @@ body {
 input:focus,
 select:focus,
 textarea:focus,
+button:focus
+ {
+  outline: none;
+}
+
 button:focus {
-    outline: none;
+   box-shadow: 0 0 0 1px gray; 
 }
 
 @mixin centerVertHoriz(){

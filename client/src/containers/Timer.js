@@ -45,16 +45,16 @@ class Timer extends Component {
       selectedProject,
       activeTaskId,
       decrementTimer,
-      projects,
       incrementTaskTime,
       remainingTime,
       resetTimer,
+      selectedTaskId, 
       toggleIsTimerActive
     } = this.props;
     
     const { intervalId } = this.state; 
     
-    const activeTask = selectedProject.tasks.find(task => task.shortId === activeTaskId);
+    const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
     
     incrementTaskTime(selectedProject, activeTask);
     decrementTimer();
@@ -67,13 +67,22 @@ class Timer extends Component {
   }
   
   render() {
-    const { activeTaskId, isTimerActive, remainingTime, setStartTime, startTime, startTimer, task } = this.props;
+    const {
+      activeTaskId,
+      isTimerActive,
+      remainingTime,
+      setStartTime,
+      startTime,
+      startTimer,
+      selectedTaskId,
+      task,
+    } = this.props;
     
     return (
       <div>
         <TimeDisplay
           isTimerActive={isTimerActive}
-          isTimerControlActive={Boolean(activeTaskId)}
+          isTimerControlActive={Boolean(selectedTaskId)}
           setStartTime={setStartTime} 
           startCount={startTime}
           time={remainingTime}

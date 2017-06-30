@@ -34,6 +34,7 @@ body {
   height: 100%;
   position: absolute;
   overflow: hidden 100%;
+  width: 100%;
 }
 
 
@@ -43,12 +44,11 @@ body {
   text-align: center;
   transform: rotateY(180deg);
   background: $timer-background-light-gray;
+  width: 100%;
 }
 
 .fa-play, 
 .fa-stop {
   position: absolute;
-  // top: 25%;
-  // left: 25%;
   @include centerVertHoriz();
 }

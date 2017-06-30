@@ -54,12 +54,13 @@ let AddProjectPage = class extends Component {
   }
   
   render() {
-    
+    const { children } = this.props;
+    const { shouldSubmit } = this.state;  
     return(
       <div>
         <label>Project Name</label>
-        <AddProjectForm shouldRenderSubmitButton={false} />
-        <AddTasksFormContainer shouldSubmit={this.state.shouldSubmit} shouldRenderSubmitButton={false} handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
+        {children}
+        <AddTasksFormContainer shouldSubmit={shouldSubmit} shouldRenderSubmitButton={false} handleFormSubmit={this.handleProjectSubmit} showTasksForSelectedProject={false}/>  
         <button onClick={this.toggleShouldSubmit.bind(this)}>Submit</button>
         <button onClick={this.routeToProjects}>Cancel</button>
       </div>

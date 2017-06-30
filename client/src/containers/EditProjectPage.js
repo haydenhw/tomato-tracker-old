@@ -5,14 +5,15 @@ import shortid from 'shortid';
 
 import { addTask, deleteTask, editProjectName, setSelectedProject } from '../actions/indexActions';
 
-import ProjectForm from '../components/ProjectForm';
+import EditProjectForm from '../components/EditProjectForm';
+import AddTasksFormContainer from './AddTasksFormContainer'; 
 
 class EditProjectPage extends Component {
   constructor() {
     super()
     
-    this.addNewTask = this.addNewTask.bind(this);
   }
+  
   static defaultProps = {
     projects: []
   }
@@ -25,33 +26,9 @@ class EditProjectPage extends Component {
   }
   
   editProjectName (props, { projectName }) { 
-    console.log(props)
     const { editProjectName } = props;
     
-    console.log(editProjectName);
     editProjectName(projectName);
-  }
-  
-  addNewTask (values) {
-    console.log('hello')
-    this.props.addTask('123', 'new task');
-  }
-  
-  deleteTask (taskId) {
-    this.props.deleteTask('123', '111');
-  }
-  
-  renderFormTask (task) {
-    const { taskName } = task;
-    
-    return (
-      <div className="form-task-list-item" key={shortid.generate()}>
-        <span>{taskName}</span>
-        <div className="button-wrapper">
-          <button onClick={this.deleteTask.bind(this)}>&times;</button>
-        </div>
-      </div>
-    );
   }
   
   render() {
@@ -59,13 +36,16 @@ class EditProjectPage extends Component {
     const { projectId } = params;
     
     return (
-      <ProjectForm 
+    <div className="fullscreen-form form-page">
+      <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
+      <EditProjectForm 
         project={selectedProject}
         projectId={projectId}
         editProjectName={editProjectName}
         handleEditProjectSubmit={this.editProjectName}
-        renderFormTask={this.renderFormTask.bind(this)}
       />
+      <AddTasksFormContainer /> 
+    </div>  
     );
   }
   
@@ -74,17 +54,17 @@ class EditProjectPage extends Component {
     const { selectedProjectId, projects } = state;
     
     const selectedProject = state.projects.length && selectedProjectId 
-    ? projects.find((project) => project.shortId === selectedProjectId).projectName
+    ? projects.items.find((project) => project.shortId === selectedProjectId).projectName
     : 'No Projects Loaded'
     
     return {
-      selectedProject, 
+      selectedProject: {projectName: 'tester'}, 
       projects
     }
 }
 
 EditProjectPage.propTypes = {
-  projects: PropTypes.array
+  projects: PropTypes.object
 }
 
 export default connect(mapStateToProps, { 

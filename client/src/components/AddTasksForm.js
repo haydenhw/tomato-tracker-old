@@ -45,7 +45,7 @@ export default class AddTasksForm extends Component {
       <div>
         <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
         <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-          <label htmlFor="taskName" />
+          <label htmlFor="taskName">Tasks</label>
           <Field name="taskName" component={renderField}/>
         </form>
         { !(shouldRenderSubmitButton === false) && 

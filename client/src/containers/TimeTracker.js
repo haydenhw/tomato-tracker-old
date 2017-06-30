@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
-import Isvg from 'react-inlinesvg';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -11,7 +9,6 @@ import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import ListItem from '../components/ListItem';
-import RoundButton from '../components/RoundButton';
 import TotalTime from '../components/TotalTime';
 import Select from './Select';
 import Timer from './Timer';
@@ -63,15 +60,9 @@ toggleShouldRenderModal(modalType) {
   this.setState(newModalState);
 }
 
-handleAddButtonClick() {
-  const { toggleAddTasksForm } = this.props
-  
-  toggleAddTasksForm();
-}
-
 handleAddTasks() {
   const { toggleAddTasksForm } = this.props;
-  
+  console.log('add task modal');
   toggleAddTasksForm();
 }
 
@@ -153,39 +144,34 @@ renderTask (task){
       
       return (
         <div className="project-select-wrapper">
-          <span>Showing tasks for project: </span>
-          <Select 
-            className="project-select"
-            handleOptionClick={setSelectedProject}
-            items={simplifiedProjects}
-            >
+          <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
               <ProjectHeading 
                 text={selectedProject ? selectedProject.projectName : "No projects added yet"}
                 iconClass={"icon icon-dots-menu"} 
               />
-            </Select>
           </div>
         );
       }
       
       render() {
-        const { tasks } = this.props;
-        const { activeTaskId, clickedTaskId, isModalActive } = this.state;
+        const { tasks, selectedProject } = this.props;
+        const { activeTaskId, clickedTaskId, isModalActive, selectedTaskId } = this.state;
         const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
+        
         return (
           <div className="time-tracker">
             <div className="timer-section">
               <div className="timer-container">
-                {this.renderTaskSelect()}
-                <Timer activeTaskId={activeTaskId} />
+                {tasks.length > 0 && this.renderTaskSelect()}
+                <Timer activeTaskId={activeTaskId} selectedTaskId={selectedTaskId}/>
               </div>
             </div>
-            { tasks.length 
+            {tasks.length > 0
               ? <div>
                   <div className="timer-task-list list-container">
-                    {this.renderProjectSelect()}
+                    <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
                     <div className="add-button-wrapper">
-                      <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASK</button> 
+                      <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
                     </div>
                     <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                       <ListHeader col1Title="Task" col2Title="Time Logged" />
@@ -194,19 +180,22 @@ renderTask (task){
                   </div>
                   <FormModal
                     clickedTaskId={clickedTaskId}
-                    form="ADD_PROJECT"
                     handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
                     isActive={isModalActive}
                   /> 
                 </div>  
-              : <div className="list-container">
-                  <span>Add tasks to you project to start tracking time.</span>
-                  <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD TASKS</button>
-                </div>
-            }
-          </div>
-          
-        );
+                : <div className="list-container">
+                  <span>Add tasks to your project to start tracking time.</span>
+                  <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
+                  
+                  <FormModal
+                    clickedTaskId={clickedTaskId}
+                    handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
+                    isActive={isModalActive}
+                  />                 </div>
+                }
+              </div>
+            );
       }
     }
     

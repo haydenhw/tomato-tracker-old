@@ -57,9 +57,3 @@ export function incrementTaskTime(project, task) {
     })
   }
 }
-
-
-
-
-
-
