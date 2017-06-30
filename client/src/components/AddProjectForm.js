@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { hashHistory } from 'react-router';
 
 import { queueNewProject } from '../actions/indexActions';
 import store from '../redux-files/store';
@@ -42,7 +41,6 @@ function AddProjectForm(props) {
 }
 
 const submit = ({ projectName }) =>  {
-    console.log('hello for submit')
   if (!hasAnyValue(projectName)) {
       throw new SubmissionError({
         projectName: 'Project name is required' 

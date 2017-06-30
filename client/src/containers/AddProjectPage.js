@@ -7,24 +7,22 @@ import { submit, SubmissionError } from 'redux-form';
 import { postProject } from '../actions/indexActions';
 
 import AddProjectForm from '../components/AddProjectForm';
-import ProjectTaskForm from '../components/ProjectTaskForm';
-
-
+import ProjectTaskForm from './ProjectTaskForm';
 
 let AddProjectPage = class extends Component {
   handleComponentUpdate(prevProps) {
-    console.log(prevProps.queuedProject, this.props.queuedProject)
     if (prevProps.queuedProject !== this.props.queuedProject) {
       const { postProject, queuedProject } = this.props;
       const { newTasks } = this.state;
-      console.log(newTasks)
+      
       postProject(queuedProject, newTasks);
-     //routeToProjects();
+      hashHistory.push('/projects')
     }
   }
   
   handleAddProject() {
     const { submit } = this.props;
+    
     submit('addProjectForm');  
   }
   

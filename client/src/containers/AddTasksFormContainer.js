@@ -128,7 +128,6 @@ let AddTasksFormContainer = class extends Component {
         renderFormTask={this.renderFormTask.bind(this)}
         shouldRenderSubmitButton={shouldRenderSubmitButton}
         shouldSubmit={shouldSubmit}
-        test={'hello'}
         tasks={tasks}
       />
     );

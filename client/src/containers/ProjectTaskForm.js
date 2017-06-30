@@ -30,7 +30,7 @@ export default class ProjectTaskForm extends Component {
         taskName: 'Please add at least one task'
       })
     }    
-    console.log('proj submit')
+    
     this.setState({ 
       newTasks: tasks.filter(task => !task.shouldDelete)
     }, handleProjectSubmit);

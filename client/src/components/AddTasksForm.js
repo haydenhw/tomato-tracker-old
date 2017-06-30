@@ -43,9 +43,9 @@ export default class AddTasksForm extends Component {
     
     return (
       <div>
+        <label htmlFor="taskName">Tasks</label>
         <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
         <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-          <label htmlFor="taskName">Tasks</label>
           <Field name="taskName" component={renderField}/>
         </form>
         { !(shouldRenderSubmitButton === false) && 
@@ -55,7 +55,6 @@ export default class AddTasksForm extends Component {
     );
   }
 }  
-
  
 AddTasksForm.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
