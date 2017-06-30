@@ -26,10 +26,6 @@
       const projectNames = getState().projects.items.map(project => project.projectName);
       const error = {};
       
-      if (!hasAnyValue(projectName)) {
-        error.projectName = "Project name is required" 
-      }  
-      
       if (isDuplicate(projectName, projectNames)) {
         error.projectName = `A project with the name '${projectName}' already exists`;
       }

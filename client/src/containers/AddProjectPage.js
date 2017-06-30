@@ -48,8 +48,8 @@ let AddProjectPage = class extends Component {
   }
   
   toggleShouldSubmit() {
-    const { shouldSubmit } = this.props;
-    console.log('toggling')
+    const { shouldSubmit } = this.state;
+    
     this.setState({ shouldSubmit: !shouldSubmit});
   }
   
