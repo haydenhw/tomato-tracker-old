@@ -26,6 +26,7 @@ export default class AddTasksForm extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
       const { handleSubmit, handleFormSubmit } = this.props;
+      
       handleSubmit(handleFormSubmit)();    
     }
   }  

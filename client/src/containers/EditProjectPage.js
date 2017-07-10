@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
-import { addTask, deleteTask, editProjectName, setSelectedProject } from '../actions/indexActions';
+import { addTask, deleteTask, editProjectName, setSelectedProject, updateTasks } from '../actions/indexActions';
 
-import EditProjectForm from '../components/EditProjectForm';
-import AddTasksFormContainer from './AddTasksFormContainer'; 
+import EditProjectNameForm from '../components/EditProjectNameForm';
+import ProjectTaskForm from './ProjectTaskForm';
 
 class EditProjectPage extends Component {
   constructor() {
@@ -25,10 +25,17 @@ class EditProjectPage extends Component {
     setSelectedProject(projectId);
   }
   
-  editProjectName (props, { projectName }) { 
+  
+  handleEditProjectName (props, { projectName }) { 
     const { editProjectName } = props;
     
     editProjectName(projectName);
+  }
+  
+  handleTasksSubmit({ tasks }) {
+    const { updateTasks, selectedProjectId } = this.props;
+    console.log(tasks)
+  //  updateTasks(selectedProjectId, tasks);
   }
   
   render() {
@@ -38,13 +45,12 @@ class EditProjectPage extends Component {
     return (
     <div className="fullscreen-form form-page">
       <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
-      <EditProjectForm 
-        project={selectedProject}
-        projectId={projectId}
-        editProjectName={editProjectName}
-        handleEditProjectSubmit={this.editProjectName}
-      />
-      <AddTasksFormContainer /> 
+      <ProjectTaskForm >
+        <EditProjectNameForm 
+          project={selectedProject}
+          handleEditProjectSubmit={this.handleEditProjectName.bind(this)}
+        />
+      </ProjectTaskForm>
     </div>  
     );
   }
@@ -58,8 +64,9 @@ class EditProjectPage extends Component {
     : 'No Projects Loaded'
     
     return {
-      selectedProject: {projectName: 'tester'}, 
-      projects
+      projects,
+      selectedProjectId,
+      selectedProject: { projectName: 'tester' }, 
     }
 }
 
@@ -72,4 +79,5 @@ export default connect(mapStateToProps, {
   deleteTask,
   editProjectName, 
   setSelectedProject,
+  updateTasks
 })(EditProjectPage);  

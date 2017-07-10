@@ -32,7 +32,7 @@ export const timer = (state=defaultState, action) => {
     case actions.SET_START_TIME:
       return {
         ...state,
-        isTimerActive: true,
+        isTimerActive: action.shouldStartTimer,
         startTime: action.startTime,
         remainingTime: action.startTime
         

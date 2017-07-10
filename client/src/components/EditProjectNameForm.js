@@ -12,19 +12,25 @@ let EditProjectForm = class extends Component {
     if (!selectedProject) {
     //  hashHistory.push('/projects'); 
     }
+  }
+    
+  componentDidUpdate(prevProps) {
+    if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
+      const { handleSubmit, project, updateProject } = this.props;
+      handleSubmit(this.handleEditProjectSubmit(project, updateProject))();
     }
+  }  
+  
+  handleEditProjectSubmit = (project, updateProject) => ({ projectName }) =>  (
+    updateProject(project, projectName)
+  );
     
   render() {
     const { handleSubmit, project, updateProject } = this.props;
-    const handleEditProjectSubmit = ({ projectName }) => {
-      
-      updateProject(project, projectName);
-    }
     
     return (
-      <form onSubmit={handleSubmit(handleEditProjectSubmit)}>
+      <form onSubmit={handleSubmit(this.handleEditProjectSubmit(project, updateProject))}>
         <div>
-          <label>Project Name</label>
           <div>
             <Field
               name="projectName"
@@ -39,20 +45,25 @@ let EditProjectForm = class extends Component {
   }
 };
 
+const submit = ({ projectName }) => {
+  
+}
+
 EditProjectForm = reduxForm({
   form: 'EditProjectForm', // a unique identifier for this form
 })(EditProjectForm);
 
 EditProjectForm = connect(
   state => {
-    const { selectedProjectId, projects } = state;
-    
+    const { /*selectedProjectId,*/ projects } = state;
+    // *********************************** replace ************************
+    const selectedProjectId = 'HyxHZpP7NW';
     const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId); 
     const projectName = (projects.items.length > 0 && selectedProjectId) && selectedProject.projectName;
     
     return ({
       selectedProjectId, 
-      initialValues: { projectName: /*'tester'*/ projectName }, 
+      initialValues: { projectName: 'harry' }, 
       project: selectedProject
     })
   }, { updateProject})(EditProjectForm);

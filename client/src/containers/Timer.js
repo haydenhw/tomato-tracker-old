@@ -42,12 +42,11 @@ class Timer extends Component {
   
   timer () {
     const { 
-      selectedProject,
       activeTaskId,
+      selectedProject,
       decrementTimer,
       incrementTaskTime,
-      remainingTime,
-      resetTimer,
+      remainingTime, resetTimer,
       selectedTaskId, 
       toggleIsTimerActive
     } = this.props;
@@ -66,12 +65,16 @@ class Timer extends Component {
     }
   }
   
+  handleSetStartTime = (shouldStartTimer) => (startTime) => {
+    const { setStartTime } = this.props;
+    
+    setStartTime(startTime, shouldStartTimer); 
+  }
+  
   render() {
     const {
-      activeTaskId,
       isTimerActive,
       remainingTime,
-      setStartTime,
       startTime,
       startTimer,
       selectedTaskId,
@@ -83,7 +86,7 @@ class Timer extends Component {
         <TimeDisplay
           isTimerActive={isTimerActive}
           isTimerControlActive={Boolean(selectedTaskId)}
-          setStartTime={setStartTime} 
+          setStartTime={this.handleSetStartTime(selectedTaskId !== null)} 
           startCount={startTime}
           time={remainingTime}
           title={task}

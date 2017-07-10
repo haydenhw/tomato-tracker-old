@@ -29,6 +29,7 @@ class FormModal extends Component {
       isContentWaiting: true
     }
   }
+  
   deleteTask (taskId) {
     this.props.deleteTask('123', '111');
   }

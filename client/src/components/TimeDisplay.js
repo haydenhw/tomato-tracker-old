@@ -9,7 +9,17 @@ import { showProgressBar, devStyle } from '../config'
 import EditInlineText from '../containers/EditInlineText';
 
 export default function TimeDisplay(props) {
-  const { handleButtonClick, isTimerActive, isTimerControlActive, setStartTime, startCount, title, time  } = props;
+  const {
+    activeTaskId, 
+    handleButtonClick,
+    isTimerActive,
+    isTimerControlActive,
+    setStartTime,
+    startCount,
+    title,
+    time
+  } = props;
+  
   const progressPercentage = Math.round((1-(time/startCount))*100);
   let displayTime = time || startCount; 
   

@@ -68,6 +68,8 @@ let AddTasksFormContainer = class extends Component {
   
   handleFormSubmit (){
     const { 
+      deleteTask,
+      selectedProject,
       selectedProjectId,
       selectedProjectDatabaseId, 
       isOnboardingActive,
@@ -96,8 +98,8 @@ let AddTasksFormContainer = class extends Component {
         });
         
       tasks.filter((task) => task.shouldDelete && task._id)
-        .forEach((task) => deleteTask(selectedProjectDatabaseId, task));
-        
+        .forEach((task) => deleteTask(selectedProject, task));
+          
       isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
   
@@ -146,6 +148,7 @@ const mapStateToProps = (state, ownProps) => {
     : [];
     
   return {
+    selectedProject,
     selectedProjectId,
     selectedProjectDatabaseId,
     isOnboardingActive,

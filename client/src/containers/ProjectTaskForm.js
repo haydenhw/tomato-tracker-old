@@ -19,7 +19,9 @@ export default class ProjectTaskForm extends Component {
   componentDidUpdate(prevProps) {
     const { handleComponentUpdate } = this.props;
     
-    handleComponentUpdate.call(this, prevProps);  
+    if (handleComponentUpdate) {
+      handleComponentUpdate.call(this, prevProps);  
+    }  
   }
   
   handleFormSubmit = (tasks) => () => {
@@ -43,14 +45,15 @@ export default class ProjectTaskForm extends Component {
   }
   
   render() {
-    const { children } = this.props;
+    const { children, handleTasksSubmit, isDefaultTaskSubmitDisabled  } = this.props;
     const { shouldSubmit } = this.state;  
+    
     return(
       <div>
         <label>Project Name</label>
-        {children}
+        {React.cloneElement(children, { shouldSubmit })}
         <AddTasksFormContainer
-          handleFormSubmit={this.handleFormSubmit}
+          handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
           shouldSubmit={shouldSubmit}
           shouldRenderSubmitButton={false}
           showTasksForSelectedProject={false}

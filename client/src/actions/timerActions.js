@@ -1,6 +1,8 @@
+import { timeStringToSeconds } from '../helpers/time';
+
 export const DECREMENT_TIMER = "DECREMENT_TIMER";
 export function decrementTimer() {
-  return {
+  return { 
     type: "DECREMENT_TIMER"
   }
 }
@@ -13,10 +15,16 @@ export function toggleIsTimerActive() {
 }
 
 export const SET_START_TIME = "SET_START_TIME";
-export function setStartTime(startTime) {
-  return {
-    type: "SET_START_TIME",
-    startTime: Math.ceil(Number(startTime) * 60)  
+export function setStartTime(startTime, shouldStartTimer) {
+  return (dispatch, getState) => {
+    startTime = isNaN(startTime) ? timeStringToSeconds(startTime, 'MMSS') : Math.ceil(Number(startTime) * 60);  
+    startTime = startTime === 'NAN_ERROR' ?  getState().timer.startTime : startTime;
+    
+    return dispatch({
+      type: "SET_START_TIME",
+      shouldStartTimer,
+      startTime  
+    });
   }
 }
 

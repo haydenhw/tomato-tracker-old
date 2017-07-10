@@ -113,8 +113,8 @@ const mapStateToProps = (state, ownProps) => {
   const { selectedProjectId, projects } = state;
   const { clickedTaskId } = ownProps;
   
-  const selectedProject = projects.find((project) => project.shortId === selectedProjectId);  
-  const selectedTask = projects.concatMap((project) => project.tasks).find((task) => clickedTaskId === task.shortId) 
+  const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId);  
+  const selectedTask = projects.items.concatMap((project) => project.tasks).find((task) => clickedTaskId === task.shortId) 
   const taskNames = selectedProject.tasks.map((task) => task.taskName);
   
   return ({

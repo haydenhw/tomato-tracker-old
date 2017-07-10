@@ -1,35 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import InlineEdit from 'react-edit-inline';
 
+import { timeStringToSeconds } from '../helpers/time';
 
 export default class TopNavbarEditableText extends React.Component {
   constructor() {
     super();
+    
     this.state = {
-      message: 'Click to Edit',
+      message: 'Click to Edit'
     };
 
     this.dataChanged = this.dataChanged.bind(this);
   }
-
+  
   dataChanged(data) {
     const { handleChange } = this.props;
     
     handleChange(data.message);
-    this.setState({ ...data });
   }
 
   customValidateText(text) {
-    return (text.length > 0 && text.length < 64);
+    if (timeStringToSeconds(text) === 'NAN_ERROR') {
+      return false
+    }
+    
+    if (text.length < 0 && text.length > 64)  {
+      return false;
+    }
+    
+    return true;
   }
 
   render() {
     const { className, text } = this.props;
 
     return (
-      
         <InlineEdit
           validate={this.customValidateText}
           className={className}

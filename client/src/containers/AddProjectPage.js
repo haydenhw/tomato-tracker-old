@@ -34,6 +34,7 @@ let AddProjectPage = class extends Component {
         <ProjectTaskForm 
           handleComponentUpdate={this.handleComponentUpdate}
           handleProjectSubmit={this.handleAddProject.bind(this)}
+          isDefaultTaskSubmitDisabled={true}
           postProject={postProject}
           queuedProject={queuedProject}
         >

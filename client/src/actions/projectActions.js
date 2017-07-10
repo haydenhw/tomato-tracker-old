@@ -240,19 +240,12 @@ export function deleteProject(project) {
     fetch(
       `projects/${project._id}`,
       {
-          method: "DELETE",
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        })
+        method: "DELETE",
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
       })
-      .then((res) => {
-        console.log('delete successful')
-        
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    })
   }
 }
 
