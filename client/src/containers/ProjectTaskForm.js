@@ -45,7 +45,12 @@ export default class ProjectTaskForm extends Component {
   }
   
   render() {
-    const { children, handleTasksSubmit, isDefaultTaskSubmitDisabled  } = this.props;
+    const {
+      children,
+      handleTasksSubmit,
+      isDefaultTaskSubmitDisabled,
+      showTasksForSelectedProject,
+     } = this.props;
     const { shouldSubmit } = this.state;  
     
     return(
@@ -56,7 +61,7 @@ export default class ProjectTaskForm extends Component {
           handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
           shouldSubmit={shouldSubmit}
           shouldRenderSubmitButton={false}
-          showTasksForSelectedProject={false}
+          showTasksForSelectedProject={false || showTasksForSelectedProject}
         />  
         <button onClick={this.toggleShouldSubmit.bind(this)}>Submit</button>
         <button onClick={routeToProjects}>Cancel</button>

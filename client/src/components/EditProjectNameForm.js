@@ -5,19 +5,34 @@ import { hashHistory } from 'react-router';
 
 import { updateProject } from '../actions/indexActions';
 
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label />
+    <input
+      {...input} 
+      autoFocus 
+      autoComplete="off"
+      className="fullscreen-input add-project-input" 
+      placeholder="Project name" 
+      type={type} 
+    />
+    {touched && error && <div className="error">{error}</div>}
+  </div>
+)
+
 let EditProjectForm = class extends Component {
   componentWillMount() {
-    const { selectedProject } = this.props;
+    const { project } = this.props;
     
-    if (!selectedProject) {
-    //  hashHistory.push('/projects'); 
+    if (!project) {
+      hashHistory.push('/projects'); 
     }
   }
     
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
-      const { handleSubmit, project, updateProject } = this.props;
-      handleSubmit(this.handleEditProjectSubmit(project, updateProject))();
+      const { handleSubmit, handleEditProjectSubmit, project, updateProject } = this.props;
+      handleSubmit(handleEditProjectSubmit(project, updateProject))();
     }
   }  
   
@@ -26,15 +41,15 @@ let EditProjectForm = class extends Component {
   );
     
   render() {
-    const { handleSubmit, project, updateProject } = this.props;
+    const { handleSubmit, handleEditProjectSubmit, project, updateProject } = this.props;
     
     return (
-      <form onSubmit={handleSubmit(this.handleEditProjectSubmit(project, updateProject))}>
+      <form onSubmit={handleSubmit(handleEditProjectSubmit(project, updateProject))}>
         <div>
           <div>
             <Field
               name="projectName"
-              component="input"
+              component={renderField}
               type="text"
               placeholder="Project Name"
             />
@@ -45,27 +60,23 @@ let EditProjectForm = class extends Component {
   }
 };
 
-const submit = ({ projectName }) => {
-  
+const mapStateToProps = state => {
+    const { selectedProjectId, projects } = state;
+    
+    const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId); 
+    const projectName = (projects.items.length > 0 && selectedProjectId) && selectedProject.projectName;
+    
+    return ({
+      selectedProjectId, 
+      initialValues: { projectName }, 
+      project: selectedProject
+    })
 }
 
 EditProjectForm = reduxForm({
   form: 'EditProjectForm', // a unique identifier for this form
 })(EditProjectForm);
 
-EditProjectForm = connect(
-  state => {
-    const { /*selectedProjectId,*/ projects } = state;
-    // *********************************** replace ************************
-    const selectedProjectId = 'HyxHZpP7NW';
-    const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId); 
-    const projectName = (projects.items.length > 0 && selectedProjectId) && selectedProject.projectName;
-    
-    return ({
-      selectedProjectId, 
-      initialValues: { projectName: 'harry' }, 
-      project: selectedProject
-    })
-  }, { updateProject})(EditProjectForm);
+EditProjectForm = connect(mapStateToProps , { updateProject })(EditProjectForm);
 
 export default EditProjectForm;

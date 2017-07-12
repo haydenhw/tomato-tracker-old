@@ -2,8 +2,10 @@ import  React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
+import { SubmissionError } from 'redux-form';
+import { addTask, deleteTask, setSelectedProject, updateProject, updateTasks } from '../actions/indexActions';
 
-import { addTask, deleteTask, editProjectName, setSelectedProject, updateTasks } from '../actions/indexActions';
+import { hasAnyValue } from '../helpers/validate';
 
 import EditProjectNameForm from '../components/EditProjectNameForm';
 import ProjectTaskForm from './ProjectTaskForm';
@@ -25,11 +27,18 @@ class EditProjectPage extends Component {
     setSelectedProject(projectId);
   }
   
-  
-  handleEditProjectName (props, { projectName }) { 
-    const { editProjectName } = props;
-    
-    editProjectName(projectName);
+  handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
+    const { updateProject } = this.props;
+      console.log(!hasAnyValue(projectName))
+      
+      if (!hasAnyValue(projectName)) {
+        console.log('no val')
+        throw new SubmissionError({
+          projectName: 'Project name is required' 
+        })
+      }
+      
+    updateProject(project, projectName);  
   }
   
   handleTasksSubmit({ tasks }) {
@@ -39,13 +48,13 @@ class EditProjectPage extends Component {
   }
   
   render() {
-    const { selectedProject, editProjectName, params } = this.props;
+    const { selectedProject, params } = this.props;
     const { projectId } = params;
     
     return (
     <div className="fullscreen-form form-page">
       <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
-      <ProjectTaskForm >
+      <ProjectTaskForm showTasksForSelectedProject={true}>
         <EditProjectNameForm 
           project={selectedProject}
           handleEditProjectSubmit={this.handleEditProjectName.bind(this)}
@@ -77,7 +86,7 @@ EditProjectPage.propTypes = {
 export default connect(mapStateToProps, { 
   addTask,
   deleteTask,
-  editProjectName, 
   setSelectedProject,
+  updateProject,
   updateTasks
 })(EditProjectPage);  

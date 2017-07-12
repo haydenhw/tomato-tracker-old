@@ -55,16 +55,19 @@
     margin-left: 20px;
   }
   
-  &.active {
-    background-color: rgba(165, 214 , 167, 0.3);
-  }
-  
   &.selected {
     background-color: #FAFAFA;  
   }
   
   &.selected:hover {
-    background-color: #FAFAFA;  
+    background-color: #FAFAFA;
+    
+      
+  }
+  
+  &.active, 
+  &.active:hover {
+    background-color: rgba(165, 214 , 167, 0.3) !important;
   }
   
   &.total-time {

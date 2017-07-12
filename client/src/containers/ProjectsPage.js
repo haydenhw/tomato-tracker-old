@@ -13,6 +13,7 @@ import {
 } from '../actions/projectActions';
 
 import Modal from './Modal';
+import EditMenu from './EditMenu';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
@@ -76,8 +77,10 @@ class ProjectsPage extends Component {
         handleClick={this.handleListItemClick(shortId)}
         isSelected={selectedProjectId === shortId}
       >
-        <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
-        <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
+        <EditMenu className='list-item-edit-menu'>
+          <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
+          <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
+        </EditMenu>  
       </ListItem>
     );
   } 

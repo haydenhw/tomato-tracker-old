@@ -24,13 +24,16 @@ class Timer extends Component {
   
   componentWillReceiveProps(nextProps) {
     if (this.props.isTimerActive !== nextProps.isTimerActive && nextProps.isTimerActive) {
+      const { selectedTaskId, setActiveTask } = this.props;
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
       this.setState({ intervalId });
+      setActiveTask(selectedTaskId);
     }
     
     if (this.props.isTimerActive !== nextProps.isTimerActive && !nextProps.isTimerActive) {
       const { intervalId } = this.state;
+      
       clearInterval(intervalId);
     }
   }
@@ -48,6 +51,7 @@ class Timer extends Component {
       incrementTaskTime,
       remainingTime, resetTimer,
       selectedTaskId, 
+      setActiveTask,
       toggleIsTimerActive
     } = this.props;
     
@@ -62,6 +66,7 @@ class Timer extends Component {
       clearInterval(intervalId);
       toggleIsTimerActive();
       resetTimer();
+      setActiveTask(null);
     }
   }
   

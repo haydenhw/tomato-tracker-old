@@ -142,11 +142,10 @@ const mapStateToProps = (state, ownProps) => {
   
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedProjectDatabaseId = selectedProject && selectedProject._id;
-  
+
   const tasks = selectedProject && ownProps.showTasksForSelectedProject !== false
     ? selectedProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
-    
   return {
     selectedProject,
     selectedProjectId,

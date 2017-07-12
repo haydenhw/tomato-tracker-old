@@ -4,6 +4,7 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
 
+import EditMenu from './EditMenu';
 import FormModal from './FormModal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
@@ -14,132 +15,148 @@ import Select from './Select';
 import Timer from './Timer';
 
 export default class TimeTracker extends Component {
-constructor(props) {
-  super(props);
-  
-  const { tasks } = this.props;
-  
-  this.state = {
-    activeTaskId: null,
-    clickedTaskId: null,
-    selectedTaskId: null, 
-    tasks: tasks,
+  constructor(props) {
+    super(props);
+    
+    const { tasks } = this.props;
+    
+    this.state = {
+      activeTaskId: null,
+      activeEditMenuParentId: null, 
+      clickedTaskId: null,
+      selectedTaskId: null, 
+      tasks: tasks,
+    }
   }
-}
 
-static defaultProps = {
-  tasks: []
-}
-
-componentDidMount() {
-  if (!localStorage.getItem('isFirstUserVisit')) {
-    localStorage.setItem('isFirstUserVisit', 'true');
-  } else {
-    localStorage.removeItem('isFirstUserVisit');
+  static defaultProps = {
+    tasks: []
   }
-}
 
-componentWillReceiveProps(nextProps) {
-  /*  if(nextProps.tasks !== this.props.tasks) {
-  this.setState({
-  tasks: nextProps.tasks,
-  activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
-})
-}*/
-}
+  componentDidMount() {
+    if (!localStorage.getItem('isFirstUserVisit')) {
+      localStorage.setItem('isFirstUserVisit', 'true');
+    } else {
+      localStorage.removeItem('isFirstUserVisit');
+    }
+  }
 
-toggleShouldRenderModal(modalType) {
-const { shouldRenderModal } = this.state;
+  componentWillReceiveProps(nextProps) {
+    /*  if(nextProps.tasks !== this.props.tasks) {
+    this.setState({
+    tasks: nextProps.tasks,
+    activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
+  })
+  }*/
+  }
 
-let newModalState = { shouldRenderModal: !shouldRenderModal};
+  toggleShouldRenderModal(modalType) {
+    const { shouldRenderModal } = this.state;
 
-if (modalType) { 
-  const updatedModalType = { modalType: modalType};
-  newModalState = Object.assign(newModalState, updatedModalType);
-}
+    let newModalState = { shouldRenderModal: !shouldRenderModal};
 
-this.setState(newModalState);
-}
+    if (modalType) { 
+      const updatedModalType = { modalType: modalType};
+      newModalState = Object.assign(newModalState, updatedModalType);
+    }
 
-handleAddTasks() {
-const { toggleAddTasksForm } = this.props;
-
-toggleAddTasksForm();
-}
-
-handleEditTask = (taskId) => () => {
-const { toggleEditTaskForm } = this.props;
-
-toggleEditTaskForm();
-this.setState({ clickedTaskId: taskId});
-} 
-
-handleTaskChange(taskId){
-const { isTimerActive } = this.props;
-
-if (isTimerActive) {
-  return null;
-}
-
-this.setState({ selectedTaskId: taskId });
-}
-
-handleTaskDelete = (selectedProject, task) => () => {
-const { deleteTask } = this.props;
-
-deleteTask(selectedProject, task, true);  
-}
-
-handleTaskItemClick = (taskId) => () => {
-this.handleTaskChange(taskId);
-}
-
-renderTask (task){
-const { selectedProject, isTimerActive } = this.props;
-const { activeTaskId, selectedTaskId } = this.state;
-const { shortId, taskName, recordedTime } = task;
-
-return (
-  <ListItem
-    key={shortid.generate()}
-    className="task"
-    col1Text={taskName}
-    col2Text={secondsToHMMSS(recordedTime)} 
-    handleClick={this.handleTaskItemClick(shortId)}
-    isActive={(activeTaskId === shortId) && isTimerActive}
-    isSelected={selectedTaskId === shortId}
-    >
-      <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
-      <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
-    </ListItem>
-  ); 
-} 
-
-renderTaskSelect() {
-  const { tasks } = this.props;
-  const { selectedTaskId } = this.state; 
+    this.setState(newModalState);
+  }
   
-  const simplifiedTasks = tasks.map(task => ({
-    name: task.taskName,
-    id: task.shortId
-  }));
+  handleAddTasks() {
+    const { toggleAddTasksForm } = this.props;
+    
+    toggleAddTasksForm();
+  }
   
-  const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
-  const selectedTaskName = selectedTask && selectedTask.taskName;
-  const taskSelectHeading = selectedTaskName || "Click to select a task...";
+  handleEditTask = (taskId) => () => {
+    const { toggleEditTaskForm } = this.props;
+    
+    toggleEditTaskForm();
+    this.setState({ clickedTaskId: taskId});
+  } 
+
+  handleTaskChange(taskId){
+    const { isTimerActive } = this.props;
+
+    if (isTimerActive) {
+      return null;
+    }
+
+    this.setState({ selectedTaskId: taskId });
+  }
+
+  handleTaskDelete = (selectedProject, task) => () => {
+    const { deleteTask } = this.props;
+
+    deleteTask(selectedProject, task, true);  
+  }
+
+  handleTaskItemClick = (taskId) => () => {
+    this.handleTaskChange(taskId);
+  }
   
-  const headingClass = selectedTaskName ? "" : "grey"; 
+  setActiveTask(selectedTaskId) {
+    this.setState({ activeTaskId: selectedTaskId });
+  }
   
-  return (
-    <Select 
-      className={"task-select"} 
-      handleOptionClick={this.handleTaskChange.bind(this)}
-      items={simplifiedTasks}
+  setActiveEditMenu = (activeEditMenuParentId) => {
+    this.setState({ activeEditMenuParentId });  
+  }
+
+  renderTask (task){
+    const { selectedProject, isTimerActive } = this.props;
+    const { activeEditMenuParentId, activeTaskId, selectedTaskId } = this.state;
+    const { shortId, taskName, recordedTime } = task;
+    // console.log(activeEditMenuParentId , shortId, activeEditMenuParentId === shortId)
+    return (
+      <ListItem
+        key={shortid.generate()}
+        className="task"
+        col1Text={taskName}
+        col2Text={secondsToHMMSS(recordedTime)} 
+        handleClick={this.handleTaskItemClick(shortId)}
+        isActive={(activeTaskId === shortId) && isTimerActive}
+        isSelected={selectedTaskId === shortId}
       >
-        <span className={headingClass}>{taskSelectHeading}</span>
-      </Select>
-    );
-  }
+        <EditMenu
+            className='list-item-edit-menu'
+            isActive={activeEditMenuParentId === shortId}
+            onMenuClick={this.setActiveEditMenu}
+            parentId={shortId}
+          >
+          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
+          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
+        </EditMenu>  
+      </ListItem>
+    ); 
+  } 
+
+  renderTaskSelect() {
+    const { tasks } = this.props;
+    const { selectedTaskId } = this.state; 
+    
+    const simplifiedTasks = tasks.map(task => ({
+      name: task.taskName,
+      id: task.shortId
+    }));
+    
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTaskName = selectedTask && selectedTask.taskName;
+    const taskSelectHeading = selectedTaskName || "Click to select a task...";
+    
+    const headingClass = selectedTaskName ? "" : "grey"; 
+    
+    return (
+      <Select 
+        className={"task-select"} 
+        handleOptionClick={this.handleTaskChange.bind(this)}
+        items={simplifiedTasks}
+        >
+          <span className={headingClass}>{taskSelectHeading}</span>
+        </Select>
+      );
+    }
   
   renderProjectSelect() {
     const { projects, selectedProject, setSelectedProject } = this.props;
@@ -170,7 +187,7 @@ renderTaskSelect() {
         <div className="timer-section">
           <div className="timer-container">
             {tasks.length > 0 && this.renderTaskSelect()}
-            <Timer activeTaskId={activeTaskId} selectedTaskId={selectedTaskId}/>
+            <Timer activeTaskId={activeTaskId} selectedTaskId={selectedTaskId} setActiveTask={this.setActiveTask.bind(this)}/>
           </div>
         </div>
         {tasks.length > 0

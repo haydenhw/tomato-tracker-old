@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+
 import { submit } from 'redux-form';
 export const ADD_PROJECT = "ADD_PROJECT";
 export function addProject(projectName) {
@@ -213,6 +214,7 @@ export function postTask(projectId, task) {
 export function updateTask(project, task, toUpdate) {
   return (dispatch) => {
     dispatch(editTask(project.shortId, task.shortId, toUpdate))
+    
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
       {

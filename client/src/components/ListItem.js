@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import EditMenu from '../containers/EditMenu';
 
 export default function ListItem(props) {
   const { col1Text, col2Text, handleClick, isActive, isSelected  } = props;
-
+  
   return(
     <div className={`list-item ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
       <div className="list-item-col1 list-col">
@@ -15,9 +14,7 @@ export default function ListItem(props) {
         <span>{col2Text}</span>
       </div>
       <div className="list-item-col3 list-col">
-        <EditMenu className='list-item-edit-menu'>
           {props.children}
-        </EditMenu>
       </div>
     </div>
   );
