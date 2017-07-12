@@ -40,7 +40,7 @@ class Timer extends Component {
   
   componentDidMount() {
     const { resetTimer } = this.props;
-    resetTimer(); 
+    // resetTimer(); 
   }
   
   timer () {
@@ -92,7 +92,7 @@ class Timer extends Component {
           isTimerActive={isTimerActive}
           isTimerControlActive={Boolean(selectedTaskId)}
           setStartTime={this.handleSetStartTime(selectedTaskId !== null)} 
-          startCount={/*isTimerActive ? remainingTime :*/ startTime}
+          startCount={startTime}
           time={remainingTime}
           title={task}
           handleButtonClick={startTimer}

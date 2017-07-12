@@ -16,7 +16,7 @@ let AddProjectPage = class extends Component {
       const { newTasks } = this.state;
       
       postProject(queuedProject, newTasks);
-      hashHistory.push('/projects')
+      hashHistory.push('/projects');
     }
   }
   
@@ -57,7 +57,6 @@ let AddProjectPage = class extends Component {
     postProject,
     submit
   })(AddProjectPage);
-  
   
   AddProjectPage.propTypes = {
     queuedProject: PropTypes.string

@@ -61,7 +61,7 @@ const renderField = ({
         taskName,
         recordedTime: newTimeString
       } 
-      console.log(selectedTask)
+      
       if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
         confirmEditTask({
           taskName,

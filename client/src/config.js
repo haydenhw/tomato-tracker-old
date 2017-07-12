@@ -1,5 +1,5 @@
 const renderModal = false; 
-const productionMode = false;
+export const productionMode = false;
 
 export const renderFormModal = productionMode || renderModal;
 export const modalType = productionMode ? "WELCOME" : "ADD_PROJECT";  

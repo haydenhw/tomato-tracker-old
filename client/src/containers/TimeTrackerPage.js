@@ -41,7 +41,7 @@ render() {
   } = this.props;
   
   if (!hasFetched) {
-    return <div>Loading...</div>
+    return <div className="loader">Loading...</div>
   }
   
   const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);

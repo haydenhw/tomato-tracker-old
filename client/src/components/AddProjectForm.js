@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { compose, withProps } from 'recompose';
 
 import { queueNewProject } from '../actions/indexActions';
 import store from '../redux-files/store';
@@ -15,6 +16,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
       autoFocus 
       autoComplete="off"
       className="fullscreen-input add-project-input" 
+      onKeyPress={(evt) => evt.keyCode === 13 ? false : true}
       placeholder="Project name" 
       type={type} 
     />
@@ -24,7 +26,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 function AddProjectForm(props) {
   const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = props;
-  
+  console.log(props.shouldSubmit)
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -41,6 +43,7 @@ function AddProjectForm(props) {
 }
 
 const submit = ({ projectName }) =>  {
+  
   if (!hasAnyValue(projectName)) {
       throw new SubmissionError({
         projectName: 'Project name is required' 

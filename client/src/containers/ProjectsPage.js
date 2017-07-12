@@ -114,7 +114,7 @@ class ProjectsPage extends Component {
     const totalTime = this.getTotalTime();
     
     if (!hasFetched){
-      return <div> Loading...</div>
+      return <div className="loader">Loading...</div>;
     }
     
     return (

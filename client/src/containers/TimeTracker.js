@@ -35,15 +35,17 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    const { projects } = this.props;
+    const { projects, tasks } = this.props;
     
     if (projects.length === 0) {
       hashHistory.push('/projects')
     }
-    
-    if (localStorage.prevSelectedTaskId) {
-      this.setState({ selectedTaskId: localStorage.prevSelectedTaskId }); 
-    }
+      
+    const selectedTaskId = tasks.find((task) => task.shortId === localStorage.prevSelectedTaskId)
+      ? localStorage.prevSelectedTaskId
+      : null
+      
+    this.setState({ selectedTaskId });
   }
   
   componentDidMount() {
@@ -51,6 +53,15 @@ export default class TimeTracker extends Component {
       localStorage.setItem('isFirstUserVisit', 'true');
     } else {
       localStorage.removeItem('isFirstUserVisit');
+    }
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const { tasks } = this.props;
+    
+    if ((prevProps.tasks.length !== tasks.length) && (tasks.length === 0)) {
+      localStorage.setItem('prevSelectedTaskId', null);
+      this.setState({ selectedTaskId: null });
     }
   }
 
@@ -214,8 +225,7 @@ export default class TimeTracker extends Component {
                   <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
                 </div>
                 <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
-                  <ListHeader col1Title="Task" col2Title="Time Logged" />
-                </List>
+                  <ListHeader col1Title="Task" col2Title="Time Logged" /> </List>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
               <FormModal
