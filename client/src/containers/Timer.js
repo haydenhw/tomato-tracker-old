@@ -92,7 +92,7 @@ class Timer extends Component {
           isTimerActive={isTimerActive}
           isTimerControlActive={Boolean(selectedTaskId)}
           setStartTime={this.handleSetStartTime(selectedTaskId !== null)} 
-          startCount={startTime}
+          startCount={/*isTimerActive ? remainingTime :*/ startTime}
           time={remainingTime}
           title={task}
           handleButtonClick={startTimer}

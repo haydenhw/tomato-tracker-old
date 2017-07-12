@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -32,7 +33,19 @@ export default class TimeTracker extends Component {
   static defaultProps = {
     tasks: []
   }
-
+  
+  componentWillMount() {
+    const { projects } = this.props;
+    
+    if (projects.length === 0) {
+      hashHistory.push('/projects')
+    }
+    
+    if (localStorage.prevSelectedTaskId) {
+      this.setState({ selectedTaskId: localStorage.prevSelectedTaskId }); 
+    }
+  }
+  
   componentDidMount() {
     if (!localStorage.getItem('isFirstUserVisit')) {
       localStorage.setItem('isFirstUserVisit', 'true');
@@ -78,11 +91,15 @@ export default class TimeTracker extends Component {
 
   handleTaskChange(taskId){
     const { isTimerActive } = this.props;
-
+    
     if (isTimerActive) {
       return null;
     }
-
+    
+    if (localStorage.prevSelectedTaskId !== taskId) {
+      localStorage.setItem("prevSelectedTaskId", taskId);
+    }
+      
     this.setState({ selectedTaskId: taskId });
   }
 
@@ -104,10 +121,6 @@ export default class TimeTracker extends Component {
     this.setState({ activeEditMenuParentId });  
   }
   
-  handleBodyClick() {
-    console.log('closing...');
-  }   
-
   renderTask (task){
     const { changeActiveEditMenu, selectedProject, isTimerActive } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;

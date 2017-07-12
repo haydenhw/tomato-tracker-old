@@ -10,9 +10,8 @@ import {
   fetchProjects,
   setSelectedProject,
   toggleAddTasksForm,
-  toggleEditTaskForm 
+  toggleEditTaskForm
 } from '../actions/indexActions';
-
 
 import TimeTracker from './TimeTracker';
 
@@ -20,6 +19,7 @@ class TimeTrackerPage extends Component {
   
 componentWillMount() {
   const { hasFetched, projects } = this.props;
+// console.log(hasFetched  !projects.length)  
   if (hasFetched && !projects.length) {
     hashHistory.push('/projects')
   }
@@ -31,6 +31,7 @@ render() {
     decrementTimer,
     deleteTask,
     hasFetched,
+    isFetching,
     isTimerActive,
     projects,
     selectedProjectId,
@@ -54,6 +55,8 @@ render() {
         decrementTimer={decrementTimer}
         deleteTask={deleteTask}
         projects={projects}
+        hasFetched={hasFetched}
+        isFetching={isFetching}
         isTimerActive={isTimerActive}
         selectedProject={selectedProject || null}
         setSelectedProject={setSelectedProject}
@@ -68,12 +71,13 @@ render() {
 
 const mapStateToProps = state => {
   const { selectedProjectId, projects, timer } = state;
-  const { hasFetched } = projects;
+  const { hasFetched, isFetching } = projects;
   const { isTimerActive } = timer;
   
   return {
     selectedProjectId,
     hasFetched, 
+    isFetching,
     isTimerActive, 
     projects: projects.items
   }
