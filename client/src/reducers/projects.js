@@ -52,6 +52,11 @@ const defaultState = {
 
 export function projects(state=defaultState, action) {
   switch(action.type) {
+    case "CHANGE_ACTIVE_EDIT_MENU":
+    return {
+      ...state,
+      activeEditMenuId: action.activeMenuId
+    } 
     case actions.TOGGLE_FETCHING:
     return {
       ...state,

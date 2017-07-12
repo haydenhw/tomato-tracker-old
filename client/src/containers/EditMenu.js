@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import { connect } from 'react-redux';
 
+import { changeActiveEditMenu } from '../actions/indexActions';
 import Dropdown from '../components/Dropdown';
 import DropdownTrigger from '../components/DropdownTrigger';
 import DropdownContent from '../components/DropdownContent';
 
-export default class EditMenu extends Component {
+class EditMenu extends Component {
   constructor(props) {
     super(props);
     
@@ -18,7 +20,6 @@ export default class EditMenu extends Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-    
     if (prevState.isActive === true && this.state.isActive === false) {
       document.body.removeEventListener('click', this.handleBodyClick);
     }
@@ -28,51 +29,46 @@ export default class EditMenu extends Component {
     document.body.addEventListener('click', this.handleBodyClick);
   }
 
-  handleClick = (evt) => { evt.stopPropagation();
-    // console.log(this.props.isActive)
-    const { onMenuClick, parentId } = this.props;
-    this.bindBodyClickHandler();  
+  handleClick = (evt) => { 
+    evt.stopPropagation();
     
-    if (onMenuClick) {
-      onMenuClick(parentId);  
-      return null; 
-    }
-      
-    const { isActive } = this.state;
-    this.setState({ isActive: !isActive });
+    const {  onMenuClick, parentId } = this.props;
+    
+    onMenuClick
+      ? onMenuClick(parentId)
+      : this.setState({ isActive: true });
+    
+    this.bindBodyClickHandler();  
   }
   
   handleBodyClick(evt) {
-    const { onMenuClick } = this.props;
-    const { isActive } = this.state;
+    const {  onMenuClick } = this.props;
     const targetClassName = evt.target.className;
     
     if (
       targetClassName !== 'task-select option' &&
       targetClassName !==  'task-select option-item'
     ) {
-      if (onMenuClick) { 
-        onMenuClick(null);
-      } else {
-        this.setState({ isActive: !isActive } );
-      }
+      onMenuClick 
+        ? onMenuClick(null)
+        : this.setState({ isActive: false });
+        
       document.body.removeEventListener('click', this.handleBodyClick);
     }
   }
   
 
   render() {
-    const { children, className, handleClick, isActive, parentId } = this.props;
+    const { activeEditMenuParentId, children, className, parentId } = this.props;
+    const { isActive } = this.state;
     
     return ( 
-      <Dropdown ref={(node) => { this.dropdown = node }} className={className}> 
+      <Dropdown className={className}> 
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.handleClick}>
             <div className="edit-menu-icon icon-edit"></div>
           </DropdownTrigger>
-          <DropdownContent 
-            isActive={(isActive !== null) && (isActive !== undefined) ? isActive : this.state.isActive}
-          >
+          <DropdownContent isActive={activeEditMenuParentId ? activeEditMenuParentId === parentId : isActive}>
             {children}
           </DropdownContent>
         </div>
@@ -81,3 +77,12 @@ export default class EditMenu extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  const { editMenu } = state;
+  
+  return {
+    activeEditMenuParentId: editMenu.activeParentId
+  } 
+}
+
+export default connect(mapStateToProps, { changeActiveEditMenu })(EditMenu);

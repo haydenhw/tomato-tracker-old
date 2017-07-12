@@ -100,15 +100,19 @@ export default class TimeTracker extends Component {
     this.setState({ activeTaskId: selectedTaskId });
   }
   
-  setActiveEditMenu = (activeEditMenuParentId) => {
+  setActiveEditMenu = (activeEditMenuParentId) => () => {
     this.setState({ activeEditMenuParentId });  
   }
+  
+  handleBodyClick() {
+    console.log('closing...');
+  }   
 
   renderTask (task){
-    const { selectedProject, isTimerActive } = this.props;
-    const { activeEditMenuParentId, activeTaskId, selectedTaskId } = this.state;
+    const { changeActiveEditMenu, selectedProject, isTimerActive } = this.props;
+    const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
-    // console.log(activeEditMenuParentId , shortId, activeEditMenuParentId === shortId)
+    
     return (
       <ListItem
         key={shortid.generate()}
@@ -121,8 +125,7 @@ export default class TimeTracker extends Component {
       >
         <EditMenu
             className='list-item-edit-menu'
-            isActive={activeEditMenuParentId === shortId}
-            onMenuClick={this.setActiveEditMenu}
+            onMenuClick={changeActiveEditMenu}
             parentId={shortId}
           >
           <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>

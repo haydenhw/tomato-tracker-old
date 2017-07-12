@@ -6,6 +6,7 @@ import { hashHistory } from 'react-router';
 import {
   deleteTask,
   decrementTimer,
+  changeActiveEditMenu,
   fetchProjects,
   setSelectedProject,
   toggleAddTasksForm,
@@ -26,12 +27,13 @@ componentWillMount() {
 
 render() {
   const { 
-    selectedProjectId,
+    changeActiveEditMenu,
     decrementTimer,
     deleteTask,
     hasFetched,
     isTimerActive,
     projects,
+    selectedProjectId,
     setSelectedProject,
     toggleAddTasksForm, 
     toggleEditTaskForm
@@ -48,11 +50,12 @@ render() {
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
-        selectedProject={selectedProject || null}
+        changeActiveEditMenu={changeActiveEditMenu}
         decrementTimer={decrementTimer}
         deleteTask={deleteTask}
         projects={projects}
         isTimerActive={isTimerActive}
+        selectedProject={selectedProject || null}
         setSelectedProject={setSelectedProject}
         tasks={selectedTasks || []}
         toggleAddTasksForm={toggleAddTasksForm} 
@@ -77,6 +80,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  changeActiveEditMenu,
   deleteTask,
   fetchProjects,
   decrementTimer,
