@@ -18,6 +18,7 @@ export default class EditMenu extends Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
+    
     if (prevState.isActive === true && this.state.isActive === false) {
       document.body.removeEventListener('click', this.handleBodyClick);
     }
@@ -64,7 +65,8 @@ export default class EditMenu extends Component {
     const { children, className, handleClick, isActive, parentId } = this.props;
     
     return ( 
-      <Dropdown ref={(node) => { this.dropdown = node }} className={className}> <div className="dropdown-wrapper">
+      <Dropdown ref={(node) => { this.dropdown = node }} className={className}> 
+        <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.handleClick}>
             <div className="edit-menu-icon icon-edit"></div>
           </DropdownTrigger>
