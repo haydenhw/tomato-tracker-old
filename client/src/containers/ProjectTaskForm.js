@@ -4,6 +4,8 @@ import { hashHistory } from 'react-router';
 import { submit, SubmissionError } from 'redux-form';
 
 import AddTasksFormContainer from '../containers/AddTasksFormContainer';
+import AddProjectForm from '../components/AddProjectForm';
+import RemoteSubmitForm from '../containers/RemoteSubmitForm';
 
 const routeToProjects = () => hashHistory.push('/projects');
 
@@ -57,13 +59,14 @@ export default class ProjectTaskForm extends Component {
     return(
       <div>
         <label>Project Name</label>
-        {React.cloneElement(children, { 
-          handleProjectSubmit({ projectName }) { console.log('projectName')}, 
-          onTargetUpdate() { console.log('success!')}, 
-          targetValue: "SDD_PROJECT", 
-          targetPropKey: "formSelector"
-        })}
-        
+        <RemoteSubmitForm
+          handleProjectSubmit={({ projectName }) => { console.log('projectName')}} 
+          onTargetUpdate={() => { console.log('success!')}}
+          targetValue="ADD_PROJECT" 
+          targetPropKey="remoteSubmitForm"
+        >
+          {children}
+        </RemoteSubmitForm>
         <AddTasksFormContainer
           handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
           shouldSubmit={shouldSubmit}

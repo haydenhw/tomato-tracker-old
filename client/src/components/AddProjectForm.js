@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
+
+import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
 // import { queueNewProject } from '../actions/indexActions';
 import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
 
-let renderField = ({ input, label, type, meta: { touched, error } }) => (
+let renderField = ({ input, label, type, /*meta: { touched, error }*/ }) => (
   <div>
     <label />
     <input
@@ -15,24 +17,23 @@ let renderField = ({ input, label, type, meta: { touched, error } }) => (
       autoFocus 
       autoComplete="off"
       className="fullscreen-input add-project-input" 
-      onKeyPress={(evt) => evt.keyCode === 13 ? false : true}
       placeholder="Project name" 
       type={type} 
     />
-    {touched && error && <div className="error">{error}</div>}
+    {/* {touched && error && <div className="error">{error}</div>} */}
   </div>
 )
 
-class AddProjectForm extends Component {
+let AddProjectForm = class extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
-      const { handleSubmit, handleProjectSubmit } = this.props;     
+      const { handleSubmit, handleProjectSubmit, remoteSubmitForm } = this.props;     
       handleSubmit(handleProjectSubmit);
     }
   }
   
   render() {
-    const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = this.props;
+    const { handleProjectSubmit, handleSubmit, remoteSubmitForm, shouldRenderSubmitButton } = this.props;
     
     return (
       <form onSubmit={handleSubmit}>
@@ -68,9 +69,10 @@ const submit = ({ projectName }) =>  {
   // store.dispatch(queueNewProject(projectName));
 };
 
+AddProjectForm = callOnTargetUpdate(renderField);
+
 export default reduxForm({
   form: 'addProjectForm', 
-  onSubmit: submit, 
   validate: validate(store.getState),
 })(AddProjectForm)
 

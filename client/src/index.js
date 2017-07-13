@@ -10,7 +10,6 @@ import AddProjectPage from './containers/AddProjectPage';
 import EditProjectPage  from './containers/EditProjectPage';
 import ProjectsPage from './containers/ProjectsPage';
 import TimeTrackerPage from './containers/TimeTrackerPage';
-import testForm from './components/testForm';
 
 import './helpers/polyfill.js';
 import './index.scss';
@@ -22,7 +21,6 @@ render((
       <Route path="/" component={App}>
         <IndexRoute component={TimeTrackerPage}/>
         <Route path="/projects" component={ProjectsPage}/>
-        <Route path="/form" component={testForm}/>
         <Route path="/projects/new" component={AddProjectPage}/>
         <Route path="/projects/:projectId" component={EditProjectPage}/>
       </Route>  

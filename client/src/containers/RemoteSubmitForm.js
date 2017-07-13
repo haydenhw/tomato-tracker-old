@@ -1,62 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { toggleModal } from '../actions/indexActions';
-
-import RootModal from '../components/ModalRoot';
-import ProjectNagModal from './ProjectNagModal';
-
-function Modal(props) {
-  
-  const MODAL_COMPONENTS = {
-    PROJECT_NAG: ProjectNagModal
-  }
-  
-  const {
-    areChildrenActive,   
-    children, 
-    isModalActive, 
-    modalClass,
-    modalProps,
-    modalType, 
-    rootModalClass,
-    style,
-    toggleModal
-  } = props;
-  
-  if (!isModalActive) {
-    return null;
-  }
-  
-  const SpecificModal = MODAL_COMPONENTS[modalType];
-  
-  return (
-    <RootModal className={rootModalClass}>
-      <div className={`modal ${modalClass}`} style={style}>
-        <span className="modal-close" onClick={toggleModal} role="button">&times;</span>
-        {areChildrenActive === true
-          ? children
-          : <SpecificModal {...modalProps} />   
-        }
-      </div>
-    </RootModal>
-  );  
+let RemoteSubmitForm = function(props) {
+    const { children, remoteSubmitForm } = props;
+    // const childProps = Object.assign({}, props, remoteSubmitForm );
+    
+    return React.cloneElement(children, {...props }, { remoteSubmitForm });
 }
 
 const mapStateToProps = state => {
-  const { modal } = state;
-  const { isModalActive, modalProps, modalType  } = modal;
-  
+  const { remoteSubmitForm } = state.customForm;
+    
   return {
-    isModalActive,
-    modalProps,
-    modalType
+    remoteSubmitForm
   }
 }
 
-export default connect(mapStateToProps, { toggleModal })(Modal)
-
-Modal.propTypes = {
-  
-};
+export default connect(mapStateToProps)(RemoteSubmitForm);
