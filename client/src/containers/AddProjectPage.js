@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { submit, SubmissionError } from 'redux-form';
 
+import validate, { hasAnyValue } from '../helpers/validate';
 import { postProject } from '../actions/indexActions';
 
 import AddProjectForm from '../components/AddProjectForm';
@@ -20,12 +21,18 @@ let AddProjectPage = class extends Component {
     }
   }
   
-  handleAddProject() {
-    const { submit } = this.props;
+  handleAddProject({ projectName }) {
+    const { queueNewProject } = this.props;
     
-    submit('addProjectForm');  
-  }
-  
+    if (!hasAnyValue(projectName)) {
+      throw new SubmissionError({
+        projectName: 'Project name is required' 
+      })
+    }
+    
+    queueNewProject(projectName);
+  };
+    
   render() {
     const { postProject, queuedProject } = this.props; 
     

@@ -14,15 +14,12 @@ const renderField = ({
     <label/>
     <div>
       <input {...input} autoFocus placeholder="Task name" type={type} />
-      {touched &&
-        ((error && <div className="error">{error}</div>) ||
-        (warning && <span className="error">{warning}</span>))}
+      {touched && (error && <div className="error">{error}</div>)}
       </div>
     </div>
   );
 
 export default class AddTasksForm extends Component {
-  
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
       const { handleSubmit, handleFormSubmit } = this.props;
@@ -49,9 +46,9 @@ export default class AddTasksForm extends Component {
         <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
           <Field name="taskName" component={renderField}/>
         </form>
-        { !(shouldRenderSubmitButton === false) && 
-          <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
-        }
+          {!(shouldRenderSubmitButton === false) && 
+            <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+          }
       </div>
     );
   }
@@ -60,5 +57,5 @@ export default class AddTasksForm extends Component {
 AddTasksForm.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.array
 }

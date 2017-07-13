@@ -4,42 +4,39 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 import { SubmissionError, reduxForm } from 'redux-form';
 
-import { deleteTask, postTask, toggleModal, toggleOnboardMode, updateTasks } from '../actions/indexActions';
-import { hasAnyValue, isDuplicate } from '../helpers/validate';
+import {
+  addTempTask,
+  deleteTask,
+  postTask,
+  setTempTasks,
+  toggleModal,
+  toggleOnboardMode,
+  toggleShouldDelete,
+  updateTasks
+} from '../actions/indexActions';
 
+import { hasAnyValue, isDuplicate } from '../helpers/validate';
 import AddTasksForm from '../components/AddTasksForm';
 
 let AddTasksFormContainer = class extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      tasks: []
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   
   componentDidMount() {
-    const { tasks } = this.props;
+    const { setTempTasks, tasks } = this.props;
     
-    this.setState({ tasks });
+    setTempTasks(tasks);
   }
   
-  toggleShouldDelete = (taskId) => (e) => {
-    const { tasks } = this.state;
-    const newTasks = tasks.map(task => {
-      if (task.shortId === taskId) {
-        const shouldDelete = !task.shouldDelete;
-        return Object.assign({}, task, { shouldDelete })
-      }
-      
-      return task;
-    })
+  toggleShouldDelete = (taskId) => () => {
+    const { toggleShouldDelete } = this.props;
     
-    this.setState({ tasks: newTasks })
+    toggleShouldDelete(taskId);
   }
   
   handleAddTask({ taskName }) {
-    const { tasks } = this.state
+    const { addTempTask, change, tempTasks: tasks } = this.props;
     
     const taskNames = tasks.map(task => task.taskName);
     
@@ -61,10 +58,9 @@ let AddTasksFormContainer = class extends Component {
       shouldDelete: false
     }
     
-    this.setState({ tasks: [...tasks, newTask] })
-    this.props.change('taskName', '')
+    addTempTask(newTask);
+    change('taskName', '')
   }
-  
   
   handleFormSubmit (){
     const { 
@@ -76,10 +72,9 @@ let AddTasksFormContainer = class extends Component {
       postTask, 
       updateTasks, 
       toggleModal, 
-      toggleOnboardMode 
+      toggleOnboardMode,
+      tempTasks: tasks, 
     } = this.props;
-    
-    const { tasks } = this.state;
     
     if (!tasks.length) {
       throw new SubmissionError({
@@ -88,20 +83,20 @@ let AddTasksFormContainer = class extends Component {
     }    
     
     const newTasks = tasks.filter((task) => !task.shouldDelete);
-      updateTasks(selectedProjectId, newTasks);
+    updateTasks(selectedProjectId, newTasks);
       
-      newTasks.filter((task) => !task._id)
-        .forEach((task) => {
-          selectedProjectDatabaseId 
-            ? postTask(selectedProjectDatabaseId, task)
-            : console.error('database id has not yet updated')
-        });
+    newTasks.filter((task) => !task._id)
+      .forEach((task) => {
+        selectedProjectDatabaseId 
+          ? postTask(selectedProjectDatabaseId, task)
+          : console.error('database id has not yet updated')
+      });
         
-      tasks.filter((task) => task.shouldDelete && task._id)
-        .forEach((task) => deleteTask(selectedProject, task));
+    tasks.filter((task) => task.shouldDelete && task._id)
+      .forEach((task) => deleteTask(selectedProject, task));
           
-      isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
-  }
+    isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
+}
   
   renderFormTask (task){
     const { shouldDelete, taskName, shortId } = task;
@@ -119,26 +114,26 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { handleSubmit, handleFormSubmit, shouldSubmit, shouldRenderSubmitButton } = this.props;
-    const { tasks } = this.state;
+    const { handleSubmit, handleFormSubmit, shouldSubmit, shouldRenderSubmitButton, tempTasks } = this.props;
     
     return (
       <AddTasksForm 
-        handleFormSubmit={handleFormSubmit ? handleFormSubmit(tasks) : this.handleFormSubmit.bind(this)}
+        handleFormSubmit={handleFormSubmit ? handleFormSubmit(tempTasks) : this.handleFormSubmit.bind(this)}
         handleSubmit={handleSubmit}
         handleTaskSubmit={this.handleAddTask.bind(this)}
         renderFormTask={this.renderFormTask.bind(this)}
         shouldRenderSubmitButton={shouldRenderSubmitButton}
         shouldSubmit={shouldSubmit}
-        tasks={tasks}
+        tasks={tempTasks}
       />
     );
   }
 }  
 
 const mapStateToProps = (state, ownProps) => {
-  const { selectedProjectId, modal, projects } = state;
+  const { customForm, selectedProjectId, modal, projects } = state;
   const { isOnboardingActive } = modal;  
+  const tempTasks = customForm.taskForm.tasks;
   
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedProjectDatabaseId = selectedProject && selectedProject._id;
@@ -151,7 +146,8 @@ const mapStateToProps = (state, ownProps) => {
     selectedProjectId,
     selectedProjectDatabaseId,
     isOnboardingActive,
-    tasks
+    tasks,
+    tempTasks
   }
 }
 AddTasksFormContainer = reduxForm({
@@ -159,10 +155,13 @@ AddTasksFormContainer = reduxForm({
 })(AddTasksFormContainer);
 
 export default AddTasksFormContainer = connect(mapStateToProps, {
+  addTempTask, 
   deleteTask,
   postTask,
+  setTempTasks,
   toggleModal,
   toggleOnboardMode,
+  toggleShouldDelete,
   updateTasks
 })(AddTasksFormContainer);
 
