@@ -7,7 +7,7 @@ import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+let renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label />
     <input

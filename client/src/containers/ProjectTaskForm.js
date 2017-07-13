@@ -47,6 +47,7 @@ export default class ProjectTaskForm extends Component {
   render() {
     const {
       children,
+      handleFormSubmit,
       handleTasksSubmit,
       isDefaultTaskSubmitDisabled,
       showTasksForSelectedProject,
@@ -56,14 +57,20 @@ export default class ProjectTaskForm extends Component {
     return(
       <div>
         <label>Project Name</label>
-        {React.cloneElement(children, { shouldSubmit })}
+        {React.cloneElement(children, { 
+          handleProjectSubmit({ projectName }) { console.log('projectName')}, 
+          onTargetUpdate() { console.log('success!')}, 
+          targetValue: "SDD_PROJECT", 
+          targetPropKey: "formSelector"
+        })}
+        
         <AddTasksFormContainer
           handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
           shouldSubmit={shouldSubmit}
           shouldRenderSubmitButton={false}
           showTasksForSelectedProject={false || showTasksForSelectedProject}
         />  
-        <button onClick={this.toggleShouldSubmit.bind(this)}>Submit</button>
+        <button onClick={handleFormSubmit}>Submit</button>
         <button onClick={routeToProjects}>Cancel</button>
       </div>
       );

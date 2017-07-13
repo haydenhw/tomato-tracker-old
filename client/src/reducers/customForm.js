@@ -1,11 +1,17 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
-  taskForm: []
+  taskForm: [],
+  remoteSubmitForm: null
 }
 
 export function customForm(state=defaultState, action) {
   switch(action.type) {
+    case "REMOTE_SUBMIT"://actions.REMOTE_SUBMIT:
+      return {
+        ...state,
+        remoteSubmitForm: action.formSelector 
+      };
     case actions.ADD_TEMP_TASK:
       return {
         ...state,

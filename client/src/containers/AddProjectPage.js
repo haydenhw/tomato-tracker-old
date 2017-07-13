@@ -7,6 +7,9 @@ import { submit, SubmissionError } from 'redux-form';
 import validate, { hasAnyValue } from '../helpers/validate';
 import { postProject } from '../actions/indexActions';
 
+//delete
+import store from '../redux-files/store.js';
+
 import AddProjectForm from '../components/AddProjectForm';
 import ProjectTaskForm from './ProjectTaskForm';
 
@@ -21,7 +24,16 @@ let AddProjectPage = class extends Component {
     }
   }
   
-  handleAddProject({ projectName }) {
+  handleFormSubmit() {
+    const { dispatch } = this.props;
+    
+    store.dispatch({
+      type: "REMOTE_SUBMIT",
+      formSelector: "ADD_PROJECT"
+    })
+  }
+  
+  handleQueNewProject({ projectName }) {
     const { queueNewProject } = this.props;
     
     if (!hasAnyValue(projectName)) {
@@ -32,18 +44,21 @@ let AddProjectPage = class extends Component {
     
     queueNewProject(projectName);
   };
-    
+  
+  handleAddNewProject() {
+    const { newTasks, projectName } = this.props;
+    postProject(newTasks, projectName)
+  }  
+  
   render() {
     const { postProject, queuedProject } = this.props; 
     
     return(
       <div>
         <ProjectTaskForm 
-          handleComponentUpdate={this.handleComponentUpdate}
-          handleProjectSubmit={this.handleAddProject.bind(this)}
+          handleFormSubmit={this.handleFormSubmit.bind(this)}
+          handleProjectSubmit={this.handleQueNewProject.bind(this)}
           isDefaultTaskSubmitDisabled={true}
-          postProject={postProject}
-          queuedProject={queuedProject}
         >
           <AddProjectForm shouldRenderSubmitButton={false} />
         </ProjectTaskForm>  
