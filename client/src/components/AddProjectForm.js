@@ -26,7 +26,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 function AddProjectForm(props) {
   const { handleProjectSubmit, handleSubmit, shouldRenderSubmitButton } = props;
-  console.log(props.shouldSubmit)
+  
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -44,11 +44,18 @@ function AddProjectForm(props) {
 
 const submit = ({ projectName }) =>  {
   
+    console.log('hola hola')
+  // const shouldSubmitProjectForm = store.getState().customForm.shouldSubmitProjectForm;
+  // console.log(shouldSubmitProjectForm);
+  // if (!shouldSubmitProjectFo   rm) {
+  //   return;  
+  // }
+  
   if (!hasAnyValue(projectName)) {
-      throw new SubmissionError({
-        projectName: 'Project name is required' 
-      })
-    }
+    throw new SubmissionError({
+      projectName: 'Project name is required' 
+    })
+  }
   
   store.dispatch(queueNewProject(projectName));
 };
