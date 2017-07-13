@@ -25,9 +25,9 @@ export default class ProjectTaskForm extends Component {
   }
   
   handleFormSubmit = (tasks) => () => {
-    const { handleProjectSubmit } = this.props;
+    const { dispatch, handleProjectSubmit } = this.props;
     
-    if (tasks.length === -1) {
+    if (tasks.length === 0) {
       throw new SubmissionError({
         taskName: 'Please add at least one task'
       })

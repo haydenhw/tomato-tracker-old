@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -32,12 +33,35 @@ export default class TimeTracker extends Component {
   static defaultProps = {
     tasks: []
   }
-
+  
+  componentWillMount() {
+    const { projects, tasks } = this.props;
+    
+    if (projects.length === 0) {
+      hashHistory.push('/projects')
+    }
+      
+    const selectedTaskId = tasks.find((task) => task.shortId === localStorage.prevSelectedTaskId)
+      ? localStorage.prevSelectedTaskId
+      : null
+      
+    this.setState({ selectedTaskId });
+  }
+  
   componentDidMount() {
     if (!localStorage.getItem('isFirstUserVisit')) {
       localStorage.setItem('isFirstUserVisit', 'true');
     } else {
       localStorage.removeItem('isFirstUserVisit');
+    }
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const { tasks } = this.props;
+    
+    if ((prevProps.tasks.length !== tasks.length) && (tasks.length === 0)) {
+      localStorage.setItem('prevSelectedTaskId', null);
+      this.setState({ selectedTaskId: null });
     }
   }
 
@@ -78,11 +102,15 @@ export default class TimeTracker extends Component {
 
   handleTaskChange(taskId){
     const { isTimerActive } = this.props;
-
+    
     if (isTimerActive) {
       return null;
     }
-
+    
+    if (localStorage.prevSelectedTaskId !== taskId) {
+      localStorage.setItem("prevSelectedTaskId", taskId);
+    }
+      
     this.setState({ selectedTaskId: taskId });
   }
 
@@ -100,15 +128,15 @@ export default class TimeTracker extends Component {
     this.setState({ activeTaskId: selectedTaskId });
   }
   
-  setActiveEditMenu = (activeEditMenuParentId) => {
+  setActiveEditMenu = (activeEditMenuParentId) => () => {
     this.setState({ activeEditMenuParentId });  
   }
-
+  
   renderTask (task){
-    const { selectedProject, isTimerActive } = this.props;
-    const { activeEditMenuParentId, activeTaskId, selectedTaskId } = this.state;
+    const { changeActiveEditMenu, selectedProject, isTimerActive } = this.props;
+    const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
-    // console.log(activeEditMenuParentId , shortId, activeEditMenuParentId === shortId)
+    
     return (
       <ListItem
         key={shortid.generate()}
@@ -121,8 +149,7 @@ export default class TimeTracker extends Component {
       >
         <EditMenu
             className='list-item-edit-menu'
-            isActive={activeEditMenuParentId === shortId}
-            onMenuClick={this.setActiveEditMenu}
+            onMenuClick={changeActiveEditMenu}
             parentId={shortId}
           >
           <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
@@ -198,8 +225,7 @@ export default class TimeTracker extends Component {
                   <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
                 </div>
                 <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
-                  <ListHeader col1Title="Task" col2Title="Time Logged" />
-                </List>
+                  <ListHeader col1Title="Task" col2Title="Time Logged" /> </List>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
               <FormModal

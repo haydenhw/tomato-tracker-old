@@ -8,7 +8,6 @@ import RootModal from '../components/ModalRoot';
 import ProjectNagModal from './ProjectNagModal';
 
 function Modal(props) {
-  
   const MODAL_COMPONENTS = {
     PROJECT_NAG: ProjectNagModal
   }
@@ -30,7 +29,6 @@ function Modal(props) {
   }
   
   const SpecificModal = MODAL_COMPONENTS[modalType];
-  
   return (
     <RootModal className={rootModalClass}>
       <div className={`modal ${modalClass}`} style={style}>

@@ -15,6 +15,7 @@ let renderField = ({ input, label, type, meta: { touched, error } }) => (
       autoFocus 
       autoComplete="off"
       className="fullscreen-input add-project-input" 
+      onKeyPress={(evt) => evt.keyCode === 13 ? false : true}
       placeholder="Project name" 
       type={type} 
     />
@@ -50,6 +51,14 @@ class AddProjectForm extends Component {
 }
 
 const submit = ({ projectName }) =>  {
+  
+    console.log('hola hola')
+  // const shouldSubmitProjectForm = store.getState().customForm.shouldSubmitProjectForm;
+  // console.log(shouldSubmitProjectForm);
+  // if (!shouldSubmitProjectFo   rm) {
+  //   return;  
+  // }
+  
   if (!hasAnyValue(projectName)) {
     throw new SubmissionError({
       projectName: 'Project name is required' 

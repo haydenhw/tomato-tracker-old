@@ -265,9 +265,6 @@ export function deleteTask(project, task, shouldUpdateLocalState) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         })
-      })
-      .then((res) => {
-        console.log('delete successful')
-      })
+      });
   }
 }

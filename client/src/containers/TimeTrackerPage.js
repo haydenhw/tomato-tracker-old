@@ -6,12 +6,12 @@ import { hashHistory } from 'react-router';
 import {
   deleteTask,
   decrementTimer,
+  changeActiveEditMenu,
   fetchProjects,
   setSelectedProject,
   toggleAddTasksForm,
-  toggleEditTaskForm 
+  toggleEditTaskForm
 } from '../actions/indexActions';
-
 
 import TimeTracker from './TimeTracker';
 
@@ -19,6 +19,7 @@ class TimeTrackerPage extends Component {
   
 componentWillMount() {
   const { hasFetched, projects } = this.props;
+// console.log(hasFetched  !projects.length)  
   if (hasFetched && !projects.length) {
     hashHistory.push('/projects')
   }
@@ -26,19 +27,21 @@ componentWillMount() {
 
 render() {
   const { 
-    selectedProjectId,
+    changeActiveEditMenu,
     decrementTimer,
     deleteTask,
     hasFetched,
+    isFetching,
     isTimerActive,
     projects,
+    selectedProjectId,
     setSelectedProject,
     toggleAddTasksForm, 
     toggleEditTaskForm
   } = this.props;
   
   if (!hasFetched) {
-    return <div>Loading...</div>
+    return <div className="loader">Loading...</div>
   }
   
   const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
@@ -48,11 +51,14 @@ render() {
   return (
     <div className="time-tracker-page-container">
       <TimeTracker
-        selectedProject={selectedProject || null}
+        changeActiveEditMenu={changeActiveEditMenu}
         decrementTimer={decrementTimer}
         deleteTask={deleteTask}
         projects={projects}
+        hasFetched={hasFetched}
+        isFetching={isFetching}
         isTimerActive={isTimerActive}
+        selectedProject={selectedProject || null}
         setSelectedProject={setSelectedProject}
         tasks={selectedTasks || []}
         toggleAddTasksForm={toggleAddTasksForm} 
@@ -65,18 +71,20 @@ render() {
 
 const mapStateToProps = state => {
   const { selectedProjectId, projects, timer } = state;
-  const { hasFetched } = projects;
+  const { hasFetched, isFetching } = projects;
   const { isTimerActive } = timer;
   
   return {
     selectedProjectId,
     hasFetched, 
+    isFetching,
     isTimerActive, 
     projects: projects.items
   }
 }
 
 export default connect(mapStateToProps, {
+  changeActiveEditMenu,
   deleteTask,
   fetchProjects,
   decrementTimer,

@@ -29,10 +29,8 @@ class EditProjectPage extends Component {
   
   handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
     const { updateProject } = this.props;
-      console.log(!hasAnyValue(projectName))
       
       if (!hasAnyValue(projectName)) {
-        console.log('no val')
         throw new SubmissionError({
           projectName: 'Project name is required' 
         })
@@ -43,8 +41,7 @@ class EditProjectPage extends Component {
   
   handleTasksSubmit({ tasks }) {
     const { updateTasks, selectedProjectId } = this.props;
-    console.log(tasks)
-  //  updateTasks(selectedProjectId, tasks);
+    updateTasks(selectedProjectId, tasks);
   }
   
   render() {

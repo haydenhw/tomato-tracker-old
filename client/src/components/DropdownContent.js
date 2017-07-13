@@ -33,5 +33,5 @@ export default function DropdownTrigger(props) {
 }
 
 DropdownTrigger.propTypes = {
-//  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };

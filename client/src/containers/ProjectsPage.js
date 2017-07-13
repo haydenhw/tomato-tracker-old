@@ -7,10 +7,11 @@ import shortid from 'shortid';
 import { secondsToHMMSS } from '../helpers/time';
 import {
   addProject,
+  changeActiveEditMenu,
   deleteProject,
   setSelectedProject,
   updateProject
-} from '../actions/projectActions';
+} from '../actions/indexActions';
 
 import Modal from './Modal';
 import EditMenu from './EditMenu';
@@ -32,10 +33,6 @@ class ProjectsPage extends Component {
     projects: ['filler']
   }
   
-  handleAddButtonClick() {
-    hashHistory.push('/projects/new');
-  }
-  
   handleListItemClick = (projectId) => () => {
     const { setSelectedProject } = this.props;
     
@@ -46,12 +43,17 @@ class ProjectsPage extends Component {
   handleEditOptionClick = (project) => (evt) => {
     evt.stopPropagation()
     hashHistory.push(`/projects/${project.shortId}`)
+  }  
+  
+  handleAddButtonClick() {
+    hashHistory.push('/projects/new');
   }
   
   handleDeleteOptionClick = (project) => (evt) => {
     evt.stopPropagation();
     
     const { deleteProject } = this.props;
+    
     deleteProject(project);
   }
   
@@ -60,13 +62,13 @@ class ProjectsPage extends Component {
   }
   
   renderProject (project){
-    const { selectedProjectId } = this.props;
+    const { changeActiveEditMenu, selectedProjectId } = this.props;
     const { projectName, shortId } = project;
+    
     const totalTime = 
-      project.tasks.length 
+      project.tasks.length > 0
         ? project.tasks.map(task => task.recordedTime).reduce((a,b) => a + b)
         : 0;
-      
     
     return (
       <ListItem 
@@ -77,7 +79,11 @@ class ProjectsPage extends Component {
         handleClick={this.handleListItemClick(shortId)}
         isSelected={selectedProjectId === shortId}
       >
-        <EditMenu className='list-item-edit-menu'>
+        <EditMenu 
+          className='list-item-edit-menu'
+          onMenuClick={changeActiveEditMenu}    
+          parentId={shortId}
+        >
           <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
           <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
         </EditMenu>  
@@ -108,7 +114,7 @@ class ProjectsPage extends Component {
     const totalTime = this.getTotalTime();
     
     if (!hasFetched){
-      return <div> Loading...</div>
+      return <div className="loader">Loading...</div>;
     }
     
     return (
@@ -156,6 +162,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { 
   addProject,
+  changeActiveEditMenu,
   deleteProject,
   setSelectedProject,
   updateProject

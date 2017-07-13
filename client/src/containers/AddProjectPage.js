@@ -20,7 +20,7 @@ let AddProjectPage = class extends Component {
       const { newTasks } = this.state;
       
       postProject(queuedProject, newTasks);
-      hashHistory.push('/projects')
+      hashHistory.push('/projects');
     }
   }
   
@@ -51,7 +51,7 @@ let AddProjectPage = class extends Component {
   }  
   
   render() {
-    const { postProject, queuedProject } = this.props; 
+    const { dispatch, postProject, queuedProject } = this.props; 
     
     return(
       <div>
@@ -75,11 +75,11 @@ let AddProjectPage = class extends Component {
     }
   }
 
-  export default AddProjectPage = connect(mapStateToProps, {
+  export default AddProjectPage = connect(mapStateToProps, (dispatch) => ({
+    dispatch,
     postProject,
     submit
-  })(AddProjectPage);
-  
+  }))(AddProjectPage);
   
   AddProjectPage.propTypes = {
     queuedProject: PropTypes.string
