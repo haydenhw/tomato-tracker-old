@@ -13,7 +13,13 @@ const renderField = ({
   <div className="input-wrapper">
     <label/>
     <div>
-      <input {...input} autoFocus placeholder="Task name" type={type} />
+      <input
+        {...input}
+        // ref={inputRef}
+        placeholder="Task name"
+        type={type}
+        onBlur={() => {}}
+       />
       {touched && (error && <div className="error">{error}</div>)}
       </div>
     </div>
@@ -34,11 +40,12 @@ export default class AddTasksForm extends Component {
       handleFormSubmit,
       handleTaskSubmit,
       handleSubmit,
+      inputRef,
       shouldRenderSubmitButton,
       renderFormTask,
       tasks,
     } = this.props;
-    
+    console.log(inputRef)
     return (
       <div>
         <label htmlFor="taskName">Tasks</label>

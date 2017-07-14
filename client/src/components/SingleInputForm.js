@@ -8,15 +8,16 @@ import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
 
-const renderField = (placeholder) => ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label />
     <input
       {...input} 
-      autoFocus 
+      autoFocus
+      // ref={inputRef}  
       autoComplete="off"
       className="fullscreen-input add-project-input" 
-      placeholder={placeholder} 
+      // placeholder={placeholder} 
       type={type} 
     />
     {touched && error && <div className="error">{error}</div>}
@@ -29,16 +30,17 @@ let SingleInputForm = function SingleInputForm(props) {
     formName,
     handleFormSubmit,
     handleSubmit,
+    inputRef,
     placeholder,
     shouldRenderSubmitButton
   } = props;
   
   return (
-    <form onSubmit={/*(evt) => { evt.preventDefault(); return false } */handleSubmit}>
+    <form onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
       <Field
         name={formName}
         type="text"
-        component={renderField(placeholder)}
+        component={renderField}
         label={formName}
       />
       {shouldRenderSubmitButton && 

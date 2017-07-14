@@ -12,18 +12,25 @@ import RemoteSubmitForm from '../containers/RemoteSubmitForm';
 
 const routeToProjects = () => hashHistory.push('/projects');
 
-class ProjectTaskForm extends Component {
+export default class ProjectTaskForm extends Component {
   constructor() {
     super() 
       this.state = {
         newTasks: [],
         shouldSubmit: false
       }
+  this.getInputRef = this.getInputRef.bind(this);  
+  }
+  
+  getInputRef(el) { return this.inputRef= el } 
+  
+  componentDidMount() {
+    // this.inputRef.focus()  
   }
   
   componentDidUpdate(prevProps) {
     const { handleComponentUpdate } = this.props;
-    
+    // this.inputRef.focus(); 
     if (handleComponentUpdate) {
       handleComponentUpdate.call(this, prevProps);  
     }  
@@ -69,7 +76,6 @@ class ProjectTaskForm extends Component {
       showTasksForSelectedProject,
      } = this.props;
     const { shouldSubmit } = this.state;  
-    
     return(
       <div>
         <label>Project Name</label>
@@ -79,7 +85,8 @@ class ProjectTaskForm extends Component {
           targetValue="ADD_PROJECT" 
           targetPropKey="remoteSubmitForm"
         >
-          {children}
+          {/* {children} */}
+          {React.cloneElement(children, { inputRef: this.getInputRef })}
         </RemoteSubmitForm>
         <AddTasksFormContainer
           handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
@@ -97,7 +104,3 @@ class ProjectTaskForm extends Component {
   ProjectTaskForm.propTypes = {
     queuedProject: PropTypes.string
   }
-  
-export default reduxForm({
-  form: 'singleInputForm', 
-})(ProjectTaskForm);

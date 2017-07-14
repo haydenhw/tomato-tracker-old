@@ -7,6 +7,7 @@ import { postProject } from '../actions/indexActions';
 import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
 
+import store from '../redux-files/store';
 let AddProjectPage = class extends Component {
   handleNewProjectSubmit({ projectName }) {
     const { newTasks, postProject } = this.props;
