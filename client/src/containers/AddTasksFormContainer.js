@@ -2,7 +2,10 @@ import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import { SubmissionError, reduxForm } from 'redux-form';
+import { SubmissionError, reduxForm, change } from 'redux-form';
+
+//delete
+import store from '../redux-files/store';
 
 import {
   addTempTask,
@@ -25,6 +28,7 @@ let AddTasksFormContainer = class extends Component {
   
   componentDidMount() {
     const { setTempTasks, tasks } = this.props;
+    store.dispatch(change('addTasks', 'pickles'))
     
     setTempTasks(tasks);
   }
@@ -36,8 +40,7 @@ let AddTasksFormContainer = class extends Component {
   }
   
   handleAddTask({ taskName }) {
-    const { addTempTask, change, tempTasks: tasks } = this.props;
-    
+    const { addTempTask, tempTasks: tasks, reset } = this.props;
     const taskNames = tasks.map(task => task.taskName);
     
     if (!hasAnyValue(taskName)) {
@@ -59,7 +62,8 @@ let AddTasksFormContainer = class extends Component {
     }
     
     addTempTask(newTask);
-    change('taskName', '')
+    // store.dispatch(reset('taskName'))
+    // change('taskName', '');
   }
   
   handleFormSubmit (){
@@ -150,12 +154,14 @@ const mapStateToProps = (state, ownProps) => {
     tempTasks
   }
 }
+
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
 })(AddTasksFormContainer);
 
 export default AddTasksFormContainer = connect(mapStateToProps, {
   addTempTask, 
+  change,
   deleteTask,
   postTask,
   setTempTasks,

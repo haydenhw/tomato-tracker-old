@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
-import { submit, SubmissionError } from 'redux-form';
 
-import validate, { hasAnyValue } from '../helpers/validate';
 import { postProject } from '../actions/indexActions';
 
 import SingleInputForm from '../components/SingleInputForm';
@@ -18,8 +15,6 @@ let AddProjectPage = class extends Component {
   } 
   
   render() {
-    const { dispatch, postProject, queuedProject } = this.props; 
-    
     return(
       <div>
         <ProjectTaskForm 
@@ -48,10 +43,7 @@ let AddProjectPage = class extends Component {
     }
   }
 
-  export default AddProjectPage = connect(mapStateToProps, {
-    postProject,
-    submit
-  })(AddProjectPage);
+  export default AddProjectPage = connect(mapStateToProps, { postProject })(AddProjectPage);
   
   AddProjectPage.propTypes = {
     queuedProject: PropTypes.string

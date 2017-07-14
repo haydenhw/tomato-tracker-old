@@ -34,7 +34,7 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <form>
+    <form onSubmit={/*(evt) => { evt.preventDefault(); return false } */handleSubmit}>
       <Field
         name={formName}
         type="text"
