@@ -118,7 +118,6 @@ export function fetchProjects() {
 }
 
 export function postProject(projectName, tasks) {
-  
   return (dispatch) => {
     
     const newProject = {

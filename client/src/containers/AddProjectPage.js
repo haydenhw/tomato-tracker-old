@@ -7,48 +7,15 @@ import { submit, SubmissionError } from 'redux-form';
 import validate, { hasAnyValue } from '../helpers/validate';
 import { postProject } from '../actions/indexActions';
 
-//delete
-import store from '../redux-files/store.js';
-
 import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
 
 let AddProjectPage = class extends Component {
-  handleComponentUpdate(prevProps) {
-    if (prevProps.queuedProject !== this.props.queuedProject) {
-      const { postProject, queuedProject } = this.props;
-      const { newTasks } = this.state;
-      
-      postProject(queuedProject, newTasks);
-      hashHistory.push('/projects');
-    }
-  }
-  
-  handleFormSubmit() {
-    const { dispatch } = this.props;
+  handleNewProjectSubmit({ projectName }) {
+    const { newTasks, postProject } = this.props;
     
-    store.dispatch({
-      type: "REMOTE_SUBMIT",
-      formSelector: "ADD_PROJECT"
-    })
-  }
-  
-  handleQueNewProject({ projectName }) {
-    const { queueNewProject } = this.props;
-    
-    if (!hasAnyValue(projectName)) {
-      throw new SubmissionError({
-        projectName: 'Project name is required' 
-      })
-    }
-    
-    queueNewProject(projectName);
-  };
-  
-  handleAddNewProject() {
-    const { newTasks, projectName } = this.props;
-    postProject(newTasks, projectName)
-  }  
+    postProject(projectName, newTasks);
+  } 
   
   render() {
     const { dispatch, postProject, queuedProject } = this.props; 
@@ -56,8 +23,8 @@ let AddProjectPage = class extends Component {
     return(
       <div>
         <ProjectTaskForm 
-          handleFormSubmit={this.handleFormSubmit.bind(this)}
-          handleProjectSubmit={this.handleQueNewProject.bind(this)}
+          formSelector={"ADD_PROJECT"}
+          handleNewProjectSubmit={this.handleNewProjectSubmit.bind(this)}
           isDefaultTaskSubmitDisabled={true}
         >
           <SingleInputForm
@@ -72,18 +39,19 @@ let AddProjectPage = class extends Component {
   }
   
   const mapStateToProps = state => {
-    const { projects } = state;
-    
+    const { projects, customForm } = state;
+    const { tasks: newTasks } = customForm.taskForm;
+        
     return {
-      queuedProject: projects.queue
+      queuedProject: projects.queue,
+      newTasks
     }
   }
 
-  export default AddProjectPage = connect(mapStateToProps, (dispatch) => ({
-    dispatch,
+  export default AddProjectPage = connect(mapStateToProps, {
     postProject,
     submit
-  }))(AddProjectPage);
+  })(AddProjectPage);
   
   AddProjectPage.propTypes = {
     queuedProject: PropTypes.string

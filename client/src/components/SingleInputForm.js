@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
@@ -34,7 +34,7 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Field
         name={formName}
         type="text"
@@ -67,7 +67,19 @@ const submit = ({ projectName }) =>  {
   // store.dispatch(queueNewProject(projectName));
 };
 
-SingleInputForm = callOnTargetUpdate(SingleInputForm);
+const targetInfo = props => {
+  return {
+    targetValue: "ADD_PROJECT",
+    targetPropKey: "remoteSubmitForm" 
+  } 
+}
+
+const onTargetUpdate = props => {
+  const { handleSubmit, onTargetUpdate } = props;
+    handleSubmit(onTargetUpdate)();
+}
+
+SingleInputForm = callOnTargetUpdate(targetInfo, onTargetUpdate)(SingleInputForm);
 
 export default reduxForm({
   form: 'singleInput', 

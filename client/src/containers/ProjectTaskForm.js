@@ -4,6 +4,9 @@ import { hashHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { submit, SubmissionError } from 'redux-form';
 
+//delete
+import store from '../redux-files/store.js';
+
 import AddTasksFormContainer from '../containers/AddTasksFormContainer';
 import RemoteSubmitForm from '../containers/RemoteSubmitForm';
 
@@ -26,11 +29,15 @@ class ProjectTaskForm extends Component {
     }  
   }
   
-  handleFormUpdate(prevProps, currProps) {
-    if (prevProps.remoteSubmitForm !== currProps.remoteSubmitForm) {
-      console.log('calling function!')
-    } 
-  }  
+    
+  handleRemoteSubmit() {
+    const { dispatch } = this.props;
+    
+    store.dispatch({
+      type: "REMOTE_SUBMIT",
+      formSelector: "ADD_PROJECT"
+    })
+  }
   
   handleFormSubmit = (tasks) => () => {
     const { dispatch, handleProjectSubmit } = this.props;
@@ -55,7 +62,7 @@ class ProjectTaskForm extends Component {
   render() {
     const {
       children,
-      handleFormSubmit,
+      handleNewProjectSubmit,
       handleSubmit,
       handleTasksSubmit,
       isDefaultTaskSubmitDisabled,
@@ -68,7 +75,7 @@ class ProjectTaskForm extends Component {
         <label>Project Name</label>
         <RemoteSubmitForm
           //handleProjectSubmit={({ projectName }) => { console.log(projectName)}} 
-          onTargetUpdate={({projectName}) => console.log(projectName)}
+          onTargetUpdate={handleNewProjectSubmit}
           targetValue="ADD_PROJECT" 
           targetPropKey="remoteSubmitForm"
         >
@@ -80,7 +87,7 @@ class ProjectTaskForm extends Component {
           shouldRenderSubmitButton={false}
           showTasksForSelectedProject={false || showTasksForSelectedProject}
         />  
-        <button onClick={handleFormSubmit}>Submit</button>
+        <button onClick={this.handleRemoteSubmit.bind(this)}>Submit</button>
         <button onClick={routeToProjects}>Cancel</button>
       </div>
       );
@@ -92,5 +99,5 @@ class ProjectTaskForm extends Component {
   }
   
 export default reduxForm({
-  form: 'projectTaskForm', 
+  form: 'singleInputForm', 
 })(ProjectTaskForm);

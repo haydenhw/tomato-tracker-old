@@ -10,7 +10,7 @@ export function customForm(state=defaultState, action) {
     case "REMOTE_SUBMIT"://actions.REMOTE_SUBMIT:
       return {
         ...state,
-        remoteSubmitForm: action.formSelector 
+        remoteSubmitForm: state.remoteSubmitForm ? null : action.formSelector
       };
     case actions.ADD_TEMP_TASK:
       return {
