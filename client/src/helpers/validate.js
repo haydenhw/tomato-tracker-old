@@ -27,7 +27,7 @@
       const error = {};
       
       if (isDuplicate(projectName, projectNames)) {
-        error.projectName = `A project with the name '${projectName}' already exists`;
+        error.singleInput = `A project with the name '${projectName}' already exists`;
       }
       
       return error;

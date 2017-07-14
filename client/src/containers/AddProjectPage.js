@@ -10,7 +10,7 @@ import { postProject } from '../actions/indexActions';
 //delete
 import store from '../redux-files/store.js';
 
-import AddProjectForm from '../components/AddProjectForm';
+import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
 
 let AddProjectPage = class extends Component {
@@ -60,7 +60,10 @@ let AddProjectPage = class extends Component {
           handleProjectSubmit={this.handleQueNewProject.bind(this)}
           isDefaultTaskSubmitDisabled={true}
         >
-          <AddProjectForm shouldRenderSubmitButton={false} />
+          <SingleInputForm
+            placeholder={"Project Name"}
+            shouldRenderSubmitButton={false}
+          />
         </ProjectTaskForm>  
       </div>
       );

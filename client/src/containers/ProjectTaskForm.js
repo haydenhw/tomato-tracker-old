@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { hashHistory } from 'react-router';
+import { reduxForm } from 'redux-form';
 import { submit, SubmissionError } from 'redux-form';
 
 import AddTasksFormContainer from '../containers/AddTasksFormContainer';
-import AddProjectForm from '../components/AddProjectForm';
 import RemoteSubmitForm from '../containers/RemoteSubmitForm';
 
 const routeToProjects = () => hashHistory.push('/projects');
 
-export default class ProjectTaskForm extends Component {
+class ProjectTaskForm extends Component {
   constructor() {
     super() 
       this.state = {
@@ -25,6 +25,12 @@ export default class ProjectTaskForm extends Component {
       handleComponentUpdate.call(this, prevProps);  
     }  
   }
+  
+  handleFormUpdate(prevProps, currProps) {
+    if (prevProps.remoteSubmitForm !== currProps.remoteSubmitForm) {
+      console.log('calling function!')
+    } 
+  }  
   
   handleFormSubmit = (tasks) => () => {
     const { dispatch, handleProjectSubmit } = this.props;
@@ -50,6 +56,7 @@ export default class ProjectTaskForm extends Component {
     const {
       children,
       handleFormSubmit,
+      handleSubmit,
       handleTasksSubmit,
       isDefaultTaskSubmitDisabled,
       showTasksForSelectedProject,
@@ -60,8 +67,8 @@ export default class ProjectTaskForm extends Component {
       <div>
         <label>Project Name</label>
         <RemoteSubmitForm
-          handleProjectSubmit={({ projectName }) => { console.log('projectName')}} 
-          onTargetUpdate={() => { console.log('success!')}}
+          handleProjectSubmit={({ projectName }) => { console.log(projectName)}} 
+          onTargetUpdate={() => handleSubmit(({projectName}) => console.log(projectName))}
           targetValue="ADD_PROJECT" 
           targetPropKey="remoteSubmitForm"
         >
@@ -83,3 +90,7 @@ export default class ProjectTaskForm extends Component {
   ProjectTaskForm.propTypes = {
     queuedProject: PropTypes.string
   }
+  
+export default reduxForm({
+  form: 'projectTaskForm', 
+})(ProjectTaskForm);

@@ -13,9 +13,8 @@ import {
   toggleModal
 } from '../actions/indexActions';
 
-
 import Modal from './Modal';
-import AddProjectForm from '../components/AddProjectForm';
+import SingleInputForm from '../components/SingleInputForm';
 import EditTaskForm from '../components/EditTaskForm';
 import ConfirmEditTask from './ConfirmEditTask';
 import AddTasksFormContainer from './AddTasksFormContainer';
@@ -34,10 +33,10 @@ class FormModal extends Component {
     this.props.deleteTask('123', '111');
   }
   
-  handleAddProject = () => ({ projectName }) => {
+  handleAddProject = () => ({ singleInput }) => {
     const { changeModalType, postProject } = this.props;
     
-    postProject(projectName)
+    postProject(singleInput)
     this.toggleIsContentWaiting();
     changeModalType('ADD_TASKS');
   }
@@ -86,8 +85,10 @@ class FormModal extends Component {
       
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
         return (
-          <AddProjectForm
-            handleProjectSubmit={this.handleAddProject()}
+          <SingleInputForm
+            formName={"addProjectForm"}
+            handleFormSubmit={this.handleAddProject()}
+            placeholder={"Project Name"}
             projects={projects}
             shouldRenderSubmitButton={true}
           />
@@ -192,7 +193,6 @@ export default connect(mapStateToProps, {
   setSelectedProject, 
   toggleModal
 })(FormModal);
-
 
 FormModal.propTypes = {
   hanldeFormSubmit: PropTypes.func,
