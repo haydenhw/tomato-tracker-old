@@ -24,16 +24,19 @@ let AddProjectPage = class extends Component {
     postProject(projectName, newTasks);
   } 
   
-  render() {
+  handleRemoteSubmit() {
     const { remoteSubmit } = this.props;
-    
+    console.log('hellola')
+    remoteSubmit('ADD_PROJECT');
+  }  
+  
+  render() {
     return(
       <div>
         <ProjectTaskForm 
-          formSelector={"ADD_PROJECT"}
           handleNewProjectSubmit={this.handleNewProjectSubmit.bind(this)}
           isDefaultTaskSubmitDisabled={true}
-          remoteSubmit={remoteSubmit}
+          handleRemoteSubmit={this.handleRemoteSubmit.bind(this)}
         >
           <SingleInputForm
             formName={"projectName"}

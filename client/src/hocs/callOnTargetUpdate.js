@@ -6,9 +6,9 @@ export default function callOnTargetUpdate(getTargetInfo, onTargetUpdate) {
     return class BaseComponent extends Component {
       componentDidUpdate(prevProps) {
         const { targetPropKey, targetValue } = getTargetInfo(this.props); 
-        
         if ((prevProps[targetPropKey] !== targetValue) && (this.props[targetPropKey]) === targetValue) {
           
+          console.log('called')
           onTargetUpdate(this.props);
         }
       }

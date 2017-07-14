@@ -14,25 +14,14 @@ export default class ProjectTaskForm extends Component {
   //   super() 
   // }
   
-  
-  handleRemoteSubmit() {
-    const { remoteSubmit } = this.props;
-    
-    remoteSubmit('ADD_PROJECT');  
-  }
-  
-  
-  
   render() {
     const {
       children,
       handleNewProjectSubmit,
-      handleSubmit,
-      handleTasksSubmit,
-      isDefaultTaskSubmitDisabled,
+      handleRemoteSubmit,
       showTasksForSelectedProject,
      } = this.props;
-    const { shouldSubmit } = this.state;  
+     
     return(
       <div>
         <label>Project Name</label>
@@ -46,12 +35,11 @@ export default class ProjectTaskForm extends Component {
           {React.cloneElement(children, { inputRef: this.getInputRef })}
         </RemoteSubmitForm>
         <AddTasksFormContainer
-          handleFormSubmit={(isDefaultTaskSubmitDisabled === true) && this.handleFormSubmit}
-          shouldSubmit={shouldSubmit}
+          // shouldSubmit={shouldSubmit}
           shouldRenderSubmitButton={false}
           showTasksForSelectedProject={false || showTasksForSelectedProject}
         />  
-        <button onClick={this.handleRemoteSubmit.bind(this)}>Submit</button>
+        <button onClick={handleRemoteSubmit}>Submit</button>
         <button onClick={routeToProjects}>Cancel</button>
       </div>
       );
