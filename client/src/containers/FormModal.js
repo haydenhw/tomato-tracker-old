@@ -86,7 +86,7 @@ class FormModal extends Component {
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
         return (
           <SingleInputForm
-            formName={"addProjectForm"}
+            formName={"projectName"}
             handleFormSubmit={this.handleAddProject()}
             placeholder={"Project Name"}
             projects={projects}
@@ -109,7 +109,6 @@ class FormModal extends Component {
         return null;
     }
   }
-  
   
   renderAnimatedElement(elementType) {
     const { modalType } = this.props;

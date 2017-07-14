@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default function callOnTargetUpdate (WrappedComponent) {
+export default function callOnTargetUpdate (Component) {
   return class Wrapper extends Component {
     componentDidUpdate(prevProps) {
       const { handleSubmit, handleProjectSubmit, onTargetUpdate, targetPropKey, targetValue } = this.props;
@@ -9,14 +9,15 @@ export default function callOnTargetUpdate (WrappedComponent) {
       if ((prevProps[targetPropKey] !== targetValue) && (this.props[targetPropKey]) === targetValue) {
         console.log('calling target func new')
         
-        handleSubmit(({projectName}) => console.log(projectName))(); 
+        handleSubmit(onTargetUpdate)(); 
         // onTargetUpdate();
+        
       }
     }
     
     render() {
       // console.log(this.props)
-      return <WrappedComponent {...this.props} {...this.state} /> 
+      return <Component {...this.props} /> 
     }
   }
 }  

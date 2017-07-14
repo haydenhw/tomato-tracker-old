@@ -67,8 +67,8 @@ class ProjectTaskForm extends Component {
       <div>
         <label>Project Name</label>
         <RemoteSubmitForm
-          handleProjectSubmit={({ projectName }) => { console.log(projectName)}} 
-          onTargetUpdate={() => handleSubmit(({projectName}) => console.log(projectName))}
+          //handleProjectSubmit={({ projectName }) => { console.log(projectName)}} 
+          onTargetUpdate={({projectName}) => console.log(projectName)}
           targetValue="ADD_PROJECT" 
           targetPropKey="remoteSubmitForm"
         >

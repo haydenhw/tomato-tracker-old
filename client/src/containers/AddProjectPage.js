@@ -61,6 +61,7 @@ let AddProjectPage = class extends Component {
           isDefaultTaskSubmitDisabled={true}
         >
           <SingleInputForm
+            formName={"projectName"}
             placeholder={"Project Name"}
             shouldRenderSubmitButton={false}
           />

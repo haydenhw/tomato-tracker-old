@@ -36,7 +36,7 @@ let SingleInputForm = function SingleInputForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="singleInput"
+        name={formName}
         type="text"
         component={renderField(placeholder)}
         label={formName}
