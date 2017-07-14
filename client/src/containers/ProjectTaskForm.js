@@ -4,67 +4,24 @@ import { hashHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { submit, SubmissionError } from 'redux-form';
 
-//delete
-import store from '../redux-files/store.js';
-
 import AddTasksFormContainer from '../containers/AddTasksFormContainer';
 import RemoteSubmitForm from '../containers/RemoteSubmitForm';
 
 const routeToProjects = () => hashHistory.push('/projects');
 
 export default class ProjectTaskForm extends Component {
-  constructor() {
-    super() 
-      this.state = {
-        newTasks: [],
-        shouldSubmit: false
-      }
-  this.getInputRef = this.getInputRef.bind(this);  
-  }
+  // constructor() {
+  //   super() 
+  // }
   
-  getInputRef(el) { return this.inputRef= el } 
   
-  componentDidMount() {
-    // this.inputRef.focus()  
-  }
-  
-  componentDidUpdate(prevProps) {
-    const { handleComponentUpdate } = this.props;
-    // this.inputRef.focus(); 
-    if (handleComponentUpdate) {
-      handleComponentUpdate.call(this, prevProps);  
-    }  
-  }
-  
-    
   handleRemoteSubmit() {
-    const { dispatch } = this.props;
+    const { remoteSubmit } = this.props;
     
-    store.dispatch({
-      type: "REMOTE_SUBMIT",
-      formSelector: "ADD_PROJECT"
-    })
+    remoteSubmit('ADD_PROJECT');  
   }
   
-  handleFormSubmit = (tasks) => () => {
-    const { dispatch, handleProjectSubmit } = this.props;
-    
-    if (tasks.length === 0) {
-      throw new SubmissionError({
-        taskName: 'Please add at least one task'
-      })
-    }    
-    
-    this.setState({ 
-      newTasks: tasks.filter(task => !task.shouldDelete)
-    }, handleProjectSubmit);
-  }  
   
-  toggleShouldSubmit() {
-    const { shouldSubmit } = this.state;
-    
-    this.setState({ shouldSubmit: !shouldSubmit});
-  }
   
   render() {
     const {

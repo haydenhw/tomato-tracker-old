@@ -22,4 +22,12 @@ export function toggleShouldDelete(taskId) {
   }
 }
 
+export const REMOTE_SUBMIT = "REMOTE_SUBMIT";
+export function remoteSubmit(formSelector) {
+  return {
+    type: 'REMOTE_SUBMIT',
+    formSelector
+  }
+}
+
 

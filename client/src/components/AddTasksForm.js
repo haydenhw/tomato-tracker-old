@@ -45,7 +45,7 @@ export default class AddTasksForm extends Component {
       renderFormTask,
       tasks,
     } = this.props;
-    console.log(inputRef)
+    
     return (
       <div>
         <label htmlFor="taskName">Tasks</label>

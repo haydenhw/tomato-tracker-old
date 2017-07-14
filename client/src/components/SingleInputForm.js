@@ -14,10 +14,9 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
     <input
       {...input} 
       autoFocus
-      // ref={inputRef}  
       autoComplete="off"
       className="fullscreen-input add-project-input" 
-      // placeholder={placeholder} 
+      placeholder={"Project Name"} 
       type={type} 
     />
     {touched && error && <div className="error">{error}</div>}
@@ -38,7 +37,7 @@ let SingleInputForm = function SingleInputForm(props) {
   return (
     <form onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
       <Field
-        name={formName}
+        name="singleInput"
         type="text"
         component={renderField}
         label={formName}

@@ -21,13 +21,12 @@
   }
   
   export default function validate(getState) {
-    return ({ projectName }) => {
-      
+    return ({ singleInput }) => {
       const projectNames = getState().projects.items.map(project => project.projectName);
       const error = {};
       
-      if (isDuplicate(projectName, projectNames)) {
-        error.singleInput = `A project with the name '${projectName}' already exists`;
+      if (isDuplicate(singleInput, projectNames)) {
+        error.singleInput = `A project with the name '${singleInput}' already exists`;
       }
       
       return error;
