@@ -8,7 +8,6 @@ export default function callOnTargetUpdate(getTargetInfo, onTargetUpdate) {
         const { targetPropKey, targetValue } = getTargetInfo(this.props); 
         if ((prevProps[targetPropKey] !== targetValue) && (this.props[targetPropKey]) === targetValue) {
           
-          console.log('called')
           onTargetUpdate(this.props);
         }
       }

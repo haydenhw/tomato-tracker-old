@@ -7,10 +7,15 @@ const defaultState = {
 
 export function customForm(state=defaultState, action) {
   switch(action.type) {
-    case "REMOTE_SUBMIT"://actions.REMOTE_SUBMIT:
+    case actions.REMOTE_SUBMIT:
       return {
         ...state,
         remoteSubmitForm: state.remoteSubmitForm ? null : action.formSelector
+      };
+      case actions.POST_PROJECT_SUCCESS:
+      return {
+        ...state,
+        remoteSubmit: null
       };
     case actions.ADD_TEMP_TASK:
       return {

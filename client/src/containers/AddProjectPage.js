@@ -13,9 +13,11 @@ import store from '../redux-files/store';
 
 let AddProjectPage = class extends Component {
   handleNewProjectSubmit({ singleInput: projectName }) {
-    const { newTasks, postProject } = this.props;
+    const { newTasks, postProject, remoteSubmit } = this.props;
     
     if (!hasAnyValue(projectName)) {
+      remoteSubmit(null);
+      
       throw new SubmissionError({
         singleInput: 'Project name is required' 
       })
@@ -26,7 +28,7 @@ let AddProjectPage = class extends Component {
   
   handleRemoteSubmit() {
     const { remoteSubmit } = this.props;
-    console.log('hellola')
+    
     remoteSubmit('ADD_PROJECT');
   }  
   
