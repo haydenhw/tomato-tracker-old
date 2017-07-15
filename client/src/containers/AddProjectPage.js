@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 
 import { postProject, remoteSubmit } from '../actions/indexActions';
-import validate, { hasAnyValue } from '../helpers/validate';
+import { hasAnyValue } from '../helpers/validate';
+import { routeToProjects } from '../helpers/route';
 
-import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
-
-import store from '../redux-files/store';
+import RemoteSubmitForm from './RemoteSubmitForm';
+import SingleInputForm from '../components/SingleInputForm';
 
 let AddProjectPage = class extends Component {
   handleNewProjectSubmit({ singleInput: projectName }) {
@@ -34,29 +34,35 @@ let AddProjectPage = class extends Component {
   
   render() {
     return(
-      <div>
+      <div className="fullscreen-form form-page">
+        <h2>New Project</h2>
         <ProjectTaskForm 
-          handleNewProjectSubmit={this.handleNewProjectSubmit.bind(this)}
-          isDefaultTaskSubmitDisabled={true}
-          handleRemoteSubmit={this.handleRemoteSubmit.bind(this)}
-        >
-          <SingleInputForm
-            formName={"projectName"}
-            placeholder={"Project Name"}
-            shouldRenderSubmitButton={false}
-          />
+          handleSubmit={this.handleRemoteSubmit.bind(this)}
+          handleCancel={routeToProjects}
+          label="Project Name"
+        >  
+          <RemoteSubmitForm
+            onTargetUpdate={this.handleNewProjectSubmit.bind(this)}
+            targetValue="ADD_PROJECT" 
+            targetPropKey="remoteSubmitForm"
+          >
+            <SingleInputForm
+              formName={"projectName"}
+              placeholder={"Project Name"}
+              shouldRenderSubmitButton={false}
+            />
+          </RemoteSubmitForm>         
         </ProjectTaskForm>  
       </div>
-      );
-    }
+    );
   }
+}
   
   const mapStateToProps = state => {
-    const { projects, customForm } = state;
+    const { customForm } = state;
     const { tasks: newTasks } = customForm.taskForm;
         
     return {
-      queuedProject: projects.queue,
       newTasks
     }
   }

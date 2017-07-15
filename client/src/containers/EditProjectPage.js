@@ -1,20 +1,20 @@
 import  React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import shortid from 'shortid';
 import { SubmissionError } from 'redux-form';
-import { addTask, deleteTask, setSelectedProject, updateProject, updateTasks } from '../actions/indexActions';
+import { addTask, deleteTask, setSelectedProject, remoteSubmit, updateProject, updateTasks } from '../actions/indexActions';
 
 import { hasAnyValue } from '../helpers/validate';
+import { routeToProjects } from '../helpers/route'
 
 import EditProjectNameForm from '../components/EditProjectNameForm';
 import ProjectTaskForm from './ProjectTaskForm';
 
 class EditProjectPage extends Component {
-  constructor() {
-    super()
-    
-  }
+  // constructor() {
+  //   super()
+  //   
+  // }
   
   static defaultProps = {
     projects: []
@@ -38,7 +38,18 @@ class EditProjectPage extends Component {
       
     updateProject(project, projectName);  
   }
+    
+  handleNewChangesSubmit() {
+    this.handleEditProjectName();
+    this.handleTasksSubmit();
+  }  
   
+  handleRemoteSubmitTasksForm() {
+    const { remoteSubmit } = this.props;
+    
+    remoteSubmit('ADD_TASKS');  
+  }  
+    
   handleTasksSubmit({ tasks }) {
     const { updateTasks, selectedProjectId } = this.props;
     updateTasks(selectedProjectId, tasks);
@@ -49,15 +60,19 @@ class EditProjectPage extends Component {
     const { projectId } = params;
     
     return (
-    <div className="fullscreen-form form-page">
-      <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
-      <ProjectTaskForm showTasksForSelectedProject={true}>
-        <EditProjectNameForm 
-          project={selectedProject}
-          handleEditProjectSubmit={this.handleEditProjectName.bind(this)}
-        />
-      </ProjectTaskForm>
-    </div>  
+      <div className="fullscreen-form form-page">
+        <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
+        <ProjectTaskForm 
+          handleSubmit={this.handleRemoteSubmitTasksForm.bind(this)}
+          handleCancel={routeToProjects}
+          showTasksForSelectedProject={true}
+        >
+          <EditProjectNameForm 
+            project={selectedProject}
+            handleEditProjectSubmit={this.handleEditProjectName.bind(this)}
+          />
+        </ProjectTaskForm>
+      </div>  
     );
   }
   
@@ -83,6 +98,7 @@ EditProjectPage.propTypes = {
 export default connect(mapStateToProps, { 
   addTask,
   deleteTask,
+  remoteSubmit,
   setSelectedProject,
   updateProject,
   updateTasks

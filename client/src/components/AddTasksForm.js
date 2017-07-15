@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 
+import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
+
 import List from './List';
 
 const renderField = ({
@@ -25,7 +27,7 @@ const renderField = ({
     </div>
   );
 
-export default class AddTasksForm extends Component {
+let AddTasksForm = class extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
       const { handleSubmit, handleFormSubmit } = this.props;
@@ -60,6 +62,20 @@ export default class AddTasksForm extends Component {
     );
   }
 }  
+ 
+const targetInfo = props => {
+  return {
+    targetValue: "ADD_TASKS",
+    targetPropKey: "remoteSubmitForm" 
+  } 
+}
+
+const onTargetUpdate = props => {
+  const { handleSubmit, onTargetUpdate } = props;
+    handleSubmit(onTargetUpdate)();
+}
+ 
+export default AddTasksForm = callOnTargetUpdate(targetInfo, onTargetUpdate)(AddTasksForm);
  
 AddTasksForm.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
