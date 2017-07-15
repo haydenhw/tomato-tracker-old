@@ -42,7 +42,6 @@ let AddTasksFormContainer = class extends Component {
   
   handleAddTask({ taskName }) {
     const { addTempTask, change, tempTasks: tasks } = this.props;
-    
     const taskNames = tasks.map(task => task.taskName);
     
     if (!hasAnyValue(taskName)) {

@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import List from './List';
 
-const renderField = ({
+let renderField = (placeholder, inputRef) => ({
   input,
   label,
   type,
@@ -16,16 +16,33 @@ const renderField = ({
       <input
         {...input}
         // ref={inputRef}
-        placeholder="Task name"
+        placeholder={placeholder}
         type={type}
-        onBlur={() => {}}
+      //  onBlur={() => {}}
        />
       {touched && (error && <div className="error">{error}</div>)}
       </div>
     </div>
   );
 
+
+
 export default class AddTasksForm extends Component {
+  componentWillMount() {
+    this.renderField = renderField('Test place',  el => this.inputRef = el);
+    console.log('hello')
+    
+    
+  }
+  
+  
+  componentDidMount() {
+    // this.inputRef.focus();
+    
+    
+  }
+  
+  
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
       const { handleSubmit, handleFormSubmit } = this.props;
@@ -51,7 +68,7 @@ export default class AddTasksForm extends Component {
         <label htmlFor="taskName">Tasks</label>
         <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
         <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-          <Field name="taskName" component={renderField}/>
+          <Field name="taskName" component={this.renderField}/>
         </form>
           {!(shouldRenderSubmitButton === false) && 
             <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
