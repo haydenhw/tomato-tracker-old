@@ -40,8 +40,13 @@ class EditProjectPage extends Component {
   }
     
   handleNewChangesSubmit() {
+    const { remoteSubmit } = this.props;
+    console.log('asdf')
+    
     this.handleEditProjectName();
     this.handleTasksSubmit();
+    remoteSubmit(null);
+    routeToProjects();
   }  
   
   handleRemoteSubmitTasksForm() {
@@ -63,8 +68,9 @@ class EditProjectPage extends Component {
       <div className="fullscreen-form form-page">
         <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
         <ProjectTaskForm 
-          handleSubmit={this.handleRemoteSubmitTasksForm.bind(this)}
           handleCancel={routeToProjects}
+          handleSubmit={this.handleRemoteSubmitTasksForm.bind(this)}
+          shouldDisableTaskFormFocus={true}
           showTasksForSelectedProject={true}
         >
           <EditProjectNameForm 

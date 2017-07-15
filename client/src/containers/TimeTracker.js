@@ -35,9 +35,9 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    const { projects, tasks } = this.props;
-    
-    if (projects.length === 0) {
+    const { isModalActive, projects, tasks } = this.props;
+    // change isModalActive to isOnboardingActive for production  
+    if ((projects.length === 0) && !isModalActive) {
       hashHistory.push('/projects')
     }
       

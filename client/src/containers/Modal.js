@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -29,6 +29,7 @@ function Modal(props) {
   }
   
   const SpecificModal = MODAL_COMPONENTS[modalType];
+  
   return (
     <RootModal className={rootModalClass}>
       <div className={`modal ${modalClass}`} style={style}>

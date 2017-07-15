@@ -24,6 +24,8 @@ let AddProjectPage = class extends Component {
     }
     
     postProject(projectName, newTasks);
+    remoteSubmit(null);
+    routeToProjects();
   } 
   
   handleRemoteSubmit() {

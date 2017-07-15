@@ -17,7 +17,7 @@ let renderField = (placeholder, inputRef) => ({
     <div>
       <input
         {...input}
-        // ref={inputRef}
+        ref={inputRef}
         placeholder={placeholder}
         type={type}
       //  onBlur={() => {}}
@@ -27,23 +27,23 @@ let renderField = (placeholder, inputRef) => ({
     </div>
   );
 
-
-
 let AddTasksForm = class extends Component {
   componentWillMount() {
-    this.renderField = renderField('Test place',  el => this.inputRef = el);
-    console.log('hello')
-    
-    
+    const { shouldDisableFocusOnMount } = this.props;
+    const getRef = !shouldDisableFocusOnMount 
+      ?  el => this.inputRef = el 
+      : () => {};
+      
+    this.renderField = renderField('Add Task', getRef);
   }
-  
   
   componentDidMount() {
-    // this.inputRef.focus();
+    const { shouldDisableFocusOnMount } = this.props;
     
-    
+    if (!shouldDisableFocusOnMount) {
+      this.inputRef.focus();
+    }
   }
-  
   
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {

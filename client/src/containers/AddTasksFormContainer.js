@@ -63,11 +63,12 @@ let AddTasksFormContainer = class extends Component {
   deleteUnwantedTasks(tasks) {
     // delete tasks that do not already exist in the database
     // we assume that taks without the database created id '_id' do not yet exist in the database  
-      
-    const { selectedProject } = this.props;
+    
+    const { deleteTask, selectedProject } = this.props;
     
     tasks.filter((task) => task.shouldDelete && task._id)
       .forEach((task) => deleteTask(selectedProject, task));
+      
   }
   
   postUnsavedTasks(tasks) {
@@ -82,14 +83,13 @@ let AddTasksFormContainer = class extends Component {
           ? postTask(selectedProjectDatabaseId, task)
           : console.error('database id has not yet updated')
       });  
-      
   }
   
   handleFormSubmit (){
     const { 
-      selectedProjectId,
       isOnboardingActive,
       updateTasks, 
+      selectedProjectId,
       toggleModal, 
       toggleOnboardMode,
       formTasks: tasks, 
@@ -134,7 +134,7 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { handleSubmit, shouldRenderSubmitButton, formTasks } = this.props;
+    const { formTasks, handleSubmit, shouldDisableFocusOnMount, shouldRenderSubmitButton } = this.props;
     
     return (
       
@@ -145,6 +145,7 @@ let AddTasksFormContainer = class extends Component {
           handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
           handleSubmit={handleSubmit}
           handleTaskSubmit={this.handleAddTask.bind(this)}
+          shouldDisableFocusOnMount={shouldDisableFocusOnMount}
           renderFormTask={this.renderFormTask.bind(this)}
           shouldRenderSubmitButton={shouldRenderSubmitButton}
           tasks={formTasks}

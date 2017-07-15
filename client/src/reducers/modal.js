@@ -1,10 +1,10 @@
 import * as actions from 'actions/indexActions';
 
-import { modalType, renderFormModal } from '../config'
+import { modalType, isOnboardingActive, renderFormModal } from '../config'
 
 const defaultState = {
+  isOnboardingActive, 
   isModalActive: renderFormModal,
-  isOnboardingActive: false, 
   modalType: modalType,
   modalProps: null,
   rootModalClass: 'unfold'    

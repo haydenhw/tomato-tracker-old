@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
 
 import {
   deleteTask,
@@ -16,68 +15,63 @@ import {
 import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
+  render() {
+    const { 
+      changeActiveEditMenu,
+      decrementTimer,
+      deleteTask,
+      hasFetched,
+      isFetching,
+      isModalActive,
+      isTimerActive,
+      projects,
+      selectedProjectId,
+      setSelectedProject,
+      toggleAddTasksForm, 
+      toggleEditTaskForm
+    } = this.props;
   
-componentWillMount() {
-  const { hasFetched, projects } = this.props;
-// console.log(hasFetched  !projects.length)  
-  if (hasFetched && !projects.length) {
-    hashHistory.push('/projects')
+    if (!hasFetched) {
+      return <div className="loader">Loading...</div>
+    }
+    
+    const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
+    const selectedProject = (selectedProjectIndex !== null && !isNaN(selectedProjectIndex)) && projects[selectedProjectIndex];
+    const selectedTasks = selectedProject && selectedProject.tasks;
+    
+    return (
+      <div className="time-tracker-page-container">
+        <TimeTracker
+          changeActiveEditMenu={changeActiveEditMenu}
+          decrementTimer={decrementTimer}
+          deleteTask={deleteTask}
+          projects={projects}
+          hasFetched={hasFetched}
+          isFetching={isFetching}
+          isModalActive={isModalActive}
+          isTimerActive={isTimerActive}
+          selectedProject={selectedProject || null}
+          setSelectedProject={setSelectedProject}
+          tasks={selectedTasks || []}
+          toggleAddTasksForm={toggleAddTasksForm} 
+          toggleEditTaskForm={toggleEditTaskForm}
+        />
+      </div>
+    );
   }
-}
-
-render() {
-  const { 
-    changeActiveEditMenu,
-    decrementTimer,
-    deleteTask,
-    hasFetched,
-    isFetching,
-    isTimerActive,
-    projects,
-    selectedProjectId,
-    setSelectedProject,
-    toggleAddTasksForm, 
-    toggleEditTaskForm
-  } = this.props;
-  
-  if (!hasFetched) {
-    return <div className="loader">Loading...</div>
-  }
-  
-  const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
-  const selectedProject = (selectedProjectIndex !== null && !isNaN(selectedProjectIndex)) && projects[selectedProjectIndex];
-  const selectedTasks = selectedProject && selectedProject.tasks;
-  
-  return (
-    <div className="time-tracker-page-container">
-      <TimeTracker
-        changeActiveEditMenu={changeActiveEditMenu}
-        decrementTimer={decrementTimer}
-        deleteTask={deleteTask}
-        projects={projects}
-        hasFetched={hasFetched}
-        isFetching={isFetching}
-        isTimerActive={isTimerActive}
-        selectedProject={selectedProject || null}
-        setSelectedProject={setSelectedProject}
-        tasks={selectedTasks || []}
-        toggleAddTasksForm={toggleAddTasksForm} 
-        toggleEditTaskForm={toggleEditTaskForm}
-      />
-    </div>
-  );
-}
 }
 
 const mapStateToProps = state => {
-  const { selectedProjectId, projects, timer } = state;
+  const {  modal, projects, timer, selectedProjectId } = state;
   const { hasFetched, isFetching } = projects;
+  const { isModalActive } = modal;
   const { isTimerActive } = timer;
   
   return {
     selectedProjectId,
     hasFetched, 
     isFetching,
+    isModalActive,
     isTimerActive, 
     projects: projects.items
   }

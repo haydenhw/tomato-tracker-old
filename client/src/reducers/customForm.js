@@ -12,11 +12,11 @@ export function customForm(state=defaultState, action) {
         ...state,
         remoteSubmitForm: state.remoteSubmitForm ? null : action.formSelector
       };
-      case actions.POST_PROJECT_SUCCESS:
-      return {
-        ...state,
-        remoteSubmit: null
-      };
+      // case actions.POST_PROJECT_SUCCESS:
+      // return {
+      //   ...state,
+      //   remoteSubmit: null
+      // };
     case actions.ADD_TEMP_TASK:
       return {
         ...state,
