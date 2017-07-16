@@ -7,8 +7,10 @@ import { addTask, deleteTask, setSelectedProject, remoteSubmit, updateProject, u
 import { hasAnyValue } from '../helpers/validate';
 import { routeToProjects } from '../helpers/route'
 
-import EditProjectNameForm from '../components/EditProjectNameForm';
+import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
+import RemoteSubmitForm from './RemoteSubmitForm';
+
 
 class EditProjectPage extends Component {
   // constructor() {
@@ -27,39 +29,57 @@ class EditProjectPage extends Component {
     setSelectedProject(projectId);
   }
   
-  handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
-    const { updateProject } = this.props;
-      
-      if (!hasAnyValue(projectName)) {
-        throw new SubmissionError({
-          projectName: 'Project name is required' 
-        })
-      }
-      
-    updateProject(project, projectName);  
-  }
+  handleEditProjectSubmit = (project) => ({ projectName }) => {
+    const { tasks, updateProject, remoteSubmit } = this.props;
     
-  handleNewChangesSubmit() {
-    const { remoteSubmit } = this.props;
-    console.log('asdf')
+    if (!hasAnyValue(projectName)) {
+      remoteSubmit(null);
+      
+      throw new SubmissionError({
+        singleInput: 'Project name is required' 
+      })
+    }
     
-    this.handleEditProjectName();
-    this.handleTasksSubmit();
+    updateProject(project, projectName);
+    
     remoteSubmit(null);
+    remoteSubmit('ADD_TASKS');
+    remoteSubmit(null);  
     routeToProjects();
-  }  
+  } 
   
-  handleRemoteSubmitTasksForm() {
+  handleRemoteSubmit() {
     const { remoteSubmit } = this.props;
     
-    remoteSubmit('ADD_TASKS');  
+    remoteSubmit('ADD_PROJECT');
   }  
+  // handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
+  //   const { updateProject } = this.props;
+  //     
+  //     if (!hasAnyValue(projectName)) {
+  //       throw new SubmissionError({
+  //         projectName: 'Project name is required' 
+  //       })
+  //     }
+  //     
+  //   updateProject(project, projectName);  
+  // }
     
-  handleTasksSubmit({ tasks }) {
-    const { updateTasks, selectedProjectId } = this.props;
-    updateTasks(selectedProjectId, tasks);
-  }
+  // handleNewChangesSubmit() {
+  //   const { remoteSubmit } = this.props;
+  //   console.log('asdf')
+  //   
+  //   this.handleEditProjectName();
+  //   this.handleTasksSubmit();
+  //   remoteSubmit(null);
+  // 
+  // handleTasksSubmit({ tasks }) {
+  //   const { updateTasks, selectedProjectId } = this.props;
+  //   updateTasks(selectedProjectId, tasks);
   
+  
+  // }
+
   render() {
     const { selectedProject, params } = this.props;
     const { projectId } = params;
@@ -69,36 +89,38 @@ class EditProjectPage extends Component {
         <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
         <ProjectTaskForm 
           handleCancel={routeToProjects}
-          handleSubmit={this.handleRemoteSubmitTasksForm.bind(this)}
+          handleSubmit={this.handleRemoteSubmit.bind(this)}
           shouldDisableTaskFormFocus={true}
           showTasksForSelectedProject={true}
         >
-          <EditProjectNameForm 
-            project={selectedProject}
-            handleEditProjectSubmit={this.handleEditProjectName.bind(this)}
-          />
+          {/* <RemoteSubmitForm
+            onTargetUpdate={this.handleEditProjectSubmit(selectedProject)}
+            targetValue="ADD_PROJECT" 
+            targetPropKey="remoteSubmitForm"
+          > */}
+            <SingleInputForm
+              formName={"projectName"}
+              placeholder={"Project Name"}
+              shouldRenderSubmitButton={false}
+            />
+          {/* </RemoteSubmitForm>          */}
         </ProjectTaskForm>
       </div>  
     );
   }
-  
-  }
-  const mapStateToProps = (state) => {
-    const { selectedProjectId, projects } = state;
-    
-    const selectedProject = state.projects.length && selectedProjectId 
-    ? projects.items.find((project) => project.shortId === selectedProjectId).projectName
-    : 'No Projects Loaded'
-    
-    return {
-      projects,
-      selectedProjectId,
-      selectedProject: { projectName: 'tester' }, 
-    }
 }
-
-EditProjectPage.propTypes = {
-  projects: PropTypes.object
+const mapStateToProps = (state) => {
+  const { selectedProjectId, projects } = state;
+  
+  const selectedProject = state.projects.length && selectedProjectId 
+  ? projects.items.find((project) => project.shortId === selectedProjectId).projectName
+  : 'No Projects Loaded'
+  
+  return {
+    projects,
+    selectedProjectId,
+    selectedProject: { projectName: 'tester' }, 
+  }
 }
 
 export default connect(mapStateToProps, { 
@@ -109,3 +131,7 @@ export default connect(mapStateToProps, {
   updateProject,
   updateTasks
 })(EditProjectPage);  
+
+EditProjectPage.propTypes = {
+  projects: PropTypes.object
+}
