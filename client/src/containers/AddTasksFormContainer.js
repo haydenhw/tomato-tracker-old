@@ -134,7 +134,7 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { handleSubmit, handleFormSubmit, shouldSubmit, shouldRenderSubmitButton, formTasks } = this.props;
+    const { handleSubmit, shouldRenderSubmitButton, formTasks } = this.props;
     
     return (
       
@@ -165,6 +165,7 @@ const mapStateToProps = (state, ownProps) => {
   const tasks = selectedProject && ownProps.showTasksForSelectedProject !== false
     ? selectedProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
+    
   return {
     selectedProject,
     selectedProjectId,
@@ -174,6 +175,7 @@ const mapStateToProps = (state, ownProps) => {
     formTasks
   }
 }
+
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
 })(AddTasksFormContainer);
