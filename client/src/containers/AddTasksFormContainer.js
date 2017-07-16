@@ -154,6 +154,7 @@ const mapStateToProps = (state, ownProps) => {
     tempTasks
   }
 }
+
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
 })(AddTasksFormContainer);

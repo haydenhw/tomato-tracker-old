@@ -13,6 +13,7 @@ const mapStateToProps = state => {
   const { remoteSubmitForm } = state.customForm;
     
   return {
+    initialState: {singleInput: 'ripper'},
     remoteSubmitForm
   }
 }

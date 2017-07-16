@@ -17,7 +17,7 @@ export default class ProjectTaskForm extends Component {
   render() {
     const {
       children,
-      handleNewProjectSubmit,
+      handleFormSubmit,
       handleRemoteSubmit,
       showTasksForSelectedProject,
      } = this.props;
@@ -27,7 +27,7 @@ export default class ProjectTaskForm extends Component {
         <label>Project Name</label>
         <RemoteSubmitForm
           //handleProjectSubmit={({ projectName }) => { console.log(projectName)}} 
-          onTargetUpdate={handleNewProjectSubmit}
+          onTargetUpdate={handleFormSubmit}
           targetValue="ADD_PROJECT" 
           targetPropKey="remoteSubmitForm"
         >
