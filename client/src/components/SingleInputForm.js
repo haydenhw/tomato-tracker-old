@@ -23,7 +23,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 )
 
-
 let SingleInputForm = function SingleInputForm(props) {
   const {
     formName,
