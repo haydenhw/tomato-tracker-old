@@ -28,6 +28,10 @@ let renderField = (placeholder, inputRef) => ({
   );
 
 let AddTasksForm = class extends Component {
+  componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.remoteSubmitForm, '**********');
+  }
+  
   componentWillMount() {
     const { shouldDisableFocusOnMount } = this.props;
     const getRef = !shouldDisableFocusOnMount 
@@ -46,6 +50,7 @@ let AddTasksForm = class extends Component {
   }
   
   componentDidUpdate(prevProps) {
+    //  console.log(this.props.remoteSubmitForm, 'updating!');
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
       const { handleSubmit, handleFormSubmit } = this.props;
       

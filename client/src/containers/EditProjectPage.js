@@ -24,6 +24,15 @@ class EditProjectPage extends Component {
     projects: []
   }
   
+  componentWillMount() {
+    this.props.remoteSubmit(null);    
+  }  
+  
+  componentDidUpdate(prevProps){ 
+    if (this.props.remoteSubmitForm === "ADD_TASKS" && prevProps.remoteSubmitForm === "ADD_TASKS") {
+      routeToProjects();
+    } 
+  }
   
   handleEditProjectSubmit = (project) => ({ singleInput: projectName }) => {
     const { updateProject, remoteSubmit } = this.props;
@@ -37,14 +46,19 @@ class EditProjectPage extends Component {
     }
     
     updateProject(project, projectName);
-    routeToProjects();
+    remoteSubmit('ADD_TASKS');
+    // remoteSubmit(null);
+    // routeToProjects();
   } 
   
   handleRemoteSubmit() {
     const { remoteSubmit } = this.props;
     
     remoteSubmit('ADD_PROJECT');
-    remoteSubmit('ADD_TASKS');
+    
+    
+    // setTimeout(() => remoteSubmit('ADD_TASKS'), 100)
+    
   }  
   // handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
   //   const { updateProject } = this.props;
@@ -98,6 +112,7 @@ class EditProjectPage extends Component {
             onTargetUpdate={this.handleEditProjectSubmit}
             targetPropKey="remoteSubmitForm"
             targetValue="ADD_PROJECT" 
+            form={'project form'}
           />
         </ProjectTaskForm>
       </div>  

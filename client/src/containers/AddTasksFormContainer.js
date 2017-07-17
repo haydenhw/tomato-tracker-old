@@ -94,7 +94,7 @@ let AddTasksFormContainer = class extends Component {
       toggleOnboardMode,
       formTasks: tasks, 
     } = this.props;
-    console.log('submitting')
+    // console.log('submitting')
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
     
     if (!tasksToSubmit.length) {
@@ -149,6 +149,7 @@ let AddTasksFormContainer = class extends Component {
           renderFormTask={this.renderFormTask.bind(this)}
           shouldRenderSubmitButton={shouldRenderSubmitButton}
           tasks={formTasks}
+          form={'tasks form'}
         />
       </RemoteSubmitForm>
     );
