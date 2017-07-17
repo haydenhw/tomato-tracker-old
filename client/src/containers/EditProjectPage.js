@@ -9,28 +9,24 @@ import { routeToProjects } from '../helpers/route'
 
 import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
-import RemoteSubmitForm from './RemoteSubmitForm';
-
 
 class EditProjectPage extends Component {
-  // constructor() {
-  //   super()
-  //   
-  // }
+  constructor(props) {
+    super(props)
+    
+    const { projects, selectedProject } = props;
+    
+    this.handleEditProjectSubmit = this.handleEditProjectSubmit(selectedProject); 
+    this.handleRemoteSubmit = this.handleRemoteSubmit.bind(this);
+  }
   
   static defaultProps = {
     projects: []
   }
   
-  componentDidMount() {
-    const { params, setSelectedProject } = this.props;
-    const { projectId } = params;
-    
-    setSelectedProject(projectId);
-  }
   
-  handleEditProjectSubmit = (project) => ({ projectName }) => {
-    const { tasks, updateProject, remoteSubmit } = this.props;
+  handleEditProjectSubmit = (project) => ({ singleInput: projectName }) => {
+    const { updateProject, remoteSubmit } = this.props;
     
     if (!hasAnyValue(projectName)) {
       remoteSubmit(null);
@@ -41,10 +37,6 @@ class EditProjectPage extends Component {
     }
     
     updateProject(project, projectName);
-    
-    remoteSubmit(null);
-    remoteSubmit('ADD_TASKS');
-    remoteSubmit(null);  
     routeToProjects();
   } 
   
@@ -52,6 +44,7 @@ class EditProjectPage extends Component {
     const { remoteSubmit } = this.props;
     
     remoteSubmit('ADD_PROJECT');
+    remoteSubmit('ADD_TASKS');
   }  
   // handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
   //   const { updateProject } = this.props;
@@ -81,45 +74,49 @@ class EditProjectPage extends Component {
   // }
 
   render() {
-    const { selectedProject, params } = this.props;
-    const { projectId } = params;
+    const { remoteSubmitForm, selectedProject } = this.props;
+    
+    if (!selectedProject) {
+      return null; 
+    }  
     
     return (
       <div className="fullscreen-form form-page">
         <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
         <ProjectTaskForm 
           handleCancel={routeToProjects}
-          handleSubmit={this.handleRemoteSubmit.bind(this)}
+          handleSubmit={this.handleRemoteSubmit}
           shouldDisableTaskFormFocus={true}
           showTasksForSelectedProject={true}
         >
-          {/* <RemoteSubmitForm
-            onTargetUpdate={this.handleEditProjectSubmit(selectedProject)}
-            targetValue="ADD_PROJECT" 
+          <SingleInputForm
+            formName={"projectName"}
+            initialValues={{ singleInput: selectedProject.projectName }}
+            placeholder={"Project Name"}
+            remoteSubmitForm={remoteSubmitForm}
+            shouldRenderSubmitButton={false}
+            onTargetUpdate={this.handleEditProjectSubmit}
             targetPropKey="remoteSubmitForm"
-          > */}
-            <SingleInputForm
-              formName={"projectName"}
-              placeholder={"Project Name"}
-              shouldRenderSubmitButton={false}
-            />
-          {/* </RemoteSubmitForm>          */}
+            targetValue="ADD_PROJECT" 
+          />
         </ProjectTaskForm>
       </div>  
     );
   }
 }
 const mapStateToProps = (state) => {
-  const { selectedProjectId, projects } = state;
+  const { customForm, selectedProjectId, projects } = state;
+  const { remoteSubmitForm } = customForm; 
   
-  const selectedProject = state.projects.length && selectedProjectId 
-  ? projects.items.find((project) => project.shortId === selectedProjectId).projectName
-  : 'No Projects Loaded'
+  const selectedProject = state.projects.items.length > 0 && selectedProjectId 
+  ? projects.items.find((project) => project.shortId === selectedProjectId)
+  : null 
   
   return {
     projects,
+    remoteSubmitForm, 
     selectedProjectId,
-    selectedProject: { projectName: 'tester' }, 
+    selectedProject
   }
 }
 

@@ -83,7 +83,7 @@ SingleInputForm = callOnTargetUpdate(targetInfo, onTargetUpdate)(SingleInputForm
 
 export default reduxForm({
   form: 'singleInput', 
-  validate: validate(store.getState),
+  // validate: validate(store.getState),
 })(SingleInputForm)
 
 // SingleInputForm.propTypes = {

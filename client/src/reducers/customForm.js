@@ -10,7 +10,7 @@ export function customForm(state=defaultState, action) {
     case actions.REMOTE_SUBMIT:
       return {
         ...state,
-        remoteSubmitForm: state.remoteSubmitForm ? null : action.formSelector
+        remoteSubmitForm:  state.remoteSubmitForm  === action.formSelector ? null : action.formSelector
       };
       // case actions.POST_PROJECT_SUCCESS:
       // return {

@@ -20,9 +20,10 @@
       return true;
   }
   
-  export default function validate(getState) {
+  export default function validate(projects) {
     return ({ singleInput }) => {
-      const projectNames = getState().projects.items.map(project => project.projectName);
+      
+      const projectNames = projects.map(project => project.projectName);
       const error = {};
       
       if (isDuplicate(singleInput, projectNames)) {

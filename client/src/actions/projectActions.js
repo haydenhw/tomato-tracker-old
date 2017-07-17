@@ -164,7 +164,7 @@ export function postProjectWithTasks(tasks) {
 
 export function updateProject(project, newName) {
   return (dispatch) => {
-    // console.log(project, newName)
+    
     dispatch(editProjectName(project.shortId, newName)); 
       
     fetch(
@@ -188,11 +188,11 @@ export function postTask(projectId, task) {
     fetch(
       `projects/${projectId}`,
       {
-          method: "POST",
-          body: JSON.stringify(task),
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+        method: "POST",
+        body: JSON.stringify(task),
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         })
       })
       .then((res) => {

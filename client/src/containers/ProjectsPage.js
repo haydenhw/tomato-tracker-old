@@ -42,6 +42,8 @@ class ProjectsPage extends Component {
   
   handleEditOptionClick = (project) => (evt) => {
     evt.stopPropagation()
+    const { setSelectedProject } = this.props;
+    setSelectedProject(project.shortId);
     hashHistory.push(`/projects/${project.shortId}`)
   }  
   

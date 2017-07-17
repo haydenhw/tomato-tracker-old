@@ -94,7 +94,7 @@ let AddTasksFormContainer = class extends Component {
       toggleOnboardMode,
       formTasks: tasks, 
     } = this.props;
-    
+    console.log('submitting')
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
     
     if (!tasksToSubmit.length) {
@@ -176,6 +176,7 @@ const mapStateToProps = (state, ownProps) => {
     formTasks
   }
 }
+
 
 AddTasksFormContainer = reduxForm({
   form: 'addTasks',
