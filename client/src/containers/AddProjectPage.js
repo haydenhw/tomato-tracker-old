@@ -35,6 +35,8 @@ let AddProjectPage = class extends Component {
   }  
   
   render() {
+    const { remoteSubmitForm } = this.props;
+    
     return(
       <div className="fullscreen-form form-page">
         <h2>New Project</h2>
@@ -43,17 +45,15 @@ let AddProjectPage = class extends Component {
           handleCancel={routeToProjects}
           label="Project Name"
         >  
-          <RemoteSubmitForm
-            onTargetUpdate={this.handleNewProjectSubmit.bind(this)}
-            targetValue="ADD_PROJECT" 
-            targetPropKey="remoteSubmitForm"
-          >
             <SingleInputForm
               formName={"projectName"}
               placeholder={"Project Name"}
+              remoteSubmitForm={remoteSubmitForm}
               shouldRenderSubmitButton={false}
+              onTargetUpdate={this.handleNewProjectSubmit.bind(this)}
+              targetValue="ADD_PROJECT" 
+              targetPropKey="remoteSubmitForm"
             />
-          </RemoteSubmitForm>         
         </ProjectTaskForm>  
       </div>
     );
@@ -62,7 +62,8 @@ let AddProjectPage = class extends Component {
   
   const mapStateToProps = state => {
     const { customForm } = state;
-    const { tasks: newTasks } = customForm.taskForm;
+    const { remoteSubmitForm, taskForm } = customForm;
+    const { tasks: newTasks} = taskForm;
         
     return {
       newTasks

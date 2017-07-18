@@ -1,7 +1,7 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
-  taskForm: [],
+  taskForm: { tasks: [] },
   remoteSubmitForm: null
 }
 
