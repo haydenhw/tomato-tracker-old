@@ -1,5 +1,5 @@
 const renderModal = true; 
-const productionMode = false;
+const productionMode = true;
 
 export const renderFormModal = productionMode || renderModal;
 export const modalType = productionMode ? "WELCOME" : "ADD_TASKS";  

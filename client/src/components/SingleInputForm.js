@@ -8,20 +8,23 @@ import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label />
-    <input
-      {...input} 
-      autoFocus
-      autoComplete="off"
-      className="fullscreen-input add-project-input" 
-      placeholder={"Project Name"} 
-      type={type} 
-    />
-    {touched && error && <div className="error">{error}</div>}
-  </div>
-)
+const renderField = (props) => {
+  
+  const { input, type, meta: { touched, error }} = props;
+  return (
+    <div>
+      <input
+        {...input} 
+        autoFocus
+        autoComplete="off"
+        className="fullscreen-input add-project-input" 
+        placeholder={"Project Name"} 
+        type={type} 
+      />
+      {touched && error && <div className="error">{error}</div>}
+    </div>
+  )
+} 
 
 let SingleInputForm = function SingleInputForm(props) {
   const {
@@ -39,7 +42,6 @@ let SingleInputForm = function SingleInputForm(props) {
         name="singleInput"
         type="text"
         component={renderField}
-        label={formName}
       />
       {shouldRenderSubmitButton && 
         <button className="form-button fullscreen-submit" onClick={handleSubmit(handleFormSubmit.bind(this))}>Continue</button>
