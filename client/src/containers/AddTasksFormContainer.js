@@ -29,9 +29,12 @@ let AddTasksFormContainer = class extends Component {
   // getInputRef(el) { return this.inputRef= el } 
   
   componentDidMount() {
-    const { setTempTasks, tasks } = this.props;
+    const { setTempTasks, showTasksForSelectedProject, tasks } = this.props;
     
-    setTempTasks(tasks);
+    if (showTasksForSelectedProject) {
+      console.log('fdasfd')
+      setTempTasks(tasks);
+    }
   }
   
   handleAddTask({ taskName }) {

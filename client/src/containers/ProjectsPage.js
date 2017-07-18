@@ -8,6 +8,7 @@ import { secondsToHMMSS } from '../helpers/time';
 import {
   addProject,
   changeActiveEditMenu,
+  setTempTasks,
   deleteProject,
   setSelectedProject,
   updateProjectName
@@ -48,6 +49,8 @@ class ProjectsPage extends Component {
   }  
   
   handleAddButtonClick() {
+    const { setTempTasks } = this.props;
+    setTempTasks([]);
     hashHistory.push('/projects/new');
   }
   
@@ -165,6 +168,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { 
   addProject,
   changeActiveEditMenu,
+  setTempTasks,
   deleteProject,
   setSelectedProject,
   updateProjectName

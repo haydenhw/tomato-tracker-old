@@ -17,7 +17,8 @@ export default class ProjectTaskForm extends Component {
       handleSubmit,
       handleCancel,
       label,
-      shouldDisableTaskFormFocus
+      shouldDisableTaskFormFocus,
+      showTasksForSelectedProject
      } = this.props;
      
     return (
@@ -27,7 +28,7 @@ export default class ProjectTaskForm extends Component {
         <AddTasksFormContainer
           shouldDisableFocusOnMount={true}
           shouldRenderSubmitButton={false}
-          // showTasksForSelectedProject={false || showTasksForSelectedProject}
+          showTasksForSelectedProject={showTasksForSelectedProject}
         />  
         <button onClick={handleSubmit}>Submit</button>
         <button onClick={handleCancel}>Cancel</button>
