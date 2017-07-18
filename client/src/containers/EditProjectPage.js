@@ -2,7 +2,7 @@ import  React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-import { addTask, deleteTask, setSelectedProject, remoteSubmit, updateProject, updateTasks } from '../actions/indexActions';
+import { addTask, deleteTask, setSelectedProject, remoteSubmit, updateProjectName, updateTasks } from '../actions/indexActions';
 
 import { hasAnyValue } from '../helpers/validate';
 import { routeToProjects } from '../helpers/route'
@@ -35,7 +35,7 @@ class EditProjectPage extends Component {
   }
   
   handleEditProjectSubmit = (project) => ({ singleInput: projectName }) => {
-    const { updateProject, remoteSubmit, updateTasks, tasks } = this.props;
+    const { updateProjectName, remoteSubmit, updateTasks, tasks } = this.props;
     
     if (!hasAnyValue(projectName)) {
       remoteSubmit(null);
@@ -44,7 +44,8 @@ class EditProjectPage extends Component {
         singleInput: 'Project name is required' 
       })
     }
-    updateProject(project, projectName);
+    
+    updateProjectName(project, projectName);
     updateTasks(project, tasks);
     remoteSubmit(null);
     routeToProjects();
@@ -59,8 +60,8 @@ class EditProjectPage extends Component {
     // setTimeout(() => remoteSubmit('ADD_TASKS'), 100)
     
   }  
-  // handleEditProjectName = (project, updateProject) => ({ projectName }) => { 
-  //   const { updateProject } = this.props;
+  // handleEditProjectName = (project, updateProjectName) => ({ projectName }) => { 
+  //   const { updateProjectName } = this.props;
   //     
   //     if (!hasAnyValue(projectName)) {
   //       throw new SubmissionError({
@@ -68,7 +69,7 @@ class EditProjectPage extends Component {
   //       })
   //     }
   //     
-  //   updateProject(project, projectName);  
+  //   updateProjectName(project, projectName);  
   // }
     
   // handleNewChangesSubmit() {
@@ -141,7 +142,7 @@ export default connect(mapStateToProps, {
   deleteTask,
   setSelectedProject,
   remoteSubmit,
-  updateProject,
+  updateProjectName,
   updateTasks
 })(EditProjectPage);  
 

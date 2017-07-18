@@ -16,7 +16,7 @@ Array.prototype.sliceDelete = function(index) {
 }
 
 
-function updateProjectName() {
+function updateProjectNameName() {
   return projects.mapAndFindById('shortId', '456', (project, index) => {
     
     return Object.assign({}, project, {projectName: 'API Hack'})

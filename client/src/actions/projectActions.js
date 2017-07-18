@@ -186,9 +186,7 @@ export function updateTasks(selectedProject, tasks) {
   return (dispatch, getState) => {
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
     
-    // update appropriate tasks in state 
     dispatch(updateTasksInState(selectedProject.shortId, tasksToSubmit));
-      
     
     postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);    
     deleteSavedTasks(dispatch, selectedProject, tasks);      

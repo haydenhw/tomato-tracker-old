@@ -60,31 +60,6 @@ let AddTasksFormContainer = class extends Component {
     reset('taskName');
   }
   
-  deleteUnwantedTasks(tasks) {
-    // delete tasks that do not already exist in the database
-    // we assume that taks without the database created id '_id' do not yet exist in the database  
-    
-    const { deleteTask, selectedProject } = this.props;
-    
-    tasks.filter((task) => task.shouldDelete && task._id)
-      .forEach((task) => deleteTask(selectedProject, task));
-      
-  }
-  
-  postUnsavedTasks(tasks) {
-    // post tasks that do not already exist in the database
-    // we assume that taks without the database created id '_id' do not yet exist in the database  
-    
-    const { selectedProjectDatabaseId, postTask } = this.props;  
-    
-    tasks.filter((task) => !task._id)
-      .forEach((task) => {
-        selectedProjectDatabaseId 
-          ? postTask(selectedProjectDatabaseId, task)
-          : console.error('database id has not yet updated')
-      });  
-  }
-  
   handleFormSubmit (){
     const { 
       isOnboardingActive,
@@ -94,7 +69,7 @@ let AddTasksFormContainer = class extends Component {
       toggleOnboardMode,
       formTasks: tasks, 
     } = this.props;
-    // console.log('submitting')
+    
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
     
     if (!tasksToSubmit.length) {
@@ -103,12 +78,7 @@ let AddTasksFormContainer = class extends Component {
       })
     }
     
-    // this.postUnsavedTasks(tasksToSubmit);    
-    // this.deleteUnwantedTasks(tasks);      
-    
-    // update appropriate tasks in state 
-    // updateTasks(selectedProjectId, tasksToSubmit);
-    
+    updateTasks(selectedProject, tasks);
     isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
   

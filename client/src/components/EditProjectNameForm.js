@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { hashHistory } from 'react-router';
 
-import { updateProject } from '../actions/indexActions';
+import { updateProjectName } from '../actions/indexActions';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -31,20 +31,20 @@ let EditProjectForm = class extends Component {
     
   componentDidUpdate(prevProps) {
     if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
-      const { handleSubmit, handleEditProjectSubmit, project, updateProject } = this.props;
-      handleSubmit(handleEditProjectSubmit(project, updateProject))();
+      const { handleSubmit, handleEditProjectSubmit, project, updateProjectName } = this.props;
+      handleSubmit(handleEditProjectSubmit(project, updateProjectName))();
     }
   }  
   
-  handleEditProjectSubmit = (project, updateProject) => ({ projectName }) =>  (
-    updateProject(project, projectName)
+  handleEditProjectSubmit = (project, updateProjectName) => ({ projectName }) =>  (
+    updateProjectName(project, projectName)
   );
     
   render() {
-    const { handleSubmit, handleEditProjectSubmit, project, updateProject } = this.props;
+    const { handleSubmit, handleEditProjectSubmit, project, updateProjectName } = this.props;
     
     return (
-      <form onSubmit={handleSubmit(handleEditProjectSubmit(project, updateProject))}>
+      <form onSubmit={handleSubmit(handleEditProjectSubmit(project, updateProjectName))}>
         <div>
           <div>
             <Field
@@ -77,6 +77,6 @@ EditProjectForm = reduxForm({
   form: 'EditProjectForm', // a unique identifier for this form
 })(EditProjectForm);
 
-EditProjectForm = connect(mapStateToProps , { updateProject })(EditProjectForm);
+EditProjectForm = connect(mapStateToProps , { updateProjectName })(EditProjectForm);
 
 export default EditProjectForm;

@@ -10,7 +10,7 @@ import {
   changeActiveEditMenu,
   deleteProject,
   setSelectedProject,
-  updateProject
+  updateProjectName
 } from '../actions/indexActions';
 
 import Modal from './Modal';
@@ -167,7 +167,7 @@ export default connect(mapStateToProps, {
   changeActiveEditMenu,
   deleteProject,
   setSelectedProject,
-  updateProject
+  updateProjectName
 })(ProjectsPage);
 
 ProjectsPage.propTypes = {

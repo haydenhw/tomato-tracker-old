@@ -83,12 +83,12 @@ export function postNewProject(newProject) {
 }
 
 export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'; 
-export const updateProjectSuccess = (modules) => ({
+export const updateProjectNameSuccess = (modules) => ({
   type: 'UPDATE_PROJECT_SUCCESS',
   modules
 });
 
-export function updateProject(data, projectId) {
+export function updateProjectName(data, projectId) {
   return (dispatch) => {
     fetch(projectsUrl + projectId, {
         method: 'put',
