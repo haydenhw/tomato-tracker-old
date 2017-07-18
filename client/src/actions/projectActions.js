@@ -16,7 +16,7 @@ export function addProject(projectName) {
 }
 
 export const EDIT_PROJECT_NAME_REQUEST = "EDIT_PROJECT_NAME_REQUEST";
-export function editProjectName(projectId, projectName) {
+export function updateProjectNameRequest(projectId, projectName) {
   return {
     type: "EDIT_PROJECT_NAME_REQUEST",
     projectId,
@@ -43,7 +43,7 @@ export function editTask(projectId, taskId, toUpdate) {
 }
 
 export const UPDATE_TASKS = "UPDATE_TASKS";
-export function updateTasks(projectId, newTasks) {
+export function updateTasksInState(projectId, newTasks) {
   return {
     type: "UPDATE_TASKS",
     projectId,
@@ -162,10 +162,43 @@ export function postProjectWithTasks(tasks) {
   }
 }
 
-export function updateProject(project, newName) {
+const deleteSavedTasks = (dispatch, selectedProject, tasks) => {
+    // delete tasks that do not already exist in the database
+    // we assume that taks without the database created id '_id' do not yet exist in the database  
+      
+    tasks.filter((task) => task.shouldDelete && task._id)
+      .forEach((task) => dispatch(deleteTask(selectedProject, task)));
+      
+  }
+  
+const postUnsavedTasks = (dispatch, selectedProjectDatabaseId, tasks) => {
+  // post tasks that do not already exist in the database
+  // we assume that taks without the database created id '_id' do not yet exist in the database  
+  tasks.filter((task) => !task._id)
+    .forEach((task) => {
+      selectedProjectDatabaseId 
+        ? dispatch(postTask(selectedProjectDatabaseId, task)) 
+        : console.error('database id has not yet updated')
+  });
+}      
+
+export function updateTasks(selectedProject, tasks) {
+  return (dispatch, getState) => {
+    const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
+    
+    // update appropriate tasks in state 
+    dispatch(updateTasksInState(selectedProject.shortId, tasksToSubmit));
+      
+    
+    postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);    
+    deleteSavedTasks(dispatch, selectedProject, tasks);      
+  }
+}  
+
+export function updateProjectName(project, newName) {
   return (dispatch) => {
     
-    dispatch(editProjectName(project.shortId, newName)); 
+    dispatch(updateProjectNameRequest(project.shortId, newName)); 
       
     fetch(
       `projects/${project._id}`,
@@ -177,16 +210,13 @@ export function updateProject(project, newName) {
             'Content-Type': 'application/json'
         })
       })
-      .then((res) => {
-        console.log('update success')
-      })
   }
 }
 
 export function postTask(projectId, task) {
   return (dispatch) => {
     fetch(
-      `projects/${projectId}`,
+        `projects/${projectId}`,
       {
         method: "POST",
         body: JSON.stringify(task),

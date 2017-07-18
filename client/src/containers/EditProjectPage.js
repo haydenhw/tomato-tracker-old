@@ -35,7 +35,7 @@ class EditProjectPage extends Component {
   }
   
   handleEditProjectSubmit = (project) => ({ singleInput: projectName }) => {
-    const { updateProject, remoteSubmit } = this.props;
+    const { updateProject, remoteSubmit, updateTasks, tasks } = this.props;
     
     if (!hasAnyValue(projectName)) {
       remoteSubmit(null);
@@ -44,11 +44,10 @@ class EditProjectPage extends Component {
         singleInput: 'Project name is required' 
       })
     }
-    
     updateProject(project, projectName);
-    remoteSubmit('ADD_TASKS');
-    // remoteSubmit(null);
-    // routeToProjects();
+    updateTasks(project, tasks);
+    remoteSubmit(null);
+    routeToProjects();
   } 
   
   handleRemoteSubmit() {
@@ -121,7 +120,8 @@ class EditProjectPage extends Component {
 }
 const mapStateToProps = (state) => {
   const { customForm, selectedProjectId, projects } = state;
-  const { remoteSubmitForm } = customForm; 
+  const { remoteSubmitForm, taskForm } = customForm; 
+  const { tasks } = taskForm;
   
   const selectedProject = state.projects.items.length > 0 && selectedProjectId 
   ? projects.items.find((project) => project.shortId === selectedProjectId)
@@ -131,15 +131,16 @@ const mapStateToProps = (state) => {
     projects,
     remoteSubmitForm, 
     selectedProjectId,
-    selectedProject
+    selectedProject,
+    tasks
   }
 }
 
 export default connect(mapStateToProps, { 
   addTask,
   deleteTask,
-  remoteSubmit,
   setSelectedProject,
+  remoteSubmit,
   updateProject,
   updateTasks
 })(EditProjectPage);  

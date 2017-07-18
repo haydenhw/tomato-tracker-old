@@ -14,7 +14,7 @@ export default function callOnTargetUpdate(getTargetInfo, onTargetUpdate) {
       }
       
       componentDidUpdate(prevProps) {
-        console.log(prevProps.remoteSubmitForm, this.props.remoteSubmitForm);
+        // console.log(prevProps.remoteSubmitForm, this.props.remoteSubmitForm);
         // console.log(this.props.onTargetUpdate);
         
         

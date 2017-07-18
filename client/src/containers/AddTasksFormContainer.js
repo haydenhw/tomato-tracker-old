@@ -89,7 +89,7 @@ let AddTasksFormContainer = class extends Component {
     const { 
       isOnboardingActive,
       updateTasks, 
-      selectedProjectId,
+      selectedProject,
       toggleModal, 
       toggleOnboardMode,
       formTasks: tasks, 
@@ -103,11 +103,11 @@ let AddTasksFormContainer = class extends Component {
       })
     }
     
-    this.postUnsavedTasks(tasksToSubmit);    
-    this.deleteUnwantedTasks(tasks);      
+    // this.postUnsavedTasks(tasksToSubmit);    
+    // this.deleteUnwantedTasks(tasks);      
     
     // update appropriate tasks in state 
-    updateTasks(selectedProjectId, tasksToSubmit);
+    // updateTasks(selectedProjectId, tasksToSubmit);
     
     isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
