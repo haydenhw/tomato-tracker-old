@@ -1,8 +1,8 @@
-const renderModal = false; 
+const renderModal = true; 
 const productionMode = false;
 
 export const renderFormModal = productionMode || renderModal;
-export const modalType = productionMode ? "WELCOME" : "ADD_PROJECT";  
+export const modalType = productionMode ? "WELCOME" : "ADD_TASKS";  
 export const isOnboardingActive = productionMode || false;
 export const showProgressBar = productionMode || false;
 export const devStyle = !productionMode && {

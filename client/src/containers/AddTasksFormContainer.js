@@ -22,7 +22,7 @@ import RemoteSubmitForm from './RemoteSubmitForm';
 let AddTasksFormContainer = class extends Component {
   constructor(props) {
     super(props);
-    
+    this.deleteButtonRefs = {};
     // this.getInputRef = this.getInputRef.bind(this);  
   }
   
@@ -82,19 +82,33 @@ let AddTasksFormContainer = class extends Component {
     isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
   }
   
-  toggleShouldDelete = (taskId) => () => {
+  handleDeleteButtonClick = (taskId) => () => {
     const { toggleShouldDelete } = this.props;
     
     toggleShouldDelete(taskId);
   }  
+  
+  handleDeleteButtonMouseOver = (taskId) => () => {
+    this.deleteButtonRefs[taskId].focus();
+  }
+  
+  handleDeleteButtonMouseOut = (taskId) => () => {
+    this.deleteButtonRefs[taskId].blur();
+  }
   
   renderFormTask (task){
     const { shouldDelete, taskName, shortId } = task;
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        <div className="button-wrapper">
-          <button onClick={this.toggleShouldDelete(shortId)}>{shouldDelete ? 'restore' : 'X' /*&times;*/}</button>
+        <div className="button-wrapper" >
+          <button ref={el => this.deleteButtonRefs[shortId] = el}
+            onClick={this.handleDeleteButtonClick(shortId)}
+            onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
+            onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
+          >
+            {shouldDelete ? 'restore' : 'X' /*&times;*/}
+          </button>
         </div>
         <div className="name-wrapper">
           <span>{taskName}</span>
