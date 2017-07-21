@@ -9,7 +9,8 @@ import {
   fetchProjects,
   setSelectedProject,
   toggleAddTasksForm,
-  toggleEditTaskForm
+  toggleEditTaskForm,
+  toggleOnboardMode
 } from '../actions/indexActions';
 
 import TimeTracker from './TimeTracker';
@@ -19,6 +20,7 @@ class TimeTrackerPage extends Component {
     const { isModalActive, selectedProjectId } = this.props;
     
     if (this.props.selectedProjectId && (nextProps.selectedProjectId !== this.props.selectedProjectId) && isModalActive) {
+      
       console.log('fdasre')
       return false;
     } 
@@ -38,7 +40,8 @@ class TimeTrackerPage extends Component {
       selectedProjectId,
       setSelectedProject,
       toggleAddTasksForm, 
-      toggleEditTaskForm
+      toggleEditTaskForm,
+      toggleOnboardMode
     } = this.props;
   
     if (!hasFetched) {
@@ -65,6 +68,7 @@ class TimeTrackerPage extends Component {
           tasks={selectedTasks || []}
           toggleAddTasksForm={toggleAddTasksForm} 
           toggleEditTaskForm={toggleEditTaskForm}
+          toggleOnboardMode={toggleOnboardMode}
         />
       </div>
     );
@@ -94,8 +98,8 @@ export default connect(mapStateToProps, {
   decrementTimer,
   setSelectedProject,
   toggleAddTasksForm,
-  toggleEditTaskForm 
-  
+  toggleEditTaskForm, 
+  toggleOnboardMode
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

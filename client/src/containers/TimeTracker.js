@@ -35,6 +35,8 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
+    this.handleFirstSessionVisit();  
+    
     const { isModalActive, projects, tasks } = this.props;
     // change isModalActive to isOnboardingActive for production  
     if ((projects.length === 0) && !isModalActive) {
@@ -48,12 +50,14 @@ export default class TimeTracker extends Component {
     this.setState({ selectedTaskId });
   }
   
-  componentDidMount() {
-    if (!localStorage.getItem('isFirstUserVisit')) {
-      localStorage.setItem('isFirstUserVisit', 'true');
-    } else {
-      localStorage.removeItem('isFirstUserVisit');
-    }
+  handleFirstSessionVisit() {
+    const { toggleOnboardMode } = this.props;
+    
+    sessionStorage.isFirstSessionVisit = !Boolean(sessionStorage.isFirstSessionVisit);
+    
+    if (JSON.parse(sessionStorage.isFirstSessionVisit) === true) {
+      toggleOnboardMode();  
+    }  
   }
   
   componentDidUpdate(prevProps, prevState) {
