@@ -26,7 +26,9 @@ class ProjectsPage extends Component {
     super();
     
     this.state = {
-      isProjectSelectTipActive: true
+      isProjectSelectTipActive: sessionStorage.isProjectSelectTipActive !== undefined
+        ? JSON.parse(sessionStorage.isProjectSelectTipActive) 
+        : true
     }
   }
   
@@ -63,7 +65,10 @@ class ProjectsPage extends Component {
   }
   
   toggleProjectSelectTip() {
-    this.setState({ isProjectSelectTipActive: false });
+    sessionStorage.setItem('isProjectSelectTipActive', false);
+    console.log('toggling')
+    console.log(sessionStorage.isProjectSelectTipActive)
+    this.setState({ isProjectSelectTipActive: false })
   }
   
   renderProject (project){
