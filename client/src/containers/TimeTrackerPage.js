@@ -15,6 +15,16 @@ import {
 import TimeTracker from './TimeTracker';
 
 class TimeTrackerPage extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { isModalActive, selectedProjectId } = this.props;
+    
+    if (this.props.selectedProjectId && (nextProps.selectedProjectId !== this.props.selectedProjectId) && isModalActive) {
+      console.log('fdasre')
+      return false;
+    } 
+    
+    return true;
+  }
   render() {
     const { 
       changeActiveEditMenu,

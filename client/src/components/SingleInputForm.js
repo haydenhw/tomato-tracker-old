@@ -44,7 +44,7 @@ let SingleInputForm = function SingleInputForm(props) {
         component={renderField}
       />
       {shouldRenderSubmitButton && 
-        <button className="form-button fullscreen-submit" onClick={handleSubmit(handleFormSubmit.bind(this))}>Continue</button>
+        <button className="form-button fullscreen-submit" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
       }
     </form>
   );

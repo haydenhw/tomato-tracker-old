@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import shortid from 'shortid';
 
+import store from 'reduxFiles/store';
+
 import { 
   addTask,
   changeModalType,
@@ -33,10 +35,10 @@ class FormModal extends Component {
     this.props.deleteTask('123', '111');
   }
   
-  handleAddProject = () => ({ singleInput }) => {
+  handleAddProject({ singleInput }) {
     const { changeModalType, postProject } = this.props;
-    
-    postProject(singleInput)
+    console.log('submitting');
+    postProject(singleInput);
     this.toggleIsContentWaiting();
     changeModalType('ADD_TASKS');
   }
@@ -87,7 +89,7 @@ class FormModal extends Component {
         return (
           <SingleInputForm
             formName={"projectName"}
-            handleFormSubmit={this.handleAddProject()}
+            handleFormSubmit={this.handleAddProject.bind(this)}
             placeholder={"Project Name"}
             projects={projects}
             shouldRenderSubmitButton={true}
