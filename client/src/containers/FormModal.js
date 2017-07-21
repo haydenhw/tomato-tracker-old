@@ -40,7 +40,7 @@ class FormModal extends Component {
     console.log('submitting');
     postProject(singleInput);
     this.toggleIsContentWaiting();
-    changeModalType('ADD_TASKS');
+    changeModalType('ADD_TASKS_FS');
   }
   
   handleGetStarted() {
@@ -96,10 +96,10 @@ class FormModal extends Component {
           />
         );
          
-      case (modalType === "ADD_TASKS") && (elementType === "TITLE"): 
+      case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "TITLE"): 
         return <h2 className="add-tasks-form-title">Add tasks for project <span>{selectedProjectName}</span></h2>
       
-      case (modalType === "ADD_TASKS") && (elementType === "CONTENT"): 
+      case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "CONTENT"): 
        return <AddTasksFormContainer />
         
       case (modalType === "EDIT_TASK") &&  (elementType === "CONTENT"):
@@ -149,15 +149,19 @@ class FormModal extends Component {
   
   
   render() {
-    const { isModalActive, rootModalClass, toggleModal } = this.props;
-    
+    const { isModalActive, modalType, rootModalClass, toggleModal } = this.props;
+  console.log(modalType);
+    const modalClass = (modalType === 'WELCOME') || (modalType === 'ADD_TASKS_FS') || (modalType === 'ADD_PROJECT')
+      ? 'fullscreen-modal'
+      : '';
+      
     return (
       isModalActive &&
       <Modal 
         areChildrenActive={true}
         handleCloseButtonClick={toggleModal}
         rootModalClass={rootModalClass} 
-        modalClass={""}
+        modalClass={modalClass}
         shouldRender={isModalActive}
         text={""}
       >
