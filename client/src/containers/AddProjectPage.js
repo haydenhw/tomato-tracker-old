@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 
 import { postProject, remoteSubmit } from '../actions/indexActions';
-import { hasAnyValue } from '../helpers/validate';
+import { hasAnyValue, isDuplicate } from '../helpers/validate';
 import { routeToProjects } from '../helpers/route';
 
 import ProjectTaskForm from './ProjectTaskForm';
@@ -13,7 +13,7 @@ import SingleInputForm from '../components/SingleInputForm';
 
 let AddProjectPage = class extends Component {
   handleNewProjectSubmit({ singleInput: projectName }) {
-    const { newTasks, postProject, remoteSubmit } = this.props;
+    const { newTasks, postProject, projectNames, remoteSubmit } = this.props;
     
     if (!hasAnyValue(projectName)) {
       remoteSubmit(null);
@@ -22,6 +22,12 @@ let AddProjectPage = class extends Component {
         singleInput: 'Project name is required' 
       })
     }
+    
+    if (isDuplicate(projectName, projectNames)) {
+      throw new SubmissionError({
+        singleInput: `A project with the name '${projectName}' already exists`,
+      })
+    }    
     
     postProject(projectName, newTasks);
     remoteSubmit(null);
@@ -61,10 +67,12 @@ let AddProjectPage = class extends Component {
 }
   
   const mapStateToProps = state => {
-    const { customForm } = state;
+    const { customForm, projects } = state;
     const { remoteSubmitForm, taskForm } = customForm;
     const { tasks: newTasks} = taskForm;
         
+    const projectName = projects.items.map((project) => project.projectName);    
+    
     return {
       newTasks
     }

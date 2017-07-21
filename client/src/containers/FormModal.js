@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { SubmissionError } from 'redux-form';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import shortid from 'shortid';
+
+import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
 import store from 'reduxFiles/store';
 
@@ -35,10 +38,25 @@ class FormModal extends Component {
     this.props.deleteTask('123', '111');
   }
   
-  handleAddProject({ singleInput }) {
-    const { changeModalType, postProject } = this.props;
-    console.log('submitting');
-    postProject(singleInput);
+  handleAddProject({ singleInput: projectName }) {
+    const { changeModalType, postProject, projects } = this.props;
+    
+    const projectNames = projects.map((project) => project.projectName);
+    
+    if (!hasAnyValue(projectName)) {
+      
+      throw new SubmissionError({
+        singleInput: 'Project name is required' 
+      })
+    }    
+    
+    if (isDuplicate(projectName, projectNames)) {
+      throw new SubmissionError({
+        singleInput: `A project with the name '${projectName}' already exists`
+      })
+    }    
+    
+    postProject(projectName);
     this.toggleIsContentWaiting();
     changeModalType('ADD_TASKS_FS');
   }
@@ -107,6 +125,7 @@ class FormModal extends Component {
       
       case (modalType === "CONFIRM_EDIT_TASK") && (elementType === "CONTENT"):
         return <ConfirmEditTask {...modalProps} /> 
+        
       default:
         return null;
     }
@@ -150,18 +169,18 @@ class FormModal extends Component {
   
   render() {
     const { isModalActive, modalType, rootModalClass, toggleModal } = this.props;
-  console.log(modalType);
-    const modalClass = (modalType === 'WELCOME') || (modalType === 'ADD_TASKS_FS') || (modalType === 'ADD_PROJECT')
-      ? 'fullscreen-modal'
-      : '';
+    
+    const modalClassNames = (modalType === 'WELCOME') || (modalType === 'ADD_TASKS_FS') || (modalType === 'ADD_PROJECT')
+      ? { modalClass: 'fullscreen-modal', rootModalClass: 'unfold' } 
+      : { modalClass: '',  rootModalClass: 'roadrunner' };      
       
     return (
       isModalActive &&
       <Modal 
         areChildrenActive={true}
         handleCloseButtonClick={toggleModal}
-        rootModalClass={rootModalClass} 
-        modalClass={modalClass}
+        rootModalClass={modalClassNames.rootModalClass} 
+        modalClass={modalClassNames.modalClass}
         shouldRender={isModalActive}
         text={""}
       >
@@ -177,7 +196,6 @@ const mapStateToProps = (state) => {
   
   const selectedProject = selectedProjectId 
     && projects.items.find(project => project.shortId === selectedProjectId);
-  
   const selectedProjectName = selectedProject && selectedProject.name;
   
   return {
