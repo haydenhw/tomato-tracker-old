@@ -21,7 +21,6 @@ class TimeTrackerPage extends Component {
     
     if (this.props.selectedProjectId && (nextProps.selectedProjectId !== this.props.selectedProjectId) && isModalActive) {
       
-      console.log('fdasre')
       return false;
     } 
     

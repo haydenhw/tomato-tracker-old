@@ -45,7 +45,6 @@ class FormModal extends Component {
     const projectNames = projects.map((project) => project.projectName);
     
     if (!hasAnyValue(projectName)) {
-      
       throw new SubmissionError({
         singleInput: 'Project name is required' 
       })
@@ -57,8 +56,8 @@ class FormModal extends Component {
       })
     }    
     
-    postProject(projectName);
     this.toggleIsContentWaiting();
+    postProject(projectName);
     changeModalType('ADD_TASKS_FS');
   }
   
@@ -129,7 +128,9 @@ class FormModal extends Component {
         );
          
       case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "TITLE"): 
-        return <h2 className="add-tasks-form-title">Add tasks for project <span>{selectedProjectName}</span></h2>
+        const lastAddedProjectName = projects[projects.length - 1].projectName;
+        
+        return <h2 className="add-tasks-form-title">Add tasks for project <span className='grey-title-name'>{lastAddedProjectName}</span></h2>
       
       case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "CONTENT"): 
        return <AddTasksFormContainer />
@@ -211,6 +212,7 @@ const mapStateToProps = (state) => {
   
   const selectedProject = selectedProjectId 
     && projects.items.find(project => project.shortId === selectedProjectId);
+    
   const selectedProjectName = selectedProject && selectedProject.name;
   
   return {

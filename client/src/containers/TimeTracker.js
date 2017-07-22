@@ -35,7 +35,6 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    this.handleFirstSessionVisit();  
     
     const { isModalActive, projects, tasks } = this.props;
     // change isModalActive to isOnboardingActive for production  
@@ -48,17 +47,10 @@ export default class TimeTracker extends Component {
       : null
       
     this.setState({ selectedTaskId });
+    
+    this.handleFirstSessionVisit();  
   }
   
-  handleFirstSessionVisit() {
-    const { toggleOnboardMode } = this.props;
-    
-    sessionStorage.isFirstSessionVisit = !Boolean(sessionStorage.isFirstSessionVisit);
-    
-    if (JSON.parse(sessionStorage.isFirstSessionVisit) === true) {
-      toggleOnboardMode();  
-    }  
-  }
   
   componentDidUpdate(prevProps, prevState) {
     const { tasks } = this.props;
@@ -76,6 +68,16 @@ export default class TimeTracker extends Component {
     activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
   })
   }*/
+  }
+  
+  handleFirstSessionVisit() {
+    const { toggleOnboardMode } = this.props;
+    
+    sessionStorage.isFirstSessionVisit = !Boolean(sessionStorage.isFirstSessionVisit);
+    
+    if (JSON.parse(sessionStorage.isFirstSessionVisit) === true) {
+      toggleOnboardMode();  
+    }  
   }
 
   toggleShouldRenderModal(modalType) {
@@ -223,8 +225,8 @@ export default class TimeTracker extends Component {
         </div>
         {tasks.length > 0
           ? <div>
-              <div className="timer-task-list list-container">
-                <span className="timer-task-list-title">Timesheet for project <span>{selectedProject.projectName}</span></span>
+              <div className="timesheet list-container">
+                <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-name"}>{selectedProject.projectName}</span></h2>
                 <div className="add-button-wrapper">
                   <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
                 </div>

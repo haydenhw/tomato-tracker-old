@@ -1,3 +1,5 @@
+@import 'variables';
+
 * {
   box-sizing: border-box;
 }
@@ -11,15 +13,19 @@ body {
 input:focus,
 select:focus,
 textarea:focus,
-button:focus
- {
+button:focus {
   outline: none;
 }
 
 button:focus {
-   box-shadow: 0 0 0 1px gray; 
+   box-shadow: 0 0 0 1px grey; 
 }
 
+.grey-title-name {
+  color: $title-name-grey;
+  font-weight: bold;
+}
+    
 @mixin centerVertHoriz(){
   position: absolute;
   top: 50%;

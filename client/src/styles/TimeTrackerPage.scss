@@ -11,7 +11,7 @@
 
 .timer-section {
   padding: 40px;
-  background-color: $timer-background-light-gray;
+  background-color: $timer-background-light-grey;
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -27,6 +27,11 @@
 
 .add-button {
   display: inline-block;
+}
+
+.timesheet-title {
+  margin-top: 20px;
+  margin-bottom: 33px;
 }
 
 // .add-button {
