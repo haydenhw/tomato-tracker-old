@@ -49,14 +49,14 @@ let AddTasksForm = class extends Component {
     }
   }
   
-  componentDidUpdate(prevProps) {
-    //  console.log(this.props.remoteSubmitForm, 'updating!');
-    if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
-      const { handleSubmit, handleFormSubmit } = this.props;
-      
-      handleSubmit(handleFormSubmit)();    
-    }
-  }  
+  // componentDidUpdate(prevProps) {
+  //   //  console.log(this.props.remoteSubmitForm, 'updating!');
+  //   if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
+  //     const { handleSubmit, handleFormSubmit } = this.props;
+  //     
+  //     handleSubmit(handleFormSubmit)();    
+  //   }
+  // }  
   
   render() {
     const {

@@ -130,7 +130,7 @@ class FormModal extends Component {
       case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "TITLE"): 
         const lastAddedProjectName = projects[projects.length - 1].projectName;
         
-        return <h2 className="add-tasks-form-title">Add tasks for project <span className='grey-title-name'>{lastAddedProjectName}</span></h2>
+        return <h2 className="add-tasks-form-title form-title">Add tasks for project <span className='grey-title-name'>{lastAddedProjectName}</span></h2>
       
       case (modalType === "ADD_TASKS" || modalType === "ADD_TASKS_FS") && (elementType === "CONTENT"): 
        return <AddTasksFormContainer />

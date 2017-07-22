@@ -1,9 +1,9 @@
-const renderModal = true; 
+const renderModal = false; 
 const productionMode = false;
-export const modalType = productionMode ? "WELCOME" : "ADD_TASKS";  
+export const modalType = productionMode ? "WELCOME" : "EDIT_TASK";  
 
 export const renderFormModal = productionMode ? false : renderModal;
-export const isOnboardingActive = productionMode ? false : renderModal;
+export const isOnboardingActive = productionMode ? false : false;
 export const showProgressBar = productionMode || false;
 export const devStyle = !productionMode && {
     position: 'static',

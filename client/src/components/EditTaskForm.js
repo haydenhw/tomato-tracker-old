@@ -79,8 +79,7 @@ const renderField = ({
     
     return (
       <form onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
-        <div>
-        </div>
+        <h2>Edit Task </h2>
         <label>Task Name</label>
         <div>
           <Field
@@ -98,7 +97,8 @@ const renderField = ({
             component={renderField}
             type="text"
           />
-          <input type="submit"/>
+          <button className="form-button fullscreen-submit" type="submit">Submit</button>
+          {/* <input className="form-button" type="submit"/> */}
         </div>
       </form>
     );
