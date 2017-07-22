@@ -224,7 +224,7 @@ export default class TimeTracker extends Component {
         {tasks.length > 0
           ? <div>
               <div className="timer-task-list list-container">
-                <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
+                <span className="timer-task-list-title">Timesheet for project <span>{selectedProject.projectName}</span></span>
                 <div className="add-button-wrapper">
                   <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
                 </div>
