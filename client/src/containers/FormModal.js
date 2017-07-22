@@ -103,7 +103,7 @@ class FormModal extends Component {
     
     switch (true) {
       case (modalType === "WELCOME") && (elementType === "TITLE"): 
-      return <h2>Welcome to PomTracker!</h2>;
+      return <h2 className="form-title">Welcome to PomTracker!</h2>;
       
       case (modalType === "WELCOME") && (elementType === "CONTENT"): 
         return (
@@ -114,7 +114,7 @@ class FormModal extends Component {
       );
       
       case (modalType === "ADD_PROJECT") && (elementType === "TITLE"): 
-        return <h2 className="project-form-title">Add a project</h2>;
+        return <h2 className="form-title project-form-title">Add a project</h2>;
       
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
         return (
@@ -174,7 +174,7 @@ class FormModal extends Component {
     }
     
     return (
-      <div className={`${modalType === "WELCOME" ? 'welcome' : '' } fullscreen-form`}>
+      <div className={`${modalType === "WELCOME" ? 'welcome' : '' } form`}>
         {this.renderAnimatedElement("TITLE")}
         {!isContentWaiting && this.renderAnimatedElement("CONTENT")}
       </div>

@@ -5,7 +5,7 @@ $placeholder-font-weight: bold;
 $placeholder-font-size: .75 * $heading-font-size; 
 
 
-.fullscreen-form {
+.form {
   width: 70%;
   margin: 0 auto;
   position: static;
@@ -15,8 +15,8 @@ $placeholder-font-size: .75 * $heading-font-size;
   font-weight: bold;
   max-width: 960px;
   
-  
-  h2 {
+  .form-title {
+    line-height: 1.2;
     font-size: $heading-font-size;
     color: $heading-faded-black;
     margin-bottom: 40px;
@@ -90,6 +90,5 @@ $placeholder-font-size: .75 * $heading-font-size;
     font-size: $placeholder-font-size;
     font-family: $font-fullscreen-form-heading;
   }
-  
 }
 

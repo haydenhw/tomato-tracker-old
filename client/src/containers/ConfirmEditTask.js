@@ -13,7 +13,7 @@ function ConfirmEditTask(props) {
       onDangerClick={() => updateTask(...payload) }
       onDangerText={`Are you sure you want to change the logged time from ${oldTime} to ${newTime}?`}
       onCancel={toggleEditTaskForm}
-      title={<h2>Confirm time change for task <span className="grey">{taskName}</span></h2>}
+      title={<h2 className="form-title">Confirm time change for task <span className="grey-title-name">{taskName}</span></h2>}
     />
   );
 }

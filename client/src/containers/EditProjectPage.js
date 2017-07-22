@@ -95,7 +95,7 @@ class EditProjectPage extends Component {
     }  
     
     return (
-      <div className="fullscreen-form form-page">
+      <div className="formform-page">
         <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
         <ProjectTaskForm 
           handleCancel={routeToProjects}

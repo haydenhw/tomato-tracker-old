@@ -44,7 +44,7 @@ let AddProjectPage = class extends Component {
     const { remoteSubmitForm } = this.props;
     
     return(
-      <div className="fullscreen-form form-page">
+      <div className="formform-page">
         <h2>New Project</h2>
         <ProjectTaskForm 
           handleSubmit={this.handleRemoteSubmit.bind(this)}
