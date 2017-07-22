@@ -30,7 +30,8 @@ class FormModal extends Component {
     super();
     
     this.state = {
-      isContentWaiting: true
+      isContentWaiting: true,
+      isModalClosing: false
     }
   }
   
@@ -68,9 +69,22 @@ class FormModal extends Component {
     changeModalType('ADD_PROJECT');
   }
   
+  handleModalClose() {
+    const { isModalClosing } = this.state;
+    const { toggleModal } = this.props;
+    
+    this.setState({ isModalClosing: true });
+    
+    setTimeout(() => {
+      toggleModal();
+      this.setState({ isModalClosing: false });
+    }, 1500)  
+  }
+  
   toggleIsContentWaiting() {
     this.setState({isContentWaiting: true});
   }
+  
   
   renderFormTask (task) {
     const { taskName } = task;
@@ -169,16 +183,17 @@ class FormModal extends Component {
   
   render() {
     const { isModalActive, modalType, rootModalClass, toggleModal } = this.props;
+    const { isModalClosing } = this.state;
     
     const modalClassNames = (modalType === 'WELCOME') || (modalType === 'ADD_TASKS_FS') || (modalType === 'ADD_PROJECT')
-      ? { modalClass: 'fullscreen-modal', rootModalClass: 'unfold' } 
-      : { modalClass: '',  rootModalClass: 'roadrunner' };      
+      ? { modalClass: 'fullscreen-modal', rootModalClass: `unfold ${ isModalClosing ? 'out' : '' }` } 
+      : { modalClass: '',  rootModalClass: `roadrunner ${ isModalClosing ? 'out' : '' }`};      
       
     return (
       isModalActive &&
       <Modal 
         areChildrenActive={true}
-        handleCloseButtonClick={toggleModal}
+        handleCloseButtonClick={this.handleModalClose.bind(this)}
         rootModalClass={modalClassNames.rootModalClass} 
         modalClass={modalClassNames.modalClass}
         shouldRender={isModalActive}
