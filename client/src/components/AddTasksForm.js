@@ -10,7 +10,7 @@ let renderField = (placeholder, inputRef) => ({
   input,
   label,
   type,
-  meta: { touched, error, warning }
+  meta: {  error, pristine, touched }
 }) => (
   <div className="input-wrapper">
     <label/>
@@ -18,20 +18,19 @@ let renderField = (placeholder, inputRef) => ({
       <input
         {...input}
         ref={inputRef}
-        placeholder={placeholder}
+        placeholder="Task Name"
         type={type}
-      //  onBlur={() => {}}
        />
-      {touched && (error && <div className="error">{error}</div>)}
+       <div className={(touched && error) && 'error' }>
+         {/* 'press ENTER to submit task' */}
+         {(touched && error ) ? error : ''} 
+       </div>
+       
       </div>
     </div>
   );
 
 let AddTasksForm = class extends Component {
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.remoteSubmitForm, '**********');
-  }
-  
   componentWillMount() {
     const { shouldDisableFocusOnMount } = this.props;
     const getRef = !shouldDisableFocusOnMount 
@@ -78,7 +77,7 @@ let AddTasksForm = class extends Component {
           <Field name="taskName" component={this.renderField}/>
         </form>
           {!(shouldRenderSubmitButton === false) && 
-            <button className='form-button fullscreen-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+            <button className='form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
           }
       </div>
     );

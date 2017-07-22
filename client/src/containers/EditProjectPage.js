@@ -95,8 +95,8 @@ class EditProjectPage extends Component {
     }  
     
     return (
-      <div className="formform-page">
-        <h2>Edit Project <span>{selectedProject.projectName}</span></h2>
+      <div className="form form-page">
+        <h2 className="form-title">Edit Project <span className="grey-title-name">{selectedProject.projectName}</span></h2>
         <ProjectTaskForm 
           handleCancel={routeToProjects}
           handleSubmit={this.handleRemoteSubmit}
