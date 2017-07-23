@@ -10,12 +10,10 @@ import 'rc-time-picker/assets/index.css';
 
 const renderField = ({
   input,
-  label,
   type,
   meta: { touched, error, warning }
 }) => (
   <div className="input-wrapper">
-    <label/>
     <div>
       <input {...input} placeholder="Task name" type={type} />
       {touched &&
@@ -80,18 +78,16 @@ const renderField = ({
     return (
       <form onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
         <h2 className="form-title">Edit Task</h2>
-        <label>Task Name</label>
-        <div>
+        <div className="field-wrapper">
+          <label>Task Name</label>
           <Field
             name="taskName"
             component={renderField}
             type="text"
           />
         </div>
-        <div>
-          <span className='current-time'>Logged Time: {initialValues.recordedTime} </span>
-        </div>
-        <div>
+        <div className="field-wrapper">
+          <label>Logged Time: {initialValues.recordedTime}</label>
           <Field
             name="newTime"
             component={renderField}

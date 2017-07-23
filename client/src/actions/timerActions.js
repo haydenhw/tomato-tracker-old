@@ -7,6 +7,14 @@ export function decrementTimer() {
   }
 }
 
+export const SET_INTERVAL_ID = "SET_INTERVAL_ID";
+export function setIntervalId(intervalId) {
+  return { 
+    type: "SET_INTERVAL_ID",
+    intervalId
+  }
+}
+
 // export const TOGGLE_IS_TIMER_ACTIVE = "TOGGLE_IS_TIMER_ACTIVE";
 // export function toggleTimer() {
 //   return {

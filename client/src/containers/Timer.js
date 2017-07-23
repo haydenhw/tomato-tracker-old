@@ -2,10 +2,13 @@ import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
+import store from '../redux-files/store';
+
 import {
   decrementTimer,
   incrementTaskTime,
   resetTimer,
+  setIntervalId,
   toggleTimer,
 } from '../actions/indexActions';
 
@@ -21,27 +24,34 @@ class Timer extends Component {
   }
   
   componentWillMount() {
-    const { isTimerActive } = this.props;
-    const { intervalId } = this.state;
-    console.log(isTimerActive)
-    if (!isTimerActive) {
-        console.log(intervalId)
+    const { intervalId, isTimerActive } = this.props;
+    // console.log(isTimerActive)
+      
+    if (isTimerActive === false) {
+        // console.log(intervalId)
       clearInterval(intervalId)
     }
   }
   
   componentWillReceiveProps(nextProps) {
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
-      const { selectedTaskId, setActiveTask } = this.props;
+      const { selectedTaskId, setActiveTask, setIntervalId } = this.props;
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
-      this.setState({ intervalId });
+      setIntervalId(intervalId);
+      // this.setState({ intervalId });
+      // store.dispatch({
+      //   type: "SET_INTERVAL_ID",
+      //   intervalId
+      // })
+      
       setActiveTask(selectedTaskId);
     }
     
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && !nextProps.isTimerActive) {
-      const { intervalId } = this.state;
+      const { intervalId } = this.props;
       console.log('receive clearing')
+      console.log(intervalId);
       clearInterval(intervalId);
     }
   }
@@ -58,7 +68,7 @@ class Timer extends Component {
       toggleTimer
     } = this.props;
     
-    const { intervalId } = this.state; 
+    const { intervalId } = this.props; 
     const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
     
     incrementTaskTime(selectedProject, activeTask);
@@ -106,11 +116,12 @@ class Timer extends Component {
 
 const mapStateToProps = state => {
   const { selectedProjectId, projects, timer } = state;
-  const { isTimerActive, remainingTime, startTime } = timer;
+  const { intervalId, isTimerActive, remainingTime, startTime } = timer;
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
 
   return {
     selectedProject,
+    intervalId,
     isTimerActive,
     remainingTime,
     startTime,
@@ -122,5 +133,6 @@ export default connect(mapStateToProps, {
   decrementTimer,
   incrementTaskTime,
   resetTimer,
+  setIntervalId,
   toggleTimer
 })(Timer);

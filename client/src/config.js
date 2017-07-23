@@ -1,5 +1,5 @@
 const renderModal = false; 
-const productionMode = true;
+const productionMode = false;
 export const modalType = productionMode ? "WELCOME" : "EDIT_TASK";  
 
 export const renderFormModal = productionMode ? false : renderModal;

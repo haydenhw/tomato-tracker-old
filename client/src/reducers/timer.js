@@ -1,9 +1,10 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
+  intervalId: null,
   isTimerActive: false,
   remainingTime: null,
-  startTime: 25 * 60
+  startTime: 25 * 60,
 }
 
 export const timer = (state=defaultState, action) => {
@@ -24,11 +25,16 @@ export const timer = (state=defaultState, action) => {
         ...state,
         remainingTime: state.remainingTime - 1
       }
-      case actions.RESET_TIMER:
-      return {
-        ...state,
-        remainingTime: state.startTime 
-      }
+    case actions.RESET_TIMER:
+    return {
+      ...state,
+      remainingTime: state.startTime 
+    }
+    case actions.SET_INTERVAL_ID: 
+    return {
+      ...state,
+      intervalId: action.intervalId 
+    }
     case actions.TOGGLE_TIMER:
       return {
         ...state,

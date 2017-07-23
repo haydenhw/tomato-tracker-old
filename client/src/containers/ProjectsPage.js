@@ -41,7 +41,6 @@ class ProjectsPage extends Component {
     const { isTimerActive, setSelectedProject, toggleTimer } = this.props;
       
     if (isTimerActive) {
-      
      toggleTimer();
     }
       
