@@ -6,9 +6,7 @@ import {
   decrementTimer,
   incrementTaskTime,
   resetTimer,
-  setStartTime,
-  startTimer,
-  toggleIsTimerActive
+  toggleTimer,
 } from '../actions/indexActions';
 
 import TimeDisplay from '../components/TimeDisplay';
@@ -22,8 +20,18 @@ class Timer extends Component {
     };
   }
   
+  componentWillMount() {
+    const { isTimerActive } = this.props;
+    const { intervalId } = this.state;
+    console.log(isTimerActive)
+    if (!isTimerActive) {
+        console.log(intervalId)
+      clearInterval(intervalId)
+    }
+  }
+  
   componentWillReceiveProps(nextProps) {
-    if (this.props.isTimerActive !== nextProps.isTimerActive && nextProps.isTimerActive) {
+    if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
       const { selectedTaskId, setActiveTask } = this.props;
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
@@ -31,32 +39,26 @@ class Timer extends Component {
       setActiveTask(selectedTaskId);
     }
     
-    if (this.props.isTimerActive !== nextProps.isTimerActive && !nextProps.isTimerActive) {
+    if ((this.props.isTimerActive !== nextProps.isTimerActive) && !nextProps.isTimerActive) {
       const { intervalId } = this.state;
-      
+      console.log('receive clearing')
       clearInterval(intervalId);
     }
   }
   
-  componentDidMount() {
-    const { resetTimer } = this.props;
-    // resetTimer(); 
-  }
-  
   timer () {
     const { 
-      activeTaskId,
       selectedProject,
       decrementTimer,
       incrementTaskTime,
-      remainingTime, resetTimer,
+      remainingTime,
+      resetTimer,
       selectedTaskId, 
       setActiveTask,
-      toggleIsTimerActive
+      toggleTimer
     } = this.props;
     
     const { intervalId } = this.state; 
-    
     const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
     
     incrementTaskTime(selectedProject, activeTask);
@@ -64,16 +66,16 @@ class Timer extends Component {
     
     if (remainingTime < 1) {
       clearInterval(intervalId);
-      toggleIsTimerActive();
+      toggleTimer();
       resetTimer();
       setActiveTask(null);
     }
   }
   
   handleSetStartTime = (shouldStartTimer) => (startTime) => {
-    const { setStartTime } = this.props;
+    const { toggleTimer } = this.props;
     
-    setStartTime(startTime, shouldStartTimer); 
+    toggleTimer(startTime, shouldStartTimer); 
   }
   
   render() {
@@ -81,7 +83,7 @@ class Timer extends Component {
       isTimerActive,
       remainingTime,
       startTime,
-      startTimer,
+      toggleTimer,
       selectedTaskId,
       task,
     } = this.props;
@@ -91,11 +93,11 @@ class Timer extends Component {
         <TimeDisplay
           isTimerActive={isTimerActive}
           isTimerControlActive={Boolean(selectedTaskId)}
-          setStartTime={this.handleSetStartTime(selectedTaskId !== null)} 
+          toggleTimer={this.handleSetStartTime(selectedTaskId !== null)} 
           startCount={startTime}
           time={remainingTime}
           title={task}
-          handleButtonClick={startTimer}
+          handleButtonClick={toggleTimer}
         />
       </div>
     );
@@ -106,7 +108,7 @@ const mapStateToProps = state => {
   const { selectedProjectId, projects, timer } = state;
   const { isTimerActive, remainingTime, startTime } = timer;
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
-  
+
   return {
     selectedProject,
     isTimerActive,
@@ -120,7 +122,5 @@ export default connect(mapStateToProps, {
   decrementTimer,
   incrementTaskTime,
   resetTimer,
-  setStartTime,
-  startTimer,
-  toggleIsTimerActive,
+  toggleTimer
 })(Timer);

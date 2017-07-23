@@ -35,9 +35,9 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    
     const { isModalActive, projects, tasks } = this.props;
     // change isModalActive to isOnboardingActive for production  
+     
     if ((projects.length === 0) && !isModalActive) {
       hashHistory.push('/projects')
     }
@@ -62,12 +62,12 @@ export default class TimeTracker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    /*  if(nextProps.tasks !== this.props.tasks) {
-    this.setState({
-    tasks: nextProps.tasks,
-    activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
-  })
-  }*/
+      /*  if(nextProps.tasks !== this.props.tasks) {
+      this.setState({
+      tasks: nextProps.tasks,
+      activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
+    })
+    }*/
   }
   
   handleFirstSessionVisit() {

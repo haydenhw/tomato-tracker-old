@@ -7,33 +7,33 @@ export function decrementTimer() {
   }
 }
 
-export const TOGGLE_IS_TIMER_ACTIVE = "TOGGLE_IS_TIMER_ACTIVE";
-export function toggleIsTimerActive() {
-  return {
-    type: "TOGGLE_IS_TIMER_ACTIVE"
-  }
-}
+// export const TOGGLE_IS_TIMER_ACTIVE = "TOGGLE_IS_TIMER_ACTIVE";
+// export function toggleTimer() {
+//   return {
+//     type: "TOGGLE_IS_TIMER_ACTIVE"
+//   }
+// }
 
-export const SET_START_TIME = "SET_START_TIME";
-export function setStartTime(startTime, shouldStartTimer) {
+export const TOGGLE_TIMER = "TOGGLE_TIMER";
+export function toggleTimer(startTime, shouldStartTimer) {
   return (dispatch, getState) => {
-    startTime = isNaN(startTime) ? timeStringToSeconds(startTime, 'MMSS') : Math.ceil(Number(startTime) * 60);  
-    startTime = startTime === 'NAN_ERROR' ?  getState().timer.startTime : startTime;
+    // startTime = isNaN(startTime) ? timeStringToSeconds(startTime, 'MMSS') : Math.ceil(Number(startTime) * 60);  
+    // startTime = startTime === 'NAN_ERROR' ?  getState().timer.startTime : startTime;
     
     return dispatch({
-      type: "SET_START_TIME",
+      type: "TOGGLE_TIMER",
       shouldStartTimer,
       startTime  
     });
   }
 }
 
-export const START_TIMER = "START_TIMER";
-export function startTimer() {
-  return {
-    type: "START_TIMER",
-  }
-}
+// export const START_TIMER = "START_TIMER";
+// export function startTimer() {
+//   return {
+//     type: "START_TIMER",
+//   }
+// }
 
 export const RESET_TIMER = "RESET_TIMER";
 export function resetTimer() {

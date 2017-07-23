@@ -8,9 +8,10 @@ import { secondsToHMMSS } from '../helpers/time';
 import {
   addProject,
   changeActiveEditMenu,
-  setTempTasks,
   deleteProject,
   setSelectedProject,
+  setTempTasks,
+  toggleTimer, 
   updateProjectName
 } from '../actions/indexActions';
 
@@ -35,10 +36,15 @@ class ProjectsPage extends Component {
   static defaultProps = {
     projects: ['filler']
   }
-  
+
   handleListItemClick = (projectId) => () => {
-    const { setSelectedProject } = this.props;
-    
+    const { isTimerActive, setSelectedProject, toggleTimer } = this.props;
+      
+    if (isTimerActive) {
+      
+     toggleTimer();
+    }
+      
     setSelectedProject(projectId);
     hashHistory.push(`/`);
   }  
@@ -46,12 +52,14 @@ class ProjectsPage extends Component {
   handleEditOptionClick = (project) => (evt) => {
     evt.stopPropagation()
     const { setSelectedProject } = this.props;
+    
     setSelectedProject(project.shortId);
     hashHistory.push(`/projects/${project.shortId}`)
   }  
   
   handleAddButtonClick() {
     const { setTempTasks } = this.props;
+    
     setTempTasks([]);
     hashHistory.push('/projects/new');
   }
@@ -66,9 +74,8 @@ class ProjectsPage extends Component {
   
   toggleProjectSelectTip() {
     sessionStorage.setItem('isProjectSelectTipActive', false);
-    console.log('toggling')
-    console.log(sessionStorage.isProjectSelectTipActive)
-    this.setState({ isProjectSelectTipActive: false })
+    
+    this.setState({ isProjectSelectTipActive: false });
   }
   
   renderProject (project){
@@ -160,11 +167,13 @@ class ProjectsPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { projects, selectedProjectId } = state; 
+  const {  projects, selectedProjectId, timer } = state; 
   const { hasFetched } = projects;
+  const { isTimerActive } = timer;
   
   return {
     hasFetched, 
+    isTimerActive,
     selectedProjectId,
     projects: projects.items,
   }
@@ -173,9 +182,10 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { 
   addProject,
   changeActiveEditMenu,
-  setTempTasks,
   deleteProject,
   setSelectedProject,
+  setTempTasks,
+  toggleTimer,
   updateProjectName
 })(ProjectsPage);
 
