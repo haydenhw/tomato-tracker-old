@@ -70,12 +70,14 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div>
-        <label htmlFor="taskName">Tasks</label>
-        <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
-        <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-          <Field name="taskName" component={this.renderField}/>
-        </form>
+      <div className="add-tasks-form">
+        <div className="field-wrapper">
+          <label htmlFor="taskName">Tasks</label>
+          <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
+          <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
+            <Field name="taskName" component={this.renderField}/>
+          </form>
+        </div>
           {!(shouldRenderSubmitButton === false) && 
             <button className='form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
           }

@@ -32,7 +32,6 @@ let AddTasksFormContainer = class extends Component {
     const { setTempTasks, showTasksForSelectedProject, tasks } = this.props;
     
     if (showTasksForSelectedProject) {
-      console.log('fdasfd')
       setTempTasks(tasks);
     }
   }

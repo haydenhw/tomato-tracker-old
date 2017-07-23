@@ -100,6 +100,7 @@ class EditProjectPage extends Component {
         <ProjectTaskForm 
           handleCancel={routeToProjects}
           handleSubmit={this.handleRemoteSubmit}
+          label="Project Name"
           shouldDisableTaskFormFocus={true}
           showTasksForSelectedProject={true}
         >
