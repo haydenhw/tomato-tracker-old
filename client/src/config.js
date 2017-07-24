@@ -1,6 +1,6 @@
 const renderModal = true; 
 const productionMode = false;
-export const modalType = productionMode ? "WELCOME" : "WELCOME";  
+export const modalType = productionMode ? "WELCOME" : "ADD_TASKS_FS";  
 
 export const renderFormModal = productionMode ? false : renderModal;
 export const isOnboardingActive = productionMode ? false : false;

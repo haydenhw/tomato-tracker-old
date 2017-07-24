@@ -8,13 +8,11 @@ export default function WelcomeModal(props) {
   
   return(
     <div className="welcome form">
-      {/* <BounceInAnimationWrapper> */}
-        <h2 className="form-title bounceInDown-appear">Welcome to PomTracker!</h2>
-      {/* </BounceInAnimationWrapper> */}
-      {/* <BounceInAnimationWrapper> */}
-        <p>Click below to add you first project</p>
-        <button className="form-button" onClick={handleGetStartedClick}>Get Started</button>
-      {/* </BounceInAnimationWrapper> */}
+        <h2 className="form-title bounceInDown-welcome">Welcome to PomTracker!</h2>
+        <div className="bounceInDown-welcome-second">
+          <p>Click below to add you first project</p>
+          <button className="form-button fadeInButton-welcome" onClick={handleGetStartedClick}>Get Started</button>
+        </div>
     </div>
   );
 }

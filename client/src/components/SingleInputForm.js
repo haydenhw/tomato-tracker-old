@@ -44,7 +44,7 @@ let SingleInputForm = function SingleInputForm(props) {
         component={renderField}
       />
       {shouldRenderSubmitButton && 
-        <button className="form-button form-submit" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
+        <button className="fadeInButton form-submit" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
       }
     </form>
   );

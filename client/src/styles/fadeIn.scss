@@ -1,12 +1,22 @@
 @keyframes fadeIn{
     0% { opacity:0; }
-    66% { opacity:0; }
+    // 66% { opacity:0; }
     100% { opacity:1; }
 }
 
 @-webkit-keyframes fadeIn{
     0% { opacity:0; }
-    66% { opacity:0; }
+    // 66% { opacity:0; }
     100% { opacity:1; }
+}
+
+.fadeInButton-welcome {
+  opacity: 0;
+  animation: fadeIn 1s ease-in 2.3s forwards;
+}
+
+.fadeInButton {
+  opacity: 0;
+  animation: fadeIn 1s ease-in 1.2s forwards;
 }
 

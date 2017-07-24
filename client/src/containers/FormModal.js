@@ -119,7 +119,7 @@ class FormModal extends Component {
       case (modalType === "ADD_PROJECT") && (elementType === "CONTENT"): 
         return (
           <SingleInputForm
-            formName={"projectName"}
+            formName="projectName"
             handleFormSubmit={this.handleAddProject.bind(this)}
             placeholder={"Project Name"}
             projects={projects}
