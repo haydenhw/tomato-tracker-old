@@ -234,23 +234,17 @@ export default class TimeTracker extends Component {
                   <ListHeader col1Title="Task" col2Title="Time Logged" /> </List>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
-              <FormModal
-                clickedTaskId={clickedTaskId}
-                handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-                isActive={isModalActive}
-              /> 
             </div>  
           : <div className="list-container">
               <span>Add tasks to your project to start tracking time.</span>
               <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
-              
-              <FormModal
-                clickedTaskId={clickedTaskId}
-                handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-                isActive={isModalActive}
-              />                 
             </div>
           }
+          <FormModal
+            clickedTaskId={clickedTaskId}
+            handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
+            isActive={isModalActive}
+          />
         </div>
     );
   }

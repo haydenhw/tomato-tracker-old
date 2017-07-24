@@ -8,6 +8,10 @@ $placeholder-font-size: .75 * $heading-font-size;
   margin-top: 30px; 
 }
 
+.minimal-form {
+  @include centerVertHoriz();  
+}
+
 .form {
   width: 70%;
   margin: 0 auto;
@@ -36,7 +40,7 @@ $placeholder-font-size: .75 * $heading-font-size;
     font-size: 1em;     
     position: absolute;
     right: 0;
-    bottom: 0;
+    // bottom: 0;
   }  
   
   input {
