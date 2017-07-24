@@ -20,7 +20,7 @@ export default class ProjectTaskForm extends Component {
       shouldDisableTaskFormFocus,
       showTasksForSelectedProject
      } = this.props;
-    console.log(label) 
+     
     return (
       <div className="form-page">
         {label && <label>{label}</label>}  

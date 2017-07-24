@@ -77,7 +77,6 @@ const renderField = ({
     
     return (
       <form onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
-        <h2 className="form-title">Edit Task</h2>
         <div className="field-wrapper">
           <label>Task Name</label>
           <Field
@@ -106,16 +105,15 @@ EditTaskForm = reduxForm({
 })(EditTaskForm);
 
 const mapStateToProps = (state, ownProps) => {
-  const { selectedProjectId, projects } = state;
-  const { clickedTaskId } = ownProps;
+  const { clickedTaskId, selectedProjectId, projects } = state;
   
   const selectedProject = projects.items.find((project) => project.shortId === selectedProjectId);  
   const selectedTask = projects.items.concatMap((project) => project.tasks).find((task) => clickedTaskId === task.shortId) 
   const taskNames = selectedProject.tasks.map((task) => task.taskName);
   
   return ({
-    selectedProjectId,
     clickedTaskId, 
+    selectedProjectId,
     selectedProject,
     selectedTask,
     taskNames, 

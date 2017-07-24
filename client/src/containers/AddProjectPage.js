@@ -13,7 +13,8 @@ import SingleInputForm from '../components/SingleInputForm';
 
 let AddProjectPage = class extends Component {
   handleNewProjectSubmit({ singleInput: projectName }) {
-    const { newTasks, postProject, projectNames, remoteSubmit } = this.props;
+    const { newTasks, postProject, projects, remoteSubmit } = this.props;
+    const projectNames = projects.items.map((project) => project.projectName);    
     
     if (!hasAnyValue(projectName)) {
       remoteSubmit(null);
@@ -44,7 +45,7 @@ let AddProjectPage = class extends Component {
     const { remoteSubmitForm } = this.props;
     
     return(
-      <div className="formform-page">
+      <div className="form form-page">
         <h2>New Project</h2>
         <ProjectTaskForm 
           handleSubmit={this.handleRemoteSubmit.bind(this)}
@@ -71,10 +72,9 @@ let AddProjectPage = class extends Component {
     const { remoteSubmitForm, taskForm } = customForm;
     const { tasks: newTasks} = taskForm;
         
-    const projectName = projects.items.map((project) => project.projectName);    
-    
     return {
-      newTasks
+      newTasks,
+      projects
     }
   }
 

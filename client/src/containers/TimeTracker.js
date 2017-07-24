@@ -102,8 +102,8 @@ export default class TimeTracker extends Component {
   handleEditTask = (taskId) => () => {
     const { toggleEditTaskForm } = this.props;
     
-    toggleEditTaskForm();
-    this.setState({ clickedTaskId: taskId});
+    toggleEditTaskForm(taskId);
+    // this.setState({ clickedTaskId: taskId});
   } 
 
   handleTaskChange(taskId){
@@ -212,7 +212,7 @@ export default class TimeTracker extends Component {
   
   render() {
     const { tasks, selectedProject } = this.props;
-    const { activeTaskId, clickedTaskId, isModalActive, selectedTaskId } = this.state;
+    const { activeTaskId, isModalActive, selectedTaskId } = this.state;
     const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
     
     return (

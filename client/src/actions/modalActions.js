@@ -16,8 +16,9 @@ export const toggleAddTasksForm = () => ({
 });
 
 export const TOGGLE_EDIT_TASK_FORM = 'TOGGLE_EDIT_TASK_FORM';
-export const toggleEditTaskForm = () => ({
+export const toggleEditTaskForm = (taskId) => ({
   type: 'TOGGLE_EDIT_TASK_FORM',
+  taskId
 });
 
 export const TOGGLE_PROJECT_NAG_MODAL = 'TOGGLE_PROJECT_NAG_MODAL';
