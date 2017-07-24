@@ -5,11 +5,15 @@ import PropTypes from 'prop-types';
 import { toggleModal } from '../actions/indexActions';
 
 import RootModal from '../components/ModalRoot';
+import AddProjectModal from './AddProjectModal';
 import ProjectNagModal from './ProjectNagModal';
+import WelcomeModalContainer from './WelcomeModalContainer';
 
 function Modal(props) {
   const MODAL_COMPONENTS = {
-    PROJECT_NAG: ProjectNagModal
+    ADD_PROJECT: AddProjectModal,
+    PROJECT_NAG: ProjectNagModal,
+    WELCOME: WelcomeModalContainer
   }
   
   const {
@@ -35,10 +39,7 @@ function Modal(props) {
     <RootModal className={rootModalClass}>
       <div className={`modal ${modalClass}`} style={style}>
         <span className="modal-close" onClick={handleCloseButtonClick} role="button">&times;</span>
-        {areChildrenActive === true
-          ? children
-          : <SpecificModal {...modalProps} />   
-        }
+           <SpecificModal {...modalProps} />   
       </div>
     </RootModal>
   );  

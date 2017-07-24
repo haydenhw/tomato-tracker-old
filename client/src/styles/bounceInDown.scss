@@ -23,17 +23,25 @@
 
   to {
     transform: none;
+    opacity: 1; 
   }
 }
 
 .bounceInDown-appear {
-   -webkit-animation-name: bounceInDown;
-  //  -webkit-animation-delay: 2s;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-    animation-name: bounceInDown;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
+  //  -webkit-animation-name: bounceInDown;
+  // //  -webkit-animation-delay: 2s;
+  //   -webkit-animation-duration: 1s;
+  //   -webkit-animation-iteration-count: 1;
+  //   -webkit-animation-timing-function: linear;
+  //   animation-name: bounceInDown;
+  //   animation-duration: 1s;
+  //   animation-timing-function: linear;
+  //   
+    animation: bounceInDown 1s linear; 
+    // animation-iteration-count: 1;
+}
+
+.bounceInDown-appear-second {
+    opacity: 0;
+    animation: bounceInDown 1s linear 400ms forwards; 
 }

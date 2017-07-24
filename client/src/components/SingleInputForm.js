@@ -37,7 +37,7 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <form onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
+    <form className="bounceInDown-appear-second" onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
       <Field
         name="singleInput"
         type="text"

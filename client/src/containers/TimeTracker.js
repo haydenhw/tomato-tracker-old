@@ -6,7 +6,7 @@ import shortid from 'shortid';
 import { secondsToHMMSS } from 'helpers/time';
 
 import EditMenu from './EditMenu';
-import FormModal from './FormModal';
+import Modal from './Modal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
@@ -240,11 +240,7 @@ export default class TimeTracker extends Component {
               <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
             </div>
           }
-          <FormModal
-            clickedTaskId={clickedTaskId}
-            handleCloseButtonClick={this.toggleShouldRenderModal.bind(this)}
-            isActive={isModalActive}
-          />
+          <Modal modalClass="fullscreen-modal" rootModalClass="unfold" />
         </div>
     );
   }

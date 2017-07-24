@@ -181,7 +181,6 @@ class FormModal extends Component {
     )
   }
   
-  
   render() {
     const { isModalActive, modalType, rootModalClass, toggleModal } = this.props;
     const { isModalClosing } = this.state;
