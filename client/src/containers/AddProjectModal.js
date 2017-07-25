@@ -29,7 +29,7 @@ class AddProjectModal extends Component {
     
     // this.toggleIsContentWaiting();
     postProject(projectName);
-    changeModalType('ADD_TASKS_FS');
+    changeModalType('ADD_TASKS');
   } 
   
   render () {
@@ -37,7 +37,7 @@ class AddProjectModal extends Component {
     
     return (
       <FormModal
-        title="Add Project Form"
+        title="Add a project "
       >
         <SingleInputForm
           // className="bounceInDown-appear"

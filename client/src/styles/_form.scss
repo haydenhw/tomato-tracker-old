@@ -13,9 +13,11 @@ $placeholder-font-size: .75 * $heading-font-size;
 }
 
 .form {
+  @include centerVertHoriz();  
+  top: 30%;
   width: 70%;
   margin: 0 auto;
-  position: static;
+  // position: static;
   // margin-top: 25vh;
   text-align: left;
   font-family: $font-fullscreen-form-heading; 
