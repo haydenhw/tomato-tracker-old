@@ -5,7 +5,7 @@ export default function FormModal(props) {
   const { children, greyText, title } = props;
   
   return (
-    <div className="form">
+    <div className="form-container">
       <h2 className="form-title bounceInDown">
       {title}
       <span className='grey-title-name'>{greyText}</span>

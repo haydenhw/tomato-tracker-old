@@ -37,16 +37,18 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <form className="bounceInDown-appear-second" onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
-      <Field
-        name="singleInput"
-        type="text"
-        component={renderField}
-      />
+    <div className="form-wrapper">
+      <form className="form" onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
+        <Field
+          name="singleInput"
+          type="text"
+          component={renderField}
+        />
+      </form>
       {shouldRenderSubmitButton && 
         <button className="fadeInButton form-submit" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
       }
-    </form>
+    </div>
   );
 }
 

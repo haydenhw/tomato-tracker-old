@@ -12,7 +12,7 @@ $placeholder-font-size: .75 * $heading-font-size;
   @include centerVertHoriz();  
 }
 
-.form {
+.form-container {
   @include centerVertHoriz();  
   top: 30%;
   width: 70%;
