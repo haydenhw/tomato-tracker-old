@@ -33,27 +33,26 @@ class AddProjectModal extends Component {
   } 
   
   render () {
-    const { title } = this.props;
+    const { lastSavedProjectName } = this.props;
     
     return (
-      <FormModal
-        title="Add a project "
-      >
-        <SingleInputForm
-          // className="bounceInDown-appear"
-          formName="projectName"
-          handleFormSubmit={this.handleAddProject.bind(this)}
-          placeholder="Project Name"
-          shouldRenderSubmitButton={true}
-        />
-      </FormModal>
+      <SingleInputForm
+        formName="projectName"
+        handleFormSubmit={this.handleAddProject.bind(this)}
+        placeholder="Project Name"
+        shouldRenderSubmitButton={true}
+        title="Add a project"
+      />
     );
   }
 }
 const mapStateToProps = state => {
   const { projects } = state;
   
+  const lastSavedProjectName = projects.items[projects.items.length - 1].projectName; 
+  
   return {
+    lastSavedProjectName,
     projects: projects.items
   }
 }

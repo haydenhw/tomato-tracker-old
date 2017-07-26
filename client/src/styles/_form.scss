@@ -4,6 +4,32 @@ $heading-font-size: 28px;
 $placeholder-font-weight: bold;
 $placeholder-font-size: .75 * $heading-font-size; 
 
+/////// del
+.form-wrapper {
+  border: 1px solid #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.form-submit {
+  margin: 0 60px 40px 0;
+  padding: 0.7em 1.9em;
+  font-size: 1em;     
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 40px;
+  background: none;
+  border: 2.2px solid #232529;
+  padding: 1em 1.9em;
+  font-size: 1.1em;
+  font-family: $font-fullscreen-form-heading; 
+  font-weight: bold; 
+}  
+
 .field-wrapper {
   margin-top: 30px; 
 }
@@ -12,7 +38,7 @@ $placeholder-font-size: .75 * $heading-font-size;
   @include centerVertHoriz();  
 }
 
-.form-container {
+.form {
   @include centerVertHoriz();  
   top: 30%;
   width: 70%;
@@ -34,15 +60,6 @@ $placeholder-font-size: .75 * $heading-font-size;
   .error {
     color: $error-red;
     font-size: 1.1em;
-  }  
-  
-  .form-submit {
-    margin: 0 60px 40px 0;
-    padding: 0.7em 1.9em;
-    font-size: 1em;     
-    position: absolute;
-    right: 0;
-    // bottom: 0;
   }  
   
   input {
