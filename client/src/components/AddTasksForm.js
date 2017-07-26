@@ -67,10 +67,19 @@ let AddTasksForm = class extends Component {
       shouldRenderSubmitButton,
       renderFormTask,
       tasks,
+      title,
+      titleName
     } = this.props;
     
     return (
+    <div className="">
       <div className="add-tasks-form">
+        {title && 
+          <h2 className="form-title bounceInDown">
+            {title}  
+            {titleName && <span className='grey-title-name'>{titleName}</span>}
+          </h2>
+        }
         <div className="field-wrapper">
           <label htmlFor="taskName">Tasks</label>
           <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
@@ -78,10 +87,11 @@ let AddTasksForm = class extends Component {
             <Field name="taskName" component={this.renderField}/>
           </form>
         </div>
-          {!(shouldRenderSubmitButton === false) && 
-            <button className='form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
-          }
       </div>
+      {!(shouldRenderSubmitButton === false) && 
+        <button className='form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+      }
+    </div>  
     );
   }
 }  

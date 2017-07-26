@@ -12,12 +12,10 @@ function AddTasksModal(props) {
   const { lastAddedProjectName } = props;
   
   return (
-    <FormModal 
+    <AddTasksFormContainer
       title={"Add tasks for project "}
-      greyText={lastAddedProjectName}
-    >
-      <AddTasksFormContainer />
-    </FormModal>
+      titleName={lastAddedProjectName}
+    />
   );
 }
 

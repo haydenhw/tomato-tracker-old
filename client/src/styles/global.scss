@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html, body, #root, [data-reactroot] {
+  width: 100%;
+  height: 100%;  
+}
+
 body {
   font-weight: normal !important;
   margin: 0 !important;
@@ -25,7 +30,13 @@ button:focus {
   color: $title-name-grey;
   font-weight: bold;
 }
-    
+
+// .master-container {
+//   height: 100%;
+//   width: 100%;
+//   border: 10px solid #000;
+// }
+//     
 @mixin centerVertHoriz(){
   position: absolute;
   top: 50%;

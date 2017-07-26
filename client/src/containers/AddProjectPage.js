@@ -45,8 +45,6 @@ let AddProjectPage = class extends Component {
     const { remoteSubmitForm } = this.props;
     
     return(
-      <div className="form form-page">
-        <h2>New Project</h2>
         <ProjectTaskForm 
           handleSubmit={this.handleRemoteSubmit.bind(this)}
           handleCancel={routeToProjects}
@@ -62,7 +60,6 @@ let AddProjectPage = class extends Component {
               targetPropKey="remoteSubmitForm"
             />
         </ProjectTaskForm>  
-      </div>
     );
   }
 }

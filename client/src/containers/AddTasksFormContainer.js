@@ -120,7 +120,14 @@ let AddTasksFormContainer = class extends Component {
   }
   
   render() {
-    const { formTasks, handleSubmit, shouldDisableFocusOnMount, shouldRenderSubmitButton } = this.props;
+    const {
+      formTasks,
+      handleSubmit,
+      shouldDisableFocusOnMount,
+      shouldRenderSubmitButton,
+      title,
+      titleName
+    } = this.props;
     
     return (
       
@@ -135,6 +142,8 @@ let AddTasksFormContainer = class extends Component {
           renderFormTask={this.renderFormTask.bind(this)}
           shouldRenderSubmitButton={shouldRenderSubmitButton}
           tasks={formTasks}
+          title={title}
+          titleName={titleName}
           form={'tasks form'}
         />
       </RemoteSubmitForm>

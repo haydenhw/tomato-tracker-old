@@ -21,9 +21,6 @@ function Modal(props) {
   }
   
   const {
-    areChildrenActive,   
-    children, 
-    handleCloseButtonClick,
     isModalActive, 
     modalClass,
     modalProps,
@@ -38,12 +35,11 @@ function Modal(props) {
   }
   
   const SpecificModal = MODAL_COMPONENTS[modalType];
-  
   return (
     <RootModal className={rootModalClass}>
       <div className={`modal ${modalClass}`} style={style}>
         <span className="modal-close" onClick={toggleModal} role="button">&times;</span>
-           <SpecificModal {...modalProps} />   
+        <SpecificModal {...modalProps} />   
       </div>
     </RootModal>
   );  

@@ -27,7 +27,7 @@ class App extends Component {
             <li className="nav-link"><Link to="/projects">Projects</Link></li>
           </ul>
         </nav>
-        {this.props.children}
+          {this.props.children}
       </div>
     );
   }

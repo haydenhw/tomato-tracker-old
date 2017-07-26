@@ -9,15 +9,9 @@ import FormModal from '../components/FormModal';
 import EditTaskForm from '../components/EditTaskForm';
 
 export default function EditTaskModal(props) {
-  // const { clickedTaskId } = props;
-  
   return (
-    <FormModal 
-      title={"Edit task"}
-      // greyText={clickedTaskId}
-    >
-      <EditTaskForm />
-    </FormModal>
+    <EditTaskForm 
+    />
   );
 }
 // 

@@ -7,7 +7,7 @@ export default function WelcomeModal(props) {
   const { handleGetStartedClick } = props;
   
   return(
-    <div className="welcome form">
+    <div className="welcome">
         <h2 className="form-title bounceInDown-welcome">Welcome to PomTracker!</h2>
         <div className="bounceInDown-welcome-second">
           <p>Click below to add you first project</p>
