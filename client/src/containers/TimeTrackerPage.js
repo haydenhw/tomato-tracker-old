@@ -9,6 +9,7 @@ import {
   fetchProjects,
   setSelectedProject,
   toggleAddTasksForm,
+  toggleConfig,
   toggleEditTaskForm,
   toggleOnboardMode
 } from '../actions/indexActions';
@@ -39,6 +40,7 @@ class TimeTrackerPage extends Component {
       selectedProjectId,
       setSelectedProject,
       toggleAddTasksForm, 
+      toggleConfig,
       toggleEditTaskForm,
       toggleOnboardMode
     } = this.props;
@@ -66,6 +68,7 @@ class TimeTrackerPage extends Component {
           setSelectedProject={setSelectedProject}
           tasks={selectedTasks || []}
           toggleAddTasksForm={toggleAddTasksForm} 
+          toggleConfig={toggleConfig}
           toggleEditTaskForm={toggleEditTaskForm}
           toggleOnboardMode={toggleOnboardMode}
         />
@@ -97,6 +100,7 @@ export default connect(mapStateToProps, {
   decrementTimer,
   setSelectedProject,
   toggleAddTasksForm,
+  toggleConfig,
   toggleEditTaskForm, 
   toggleOnboardMode
 })(TimeTrackerPage);

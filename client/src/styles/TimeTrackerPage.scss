@@ -34,6 +34,19 @@
   margin-bottom: 33px;
 }
 
+.gear-icon-wrapper {
+  color: #BDBDBD;
+  padding: 5px;
+  position: absolute;
+  top: 75px;  
+  right: 10px;
+}
+
+.gear-icon-wrapper:hover {
+  color: #9E9E9E;
+  cursor: pointer;
+}
+
 // .add-button {
 //   bottom: 36px;
 //   right: 54px;

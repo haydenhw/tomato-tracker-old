@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import { customForm } from './customForm';
 import { clickedTaskId } from './clickedTaskId';
+import { config } from './config';
 import { editMenu } from './editMenu';
 import { modal } from './modal';
 import { projects } from './projects';
@@ -11,6 +12,7 @@ import { timer } from './timer';
 
 export default combineReducers({
     clickedTaskId,
+    config,
     customForm,
     editMenu,
     modal,

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InlineEdit from 'react-edit-inline';
 
 import { timeStringToSeconds } from '../helpers/time';
 
-export default class TopNavbarEditableText extends React.Component {
+export default class TopNavbarEditableText extends Component {
   constructor() {
     super();
     

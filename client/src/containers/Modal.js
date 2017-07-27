@@ -7,6 +7,7 @@ import { toggleModal } from '../actions/indexActions';
 import RootModal from '../components/ModalRoot';
 import AddProjectModal from './AddProjectModal';
 import AddTasksModal from './AddTasksModal';
+import ConfigModal from './ConfigModal';
 import EditTaskModal from './EditTaskModal';
 import ProjectNagModal from './ProjectNagModal';
 import WelcomeModalContainer from './WelcomeModalContainer';
@@ -15,6 +16,7 @@ function Modal(props) {
   const MODAL_COMPONENTS = {
     ADD_PROJECT: AddProjectModal,
     ADD_TASKS: AddTasksModal,
+    CONFIG: ConfigModal,
     EDIT_TASK: EditTaskModal,
     PROJECT_NAG: ProjectNagModal,
     WELCOME: WelcomeModalContainer

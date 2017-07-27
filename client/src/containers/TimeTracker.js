@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
@@ -211,13 +212,16 @@ export default class TimeTracker extends Component {
   }
   
   render() {
-    const { tasks, selectedProject } = this.props;
+    const { tasks, selectedProject, toggleConfig } = this.props;
     const { activeTaskId, isModalActive, selectedTaskId } = this.state;
     const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
-    
+  console.log(toggleConfig)  
     return (
       <div className="time-tracker">
         <div className="timer-section">
+          <div className="gear-icon-wrapper" onClick={toggleConfig}>
+            <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
+          </div>  
           <div className="timer-container">
             {tasks.length > 0 && this.renderTaskSelect()}
             <Timer activeTaskId={activeTaskId} selectedTaskId={selectedTaskId} setActiveTask={this.setActiveTask.bind(this)}/>

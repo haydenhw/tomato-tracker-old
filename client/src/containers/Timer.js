@@ -52,11 +52,12 @@ class Timer extends Component {
   
   timer () {
     const { 
-      selectedProject,
+      alarmSoundSrc,
       decrementTimer,
       incrementTaskTime,
       remainingTime,
       resetTimer,
+      selectedProject,
       selectedTaskId, 
       setActiveTask,
       toggleTimer
@@ -69,7 +70,7 @@ class Timer extends Component {
     decrementTimer();
     
     if (remainingTime < 1) {
-      const audio = new Audio('Old-clock-ringing-short.mp3');
+      const audio = new Audio(alarmSoundSrc);
       audio.play();
       
       clearInterval(intervalId);
@@ -114,11 +115,13 @@ class Timer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { selectedProjectId, projects, timer } = state;
+  const { config, selectedProjectId, projects, timer } = state;
+  const { alarmSoundSrc } = config;
   const { intervalId, isTimerActive, remainingTime, startTime } = timer;
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
 
   return {
+    alarmSoundSrc,
     selectedProject,
     intervalId,
     isTimerActive,

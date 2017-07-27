@@ -1,8 +1,11 @@
-
-
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const toggleModal = () => ({
   type: 'TOGGLE_MODAL',
+});
+
+export const TOGGLE_CONFIG = 'TOGGLE_CONFIG';
+export const toggleConfig = () => ({
+  type: 'TOGGLE_CONFIG',
 });
 
 export const TOGGLE_ONBOARD_MODE = 'TOGGLE_ONBOARD_MODE';

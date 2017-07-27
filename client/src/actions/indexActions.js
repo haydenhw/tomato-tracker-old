@@ -1,3 +1,4 @@
+export * from './configActions';
 export * from './customFormActions';
 export * from './editMenuActions';
 export * from './projectActions';

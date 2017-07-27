@@ -1,0 +1,56 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+
+import store from '../redux-files/store';
+
+const renderField = (props) => {
+  const { input, type, meta: { touched, error }} = props;
+  return (
+    <div>
+      <input
+        {...input} 
+        autoFocus
+        autoComplete="off"
+        className="fullscreen-input add-project-input" 
+        placeholder={"Project Name"} 
+        type={type} 
+      />
+      {touched && error && <div className="error">{error}</div>}
+    </div>
+  )
+} 
+
+let ConfigForm = function ConfigForm(props) {
+  const {
+    handleFormSubmit,
+    handleSubmit,
+    title
+  } = props;
+  
+  return (
+        <form onSubmit={handleSubmit}>
+          {title && 
+            <h2 className="form-title bounceInDown">
+              {title}  
+            </h2>
+          }
+          <div className="bounceInDown-second">
+            <Field component="select" name="alarmSound">
+              <option value="sound/Old-clock-ringing-short.mp3">ringer</option>
+              <option value="sound/endSound.mp3">electronic</option>
+            </Field> 
+          </div>
+          <button className="fadeInButton form-submit" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+        </form>
+  );
+}
+
+export default reduxForm({
+  form: 'config', 
+})(ConfigForm)
+
+// ConfigForm.propTypes = {
+//   handleProjectSubmit: PropTypes.func,
+//   handleSubmit: PropTypes.func,
+// }
