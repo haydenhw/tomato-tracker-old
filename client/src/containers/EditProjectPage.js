@@ -95,27 +95,24 @@ class EditProjectPage extends Component {
     }  
     
     return (
-      <div className="form form-page">
-        <h2 className="form-title">Edit Project <span className="grey-title-name">{selectedProject.projectName}</span></h2>
-        <ProjectTaskForm 
-          handleCancel={routeToProjects}
-          handleSubmit={this.handleRemoteSubmit}
-          label="Project Name"
-          shouldDisableTaskFormFocus={true}
-          showTasksForSelectedProject={true}
-        >
-          <SingleInputForm
-            formName={"projectName"}
-            initialValues={{ singleInput: selectedProject.projectName }}
-            placeholder={"Project Name"}
-            shouldRenderSubmitButton={false}
-            onTargetUpdate={this.handleEditProjectSubmit}
-            targetPropKey="remoteSubmitForm"
-            targetValue="ADD_PROJECT" 
-            form={'project form'}
-          />
-        </ProjectTaskForm>
-      </div>  
+      <ProjectTaskForm 
+        handleCancel={routeToProjects}
+        handleSubmit={this.handleRemoteSubmit}
+        label="Project Name"
+        shouldDisableTaskFormFocus={true}
+        showTasksForSelectedProject={true}
+      >
+        <SingleInputForm
+          formName={"projectName"}
+          initialValues={{ singleInput: selectedProject.projectName }}
+          placeholder={"Project Name"}
+          shouldRenderSubmitButton={false}
+          onTargetUpdate={this.handleEditProjectSubmit}
+          targetPropKey="remoteSubmitForm"
+          targetValue="ADD_PROJECT" 
+          form={'project form'}
+        />
+      </ProjectTaskForm>
     );
   }
 }

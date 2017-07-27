@@ -28,19 +28,17 @@ const renderField = (props) => {
 
 let SingleInputForm = function SingleInputForm(props) {
   const {
-    formName,
     handleFormSubmit,
     handleSubmit,
-    inputRef,
-    placeholder,
+    isModalActive,
     shouldRenderSubmitButton,
     title,
     titleName
   } = props;
   
   return (
-    <div>
-      <div>
+    <div className={`${isModalActive ? "fs-modal-form-container": ""}`}>
+      <div className={`${isModalActive ? "form-container": "" }`}>
         <form onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
           {title && 
             <h2 className="form-title bounceInDown">

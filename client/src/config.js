@@ -1,4 +1,4 @@
-const renderModal = true; 
+const renderModal = false; 
 const productionMode = false;
 export const modalType = productionMode ? "WELCOME" : "WELCOME";  
 

@@ -123,6 +123,7 @@ let AddTasksFormContainer = class extends Component {
     const {
       formTasks,
       handleSubmit,
+      isModalActive,
       shouldDisableFocusOnMount,
       shouldRenderSubmitButton,
       title,
@@ -138,6 +139,7 @@ let AddTasksFormContainer = class extends Component {
           handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
           handleSubmit={handleSubmit}
           handleTaskSubmit={this.handleAddTask.bind(this)}
+          isModalActive={isModalActive}
           shouldDisableFocusOnMount={shouldDisableFocusOnMount}
           renderFormTask={this.renderFormTask.bind(this)}
           shouldRenderSubmitButton={shouldRenderSubmitButton}

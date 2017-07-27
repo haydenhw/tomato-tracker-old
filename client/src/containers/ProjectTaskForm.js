@@ -17,13 +17,15 @@ export default class ProjectTaskForm extends Component {
       handleSubmit,
       handleCancel,
       label,
+      selectedProjectName,
       shouldDisableTaskFormFocus,
       showTasksForSelectedProject
      } = this.props;
      
     return (
-      <div className="fs-modal-form-container">
+      <div className="form-page">
         <div className="form-container">
+          <h2 className="form-title">Edit Project <span className="grey-title-name">{selectedProjectName}</span></h2>
           {label && <label>{label}</label>}  
           {children}        
           <AddTasksFormContainer
@@ -31,7 +33,7 @@ export default class ProjectTaskForm extends Component {
             shouldRenderSubmitButton={false}
             showTasksForSelectedProject={showTasksForSelectedProject}
           />  
-          <div className="form-button form-submit">
+          <div className="form-submit-button-group">
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleCancel}>Cancel</button>
           </div>

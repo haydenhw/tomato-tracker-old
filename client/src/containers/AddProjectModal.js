@@ -39,6 +39,7 @@ class AddProjectModal extends Component {
       <SingleInputForm
         formName="projectName"
         handleFormSubmit={this.handleAddProject.bind(this)}
+        isModalActive={true}
         placeholder="Project Name"
         shouldRenderSubmitButton={true}
         title="Add a project"
