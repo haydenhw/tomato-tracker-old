@@ -24,14 +24,21 @@ export function setIntervalId(intervalId) {
 
 export const TOGGLE_TIMER = "TOGGLE_TIMER";
 export function toggleTimer(startTime, shouldStartTimer) {
+  return {
+    type: "TOGGLE_TIMER"
+  }
+}
+
+export const SET_START_TIME = "SET_START_TIME";
+export function setStartTime(startTime, shouldToggleTimer) {
   return (dispatch, getState) => {
-    // startTime = isNaN(startTime) ? timeStringToSeconds(startTime, 'MMSS') : Math.ceil(Number(startTime) * 60);  
-    // startTime = startTime === 'NAN_ERROR' ?  getState().timer.startTime : startTime;
+    startTime = isNaN(startTime) ? timeStringToSeconds(startTime, 'MMSS') : Math.ceil(Number(startTime) * 60);  
+    startTime = startTime === 'NAN_ERROR' ?  getState().timer.startTime : startTime;
     
     return dispatch({
-      type: "TOGGLE_TIMER",
-      shouldStartTimer,
-      startTime  
+      type: "SET_START_TIME",
+      startTime, 
+      shouldToggleTimer
     });
   }
 }
@@ -52,7 +59,6 @@ export function resetTimer() {
 
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
 export function incrementTaskTime(project, task) {
-  
   return (dispatch) => {
     const updatedTask = Object.assign({}, task, { recordedTime: task.recordedTime + 1 })
     

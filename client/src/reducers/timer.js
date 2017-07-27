@@ -26,22 +26,28 @@ export const timer = (state=defaultState, action) => {
         remainingTime: state.remainingTime - 1
       }
     case actions.RESET_TIMER:
-    return {
-      ...state,
-      remainingTime: state.startTime 
-    }
+      return {
+        ...state,
+        remainingTime: state.startTime 
+      }
     case actions.SET_INTERVAL_ID: 
-    return {
-      ...state,
-      intervalId: action.intervalId 
-    }
+      return {
+        ...state,
+        intervalId: action.intervalId 
+      }
+    case actions.SET_START_TIME:
+      return {
+        ...state,
+        isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,  
+        startTime: action.startTime,
+        remainingTime: action.startTime 
+        
+      }
     case actions.TOGGLE_TIMER:
       return {
         ...state,
         isTimerActive: !state.isTimerActive,  
-        // startTime: action.startTime,
         remainingTime: state.startTime 
-        
       }
     default:
       return state;

@@ -9,6 +9,7 @@ import {
   incrementTaskTime,
   resetTimer,
   setIntervalId,
+  setStartTime,
   toggleTimer,
 } from '../actions/indexActions';
 
@@ -25,12 +26,11 @@ class Timer extends Component {
   
   componentWillMount() {
     const { intervalId, isTimerActive } = this.props;
-    // console.log(isTimerActive)
       
     if (isTimerActive === false) {
-        // console.log(intervalId)
       clearInterval(intervalId)
     }
+  
   }
   
   componentWillReceiveProps(nextProps) {
@@ -39,19 +39,13 @@ class Timer extends Component {
       const intervalId = setInterval(this.timer.bind(this), 1000);
       
       setIntervalId(intervalId);
-      // this.setState({ intervalId });
-      // store.dispatch({
-      //   type: "SET_INTERVAL_ID",
-      //   intervalId
-      // })
       
       setActiveTask(selectedTaskId);
     }
     
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && !nextProps.isTimerActive) {
       const { intervalId } = this.props;
-      console.log('receive clearing')
-      console.log(intervalId);
+      
       clearInterval(intervalId);
     }
   }
@@ -75,6 +69,9 @@ class Timer extends Component {
     decrementTimer();
     
     if (remainingTime < 1) {
+      const audio = new Audio('Old-clock-ringing-short.mp3');
+      audio.play();
+      
       clearInterval(intervalId);
       toggleTimer();
       resetTimer();
@@ -82,10 +79,11 @@ class Timer extends Component {
     }
   }
   
-  handleSetStartTime = (shouldStartTimer) => (startTime) => {
-    const { toggleTimer } = this.props;
+  handleSetStartTime = (selectedTaskId) => (newTime) => {
+    const { selectedTaskId, setStartTime } = this.props;
+    const shouldToggleTimer = Boolean(selectedTaskId);
     
-    toggleTimer(startTime, shouldStartTimer); 
+    setStartTime(newTime, shouldToggleTimer);  
   }
   
   render() {
@@ -95,6 +93,7 @@ class Timer extends Component {
       startTime,
       toggleTimer,
       selectedTaskId,
+      setStartTime,
       task,
     } = this.props;
     
@@ -103,7 +102,7 @@ class Timer extends Component {
         <TimeDisplay
           isTimerActive={isTimerActive}
           isTimerControlActive={Boolean(selectedTaskId)}
-          toggleTimer={this.handleSetStartTime(selectedTaskId !== null)} 
+          setStartTime={this.handleSetStartTime(selectedTaskId)}
           startCount={startTime}
           time={remainingTime}
           title={task}
@@ -134,5 +133,6 @@ export default connect(mapStateToProps, {
   incrementTaskTime,
   resetTimer,
   setIntervalId,
+  setStartTime,
   toggleTimer
 })(Timer);

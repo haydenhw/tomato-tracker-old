@@ -1,6 +1,6 @@
 import * as actions from 'actions/indexActions';
 
-import { modalType, isOnboardingActive, renderFormModal } from '../config'
+import { modalType, isOnboardingActive, renderFormModal } from '../srcConfig/devSettings'
 
 const defaultState = {
   isOnboardingActive, 

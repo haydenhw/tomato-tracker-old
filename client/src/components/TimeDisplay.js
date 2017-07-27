@@ -4,7 +4,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import FontAwesome from 'react-fontawesome';
 
 import { secondsToMSS } from '../helpers/time'
-import { showProgressBar, devStyle } from '../config'
+import { showProgressBar, devStyle } from '../srcConfig/devSettings'
 
 import EditInlineText from '../containers/EditInlineText';
 
@@ -15,6 +15,7 @@ export default function TimeDisplay(props) {
     isTimerActive,
     isTimerControlActive,
     toggleTimer,
+    setStartTime,
     startCount,
     title,
     time
@@ -36,7 +37,7 @@ export default function TimeDisplay(props) {
       />}
       <div>{title}</div>
       <div style={devStyle || null} className="timer-content">
-        <EditInlineText className="edit-time" handleChange={toggleTimer} text={secondsToMSS(displayTime)} />
+        <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} />
         <div className="timer-control">
           <div 
             className={`${isTimerControlActive ? "active": "" } flip-button-container`}  
