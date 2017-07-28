@@ -65,15 +65,16 @@ let AddTasksForm = class extends Component {
       handleSubmit,
       inputRef,
       isModalActive,
+      isOnboardingActive,
       shouldRenderSubmitButton,
       renderFormTask,
       tasks,
       title,
       titleName
     } = this.props;
-    
+    console.log(isModalActive)
     return (
-      <div className={`${true || isModalActive ? "fs-modal-form-container": ""}`}>
+      <div className={`${isOnboardingActive ? "fs-modal-form-container": ""}`}>
         <div className={`${true || isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className="form-title bounceInDown">

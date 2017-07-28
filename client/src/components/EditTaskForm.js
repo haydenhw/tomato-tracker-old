@@ -80,26 +80,28 @@ const renderField = ({
     const { handleSubmit, initialValues } = this.props;
     
     return (
-      <div className="form-container">
-        <h2 className="form-title bounceInDown">Edit Task</h2>
-        <form className="form" onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
-          <div className="field-wrapper">
-            <label>Task Name</label>
-            <Field
-              name="taskName"
-              component={renderField}
-              type="text"
-            />
-          </div>
-          <div className="field-wrapper">
-            <label>Logged Time: {initialValues.recordedTime}</label>
-            <Field
-              name="newTime"
-              component={renderField}
-              type="text"
-            />
-          </div>
-        </form>
+      <div style={{position:"relatvie"}}>
+        <div className="form-container">
+          <h2 className="form-title bounceInDown">Edit Task</h2>
+          <form className="form" onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
+            <div className="field-wrapper">
+              <label>Task Name</label>
+              <Field
+                name="taskName"
+                component={renderField}
+                type="text"
+              />
+            </div>
+            <div className="field-wrapper">
+              <label>Logged Time: {initialValues.recordedTime}</label>
+              <Field
+                name="newTime"
+                component={renderField}
+                type="text"
+              />
+            </div>
+          </form>
+        </div>
         <button className="form-button form-submit" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );

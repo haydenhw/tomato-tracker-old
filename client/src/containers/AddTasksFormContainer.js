@@ -126,6 +126,7 @@ let AddTasksFormContainer = class extends Component {
       formTasks,
       handleSubmit,
       isModalActive,
+      isOnboardingActive,
       shouldDisableFocusOnMount,
       shouldRenderSubmitButton,
       title,
@@ -142,6 +143,7 @@ let AddTasksFormContainer = class extends Component {
           handleSubmit={handleSubmit}
           handleTaskSubmit={this.handleAddTask.bind(this)}
           isModalActive={isModalActive}
+          isOnboardingActive={isOnboardingActive}
           shouldDisableFocusOnMount={shouldDisableFocusOnMount}
           renderFormTask={this.renderFormTask.bind(this)}
           shouldRenderSubmitButton={shouldRenderSubmitButton}
@@ -157,7 +159,7 @@ let AddTasksFormContainer = class extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { customForm, selectedProjectId, modal, projects } = state;
-  const { isOnboardingActive } = modal;  
+  const { isModalActive, isOnboardingActive } = modal;  
   const formTasks = customForm.taskForm.tasks;
   
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
@@ -171,6 +173,7 @@ const mapStateToProps = (state, ownProps) => {
     selectedProject,
     selectedProjectId,
     selectedProjectDatabaseId,
+    isModalActive,
     isOnboardingActive,
     tasks,
     formTasks

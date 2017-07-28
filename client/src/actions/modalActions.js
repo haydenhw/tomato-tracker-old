@@ -12,7 +12,7 @@ export const closeModal = () => {
   return (dispatch) => {
     dispatch(addModalClosingClass());
     
-    // setTimeout(() => dispatch(toggleModal()), 1500);
+    setTimeout(() => dispatch(toggleModal()), 1500);
   } 
 } 
 
