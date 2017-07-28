@@ -5,6 +5,8 @@ import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from '../helpers/time';
+import { routeToTimerPage } from '../helpers/route';
+
 import {
   addProject,
   changeActiveEditMenu,
@@ -36,7 +38,15 @@ class ProjectsPage extends Component {
   static defaultProps = {
     projects: ['filler']
   }
-
+  
+  componentWillMount() {
+    const { isOnboardingActive } = this.props;
+    
+    if (isOnboardingActive) {
+      routeToTimerPage();
+    } 
+  }
+  
   handleListItemClick = (projectId) => () => {
     const { isTimerActive, setSelectedProject, toggleTimer } = this.props;
       
@@ -45,7 +55,7 @@ class ProjectsPage extends Component {
     }
       
     setSelectedProject(projectId);
-    hashHistory.push(`/`);
+    routeToTimerPage();
   }  
   
   handleEditOptionClick = (project) => (evt) => {
@@ -166,12 +176,14 @@ class ProjectsPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const {  projects, selectedProjectId, timer } = state; 
+  const {  projects, modal, selectedProjectId, timer } = state; 
+  const { isOnboardingActive } = modal;
   const { hasFetched } = projects;
   const { isTimerActive } = timer;
   
   return {
     hasFetched, 
+    isOnboardingActive,
     isTimerActive,
     selectedProjectId,
     projects: projects.items,

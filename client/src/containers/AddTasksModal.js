@@ -22,9 +22,13 @@ function AddTasksModal(props) {
 const mapStateToProps = state => {
   const { projects } = state;
   
+  const lastAddedProjectName = projects.length > 0 
+    ? projects.items[projects.items.length-1].projectName
+    : null;
+  
   return {
-    lastAddedProjectName: projects.items[projects.items.length-1].projectName
-  }  
+    lastAddedProjectName  
+   }  
 } 
 
 export default connect(mapStateToProps, { changeModalType })(AddTasksModal);

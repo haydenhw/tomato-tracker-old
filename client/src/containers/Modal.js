@@ -8,6 +8,7 @@ import RootModal from '../components/ModalRoot';
 import AddProjectModal from './AddProjectModal';
 import AddTasksModal from './AddTasksModal';
 import ConfigModal from './ConfigModal';
+import ConfirmEditTask from './ConfirmEditTask';
 import EditTaskModal from './EditTaskModal';
 import ProjectNagModal from './ProjectNagModal';
 import WelcomeModalContainer from './WelcomeModalContainer';
@@ -17,6 +18,7 @@ function Modal(props) {
     ADD_PROJECT: AddProjectModal,
     ADD_TASKS: AddTasksModal,
     CONFIG: ConfigModal,
+    CONFIRM_EDIT_TASK: ConfirmEditTask,
     EDIT_TASK: EditTaskModal,
     PROJECT_NAG: ProjectNagModal,
     WELCOME: WelcomeModalContainer
@@ -35,6 +37,7 @@ function Modal(props) {
   if (!isModalActive) {
     return null;
   }
+  
   const SpecificModal = MODAL_COMPONENTS[modalType];
   return (
     <RootModal className={rootModalClass}>

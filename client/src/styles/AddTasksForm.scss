@@ -9,12 +9,12 @@ $form-margin-left: 30%;
 }
 
 .form-task-list {
+  border: 1px solid #000;
   margin: 25px auto;
   width: $form-width;
-  max-height: 265px;
-  overflow-y: auto;
+  // overflow-y: auto;
   font-size: .75em;
-  margin-left: $form-margin-left;
+  // margin-left: $form-margin-left;
   
   .button-wrapper {
     width: 20%;
@@ -61,6 +61,25 @@ $form-margin-left: 30%;
   
   button {
     margin: 0;
+  }
+}
+
+.modal {
+  .form-task-list {
+    overflow-y: auto;
+  }
+}
+
+.fullscreen-modal {
+  .form-task-list {
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+}
+
+.normal-modal {
+  .form-task-list {
+    max-height: 265px;
   }
 }
 

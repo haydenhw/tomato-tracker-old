@@ -35,9 +35,11 @@
 }
 
 .dropdown-content {
-  min-width: 160px;
+  min-width: 200px;
+  max-height: 300px;
+  overflow: auto;
   position: absolute;
-  top: 50%;
+  top: 200%;
   transform: translateY(-50%) scale(1);  
   background-color: #f9f9f9;
   list-style-type: none;

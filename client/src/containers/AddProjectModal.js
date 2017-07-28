@@ -47,11 +47,14 @@ class AddProjectModal extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   const { projects } = state;
   
-  const lastSavedProjectName = projects.items[projects.items.length - 1].projectName; 
-  
+  const lastSavedProjectName = projects.length > 0 
+    ? projects.items[projects.items.length - 1].projectName 
+    : null; 
+    
   return {
     lastSavedProjectName,
     projects: projects.items

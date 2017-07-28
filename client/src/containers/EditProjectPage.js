@@ -5,7 +5,7 @@ import { SubmissionError } from 'redux-form';
 import { addTask, deleteTask, setSelectedProject, remoteSubmit, updateProjectName, updateTasks } from '../actions/indexActions';
 
 import { hasAnyValue } from '../helpers/validate';
-import { routeToProjects } from '../helpers/route'
+import { routeToProjectsPage } from '../helpers/route'
 
 import SingleInputForm from '../components/SingleInputForm';
 import ProjectTaskForm from './ProjectTaskForm';
@@ -30,7 +30,7 @@ class EditProjectPage extends Component {
   
   componentDidUpdate(prevProps){ 
     if (this.props.remoteSubmitForm === "ADD_TASKS" && prevProps.remoteSubmitForm === "ADD_TASKS") {
-      routeToProjects();
+      routeToProjectsPage();
     } 
   }
   
@@ -48,7 +48,7 @@ class EditProjectPage extends Component {
     updateProjectName(project, projectName);
     updateTasks(project, tasks);
     remoteSubmit(null);
-    routeToProjects();
+    routeToProjectsPage();
   } 
   
   handleRemoteSubmit() {
@@ -96,7 +96,7 @@ class EditProjectPage extends Component {
     
     return (
       <ProjectTaskForm 
-        handleCancel={routeToProjects}
+        handleCancel={routeToProjectsPage}
         handleSubmit={this.handleRemoteSubmit}
         label="Project Name"
         shouldDisableTaskFormFocus={true}

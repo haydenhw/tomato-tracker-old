@@ -36,10 +36,9 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    const { isModalActive, projects, tasks } = this.props;
+    const { isOnboardingActive, projects, tasks } = this.props;
     // change isModalActive to isOnboardingActive for production  
-     
-    if ((projects.length === 0) && !isModalActive) {
+    if ((projects.length === 0) && !isOnboardingActive) {
       hashHistory.push('/projects')
     }
       
@@ -231,7 +230,11 @@ export default class TimeTracker extends Component {
               <div className="timesheet list-container">
                 <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-name"}>{selectedProject.projectName}</span></h2>
                 <div className="add-button-wrapper">
-                  <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASK</button> 
+                  <button
+                    className="add-button material-button" onClick={this.handleAddTasks.bind(this)}
+                  >
+                    ADD TASKS
+                  </button> 
                 </div>
                 <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                   <ListHeader col1Title="Task" col2Title="Time Logged" /> </List>

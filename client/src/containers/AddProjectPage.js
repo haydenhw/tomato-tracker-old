@@ -5,7 +5,7 @@ import { SubmissionError } from 'redux-form';
 
 import { postProject, remoteSubmit } from '../actions/indexActions';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
-import { routeToProjects } from '../helpers/route';
+import { routeToProjectsPage } from '../helpers/route';
 
 import ProjectTaskForm from './ProjectTaskForm';
 import RemoteSubmitForm from './RemoteSubmitForm';
@@ -32,7 +32,7 @@ let AddProjectPage = class extends Component {
     
     postProject(projectName, newTasks);
     remoteSubmit(null);
-    routeToProjects();
+    routeToProjectsPage();
   } 
   
   handleRemoteSubmit() {
@@ -47,7 +47,7 @@ let AddProjectPage = class extends Component {
     return(
         <ProjectTaskForm 
           handleSubmit={this.handleRemoteSubmit.bind(this)}
-          handleCancel={routeToProjects}
+          handleCancel={routeToProjectsPage}
           label="Project Name"
         >  
             <SingleInputForm

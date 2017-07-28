@@ -1,3 +1,4 @@
 import { hashHistory } from 'react-router';
 
-export const routeToProjects = () => hashHistory.push('/projects');
+export const routeToProjectsPage = () => hashHistory.push('/projects');
+export const routeToTimerPage = () => hashHistory.push('/');

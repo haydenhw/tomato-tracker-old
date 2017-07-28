@@ -111,6 +111,12 @@ html,body {
     }
   }
 }
+.fullscreen-modal {
+  .modal-close {
+    display: none;
+  }
+}
+
 @keyframes unfoldIn {
   0% {
     transform:scaleY(.005) scaleX(0);
