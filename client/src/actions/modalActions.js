@@ -10,10 +10,9 @@ export const addModalClosingClass = () => ({
 
 export const closeModal = () => {
   return (dispatch) => {
-    console.log('dispatching')
-    // dispatch(toggleModal())  
     dispatch(addModalClosingClass());
-    setTimeout(() => dispatch(toggleModal()), 1500);
+    
+    // setTimeout(() => dispatch(toggleModal()), 1500);
   } 
 } 
 
@@ -23,10 +22,13 @@ export const toggleConfig = () => ({
 });
 
 export const TOGGLE_ONBOARD_MODE = 'TOGGLE_ONBOARD_MODE';
-export const toggleOnboardMode = () => ({
-  type: 'TOGGLE_ONBOARD_MODE',
-});
-
+export const toggleOnboardMode = () => {
+  return (dispatch) => {
+    dispatch(addModalClosingClass());
+    
+    setTimeout(() => dispatch({ type: 'TOGGLE_ONBOARD_MODE' }), 1500);
+  }
+}
 export const TOGGLE_ADD_TASKS_FORM = 'TOGGLE_ADD_TASKS_FORM';
 export const toggleAddTasksForm = () => ({
   type: 'TOGGLE_ADD_TASKS_FORM',

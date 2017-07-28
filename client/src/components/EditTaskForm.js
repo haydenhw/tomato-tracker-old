@@ -1,10 +1,11 @@
+// refactor to fucntional/presentational Component. Pass submit handler from modal
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 import { secondsToHMMSS, timeStringToSeconds } from '../helpers/time';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
-import { confirmEditTask, updateTask } from '../actions/indexActions';
+import { closeModal, confirmEditTask, updateTask } from '../actions/indexActions';
 
 import 'rc-time-picker/assets/index.css';
 
@@ -29,6 +30,7 @@ const renderField = ({
         selectedProjectId,
         clickedTaskId,
         confirmEditTask,
+        closeModal,
         updateTask,
         initialValues,
         selectedProject,
@@ -59,7 +61,6 @@ const renderField = ({
         taskName,
         recordedTime: newTimeString
       } 
-      
       if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
         confirmEditTask({
           taskName,
@@ -69,6 +70,9 @@ const renderField = ({
         })
       } else if (taskName !== initialValues.taskName) {
         updateTask(selectedProject, selectedTask, toUpdate);
+        closeModal();
+      } else {
+        closeModal();
       }
     }
     
@@ -96,7 +100,7 @@ const renderField = ({
             />
           </div>
         </form>
-        <button className="form-button form-submit" type="submit">Submit</button>
+        <button className="form-button form-submit" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );
   }
@@ -127,6 +131,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditTaskForm = connect( mapStateToProps, { 
+  closeModal,
   confirmEditTask,
   updateTask
  })(EditTaskForm);

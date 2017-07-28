@@ -81,7 +81,7 @@ let AddTasksFormContainer = class extends Component {
     }
     
     updateTasks(selectedProject, tasks);
-    isOnboardingActive ? toggleOnboardMode() : toggleModal(false); 
+    isOnboardingActive ? toggleOnboardMode() : toggleModal(); 
   }
   
   handleDeleteButtonClick = (taskId) => () => {

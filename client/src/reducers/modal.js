@@ -57,11 +57,6 @@ export const modal = (state = defaultState, action) => {
         modalType: 'CONFIRM_EDIT_TASK',
         modalProps: action.modalProps
       };
-    case actions.EDIT_TASK_REQUEST:
-      return {
-        ...state,
-        isModalActive: false,
-      };
     case actions.CHANGE_MODAL_TYPE:
       return {
         ...state,
