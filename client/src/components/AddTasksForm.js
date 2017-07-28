@@ -42,20 +42,11 @@ let AddTasksForm = class extends Component {
   
   componentDidMount() {
     const { shouldDisableFocusOnMount } = this.props;
-    
+    console.log('mounting')
     if (!shouldDisableFocusOnMount) {
       this.inputRef.focus();
     }
   }
-  
-  // componentDidUpdate(prevProps) {
-  //   //  console.log(this.props.remoteSubmitForm, 'updating!');
-  //   if (prevProps.shouldSubmit !== this.props.shouldSubmit) {
-  //     const { handleSubmit, handleFormSubmit } = this.props;
-  //     
-  //     handleSubmit(handleFormSubmit)();    
-  //   }
-  // }  
   
   render() {
     const {
@@ -72,10 +63,10 @@ let AddTasksForm = class extends Component {
       title,
       titleName
     } = this.props;
-    console.log(isModalActive)
+    
     return (
       <div className={`${isOnboardingActive ? "fs-modal-form-container": ""}`}>
-        <div className={`${true || isModalActive ? "form-container": "" }`}>
+        <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className="form-title bounceInDown">
               {title}  

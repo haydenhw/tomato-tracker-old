@@ -40,8 +40,16 @@ $form-margin-left: 30%;
         @include centerVertHoriz
       }
     }
+    
   }
   
+  .button-wrapper:focus {
+    border: 3px solid black;
+  }
+  
+  .button-wrapper:hover {
+    cursor: pointer;
+  }
   .name-wrapper {
     width: 80%;
     text-align: left;

@@ -93,6 +93,9 @@ let AddTasksFormContainer = class extends Component {
   }  
   
   handleDeleteButtonMouseOver = (taskId) => () => {
+    console.log('mouse over')
+    console.log(taskId, this.deleteButtonRefs)
+    console.log(this.deleteButtonRefs[taskId])
     this.deleteButtonRefs[taskId].focus();
   }
   
@@ -105,12 +108,13 @@ let AddTasksFormContainer = class extends Component {
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        <div className="button-wrapper" >
-          <div className="delete-task-button" ref={el => this.deleteButtonRefs[shortId] = el}
-            onClick={this.handleDeleteButtonClick(shortId)}
-            onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
-            onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
-          >
+        <div className="button-wrapper" 
+          ref={el => this.deleteButtonRefs[shortId] = el}
+          onClick={this.handleDeleteButtonClick(shortId)}
+          onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
+          onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
+        >
+          <div className="delete-task-button" >
             <span>{shouldDelete ? 'restore' : 'X' }</span>
           </div>
         </div>

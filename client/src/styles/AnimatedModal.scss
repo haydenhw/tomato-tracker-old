@@ -68,28 +68,49 @@ html,body {
       }
     }
   }
+  
   .modal-background {
     // display:table-cell;
     height: 100%;
     background:rgba(0,0,0,.8);
     text-align:center;
+    
     .modal {
       background:white;
       padding:50px;
       display:inline-block;
       border-radius:3px;
       font-weight:300;
-      min-height: 375px;
-      min-width: 460px;
+      min-height: 425px;
+      min-width: 525px;
       padding: 106px 58px;
       padding-top: 46px;
-    }
-    .modal-close {
       
+      .modal-close {
+        position: absolute;
+        top: 13px;
+        right: 26px;
+        color: #aaa;
+        float: right;
+        font-size: 25px;
+        font-weight: bold;
+      }
+
+      .modal-close:hover {
+        cursor: pointer; 
+      }
+
+      .modal-close:hover {
+        
+      }
+
+      .modal-button-right:hover {
+        background-color: #528ff5;
+        cursor: pointer;
+      }    
     }
   }
 }
-
 @keyframes unfoldIn {
   0% {
     transform:scaleY(.005) scaleX(0);
