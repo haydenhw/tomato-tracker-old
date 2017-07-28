@@ -42,7 +42,7 @@ let AddTasksForm = class extends Component {
   
   componentDidMount() {
     const { shouldDisableFocusOnMount } = this.props;
-    console.log('mounting')
+    
     if (!shouldDisableFocusOnMount) {
       this.inputRef.focus();
     }

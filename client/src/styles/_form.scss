@@ -117,6 +117,12 @@ $placeholder-font-size: .75 * $heading-font-size;
   font-weight: bold; 
 }  
 
+.normal-modal {
+  .form-submit {
+    margin: 0 30px 25px 0;
+  }
+}
+
 .form-submit-button-group {
   text-align: right;
 } 

@@ -8,6 +8,7 @@ import {
   changeActiveEditMenu,
   fetchProjects,
   setSelectedProject,
+  setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
   toggleEditTaskForm,
@@ -41,6 +42,7 @@ class TimeTrackerPage extends Component {
       projects,
       selectedProjectId,
       setSelectedProject,
+      setTempTasks,
       toggleAddTasksForm, 
       toggleConfig,
       toggleEditTaskForm,
@@ -70,6 +72,7 @@ class TimeTrackerPage extends Component {
           isTimerActive={isTimerActive}
           selectedProject={selectedProject || null}
           setSelectedProject={setSelectedProject}
+          setTempTasks={setTempTasks}
           tasks={selectedTasks || []}
           toggleAddTasksForm={toggleAddTasksForm} 
           toggleConfig={toggleConfig}
@@ -105,6 +108,7 @@ export default connect(mapStateToProps, {
   deleteTask,
   fetchProjects,
   setSelectedProject,
+  setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
   toggleEditTaskForm, 

@@ -104,7 +104,6 @@ export default class TimeTracker extends Component {
     const { toggleEditTaskForm } = this.props;
     
     toggleEditTaskForm(taskId);
-    // this.setState({ clickedTaskId: taskId});
   } 
 
   handleTaskChange(taskId){
@@ -244,7 +243,7 @@ export default class TimeTracker extends Component {
               <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
             </div>
           }
-          <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : ''}`}
+          <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
            rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
           />
         </div>

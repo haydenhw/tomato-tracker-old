@@ -30,9 +30,15 @@ let AddTasksFormContainer = class extends Component {
   // getInputRef(el) { return this.inputRef= el } 
   
   componentDidMount() {
-    const { setTempTasks, showTasksForSelectedProject, tasks } = this.props;
+    const {
+      isModalActive,
+      isOnboardingActive,
+      setTempTasks,
+      showTasksForSelectedProject,
+      tasks
+    } = this.props;
     
-    if (showTasksForSelectedProject) {
+    if (showTasksForSelectedProject || (!isOnboardingActive && isModalActive)) {
       setTempTasks(tasks);
     }
   }
@@ -93,9 +99,6 @@ let AddTasksFormContainer = class extends Component {
   }  
   
   handleDeleteButtonMouseOver = (taskId) => () => {
-    console.log('mouse over')
-    console.log(taskId, this.deleteButtonRefs)
-    console.log(this.deleteButtonRefs[taskId])
     this.deleteButtonRefs[taskId].focus();
   }
   
