@@ -35,6 +35,8 @@ class TimeTrackerPage extends Component {
       hasFetched,
       isFetching,
       isModalActive,
+      isModalClosing,
+      isOnboardingActive,
       isTimerActive,
       projects,
       selectedProjectId,
@@ -63,6 +65,8 @@ class TimeTrackerPage extends Component {
           hasFetched={hasFetched}
           isFetching={isFetching}
           isModalActive={isModalActive}
+          isModalClosing={isModalClosing}
+          isOnboardingActive={isOnboardingActive}
           isTimerActive={isTimerActive}
           selectedProject={selectedProject || null}
           setSelectedProject={setSelectedProject}
@@ -80,7 +84,7 @@ class TimeTrackerPage extends Component {
 const mapStateToProps = state => {
   const {  modal, projects, timer, selectedProjectId } = state;
   const { hasFetched, isFetching } = projects;
-  const { isModalActive } = modal;
+  const { isModalActive, isModalClosing, isOnboardingActive } = modal;
   const { isTimerActive } = timer;
   
   return {
@@ -88,6 +92,8 @@ const mapStateToProps = state => {
     hasFetched, 
     isFetching,
     isModalActive,
+    isModalClosing,
+    isOnboardingActive,
     isTimerActive, 
     projects: projects.items
   }
@@ -95,9 +101,9 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   changeActiveEditMenu,
+  decrementTimer,
   deleteTask,
   fetchProjects,
-  decrementTimer,
   setSelectedProject,
   toggleAddTasksForm,
   toggleConfig,

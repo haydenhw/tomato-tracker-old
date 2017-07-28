@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { toggleModal } from '../actions/indexActions';
+import { closeModal } from '../actions/indexActions';
 
 import RootModal from '../components/ModalRoot';
 import AddProjectModal from './AddProjectModal';
@@ -29,18 +29,17 @@ function Modal(props) {
     modalType, 
     rootModalClass,
     style,
-    toggleModal
+    closeModal
   } = props;
   
   if (!isModalActive) {
     return null;
   }
-  
   const SpecificModal = MODAL_COMPONENTS[modalType];
   return (
     <RootModal className={rootModalClass}>
       <div className={`modal ${modalClass}`} style={style}>
-        <span className="modal-close" onClick={toggleModal} role="button">&times;</span>
+        <span className="modal-close" onClick={closeModal} role="button">&times;</span>
         <SpecificModal {...modalProps} />   
       </div>
     </RootModal>
@@ -49,7 +48,7 @@ function Modal(props) {
 
 const mapStateToProps = state => {
   const { modal } = state;
-  const { isModalActive, modalProps, modalType  } = modal;
+  const { isModalActive, modalProps, modalType } = modal;
   
   return {
     isModalActive,
@@ -58,7 +57,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { toggleModal })(Modal)
+export default connect(mapStateToProps, { closeModal })(Modal)
 
 Modal.propTypes = {
   

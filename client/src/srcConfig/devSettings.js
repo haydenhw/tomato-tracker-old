@@ -1,9 +1,9 @@
 const renderModal = false; 
 const productionMode = false;
-export const modalType = productionMode ? "WELCOME" : "CONFIG";  
+export const modalType = productionMode ? "WELCOME" : "WELCOME";  
 
-export const renderFormModal = productionMode ? false : renderModal;
-export const isOnboardingActive = productionMode ? false : false;
+export const isOnboardingActive = productionMode ? false : true;
+export const renderFormModal = productionMode ? false : (isOnboardingActive || renderModal);
 export const showProgressBar = productionMode || false;
 export const devStyle = !productionMode && {
     position: 'static',

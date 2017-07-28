@@ -212,10 +212,10 @@ export default class TimeTracker extends Component {
   }
   
   render() {
-    const { tasks, selectedProject, toggleConfig } = this.props;
-    const { activeTaskId, isModalActive, selectedTaskId } = this.state;
+    const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig } = this.props;
+    const { activeTaskId, selectedTaskId } = this.state;
     const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
-  console.log(toggleConfig)  
+    
     return (
       <div className="time-tracker">
         <div className="timer-section">
@@ -244,7 +244,9 @@ export default class TimeTracker extends Component {
               <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
             </div>
           }
-          <Modal modalClass="fullscreen-modal" rootModalClass="unfold" />
+          <Modal modalClass="fullscreen-modal"
+           rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
+          />
         </div>
     );
   }

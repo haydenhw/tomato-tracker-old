@@ -3,6 +3,20 @@ export const toggleModal = () => ({
   type: 'TOGGLE_MODAL',
 });
 
+export const ADD_MODAL_CLOSING_CLASS = 'ADD_MODAL_CLOSING_CLASS';
+export const addModalClosingClass = () => ({
+  type: 'ADD_MODAL_CLOSING_CLASS',
+});
+
+export const closeModal = () => {
+  return (dispatch) => {
+    console.log('dispatching')
+    // dispatch(toggleModal())  
+    dispatch(addModalClosingClass());
+    setTimeout(() => dispatch(toggleModal()), 1500);
+  } 
+} 
+
 export const TOGGLE_CONFIG = 'TOGGLE_CONFIG';
 export const toggleConfig = () => ({
   type: 'TOGGLE_CONFIG',

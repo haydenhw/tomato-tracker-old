@@ -19,29 +19,27 @@ $form-margin-left: 30%;
   .button-wrapper {
     width: 20%;
     display: inline-block;
-    padding: 10px;
+    // padding: 10px;
+    height: 50px;
     padding-left: 0;
+    vertical-align: top;
+    // position: absolute;
     
-    button {
+    .delete-task-button {
       animation: none;
       -webkit-animation: none;
-      padding: 5px;
-      /*border-radius: 50px;
-      cursor: pointer;
-      height: 22px;
-      line-height: 0;
-      padding: 0;
-      width: 22px;
-      background: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;  
       border: 1px solid black;
-      */
-      i {
-        font-size: 17px;
-        padding: 3px;
+      top: 47%;
+      transform: translateY(-50%);
+      position: relative;
+      
+      span {
+        @include centerVertHoriz
       }
     }
-    
-  
   }
   
   .name-wrapper {
@@ -51,6 +49,7 @@ $form-margin-left: 30%;
     padding-left: 20px;
     display: inline-block;
     font-size: 1.5em;
+    height: 50px;  
   }
   
   button {

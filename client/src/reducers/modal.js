@@ -5,9 +5,9 @@ import { modalType, isOnboardingActive, renderFormModal } from '../srcConfig/dev
 const defaultState = {
   isOnboardingActive, 
   isModalActive: renderFormModal,
+  isModalClosing: false,
   modalType: modalType,
   modalProps: null,
-  rootModalClass: 'unfold'    
 };
 
 export const modal = (state = defaultState, action) => {
@@ -17,11 +17,12 @@ export const modal = (state = defaultState, action) => {
       return {
         ...state,
         isModalActive: !state.isModalActive,
+        isModalClosing: false, 
+        isOnboardingActive: false
       };
     case actions.TOGGLE_ONBOARD_MODE:
       return {
         ...state,
-        rootModalClass: 'roadrunner',
         isModalActive: !state.isModalActive,
         isOnboardingActive: !state.isOnboardingActive,
       };
@@ -73,9 +74,15 @@ export const modal = (state = defaultState, action) => {
       };
     case actions.CONFIRM_PROJECT_DELETE:
       return {
+        ...state,
         shouldRenderModal: true,
         modalType: 'CONFIRM',
         modalProps: action.modalProps,
+      }    
+    case actions.ADD_MODAL_CLOSING_CLASS:
+      return {
+        ...state,
+        isModalClosing: true
       }    
     default:
       return state;
