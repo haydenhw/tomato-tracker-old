@@ -6,6 +6,7 @@ import { SubmissionError, reduxForm } from 'redux-form';
 
 import {
   addTempTask,
+  closeModal,
   deleteTask,
   postTask,
   setTempTasks,
@@ -64,6 +65,7 @@ let AddTasksFormContainer = class extends Component {
   
   handleFormSubmit (){
     const { 
+      closeModal,
       isOnboardingActive,
       updateTasks, 
       selectedProject,
@@ -81,7 +83,7 @@ let AddTasksFormContainer = class extends Component {
     }
     
     updateTasks(selectedProject, tasks);
-    isOnboardingActive ? toggleOnboardMode() : toggleModal(); 
+    isOnboardingActive ? toggleOnboardMode() : closeModal(); 
   }
   
   handleDeleteButtonClick = (taskId) => () => {
@@ -182,6 +184,7 @@ AddTasksFormContainer = reduxForm({
 
 export default AddTasksFormContainer = connect(mapStateToProps, {
   addTempTask, 
+  closeModal,
   deleteTask,
   focus,
   postTask,

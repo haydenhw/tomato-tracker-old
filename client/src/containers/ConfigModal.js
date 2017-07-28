@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 
-import { updateConfig } from '../actions/indexActions';
+import { closeModal, updateConfig } from '../actions/indexActions';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
 import FormModal from '../components/FormModal';
@@ -11,14 +11,15 @@ import ConfigForm from '../components/ConfigForm';
 
 class ConfigModal extends Component {
   handleUpdateConfig = (submitData) => {
-    const { updateConfig } = this.props; 
+    const { closeModal, updateConfig } = this.props; 
     const { alarmSound } = submitData;
     
     const newConfigData = {
       alarmSoundSrc: alarmSound || 'sound/Old-clock-ringing-short.mp3' 
     }
-    console.log(newConfigData)
+    
     updateConfig(newConfigData);
+    closeModal();
   } 
   
   render () {
@@ -36,7 +37,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { updateConfig })(ConfigModal);
+export default connect(mapStateToProps, { closeModal, updateConfig })(ConfigModal);
 
 ConfigModal.propTypes = {
   
