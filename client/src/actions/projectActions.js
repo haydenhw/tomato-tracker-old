@@ -53,9 +53,13 @@ export function updateTasksInState(projectId, newTasks) {
 
 export const SET_SELECTED_PROJECT = "SET_SELECTED_PROJECT";
 export function setSelectedProject(projectId) {
-  return {
-    type: "SET_SELECTED_PROJECT",
-    projectId
+  return (dispatch) => {
+    dispatch({
+        type: "SET_SELECTED_PROJECT",
+        projectId
+    }) 
+    
+    localStorage.selectedProjectId = projectId;
   }
 }
 
@@ -146,6 +150,7 @@ export function postProject(projectName, tasks) {
         const databaseId = data._id;
         
         dispatch(postProjectSuccess(projectId, databaseId));
+        localStorage.selectedProjectId = projectId;
       })
       
   }

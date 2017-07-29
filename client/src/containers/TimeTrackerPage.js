@@ -40,7 +40,8 @@ class TimeTrackerPage extends Component {
       isOnboardingActive,
       isTimerActive,
       projects,
-      selectedProjectId,
+      selectedProject,
+      selectedTasks,
       setSelectedProject,
       setTempTasks,
       toggleAddTasksForm, 
@@ -52,10 +53,6 @@ class TimeTrackerPage extends Component {
     if (!hasFetched) {
       return <div className="loader">Loading...</div>
     }
-    
-    const selectedProjectIndex = selectedProjectId && projects.findIndex(project => project.shortId === selectedProjectId);
-    const selectedProject = (selectedProjectIndex !== null && !isNaN(selectedProjectIndex)) && projects[selectedProjectIndex];
-    const selectedTasks = selectedProject && selectedProject.tasks;
     
     return (
       <div className="time-tracker-page-container">
@@ -90,14 +87,18 @@ const mapStateToProps = state => {
   const { isModalActive, isModalClosing, isOnboardingActive } = modal;
   const { isTimerActive } = timer;
   
+  const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
+  const selectedTasks = selectedProject && selectedProject.tasks;
+  
   return {
-    selectedProjectId,
     hasFetched, 
     isFetching,
     isModalActive,
     isModalClosing,
     isOnboardingActive,
     isTimerActive, 
+    selectedProject,
+    selectedTasks,
     projects: projects.items
   }
 }

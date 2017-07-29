@@ -36,19 +36,22 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    const { isOnboardingActive, projects, tasks } = this.props;
+    const { isOnboardingActive, projects, setSelectedProject, toggleOnboardMode } = this.props;
     // change isModalActive to isOnboardingActive for production  
     if ((projects.length === 0) && !isOnboardingActive) {
       hashHistory.push('/projects')
     }
-      
-    const selectedTaskId = tasks.find((task) => task.shortId === localStorage.prevSelectedTaskId)
-      ? localStorage.prevSelectedTaskId
-      : null
-      
-    this.setState({ selectedTaskId });
     
-    this.handleFirstSessionVisit();  
+    if (sessionStorage.isFirstSessionVisit === undefined) {
+      sessionStorage.isFirstSessionVisit = false;
+      toggleOnboardMode();
+    }
+    
+    if (localStorage.selectedProjectId) {
+      setSelectedProject(localStorage.selectedProjectId);
+    }
+    
+    this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
   }
   
   
@@ -70,15 +73,6 @@ export default class TimeTracker extends Component {
     }*/
   }
   
-  handleFirstSessionVisit() {
-    const { toggleOnboardMode } = this.props;
-    
-    sessionStorage.isFirstSessionVisit = !Boolean(sessionStorage.isFirstSessionVisit);
-    
-    if (JSON.parse(sessionStorage.isFirstSessionVisit) === true) {
-      toggleOnboardMode();  
-    }  
-  }
 
   toggleShouldRenderModal(modalType) {
     const { shouldRenderModal } = this.state;
