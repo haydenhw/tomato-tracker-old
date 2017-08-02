@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(express.static('public'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

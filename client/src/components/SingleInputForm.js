@@ -8,6 +8,7 @@ import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
 
+
 const renderField = (props) => {
   
   const { input, type, meta: { touched, error }} = props;
@@ -26,11 +27,17 @@ const renderField = (props) => {
   )
 } 
 
+const dummySubmit = (evt) => { 
+  evt.preventDefault(); 
+  return false; 
+}
+
 let SingleInputForm = function SingleInputForm(props) {
   const {
     handleFormSubmit,
     handleSubmit,
     isModalActive,
+    isOnlyInput,
     shouldRenderSubmitButton,
     title,
     titleName
@@ -39,7 +46,7 @@ let SingleInputForm = function SingleInputForm(props) {
   return (
     <div className={`${isModalActive ? "fs-modal-form-container": ""}`}>
       <div className={`${isModalActive ? "form-container": "" }`}>
-        <form onSubmit={(evt) => { evt.preventDefault(); console.log('submitting'); return false } }>
+        <form onSubmit={isOnlyInput ? handleSubmit(handleFormSubmit) : dummySubmit}>
           {title && 
             <h2 className="form-title bounceInDown">
               {title}  

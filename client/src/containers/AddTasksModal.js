@@ -10,7 +10,7 @@ import AddTasksFormContainer from './AddTasksFormContainer';
 
 function AddTasksModal(props) {
   const { lastAddedProjectName } = props;
-  
+  console.log(lastAddedProjectName)
   return (
     <AddTasksFormContainer
       title={"Add tasks for project "}
@@ -22,7 +22,7 @@ function AddTasksModal(props) {
 const mapStateToProps = state => {
   const { projects } = state;
   
-  const lastAddedProjectName = projects.length > 0 
+  const lastAddedProjectName = projects.items.length > 0 
     ? projects.items[projects.items.length-1].projectName
     : null;
   

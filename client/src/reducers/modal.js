@@ -13,7 +13,6 @@ const defaultState = {
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
     case actions.TOGGLE_MODAL:
-    case actions.DELETE_PROJECT_REQUEST:
       return {
         ...state,
         isModalActive: !state.isModalActive,

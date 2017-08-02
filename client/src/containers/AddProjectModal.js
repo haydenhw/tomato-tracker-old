@@ -40,6 +40,7 @@ class AddProjectModal extends Component {
         formName="projectName"
         handleFormSubmit={this.handleAddProject.bind(this)}
         isModalActive={true}
+        isOnlyInput={true}
         placeholder="Project Name"
         shouldRenderSubmitButton={true}
         title="Add a project"

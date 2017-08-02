@@ -135,7 +135,7 @@ class ProjectsPage extends Component {
   }
   
   render() {
-    const { hasFetched, projects } = this.props;
+    const { hasFetched, isModalClosing, isOnboardingActive, projects } = this.props;
     const { isProjectSelectTipActive } = this.state;
     const totalTime = this.getTotalTime();
     
@@ -167,7 +167,9 @@ class ProjectsPage extends Component {
           : <div className="list-container">
               <span>No projects exist yet. Create one to get started</span>
               <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
-              <Modal rootModalClass="roadrunner" />  
+              <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
+               rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
+              />
             </div>
         }
       </div>
@@ -177,12 +179,13 @@ class ProjectsPage extends Component {
 
 const mapStateToProps = state => {
   const {  projects, modal, selectedProjectId, timer } = state; 
-  const { isOnboardingActive } = modal;
+  const { isOnboardingActive, isModalClosing } = modal;
   const { hasFetched } = projects;
   const { isTimerActive } = timer;
   
   return {
     hasFetched, 
+    isModalClosing,
     isOnboardingActive,
     isTimerActive,
     selectedProjectId,
