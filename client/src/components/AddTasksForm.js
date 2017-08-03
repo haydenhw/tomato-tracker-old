@@ -73,7 +73,7 @@ let AddTasksForm = class extends Component {
               {titleName && <span className='grey-title-name'>{titleName}</span>}
             </h2>
           }
-          <div className="field-wrapper">
+          <div className="field-wrapper bounceInDown-second">
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
@@ -82,7 +82,7 @@ let AddTasksForm = class extends Component {
           </div>
         </div>
       {!(shouldRenderSubmitButton === false) && 
-        <button className='form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+        <button className='fadeInButton form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
       }
     </div>  
     );

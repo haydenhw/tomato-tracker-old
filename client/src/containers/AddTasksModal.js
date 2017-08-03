@@ -10,7 +10,7 @@ import AddTasksFormContainer from './AddTasksFormContainer';
 
 function AddTasksModal(props) {
   const { lastAddedProjectName } = props;
-  console.log(lastAddedProjectName)
+  
   return (
     <AddTasksFormContainer
       title={"Add tasks for project "}

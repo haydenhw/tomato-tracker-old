@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-fontawesome';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 
@@ -47,25 +48,10 @@ class ProjectsPage extends Component {
     } 
   }
   
-  handleListItemClick = (projectId) => () => {
-    const { isTimerActive, setSelectedProject, toggleTimer } = this.props;
-      
-    if (isTimerActive) {
-     toggleTimer();
-    }
-      
-    setSelectedProject(projectId);
-    routeToTimerPage();
-  }  
-  
-  handleEditOptionClick = (project) => (evt) => {
-    evt.stopPropagation()
-    const { setSelectedProject } = this.props;
+  componentWillMount() {
     
-    setSelectedProject(project.shortId);
-    hashHistory.push(`/projects/${project.shortId}`)
-  }  
-  
+  }   
+
   handleAddButtonClick() {
     const { setTempTasks } = this.props;
     
@@ -80,6 +66,25 @@ class ProjectsPage extends Component {
     
     deleteProject(project);
   }
+  
+  handleEditOptionClick = (project) => (evt) => {
+    evt.stopPropagation()
+    const { setSelectedProject } = this.props;
+    
+    setSelectedProject(project.shortId);
+    hashHistory.push(`/projects/${project.shortId}`)
+  }  
+  
+  handleListItemClick = (projectId) => () => {
+    const { isTimerActive, setSelectedProject, toggleTimer } = this.props;
+      
+    if (isTimerActive) {
+     toggleTimer();
+    }
+      
+    setSelectedProject(projectId);
+    routeToTimerPage();
+  }  
   
   toggleProjectSelectTip() {
     sessionStorage.setItem('isProjectSelectTipActive', false);
@@ -137,6 +142,7 @@ class ProjectsPage extends Component {
   render() {
     const { hasFetched, isModalClosing, isOnboardingActive, projects } = this.props;
     const { isProjectSelectTipActive } = this.state;
+    const reverseProjects = projects.slice().reverse();
     const totalTime = this.getTotalTime();
     
     if (!hasFetched){
@@ -148,8 +154,11 @@ class ProjectsPage extends Component {
         { (isProjectSelectTipActive && projects.length > 1) && 
           <div className="project-select-tip-wrapper">
             <div className="project-select-tip">
+              <FontAwesome className="info-icon" name='info-circle'></FontAwesome>  
               <span>To track time for a different project, simply select it from the list below.</span>
-              <button onClick={this.toggleProjectSelectTip.bind(this)}>&times;</button>
+              <button onClick={this.toggleProjectSelectTip.bind(this)}>
+                <i className="icon-cancel"></i>   
+              </button>
             </div>
           </div>  
         }
@@ -160,7 +169,7 @@ class ProjectsPage extends Component {
                   <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>NEW PROJECT</button>
                 </div>                
                 <ListHeader col1Title="Project" col2Title="Logged Time" />
-                <List className="project-list" items={projects} renderItem={this.renderProject.bind(this)}/>
+                <List className="project-list" items={reverseProjects} renderItem={this.renderProject.bind(this)}/>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
             </div> 

@@ -36,19 +36,25 @@ export default class TimeTracker extends Component {
   }
   
   componentWillMount() {
-    const { isOnboardingActive, projects, setSelectedProject, toggleOnboardMode } = this.props;
+    const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
     // change isModalActive to isOnboardingActive for production  
-    if ((projects.length === 0) && !isOnboardingActive) {
-      hashHistory.push('/projects')
-    }
     
     if (sessionStorage.isFirstSessionVisit === undefined) {
       sessionStorage.isFirstSessionVisit = false;
       toggleOnboardMode();
     }
     
-    if (localStorage.selectedProjectId) {
+    if ((projects.length === 0) && !isOnboardingActive) {
+      hashHistory.push('/projects')
+    }
+    
+    if (
+      localStorage.selectedProjectId && 
+      projects.find(project => project.shortId === localStorage.selectedProjectId)
+    ) {
       setSelectedProject(localStorage.selectedProjectId);
+    } else {
+      setSelectedProject(projects[projects.length-1].shortId);
     }
     
     this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
@@ -170,7 +176,6 @@ export default class TimeTracker extends Component {
     const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
-    
     const headingClass = selectedTaskName ? "" : "grey"; 
     
     return (
