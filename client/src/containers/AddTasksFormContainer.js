@@ -94,7 +94,7 @@ let AddTasksFormContainer = class extends Component {
   
   handleDeleteButtonClick = (taskId) => () => {
     const { toggleShouldDelete } = this.props;
-    
+    console.log('hello')
     toggleShouldDelete(taskId);
   }  
   
@@ -111,15 +111,17 @@ renderFormTask (task){
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        <div className="button-wrapper" >
-          <button ref={el => this.deleteButtonRefs[shortId] = el}
+        {/* <div className="button-wrapper" > */}
+          <button
+            className={`${shouldDelete ? "task-restore" : "task-delete" } circular-delete`}
+            ref={el => this.deleteButtonRefs[shortId] = el}
             onClick={this.handleDeleteButtonClick(shortId)}
             onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
             onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
           >
-            {shouldDelete ? 'restore' : 'X' /*&times;*/}
+              { shouldDelete ? "Restore": <i className="icon-cancel"></i> } 
           </button>
-        </div>
+        {/* </div> */}
         <div className="name-wrapper">
           <span>{taskName}</span>
         </div>

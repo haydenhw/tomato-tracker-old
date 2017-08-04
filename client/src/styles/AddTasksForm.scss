@@ -1,5 +1,6 @@
 @import 'form';
 @import 'variables'; 
+@import '_circularDeleteButton';
 
 $form-width: 300px;
 $form-margin-left: 30%;
@@ -12,43 +13,15 @@ $form-margin-left: 30%;
   border: 1px solid #000;
   margin: 25px auto;
   width: $form-width;
-  // overflow-y: auto;
   font-size: .75em;
-  // margin-left: $form-margin-left;
   
-  .button-wrapper {
-    width: 20%;
-    display: inline-block;
-    // padding: 10px;
-    height: 50px;
-    padding-left: 0;
-    vertical-align: top;
-    // position: absolute;
-    
-    .delete-task-button {
-      animation: none;
-      -webkit-animation: none;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;  
-      border: 1px solid black;
-      top: 47%;
-      transform: translateY(-50%);
-      position: relative;
-      
-      span {
-        @include centerVertHoriz
-      }
-    }
+  .task-restore {
+    height: auto;
+    width: auto;
+    padding: 5px;
+    border-radius: 3px;
   }
   
-  .button-wrapper:focus {
-    border: 3px solid black;
-  }
-  
-  .button-wrapper:hover {
-    cursor: pointer;
-  }
   .name-wrapper {
     width: 80%;
     text-align: left;
