@@ -16,11 +16,8 @@ nav ul {
 
 nav a {
   height: 100%;
-}
-
-nav a {
-  padding: 20px 10px;
-  padding-top: 25px; 
+  padding: 24px 10px;
+  padding-top: 28px; 
   color: white;
   font-size: .5em;
   font-weight: normal;
@@ -29,6 +26,7 @@ nav a {
 
 nav a:hover {
   background-color: grey;
+  cursor: pointer;
 }
 
 .logo-text {
@@ -39,4 +37,12 @@ nav a:hover {
 .nav-link {
   display: inline-block;
   margin-right: 15px;
+  
+  &.active-link {
+    // background-color: grey;
+  }
+}
+
+nav a.active-link {
+    background-color: grey;
 }
