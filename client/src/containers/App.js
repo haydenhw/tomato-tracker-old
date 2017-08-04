@@ -39,14 +39,16 @@ class App extends Component {
       <div>
         <nav>
           <h1 className="logo-text">PomTracker</h1>
-          <ul role="nav">
-            <li className="nav-link" onClick={this.handleTimerLinkClick.bind(this)}>
-              <a className={`${this.state.activeLink === 'TIMER' ? 'active-link' : ''}`}>Timer</a>
-            </li>
-            <li className="nav-link" onClick={this.handleProjectsLinkClck.bind(this)}>
-              <a className={`${this.state.activeLink === 'PROJECTS' ? 'active-link' : ''}`}>Projects</a>
-            </li>
-          </ul>
+              <a className={`${this.state.activeLink === 'TIMER' ? 'active-link' : ''}`}
+                onClick={this.handleTimerLinkClick.bind(this)}
+              >
+                Timer
+              </a>
+              <a className={`nav-link ${this.state.activeLink === 'PROJECTS' ? 'active-link' : ''}`}
+                onClick={this.handleProjectsLinkClck.bind(this)}
+              >
+                Projects
+              </a>
         </nav>
           {this.props.children}
       </div>

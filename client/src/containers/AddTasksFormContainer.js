@@ -146,6 +146,7 @@ renderFormTask (task){
           handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
           handleSubmit={handleSubmit}
           handleTaskSubmit={this.handleAddTask.bind(this)}
+          isContentAnimated={isOnboardingActive}
           isModalActive={isModalActive}
           isOnboardingActive={isOnboardingActive}
           shouldDisableFocusOnMount={shouldDisableFocusOnMount}

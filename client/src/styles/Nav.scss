@@ -2,41 +2,40 @@
 
 nav {
   background-color: $color-primary;
-  padding: 20px;
   width: 100%;
   color: white;
   font-size: 30px;
   font-weight: normal;
 }
 
-nav ul {
-  display: inline-block;
-  margin-left:  20px;
-}
-
 nav a {
-  height: 100%;
-  padding: 24px 10px;
-  padding-top: 28px; 
+  // height: 100%;
+  line-height: 56px;
+  padding: 0 19px;
   color: white;
   font-size: .5em;
   font-weight: normal;
   text-decoration: none;
+  display: inline-block;
 }
 
 nav a:hover {
-  background-color: grey;
+  background-color: #5C6BC0;
   cursor: pointer;
 }
 
 .logo-text {
   display: inline-block;
   margin-left: 25%;
+  margin-right: 20px;
+  line-height: 1;
+  position: relative;
+  // top: 5px;
 }
 
 .nav-link {
-  display: inline-block;
-  margin-right: 15px;
+  // display: inline-block;
+  // margin-right: 25px;
   
   &.active-link {
     // background-color: grey;
@@ -44,5 +43,5 @@ nav a:hover {
 }
 
 nav a.active-link {
-    background-color: grey;
+  background-color: #5C6BC0;
 }

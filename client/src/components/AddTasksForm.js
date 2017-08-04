@@ -55,6 +55,7 @@ let AddTasksForm = class extends Component {
       handleTaskSubmit,
       handleSubmit,
       inputRef,
+      isContentAnimated, 
       isModalActive,
       isOnboardingActive,
       shouldRenderSubmitButton,
@@ -68,12 +69,12 @@ let AddTasksForm = class extends Component {
       <div className={`${isOnboardingActive ? "fs-modal-form-container": ""}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
-            <h2 className="form-title bounceInDown">
+            <h2 className={`form-title ${isContentAnimated ? "bounceInDown" : ""}`}>
               {title}  
               {titleName && <span className='grey-title-name'>{titleName}</span>}
             </h2>
           }
-          <div className="field-wrapper bounceInDown-second">
+          <div className={`field-wrapper ${isContentAnimated ? "bounceInDown" : ""}`}>
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
