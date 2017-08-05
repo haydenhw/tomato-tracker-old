@@ -6,6 +6,7 @@ import { clickedTaskId } from './clickedTaskId';
 import { config } from './config';
 import { editMenu } from './editMenu';
 import { modal } from './modal';
+import { nav } from './nav';
 import { projects } from './projects';
 import { selectedProjectId } from './selectedProjectId';
 import { timer } from './timer';
@@ -16,6 +17,7 @@ export default combineReducers({
     customForm,
     editMenu,
     modal,
+    nav,
     projects,
     selectedProjectId,
     timer,

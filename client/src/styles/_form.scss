@@ -22,6 +22,7 @@ $placeholder-font-size: .75 * $heading-font-size;
 
 .form-container {
   width: 70%;
+  max-width: 960px;
 }
 
 .form-container, .welcome, .confirm-modal, .modal, .nag {
@@ -31,7 +32,6 @@ $placeholder-font-size: .75 * $heading-font-size;
   text-align: left;
   font-family: $font-fullscreen-form-heading; 
   font-weight: bold;
-  max-width: 960px;
   
   .form-title, h2 {
     line-height: 1.2;
@@ -125,6 +125,12 @@ $placeholder-font-size: .75 * $heading-font-size;
   font-weight: bold; 
 }  
 
+.welcome {
+  .form-submit {
+    position: static;
+    margin: 0;
+  }
+}
 .normal-modal {
   .form-submit {
     // margin: 0 30px 25px 0;

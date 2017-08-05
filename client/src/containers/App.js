@@ -1,12 +1,13 @@
 // extract nav presentational component
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hashHistory, Link  } from 'react-router';
+import { hashHistory } from 'react-router';
 import Notification  from 'react-web-notification';
 
 import { routeToProjectsPage } from 'helpers/route';
+import { changeActiveLink, fetchProjects, toggleProjectNagModal } from '../actions/indexActions';
 
-import { fetchProjects, toggleProjectNagModal } from '../actions/indexActions';
+import Nav from '../components/Nav';
 
 class App extends Component {
   constructor() {
@@ -25,38 +26,29 @@ class App extends Component {
   }
   
   handleTimerLinkClick() {
-    const { projects, toggleProjectNagModal } = this.props;
+    const { changeActiveLink, projects, toggleProjectNagModal } = this.props;
     
+    changeActiveLink('TIMER');
     projects.length ? hashHistory.push('/') : toggleProjectNagModal();
-    this.setState({ activeLink: 'TIMER' })
   }
   
   handleProjectsLinkClck() {
+    const { changeActiveLink } = this.props;
+    
+    changeActiveLink(changeActiveLink('PROJECTS'))
     routeToProjectsPage();
-    this.setState({ activeLink: 'PROJECTS' })
   }
   
   render() {
-    const { isDesktopNotificationActive } = this.props;
+    const { activeLink, isDesktopNotificationActive } = this.props;
     
     return (
       <div>
-        <nav>
-          <div className="logo-wrapper">
-            <h1 className="logo-text">TomatoTracker</h1>
-            <img className="logo-image" src="images/tomato-timer.png" alt="tomato timer logo"/>
-          </div>
-              <a className={`${this.state.activeLink === 'TIMER' ? 'active-link' : ''}`}
-                onClick={this.handleTimerLinkClick.bind(this)}
-              >
-                Timer
-              </a>
-              <a className={`nav-link ${this.state.activeLink === 'PROJECTS' ? 'active-link' : ''}`}
-                onClick={this.handleProjectsLinkClck.bind(this)}
-              >
-                Projects
-              </a>
-        </nav>
+        <Nav
+          activeLink={activeLink}
+          handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 
+          handleProjectsLinkClck={this.handleProjectsLinkClck.bind(this)}
+        /> 
         {this.props.children}
         {isDesktopNotificationActive
           && <Notification 
@@ -71,16 +63,19 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { projects, timer } = state;
+  const { nav ,projects, timer } = state;
+  const { activeLink } = nav;
   const { isDesktopNotificationActive } = timer;
   
   return {
+    activeLink,
     isDesktopNotificationActive,
     projects: projects.items
   }
 }
 
 export default connect(mapStateToProps, {
+  changeActiveLink,
   fetchProjects, 
   toggleProjectNagModal
 })(App);
