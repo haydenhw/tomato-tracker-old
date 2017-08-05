@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory, Link  } from 'react-router';
+import Notification  from 'react-web-notification';
 
 import { routeToProjectsPage } from 'helpers/route';
 
@@ -35,6 +36,8 @@ class App extends Component {
   }
   
   render() {
+    const { isDesktopNotificationActive } = this.props;
+    
     return (
       <div>
         <nav>
@@ -51,15 +54,22 @@ class App extends Component {
               </a>
         </nav>
           {this.props.children}
+          
+      <Notification 
+        title="Timer's Up!"
+        ignore={!isDesktopNotificationActive}
+      />  
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { projects } = state;
+  const { projects, timer } = state;
+  const { isDesktopNotificationActive } = timer;
   
   return {
+    isDesktopNotificationActive,
     projects: projects.items
   }
 }

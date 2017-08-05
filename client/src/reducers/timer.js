@@ -3,6 +3,7 @@ import * as actions from '../actions/indexActions';
 const defaultState = {
   intervalId: null,
   isTimerActive: false,
+  isDesktopNotificationActive: false,
   remainingTime: null,
   startTime: 25 * 60,
 }

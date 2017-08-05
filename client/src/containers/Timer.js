@@ -30,7 +30,7 @@ class Timer extends Component {
     if (isTimerActive === false) {
       clearInterval(intervalId)
     }
-  
+    
   }
   
   componentWillReceiveProps(nextProps) {
