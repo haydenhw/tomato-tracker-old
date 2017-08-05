@@ -7,6 +7,24 @@ export function decrementTimer() {
   }
 }
 
+export const TOGGLE_DESKTOP_NOTIFICATION = "TOGGLE_DESKTOP_NOTIFICATION";
+export function toggleDesktopNotification() {
+  return { 
+    type: "TOGGLE_DESKTOP_NOTIFICATION"
+  }
+}
+
+export const HANDLE_TIMER_COMPLETE = "HANDLE_TIMER_COMPLETE";
+export function handleTimerComplete() {
+  return (dispatch) => {
+    dispatch({ 
+        type: "HANDLE_TIMER_COMPLETE"
+    })
+    
+    setTimeout(() => dispatch(toggleDesktopNotification()), 1500)
+  } 
+}
+
 export const SET_INTERVAL_ID = "SET_INTERVAL_ID";
 export function setIntervalId(intervalId) {
   return { 

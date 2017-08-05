@@ -13,7 +13,8 @@ class App extends Component {
     super(); 
     
     this.state = {
-      activeLink: 'TIMER'
+      activeLink: 'TIMER',
+      showNotification: true
     }
   }
   
@@ -41,7 +42,10 @@ class App extends Component {
     return (
       <div>
         <nav>
-          <h1 className="logo-text">PomTracker</h1>
+          <div className="logo-wrapper">
+            <h1 className="logo-text">TomatoTracker</h1>
+            <img className="logo-image" src="images/tomato-timer.png" alt="tomato timer logo"/>
+          </div>
               <a className={`${this.state.activeLink === 'TIMER' ? 'active-link' : ''}`}
                 onClick={this.handleTimerLinkClick.bind(this)}
               >
@@ -53,12 +57,14 @@ class App extends Component {
                 Projects
               </a>
         </nav>
-          {this.props.children}
-          
-      <Notification 
-        title="Timer's Up!"
-        ignore={!isDesktopNotificationActive}
-      />  
+        {this.props.children}
+        {isDesktopNotificationActive
+          && <Notification 
+            title="Time's Up!"
+            ignore={false}
+            options={{icon: 'images/tomato-timer.png'}}
+          />}
+        }  
       </div>
     );
   }
@@ -73,6 +79,7 @@ const mapStateToProps = state => {
     projects: projects.items
   }
 }
+
 export default connect(mapStateToProps, {
   fetchProjects, 
   toggleProjectNagModal

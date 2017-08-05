@@ -6,6 +6,7 @@ import store from '../redux-files/store';
 
 import {
   decrementTimer,
+  handleTimerComplete,
   incrementTaskTime,
   resetTimer,
   setIntervalId,
@@ -54,6 +55,7 @@ class Timer extends Component {
     const { 
       alarmSoundSrc,
       decrementTimer,
+      handleTimerComplete,
       incrementTaskTime,
       remainingTime,
       resetTimer,
@@ -74,8 +76,7 @@ class Timer extends Component {
       audio.play();
       
       clearInterval(intervalId);
-      toggleTimer();
-      resetTimer();
+      handleTimerComplete();
       setActiveTask(null);
     }
   }
@@ -122,10 +123,10 @@ const mapStateToProps = state => {
 
   return {
     alarmSoundSrc,
-    selectedProject,
     intervalId,
     isTimerActive,
     remainingTime,
+    selectedProject,
     startTime,
     projects: projects.items
   }
@@ -133,6 +134,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   decrementTimer,
+  handleTimerComplete,
   incrementTaskTime,
   resetTimer,
   setIntervalId,

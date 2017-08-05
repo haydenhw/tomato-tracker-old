@@ -1,3 +1,19 @@
 .danger-text {
   font-size: 1.3em;
 }
+
+.confirm-modal {
+  height: 275px;
+}
+
+.confirm-button-group {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  
+  button {
+    position: static;
+    margin: 0;
+    margin-left: 10px;
+  }
+}

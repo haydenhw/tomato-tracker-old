@@ -7,9 +7,9 @@ export default function Confirm({ onCancel, onDangerClick, onDangerText, title }
     <div className="confirm-modal">
       {title}
       <p className="danger-text">{onDangerText}</p>
-      <div className="form-submit-button-group">
-        <button className="cancel" onClick={onCancel}>Cancel</button>
-        <button className="confirm" onClick={onDangerClick}>Confirm</button>
+      <div className="confirm-button-group">
+        <button className="form-submit cancel" onClick={onCancel}>Cancel</button>
+        <button className="form-submit confirm" onClick={onDangerClick}>Confirm</button>
       </div>
     </div>
   );

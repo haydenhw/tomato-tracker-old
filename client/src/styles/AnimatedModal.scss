@@ -77,14 +77,15 @@ html,body {
     
     .modal {
       background:white;
-      padding:50px;
       display:inline-block;
       border-radius:3px;
       font-weight:300;
-      min-height: 425px;
+      min-height: 330px;
       min-width: 525px;
       padding: 106px 58px;
       padding-top: 46px;
+      padding-bottom: 46px;
+      position: relative;
       
       .modal-close {
         position: absolute;

@@ -26,6 +26,13 @@ export const timer = (state=defaultState, action) => {
         ...state,
         remainingTime: state.remainingTime - 1
       }
+    case actions.HANDLE_TIMER_COMPLETE:
+      return {
+        ...state,
+        isDesktopNotificationActive: !state.isDesktopNotificationActive,
+        isTimerActive: !state.isTimerActive,
+        remainingTime: state.startTime,
+      }
     case actions.RESET_TIMER:
       return {
         ...state,
@@ -43,6 +50,11 @@ export const timer = (state=defaultState, action) => {
         startTime: action.startTime,
         remainingTime: action.startTime 
         
+      }
+    case actions.TOGGLE_DESKTOP_NOTIFICATION:
+      return {
+        ...state,
+        isDesktopNotificationActive: !state.isDesktopNotificationActive
       }
     case actions.TOGGLE_TIMER:
       return {
