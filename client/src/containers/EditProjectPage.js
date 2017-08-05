@@ -101,6 +101,7 @@ class EditProjectPage extends Component {
         label="Project Name"
         shouldDisableTaskFormFocus={true}
         showTasksForSelectedProject={true}
+        title="Edit Project"
       >
         <SingleInputForm
           formName={"projectName"}

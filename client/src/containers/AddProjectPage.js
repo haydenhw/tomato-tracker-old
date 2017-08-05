@@ -49,6 +49,7 @@ let AddProjectPage = class extends Component {
           handleSubmit={this.handleRemoteSubmit.bind(this)}
           handleCancel={routeToProjectsPage}
           label="Project Name"
+          title="New Project"
         >  
             <SingleInputForm
               formName={"projectName"}

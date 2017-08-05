@@ -232,7 +232,7 @@ export default class TimeTracker extends Component {
                   <button
                     className="add-button material-button" onClick={this.handleAddTasks.bind(this)}
                   >
-                    ADD TASKS
+                    NEW TASKS
                   </button> 
                 </div>
                 <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>

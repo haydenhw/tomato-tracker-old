@@ -74,7 +74,7 @@ let AddTasksForm = class extends Component {
               {titleName && <span className='grey-title-name'>{titleName}</span>}
             </h2>
           }
-          <div className={`field-wrapper ${isContentAnimated ? "bounceInDown" : ""}`}>
+          <div className={`field-wrapper ${isContentAnimated ? "bounceInDown-second" : ""}`}>
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>

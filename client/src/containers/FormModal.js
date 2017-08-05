@@ -140,7 +140,7 @@ class FormModal extends Component {
           return <EditTaskForm clickedTaskId={clickedTaskId} />
       
       case (modalType === "CONFIRM_EDIT_TASK") && (elementType === "CONTENT"):
-        return <ConfirmEditTask {...modalProps} /> 
+        return <ConfirmEditTask  {...modalProps} /> 
         
       default:
         return null;
