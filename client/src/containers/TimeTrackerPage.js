@@ -61,7 +61,7 @@ class TimeTrackerPage extends Component {
     }
     
     return (
-      <div className="time-tracker-page-container pt-page">
+      <div className="time-tracker-page-container pt-page pt-page-flipInTop">
         <TimeTracker
           changeActiveEditMenu={changeActiveEditMenu}
           decrementTimer={decrementTimer}

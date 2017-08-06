@@ -20,17 +20,35 @@ $form-margin-left: 30%;
     width: auto;
     padding: 5px;
     border-radius: 3px;
+    margin-bottom: 5px;
+    @include centerVertHoriz();
+  }
+  
+  .button-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;  
+    padding-top: 9px;
   }
   
   .name-wrapper {
-    width: 80%;
+    height: 50px;
+    line-height: 50px;
+    width: 75%;
     text-align: left;
-    padding: 10px;
-    padding-left: 20px;
     display: inline-block;
     font-size: 1.5em;
-    height: 50px;  
+    padding-left: 20px;
   }
+  
+  span {
+    position: relative;
+    top: 3px;
+  }  
   
   button {
     margin: 0;

@@ -111,7 +111,7 @@ renderFormTask (task){
     
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
-        {/* <div className="button-wrapper" > */}
+        <div className="button-wrapper" >
           <button
             className={`${shouldDelete ? "task-restore" : "task-delete" } circular-delete`}
             ref={el => this.deleteButtonRefs[shortId] = el}
@@ -119,9 +119,9 @@ renderFormTask (task){
             onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
             onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
           >
-              { shouldDelete ? "Restore": <i className="icon-cancel"></i> } 
+              { shouldDelete ? "Restore": <div className="icon-cancel"></div> } 
           </button>
-        {/* </div> */}
+        </div>
         <div className="name-wrapper">
           <span>{taskName}</span>
         </div>

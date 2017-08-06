@@ -3,11 +3,12 @@
 }
 
 .confirm-modal {
-  height: 275px;
+  position: static;
 }
 
 .confirm-button-group {
   position: absolute;
+  margin: 40px 40px;  
   right: 0;
   bottom: 0;
   
