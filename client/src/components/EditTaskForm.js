@@ -80,9 +80,9 @@ const renderField = ({
     const { handleSubmit, initialValues } = this.props;
     
     return (
-      <div style={{position:"relatvie"}}>
+      <div className={`${false ? '' : 'bounceInDown' }`}>
         <div className="form-container">
-          <h2 className="form-title bounceInDown">Edit Task</h2>
+          <h2 className="form-title">Edit Task</h2>
           <form className="form" onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
             <div className="field-wrapper">
               <label>Task Name</label>
@@ -102,7 +102,7 @@ const renderField = ({
             </div>
           </form>
         </div>
-        <button className="form-button form-submit" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
+        <button className="form-button form-submit fadeInButton" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );
   }

@@ -1,5 +1,24 @@
 .projects-page-container {
   padding-top: 30px; 
+  
+  &.transition-appear {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &.transition-appear.transition-appear-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  &.transition-leave {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.transition-leave.transition-leave-active {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .project-select-tip-wrapper {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
   deleteTask,
@@ -28,6 +29,11 @@ class TimeTrackerPage extends Component {
     
     return true;
   }
+  
+  componentWillUnmount() {
+    console.log('unmounting')  
+  }
+  
   render() {
     const { 
       changeActiveEditMenu,
@@ -55,7 +61,7 @@ class TimeTrackerPage extends Component {
     }
     
     return (
-      <div className="time-tracker-page-container">
+      <div className="time-tracker-page-container pt-page">
         <TimeTracker
           changeActiveEditMenu={changeActiveEditMenu}
           decrementTimer={decrementTimer}

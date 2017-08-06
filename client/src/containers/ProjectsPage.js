@@ -150,7 +150,7 @@ class ProjectsPage extends Component {
     }
     
     return (
-      <div className='projects-page-container'>
+      <div className='projects-page-container pt-page-moveFromBottomFade'>
         { (isProjectSelectTipActive && projects.length > 1) && 
           <div className="project-select-tip-wrapper">
             <div className="project-select-tip">

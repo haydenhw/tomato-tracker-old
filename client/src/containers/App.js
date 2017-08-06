@@ -3,11 +3,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import Notification  from 'react-web-notification';
+import { RouteTransition } from 'react-router-transition';
+
+import { spring } from 'react-motion';
 
 import { routeToProjectsPage, routeToTimerPage } from 'helpers/route';
 import { changeActiveLink, fetchProjects, toggleProjectNagModal } from '../actions/indexActions';
 
 import Nav from '../components/Nav';
+
+const fadeConfig = { stiffness: 200, damping: 22 };
+const popConfig = { stiffness: 360, damping: 25 };
+const slideConfig = { stiffness: 330, damping: 30 };
+
+const slideLeft = {
+  atEnter: {
+    opacity: 0,
+    offset: 100,
+  },
+  atLeave: {
+    opacity: spring(0, fadeConfig),
+    offset: spring(-100, slideConfig),
+  },
+  atActive: {
+    opacity: spring(1, slideConfig),
+    offset: spring(0, slideConfig),
+  },
+  mapStyles(styles) {
+    return {
+      opacity: styles.opacity,
+      transform: `translateX(${styles.offset}%)`,
+    };
+  },
+};
 
 class App extends Component {
   constructor() {
@@ -42,7 +70,9 @@ class App extends Component {
           handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 
           handleProjectsLinkClck={routeToProjectsPage}
         /> 
-        {this.props.children}
+        <div className="pt-perspective">
+          {this.props.children}
+        </div>
         {isDesktopNotificationActive
           && <Notification 
             title="Time's Up!"
@@ -71,4 +101,5 @@ export default connect(mapStateToProps, {
   changeActiveLink,
   fetchProjects, 
   toggleProjectNagModal
-})(App);
+}
+)(App);
