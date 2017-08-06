@@ -7,7 +7,11 @@ const defaultState = {
 export function nav(state=defaultState, action) {
   switch(action.type) {
     case actions.CHANGE_ACTIVE_LINK:
-      return action.activeLink;
+      return {
+        ...state,
+        activeLink: action.activeLink
+      }
+        
     default:
       return state;
   }

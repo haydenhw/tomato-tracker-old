@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import Notification  from 'react-web-notification';
 
-import { routeToProjectsPage } from 'helpers/route';
+import { routeToProjectsPage, routeToTimerPage } from 'helpers/route';
 import { changeActiveLink, fetchProjects, toggleProjectNagModal } from '../actions/indexActions';
 
 import Nav from '../components/Nav';
@@ -26,18 +26,11 @@ class App extends Component {
   }
   
   handleTimerLinkClick() {
-    const { changeActiveLink, projects, toggleProjectNagModal } = this.props;
+    const {  projects, toggleProjectNagModal } = this.props;
     
-    changeActiveLink('TIMER');
-    projects.length ? hashHistory.push('/') : toggleProjectNagModal();
+    projects.length ? routeToTimerPage() : toggleProjectNagModal();
   }
   
-  handleProjectsLinkClck() {
-    const { changeActiveLink } = this.props;
-    
-    changeActiveLink(changeActiveLink('PROJECTS'))
-    routeToProjectsPage();
-  }
   
   render() {
     const { activeLink, isDesktopNotificationActive } = this.props;
@@ -47,7 +40,7 @@ class App extends Component {
         <Nav
           activeLink={activeLink}
           handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 
-          handleProjectsLinkClck={this.handleProjectsLinkClck.bind(this)}
+          handleProjectsLinkClck={routeToProjectsPage}
         /> 
         {this.props.children}
         {isDesktopNotificationActive
@@ -63,7 +56,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { nav ,projects, timer } = state;
+  const { nav, projects, timer } = state;
   const { activeLink } = nav;
   const { isDesktopNotificationActive } = timer;
   

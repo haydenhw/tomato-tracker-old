@@ -23,6 +23,7 @@ export const modal = (state = defaultState, action) => {
       return {
         ...state,
         isModalActive: !state.isModalActive,
+        isModalClosing: false,
         isOnboardingActive: !state.isOnboardingActive,
       };
     case actions.TOGGLE_ADD_TASKS_FORM:
