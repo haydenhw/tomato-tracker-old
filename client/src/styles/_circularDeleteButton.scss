@@ -7,17 +7,19 @@
     margin-left: 10px;
     background: linear-gradient(#fff, #eee);
     text-align: center;
-    position: relative;
     padding: 0;
     color: #212121;
-    
+    border-radius: 50%;
     .icon-cancel  {
-      @include centerVertHoriz();
-      left: 50.8%;
-      top: 57.6%;
+      position: relative;
+    }
+    
+    .icon-cancel::before {
       opacity: 0.6;
       font-size: 1.05em;
-  }
+      position: relative;
+      top: 2px;
+    }
 }
 
 .circular-delete:focus {

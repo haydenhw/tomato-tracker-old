@@ -61,6 +61,7 @@ const renderField = ({
         taskName,
         recordedTime: newTimeString
       } 
+      
       if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
         confirmEditTask({
           taskName,
@@ -77,7 +78,7 @@ const renderField = ({
     }
     
   render() {
-    const { handleSubmit, initialValues } = this.props;
+    const { closeModal, handleSubmit, initialValues } = this.props;
     
     return (
       <div className={`${false ? '' : 'bounceInDown' }`}>
@@ -102,7 +103,7 @@ const renderField = ({
             </div>
           </form>
         </div>
-        <button className="form-button form-submit fadeInButton" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
+          <button className="form-button form-submit fadeInButton" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );
   }

@@ -10,21 +10,14 @@ $form-margin-left: 30%;
 }
 
 .form-task-list {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   margin: 25px auto;
   width: $form-width;
   font-size: .75em;
   
-  .task-restore {
-    height: auto;
-    width: auto;
-    padding: 5px;
-    border-radius: 3px;
-    margin-bottom: 5px;
-    @include centerVertHoriz();
-  }
   
   .button-wrapper {
+    // border: 1px solid #000;
     position: relative;
     display: inline-block;
     width: 25%;
@@ -32,10 +25,20 @@ $form-margin-left: 30%;
     text-align: center;
     line-height: 50px;
     height: 50px;  
-    padding-top: 9px;
+    
+    .task-restore {
+      color: #555;
+      height: auto;
+      width: auto;
+      padding: 5px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+      @include centerVertHoriz();
+    }
   }
   
   .name-wrapper {
+    // border: 1px solid #000;
     height: 50px;
     line-height: 50px;
     width: 75%;
@@ -47,7 +50,7 @@ $form-margin-left: 30%;
   
   span {
     position: relative;
-    top: 3px;
+    // top: 3px;
   }  
   
   button {
