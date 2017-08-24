@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 export default function Confirm({ onCancel, onDangerClick, onDangerText, title }) {
 
   return(
-    <div className="confirm-modal">
+    <div className="confirm">
       {title}
       <p className="danger-text">{onDangerText}</p>
       <div className="confirm-button-group">
-        <button className="form-submit cancel" onClick={onCancel}>Cancel</button>
-        <button className="form-submit confirm" onClick={onDangerClick}>Confirm</button>
+        <button className="confirm-button form-submit cancel" onClick={onCancel}>Cancel</button>
+        <button className="confirm-button form-submit confirm" onClick={onDangerClick}>Confirm</button>
       </div>
     </div>
   );

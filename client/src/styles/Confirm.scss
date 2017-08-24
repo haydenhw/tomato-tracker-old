@@ -1,20 +1,24 @@
-.danger-text {
-  font-size: 1.3em;
-}
-
-.confirm-modal {
+.confirm {
   position: static;
-}
-
-.confirm-button-group {
-  position: absolute;
-  margin: 40px 40px;  
-  right: 0;
-  bottom: 0;
   
-  button {
-    position: static;
-    margin: 0;
-    margin-left: 10px;
+  .confirm-danger-text {
+    font-size: 1.3em;
+  }
+  
+  .confirm-button-group {
+    position: absolute;
+    margin: 40px 40px;  
+    right: 0;
+    bottom: 0;
+    
+    .confirm-button {
+      position: static;
+      margin: 0;
+      margin-left: 10px;
+    }
+  }
+  
+  .confirm-time {
+    font-family: monospace;
   }
 }

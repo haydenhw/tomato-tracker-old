@@ -16,7 +16,13 @@ function ConfirmEditTask(props) {
   return(
     <Confirm 
       onDangerClick={updateTaskAndCloseModal(payload, updateTask, closeModal)}
-      onDangerText={`Are you sure you want to change the logged time from ${oldTime} to ${newTime}?`}
+      onDangerText={[
+        "Are you sure you want to change the logged time from ",
+        <span className="confirm-time">{oldTime}</span>,
+        " to ", 
+        <span className="confirm-time">{newTime}</span>,
+        " ?"
+      ]}
       onCancel={closeModal}
       title={<h2 className="form-title">Confirm time change for task <span className="grey-title-name">{taskName}</span></h2>}
     />
