@@ -1,0 +1,49 @@
+// 1. Configuration and helpers
+@import
+  'helpers/variables',
+  'helpers/functions',
+  'helpers/mixins';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/fonts',
+  'base/typography',
+  'base/reset';
+
+// 4. Layout-related sections
+@import
+  'layout/header',
+  'layout/footer';
+
+// 6. Page-specific styles
+@import
+  'pages/home';
+
+@import
+ './components/addTasksForm',
+ './components/animatedModal',
+ './components/app',
+ './components/circularProgressbar',
+ './components/confirm',
+ './components/dropdown',
+ './components/editInlineText',
+ './components/editProjectPage',
+ './components/flipButton',
+ './components/list',
+ './components/listItem',
+ './components/loader',
+ './components/nag',
+ './components/nav',
+ './components/pageTransitions',
+ './components/projectForm',
+ './components/projectHeading',
+ './components/projectsPage',
+ './components/rootModal',
+ './components/roundButton',
+ './components/select',
+ './components/slideInLeft',
+ './components/task',
+ './components/timer',
+ './components/timeTrackerPage';
+

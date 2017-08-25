@@ -1,9 +1,10 @@
-@import 'variables';
+// @import '_variables';
 
 body {
   font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
   margin: 12px 0;
 }
+
 .flip-button-container {
   height: 50px;
   perspective: 1000px;
@@ -17,6 +18,7 @@ body {
     cursor: pointer;
   }
 }
+
 .flip-button {
   height: 100%;
   position: absolute;
@@ -24,6 +26,7 @@ body {
   transition: all .2s ease-in-out;
   width: 100%;
 }
+
 .flipped {
   transform: rotateY(-180deg);
 }
@@ -37,13 +40,11 @@ body {
   width: 100%;
 }
 
-
-
 .flip-button .back {
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg);
-  background: $timer-background-light-grey;
+  background: $background-light-grey;
   width: 100%;
 }
 

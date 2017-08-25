@@ -1,3 +1,5 @@
+// bounceInDown 
+
 @keyframes bounceInDown {
   from, 60%, 75%, 90%, to {
     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -49,3 +51,28 @@ $welcome-delay: 1;
 .bounceInDown-welcome-second {
   @include bounceInDownDelay($welcome-delay + $second-element-delay + 0s);  
 }
+
+// fadeIn 
+
+@keyframes fadeIn{
+    0% { opacity:0; }
+    // 66% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-webkit-keyframes fadeIn{
+    0% { opacity:0; }
+    // 66% { opacity:0; }
+    100% { opacity:1; }
+}
+
+.fadeInButton-welcome {
+  opacity: 0;
+  animation: fadeIn 1s ease-in 2.3s forwards;
+}
+
+.fadeInButton {
+  opacity: 0;
+  animation: fadeIn 1s ease-in 1.2s forwards;
+}
+
