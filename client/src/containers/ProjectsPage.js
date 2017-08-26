@@ -165,8 +165,8 @@ class ProjectsPage extends Component {
         { projects.length 
           ? <div>
               <div className="list-container">
-                <div className="add-button-wrapper">
-                  <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>NEW PROJECT</button>
+                <div className="timesheet-button-wrapper">
+                  <button className="timesheet-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>NEW PROJECT</button>
                 </div>                
                 <ListHeader col1Title="Project" col2Title="Logged Time" />
                 <List className="project-list" items={reverseProjects} renderItem={this.renderProject.bind(this)}/>
@@ -175,7 +175,7 @@ class ProjectsPage extends Component {
             </div> 
           : <div className="list-container">
               <span>No projects exist yet. Create one to get started</span>
-              <button className="add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+              <button className="timesheet-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
               <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
                rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
               />

@@ -228,9 +228,9 @@ export default class TimeTracker extends Component {
           ? <div>
               <div className="timesheet list-container">
                 <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-text"}>{selectedProject.projectName}</span></h2>
-                <div className="add-button-wrapper">
+                <div className="timesheet-button-wrapper">
                   <button
-                    className="add-button material-button" onClick={this.handleAddTasks.bind(this)}
+                    className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}
                   >
                     NEW TASKS
                   </button> 
@@ -243,7 +243,7 @@ export default class TimeTracker extends Component {
             </div>  
           : <div className="list-container">
               <span>Add tasks to your project to start tracking time.</span>
-              <button className="add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
+              <button className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
             </div>
           }
           <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
