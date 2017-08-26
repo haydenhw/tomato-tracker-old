@@ -1,8 +1,8 @@
 // @import '/helpers/_variables';
 
-$heading-font-size: 28px;
+// $heading-font-size: 28px;
 $placeholder-font-weight: bold;
-$placeholder-font-size: .75 * $heading-font-size; 
+$placeholder-font-size: 1em;
 
 /////// del
 .fs-modal-form-container, .form-page {
@@ -26,18 +26,18 @@ $placeholder-font-size: .75 * $heading-font-size;
   max-width: 960px;
 }
 
-.form-container, .welcome, .confirm, .modal, .nag {
-  border: 1px solid #000;
+.form-container {
+  // border: 1px solid #000;
   position: relative;
   margin: 0 auto;
   text-align: left;
   font-family: $form-font; 
   font-weight: bold;
   
-  .form-title, h2 {
+  .form-title {
     line-height: 1.2;
-    font-size: $heading-font-size;
-    color: $heading-faded-black;
+    // font-size: $heading-font-size;
+    color: $faded-black;
     margin-bottom: 40px;
   }
   
@@ -48,7 +48,7 @@ $placeholder-font-size: .75 * $heading-font-size;
   
   input {
     border: none;
-    border-bottom: 1px solid $heading-faded-black;
+    border-bottom: 1px solid $faded-black;
     padding-bottom: 10px;
     margin-bottom: 10px; 
     width: 100%;
@@ -57,18 +57,8 @@ $placeholder-font-size: .75 * $heading-font-size;
     font-family: $form-font; 
   }
   
-  .form-submit {
-    border-radius: 40px;
-    background: none;
-    border: 2.2px solid #232529;
-    padding: 1em 1.9em;
-    font-size: 1.1em;
-    font-family: $form-font; 
-    font-weight: bold; 
-  }
-  
   label {
-    font-size: 1.2em;
+    font-size: 1.25em;
     margin-bottom: 10px;
     display: block;
   }
@@ -111,19 +101,16 @@ $placeholder-font-size: .75 * $heading-font-size;
 } 
 
 .form-submit {
-  margin: 0 60px 40px 0;
-  padding: 0.7em 1.9em;
-  font-size: 1em;     
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  border-radius: 40px;
   background: none;
+  border-radius: 40px;
   border: 2.2px solid #232529;
-  padding: 1em 1.9em;
-  font-size: 1.1em;
+  bottom: 0;
   font-family: $form-font; 
   font-weight: bold; 
+  margin: 0 60px 40px 0;
+  padding: 20px 30px;
+  position: absolute;
+  right: 0;
 }  
 
 .welcome {

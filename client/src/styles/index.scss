@@ -2,14 +2,15 @@
 @import
   'helpers/variables',
   'helpers/functions',
+  'helpers/helpers',
   'helpers/mixins';
 
 // 3. Base stuff
 @import
   'base/base',
   'base/fonts',
-  'base/typography',
-  'base/reset';
+  'base/normalize',
+  'base/typography';
 
 // 4. Layout-related sections
 @import
@@ -35,6 +36,7 @@
  './components/loader',
  './components/nag',
  './components/nav',
+ './components/outlineButton',
  './components/pageTransitions',
  './components/projectForm',
  './components/projectHeading',
@@ -45,5 +47,7 @@
  './components/slideInLeft',
  './components/task',
  './components/timer',
- './components/timeTrackerPage';
+ './components/timeTrackerPage',
+ './components/timeTrackerPage',
+ './components/welcomeModal';
 

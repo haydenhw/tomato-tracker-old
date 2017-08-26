@@ -1,14 +1,16 @@
 // colors
 $primary-color: #3949ab;
 
-
-$background-light-grey: #f7f8f8;
-$border-light-grey: #d9d9d9;
 $error-red: #eb7e7f; 
-$font-light-grey: #808080;
-$heading-faded-black: #424242;
+$faded-black: #424242;
+
+$light-grey: #f7f8f8;
+$dark-grey: #808080;
+$medium-grey: #d9d9d9;
 
 // fonts 
 $form-font: 'Raleway', sans-serif;
+$modal-font: $form-font; 
+
 $onboard-screen-top-margin: 10vh;
 

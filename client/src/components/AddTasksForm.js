@@ -71,7 +71,7 @@ let AddTasksForm = class extends Component {
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? "bounceInDown" : ""}`}>
               {title}  
-              {titleName && <span className='grey-title-name'>{titleName}</span>}
+              {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
           <div className={`field-wrapper ${isOnboardingActive ? "bounceInDown-second" : ""}`}>

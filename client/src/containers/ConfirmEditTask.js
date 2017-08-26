@@ -24,7 +24,7 @@ function ConfirmEditTask(props) {
         " ?"
       ]}
       onCancel={closeModal}
-      title={<h2 className="form-title">Confirm time change for task <span className="grey-title-name">{taskName}</span></h2>}
+      title={<h2 className="form-title">Confirm time change for task <span className="grey-title-text">{taskName}</span></h2>}
     />
   );
 }

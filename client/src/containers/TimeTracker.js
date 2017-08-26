@@ -227,7 +227,7 @@ export default class TimeTracker extends Component {
         {tasks.length > 0
           ? <div>
               <div className="timesheet list-container">
-                <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-name"}>{selectedProject.projectName}</span></h2>
+                <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-text"}>{selectedProject.projectName}</span></h2>
                 <div className="add-button-wrapper">
                   <button
                     className="add-button material-button" onClick={this.handleAddTasks.bind(this)}

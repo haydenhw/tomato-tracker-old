@@ -50,7 +50,7 @@ let SingleInputForm = function SingleInputForm(props) {
           {title && 
             <h2 className="form-title bounceInDown">
               {title}  
-              {titleName && <span className='grey-title-name'>{titleName}</span>}
+              {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
           <div className="bounceInDown-second">

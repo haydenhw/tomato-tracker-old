@@ -26,7 +26,7 @@ export default class ProjectTaskForm extends Component {
     return (
       <div className="form-page">
         <div className="form-container">
-          <h2 className="form-title">{title}<span className="grey-title-name">{selectedProjectName}</span></h2>
+          <h2 className="form-title">{title}<span className="grey-title-text">{selectedProjectName}</span></h2>
           {label && <label>{label}</label>}  
           {children}        
           <AddTasksFormContainer

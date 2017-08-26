@@ -48,9 +48,9 @@
 
 .list-item {
   width: 100%;
-  border-top: 1px solid $border-light-grey;
-  border-left: 1px solid $border-light-grey;
-  border-right: 1px solid $border-light-grey;
+  border-top: 1px solid $medium-grey;
+  border-left: 1px solid $medium-grey;
+  border-right: 1px solid $medium-grey;
   position: relative;
   padding: 15px;
   padding-left: 20px;
@@ -80,7 +80,7 @@
 }
 
 .list-item:last-child {
-  border-bottom: 1px solid $border-light-grey;
+  border-bottom: 1px solid $medium-grey;
    
    &.total-time {
     border: none;   
