@@ -18,11 +18,11 @@ const renderField = (props) => {
         {...input} 
         autoFocus
         autoComplete="off"
-        className="fullscreen-input add-project-input" 
+        className="form-input fullscreen-input add-project-input" 
         placeholder={"Project Name"} 
         type={type} 
       />
-      {touched && error && <div className="error">{error}</div>}
+      {touched && error && <div className="form-error">{error}</div>}
     </div>
   )
 } 
@@ -44,7 +44,7 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <div className={`${isModalActive ? "fs-modal-form-container": ""}`}>
+    <div className={`${isModalActive ? "fullscreen-container": ""}`}>
       <div className={`${isModalActive ? "form-container": "" }`}>
         <form onSubmit={isOnlyInput ? handleSubmit(handleFormSubmit) : dummySubmit}>
           {title && 
@@ -63,7 +63,7 @@ let SingleInputForm = function SingleInputForm(props) {
         </form>
       </div>
       {shouldRenderSubmitButton && 
-        <button className="fadeInButton form-submit" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
+        <button className="fadeInButton outline-button modal-button-bottom-right" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
       }
     </div>
   );

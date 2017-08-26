@@ -6,7 +6,7 @@ export default function FormModal(props) {
   const { children, greyText, title } = props;
   
   
-    // <div className="fs-modal-form-container">
+    // <div className="fullscreen-container">
     //   <div className="form-container">
   
   return (

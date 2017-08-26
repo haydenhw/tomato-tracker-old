@@ -12,11 +12,11 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
       {...input} 
       autoFocus 
       autoComplete="off"
-      className="fullscreen-input add-project-input" 
+      className="form-input fullscreen-input add-project-input" 
       placeholder="Project name" 
       type={type} 
     />
-    {touched && error && <div className="error">{error}</div>}
+    {touched && error && <div className="form-error">{error}</div>}
   </div>
 )
 

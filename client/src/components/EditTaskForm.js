@@ -16,10 +16,10 @@ const renderField = ({
 }) => (
   <div className="input-wrapper">
     <div>
-      <input {...input} placeholder="Task name" type={type} />
+      <input {...input} className="form-input" placeholder="Task name" type={type} />
       {touched &&
-        ((error && <div className="error">{error}</div>) ||
-        (warning && <span className="error">{warning}</span>))}
+        ((error && <div className="form-error">{error}</div>) ||
+        (warning && <span className="form-error">{warning}</span>))}
       </div>
     </div>
   )
@@ -27,15 +27,15 @@ const renderField = ({
   let EditTaskForm = class extends Component {
     handleEditTaskSubmit ({ taskName, newTime }) {
       const {
-        selectedProjectId,
         clickedTaskId,
-        confirmEditTask,
         closeModal,
-        updateTask,
+        confirmEditTask,
         initialValues,
         selectedProject,
+        selectedProjectId,
         selectedTask,
         taskNames,
+        updateTask,
       } = this.props
       const newTimeString = timeStringToSeconds(newTime);
       
@@ -78,14 +78,14 @@ const renderField = ({
     }
     
   render() {
-    const { closeModal, handleSubmit, initialValues } = this.props;
+    const { closeModal, containerClass, handleSubmit, initialValues } = this.props;
     
     return (
       <div className={`${false ? '' : 'bounceInDown' }`}>
-        <div className="form-container">
+        <div className={`form-container ${containerClass || ''}`}>
           <h2 className="form-title">Edit Task</h2>
           <form className="form" onSubmit={handleSubmit(this.handleEditTaskSubmit.bind(this))}>
-            <div className="field-wrapper">
+            <div className="form-field-wrapper">
               <label>Task Name</label>
               <Field
                 name="taskName"
@@ -93,7 +93,7 @@ const renderField = ({
                 type="text"
               />
             </div>
-            <div className="field-wrapper">
+            <div className="form-field-wrapper">
               <label>Logged Time: {initialValues.recordedTime}</label>
               <Field
                 name="newTime"
@@ -103,7 +103,7 @@ const renderField = ({
             </div>
           </form>
         </div>
-          <button className="form-button form-submit fadeInButton" onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
+          <button className="fadeInButton outline-button modal-button-bottom-right"  onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );
   }

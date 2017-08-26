@@ -8,8 +8,9 @@ html, body, #root, [data-reactroot] {
 }
 
 body {
-  font-weight: normal !important;
-  margin: 0 !important;
+  color: $faded-black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
   padding-bottom: 20px;
 }
 
@@ -18,4 +19,43 @@ select:focus,
 textarea:focus,
 button:focus {
   outline: none;
+}
+  
+label {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+input::-webkit-input-placeholder {
+  font-weight: $placeholder-font-weight;
+  font-size: $placeholder-font-size;
+  font-family: $form-font;
+}
+  
+input::-moz-placeholder { /* Firefox 18- */
+  font-weight: $placeholder-font-weight;
+  font-size: $placeholder-font-size;
+  font-family: $form-font;
+}
+  
+input::-moz-placeholder {  /* Firefox 19+ */
+  font-weight: $placeholder-font-weight;
+  font-size: $placeholder-font-size;
+  font-family: $form-font;
+}
+  
+input::-ms-input-placeholder {  
+  font-weight: $placeholder-font-weight;
+  font-size: $placeholder-font-size;
+  font-family: $form-font;
 }

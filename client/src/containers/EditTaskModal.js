@@ -10,7 +10,7 @@ import EditTaskForm from '../components/EditTaskForm';
 
 export default function EditTaskModal(props) {
   return (
-    <EditTaskForm />
+    <EditTaskForm containerClass="normal-modal-form-container"/>
   );
 }
 // 

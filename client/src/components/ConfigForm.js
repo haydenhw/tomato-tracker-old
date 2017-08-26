@@ -12,11 +12,11 @@ const renderField = (props) => {
         {...input} 
         autoFocus
         autoComplete="off"
-        className="fullscreen-input add-project-input" 
+        className="form-input fullscreen-input add-project-input" 
         placeholder={"Project Name"} 
         type={type} 
       />
-      {touched && error && <div className="error">{error}</div>}
+      {touched && error && <div className="form-error">{error}</div>}
     </div>
   )
 } 
@@ -41,7 +41,7 @@ let ConfigForm = function ConfigForm(props) {
               <option value="sound/endSound.mp3">electronic</option>
             </Field> 
           </div>
-          <button className="fadeInButton form-submit" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+          <button className="fadeInButtonoutline-button" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
         </form>
   );
 }

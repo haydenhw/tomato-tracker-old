@@ -11,4 +11,4 @@ export const showProgressBar = true || false;
 //     margin: '0 auto',
 //     transform: 'translate(0, 0)'
 //   };
-
+  

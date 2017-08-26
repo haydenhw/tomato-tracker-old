@@ -17,6 +17,7 @@ let renderField = (placeholder, inputRef) => ({
     <div>
       <input
         {...input}
+        className="form-input"
         ref={inputRef}
         placeholder="Task Name"
         type={type}
@@ -66,7 +67,7 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "fs-modal-form-container": "bounceInDown"}`}>
+      <div className={`${isOnboardingActive ? "": "fullscreen-container bounceInDown"}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? "bounceInDown" : ""}`}>
@@ -74,7 +75,7 @@ let AddTasksForm = class extends Component {
               {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
-          <div className={`field-wrapper ${isOnboardingActive ? "bounceInDown-second" : ""}`}>
+          <div className={`form-field-wrapper ${isOnboardingActive ? "bounceInDown-second" : ""}`}>
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
@@ -83,7 +84,7 @@ let AddTasksForm = class extends Component {
           </div>
         </div>
       {!(shouldRenderSubmitButton === false) && 
-        <button className='fadeInButton form-button form-submit' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+        <button className='fadeInButton outline-button modal-button-bottom-right' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
       }
     </div>  
     );

@@ -24,7 +24,7 @@ export default class ProjectTaskForm extends Component {
      } = this.props;
      
     return (
-      <div className="form-page">
+      <div className="form-page fullscreen-container">
         <div className="form-container">
           <h2 className="form-title">{title}<span className="grey-title-text">{selectedProjectName}</span></h2>
           {label && <label>{label}</label>}  
@@ -34,9 +34,9 @@ export default class ProjectTaskForm extends Component {
             shouldRenderSubmitButton={false}
             showTasksForSelectedProject={showTasksForSelectedProject}
           />  
-          <div className="form-submit-button-group">
-            <button className="form-submit" onClick={handleSubmit}>Submit</button>
-            <button className="form-submit" onClick={handleCancel}>Cancel</button>
+          <div className="form-page-button-group">
+            <button className="form-page-button outline-button" onClick={handleSubmit}>Submit</button>
+            <button className="form-page-button outline-button" onClick={handleCancel}>Cancel</button>
           </div>
         </div>
       </div>  

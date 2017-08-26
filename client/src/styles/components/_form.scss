@@ -1,52 +1,47 @@
-// @import '/helpers/_variables';
-
-// $heading-font-size: 28px;
-$placeholder-font-weight: bold;
-$placeholder-font-size: 1em;
-
-/////// del
-.fs-modal-form-container, .form-page {
-  margin-top: $onboard-screen-top-margin; 
-  border: 1px solid #000;
-  position: relative;
-  width: 100%;
-  min-height: 60vh;
-  max-height: 80vh;
-  height: 100%;
-}
 
 .form-page {
+  padding-top: 60px;
+  position: relative;
+  
   .form-container {
     top: 0;
   } 
-}
-
-.form-container {
-  width: 70%;
-  max-width: 960px;
-}
+  
+  .form-page-button-group {
+    margin-top: 25px;
+    text-align: right;
+    
+    .form-page-button {
+      position: static; 
+      margin-bottom: 0; 
+      margin-right: 10px;
+    }
+  }
+}  
 
 .form-container {
   // border: 1px solid #000;
+  width: 70%;
+  max-width: 960px;
   position: relative;
   margin: 0 auto;
   text-align: left;
   font-family: $form-font; 
   font-weight: bold;
   
-  .form-title {
-    line-height: 1.2;
-    // font-size: $heading-font-size;
-    color: $faded-black;
-    margin-bottom: 40px;
+  &.normal-modal-form-container {
+    height: 70%;
   }
   
-  .error {
+  .form-error {
     color: $error-red;
-    font-size: 1.1em;
   }  
   
-  input {
+  .form-field-wrapper {
+    margin-top: 30px; 
+  }  
+  
+  .form-input {
     border: none;
     border-bottom: 1px solid $faded-black;
     padding-bottom: 10px;
@@ -57,92 +52,9 @@ $placeholder-font-size: 1em;
     font-family: $form-font; 
   }
   
-  label {
-    font-size: 1.25em;
-    margin-bottom: 10px;
-    display: block;
-  }
-  
-  &.welcome {
-    text-align: center;
-    
-    button {
-      margin-top: 25px;
-    }
-  }
-  
-  input::-webkit-input-placeholder {
-    font-weight: $placeholder-font-weight;
-    font-size: $placeholder-font-size;
-    font-family: $form-font;
-  }
-  
-  input::-moz-placeholder { /* Firefox 18- */
-    font-weight: $placeholder-font-weight;
-    font-size: $placeholder-font-size;
-    font-family: $form-font;
-  }
-  
-  input::-moz-placeholder {  /* Firefox 19+ */
-    font-weight: $placeholder-font-weight;
-    font-size: $placeholder-font-size;
-    font-family: $form-font;
-  }
-  
-  input::-ms-input-placeholder {  
-    font-weight: $placeholder-font-weight;
-    font-size: $placeholder-font-size;
-    font-family: $form-font;
+  .form-title {
+    line-height: 1.2;
+    color: $faded-black;
+    margin-bottom: 40px;
   }
 }
-
-.welcome {
-  margin-top: $onboard-screen-top-margin;
-} 
-
-.form-submit {
-  background: none;
-  border-radius: 40px;
-  border: 2.2px solid #232529;
-  bottom: 0;
-  font-family: $form-font; 
-  font-weight: bold; 
-  margin: 0 60px 40px 0;
-  padding: 20px 30px;
-  position: absolute;
-  right: 0;
-}  
-
-.welcome {
-  .form-submit {
-    position: static;
-    margin: 0;
-  }
-}
-.normal-modal {
-  .form-submit {
-    // margin: 0 30px 25px 0;
-  }
-  .form-container {
-    height: 70%;
-  }
-}
-
-.form-submit-button-group {
-  margin-top: 25px;
-  text-align: right;
-  
-  button {
-    position: static; 
-    margin-bottom: 0; 
-    margin-right: 10px;
-  }
-} 
-
-.field-wrapper {
-  margin-top: 30px; 
-}
-// 
-// .minimal-form {
-//   @include centerVertHoriz();  
-// }
