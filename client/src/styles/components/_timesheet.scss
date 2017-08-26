@@ -3,4 +3,13 @@
   margin: 0 auto;
   min-width: 600px;
   padding-top: 50px;
+  
+  .timesheet-title {
+    font-size: 1.5em;
+  }    
+  
+  .total {
+    color: #808080;
+    font-weight: bold;
+  }
 }
