@@ -41,7 +41,7 @@ let ConfigForm = function ConfigForm(props) {
               <option value="sound/endSound.mp3">electronic</option>
             </Field> 
           </div>
-          <button className="fadeInButtonoutline-button" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+          <button className="fade\-in\-medium\-delayoutline-button" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
         </form>
   );
 }

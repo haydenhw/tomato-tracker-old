@@ -67,7 +67,7 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "": "fullscreen-container bounceInDown"}`}>
+      <div className={`${isOnboardingActive ? "": "bounceInDown"}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? "bounceInDown" : ""}`}>
@@ -84,7 +84,7 @@ let AddTasksForm = class extends Component {
           </div>
         </div>
       {!(shouldRenderSubmitButton === false) && 
-        <button className='fadeInButton outline-button modal-button-bottom-right' onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
+        <button className={`${isOnboardingActive ? 'fade-in-medium-delay' : 'fade-in-short-delay'} outline-button modal-button-bottom-right`} onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
       }
     </div>  
     );

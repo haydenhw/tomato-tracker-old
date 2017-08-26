@@ -63,7 +63,7 @@ let SingleInputForm = function SingleInputForm(props) {
         </form>
       </div>
       {shouldRenderSubmitButton && 
-        <button className="fadeInButton outline-button modal-button-bottom-right" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
+        <button className="fade-in-medium-delay outline-button modal-button-bottom-right" onClick={handleSubmit(handleFormSubmit)}>Continue</button>
       }
     </div>
   );

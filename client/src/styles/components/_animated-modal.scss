@@ -106,7 +106,7 @@ html,body {
       text-align:center;
       vertical-align:middle;
       background:rgba(0,0,0,.0);
-      animation: fadeInBackground .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      animation: fade-inBackground .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
       .modal {
         transform:translateX(-1500px);
         animation: roadRunnerIn .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -173,7 +173,7 @@ html,body {
   }
 }
 
-@keyframes fadeInBackground {
+@keyframes fade-inBackground {
   0% {
     background:rgba(0,0,0,.0);
   }

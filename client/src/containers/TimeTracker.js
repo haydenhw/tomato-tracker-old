@@ -235,8 +235,9 @@ export default class TimeTracker extends Component {
                     NEW TASKS
                   </button> 
                 </div>
-                <List className="task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
-                  <ListHeader col1Title="Task" col2Title="Time Logged" /> </List>
+                <List className="list task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
+                  <ListHeader col1Title="Task" col2Title="Time Logged" /> 
+                </List>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
               </div>
             </div>  

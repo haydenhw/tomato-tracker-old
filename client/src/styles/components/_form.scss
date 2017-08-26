@@ -1,15 +1,18 @@
 
 .form-page {
   padding-top: 60px;
-  position: relative;
+  // position: relative;
   
   .form-container {
     top: 0;
   } 
   
   .form-page-button-group {
-    margin-top: 25px;
-    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    // margin-top: 25px;
+    // text-align: right;
     
     .form-page-button {
       position: static; 
@@ -20,7 +23,7 @@
 }  
 
 .form-container {
-  // border: 1px solid #000;
+  border: 1px solid #000;
   width: 70%;
   max-width: 960px;
   position: relative;
@@ -28,6 +31,10 @@
   text-align: left;
   font-family: $form-font; 
   font-weight: bold;
+  
+  &.form-container-nested {
+    margin: 0; 
+  }  
   
   &.normal-modal-form-container {
     height: 70%;

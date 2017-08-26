@@ -103,7 +103,7 @@ const renderField = ({
             </div>
           </form>
         </div>
-          <button className="fadeInButton outline-button modal-button-bottom-right"  onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
+          <button className="fade-in-medium-delay outline-button modal-button-bottom-right"  onClick={handleSubmit(this.handleEditTaskSubmit.bind(this))} type="submit">Submit</button>
       </div>
     );
   }

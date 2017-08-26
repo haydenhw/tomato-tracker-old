@@ -52,27 +52,27 @@ $welcome-delay: 1;
   @include bounceInDownDelay($welcome-delay + $second-element-delay + 0s);  
 }
 
-// fadeIn 
+// fade-in 
 
-@keyframes fadeIn{
+@keyframes fade-in{
     0% { opacity:0; }
     // 66% { opacity:0; }
     100% { opacity:1; }
 }
 
-@-webkit-keyframes fadeIn{
+@-webkit-keyframes fade-in{
     0% { opacity:0; }
     // 66% { opacity:0; }
     100% { opacity:1; }
 }
 
-.fadeInButton-welcome {
+.fade-in-long-delay {
   opacity: 0;
-  animation: fadeIn 1s ease-in 2.3s forwards;
+  animation: fade-in 1s ease-in 2.3s forwards;
 }
 
-.fadeInButton {
+.fade\-in\-medium\-delay {
   opacity: 0;
-  animation: fadeIn 1s ease-in 1.2s forwards;
+  animation: fade-in 1s ease-in 1.2s forwards;
 }
 
