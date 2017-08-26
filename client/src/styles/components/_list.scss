@@ -2,16 +2,11 @@
   box-sizing: border-box;
 }
 
-.list-container {
-  width: 55%;
-  margin: 0 auto;
-  min-width: 600px;
-  padding-top: 50px;
-  
-  .timesheet-title {
-    font-size: 1.5em;
-  }    
-}
+
+
+.timesheet-title {
+  font-size: 1.5em;
+}    
 
 .task-list {
   width: 100%;

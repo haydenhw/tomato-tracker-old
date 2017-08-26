@@ -12,6 +12,7 @@ import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import ListItem from '../components/ListItem';
+import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
 import Select from './Select';
 import Timer from './Timer';
@@ -226,22 +227,18 @@ export default class TimeTracker extends Component {
         </div>
         {tasks.length > 0
           ? <div>
-              <div className="timesheet list-container">
-                <h2 className="timesheet-title">Timesheet for project <span className={"grey-title-text"}>{selectedProject.projectName}</span></h2>
-                <div className="timesheet-button-wrapper">
-                  <button
-                    className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}
-                  >
-                    NEW TASKS
-                  </button> 
-                </div>
+              <Timesheet
+                buttonText="NEW TASKS"
+                handleButtonClick={this.handleAddTasks.bind(this)}
+                titleText={["Timesheet for project ", <span className={"grey-title-text"} key={shortid.generate()}>{selectedProject.projectName}</span>]} 
+              >
                 <List className="list task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
                   <ListHeader col1Title="Task" col2Title="Time Logged" /> 
                 </List>
                 <TotalTime time={secondsToHMMSS(totalTime)} />
-              </div>
-            </div>  
-          : <div className="list-container">
+              </Timesheet>
+            </div>
+          : <div className="timesheet">
               <span>Add tasks to your project to start tracking time.</span>
               <button className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
             </div>
