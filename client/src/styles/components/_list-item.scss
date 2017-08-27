@@ -1,0 +1,130 @@
+.list-item {
+  width: 100%;
+  // border-top: 1px solid $medium-grey;
+  // border-left: 1px solid $medium-grey;
+  // border-right: 1px solid $medium-grey;
+  display: table;
+  position: relative;
+  padding: 15px;
+  padding-left: 20px;
+  line-height: 6px;
+  
+  span {
+    margin-left: 20px;
+  }
+  
+  &.selected {
+    background-color: $light-blue;  
+  }
+  
+  &.selected:hover {
+    background-color: $light-blue;
+  }
+  
+  &.active, 
+  &.active:hover {
+    background-color: rgba(165, 214 , 167, 0.3) !important;
+  }
+  
+  &:first-child:last-child {
+    border-bottom: 1px solid $medium-grey;
+    
+    &.total-time {
+      border: none;   
+    }
+  }
+  
+  &:not(.list-item-header):not(.total-time):hover {
+    background-color: $light-blue;
+    cursor: pointer; 
+  }
+  
+  &.total-time {
+    border: none;
+  }
+  
+  .list-item-header {
+    color: grey;
+    padding: 20px;
+    font-weight: bold;
+  }
+  
+  .list-item-icon {
+    font-size: 32px;
+  }
+  
+  .list-item-col {
+    // border: 1px solid $light-blue;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    
+    &.list-item-col1 {
+      width: 20%;
+      // padding-left: 12%;
+      // height: 30px;
+    }
+    
+    &.list-item-col2 {
+      width: 60%;
+      // padding-left: 19%;
+    }
+    
+    &.list-item-col3 {
+      width: 10%;
+      // vertical-align: middle;
+    }
+    
+    &.list-item-col4 {
+      // width: 10%;
+      // vertical-align: middle;
+    }
+    
+    .list-item-col-title {
+      color: $faded-black;
+      font-size: 22px;
+      font-weight: normal;
+    }
+    
+    .list-item-col-time {
+      // display: inline-block;
+    }
+  }
+  
+  .list-item-context-menu {
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    
+    .dropdown-wrapper {
+      height: 0px;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    
+    .context-menu-icon {
+      position: absolute;
+      top: 1px;
+      padding: 7px 12px;
+      opacity: 0.5;
+      
+      &:hover {
+        background-color: $light-blue;
+        opacity: 1;   
+      }
+      
+      &:before {
+        position: relative;
+        top: 3px;
+        left: 1px;
+      }
+    }
+  }
+}
+

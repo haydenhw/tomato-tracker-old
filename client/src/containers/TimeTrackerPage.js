@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {
   deleteTask,
   decrementTimer,
-  changeActiveEditMenu,
+  changeActiveContextMenu,
   fetchProjects,
   setSelectedProject,
   setTempTasks,
@@ -36,7 +36,7 @@ class TimeTrackerPage extends Component {
   
   render() {
     const { 
-      changeActiveEditMenu,
+      changeActiveContextMenu,
       decrementTimer,
       deleteTask,
       hasFetched,
@@ -63,7 +63,7 @@ class TimeTrackerPage extends Component {
     return (
       <div className="time-tracker-page-container pt-page pt-page-flipInTop">
         <TimeTracker
-          changeActiveEditMenu={changeActiveEditMenu}
+          changeActiveContextMenu={changeActiveContextMenu}
           decrementTimer={decrementTimer}
           deleteTask={deleteTask}
           projects={projects}
@@ -110,7 +110,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  changeActiveEditMenu,
+  changeActiveContextMenu,
   decrementTimer,
   deleteTask,
   fetchProjects,

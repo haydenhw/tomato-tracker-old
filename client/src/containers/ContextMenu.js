@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 
-import { changeActiveEditMenu } from '../actions/indexActions';
+import { changeActiveContextMenu } from '../actions/indexActions';
 import Dropdown from '../components/Dropdown';
 import DropdownTrigger from '../components/DropdownTrigger';
 import DropdownContent from '../components/DropdownContent';
 
-class EditMenu extends Component {
+class ContextMenu extends Component {
   constructor(props) {
     super(props);
     
@@ -59,16 +59,16 @@ class EditMenu extends Component {
   
 
   render() {
-    const { activeEditMenuParentId, children, className, parentId } = this.props;
+    const { activeContextMenuParentId, children, className, parentId } = this.props;
     const { isActive } = this.state;
     
     return ( 
       <Dropdown className={className}> 
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.handleClick}>
-            <div className="edit-menu-icon icon-edit"></div>
+            <div className="context-menu-icon icon-edit"></div>
           </DropdownTrigger>
-          <DropdownContent isActive={activeEditMenuParentId ? activeEditMenuParentId === parentId : isActive}>
+          <DropdownContent isActive={activeContextMenuParentId ? activeContextMenuParentId === parentId : isActive}>
             {children}
           </DropdownContent>
         </div>
@@ -81,8 +81,8 @@ const mapStateToProps = state => {
   const { editMenu } = state;
   
   return {
-    activeEditMenuParentId: editMenu.activeParentId
+    activeContextMenuParentId: editMenu.activeParentId
   } 
 }
 
-export default connect(mapStateToProps, { changeActiveEditMenu })(EditMenu);
+export default connect(mapStateToProps, { changeActiveContextMenu })(ContextMenu);

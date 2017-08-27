@@ -10,7 +10,7 @@ import { routeToTimerPage } from '../helpers/route';
 
 import {
   addProject,
-  changeActiveEditMenu,
+  changeActiveContextMenu,
   deleteProject,
   setSelectedProject,
   setTempTasks,
@@ -19,7 +19,7 @@ import {
 } from '../actions/indexActions';
 
 import Modal from './Modal';
-import EditMenu from './EditMenu';
+import ContextMenu from './ContextMenu';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
@@ -93,7 +93,7 @@ class ProjectsPage extends Component {
   }
   
   renderProject (project){
-    const { changeActiveEditMenu, selectedProjectId } = this.props;
+    const { changeActiveContextMenu, selectedProjectId } = this.props;
     const { projectName, shortId } = project;
     
     const totalTime = 
@@ -110,14 +110,14 @@ class ProjectsPage extends Component {
         handleClick={this.handleListItemClick(shortId)}
         isSelected={selectedProjectId === shortId}
       >
-        <EditMenu 
-          className='list-item-edit-menu'
-          onMenuClick={changeActiveEditMenu}    
+        <ContextMenu 
+          className='list-item-context-menu'
+          onMenuClick={changeActiveContextMenu}    
           parentId={shortId}
         >
           <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
           <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
-        </EditMenu>  
+        </ContextMenu>  
       </ListItem>
     );
   } 
@@ -204,7 +204,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { 
   addProject,
-  changeActiveEditMenu,
+  changeActiveContextMenu,
   deleteProject,
   setSelectedProject,
   setTempTasks,

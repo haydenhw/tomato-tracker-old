@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 import { secondsToHMMSS } from '../helpers/time'
 
-import EditMenu from '../containers/EditMenu';
+import ContextMenu from '../containers/ContextMenu';
 
 export default function Task(props) {
   const { taskData } = props;
@@ -11,18 +12,22 @@ export default function Task(props) {
 
   return(
     <div className="list-item">
-      <div className="list-item-col1 list-col">
-        <span>{taskName}</span>
+      <div className="list-item-col list-item-col1">
+          <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
       </div>
-      <div className="list-item-col2 list-col">
-        <span>{secondsToHMMSS(recordedTime)}</span>
+      <div className="list-item-col list-item-col2">
+        <h2>{taskName}</h2>
+        <div>{secondsToHMMSS(recordedTime)}</div>
       </div>
-      <div className="list-item-col3 list-col">
-        <EditMenu className='list-item-edit-menu'>
+      <div className="list-item-col list-item-col3">
+        <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
+      </div>
+      {/* <div className="list-item-col list-item-col4">
+        <ContextMenu className='list-item-context-menu'>
           <li className="dropdown-item"><a>Edit</a></li>
           <li className="dropdown-item"><a>Delete</a></li>
-        </EditMenu>
-      </div>
+        </ContextMenu>
+      </div> */}
     </div>
   );
 }

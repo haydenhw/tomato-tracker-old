@@ -1,8 +1,12 @@
 .timesheet {
-  width: 55%;
+  width: 100%;
   margin: 0 auto;
   min-width: 600px;
   padding-top: 50px;
+  
+  .timesheet-add-button {
+    margin-bottom: 10px;
+  }  
   
   .timesheet-title {
     font-size: 1.5em;

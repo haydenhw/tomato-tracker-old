@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
-import EditMenu from '../containers/EditMenu';
+import ContextMenu from '../containers/ContextMenu';
 
 export default function Project(props) {
   const { handleMenuClick ,projectData, totalTime } = props;
@@ -12,10 +12,10 @@ export default function Project(props) {
     <div className="list-item">
       <span>{projectName}</span>
       <span>{totalTime}</span>
-      <EditMenu>
+      <ContextMenu>
         <li className="dropdown-item"><a>Edit</a></li>
         <li className="dropdown-item"><a>Delete</a></li>
-      </EditMenu>
+      </ContextMenu>
     </div>
   );
 }

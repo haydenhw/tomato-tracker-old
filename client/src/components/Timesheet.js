@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function Timesheet({ buttonText, children, handleButtonClick, titleText }) {
   return(
-    <div className="timesheet list-container">
+    <div className="timesheet">
       <h2 className="timesheet-title">{titleText}</h2>
       <div className="timesheet-button-wrapper">
         <button
@@ -11,8 +11,8 @@ export default function Timesheet({ buttonText, children, handleButtonClick, tit
           >
             NEW TASKS
         </button> 
-        {children}
       </div>      
+      {children}
   </div>
   );
 }

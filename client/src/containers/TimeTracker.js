@@ -6,12 +6,13 @@ import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
 
-import EditMenu from './EditMenu';
+import ContextMenu from './ContextMenu';
 import Modal from './Modal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
 import ListItem from '../components/ListItem';
+import ListItemColumn from '../components/ListItemColumn';
 import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
 import Select from './Select';
@@ -25,7 +26,7 @@ export default class TimeTracker extends Component {
     
     this.state = {
       activeTaskId: null,
-      activeEditMenuParentId: null, 
+      activeContextMenuParentId: null, 
       clickedTaskId: null,
       selectedTaskId: null, 
       tasks: tasks,
@@ -134,12 +135,12 @@ export default class TimeTracker extends Component {
     this.setState({ activeTaskId: selectedTaskId });
   }
   
-  setActiveEditMenu = (activeEditMenuParentId) => () => {
-    this.setState({ activeEditMenuParentId });  
+  setActiveContextMenu = (activeContextMenuParentId) => () => {
+    this.setState({ activeContextMenuParentId });  
   }
   
   renderTask (task){
-    const { changeActiveEditMenu, selectedProject, isTimerActive } = this.props;
+    const { changeActiveContextMenu, isTimerActive, selectedProject } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
     
@@ -147,20 +148,35 @@ export default class TimeTracker extends Component {
       <ListItem
         key={shortid.generate()}
         className="task"
-        col1Text={taskName}
-        col2Text={secondsToHMMSS(recordedTime)} 
         handleClick={this.handleTaskItemClick(shortId)}
         isActive={(activeTaskId === shortId) && isTimerActive}
         isSelected={selectedTaskId === shortId}
       >
-        <EditMenu
-            className='list-item-edit-menu'
-            onMenuClick={changeActiveEditMenu}
+        <ListItemColumn colNumber="1">
+          <FontAwesome className="list-item-icon task-icon" name='check-circle'></FontAwesome>
+        </ListItemColumn>
+        
+        <ListItemColumn colNumber="2">
+          <div>
+            <h2 className="list-item-col-title">{taskName}</h2>
+            <div className="list-item-col-time">{secondsToHMMSS(recordedTime)}</div>
+          </div>
+        </ListItemColumn>
+        
+        <ListItemColumn colNumber="3">
+          <span>Hello</span>
+        </ListItemColumn>
+        
+        <ListItemColumn colNumber="4">
+          <ContextMenu
+            className='list-item-context-menu'
+            onMenuClick={changeActiveContextMenu}
             parentId={shortId}
           >
-          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
-          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
-        </EditMenu>  
+            <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
+            <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
+          </ContextMenu>          
+        </ListItemColumn>
       </ListItem>
     ); 
   } 
@@ -241,7 +257,7 @@ export default class TimeTracker extends Component {
           : <div className="timesheet">
               <span>Add tasks to your project to start tracking time.</span>
               <button className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
-            </div>
+          </div>
           }
           <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
            rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}

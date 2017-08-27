@@ -55,7 +55,7 @@ export function projects(state=defaultState, action) {
     case "CHANGE_ACTIVE_EDIT_MENU":
     return {
       ...state,
-      activeEditMenuId: action.activeMenuId
+      activeContextMenuId: action.activeMenuId
     } 
     case actions.TOGGLE_FETCHING:
     return {
