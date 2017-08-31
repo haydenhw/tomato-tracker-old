@@ -11,8 +11,7 @@ import Modal from './Modal';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ProjectHeading from '../components/ProjectHeading';
-import ListItem from '../components/ListItem';
-import ListItemColumn from '../components/ListItemColumn';
+import TimesheetListItem from '../components/TimesheetListItem';
 import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
 import Select from './Select';
@@ -62,7 +61,6 @@ export default class TimeTracker extends Component {
     this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
   }
   
-  
   componentDidUpdate(prevProps, prevState) {
     const { tasks } = this.props;
     
@@ -107,23 +105,39 @@ export default class TimeTracker extends Component {
     toggleEditTaskForm(taskId);
   } 
 
-  handleTaskChange(taskId){
+  handleTaskChange(taskId, callback){
     const { isTimerActive } = this.props;
-    
-    if (isTimerActive) {
-      return null;
-    }
+    const { selectedTaskId } = this.props;
     
     if (localStorage.prevSelectedTaskId !== taskId) {
       localStorage.setItem("prevSelectedTaskId", taskId);
     }
-      
+    
     this.setState({ selectedTaskId: taskId });
+  }
+  
+  handlePlayClick = (taskId) => () => {
+    const { isTimerActive, toggleTimer } = this.props;
+    const { selectedTaskId } = this.state;
+    
+    if (isTimerActive && (selectedTaskId === taskId)) {
+      toggleTimer();
+      return null; 
+    }
+    
+    if (isTimerActive && !(selectedTaskId === taskId)) {
+      this.setState({ activeTaskId: taskId })
+      this.handleTaskChange(taskId);
+      return null;
+    }
+    
+    this.setState({ activeTaskId: taskId }, toggleTimer)
+    this.handleTaskChange(taskId);
   }
 
   handleTaskDelete = (selectedProject, task) => () => {
     const { deleteTask } = this.props;
-
+      
     deleteTask(selectedProject, task, true);  
   }
 
@@ -140,44 +154,31 @@ export default class TimeTracker extends Component {
   }
   
   renderTask (task){
-    const { changeActiveContextMenu, isTimerActive, selectedProject } = this.props;
+    const { changeActiveContextMenu, isTimerActive, selectedProject, toggleTimer } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
     
     return (
-      <ListItem
+      <TimesheetListItem
         key={shortid.generate()}
-        className="task"
-        handleClick={this.handleTaskItemClick(shortId)}
+        // className="task"
+        handleItemClick={this.handleTaskItemClick(shortId)}
+        handlePlayClick={this.handlePlayClick(shortId)}
         isActive={(activeTaskId === shortId) && isTimerActive}
         isSelected={selectedTaskId === shortId}
+        title={taskName}
+        time={recordedTime}
+        
       >
-        <ListItemColumn colNumber="1">
-          <FontAwesome className="list-item-icon task-icon" name='check-circle'></FontAwesome>
-        </ListItemColumn>
-        
-        <ListItemColumn colNumber="2">
-          <div>
-            <h2 className="list-item-col-title">{taskName}</h2>
-            <div className="list-item-col-time">{secondsToHMMSS(recordedTime)}</div>
-          </div>
-        </ListItemColumn>
-        
-        <ListItemColumn colNumber="3">
-          <span>Hello</span>
-        </ListItemColumn>
-        
-        <ListItemColumn colNumber="4">
-          <ContextMenu
-            className='list-item-context-menu'
-            onMenuClick={changeActiveContextMenu}
-            parentId={shortId}
-          >
-            <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
-            <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
-          </ContextMenu>          
-        </ListItemColumn>
-      </ListItem>
+        <ContextMenu
+          className='list-item-context-menu'
+          onMenuClick={changeActiveContextMenu}
+          parentId={shortId}
+        >
+          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
+          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
+        </ContextMenu>          
+      </TimesheetListItem>
     ); 
   } 
 

@@ -1,0 +1,31 @@
+**Styles**:
+  List Item:
+    ☐ create circular menu index
+        ☐ create span wrapper 
+        ☐ make horizontal elipse icon
+    ☐ add stop button to play button
+    ☐ find better task icon?  
+    ☐ adjust icons to match
+    ☐ make project screen list items display correctly
+    ☐ put list in a container
+      ☐ add background to timsheet section 
+      ☐ decrease widht of list container
+      
+  Misc:
+    ☐ 
+   
+**Forms**:
+  ProjectTaskForms:
+    ☐ buttons display incorrectly
+    
+**Bugs**:
+
+    
+Questions for Kyle:
+  ☐ How do you like the layout i.e that the timer is directly above the timesheet and timesheet is small?
+    ☐ any alternatives?
+    ☐ How to center icon inside of close button?   
+    ☐ Why does my list item play button need to be wrapped in a parent element
+    
+  
+

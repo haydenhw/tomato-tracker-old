@@ -13,7 +13,8 @@ import {
   toggleAddTasksForm,
   toggleConfig,
   toggleEditTaskForm,
-  toggleOnboardMode
+  toggleOnboardMode,
+  toggleTimer
 } from '../actions/indexActions';
 
 import TimeTracker from './TimeTracker';
@@ -29,58 +30,23 @@ class TimeTrackerPage extends Component {
     
     return true;
   }
-  
-  componentWillUnmount() {
-    console.log('unmounting')  
-  }
-  
+
   render() {
     const { 
-      changeActiveContextMenu,
-      decrementTimer,
-      deleteTask,
       hasFetched,
-      isFetching,
-      isModalActive,
-      isModalClosing,
-      isOnboardingActive,
-      isTimerActive,
-      projects,
       selectedProject,
       selectedTasks,
-      setSelectedProject,
-      setTempTasks,
-      toggleAddTasksForm, 
-      toggleConfig,
-      toggleEditTaskForm,
-      toggleOnboardMode
     } = this.props;
   
     if (!hasFetched) {
       return <div className="loader">Loading...</div>
     }
-    
     return (
       <div className="time-tracker-page-container pt-page pt-page-flipInTop">
         <TimeTracker
-          changeActiveContextMenu={changeActiveContextMenu}
-          decrementTimer={decrementTimer}
-          deleteTask={deleteTask}
-          projects={projects}
-          hasFetched={hasFetched}
-          isFetching={isFetching}
-          isModalActive={isModalActive}
-          isModalClosing={isModalClosing}
-          isOnboardingActive={isOnboardingActive}
-          isTimerActive={isTimerActive}
           selectedProject={selectedProject || null}
-          setSelectedProject={setSelectedProject}
-          setTempTasks={setTempTasks}
           tasks={selectedTasks || []}
-          toggleAddTasksForm={toggleAddTasksForm} 
-          toggleConfig={toggleConfig}
-          toggleEditTaskForm={toggleEditTaskForm}
-          toggleOnboardMode={toggleOnboardMode}
+          {...this.props}
         />
       </div>
     );
@@ -119,7 +85,8 @@ export default connect(mapStateToProps, {
   toggleAddTasksForm,
   toggleConfig,
   toggleEditTaskForm, 
-  toggleOnboardMode
+  toggleOnboardMode,
+  toggleTimer
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

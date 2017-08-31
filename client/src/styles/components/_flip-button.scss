@@ -12,6 +12,12 @@
     opacity: 1;
     cursor: pointer;
   }
+  
+  .fa-play, 
+  .fa-stop {
+    position: absolute;
+    @include centerVertHoriz();
+  }
 }
 
 .flip-button {
@@ -41,10 +47,4 @@
   transform: rotateY(180deg);
   background: $light-grey;
   width: 100%;
-}
-
-.fa-play, 
-.fa-stop {
-  position: absolute;
-  @include centerVertHoriz();
 }

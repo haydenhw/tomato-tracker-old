@@ -13,7 +13,8 @@ import TimeTrackerPage from './containers/TimeTrackerPage';
 
 import './helpers/polyfill.js';
 import './styles/index.scss';
-import './styles/icons/styles.css';
+// import './styles/icons/fontastic-icons.css';
+import './styles/icons/fonts/style.css';
 
 render((
   <Provider store={store}>
