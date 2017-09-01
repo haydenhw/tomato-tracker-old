@@ -66,7 +66,9 @@ class ContextMenu extends Component {
       <Dropdown className={className}> 
         <div className="dropdown-wrapper">
           <DropdownTrigger handleClick={this.handleClick}>
-            <div className="context-menu-icon icon-dots-three-horizontal"></div>
+            <div className="list-item-button list-item-outline-button">
+              <span className="icon-dots"></span>
+            </div>
           </DropdownTrigger>
           <DropdownContent isActive={activeContextMenuParentId ? activeContextMenuParentId === parentId : isActive}>
             {children}

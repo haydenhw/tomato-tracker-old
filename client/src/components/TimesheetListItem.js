@@ -23,6 +23,9 @@ export default function TimesheetListItem(props) {
       handleClick={handleItemClick}
     >
       <ListItemColumn colNumber="1">
+        {/* <div className="list-item-button">
+          <span className="">A</span>
+        </div> */}
         <FontAwesome className="list-item-icon list-item-task-icon" name='check-circle'></FontAwesome>  
       </ListItemColumn>
       <ListItemColumn colNumber="2">
@@ -33,27 +36,13 @@ export default function TimesheetListItem(props) {
       </ListItemColumn>
       
       <ListItemColumn colNumber="3">
-        {/* <div className="list-item-button">
-          <span className="icon-dots-three-horizontal">
-          </span>
-        </div> */}
-
-        {/* <FontAwesome className="list-item-icon list-item-play-icon" name='play-circle'></FontAwesome>   */}
         <div className="list-item-button" onClick={handlePlayClick}>
-          <span className="list-item-button-child list-item-play">
-            <span className="context-menu-icon icon-dots-three-horizontal"></span>
-            {/* <FontAwesome className="list-item-icon list-item-play-icon" name={`${isActive ? 'stop' : 'play'}`}/>   */}
-          </span> 
+          <span className={`icon-${isActive ? 'stop' : 'play'}`}></span>
         </div>
       </ListItemColumn>
       
        <ListItemColumn colNumber="4">
-        <a className="list-item-button" onClick={""}>
-        {/* <a className="" onClick={""}> */}
-          <span className="list-item-button-child list-item-menu">
             { children }
-          </span> 
-        </a> 
       </ListItemColumn> 
     </ListItem>
   );

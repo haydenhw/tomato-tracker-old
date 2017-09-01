@@ -1,11 +1,9 @@
 **Styles**:
   List Item:
-    ☐ create circular menu index
-        ☐ create span wrapper 
-        ☐ make horizontal elipse icon
-    ☐ add stop button to play button
-    ☐ find better task icon?  
-    ☐ adjust icons to match
+    ☐ make buttons smaller
+      ☐ make closer together   
+    ☐ adjust icons to match other site
+    ☐ add spinning border animations
     ☐ make project screen list items display correctly
     ☐ put list in a container
       ☐ add background to timsheet section 

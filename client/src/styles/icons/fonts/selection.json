@@ -4,6 +4,89 @@
     {
       "icon": {
         "paths": [
+          "M704 64l-128 128 192 192 128-128-192-192zM0 768l0.688 192.562 191.312-0.562 512-512-192-192-512 512zM192 896h-128v-128h64v64h64v64z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 896,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "pencil"
+        ],
+        "grid": 16
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 1,
+        "id": 0,
+        "prevSize": 32,
+        "code": 59648,
+        "name": "pencil"
+      },
+      "setIdx": 0,
+      "setId": 4,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M192 128l640 384-640 384z"
+        ],
+        "tags": [
+          "play",
+          "player"
+        ],
+        "defaultCode": 59932,
+        "grid": 16,
+        "attrs": []
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "play3, player8",
+        "name": "play",
+        "order": 7,
+        "id": 285,
+        "prevSize": 32,
+        "code": 59932
+      },
+      "setIdx": 3,
+      "setId": 1,
+      "iconIdx": 284
+    },
+    {
+      "icon": {
+        "paths": [
+          "M128 128h768v768h-768z"
+        ],
+        "tags": [
+          "stop",
+          "player",
+          "square"
+        ],
+        "defaultCode": 59934,
+        "grid": 16,
+        "attrs": []
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "stop2, player10",
+        "name": "stop",
+        "order": 8,
+        "id": 287,
+        "prevSize": 32,
+        "code": 59934
+      },
+      "setIdx": 3,
+      "setId": 1,
+      "iconIdx": 286
+    },
+    {
+      "icon": {
+        "paths": [
           "M512.051 399.36c-62.208 0-112.691 50.432-112.691 112.64s50.483 112.64 112.691 112.64c62.208 0 112.589-50.432 112.589-112.64s-50.381-112.64-112.589-112.64zM153.651 399.36c-62.208 0-112.691 50.432-112.691 112.64s50.483 112.64 112.691 112.64c62.208 0 112.589-50.483 112.589-112.64s-50.381-112.64-112.589-112.64zM870.451 399.36c-62.208 0-112.691 50.432-112.691 112.64s50.483 112.64 112.691 112.64c62.208 0 112.589-50.432 112.589-112.64s-50.381-112.64-112.589-112.64z"
         ],
         "attrs": [],
@@ -17,12 +100,12 @@
       "attrs": [],
       "properties": {
         "id": 60,
-        "order": 3,
+        "order": 5,
         "prevSize": 20,
-        "code": 59648,
-        "name": "dots-three-horizontal"
+        "code": 59650,
+        "name": "dots"
       },
-      "setIdx": 0,
+      "setIdx": 2,
       "setId": 2,
       "iconIdx": 59
     },
@@ -45,9 +128,9 @@
         "order": 4,
         "prevSize": 20,
         "code": 59649,
-        "name": "cross"
+        "name": "close"
       },
-      "setIdx": 0,
+      "setIdx": 2,
       "setId": 2,
       "iconIdx": 141
     }

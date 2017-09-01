@@ -8,7 +8,7 @@
   padding: 15px;
   padding-left: 20px;
   line-height: 6px;
-  
+
   span {
     // margin-left: 20px;
   }
@@ -36,7 +36,11 @@
   
   &:not(.list-item-header):not(.total-time):hover {
     background-color: $light-blue;
-    cursor: pointer; 
+    cursor: pointer;
+    
+    .icon-dots {
+      opacity: .7;
+    }  
   }
   
   &.total-time {
@@ -50,57 +54,53 @@
   }
   
   .list-item-button {
-    border-radius: 50%;
-    display: inline-table;
+    $icon-size: 18px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display:inline-table;
+    padding: 10px;
+    background-color: $steel-blue;
+    border: 1px solid $steel-blue;
+    color: white;
+    font-size: $icon-size;
+    line-height: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
     text-align: center;
-    // width: 50px;
-    // font-size: 50px;
-    // padding: 15px;
-    // line-height: 50px;
-    // background-color: black;
-    // color: white;
-    // width: 50px;
-    // height: 50px;
-    // vertical-align: text-bottom;
-    // border-radius: 50%;    
+    vertical-align: text-bottom;
+    border-radius: 50%;
+    position: relative;
     
-    .list-item-button-child {
-      border-radius: 50%;
-      display: inline-block;
-      padding: 0px;
-      position: relative;
-      text-align: center;
-      height: 37px;
-      width: 37px;
-      line-height: 37px;
-      vertical-align: middle;
+    &.list-item-outline-button {
+      background-color: transparent;
+      color: $steel-blue;
       
-      &.list-item-play {
-        background-color: $steel-blue;
-        border: 1px solid $steel-blue; 
-      }  
-      
-      &.list-item-menu {
-        border: 1px solid $steel-blue; 
-      }  
-      
-      .list-item-play-icon {
-        // color: $steel-blue;
-        color: white;
-        font-size: 18px;
-        z-index: 1000;
-        position: relative;
-        left: 4.5%;
-        
+      .icon-dots {
+        // opacity: 0;
         // @include centerVertHoriz();
-        // left: 0;
+        // border: 1px solid #000;
+        opacity: 1;
+      }
+      
+      &:hover {
+        .icon-dots {
+          opacity: 1;
+        }  
       }
     }
+    
+    .icon-play {
+      position: relative;
+      left: 7.5%; 
+    }
+    
+    
   }
   
   .list-item-icon {
     &.list-item-task-icon {
-      font-size: 32px;
+      font-size: 39px;
+      // color: $steel-blue;
     }
     
   }
@@ -150,44 +150,19 @@
     position: relative;
     display: inline-table;
     // vertical-align: middle;
-    
+     
     .dropdown-wrapper {
       height: 0px;
     }
     
+    .dropdown-trigger:hover {
+      background-color: transparent; 
+    }  
+  
     .dropdown-content {
       position: absolute;
       top: 10px;
       left: 10px;
-    }
-    
-    .context-menu-icon {
-      // height: 20px;
-      // line-height: 20px;
-      // width: 100px;
-      // height: 100px;
-      // border-radius: 50%;
-      // text-align: center;
-      // line-height: 100px;
-      // vertical-align: middle;
-      // padding: 30px;
-      // position: absolute;
-      // /* top: 56%; */
-      // left: 50%;
-      // transform: translate(-50%, -7%);
-      // /* padding: 7px 2px; */
-      opacity: 0.5;
-      
-      &:hover {
-        background-color: $light-blue;
-        opacity: 1;   
-      }
-      
-      &:before {
-        position: relative;
-        top: 3px;
-        left: 1px;
-      }
     }
   }
 }
