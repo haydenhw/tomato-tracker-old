@@ -3,7 +3,7 @@
   // border-top: 1px solid $medium-grey;
   // border-left: 1px solid $medium-grey;
   // border-right: 1px solid $medium-grey;
-  display: table;
+  // display: table;
   position: relative;
   padding: 15px;
   padding-left: 20px;
@@ -23,7 +23,25 @@
   
   &.active, 
   &.active:hover {
-    background-color: rgba(165, 214 , 167, 0.3) !important;
+    background-color: $aqua !important;
+  
+    .list-item-stop {
+      background-color: black;
+      border-color: black;
+      
+    }
+    
+    .list-item-outline-button {
+      background-color: transparent;
+      
+      .icon-dots {
+        opacity: 0.7 !important;
+      }
+    }  
+    
+    .icon-stop {
+      color: $aqua;
+    }
   }
   
   &:first-child:last-child {
@@ -54,32 +72,36 @@
   }
   
   .list-item-button {
-    $icon-size: 18px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    display:inline-table;
-    padding: 10px;
+    $icon-size: 16;
+    $icon-padding: 10;
+    box-sizing: content-box; 
+    margin-right: 20px;
+    display: inline-block;
+    padding: $icon-padding * 1px;
     background-color: $steel-blue;
     border: 1px solid $steel-blue;
     color: white;
-    font-size: $icon-size;
-    line-height: $icon-size;
-    width: $icon-size;
-    height: $icon-size;
     text-align: center;
     vertical-align: text-bottom;
     border-radius: 50%;
     position: relative;
+    font-size: $icon-size * 1px;
+    line-height: $icon-size * 1px;
+    width: $icon-size * 1px;
+    height: $icon-size * 1px;
+    
+    &.active {
+      
+    }
     
     &.list-item-outline-button {
       background-color: transparent;
       color: $steel-blue;
+      width: $icon-size - 2 * 1px;
+      height: $icon-size - 2 * 1px;
       
       .icon-dots {
-        // opacity: 0;
-        // @include centerVertHoriz();
-        // border: 1px solid #000;
-        opacity: 1;
+        opacity: 0;
       }
       
       &:hover {
@@ -88,6 +110,24 @@
         }  
       }
     }
+    
+    
+    &.list-item-stop:before {
+      $icon-radius: $icon-size / 2 + $icon-padding; 
+      $spinner-raduius: $icon-radius - 1;
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: $icon-radius - $spinner-raduius * 1px;
+      left: $icon-radius - $spinner-raduius * 1px;
+      width: $spinner-raduius * 2px;
+      height: $spinner-raduius * 2px;
+      border-radius: 50%;
+      border-top: 0.75px solid white;
+      /*   border-right: 2px solid transparent; */
+      // border: 2px solid yellow; 
+      animation: spinner 0.9s linear infinite;
+    }   
     
     .icon-play {
       position: relative;
@@ -106,10 +146,10 @@
   }
   
   .list-item-col {
-    // border: 1px solid $light-blue;
-    display: table-cell;
+    // border: 1px solid black;
+    display: inline-block; 
     text-align: left;
-    vertical-align: middle;
+    vertical-align: top;
     
     &.list-item-col1 {
       width: 20%;
@@ -123,7 +163,8 @@
     }
     
     &.list-item-col3 {
-      width: 10%;
+      width: 20%;
+      text-align: right;
       // vertical-align: middle;
     }
     
@@ -136,6 +177,7 @@
       color: $faded-black;
       font-size: 22px;
       font-weight: normal;
+      margin-top: 0px;
     }
     
     .list-item-col-time {
@@ -148,7 +190,7 @@
     padding: 0;
     text-align: left;
     position: relative;
-    display: inline-table;
+    // display: inline-table;
     // vertical-align: middle;
      
     .dropdown-wrapper {
@@ -167,3 +209,8 @@
   }
 }
 
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

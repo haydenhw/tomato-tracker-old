@@ -36,13 +36,17 @@ export default function TimesheetListItem(props) {
       </ListItemColumn>
       
       <ListItemColumn colNumber="3">
-        <div className="list-item-button" onClick={handlePlayClick}>
+        <div 
+          className={`list-item-button list-item-${isActive ? 'stop' : 'play'} 
+          ${isActive ? 'active' : ''}`}
+          onClick={handlePlayClick}
+        >
           <span className={`icon-${isActive ? 'stop' : 'play'}`}></span>
         </div>
+        { children }
       </ListItemColumn>
       
        <ListItemColumn colNumber="4">
-            { children }
       </ListItemColumn> 
     </ListItem>
   );
