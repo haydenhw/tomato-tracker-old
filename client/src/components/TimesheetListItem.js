@@ -12,7 +12,7 @@ import ListItem from './ListItem';
 import ListItemColumn from './ListItemColumn';
 
 export default function TimesheetListItem(props) {
-  const { children, isActive, isSelected, handleItemClick, handlePlayClick, time, title  } = props;
+  const { actionIconClass, children, isActive, isSelected, handleItemClick, handlePlayClick, time, title  } = props;
   
   return (
     <ListItem
@@ -41,11 +41,10 @@ export default function TimesheetListItem(props) {
           ${isActive ? 'active' : ''}`}
           onClick={handlePlayClick}
         >
-          <span className={`icon-${isActive ? 'stop' : 'play'}`}></span>
+          <span className={`icon-${isActive ? 'stop' : actionIconClass}`}></span>
         </div>
-        { children }
+        { children }  
       </ListItemColumn>
-      
        <ListItemColumn colNumber="4">
       </ListItemColumn> 
     </ListItem>

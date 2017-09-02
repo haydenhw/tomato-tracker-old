@@ -23,6 +23,8 @@ import ContextMenu from './ContextMenu';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
+import TimesheetListItem from '../components/TimesheetListItem';
+import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
 
 class ProjectsPage extends Component {
@@ -52,7 +54,7 @@ class ProjectsPage extends Component {
     
   }   
 
-  handleAddButtonClick() {
+  handleAddProject() {
     const { setTempTasks } = this.props;
     
     setTempTasks([]);
@@ -102,13 +104,14 @@ class ProjectsPage extends Component {
         : 0;
     
     return (
-      <ListItem 
-        className="project"
+      <TimesheetListItem 
+        actionIconClass="arrow-right"
         key={shortid.generate()}
-        col1Text={projectName}
-        col2Text={secondsToHMMSS(Math.round(totalTime))}
         handleClick={this.handleListItemClick(shortId)}
+        handlePlayClick={this.handleListItemClick(shortId)}
         isSelected={selectedProjectId === shortId}
+        title={projectName}
+        time={totalTime}
       >
         <ContextMenu 
           className='list-item-context-menu'
@@ -118,7 +121,7 @@ class ProjectsPage extends Component {
           <li className="dropdown-item" onClick={this.handleEditOptionClick(project)}><a>Edit</a></li>
           <li className="dropdown-item" onClick={this.handleDeleteOptionClick(project)}><a>Delete</a></li>
         </ContextMenu>  
-      </ListItem>
+      </TimesheetListItem>
     );
   } 
   
@@ -163,16 +166,16 @@ class ProjectsPage extends Component {
           </div>  
         }
         { projects.length 
-          ? <div>
-              <div className="list-container">
-                <div className="timesheet-button-wrapper">
-                  <button className="timesheet-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>NEW PROJECT</button>
-                </div>                
-                <ListHeader col1Title="Project" col2Title="Logged Time" />
-                <List className="project-list" items={reverseProjects} renderItem={this.renderProject.bind(this)}/>
-                <TotalTime time={secondsToHMMSS(totalTime)} />
-              </div>
-            </div> 
+          ? <Timesheet
+              buttonText="NEW PROJECT"
+              handleButtonClick={this.handleAddProject.bind(this)}
+              titleText={"Projects"} 
+            >
+              <List className="list task-list" items={projects} renderItem={this.renderProject.bind(this)}>
+                <ListHeader col1Title="Project" col2Title="Time Logged" /> 
+              </List>
+              <TotalTime time={secondsToHMMSS(totalTime)} />
+            </Timesheet>
           : <div className="list-container">
               <span>No projects exist yet. Create one to get started</span>
               <button className="timesheet-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>

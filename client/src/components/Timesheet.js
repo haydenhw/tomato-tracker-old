@@ -9,7 +9,7 @@ export default function Timesheet({ buttonText, children, handleButtonClick, tit
         <button
           className="timesheet-add-button material-button" onClick={handleButtonClick}
           >
-            NEW TASKS
+            {buttonText}  
         </button> 
       </div>      
       {children}

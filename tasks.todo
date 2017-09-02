@@ -1,11 +1,14 @@
 **Styles**:
   List Item:
-    ☐ add padding to list items
-    ☐ try buttons in separate columns
-    ☐ make project screen list items display correctly
+    ☐ align text with button
     ☐ put list in a container
       ☐ add background to timsheet section 
-      ☐ decrease widht of list container
+      ☐ decrease width of list container
+    ☐ fix list item edit menu
+      ☐ ie make it fit on screen 
+      
+  Context Menu:
+  ☐ make it look dope
       
   Misc:
     ☐ 

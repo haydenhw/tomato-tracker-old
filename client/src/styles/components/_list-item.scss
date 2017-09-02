@@ -5,7 +5,7 @@
   // border-right: 1px solid $medium-grey;
   // display: table;
   position: relative;
-  padding: 15px;
+  padding: 25px;
   padding-left: 20px;
   line-height: 6px;
 
@@ -21,21 +21,34 @@
     background-color: $light-blue;
   }
   
-  &.active, 
-  &.active:hover {
-    background-color: $aqua !important;
+  // &.active, 
   
+  &.active { 
+    background-color: $aqua !important;
+    
+    // &.active:hover {
+    //   // background-color: $aqua !important;
+    // }
+    
     .list-item-stop {
       background-color: black;
       border-color: black;
-      
     }
     
     .list-item-outline-button {
       background-color: transparent;
+      &:hover {
+        background-color: white;
+        
+        .icon-dots {
+          opacity: 1;
+          color: black;
+        }
+      }
       
       .icon-dots {
         opacity: 0.7 !important;
+        
       }
     }  
     
