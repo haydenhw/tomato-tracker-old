@@ -1,20 +1,30 @@
 .timesheet {
+  background-color: white;
   width: 100%;
   margin: 0 auto;
   min-width: 600px;
   padding-top: 50px;
+  font-size: 14px;
   
   .timesheet-add-button {
     margin-bottom: 10px;
+    // fix
+    margin-right: 37px;
   }  
   
   .timesheet-title {
     font-size: 1.5em;
     text-align: center;
+    // fix
+    // margin-left: 6%;
   }    
   
-  .total {
-    color: #808080;
-    font-weight: bold;
+  .total-time {
+    // padding-bottom: 0;
+    
+    .total-time-time {
+      font-weight: 500;
+      font-size: .95em;
+    }  
   }
 }

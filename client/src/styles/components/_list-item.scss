@@ -8,6 +8,7 @@
   padding: 25px;
   padding-left: 20px;
   line-height: 6px;
+  font-size: 14px;
 
   span {
     // margin-left: 20px;
@@ -76,6 +77,7 @@
   
   &.total-time {
     border: none;
+    font-size: inherit;
   }
   
   .list-item-header {
@@ -85,10 +87,10 @@
   }
   
   .list-item-button {
-    $icon-size: 16;
-    $icon-padding: 10;
+    $icon-size: 14;
+    $icon-padding: 8;
     box-sizing: content-box; 
-    margin-right: 20px;
+    margin-left: 20px;
     display: inline-block;
     padding: $icon-padding * 1px;
     background-color: $steel-blue;
@@ -103,15 +105,18 @@
     width: $icon-size * 1px;
     height: $icon-size * 1px;
     
-    &.active {
-      
+    &.list-item-play,
+    &.list-item-stop, {
+      &:hover {
+        background-color: $steel-blue-hover;
+      }
     }
     
     &.list-item-outline-button {
       background-color: transparent;
       color: $steel-blue;
-      width: $icon-size - 2 * 1px;
-      height: $icon-size - 2 * 1px;
+      width: $icon-size - 0 * 1px;
+      height: $icon-size - 0 * 1px;
       
       .icon-dots {
         opacity: 0;
@@ -127,20 +132,25 @@
     
     &.list-item-stop:before {
       $icon-radius: $icon-size / 2 + $icon-padding; 
-      $spinner-raduius: $icon-radius - 1;
+      $spinner-radius: $icon-radius - 1;
       content: '';
       box-sizing: border-box;
       position: absolute;
-      top: $icon-radius - $spinner-raduius * 1px;
-      left: $icon-radius - $spinner-raduius * 1px;
-      width: $spinner-raduius * 2px;
-      height: $spinner-raduius * 2px;
+      top: $icon-radius - $spinner-radius * 1px;
+      left: $icon-radius - $spinner-radius * 1px;
+      width: $spinner-radius * 2px;
+      height: $spinner-radius * 2px;
       border-radius: 50%;
       border-top: 0.75px solid white;
       /*   border-right: 2px solid transparent; */
       // border: 2px solid yellow; 
       animation: spinner 0.9s linear infinite;
     }   
+    
+    .list-item-letter-icon {
+      font-size: 1.1em;
+      font-weight: 500;
+    }
     
     .icon-play {
       position: relative;
@@ -150,15 +160,8 @@
     
   }
   
-  .list-item-icon {
-    &.list-item-task-icon {
-      font-size: 39px;
-      // color: $steel-blue;
-    }
-    
-  }
-  
   .list-item-col {
+    $left-right-padding: 3%;
     // border: 1px solid black;
     display: inline-block; 
     text-align: left;
@@ -166,7 +169,7 @@
     
     &.list-item-col1 {
       width: 20%;
-      // padding-left: 12%;
+      padding-left: $left-right-padding;
       // height: 30px;
     }
     
@@ -178,7 +181,8 @@
     &.list-item-col3 {
       width: 20%;
       text-align: right;
-      // vertical-align: middle;
+      padding-right: $left-right-padding;
+      // visibility: hidden;rtical-align: middle;
     }
     
     &.list-item-col4 {
@@ -188,13 +192,14 @@
     
     .list-item-col-title {
       color: $faded-black;
-      font-size: 22px;
-      font-weight: normal;
-      margin-top: 0px;
+      font-weight: 500;
+      font-size: inherit;
+      margin-top: 2.4px;
+      margin-bottom: 20px;
     }
     
     .list-item-col-time {
-      // display: inline-block;
+      font-size: .95em;
     }
   }
   

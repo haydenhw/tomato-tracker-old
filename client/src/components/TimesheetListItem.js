@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FontAwesome from 'react-fontawesome';
+import randomColor from 'randomcolor'
 import shortid from 'shortid';
 
 import { secondsToHMMSS } from 'helpers/time';
@@ -13,20 +13,23 @@ import ListItemColumn from './ListItemColumn';
 
 export default function TimesheetListItem(props) {
   const { actionIconClass, children, isActive, isSelected, handleItemClick, handlePlayClick, time, title  } = props;
+  const letterIconColor = randomColor({
+    // luminosity: 'light',
+    hue: 'purple'
+  }); 
   
   return (
     <ListItem
       key={shortid.generate()}
-      // className="className"
       isActive={isActive}
       isSelected={isSelected}
       handleClick={handleItemClick}
     >
       <ListItemColumn colNumber="1">
-        {/* <div className="list-item-button">
-          <span className="">A</span>
-        </div> */}
-        <FontAwesome className="list-item-icon list-item-task-icon" name='check-circle'></FontAwesome>  
+        <div className="list-item-button" style={{ "backgroundColor": letterIconColor ,  "borderColor": letterIconColor }}>
+           <span className="list-item-letter-icon"> {title[0].toUpperCase()}</span>
+        </div>
+        {/* <FontAwesome className="list-item-icon list-item-task-icon" name='check-circle'></FontAwesome>   */}
       </ListItemColumn>
       <ListItemColumn colNumber="2">
         <div>
