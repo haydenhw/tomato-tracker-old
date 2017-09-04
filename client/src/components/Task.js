@@ -12,17 +12,17 @@ export default function Task(props) {
 
   return(
     <div className="list-item">
-      <div className="list-item-col list-item-col1">
+      <div className="timesheet-col timesheet-col1">
           <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
       </div>
-      <div className="list-item-col list-item-col2">
+      <div className="timesheet-col timesheet-col2">
         <h2>{taskName}</h2>
         <div>{secondsToHMMSS(recordedTime)}</div>
       </div>
-      <div className="list-item-col list-item-col3">
+      <div className="timesheet-col timesheet-col3">
         <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
       </div>
-      {/* <div className="list-item-col list-item-col4">
+      {/* <div className="timesheet-col timesheet-col4">
         <ContextMenu className='list-item-context-menu'>
           <li className="dropdown-item"><a>Edit</a></li>
           <li className="dropdown-item"><a>Delete</a></li>

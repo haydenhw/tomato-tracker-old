@@ -6,13 +6,13 @@ export default function ListHeader(props) {
   
   return(
     <div className="list-item list-item-header">
-      <div className="list-item-col1 list-item-col">
+      <div className="timesheet-col1 timesheet-col">
         <span>{col1Title}</span>
       </div>
-      <div className="list-item-col2 list-item-col">
+      <div className="timesheet-col2 timesheet-col">
         <span>{col2Title}</span>
       </div>
-      <div className="list-item-col3 list-item-col"></div>
+      <div className="timesheet-col3 timesheet-col"></div>
     </div>
   );
 }

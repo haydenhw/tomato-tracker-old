@@ -6,9 +6,9 @@ export default function TotalTime(props){
   
   return (
     <div className='total-time list-item'>
-      <div className="list-item-col1 list-item-col total-time-total"><span>Total:</span></div>
-      <div className="list-item-col2 list-item-col total-time-time"><span>{time}</span></div>
-      <div className="list-item-col3 list-item-col"></div>
+      <div className="timesheet-col1 timesheet-col total-time-total"><span>Total:</span></div>
+      <div className="timesheet-col2 timesheet-col total-time-time"><span>{time}</span></div>
+      <div className="timesheet-col3 timesheet-col"></div>
     </div>
   )
 }

@@ -7,14 +7,14 @@ export default function TaskListItem(props) {
   
   return(
     <div className={`list-item ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
-      <div className="list-item-col1 list-item-col">
+      <div className="timesheet-col1 timesheet-col">
           <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
       </div>
-      <div className="list-item-col2 list-item-col">
+      <div className="timesheet-col2 timesheet-col">
         <h2>{taskName}</h2>
         <div>{taskTime}</div>
       </div>
-      <div className="list-item-col3 list-item-col">
+      <div className="timesheet-col3 timesheet-col">
           <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
           {props.children}
       </div>
