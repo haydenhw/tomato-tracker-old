@@ -4,8 +4,8 @@ export function selectedProjectId(state=null, action) {
   switch(action.type) {
     case actions.SET_SELECTED_PROJECT:
       return action.projectId;
-    // case actions.POST_PROJECT_REQUEST:
-      // return action.projectId;
+    case actions.POST_PROJECT_SUCCESS:
+      return action.projectId;
     case actions.FETCH_PROJECTS_SUCCESS:
       return !action.projects.length ? state : action.projects[0].shortId;
     default:

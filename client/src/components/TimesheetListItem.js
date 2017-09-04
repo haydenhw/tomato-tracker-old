@@ -17,7 +17,7 @@ export default function TimesheetListItem(props) {
     // luminosity: 'light',
     hue: 'purple'
   }); 
-  
+  console.log(handleItemClick)
   return (
     <ListItem
       key={shortid.generate()}

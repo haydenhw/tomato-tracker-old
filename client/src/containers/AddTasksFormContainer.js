@@ -119,7 +119,7 @@ renderFormTask (task){
             onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
             onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
           >
-              { shouldDelete ? "Restore": <div className="icon-cancel"></div> } 
+              { shouldDelete ? "Restore": <div className="icon-close"></div> } 
           </button>
         </div>
         <div className="name-wrapper">

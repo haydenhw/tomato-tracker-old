@@ -35,6 +35,11 @@ $form-margin-left: 30%;
       margin-bottom: 5px;
       @include centerVertHoriz();
     }
+    
+    .icon-close {
+      opacity: 0.6; 
+      font-size: 15px;
+    }
   }
   
   .name-wrapper {

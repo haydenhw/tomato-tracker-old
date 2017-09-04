@@ -1,13 +1,7 @@
 **Styles**:
-  List Item:
-    ☐ fix list item edit menu
-      ☐ ie make it fit on screen 
-      
-  Context Menu:
-  ☐ make it look dope
-      
-  Misc:
-    ☐ 
+    ☐ move total time further to bottom
+    ☐ rm page transitions
+    ☐ make add tasks form modal match add projects form modal
    
 **Forms**:
   ProjectTaskForms:
@@ -15,6 +9,8 @@
     
 **Bugs**:
 
+
+########################
 
 **Later**:
   ☐ change all icons to icomoon

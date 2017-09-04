@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-
 import { changeModalType, postProject } from '../actions/indexActions';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
 
@@ -26,7 +25,7 @@ class AddProjectModal extends Component {
         singleInput: `A project with the name '${projectName}' already exists`
       })
     }    
-    
+    console.log('fdsa')
     // this.toggleIsContentWaiting();
     postProject(projectName);
     changeModalType('ADD_TASKS');
