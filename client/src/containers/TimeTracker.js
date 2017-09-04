@@ -176,8 +176,14 @@ export default class TimeTracker extends Component {
           onMenuClick={changeActiveContextMenu}
           parentId={shortId}
         >
-          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}><a>Edit</a></li>
-          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}><a>Delete</a></li>
+          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}>
+            <i className="context-menu-icon icon-edit"></i>
+            <a>Edit</a>
+          </li>
+          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}>
+            <i className="context-menu-icon icon-delete"></i>
+            <a>Delete</a>
+          </li>
         </ContextMenu>          
       </TimesheetListItem>
     ); 
