@@ -42,13 +42,11 @@ class TimeTrackerPage extends Component {
       return <div className="loader">Loading...</div>
     }
     return (
-      <div className="time-tracker-page-container pt-page pt-page-flipInTop">
         <TimeTracker
           selectedProject={selectedProject || null}
           tasks={selectedTasks || []}
           {...this.props}
         />
-      </div>
     );
   }
 }

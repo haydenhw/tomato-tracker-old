@@ -154,7 +154,7 @@ export default class TimeTracker extends Component {
   }
   
   renderTask (task){
-    const { changeActiveContextMenu, isTimerActive, selectedProject, toggleTimer } = this.props;
+    const { changeActiveContextMenu, isTimerActive, selectedProject, tasks, toggleTimer } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
     
@@ -240,33 +240,41 @@ export default class TimeTracker extends Component {
     
     return (
       <div className="time-tracker">
-        <div className="timer-section">
+        <section className="timer-section">
           <div className="gear-icon-wrapper" onClick={toggleConfig}>
             <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
           </div>  
           <div className="timer-container">
             {tasks.length > 0 && this.renderTaskSelect()}
-            <Timer activeTaskId={activeTaskId} selectedTaskId={selectedTaskId} setActiveTask={this.setActiveTask.bind(this)}/>
+           <Timer
+             activeTaskId={activeTaskId}
+             tasks={tasks}
+             selectedTaskId={selectedTaskId}
+             setActiveTask={this.setActiveTask.bind(this)}
+           />
           </div>
-        </div>
+        </section>
         {tasks.length > 0
-          
-          ? <div className="timesheet-section">
+          ? <div></div>  
+          ? <section className="timesheet-section">
              <Timesheet
                 buttonText="NEW TASKS"
                 handleButtonClick={this.handleAddTasks.bind(this)}
                 titleText={["Tasks for project ", <span className={"grey-title-text"} key={shortid.generate()}>{selectedProject.projectName}</span>]} 
                 >
-                  <List className="list task-list" items={tasks} renderItem={this.renderTask.bind(this)}>
-                    {/* <ListHeader col1Title="Task" col2Title="Time Logged" />  */}
-                  </List>
+                  <List className="list task-list" items={tasks} renderItem={this.renderTask.bind(this)} />
                   <TotalTime time={secondsToHMMSS(totalTime)} />
               </Timesheet>
-            </div>
-            : <div className="timesheet">
-                <span>Add tasks to your project to start tracking time.</span>
-                <button className="timesheet-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
-            </div>
+            </section>
+            : <div> </div>
+            : <div className="task-nag-section">
+                <div className="task-nag">
+                  <span className="task-nag-message">Add tasks to project {<span className="grey-title-text">{selectedProject.projectName}</span>} to start tracking time.</span>
+                  <div className="task-nag-button-wrapper">
+                    <button className="task-nag-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
+                  </div>
+                </div>
+              </div>
           }
           <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
            rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}

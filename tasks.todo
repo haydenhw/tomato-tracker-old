@@ -1,46 +1,38 @@
 **Styles**:
-    ☐ move total time further to bottom
-    ☐ rm page transitions
-    ☐ make add tasks form modal match add projects form modal
+  ☐ add projet name to add tasks to project to start message on time tracker page
+  ☐ 
+    
    
 **Forms**:
   ProjectTaskForms:
-    ☐ buttons display incorrectly
     
 **Bugs**:
 
 
 ########################
+**Cleanup/Refactor**:
+  ☐ extract presentaional components from containers
+  ☐ refactor time-tracker-master-container to diff name
 
 **Later**:
   ☐ change all icons to icomoon
-
+  ☐ move fonts from html file to sass files
+  ☐ move fonts from html file to sass files
+  
+Questions for Derek:
+☐ should I add a 'press enter key to add task' message on add tasks form?
     
 Questions for Kyle:
+
   ☐ How do you like the layout i.e that the timer is directly above the timesheet and timesheet is small?
     ☐ any alternatives?
     ☐ How to center icon inside of close button?   
     ☐ Why does my list item play button need to be wrapped in a parent element.
     ☐ Why does border-box prop screw up my buttons. 
-    
-  
+    ☐ Should modals and forms all have same fonts as main page? 
+    ☐ Mkae add tasks to project nag look better
+    ☐ try changing time while timer is runnning. Not ideal right? ask about how to handle this user action.
 
 
-
-
-
-
-
-
-Title:
-Spawn bags: temp swings, condensation, and wet grains
-
-I walked into my grown room this morning and found a shit ton of condensation in all the spawn bags I have colonizing. My bags had some condensation before today to be sure but there was definitely a dramatic overnight increase. I've been keeping the window open in my grow room to let in fresh air but I guess that's going to mean temps will fall further at night than they would otherwise.
-
-In this bag it looks like the condensation has dripped down and saturated a patch of uncolonized grains. I imagine that can't be good.
-
-Should I keep the window in my grow room closed or store my colonizing spawn bags in a different room?
-
-Or maybe try to prep my grains more on the dry side?  
- 
-Thanks in advance for the help.
+Reading Topics:
+  ☐ line-height

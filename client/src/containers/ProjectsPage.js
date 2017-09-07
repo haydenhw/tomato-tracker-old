@@ -94,7 +94,7 @@ class ProjectsPage extends Component {
   }
   
   renderProject (project){
-    const { changeActiveContextMenu, selectedProjectId } = this.props;
+    const { changeActiveContextMenu, projects, selectedProjectId } = this.props;
     const { projectName, shortId } = project;
     
     const totalTime = 
@@ -108,7 +108,7 @@ class ProjectsPage extends Component {
         key={shortid.generate()}
         handleItemClick={this.handleListItemClick(shortId)}
         handlePlayClick={this.handleListItemClick(shortId)}
-        isSelected={selectedProjectId === shortId}
+        isSelected={(selectedProjectId === shortId) && (projects.length > 1)}
         title={projectName}
         time={totalTime}
       >
@@ -158,18 +158,19 @@ class ProjectsPage extends Component {
     }
     
     return (
-      <div className='projects-page-container pt-page-moveFromBottomFade'>
-        { (isProjectSelectTipActive && projects.length > 1) && 
+      // <div className='projects-page-container pt-page-moveFromBottomFade'>
+      <div className='projects-page-container'>
+        {/* { (isProjectSelectTipActive && projects.length > 1) && 
           <div className="project-select-tip-wrapper">
             <div className="project-select-tip">
               <FontAwesome className="info-icon" name='info-circle'></FontAwesome>  
               <span>To track time for a different project, simply select it from the list below.</span>
               <button onClick={this.toggleProjectSelectTip.bind(this)}>
-                <i className="icon-cancel"></i>   
+                <i className="icon-close"></i>   
               </button>
             </div>
           </div>  
-        }
+        } */}
         { projects.length 
           ? <Timesheet
               buttonText="NEW PROJECT"

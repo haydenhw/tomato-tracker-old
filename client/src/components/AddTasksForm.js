@@ -67,7 +67,7 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "": "bounceInDown"}`}>
+      <div className={`${isOnboardingActive ? "fullscreen-container": "bounceInDown"}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? "bounceInDown" : ""}`}>

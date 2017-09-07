@@ -16,7 +16,7 @@
 @import
   'layout/header',
   'layout/footer',
-  'layout/timesheet-section';
+  'layout/time-tracker-sections';
 
 // 6. Page-specific styles
 @import
@@ -57,6 +57,7 @@
   'components/select',
   'components/slide-in-left',
   'components/task',
+  'components/task-nag',
   'components/timesheet',
   'components/timer',
   'components/time-tracker-page',

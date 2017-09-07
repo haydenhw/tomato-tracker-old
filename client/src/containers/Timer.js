@@ -51,6 +51,13 @@ class Timer extends Component {
     }
   }
   
+  doesSelectedTaskExist() {
+    const { selectedTaskId, tasks } = this.props;
+    const taskIds = tasks.map(task => task.shortId);
+    
+    return taskIds.includes(selectedTaskId); 
+  }
+  
   timer () {
     const { 
       alarmSoundSrc,
@@ -103,7 +110,7 @@ class Timer extends Component {
       <div>
         <TimeDisplay
           isTimerActive={isTimerActive}
-          isTimerControlActive={Boolean(selectedTaskId)}
+          isTimerControlActive={this.doesSelectedTaskExist()}
           setStartTime={this.handleSetStartTime(selectedTaskId)}
           startCount={startTime}
           time={remainingTime}

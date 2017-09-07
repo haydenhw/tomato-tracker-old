@@ -1,0 +1,24 @@
+$section-padding: 40px;
+// $top-section-height: 35;
+// $bottom-section-height: 100-35;
+
+.timer-section {
+  background-color: $light-grey;
+  border-bottom: 1px solid $medium-grey;
+  padding: $section-padding; 
+    .timer-container {
+      width: 60%;
+      margin: 0 auto;
+    }
+}
+
+.timesheet-section {
+  background-color: $blue-grey;
+  padding: $section-padding; 
+}
+
+.task-nag-section {
+  height: 50%;
+  padding: $section-padding; 
+  position: relative;
+}

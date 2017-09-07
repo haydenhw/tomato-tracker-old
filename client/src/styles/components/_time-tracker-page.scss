@@ -1,40 +1,14 @@
-.time-tracker-page-container {
-  // padding-bottom: 50px;
-  
-  &.transition-appear {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  &.transition-appear.transition-appear-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-  &.transition-leave {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &.transition-leave.transition-leave-active {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
+.master-container {
+  background-color: $blue-grey; 
 }
+
 
 .time-tracker {
+  height: 100%;
   text-align: center;
-}
+} 
 
-.timer-section {
-  padding: 40px;
-  background-color: $light-grey;
-  border-bottom: 1px solid #e5e5e5;
-}
 
-.timer-container {
-  width: 60%;
-  margin: 0 auto;
-}
 
 .timesheet-button-wrapper {
   text-align: right;
@@ -45,17 +19,12 @@
   display: inline-block;
 }
 
-.timesheet-title {
-  margin-top: 20px;
-  margin-bottom: 33px;
-}
-
 .gear-icon-wrapper {
   color: #BDBDBD;
   padding: 5px;
   position: absolute;
-  top: 15px;  
-  right: 15px;
+  top: 80px;  
+  right: 35px;
 }
 
 .gear-icon-wrapper:hover {
