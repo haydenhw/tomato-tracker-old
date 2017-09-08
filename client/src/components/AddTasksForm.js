@@ -52,6 +52,7 @@ let AddTasksForm = class extends Component {
   render() {
     const {
       fieldAnimationName,
+      formAnimationName,
       handleFormSubmit,
       handleSubmit,
       handleTaskSubmit,
@@ -69,7 +70,7 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "fullscreen-container": titleAnimationName}`}>
+      <div className={`${isOnboardingActive ? "fullscreen-container": formAnimationName}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? (titleAnimationName || "") : ""}`}>

@@ -146,6 +146,7 @@ renderFormTask (task){
       >
         <AddTasksForm 
           fieldAnimationName={isOnboardingActive ? "bounceInDown-second" : ""  }
+          formAnimationName={isOnboardingActive ? "" : "bounceInDown"  }
           handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
           handleSubmit={handleSubmit}
           handleTaskSubmit={this.handleAddTask.bind(this)}
