@@ -1,6 +1,9 @@
 **Styles**:
-  ☐ add projet name to add tasks to project to start message on time tracker page
-  ☐ 
+  ☐ fix animations of project task form. 
+  ☐ get rid of time tracker page scss
+  ☐ fix time change element background
+  ☐ fix fs add tasks modal
+  
     
    
 **Forms**:
@@ -13,6 +16,7 @@
 **Cleanup/Refactor**:
   ☐ extract presentaional components from containers
   ☐ refactor time-tracker-master-container to diff name
+  ☐ extract input components to separate file
 
 **Later**:
   ☐ change all icons to icomoon

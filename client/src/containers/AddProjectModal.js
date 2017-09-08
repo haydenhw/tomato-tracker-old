@@ -25,7 +25,7 @@ class AddProjectModal extends Component {
         singleInput: `A project with the name '${projectName}' already exists`
       })
     }    
-    console.log('fdsa')
+    
     // this.toggleIsContentWaiting();
     postProject(projectName);
     changeModalType('ADD_TASKS');

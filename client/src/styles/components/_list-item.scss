@@ -1,8 +1,8 @@
 .list-item {
   width: 100%;
-  // border-top: 1px solid $medium-grey;
-  // border-left: 1px solid $medium-grey;
-  // border-right: 1px solid $medium-grey;
+  // border-top: 1px solid $medium-dark-grey;
+  // border-left: 1px solid $medium-dark-grey;
+  // border-right: 1px solid $medium-dark-grey;
   position: relative;
   padding: 25px;
   padding-left: 20px;
@@ -59,7 +59,7 @@
   }
   
   &:first-child:last-child {
-    // border-bottom: 1px solid $medium-grey;
+    // border-bottom: 1px solid $medium-dark-grey;
     
     &.total-time {
       padding-top: 50px;
