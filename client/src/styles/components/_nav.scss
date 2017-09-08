@@ -7,18 +7,18 @@ nav {
   font-weight: normal;
 }
 
-.logo-wrapper {
+.nav-logo-wrapper {
   display: inline-block;
   margin-left: 25%;
   margin-right: 50px;
   position: relative;
   
-  .logo-text {
+  .nav-logo-text {
     display: inline-block;
     line-height: 1;
   }
   
-  .logo-image {
+  .nav-logo-image {
     @include centerVertHoriz();
     left: 110%;
     display: inline-block;

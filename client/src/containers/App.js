@@ -36,7 +36,7 @@ class App extends Component {
     const pathName = location.pathname;  
     
     return (
-      <div className={`${pathName === '/' || pathName === '/projects' ? 'master-container' : '' }`}>
+      <div className={`${pathName === '/' || pathName === '/projects' ? 'app-container' : '' }`}>
         <Nav
           activeLink={activeLink}
           handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 

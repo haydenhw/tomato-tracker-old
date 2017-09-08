@@ -13,14 +13,14 @@ export default function Task(props) {
   return(
     <div className="list-item">
       <div className="timesheet-col timesheet-col1">
-          <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
+          <FontAwesome className="timer-settings-icon" name='gear'></FontAwesome>  
       </div>
       <div className="timesheet-col timesheet-col2">
         <h2>{taskName}</h2>
         <div>{secondsToHMMSS(recordedTime)}</div>
       </div>
       <div className="timesheet-col timesheet-col3">
-        <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
+        <FontAwesome className="timer-settings-icon" name='gear'></FontAwesome>  
       </div>
       {/* <div className="timesheet-col timesheet-col4">
         <ContextMenu className='list-item-context-menu'>

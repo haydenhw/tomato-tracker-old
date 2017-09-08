@@ -241,8 +241,8 @@ export default class TimeTracker extends Component {
     return (
       <div className="time-tracker">
         <section className="timer-section">
-          <div className="gear-icon-wrapper" onClick={toggleConfig}>
-            <FontAwesome className="gear-icon" name='gear'></FontAwesome>  
+          <div className="timer-settings-wrapper" onClick={toggleConfig}>
+            <FontAwesome className="timer-settings-icon" name='gear'></FontAwesome>  
           </div>  
           <div className="timer-container">
             {tasks.length > 0 && this.renderTaskSelect()}
@@ -256,7 +256,7 @@ export default class TimeTracker extends Component {
         </section>
         {tasks.length > 0
           ? <div></div>  
-          ? <section className="timesheet-section">
+          ? <section className="timer-settings-icon">
              <Timesheet
                 buttonText="NEW TASKS"
                 handleButtonClick={this.handleAddTasks.bind(this)}

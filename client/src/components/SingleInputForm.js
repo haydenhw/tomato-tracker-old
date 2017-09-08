@@ -36,10 +36,12 @@ let SingleInputForm = function SingleInputForm(props) {
   const {
     handleFormSubmit,
     handleSubmit,
+    fieldAnimationName,
     isModalActive,
     isOnlyInput,
     shouldRenderSubmitButton,
     title,
+    titleAnimationName,
     titleName
   } = props;
   
@@ -48,12 +50,13 @@ let SingleInputForm = function SingleInputForm(props) {
       <div className={`${isModalActive ? "form-container": "" }`}>
         <form onSubmit={isOnlyInput ? handleSubmit(handleFormSubmit) : dummySubmit}>
           {title && 
-            <h2 className="form-title bounceInDown">
+            <h2 className={`form-title ${titleAnimationName || ""}`}>
               {title}  
               {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
-          <div className="bounceInDown-second">
+          {/* <div className="fieldAnimationName"> */}
+          <div className={fieldAnimationName || ""}>
             <Field
               component={renderField}
               name="singleInput"

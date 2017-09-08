@@ -1,4 +1,4 @@
-.master-container {
+.app-container {
   background-color: $blue-grey; 
 }
 
@@ -16,7 +16,7 @@
   display: inline-block;
 }
 
-.gear-icon-wrapper {
+.timer-settings-wrapper {
   color: #BDBDBD;
   padding: 5px;
   position: absolute;
@@ -24,7 +24,7 @@
   right: 35px;
 }
 
-.gear-icon-wrapper:hover {
+.timer-settings-wrapper:hover {
   color: #9E9E9E;
   cursor: pointer;
 }

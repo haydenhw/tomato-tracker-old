@@ -36,6 +36,7 @@ class AddProjectModal extends Component {
     
     return (
       <SingleInputForm
+        fieldAnimationName="bounceInDown-second"
         formName="projectName"
         handleFormSubmit={this.handleAddProject.bind(this)}
         isModalActive={true}
@@ -43,6 +44,7 @@ class AddProjectModal extends Component {
         placeholder="Project Name"
         shouldRenderSubmitButton={true}
         title="Add a project"
+        titleAnimationName="bounceInDown"
       />
     );
   }

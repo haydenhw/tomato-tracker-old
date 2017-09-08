@@ -51,31 +51,33 @@ let AddTasksForm = class extends Component {
   
   render() {
     const {
-      submitButtonText, 
+      fieldAnimationName,
       handleFormSubmit,
-      handleTaskSubmit,
       handleSubmit,
+      handleTaskSubmit,
       inputRef,
       isContentAnimated, 
       isModalActive,
       isOnboardingActive,
-      shouldRenderSubmitButton,
       renderFormTask,
+      shouldRenderSubmitButton,
+      submitButtonText, 
       tasks,
       title,
+      titleAnimationName,
       titleName
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "fullscreen-container": "bounceInDown"}`}>
+      <div className={`${isOnboardingActive ? "fullscreen-container": titleAnimationName}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
-            <h2 className={`form-title ${isOnboardingActive ? "bounceInDown" : ""}`}>
+            <h2 className={`form-title ${isOnboardingActive ? (titleAnimationName || "") : ""}`}>
               {title}  
               {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
-          <div className={`form-field-wrapper ${isOnboardingActive ? "bounceInDown-second" : ""}`}>
+          <div className={`form-field-wrapper ${isOnboardingActive ? (fieldAnimationName || "") : ""}`}>
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>

@@ -1,6 +1,6 @@
 const renderModal = false; 
 const productionMode = false;
-export const isOnboardingActive = productionMode ? false : true;
+export const isOnboardingActive = productionMode ? false : false;
 export const modalType = productionMode ? "WELCOME" : "ADD_PROJECT";  
 
 export const renderFormModal = productionMode ? false : (isOnboardingActive || renderModal);
