@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
-import Dropdown from '../components/Dropdown';
-import DropdownTrigger from '../components/DropdownTrigger';
-import DropdownContent from '../components/DropdownContent';
+import PopupMenu from '../components/PopupMenu';
+import PopupMenuTrigger from '../components/PopupMenuTrigger';
+import PopupMenuContent from '../components/PopupMenuContent';
 
 export default class Select extends Component {
   constructor() {
@@ -76,16 +76,16 @@ export default class Select extends Component {
     const { className } = this.props;
     
     return (
-      <Dropdown className={`${className || ""} select`}>
-        <div className="dropdown-wrapper">
-          <DropdownTrigger handleClick={this.toggleIsActive}>
+      <PopupMenu className={`${className || ""} select`}>
+        <div className="popup-wrapper">
+          <PopupMenuTrigger handleClick={this.toggleIsActive}>
             {this.props.children}
-          </DropdownTrigger>
-          <DropdownContent isActive={isActive}>
+          </PopupMenuTrigger>
+          <PopupMenuContent isActive={isActive}>
             {this.renderOptions()}
-          </DropdownContent>
+          </PopupMenuContent>
         </div>
-      </Dropdown>
+      </PopupMenu>
     );
   }
 }

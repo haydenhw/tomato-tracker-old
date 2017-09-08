@@ -4,9 +4,9 @@ import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 
 import { changeActiveContextMenu } from '../actions/indexActions';
-import Dropdown from '../components/Dropdown';
-import DropdownTrigger from '../components/DropdownTrigger';
-import DropdownContent from '../components/DropdownContent';
+import Popup from '../components/PopupMenu';
+import PopupMenuContent from '../components/PopupMenuContent';
+import PopupMenuTrigger from '../components/PopupMenuTrigger';
 
 class ContextMenu extends Component {
   constructor(props) {
@@ -63,18 +63,18 @@ class ContextMenu extends Component {
     const { isActive } = this.state;
     
     return ( 
-      <Dropdown className={className}> 
-        <div className="dropdown-wrapper">
-          <DropdownTrigger handleClick={this.handleClick}>
+      <Popup className={className}> 
+        <div className="popup-wrapper">
+          <PopupMenuTrigger handleClick={this.handleClick}>
             <div className="list-item-button list-item-outline-button">
               <span className="icon-dots"></span>
             </div>
-          </DropdownTrigger>
-          <DropdownContent isActive={activeContextMenuParentId ? activeContextMenuParentId === parentId : isActive}>
+          </PopupMenuTrigger>
+          <PopupMenuContent isActive={activeContextMenuParentId ? activeContextMenuParentId === parentId : isActive}>
             {children}
-          </DropdownContent>
+          </PopupMenuContent>
         </div>
-      </Dropdown>
+      </Popup>
     );
   }
 }

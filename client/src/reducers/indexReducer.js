@@ -17,7 +17,7 @@ export default combineReducers({
     customForm,
     editMenu,
     modal,
-    nav,
+    // nav, not currently in use!
     projects,
     selectedProjectId,
     timer,

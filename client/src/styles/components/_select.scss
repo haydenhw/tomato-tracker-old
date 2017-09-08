@@ -2,6 +2,13 @@
 
 .select {
   font-size: 1.5em;
+  &.popup-menu  {
+    .popup-menu-trigger {
+      &:hover {
+        background-color: $medium-grey;
+      }
+    }
+  }
   
   .option {
     padding: 7px 15px;
@@ -21,12 +28,12 @@
   from { opacity:0; }
 }
 
-.dropdown-enter {
+.popup-menu-enter {
   opacity: 0;
   transform:   translateY(-40%) scale(0.9);
 
 }
-.dropdown-enter.dropdown-enter-active {
+.popup-menu-enter.popup-menu-enter-active {
   opacity: 1;
   transform:   translateY(-50%) scale(1);
   transition-property: transform, opacity, scale;
@@ -36,12 +43,12 @@
 }
 
 
-.dropdown-leave {
+.popup-menu-leave {
   opacity: 1;
   transform:   translateY(-50%) scale(1);
 }
 
-.dropdown-leave.dropdown-leave-active {
+.popup-menu-leave.popup-menu-leave-active {
   opacity: 0;
   transform:   translateY(-40%) scale(0.9);
   transition: opacity 0.4s, transform 0.4s;

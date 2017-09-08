@@ -1,7 +1,7 @@
-// @import 'ProjectDropdown.scss';
+// @import 'ProjectPopup.scss';
 // @import '_variables';
 
-.dropdown {
+.popup-menu {
   position: relative;
   display: inline-block;
   min-width: 125px;
@@ -10,32 +10,32 @@
   padding: 5px;
 }
 
-.dropdown-item {
+.popup-menu-item {
   clear: both;
 }
 
-.dropdown-trigger-wrapper {
+.popup-menu-trigger-wrapper {
   display: inline-block;
   width: 100%;
 }
 
-.dropdown-trigger {
+.popup-menu-trigger {
   width: 100%;
 }
 
-.projects-dropdown .dropdown-trigger-wrapper {
+.projects-popup-menu .popup-menu-trigger-wrapper {
   height: 50px;
   padding: 14px 18px;
   display: inline-block;
 }
 
-.dropdown-trigger:hover {
+.popup-menu-trigger:hover {
   cursor: pointer;
-  background-color: $medium-grey;
+  // background-color: $medium-grey;
   // background-color: white; 
 }
 
-.dropdown-content {
+.popup-menu-content {
   min-width: 200px;
   max-height: 300px;
   overflow: auto;
@@ -52,18 +52,18 @@
   z-index: 9999;
 }
 
-.projects-dropdown .dropdown-content {
+.projects-popup-menu .popup-menu-content {
   margin-top: 13px;
 }
 
-.dropdown a {
+.popup-menu a {
   display: inline-block;
   padding: 8px 15px;
   text-decoration: none;
   color: black;
 }
 
-.dropdown-item:hover {
+.popup-menu-item:hover {
   width: 100%;
   background-color: $light-grey;
 }

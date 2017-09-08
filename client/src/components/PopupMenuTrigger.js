@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function DropdownTrigger(props) {
+export default function PopupMenuTrigger(props) {
   const { children, handleClick } = props;
 
   return (
-    <div className="dropdown-trigger-wrapper">
-      <div className="dropdown-trigger" onClick={handleClick}>
+    <div className="popup-menu-trigger-wrapper">
+      <div className="popup-menu-trigger" onClick={handleClick}>
         {children}
       </div>
     </div>
   );
 }
 
-DropdownTrigger.propTypes = {
+PopupMenuTrigger.propTypes = {
   shouldRender: PropTypes.bool,
 };

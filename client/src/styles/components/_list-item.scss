@@ -167,15 +167,15 @@
     // display: inline-table;
     // vertical-align: middle;
      
-    .dropdown-wrapper {
+    .popup-wrapper {
       height: 0px;
     }
     
-    .dropdown-trigger:hover {
+    .popup-trigger:hover {
       background-color: transparent; 
     }  
   
-    .dropdown-content {
+    .popup-content {
       background-color: white;
       font-size: 12px;
       font-weight: 500;
@@ -188,7 +188,7 @@
       padding: 0;
     }
     
-    .dropdown-item {
+    .popup-item {
       border: 1px solid $medium-light-grey;
       border-bottom: none;
       padding: 5px;

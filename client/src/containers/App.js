@@ -32,22 +32,24 @@ class App extends Component {
   }
   
   render() {
-    const { activeLink, isDesktopNotificationActive, location } = this.props;
+    const { isDesktopNotificationActive, location } = this.props;
     const pathName = location.pathname;  
+    const isProjectRoute = /projects/.test(pathName);
     
     return (
       <div className={`${pathName === '/' || pathName === '/projects' ? 'app-container' : '' }`}>
         <Nav
-          activeLink={activeLink}
+          activeLink={isProjectRoute ? 'PROJECTS' : 'TIMER'}
           handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 
           handleProjectsLinkClck={routeToProjectsPage}
+          isProjectRoute={isProjectRoute}
         /> 
         {this.props.children}
         {isDesktopNotificationActive
           && <Notification 
             title="Time's Up!"
             ignore={false}
-            options={{icon: 'images/tomato-timer.png'}}
+            options={{ icon: 'images/tomato-timer.png' }}
           />}
       </div>
     );
@@ -55,12 +57,10 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { nav, projects, timer } = state;
-  const { activeLink } = nav;
+  const { projects, timer } = state;
   const { isDesktopNotificationActive } = timer;
   
   return {
-    activeLink,
     isDesktopNotificationActive,
     projects: projects.items
   }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function Nav(props) {
   const { activeLink, handleTimerLinkClick, handleProjectsLinkClck } = props;
-  
+  console.log(props)
   return(
     <nav>
       <div className="nav-logo-wrapper">

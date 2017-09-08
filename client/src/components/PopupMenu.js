@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function DropdownMenu(props) {
+export default function PopupMenu(props) {
   const { className, children } = props;
 
   return (
-    <div className={`dropdown ${className || ''}`}>
+    <div className={`popup-menu ${className || ''}`}>
       {children}
     </div>
   );
 }
 
-DropdownMenu.propTypes = {
+PopupMenu.propTypes = {
   className: PropTypes.string,
 };

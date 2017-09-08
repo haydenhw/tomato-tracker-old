@@ -176,11 +176,11 @@ export default class TimeTracker extends Component {
           onMenuClick={changeActiveContextMenu}
           parentId={shortId}
         >
-          <li className="dropdown-item" onClick={this.handleEditTask(shortId)}>
+          <li className="popup-item" onClick={this.handleEditTask(shortId)}>
             <i className="context-menu-icon icon-edit"></i>
             <a>Edit</a>
           </li>
-          <li className="dropdown-item" onClick={this.handleTaskDelete(selectedProject, task)}>
+          <li className="popup-item" onClick={this.handleTaskDelete(selectedProject, task)}>
             <i className="context-menu-icon icon-delete"></i>
             <a>Delete</a>
           </li>
@@ -214,24 +214,24 @@ export default class TimeTracker extends Component {
       );
     }
   
-  renderProjectSelect() {
-    const { projects, selectedProject, setSelectedProject } = this.props;
-    
-    const simplifiedProjects = projects.map(project => ({
-      name: project.projectName,
-      id: project.shortId
-    }));
-    
-    return (
-      <div className="project-select-wrapper">
-        <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
-        <ProjectHeading 
-          text={selectedProject ? selectedProject.projectName : "No projects added yet"}
-          iconClass={"icon icon-dots-menu"} 
-        />
-      </div>
-    );
-  }
+  // renderProjectSelect() {
+  //   const { projects, selectedProject, setSelectedProject } = this.props;
+  //   
+  //   const simplifiedProjects = projects.map(project => ({
+  //     name: project.projectName,
+  //     id: project.shortId
+  //   }));
+  //   
+  //   return (
+  //     <div className="project-select-wrapper">
+  //       <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
+  //       <ProjectHeading 
+  //         text={selectedProject ? selectedProject.projectName : "No projects added yet"}
+  //         iconClass={"icon icon-dots-menu"} 
+  //       />
+  //     </div>
+  //   );
+  // }
   
   render() {
     const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig } = this.props;
@@ -255,7 +255,6 @@ export default class TimeTracker extends Component {
           </div>
         </section>
         {tasks.length > 0
-          ? <div></div>  
           ? <section className="timer-settings-icon">
              <Timesheet
                 buttonText="NEW TASKS"
@@ -266,7 +265,6 @@ export default class TimeTracker extends Component {
                   <TotalTime time={secondsToHMMSS(totalTime)} />
               </Timesheet>
             </section>
-            : <div> </div>
             : <div className="task-nag-section">
                 <div className="task-nag">
                   <span className="task-nag-message">Add tasks to project {<span className="grey-title-text">{selectedProject.projectName}</span>} to start tracking time.</span>

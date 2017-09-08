@@ -1,8 +1,4 @@
 **Styles**:
-  ☐ get rid of time tracker page scss
-  ☐ fix time change element background
-  ☐ fix fs add tasks modal
-  ☐ go to new project page and refresh screen. the timer nav tab is selected rather than the projects tab
   ☐ make add tasks modal button fade in more consitent
    
 **Forms**:
@@ -10,13 +6,13 @@
     
 **Bugs**:
 
-
 ########################
 **Cleanup/Refactor**:
   ☐ extract presentaional components from containers
   ☐ refactor time-tracker-master-container to diff name
   ☐ extract input components to separate file
   ☐ notice that forms like SingleInputForm form have container classes defined by ternary operators. Change this so that these classes are supplied by props; 
+  ☐ review all scss files. make sure all files are using scss nesting and not just regular css. (especially for _popup-menu);
 
 **Later**:
   ☐ change all icons to icomoon

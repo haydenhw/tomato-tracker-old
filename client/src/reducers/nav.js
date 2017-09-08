@@ -1,3 +1,5 @@
+// Not currently in use!!
+
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
