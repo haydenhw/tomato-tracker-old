@@ -1,4 +1,10 @@
 **Styles**:
+  ☐ center nag message from project screen and make it match the one from timer screen.
+  ☐ disable close button on onboard modal
+  ☐ make projects page css classes consistent with timer page
+  ☐ extract a project task nag presentaional component
+  ☐ a bug occurs if user has already visited page but does not have any projects added. 
+  
    
 **Forms**:
   ProjectTaskForms:

@@ -1,10 +1,11 @@
+const shouldDeleteDb = true;
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const app = express();
 
-const shouldDeleteDb = false;
 const shouldResetDb = false;
 
 const { PORT, DATABASE_URL } = require('./server-files/config');

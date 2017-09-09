@@ -43,10 +43,12 @@ export default class TimeTracker extends Component {
     if (sessionStorage.isFirstSessionVisit === undefined) {
       sessionStorage.isFirstSessionVisit = false;
       toggleOnboardMode();
+      return null;
     }
     
     if ((projects.length === 0) && !isOnboardingActive) {
       hashHistory.push('/projects')
+      return null;
     }
     
     if (
@@ -237,6 +239,7 @@ export default class TimeTracker extends Component {
     const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
+    const selectedProjectName = selectedProject ?  selectedProject.projectName : '';
     
     return (
       <div className="time-tracker">
@@ -267,7 +270,7 @@ export default class TimeTracker extends Component {
             </section>
             : <div className="task-nag-section">
                 <div className="task-nag">
-                  <span className="task-nag-message">Add tasks to project {<span className="grey-title-text">{selectedProject.projectName}</span>} to start tracking time.</span>
+                  <span className="task-nag-message">Add tasks to project {<span className="grey-title-text">{selectedProjectName}</span>} to start tracking time.</span>
                   <div className="task-nag-button-wrapper">
                     <button className="task-nag-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
                   </div>

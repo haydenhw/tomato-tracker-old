@@ -180,11 +180,15 @@ class ProjectsPage extends Component {
               <List className="list task-list" items={projects} renderItem={this.renderProject.bind(this)}/>
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </Timesheet>
-          : <div className="list-container">
-              <span>No projects exist yet. Create one to get started</span>
-              <button className="timesheet-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+          : <div className="task-nag-section">
+              <div className="task-nag">
+                <span className="task-nag-message">Please create a project to get started.</span>
+                <div className="task-nag-button-wrapper">
+                  <button className="task-nag-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
+                </div>
+              </div>
               <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
-               rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
+                rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
               />
             </div>
         }
