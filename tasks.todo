@@ -1,5 +1,4 @@
 **Styles**:
-  ☐ make add tasks modal button fade in more consitent
    
 **Forms**:
   ProjectTaskForms:
@@ -9,14 +8,12 @@
 ########################
 **Cleanup/Refactor**:
   ☐ extract presentaional components from containers
-  ☐ refactor time-tracker-master-container to diff name
   ☐ extract input components to separate file
   ☐ notice that forms like SingleInputForm form have container classes defined by ternary operators. Change this so that these classes are supplied by props; 
   ☐ review all scss files. make sure all files are using scss nesting and not just regular css. (especially for _popup-menu);
 
 **Later**:
   ☐ change all icons to icomoon
-  ☐ move fonts from html file to sass files
   ☐ move fonts from html file to sass files
   
 Questions for Derek:
@@ -26,11 +23,7 @@ Questions for Kyle:
 
   ☐ How do you like the layout i.e that the timer is directly above the timesheet and timesheet is small?
     ☐ any alternatives?
-    ☐ How to center icon inside of close button?   
-    ☐ Why does my list item play button need to be wrapped in a parent element.
-    ☐ Why does border-box prop screw up my buttons. 
     ☐ Should modals and forms all have same fonts as main page? 
-    ☐ Mkae add tasks to project nag look better
     ☐ try changing time while timer is runnning. Not ideal right? ask about how to handle this user action.
 
 

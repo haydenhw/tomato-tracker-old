@@ -1,9 +1,9 @@
-// @import '_variables';
-
 .select {
-  font-size: 1.5em;
+  font-size: 22px;
+  
   &.popup-menu  {
     .popup-menu-trigger {
+      padding: 5px;
       &:hover {
         background-color: $medium-grey;
       }
@@ -12,10 +12,13 @@
   
   .option {
     padding: 7px 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
   }
   
   .option:hover {
-    background-color: $medium-light-grey;
+    background-color: $super-light-grey;
     cursor: pointer;
   }
   

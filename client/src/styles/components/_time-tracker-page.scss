@@ -1,6 +1,6 @@
-.app-container {
-  background-color: $blue-grey; 
-}
+// .main-page {
+//   background-color: $blue-grey; 
+// }
 
 .time-tracker {
   text-align: center;
@@ -16,18 +16,6 @@
   display: inline-block;
 }
 
-.timer-settings-wrapper {
-  color: #BDBDBD;
-  padding: 5px;
-  position: absolute;
-  top: 80px;  
-  right: 35px;
-}
-
-.timer-settings-wrapper:hover {
-  color: #9E9E9E;
-  cursor: pointer;
-}
 
 // .timesheet-add-button {
 //   bottom: 36px;

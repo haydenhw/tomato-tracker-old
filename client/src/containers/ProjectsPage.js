@@ -117,11 +117,11 @@ class ProjectsPage extends Component {
           onMenuClick={changeActiveContextMenu}    
           parentId={shortId}
         >
-          <li className="popup-item" onClick={this.handleEditOptionClick(project)}>
+          <li className="popup-menu-item" onClick={this.handleEditOptionClick(project)}>
             <i className="context-menu-icon icon-edit"></i>
             <a>Edit</a>
           </li>
-          <li className="popup-item" onClick={this.handleDeleteOptionClick(project)}>
+          <li className="popup-menu-item" onClick={this.handleDeleteOptionClick(project)}>
             <i className="context-menu-icon icon-delete"></i>
             <a>Delete</a>
           </li>

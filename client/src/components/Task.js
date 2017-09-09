@@ -24,8 +24,8 @@ export default function Task(props) {
       </div>
       {/* <div className="timesheet-col timesheet-col4">
         <ContextMenu className='list-item-context-menu'>
-          <li className="popup-item"><a>Edit</a></li>
-          <li className="popup-item"><a>Delete</a></li>
+          <li className="popup-menu-item"><a>Edit</a></li>
+          <li className="popup-menu-item"><a>Delete</a></li>
         </ContextMenu>
       </div> */}
     </div>

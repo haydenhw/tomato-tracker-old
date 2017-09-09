@@ -176,11 +176,11 @@ export default class TimeTracker extends Component {
           onMenuClick={changeActiveContextMenu}
           parentId={shortId}
         >
-          <li className="popup-item" onClick={this.handleEditTask(shortId)}>
+          <li className="popup-menu-item" onClick={this.handleEditTask(shortId)}>
             <i className="context-menu-icon icon-edit"></i>
             <a>Edit</a>
           </li>
-          <li className="popup-item" onClick={this.handleTaskDelete(selectedProject, task)}>
+          <li className="popup-menu-item" onClick={this.handleTaskDelete(selectedProject, task)}>
             <i className="context-menu-icon icon-delete"></i>
             <a>Delete</a>
           </li>
@@ -255,7 +255,7 @@ export default class TimeTracker extends Component {
           </div>
         </section>
         {tasks.length > 0
-          ? <section className="timer-settings-icon">
+          ? <section className="timesheet-section">
              <Timesheet
                 buttonText="NEW TASKS"
                 handleButtonClick={this.handleAddTasks.bind(this)}

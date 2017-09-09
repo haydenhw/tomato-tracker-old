@@ -13,8 +13,8 @@ export default function Project(props) {
       <span>{projectName}</span>
       <span>{totalTime}</span>
       <ContextMenu>
-        <li className="popup-item"><a>Edit</a></li>
-        <li className="popup-item"><a>Delete</a></li>
+        <li className="popup-menu-item"><a>Edit</a></li>
+        <li className="popup-menu-item"><a>Delete</a></li>
       </ContextMenu>
     </div>
   );

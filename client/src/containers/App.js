@@ -14,8 +14,18 @@ class App extends Component {
     super(); 
     
     this.state = {
-      activeLink: 'TIMER',
       showNotification: true
+    }
+  }
+  
+  componentWillReceiveProps() {
+    const { location } = this.props;
+    const pathName = location.pathname;
+    
+    if((pathName === '/' || pathName === '/projects')) {
+      document.body.style.backgroundColor = "#f0f4f7";
+    } else {
+      document.body.style.backgroundColor = "white";
     }
   }
   
@@ -23,6 +33,8 @@ class App extends Component {
     const { fetchProjects } = this.props;
     
     fetchProjects();
+    const { location } = this.props;
+    const pathName = location.pathname;
   }
   
   handleTimerLinkClick() {
@@ -37,7 +49,7 @@ class App extends Component {
     const isProjectRoute = /projects/.test(pathName);
     
     return (
-      <div className={`${pathName === '/' || pathName === '/projects' ? 'app-container' : '' }`}>
+      <div className={`${(pathName === '/' || pathName === '/projects') ? 'main-page' : '' }`}>
         <Nav
           activeLink={isProjectRoute ? 'PROJECTS' : 'TIMER'}
           handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 

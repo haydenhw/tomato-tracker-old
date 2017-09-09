@@ -10,7 +10,7 @@ export default function WelcomeModal(props) {
     <div className="welcome">
         <h2 className="modal-title bounceInDown-welcome">Welcome to PomTracker!</h2>
         <div className="bounceInDown-welcome-second">
-          <p className="welcome-instructions">Click below to add you first project</p>
+          <p className="welcome-instructions">Click below to create you first project</p>
           <button className="outline-button fade-in-long-delay" onClick={handleGetStartedClick}>Get Started</button>
         </div>
     </div>

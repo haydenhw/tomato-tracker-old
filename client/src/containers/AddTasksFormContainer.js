@@ -94,7 +94,7 @@ let AddTasksFormContainer = class extends Component {
   
   handleDeleteButtonClick = (taskId) => () => {
     const { toggleShouldDelete } = this.props;
-    console.log('hello')
+    
     toggleShouldDelete(taskId);
   }  
   
@@ -108,7 +108,7 @@ let AddTasksFormContainer = class extends Component {
   
 renderFormTask (task){
     const { shouldDelete, taskName, shortId } = task;
-    
+    console.log(shouldDelete)
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
         <div className="button-wrapper" >
@@ -127,40 +127,18 @@ renderFormTask (task){
         </div>
       </div>
     );
-  }  render() {
-    const {
-      formTasks,
-      handleSubmit,
-      isModalActive,
-      isOnboardingActive,
-      shouldDisableFocusOnMount,
-      shouldRenderSubmitButton,
-      title,
-      titleName
-    } = this.props;
-    
+  }  
+  
+  render() {
     return (
-      
       <RemoteSubmitForm
         onTargetUpdate={this.handleFormSubmit.bind(this)}
-      >
-        <AddTasksForm 
-          fieldAnimationName={isOnboardingActive ? "bounceInDown-second" : ""  }
-          formAnimationName={isOnboardingActive ? "" : "bounceInDown"  }
-          handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
-          handleSubmit={handleSubmit}
-          handleTaskSubmit={this.handleAddTask.bind(this)}
-          isContentAnimated={isOnboardingActive}
-          isModalActive={isModalActive}
-          isOnboardingActive={isOnboardingActive}
-          shouldDisableFocusOnMount={shouldDisableFocusOnMount}
-          renderFormTask={this.renderFormTask.bind(this)}
-          shouldRenderSubmitButton={shouldRenderSubmitButton}
-          tasks={formTasks}
-          title={title}
-          titleAnimationName={isOnboardingActive ? "bounceInDown" : ""  }
-          titleName={titleName}
-          form={'tasks form'}
+        >
+          <AddTasksForm 
+            {...this.props}
+            handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
+            handleTaskSubmit={this.handleAddTask.bind(this)}
+            renderFormTask={this.renderFormTask.bind(this)}
         />
       </RemoteSubmitForm>
     );
@@ -174,11 +152,12 @@ const mapStateToProps = (state, ownProps) => {
   
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedProjectDatabaseId = selectedProject && selectedProject._id;
-
-  const tasks = selectedProject && ownProps.showTasksForSelectedProject !== false
+    // console.log(formTasks)
+  const tasks = selectedProject && (ownProps.showTasksForSelectedProject !== false)
     ? selectedProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
-    
+    // console.log(selectedProject && ownProps.showTasksForSelectedProject !== false)
+    // console.log(tasks)
   return {
     selectedProject,
     selectedProjectId,

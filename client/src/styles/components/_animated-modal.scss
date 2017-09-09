@@ -39,14 +39,14 @@ html,body {
       position: relative;
       
       .fullscreen-container {
-        margin-top: $onboard-screen-top-margin;
+        margin-top: 15vh; 
       }
       
       .modal-button-bottom-right {
         position: absolute;
         right: 0;
         bottom: 0;
-        margin: 0 60px 40px 0;
+        margin: 0 26px 23px 0;
       }      
       
       .modal-close {

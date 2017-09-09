@@ -22,7 +22,7 @@ let renderField = (placeholder, inputRef) => ({
         placeholder="Task Name"
         type={type}
        />
-       <div className={(touched && error) && 'error' }>
+       <div className={(touched && error) && 'form-error' }>
          {/* 'press ENTER to submit task' */}
          {(touched && error ) ? error : ''} 
        </div>
@@ -53,11 +53,11 @@ let AddTasksForm = class extends Component {
     const {
       fieldAnimationName,
       formAnimationName,
+      formTasks,
       handleFormSubmit,
       handleSubmit,
       handleTaskSubmit,
       inputRef,
-      isContentAnimated, 
       isModalActive,
       isOnboardingActive,
       renderFormTask,
@@ -70,7 +70,7 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "fullscreen-container": formAnimationName}`}>
+      <div className={`${isOnboardingActive ? "fullscreen-container": (formAnimationName || "")}`}>
         <div className={`${isModalActive ? "form-container": "" }`}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? (titleAnimationName || "") : ""}`}>
@@ -80,7 +80,7 @@ let AddTasksForm = class extends Component {
           }
           <div className={`form-field-wrapper ${isOnboardingActive ? (fieldAnimationName || "") : ""}`}>
             <label htmlFor="taskName">Tasks</label>
-            <List className="form-task-list" items={tasks} renderItem={renderFormTask} />
+            <List className="form-task-list" items={formTasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
               <Field name="taskName" component={this.renderField}/>
             </form>

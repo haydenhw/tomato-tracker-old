@@ -1,24 +1,23 @@
 .timer {
   position: relative;
-  margin: 20px;
   width: 225px;
-  margin: 20px auto;
-}
+  margin: 0 auto;
+    
+  .timer-content {
+    font-size: 29px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -62%);
+  }
 
-.timer-content {
-  font-size: 29px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -62%);
-}
-
-.timer-control {
-  font-size: 1em;
-}
-
-.edit-time, 
-.editing {
-  font-size: 1.5em;
+  .timer-control {
+    font-size: 1em;
+  }
+  
+  .edit-time, 
+  .editing {
+    font-size: 1.5em;
+  }
 }
 

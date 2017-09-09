@@ -6,15 +6,27 @@ $section-padding: 40px;
   background-color: $light-grey;
   border-bottom: 1px solid $medium-grey;
   padding: $section-padding; 
+  padding-bottom: 55px;
+    
     .timer-container {
       width: 60%;
       margin: 0 auto;
     }
+    
+    .timer-settings-wrapper {
+      color: #BDBDBD;
+      padding: 5px;
+      position: absolute;
+      top: 80px;  
+      right: 35px;
+    }
+
+    .timer-settings-wrapper:hover {
+      color: #9E9E9E;
+      cursor: pointer;
+    }
 }
 
-.timer-settings-icon {
-  padding: $section-padding; 
-}
 
 .task-nag-section {
   height: 50%;
