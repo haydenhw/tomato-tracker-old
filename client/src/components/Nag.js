@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Nag({ onCancel, onAccept, nagMessage, title }) {
-
-  return(
-    <div className="nag">
-      <h2>{title}</h2>
-      <p className="danger-text">{nagMessage}</p>
-      <button className="material-button" onClick={onAccept}>ADD PROJECT</button>
-    </div>
+export default function Nag({ actionButtonText, nagMessage, onActionButtonClick }) {
+  return (
+      <div className="nag">
+        <span className="nag-message">{nagMessage}</span>
+        <div className="nag-button-wrapper">
+          <button className="nag-add-button material-button" onClick={onActionButtonClick}>{actionButtonText}</button>
+        </div>
+      </div>
   );
 }
 

@@ -38,6 +38,11 @@ html,body {
       padding-top: 46px;
       position: relative;
       
+      &.fullscreen-modal  {
+        .modal-close {
+          // display: none;
+        } 
+      }
       .fullscreen-container {
         margin-top: 15vh; 
       }
@@ -122,12 +127,6 @@ html,body {
         }
       }
     }
-  }
-}
-
-.fullscreen-modal {
-  .modal-close {
-    // display: none;
   }
 }
 

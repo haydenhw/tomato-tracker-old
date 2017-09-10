@@ -23,6 +23,7 @@ import ContextMenu from './ContextMenu';
 import List from '../components/List';
 import ListHeader from '../components/ListHeader';
 import ListItem from '../components/ListItem';
+import Nag from '../components/Nag';
 import TimesheetListItem from '../components/TimesheetListItem';
 import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
@@ -177,20 +178,19 @@ class ProjectsPage extends Component {
               handleButtonClick={this.handleAddButtonClick.bind(this)}
               titleText={"Projects"} 
             >
-              <List className="list task-list" items={projects} renderItem={this.renderProject.bind(this)}/>
+              <List className="list" items={projects} renderItem={this.renderProject.bind(this)}/>
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </Timesheet>
-          : <div className="task-nag-section">
-              <div className="task-nag">
-                <span className="task-nag-message">Please create a project to get started.</span>
-                <div className="task-nag-button-wrapper">
-                  <button className="task-nag-add-button material-button" onClick={this.handleAddButtonClick.bind(this)}>ADD PROJECT</button>
-                </div>
-              </div>
+          : <div>
+              <Nag
+                actionButtonText="ADD PROJECT"
+                nagMessage="Please create a project to continue."
+                onActionButtonClick={this.handleAddButtonClick.bind(this)}
+              /> 
               <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
                 rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
               />
-            </div>
+          </div>
         }
       </div>
     );

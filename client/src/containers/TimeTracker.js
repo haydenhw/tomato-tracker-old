@@ -9,8 +9,7 @@ import { secondsToHMMSS } from 'helpers/time';
 import ContextMenu from './ContextMenu';
 import Modal from './Modal';
 import List from '../components/List';
-import ListHeader from '../components/ListHeader';
-import ProjectHeading from '../components/ProjectHeading';
+import Nag from '../components/Nag';
 import TimesheetListItem from '../components/TimesheetListItem';
 import Timesheet from '../components/Timesheet';
 import TotalTime from '../components/TotalTime';
@@ -268,19 +267,16 @@ export default class TimeTracker extends Component {
                   <TotalTime time={secondsToHMMSS(totalTime)} />
               </Timesheet>
             </section>
-            : <div className="task-nag-section">
-                <div className="task-nag">
-                  <span className="task-nag-message">Add tasks to project {<span className="grey-title-text">{selectedProjectName}</span>} to start tracking time.</span>
-                  <div className="task-nag-button-wrapper">
-                    <button className="task-nag-add-button material-button" onClick={this.handleAddTasks.bind(this)}>ADD TASKS</button>
-                  </div>
-                </div>
-              </div>
-          }
-          <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
-           rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
-          />
-        </div>
+            : <Nag
+                actionButtonText="ADD TASKS"
+                nagMessage={<span>Add tasks to project <span className="grey-title-text">{selectedProjectName}</span> to start tracking time.</span>}
+                onActionButtonClick={this.handleAddTasks.bind(this)}
+              />
+        }
+        <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
+         rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
+        />
+      </div>
     );
   }
 }
