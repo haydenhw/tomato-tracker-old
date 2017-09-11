@@ -7,8 +7,8 @@ export default function Nav(props) {
   return(
     <nav>
       <div className="nav-logo-wrapper">
-        <h1 className="nav-logo-text">TomatoTracker</h1>
         <img className="nav-logo-image" src="images/tomato-timer.png" alt="tomato timer logo"/>
+        <h1 className="nav-logo-text">TomatoTracker</h1>
       </div>
           <a className={`nav-link ${activeLink === 'TIMER' ? 'active-link' : ''}`}
             onClick={handleTimerLinkClick}

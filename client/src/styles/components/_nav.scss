@@ -8,6 +8,7 @@ nav {
 }
 
 .nav-logo-wrapper {
+  // border: 1px solid white;
   display: inline-block;
   margin-left: 25%;
   margin-right: 50px;
@@ -15,21 +16,21 @@ nav {
   
   .nav-logo-text {
     display: inline-block;
-    line-height: 1;
+    margin-left: 5px;
   }
   
   .nav-logo-image {
-    @include centerVertHoriz();
-    left: 110%;
-    display: inline-block;
-    display: none;
+    position: relative;
+    vertical-align: middle;
+    width: 35px;
+    bottom: 7px;
   }
 }
 
 nav a {
   // height: 100%;
-  line-height: 60px;
-  padding: 0 19px;
+  line-height: 61px;
+  padding: 1px 20px;
   color: white;
   font-weight: normal;
   text-decoration: none;
