@@ -3,28 +3,8 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
-// import { queueNewProject } from '../actions/indexActions';
-import store from '../redux-files/store';
 
-import validate, { hasAnyValue } from '../helpers/validate';
 import Input from './Input';
-
-const renderField = (props) => {
-  const { input, type, meta: { touched, error }} = props;
-  return (
-    <div>
-      <input
-        {...input} 
-        // autoFocus
-        autoComplete="off"
-        className="form-input fullscreen-input add-project-input" 
-        placeholder={"Project Name"} 
-        type={type} 
-      />
-      {touched && error && <div className="form-error">{error}</div>}
-    </div>
-  )
-} 
 
 const dummySubmit = (evt) => { 
   evt.preventDefault(); 
@@ -74,25 +54,6 @@ let SingleInputForm = function SingleInputForm(props) {
   );
 }
 
-
-const submit = ({ projectName }) =>  {
-  
-    console.log('hola hola')
-  // const shouldSubmitProjectForm = store.getState().customForm.shouldSubmitProjectForm;
-  // console.log(shouldSubmitProjectForm);
-  // if (!shouldSubmitProjectFo   rm) {
-  //   return;  
-  // }
-  
-  if (!hasAnyValue(projectName)) {
-    throw new SubmissionError({
-      singleInput: 'Project name is required' 
-    })
-  }
-  
-  // store.dispatch(queueNewProject(projectName));
-};
-
 const targetInfo = props => {
   return {
     targetValue: "ADD_PROJECT",
@@ -109,10 +70,5 @@ SingleInputForm = callOnTargetUpdate(targetInfo, onTargetUpdate)(SingleInputForm
 
 export default reduxForm({
   form: 'singleInput', 
-  // validate: validate(store.getState),
 })(SingleInputForm)
 
-// SingleInputForm.propTypes = {
-//   handleProjectSubmit: PropTypes.func,
-//   handleSubmit: PropTypes.func,
-// }
