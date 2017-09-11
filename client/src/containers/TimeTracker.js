@@ -16,6 +16,8 @@ import TotalTime from '../components/TotalTime';
 import Select from './Select';
 import Timer from './Timer';
 
+import {isDevOnboardingActive} from '../srcConfig/devSettings';
+
 export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
@@ -37,9 +39,16 @@ export default class TimeTracker extends Component {
   
   componentWillMount() {
     const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
-    // change isModalActive to isOnboardingActive for production  
     
-    if (sessionStorage.isFirstSessionVisit === undefined) {
+    if (isDevOnboardingActive) {
+      !isOnboardingActive && toggleOnboardMode();
+      return null;
+    }  
+    
+    if (
+      (sessionStorage.isFirstSessionVisit === undefined) ||
+      ((projects.length === 0) && isOnboardingActive)
+    ) {
       sessionStorage.isFirstSessionVisit = false;
       toggleOnboardMode();
       return null;
@@ -78,20 +87,6 @@ export default class TimeTracker extends Component {
       activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
     })
     }*/
-  }
-  
-
-  toggleShouldRenderModal(modalType) {
-    const { shouldRenderModal } = this.state;
-
-    let newModalState = { shouldRenderModal: !shouldRenderModal};
-
-    if (modalType) { 
-      const updatedModalType = { modalType: modalType};
-      newModalState = Object.assign(newModalState, updatedModalType);
-    }
-
-    this.setState(newModalState);
   }
   
   handleAddTasks() {
@@ -241,7 +236,8 @@ export default class TimeTracker extends Component {
     const selectedProjectName = selectedProject ?  selectedProject.projectName : '';
     
     return (
-      <div className="time-tracker">
+      // <div className="time-tracker">
+      <div>
         <section className="timer-section">
           <div className="timer-settings-wrapper" onClick={toggleConfig}>
             <FontAwesome className="timer-settings-icon" name='gear'></FontAwesome>  
@@ -263,7 +259,7 @@ export default class TimeTracker extends Component {
                 handleButtonClick={this.handleAddTasks.bind(this)}
                 titleText={["Tasks for project ", <span className={"grey-title-text"} key={shortid.generate()}>{selectedProject.projectName}</span>]} 
                 >
-                  <List className="list task-list" items={tasks} renderItem={this.renderTask.bind(this)} />
+                  <List className="timesheet-list list" items={tasks} renderItem={this.renderTask.bind(this)} />
                   <TotalTime time={secondsToHMMSS(totalTime)} />
               </Timesheet>
             </section>

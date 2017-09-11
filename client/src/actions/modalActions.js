@@ -46,8 +46,9 @@ export const toggleEditTaskForm = (taskId) => ({
 });
 
 export const TOGGLE_PROJECT_NAG_MODAL = 'TOGGLE_PROJECT_NAG_MODAL';
-export const toggleProjectNagModal = () => ({
+export const toggleProjectNagModal = (modalProps) => ({
   type: 'TOGGLE_PROJECT_NAG_MODAL',
+  modalProps
 });
 
 export const CONFIRM_EDIT_TASK = 'CONFIRM_EDIT_TASK';

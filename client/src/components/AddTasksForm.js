@@ -26,7 +26,6 @@ let renderField = (placeholder, inputRef) => ({
          {/* 'press ENTER to submit task' */}
          {(touched && error ) ? error : ''} 
        </div>
-       
       </div>
     </div>
   );
@@ -51,6 +50,7 @@ let AddTasksForm = class extends Component {
   
   render() {
     const {
+      childContainerClass,
       fieldAnimationName,
       formAnimationName,
       formTasks,
@@ -60,6 +60,7 @@ let AddTasksForm = class extends Component {
       inputRef,
       isModalActive,
       isOnboardingActive,
+      parentContainerClass,
       renderFormTask,
       shouldRenderSubmitButton,
       submitButtonText, 
@@ -70,8 +71,8 @@ let AddTasksForm = class extends Component {
     } = this.props;
     
     return (
-      <div className={`${isOnboardingActive ? "fullscreen-container": (formAnimationName || "")}`}>
-        <div className={`${isModalActive ? "form-container": "" }`}>
+    <div className={parentContainerClass}>
+      <div className={childContainerClass}>
           {title && 
             <h2 className={`form-title ${isOnboardingActive ? (titleAnimationName || "") : ""}`}>
               {title}  

@@ -36,14 +36,16 @@ class AddProjectModal extends Component {
     
     return (
       <SingleInputForm
+        childContainerClass="form-container onboarding-form"
         fieldAnimationName="bounceInDown-second"
         formName="projectName"
         handleFormSubmit={this.handleAddProject.bind(this)}
         isModalActive={true}
         isOnlyInput={true}
+        parentContainerClass="fullscreen-container"
         placeholder="Project Name"
         shouldRenderSubmitButton={true}
-        title="Add a project"
+        title="Add a project name"
         titleAnimationName="bounceInDown"
       />
     );

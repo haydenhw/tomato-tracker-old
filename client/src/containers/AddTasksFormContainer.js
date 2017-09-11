@@ -108,7 +108,7 @@ let AddTasksFormContainer = class extends Component {
   
 renderFormTask (task){
     const { shouldDelete, taskName, shortId } = task;
-    console.log(shouldDelete)
+    
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
         <div className="button-wrapper" >
@@ -130,14 +130,17 @@ renderFormTask (task){
   }  
   
   render() {
+    const { formAnimationName, isModalActive, isOnboardingActive } = this.props;
     return (
       <RemoteSubmitForm
         onTargetUpdate={this.handleFormSubmit.bind(this)}
         >
           <AddTasksForm 
             {...this.props}
+            childContainerClass={isModalActive ? "form-container onboarding-form": "" }
             handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
             handleTaskSubmit={this.handleAddTask.bind(this)}
+            parentContainerClass={isOnboardingActive ? "fullscreen-container": (formAnimationName || "")}
             renderFormTask={this.renderFormTask.bind(this)}
         />
       </RemoteSubmitForm>

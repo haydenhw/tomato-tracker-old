@@ -160,7 +160,7 @@ class ProjectsPage extends Component {
     
     return (
       // <div className='projects-page-container pt-page-moveFromBottomFade'>
-      <div className='projects-page-container'>
+      <div>
         {/* { (isProjectSelectTipActive && projects.length > 1) && 
           <div className="project-select-tip-wrapper">
             <div className="project-select-tip">
@@ -178,7 +178,7 @@ class ProjectsPage extends Component {
               handleButtonClick={this.handleAddButtonClick.bind(this)}
               titleText={"Projects"} 
             >
-              <List className="list" items={projects} renderItem={this.renderProject.bind(this)}/>
+              <List className="timesheet-list list" items={projects} renderItem={this.renderProject.bind(this)}/>
               <TotalTime time={secondsToHMMSS(totalTime)} />
             </Timesheet>
           : <div>

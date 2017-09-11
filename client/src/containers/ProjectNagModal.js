@@ -8,8 +8,9 @@ import Modal from './Modal';
 export default function ProjectNagModal(props) {
   return (
         <Nag 
-          nagMessage="Please add a project before continuing"
-          onAccept={() => hashHistory.push("/projects/new")}
+          actionButtonText="ADD PROJECT"
+          nagMessage="Please add a project before continuing."
+          onActionButtonClick={() => hashHistory.push("/projects/new")}
           title="No projects added yet"
         />
     );

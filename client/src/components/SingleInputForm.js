@@ -7,16 +7,15 @@ import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
 import store from '../redux-files/store';
 
 import validate, { hasAnyValue } from '../helpers/validate';
-
+import Input from './Input';
 
 const renderField = (props) => {
-  
   const { input, type, meta: { touched, error }} = props;
   return (
     <div>
       <input
         {...input} 
-        autoFocus
+        // autoFocus
         autoComplete="off"
         className="form-input fullscreen-input add-project-input" 
         placeholder={"Project Name"} 
@@ -34,9 +33,11 @@ const dummySubmit = (evt) => {
 
 let SingleInputForm = function SingleInputForm(props) {
   const {
+    childContainerClass,
     handleFormSubmit,
     handleSubmit,
     fieldAnimationName,
+    parentContainerClass,
     isModalActive,
     isOnlyInput,
     shouldRenderSubmitButton,
@@ -46,8 +47,8 @@ let SingleInputForm = function SingleInputForm(props) {
   } = props;
   
   return (
-    <div className={`${isModalActive ? "fullscreen-container": ""}`}>
-      <div className={`${isModalActive ? "form-container": "" }`}>
+    <div className={parentContainerClass}>
+      <div className={childContainerClass}>
         <form onSubmit={isOnlyInput ? handleSubmit(handleFormSubmit) : dummySubmit}>
           {title && 
             <h2 className={`form-title ${titleAnimationName || ""}`}>
@@ -58,9 +59,10 @@ let SingleInputForm = function SingleInputForm(props) {
           {/* <div className="fieldAnimationName"> */}
           <div className={fieldAnimationName || ""}>
             <Field
-              component={renderField}
+              component={Input}
               name="singleInput"
               type="text"
+              shouldAutoFocus={true}
             />
           </div>
         </form>

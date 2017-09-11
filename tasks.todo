@@ -1,9 +1,5 @@
 **Styles**:
-  ☐ make projects page css classes consistent with timer page
-  ☐ extract a project task nag presentaional component
-  ☐ a bug occurs if user has already visited page but does not have any projects added. 
-  ☐ disable form buttons until input conditions are satisfied
-  
+  ☐ match onboard modal buttons with codrops 
   
    
 **Forms**:

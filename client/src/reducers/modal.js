@@ -1,6 +1,6 @@
 import * as actions from 'actions/indexActions';
 
-import { modalType, isOnboardingActive, renderFormModal } from '../srcConfig/devSettings'
+import { modalType, isOnboardingActive, renderFormModal } from '../srcConfig/devSettings';
 
 const defaultState = {
   isOnboardingActive, 
@@ -42,6 +42,7 @@ export const modal = (state = defaultState, action) => {
       return {
         ...state,
         isModalActive: true,
+        modalProps: action.modalProps,
         modalType: 'PROJECT_NAG'
       };
     case actions.TOGGLE_CONFIG:
