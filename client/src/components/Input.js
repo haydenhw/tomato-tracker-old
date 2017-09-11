@@ -5,7 +5,7 @@ export default function Input(props) {
   const {
     className,
     input,
-    meta: { touched, error },
+    meta: { error, pristine, touched },
     placeholder,
     shouldAutoFocus,
     type
@@ -17,7 +17,7 @@ export default function Input(props) {
         autoFocus={shouldAutoFocus || false}
         autoComplete="off"
         className="form-input fullscreen-input add-project-input" 
-        placeholder={"Project Name"} 
+        placeholder={placeholder}
         type={type} 
       />
       {touched && error && <div className="form-error">{error}</div>}

@@ -4,31 +4,34 @@ import { Field } from 'redux-form';
 
 import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
 
+import Input from './Input';
 import List from './List';
 
-let renderField = (placeholder, inputRef) => ({
-  input,
-  label,
-  type,
-  meta: {  error, pristine, touched }
-}) => (
-  <div className="input-wrapper">
-    <label/>
-    <div>
-      <input
-        {...input}
-        className="form-input"
-        ref={inputRef}
-        placeholder="Task Name"
-        type={type}
-       />
-       <div className={(touched && error) && 'form-error' }>
-         {/* 'press ENTER to submit task' */}
-         {(touched && error ) ? error : ''} 
-       </div>
-      </div>
-    </div>
-  );
+// let renderField = (placeholder, inputRef) => ({
+// let renderField = ({
+//   inputRef,
+//   input,
+//   type,
+//   meta: { error, pristine, touched }
+// }) => (
+//   <div className="input-wrapper">
+//     {/* <label/> */}
+//     <div>
+//       <input
+//         autoFocus={true}
+//         {...input}
+//         className="form-input"
+//         ref={inputRef}
+//         placeholder="Task Name"
+//         type={type}
+//        />
+//        <div className={(touched && error) && 'form-error' }>
+//          'press ENTER to submit task'
+//          {(touched && error ) ? error : ''} 
+//        </div>
+//       </div>
+//     </div>
+//   );
 
 let AddTasksForm = class extends Component {
   componentWillMount() {
@@ -37,14 +40,14 @@ let AddTasksForm = class extends Component {
       ?  el => this.inputRef = el 
       : () => {};
       
-    this.renderField = renderField('Add Task', getRef);
+    // this.renderField = renderField('Add Task', getRef);
   }
   
   componentDidMount() {
     const { shouldDisableFocusOnMount } = this.props;
     
     if (!shouldDisableFocusOnMount) {
-      this.inputRef.focus();
+      // this.inputRef.focus();
     }
   }
   
@@ -63,6 +66,7 @@ let AddTasksForm = class extends Component {
       parentContainerClass,
       renderFormTask,
       shouldRenderSubmitButton,
+      shouldAutoFocus,
       submitButtonText, 
       tasks,
       title,
@@ -83,7 +87,13 @@ let AddTasksForm = class extends Component {
             <label htmlFor="taskName">Tasks</label>
             <List className="form-task-list" items={formTasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
-              <Field name="taskName" component={this.renderField}/>
+             <Field
+               component={Input}
+               name="taskName"
+               placeholder="Add Tasks"
+               inputRef={this.inputRef}
+               shouldAutoFocus={shouldAutoFocus}
+             />
             </form>
           </div>
         </div>

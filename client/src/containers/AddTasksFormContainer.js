@@ -142,6 +142,7 @@ renderFormTask (task){
             handleTaskSubmit={this.handleAddTask.bind(this)}
             parentContainerClass={isOnboardingActive ? "fullscreen-container": (formAnimationName || "")}
             renderFormTask={this.renderFormTask.bind(this)}
+            shouldAutoFocus={isModalActive}
         />
       </RemoteSubmitForm>
     );
