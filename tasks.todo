@@ -21,12 +21,23 @@ Questions for Derek:
 ☐ should I add a 'press enter key to add task' message on add tasks form?
     
 Questions for Kyle:
-
   ☐ How do you like the layout i.e that the timer is directly above the timesheet and timesheet is small?
     ☐ any alternatives?
     ☐ Should modals and forms all have same fonts as main page? 
     ☐ try changing time while timer is runnning. Not ideal right? ask about how to handle this user action.
-
+    
+Kyle Notes:
+  ☐ Projects
+    ☐ Make timer visible from projects screen 
+  ☐ negative space 
+    ☐ 600px   
+    ☐ monochromatic theme
+    ☐ switch submit and cancel button
+    ☐ number font is good. play with different title fonts
+    
+    
+      
+    
 
 Reading Topics:
   ☐ line-height

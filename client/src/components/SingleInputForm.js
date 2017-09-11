@@ -18,6 +18,7 @@ let SingleInputForm = function SingleInputForm(props) {
     handleSubmit,
     fieldAnimationName,
     parentContainerClass,
+    placeholder,
     isModalActive,
     isOnlyInput,
     shouldRenderSubmitButton,
@@ -41,6 +42,7 @@ let SingleInputForm = function SingleInputForm(props) {
             <Field
               component={Input}
               name="singleInput"
+              placeholder="Project Name"
               type="text"
               shouldAutoFocus={true}
             />
