@@ -7,75 +7,60 @@ import { secondsToHMMSS, timeStringToSeconds } from '../helpers/time';
 import { hasAnyValue, isDuplicate } from '../helpers/validate';
 import { closeModal, confirmEditTask, updateTask } from '../actions/indexActions';
 
-import 'rc-time-picker/assets/index.css';
+import Input from './Input'; 
 
-const renderField = ({
-  input,
-  type,
-  meta: { touched, error, warning }
-}) => (
-  <div className="input-wrapper">
-    <div>
-      <input {...input} className="form-input" placeholder="Task name" type={type} />
-      {touched &&
-        ((error && <div className="form-error">{error}</div>) ||
-        (warning && <span className="form-error">{warning}</span>))}
-      </div>
-    </div>
-  )
-  
-  let EditTaskForm = class extends Component {
-    handleEditTaskSubmit ({ taskName, newTime }) {
-      const {
-        clickedTaskId,
-        closeModal,
-        confirmEditTask,
-        initialValues,
-        selectedProject,
-        selectedProjectId,
-        selectedTask,
-        taskNames,
-        updateTask,
-      } = this.props
-      const newTimeString = timeStringToSeconds(newTime);
-      
-      if (taskName !== initialValues.taskName && isDuplicate(taskName, taskNames)){
-        throw new SubmissionError({
-          taskName: `A task with the name ${taskName} already exits`
-        });      
-      }
-      
-      if (!hasAnyValue(taskName)){
-        throw new SubmissionError({
-          taskName: `This field cannot be left blank`
-        });      
-      }
-      
-      if (isNaN(newTimeString)) {
-        throw new SubmissionError({
-          newTime: 'Please enter a numberic time'
-        });
-      }
-      
-      const toUpdate = {
-        taskName,
-        recordedTime: newTimeString
-      } 
-      
-      if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
-        confirmEditTask({
-          taskName,
-          payload:  [selectedProject, selectedTask, toUpdate],
-          oldTime: initialValues.newTime,
-          newTime: secondsToHMMSS(newTimeString) 
-        })
-      } else if (taskName !== initialValues.taskName) {
-        updateTask(selectedProject, selectedTask, toUpdate);
-        closeModal();
-      } else {
-        closeModal();
-      }
+let EditTaskForm = class extends Component {
+  handleEditTaskSubmit ({ taskName, newTime }) {
+    const {
+      clickedTaskId,
+      closeModal,
+      confirmEditTask,
+      initialValues,
+      selectedProject,
+      selectedProjectId,
+      selectedTask,
+      taskNames,
+      updateTask,
+    } = this.props
+    const newTimeString = timeStringToSeconds(newTime);
+    
+    if (taskName !== initialValues.taskName && isDuplicate(taskName, taskNames)){
+      throw new SubmissionError({
+        taskName: `A task with the name ${taskName} already exits`
+      });      
     }
+    
+    if (!hasAnyValue(taskName)){
+      throw new SubmissionError({
+        taskName: `This field cannot be left blank`
+      });      
+    }
+    
+    if (isNaN(newTimeString)) {
+      throw new SubmissionError({
+        newTime: 'Please enter a numberic time'
+      });
+    }
+    
+    const toUpdate = {
+      taskName,
+      recordedTime: newTimeString
+    } 
+    
+    if (secondsToHMMSS(newTimeString)  !== initialValues.newTime)  {
+      confirmEditTask({
+        taskName,
+        payload:  [selectedProject, selectedTask, toUpdate],
+        oldTime: initialValues.newTime,
+        newTime: secondsToHMMSS(newTimeString) 
+      })
+    } else if (taskName !== initialValues.taskName) {
+      updateTask(selectedProject, selectedTask, toUpdate);
+      closeModal();
+    } else {
+      closeModal();
+    }
+  }
     
   render() {
     const { closeModal, containerClass, handleSubmit, initialValues } = this.props;
@@ -89,7 +74,8 @@ const renderField = ({
               <label>Task Name</label>
               <Field
                 name="taskName"
-                component={renderField}
+                component={Input}
+                shouldAutoFocus
                 type="text"
               />
             </div>
@@ -97,7 +83,7 @@ const renderField = ({
               <label>Logged Time: {initialValues.recordedTime}</label>
               <Field
                 name="newTime"
-                component={renderField}
+                component={Input}
                 type="text"
               />
             </div>

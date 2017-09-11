@@ -41,6 +41,7 @@ export default class TimeTracker extends Component {
     const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
     
     if (isDevOnboardingActive) {
+      console.log('asdf')
       !isOnboardingActive && toggleOnboardMode();
       return null;
     }  

@@ -25,7 +25,9 @@ function AddTasksModal(props) {
 const mapStateToProps = state => {
   const { projects, selectedProjectId } = state;
   
-  const selectedProjectName = projects.items.find(project => project.shortId === selectedProjectId).projectName;
+  const selectedProjectName = projects.items.length > 0 
+  ? projects.items.find(project => project.shortId === selectedProjectId).projectName
+  : null;
   
   return {
     selectedProjectName  

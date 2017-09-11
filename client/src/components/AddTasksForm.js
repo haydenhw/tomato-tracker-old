@@ -1,3 +1,5 @@
+// refactor to presentaional Component
+// assign button classes from container
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
@@ -7,68 +9,21 @@ import callOnTargetUpdate from '../hocs/callOnTargetUpdate';
 import Input from './Input';
 import List from './List';
 
-// let renderField = (placeholder, inputRef) => ({
-// let renderField = ({
-//   inputRef,
-//   input,
-//   type,
-//   meta: { error, pristine, touched }
-// }) => (
-//   <div className="input-wrapper">
-//     {/* <label/> */}
-//     <div>
-//       <input
-//         autoFocus={true}
-//         {...input}
-//         className="form-input"
-//         ref={inputRef}
-//         placeholder="Task Name"
-//         type={type}
-//        />
-//        <div className={(touched && error) && 'form-error' }>
-//          'press ENTER to submit task'
-//          {(touched && error ) ? error : ''} 
-//        </div>
-//       </div>
-//     </div>
-//   );
-
 let AddTasksForm = class extends Component {
-  componentWillMount() {
-    const { shouldDisableFocusOnMount } = this.props;
-    const getRef = !shouldDisableFocusOnMount 
-      ?  el => this.inputRef = el 
-      : () => {};
-      
-    // this.renderField = renderField('Add Task', getRef);
-  }
-  
-  componentDidMount() {
-    const { shouldDisableFocusOnMount } = this.props;
-    
-    if (!shouldDisableFocusOnMount) {
-      // this.inputRef.focus();
-    }
-  }
-  
   render() {
     const {
       childContainerClass,
       fieldAnimationName,
-      formAnimationName,
       formTasks,
       handleFormSubmit,
       handleSubmit,
       handleTaskSubmit,
-      inputRef,
-      isModalActive,
       isOnboardingActive,
       parentContainerClass,
       renderFormTask,
       shouldRenderSubmitButton,
       shouldAutoFocus,
       submitButtonText, 
-      tasks,
       title,
       titleAnimationName,
       titleName
