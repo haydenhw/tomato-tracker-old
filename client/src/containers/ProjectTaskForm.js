@@ -35,8 +35,8 @@ export default class ProjectTaskForm extends Component {
             showTasksForSelectedProject={showTasksForSelectedProject}
           />  
           <div className="form-page-button-group">
-            <button className="form-page-button outline-button" onClick={handleSubmit}>Submit</button>
             <button className="form-page-button outline-button" onClick={handleCancel}>Cancel</button>
+            <button className="form-page-button outline-button" onClick={handleSubmit}>Submit</button>
           </div>
         </div>
       </div>  
