@@ -1,4 +1,4 @@
-const shouldDeleteDb = false;
+const shouldDeleteDb = true;
 
 const express = require('express');
 const bodyParser = require('body-parser');
