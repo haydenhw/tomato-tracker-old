@@ -4,6 +4,66 @@
     {
       "icon": {
         "paths": [
+          "M733.636 920.803h-648.277c-46.565 0-84.662-38.098-84.662-84.657v-648.282c0-46.57 38.098-84.667 84.662-84.667h648.282c46.565 0 84.662 38.098 84.662 84.662v648.282c0 46.565-38.098 84.662-84.667 84.662z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 819,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "stop-rounded"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 12,
+        "id": 0,
+        "name": "stop-rounded",
+        "prevSize": 32,
+        "code": 59654
+      },
+      "setIdx": 0,
+      "setId": 5,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M205.929 207.258c-32.768-18.842-73.728 4.915-73.728 42.598v523.469c0 38.502 40.96 62.259 73.728 42.598l448.102-261.325c32.768-18.842 32.768-66.355 0-86.016l-448.102-261.325z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 819,
+        "grid": 0,
+        "tags": [
+          "play-rounded"
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 11,
+        "id": 0,
+        "name": "play-rounded",
+        "prevSize": 32,
+        "code": 59653
+      },
+      "setIdx": 1,
+      "setId": 4,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
           "M810 170v86h-596v-86h148l44-42h212l44 42h148zM256 810v-512h512v512c0 46-40 86-86 86h-340c-46 0-86-40-86-86z"
         ],
         "attrs": [
@@ -26,7 +86,7 @@
         "prevSize": 24,
         "code": 59652
       },
-      "setIdx": 0,
+      "setIdx": 2,
       "setId": 3,
       "iconIdx": 0
     },
@@ -55,7 +115,7 @@
         "code": 59648,
         "name": "edit"
       },
-      "setIdx": 0,
+      "setIdx": 2,
       "setId": 3,
       "iconIdx": 1
     },
@@ -84,7 +144,7 @@
         "code": 59651,
         "name": "arrow-right"
       },
-      "setIdx": 1,
+      "setIdx": 3,
       "setId": 2,
       "iconIdx": 0
     },
@@ -109,9 +169,9 @@
         "code": 59650,
         "name": "dots"
       },
-      "setIdx": 2,
+      "setIdx": 4,
       "setId": 1,
-      "iconIdx": 3
+      "iconIdx": 2
     },
     {
       "icon": {
@@ -134,9 +194,9 @@
         "code": 59649,
         "name": "close"
       },
-      "setIdx": 2,
+      "setIdx": 4,
       "setId": 1,
-      "iconIdx": 4
+      "iconIdx": 3
     },
     {
       "icon": {
@@ -160,9 +220,9 @@
         "prevSize": 32,
         "code": 59932
       },
-      "setIdx": 2,
+      "setIdx": 4,
       "setId": 1,
-      "iconIdx": 1
+      "iconIdx": 0
     },
     {
       "icon": {
@@ -187,9 +247,9 @@
         "prevSize": 32,
         "code": 59934
       },
-      "setIdx": 2,
+      "setIdx": 4,
       "setId": 1,
-      "iconIdx": 2
+      "iconIdx": 1
     }
   ],
   "height": 1024,
@@ -226,7 +286,7 @@
     "showCodes": true,
     "gridSize": 16,
     "quickUsageToken": {
-      "UntitledProject2": "ZmE3N2JmODgzNjc5MGMxNWU3Mzc2OWIxMjNkNDIxNGMjMSMxNTA0Mjk1ODM0IyMj"
+      "PomodoroTimeTracker": "YWM2MTU4ZGU0NjBkOTM5YTU0ZDhlNjNmYWY2NGYzOWQjMSMxNTA1NDQyODU5IyMj"
     }
   }
 }

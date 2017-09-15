@@ -37,20 +37,25 @@ export default function TimeDisplay(props) {
       />}
       <div>{title}</div>
       <div style={devStyle || null} className="timer-content">
-        <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} />
-        <div className="timer-control">
+        {/* <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} /> */}
+        <EditInlineText className={`edit-time ${isTimerActive ? "fade-in-fast" : "hide"}`} handleChange={setStartTime} text={secondsToMSS(displayTime)} />
+        {/* <div className="timer-control"> */}
+        <div className={`timer-control ${isTimerActive ? "" : "timer-control-large"}`}>
           <div 
-            className={`${isTimerControlActive ? "active": "" } flip-button-container`}  
+            className={`${isTimerControlActive ? "active": "timer-control-large" } `}  
             onClick={isTimerControlActive && handleButtonClick}
             >
-            <div className={flippedClass}>
-              <div className="side">
+                <div className={`${isTimerActive? "icon-stop-rounded" : "icon-play-rounded"}`}></div>
+                {/* <FontAwesome className="fa-play" name="fa-play" /> */}
+                {/* <FontAwesome className={`${isTimerActive? "fa-stop" : "play"}`} name="fa-play" /> */}
+            {/* <div className={flippedClass}>
+              <div className="">
                 <FontAwesome className="fa-play" name="fa-play" />
               </div>
-              <div className="side back">
+              <div className="">
                 <FontAwesome className="fa-stop" name="fa-stop" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

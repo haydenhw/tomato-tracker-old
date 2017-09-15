@@ -5,15 +5,21 @@
     
   .timer-content {
     font-size: 29px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -62%);
+    @include centerVertHoriz();
+    
+    .timer-control {
+      color: $timer-color;
+      // color: #5C6BC0;
+      // color: #7986CB;
+      .icon-play-rounded {
+        font-size: 128px;
+        position: relative;
+        left: 5%;
+      }
+    }
+    
   }
 
-  .timer-control {
-    font-size: 1em;
-  }
   
   .edit-time, 
   .editing {
