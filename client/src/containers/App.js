@@ -23,7 +23,7 @@ class App extends Component {
     const pathName = location.pathname;
     
     if((pathName === '/' || pathName === '/projects')) {
-      document.body.style.backgroundColor = "#f0f4f7";
+      // document.body.style.backgroundColor = "#f0f4f7";
     } else {
       document.body.style.backgroundColor = "white";
     }
