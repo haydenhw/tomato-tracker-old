@@ -1,5 +1,12 @@
 // colors
 $primary-color: #3949ab;
+$primary-color: teal;
+
+$secondary-color: $primary-color;
+
+$timer-color: #3949ab;
+$timer-color: #009cb8;
+$timer-color: $primary-color;
 
 $aqua: #1dd7b9;
 $blue-grey: #f0f4f7;
@@ -19,7 +26,6 @@ $medium-dark-grey: #d9d9d9;
 $dark-grey: #808080;
 
 
-$timer-color: #3949ab;
 
 // typography 
 $main-font: 'Roboto', sans-serif; 

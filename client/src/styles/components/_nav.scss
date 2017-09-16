@@ -2,6 +2,7 @@
 
 nav {
   background-color: $primary-color;
+  // background-color: white;
   width: 100%;
   color: white;
   font-weight: normal;
@@ -25,6 +26,7 @@ nav {
     vertical-align: middle;
     width: 35px;
     bottom: 7px;
+    display: none;
   }
 }
 
@@ -55,4 +57,5 @@ nav a:hover {
 
 nav a.active-link {
   background-color: #5C6BC0;
+  background-color: $secondary-color;
 }

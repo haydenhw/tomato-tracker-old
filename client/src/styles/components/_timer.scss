@@ -2,9 +2,11 @@
   position: relative;
   width: 225px;
   margin: 0 auto;
-    
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 100;
+   
   .timer-content {
-    font-size: 29px;
+    font-size: 33px;
     @include centerVertHoriz();
     
     .timer-control {
