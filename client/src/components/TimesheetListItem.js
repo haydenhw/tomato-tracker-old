@@ -26,7 +26,8 @@ export default function TimesheetListItem(props) {
       handleClick={handleItemClick}
     >
       <TimesheetColumn colNumber="1">
-        <div className="list-item-button" style={{ "backgroundColor": letterIconColor ,  "borderColor": letterIconColor }}>
+        {/* <div className="list-item-button" style={{ "backgroundColor": letterIconColor ,  "borderColor": letterIconColor }}> */}
+        <div className="list-item-button">
            <span className="list-item-letter-icon"> {title[0].toUpperCase()}</span>
         </div>
         {/* <FontAwesome className="list-item-icon list-item-task-icon" name='check-circle'></FontAwesome>   */}
