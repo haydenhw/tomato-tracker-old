@@ -40,9 +40,9 @@ export default function TimeDisplay(props) {
         {/* <EditInlineText className="edit-time" handleChange={setStartTime} text={secondsToMSS(displayTime)} /> */}
         <EditInlineText className={`edit-time ${isTimerActive ? "fade-in-fast" : "hide"}`} handleChange={setStartTime} text={secondsToMSS(displayTime)} />
         {/* <div className="timer-control"> */}
-        <div className={`timer-control ${isTimerActive ? "" : "timer-control-large"}`}>
+        {/* <div className={`timer-control ${isTimerActive ? "" : "timer-control-large"}`}> */}
           <div 
-            className={`${isTimerControlActive ? "active": "timer-control-large" } `}  
+            className={`timer-control ${isTimerControlActive ? "": "disabled"} `}  
             onClick={isTimerControlActive && handleButtonClick}
             >
                 <div className={`${isTimerActive? "icon-stop-rounded" : "icon-play-rounded"}`}></div>
@@ -57,7 +57,7 @@ export default function TimeDisplay(props) {
               </div>
             </div> */}
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

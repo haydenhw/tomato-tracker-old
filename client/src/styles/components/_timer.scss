@@ -12,16 +12,19 @@
     
     .timer-control {
       color: $timer-color;
+      cursor: pointer; 
       // color: #5C6BC0;
       // color: #7986CB;
+      // opacity: 0.8;
+      &.disabled {
+        // opacity: 0.5;
+      }
+      
       .icon-play-rounded {
         // border: 1px solid #000;
         font-size: 98px;
         position: relative;
         left: 7%;
-        &:before {
-          // @include centerVertHoriz();
-        }
       }
     }
     
