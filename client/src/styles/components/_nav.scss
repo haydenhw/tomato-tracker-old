@@ -38,12 +38,16 @@ nav {
   
   @include respond-to(handhelds) { 
     margin-left: 5%;
-    margin-right: 35px;
-    color: tomato;
+    margin-right: 25px;
   }
   
-  @include respond-to(small-screens) { margin-left: 10%; color: blue;}
-  @include respond-to(medium-screens) { margin-left: 10%; color: red;}
+  @include respond-to(small-screens) {
+     margin-left: 10%;
+  }
+   
+  @include respond-to(medium-screens) { 
+    margin-left: 10%;
+  }
 }
 
 nav a {
