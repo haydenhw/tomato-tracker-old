@@ -28,7 +28,7 @@ export default class TimeTracker extends Component {
       activeTaskId: null,
       activeContextMenuParentId: null, 
       clickedTaskId: null,
-      selectedTaskId: tasks[0].shortId, 
+      selectedTaskId: null, 
       tasks: tasks,
     }
   }
@@ -41,7 +41,6 @@ export default class TimeTracker extends Component {
     const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
     
     if (isDevOnboardingActive) {
-      console.log('asdf')
       !isOnboardingActive && toggleOnboardMode();
       return null;
     }  
@@ -196,7 +195,6 @@ export default class TimeTracker extends Component {
     }));
     
     const selectedTask = tasks.find(task => task.shortId === selectedTaskId) || tasks[0];
-    console.log(selectedTask)
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     const headingClass = selectedTaskName ? "" : "grey"; 

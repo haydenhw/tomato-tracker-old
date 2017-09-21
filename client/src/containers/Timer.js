@@ -110,7 +110,7 @@ class Timer extends Component {
       <div>
         <TimeDisplay
           isTimerActive={isTimerActive}
-          isTimerControlActive={this.doesSelectedTaskExist()}
+          isTimerControlActive={true}
           setStartTime={this.handleSetStartTime(selectedTaskId)}
           startCount={startTime}
           time={remainingTime}

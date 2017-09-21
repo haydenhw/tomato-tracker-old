@@ -78,6 +78,10 @@ export function resetTimer() {
 export const INCREMENT_TASK_TIME = "INCREMENT_TASK_TIME";
 export function incrementTaskTime(project, task) {
   return (dispatch) => {
+    if (!task) {
+      return null;
+    }
+    
     const updatedTask = Object.assign({}, task, { recordedTime: task.recordedTime + 1 })
     
     dispatch({
