@@ -41,7 +41,7 @@ export default class TimeTracker extends Component {
     const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
     
     if (isDevOnboardingActive) {
-      !isOnboardingActive && toggleOnboardMode();
+      // !isOnboardingActive && toggleOnboardMode();
       return null;
     }  
     
@@ -50,7 +50,7 @@ export default class TimeTracker extends Component {
       ((projects.length === 0) && isOnboardingActive)
     ) {
       sessionStorage.isFirstSessionVisit = false;
-      toggleOnboardMode();
+      // toggleOnboardMode();
       return null;
     }
     
