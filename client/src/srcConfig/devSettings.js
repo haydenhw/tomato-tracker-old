@@ -1,4 +1,4 @@
-const productionMode = true;
+const productionMode = false;
 export const isOnboardingActive = productionMode ? false : false;
 export const modalType = productionMode ? "WELCOME" : "ADD_PROJECT";
 const renderModal = false; 
