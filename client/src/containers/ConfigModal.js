@@ -26,7 +26,6 @@ class ConfigModal extends Component {
     
     return (
       <div>
-        At the moment this modal is for personal use only. I'm not planning on using it in my portfolio version of this app.
         <ConfigForm handleFormSubmit={this.handleUpdateConfig.bind(this)} />  
       </div>
     );

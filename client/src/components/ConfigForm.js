@@ -31,17 +31,18 @@ let ConfigForm = function ConfigForm(props) {
   return (
         <form onSubmit={handleSubmit}>
           {title && 
-            <h2 className="form-title bounceInDown">
+            <h2 className="form-title">
               {title}  
             </h2>
           }
-          <div className="bounceInDown-second">
+          <div className="">
+            <span>Alarm sound: </span>
             <Field component="select" name="alarmSound">
               <option value="sound/Old-clock-ringing-short.mp3">ringer</option>
               <option value="sound/endSound.mp3">electronic</option>
             </Field> 
           </div>
-          <button className="fade\-in\-medium\-delayoutline-button" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+          <button style={{'marginTop': '10px' }} className="fade\-in\-medium\-delayoutline-button" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
         </form>
   );
 }

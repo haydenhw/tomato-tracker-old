@@ -28,7 +28,7 @@ export default class TimeTracker extends Component {
       activeTaskId: null,
       activeContextMenuParentId: null, 
       clickedTaskId: null,
-      selectedTaskId: null, 
+      selectedTaskId: tasks[0].shortId, 
       tasks: tasks,
     }
   }
@@ -195,7 +195,8 @@ export default class TimeTracker extends Component {
       id: task.shortId
     }));
     
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId) || tasks[0];
+    console.log(selectedTask)
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     const headingClass = selectedTaskName ? "" : "grey"; 
@@ -210,26 +211,7 @@ export default class TimeTracker extends Component {
         </Select>
       );
     }
-  
-  // renderProjectSelect() {
-  //   const { projects, selectedProject, setSelectedProject } = this.props;
-  //   
-  //   const simplifiedProjects = projects.map(project => ({
-  //     name: project.projectName,
-  //     id: project.shortId
-  //   }));
-  //   
-  //   return (
-  //     <div className="project-select-wrapper">
-  //       <span>Timesheet for project <span>{selectedProject.projectName}</span></span>
-  //       <ProjectHeading 
-  //         text={selectedProject ? selectedProject.projectName : "No projects added yet"}
-  //         iconClass={"icon icon-dots-menu"} 
-  //       />
-  //     </div>
-  //   );
-  // }
-  
+
   render() {
     const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
