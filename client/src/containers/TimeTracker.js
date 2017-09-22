@@ -40,24 +40,24 @@ export default class TimeTracker extends Component {
   componentWillMount() {
     const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
     
-    if (isDevOnboardingActive) {
-      // !isOnboardingActive && toggleOnboardMode();
-      return null;
-    }  
+    // if (isDevOnboardingActive) {
+    //   // !isOnboardingActive && toggleOnboardMode();
+    //   return null;
+    // }  
+    // 
+    // if (
+    //   (sessionStorage.isFirstSessionVisit === undefined) ||
+    //   ((projects.length === 0) && isOnboardingActive)
+    // ) {
+    //   sessionStorage.isFirstSessionVisit = false;
+    //   // toggleOnboardMode();
+    //   return null;
+    // }
     
-    if (
-      (sessionStorage.isFirstSessionVisit === undefined) ||
-      ((projects.length === 0) && isOnboardingActive)
-    ) {
-      sessionStorage.isFirstSessionVisit = false;
-      // toggleOnboardMode();
-      return null;
-    }
-    
-    if ((projects.length === 0) && !isOnboardingActive) {
-      hashHistory.push('/projects')
-      return null;
-    }
+    // if ((projects.length === 0) && !isOnboardingActive) {
+    //   // hashHistory.push('/projects')
+    //   return null;
+    // }
     
     if (
       localStorage.selectedProjectId && 
@@ -65,7 +65,7 @@ export default class TimeTracker extends Component {
     ) {
       setSelectedProject(localStorage.selectedProjectId);
     } else {
-      setSelectedProject(projects[projects.length-1].shortId);
+      projects.length > 0 && setSelectedProject(projects[projects.length-1].shortId);
     }
     
     this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });

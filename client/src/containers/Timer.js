@@ -73,10 +73,14 @@ class Timer extends Component {
     } = this.props;
     
     const { intervalId } = this.props; 
-    const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
     
-    incrementTaskTime(selectedProject, activeTask);
     decrementTimer();
+    
+    if (selectedProject) {
+      const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
+      
+      incrementTaskTime(selectedProject, activeTask);
+    } 
     
     if (remainingTime < 1) {
       const audio = new Audio(alarmSoundSrc);

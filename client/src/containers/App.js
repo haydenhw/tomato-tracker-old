@@ -18,16 +18,16 @@ class App extends Component {
     }
   }
   
-  componentWillReceiveProps() {
-    const { location } = this.props;
-    const pathName = location.pathname;
-    
-    if((pathName === '/' || pathName === '/projects')) {
-      // document.body.style.backgroundColor = "#f0f4f7";
-    } else {
-      document.body.style.backgroundColor = "white";
-    }
-  }
+  // componentWillReceiveProps() {
+    // const { location } = this.props;
+    // const pathName = location.pathname;
+    // 
+    // if((pathName === '/' || pathName === '/projects')) {
+    //   // document.body.style.backgroundColor = "#f0f4f7";
+    // } else {
+    //   document.body.style.backgroundColor = "white";
+    // }
+  // }
   
   componentDidMount() {
     const { fetchProjects } = this.props;
@@ -37,11 +37,11 @@ class App extends Component {
     const pathName = location.pathname;
   }
   
-  handleTimerLinkClick() {
-    const {  projects, toggleProjectNagModal } = this.props;
-    
-    projects.length ? routeToTimerPage() : toggleProjectNagModal();
-  }
+  // handleTimerLinkClick() {
+  //   const {  projects, toggleProjectNagModal } = this.props;
+  //   
+  //   projects.length ? routeToTimerPage() : toggleProjectNagModal();
+  // }
   
   render() {
     const { isDesktopNotificationActive, location } = this.props;
@@ -53,7 +53,7 @@ class App extends Component {
       <div>
         <Nav
           activeLink={isProjectRoute ? 'PROJECTS' : 'TIMER'}
-          handleTimerLinkClick={this.handleTimerLinkClick.bind(this)} 
+          handleTimerLinkClick={routeToTimerPage} 
           handleProjectsLinkClck={routeToProjectsPage}
           isProjectRoute={isProjectRoute}
         /> 
