@@ -22,22 +22,22 @@ import TimeTracker from './TimeTracker';
 class TimeTrackerPage extends Component {
   shouldComponentUpdate(nextProps) {
     const { isModalActive, selectedProjectId } = this.props;
-    
+
     if (this.props.selectedProjectId && (nextProps.selectedProjectId !== this.props.selectedProjectId) && isModalActive) {
-      
+
       return false;
-    } 
-    
+    }
+
     return true;
   }
 
   render() {
-    const { 
+    const {
       hasFetched,
       selectedProject,
       selectedTasks,
     } = this.props;
-  
+
     if (!hasFetched) {
       return <div className="loader">Loading...</div>
     }
@@ -56,17 +56,16 @@ const mapStateToProps = state => {
   const { hasFetched, isFetching } = projects;
   const { isModalActive, isModalClosing, isOnboardingActive } = modal;
   const { isTimerActive } = timer;
-  
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedTasks = selectedProject && selectedProject.tasks;
-  
+
   return {
-    hasFetched, 
+    hasFetched,
     isFetching,
     isModalActive,
     isModalClosing,
     isOnboardingActive,
-    isTimerActive, 
+    isTimerActive,
     selectedProject,
     selectedTasks,
     projects: projects.items
@@ -82,7 +81,7 @@ export default connect(mapStateToProps, {
   setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
-  toggleEditTaskForm, 
+  toggleEditTaskForm,
   toggleOnboardMode,
   toggleTimer
 })(TimeTrackerPage);
