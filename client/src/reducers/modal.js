@@ -3,7 +3,7 @@ import * as actions from 'actions/indexActions';
 import { modalType, isOnboardingActive, renderFormModal } from '../srcConfig/devSettings';
 
 const defaultState = {
-  isOnboardingActive, 
+  isOnboardingActive,
   isModalActive: renderFormModal,
   isModalClosing: false,
   modalType: modalType,
@@ -16,7 +16,7 @@ export const modal = (state = defaultState, action) => {
       return {
         ...state,
         isModalActive: !state.isModalActive,
-        isModalClosing: false, 
+        isModalClosing: false,
         isOnboardingActive: false
       };
     case actions.TOGGLE_ONBOARD_MODE:
@@ -48,7 +48,7 @@ export const modal = (state = defaultState, action) => {
     case actions.TOGGLE_CONFIG:
       return {
         ...state,
-        isModalActive: true,
+        isModalActive: !state.isModalActive,
         modalType: 'CONFIG'
       };
     case actions.CONFIRM_EDIT_TASK:
@@ -74,12 +74,12 @@ export const modal = (state = defaultState, action) => {
         shouldRenderModal: true,
         modalType: 'CONFIRM',
         modalProps: action.modalProps,
-      }    
+      }
     case actions.ADD_MODAL_CLOSING_CLASS:
       return {
         ...state,
         isModalClosing: true
-      }    
+      }
     default:
       return state;
   }
