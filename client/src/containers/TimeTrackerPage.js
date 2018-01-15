@@ -44,7 +44,7 @@ class TimeTrackerPage extends Component {
     return (
         <TimeTracker
           selectedProject={selectedProject || null}
-          tasks={selectedTasks.reverse() || []}
+          tasks={selectedTasks.slice().reverse() || []}
           {...this.props}
         />
     );
