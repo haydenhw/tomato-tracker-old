@@ -22,15 +22,11 @@ export const handleKeyDown = (evt) => {
   return (dispatch, getState) => {
 
     evt.preventDefault();
-    // evt.stopPropagation();
     const evtobj = window.event? event : evt;
     const keycode = evtobj.keyCode;
 
-    // const key = evtobj.ctrlKey && keycode === 88
-    // ? 'CTRL+X'
-    // : keymap[keycode];
     const key = keymap[keycode];
-    console.log(keycode)
+
     switch(key) {
       case 'G':
         if (evtobj.ctrlKey) {
