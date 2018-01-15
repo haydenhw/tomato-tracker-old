@@ -12,6 +12,7 @@ import {
   setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
+  toggleSelected,
   toggleEditTaskForm,
   toggleOnboardMode,
   toggleTimer
@@ -44,7 +45,7 @@ class TimeTrackerPage extends Component {
     return (
         <TimeTracker
           selectedProject={selectedProject || null}
-          tasks={selectedTasks.slice().reverse() || []}
+          tasks={selectedTasks || []}
           {...this.props}
         />
     );
@@ -68,6 +69,7 @@ const mapStateToProps = state => {
     isOnboardingActive,
     isTimerActive,
     selectedProject,
+    selectedProjectId,
     selectedTasks,
     projects: projects.items
   }
@@ -84,7 +86,8 @@ export default connect(mapStateToProps, {
   toggleConfig,
   toggleEditTaskForm,
   toggleOnboardMode,
-  toggleTimer
+  toggleSelected,
+  toggleTimer,
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

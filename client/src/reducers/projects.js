@@ -1,4 +1,5 @@
 import  * as actions from '../actions/indexActions'
+import { shiftElementsUp, shiftElementsDown } from '../helpers/customImmutable';
 
 function tasks(state, action) {
   switch(action.type) {
@@ -35,6 +36,28 @@ function tasks(state, action) {
 
           return Object.assign({}, task, action.toUpdate);
         });
+        return Object.assign({}, project, { tasks: newTasks });
+      });
+    case actions.TOGGLE_SELECTED:
+      return state.mapAndFindById('shortId', action.projectId, (project) => {
+        const newTasks = project.tasks.mapAndFindById('shortId', action.taskId, (task) => {
+          return Object.assign({}, task, { isSelected: !task.isSelected });
+        });
+        return Object.assign({}, project, { tasks: newTasks });
+      });
+    case actions.MOVE_TASKS:
+      const { activeTasks, key, selectedProjectId, startIndex, endIndex } = action;
+      let newTasks;
+
+      return state.mapAndFindById('shortId', selectedProjectId, (project) => {
+        if (key === 'ARROW_DOWN') {
+          newTasks =  shiftElementsUp(activeTasks, startIndex, endIndex);
+        }
+
+        if (key === 'ARROW_UP') {
+          newTasks  = shiftElementsDown(activeTasks, startIndex, endIndex);
+        }
+
         return Object.assign({}, project, { tasks: newTasks });
       });
     default:
@@ -102,11 +125,13 @@ export function projects(state=defaultState, action) {
         ...state,
         queue: action.projectName
       }
-    case actions.UPDATE_TASKS:
-    case actions.POST_TASK_SUCCESS:
-    case actions.EDIT_TASK_REQUEST:
     case actions.DELETE_TASK_REQUEST:
+    case actions.EDIT_TASK_REQUEST:
     case actions.INCREMENT_TASK_TIME:
+    case actions.MOVE_TASKS:
+    case actions.POST_TASK_SUCCESS:
+    case actions.TOGGLE_SELECTED:
+    case actions.UPDATE_TASKS:
       return {
         ...state,
         items: tasks(state.items, action)

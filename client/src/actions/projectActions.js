@@ -1,6 +1,7 @@
 import shortid from 'shortid';
-
+import { filterConsec, findIndices } from '../helpers/customImmutable';
 import { submit } from 'redux-form';
+
 export const ADD_PROJECT = "ADD_PROJECT";
 export function addProject(projectName) {
   const newProject = {
@@ -8,7 +9,7 @@ export function addProject(projectName) {
     tasks: [],
     shortId: shortid.generate()
   }
-  
+
   return {
     type: "ADD_PROJECT",
     project: newProject
@@ -57,8 +58,8 @@ export function setSelectedProject(projectId) {
     dispatch({
         type: "SET_SELECTED_PROJECT",
         projectId
-    }) 
-    
+    })
+
     localStorage.selectedProjectId = projectId;
   }
 }
@@ -72,7 +73,39 @@ export function deleteTaskRequest(projectId, taskId) {
   }
 }
 
-export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST'; 
+export const MOVE_TASKS = 'MOVE_TASKS';
+export const moveCardsKeyboard = (key) => {
+  return (dispatch, getState) => {
+    const { selectedProjectId, projects } = getState();
+    const activeTasks = projects.items.find(project => project.shortId === selectedProjectId).tasks;
+    let selectedIndices = findIndices(activeTasks, (task) =>  task.isSelected);
+    let startIndex, endIndex;
+
+    if (selectedIndices.length > 1) {
+      selectedIndices = filterConsec(selectedIndices);
+      startIndex = selectedIndices[0];
+      endIndex = selectedIndices[selectedIndices.length - 1];
+    } else {
+      startIndex = endIndex = selectedIndices[0];
+    }
+
+    if (startIndex == undefined) {
+      console.error('move indices undefined')
+      return null;
+    }
+
+    return dispatch({
+      type: 'MOVE_TASKS',
+      activeTasks,
+      key,
+      selectedProjectId,
+      startIndex,
+      endIndex,
+    });
+  }
+}
+
+export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST';
 export function postProjectRequest(project) {
   return {
     type: 'POST_PROJECT_REQUEST',
@@ -80,37 +113,37 @@ export function postProjectRequest(project) {
   }
 }
 
-export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS'; 
+export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
 export function postProjectSuccess(projectId, databaseId) {
   return {
     type: 'POST_PROJECT_SUCCESS',
     projectId,
-    databaseId
+    databaseId,
   }
 }
 
-export const POST_TASK_SUCCESS = 'POST_TASK_SUCCESS'; 
+export const POST_TASK_SUCCESS = 'POST_TASK_SUCCESS';
 export function postTaskSuccess(projectId, taskId, databaseId) {
   return {
     type: 'POST_TASK_SUCCESS',
     projectId,
     taskId,
-    databaseId
+    databaseId,
   }
 }
 
-export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
+export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
 export const fetchProjectsSuccess = (projects) => ({
   type: 'FETCH_PROJECTS_SUCCESS',
-  projects
+  projects,
 });
 
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export function fetchProjects() {
   return (dispatch) => {
-    
+
     dispatch({ type: 'TOGGLE_FETCHING' })
-    
+
     fetch('projects')
     .then((res) => {
       return res.json();
@@ -121,17 +154,41 @@ export function fetchProjects() {
   }
 }
 
+export const TOGGLE_SELECTED = 'TOGGLE_SELECTED';
+export const TOGGLE_SELECTED_MULTIPLE = 'TOGGLE_SELECTED_MULTIPLE';
+export const toggleSelected = (projectId, taskId, shouldToggleMultiple) => {
+  return (dispatch, getState) => {
+    if (shouldToggleMultiple) {
+      // this line needs to be updated
+      const tasks = getState().listOne.tasks;
+      let selectedCardIndices = findIndices(tasks, (task) => task.isSelected);
+      selectedCardIndices = [...selectedCardIndices, taskId].sort((a, b) => a - b);
+
+      const startIndex = selectedCardIndices[0];
+      const endIndex = selectedCardIndices[selectedCardIndices.length - 1];
+
+      return dispatch({
+        type: 'TOGGLE_SELECTED_MULTIPLE',
+        startIndex,
+        endIndex,
+      });
+    }
+
+    return dispatch({ type: 'TOGGLE_SELECTED', projectId, taskId})
+  }
+}
+
 export function postProject(projectName, tasks) {
   return (dispatch) => {
-    
+
     const newProject = {
       projectName,
       shortId: shortid.generate(),
-      tasks: tasks || []
+      tasks: tasks || [],
     }
-    
+
     dispatch(postProjectRequest(newProject));
-    
+
     fetch(
       'projects',
       {
@@ -139,7 +196,7 @@ export function postProject(projectName, tasks) {
           body: JSON.stringify(newProject),
           headers: new Headers({
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         })
       })
       .then((res) => {
@@ -148,18 +205,18 @@ export function postProject(projectName, tasks) {
       .then(data => {
         const projectId = data.shortId;
         const databaseId = data._id;
-        
+
         dispatch(postProjectSuccess(projectId, databaseId));
         localStorage.selectedProjectId = projectId;
       })
-      
+
   }
 }
 
 export function postProjectWithTasks(tasks) {
   return (dispatch, getState) => {
     //dispatch(submit('addProjectForm')).then(() => console.log('hello'))
-    
+
     // const newProjectName = getState().projects.queue;
     // console.log(newProjectName);
     // console.log(tasks)
@@ -169,40 +226,40 @@ export function postProjectWithTasks(tasks) {
 
 const deleteSavedTasks = (dispatch, selectedProject, tasks) => {
     // delete tasks that do not already exist in the database
-    // we assume that taks without the database created id '_id' do not yet exist in the database  
-      
+    // we assume that taks without the database created id '_id' do not yet exist in the database
+
     tasks.filter((task) => task.shouldDelete && task._id)
       .forEach((task) => dispatch(deleteTask(selectedProject, task)));
-      
+
   }
-  
+
 const postUnsavedTasks = (dispatch, selectedProjectDatabaseId, tasks) => {
   // post tasks that do not already exist in the database
-  // we assume that taks without the database created id '_id' do not yet exist in the database  
+  // we assume that taks without the database created id '_id' do not yet exist in the database
   tasks.filter((task) => !task._id)
     .forEach((task) => {
-      selectedProjectDatabaseId 
-        ? dispatch(postTask(selectedProjectDatabaseId, task)) 
+      selectedProjectDatabaseId
+        ? dispatch(postTask(selectedProjectDatabaseId, task))
         : console.error('database id has not yet updated')
   });
-}      
+}
 
 export function updateTasks(selectedProject, tasks) {
   return (dispatch, getState) => {
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
-    
+
     dispatch(updateTasksInState(selectedProject.shortId, tasksToSubmit));
-    
-    postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);    
-    deleteSavedTasks(dispatch, selectedProject, tasks);      
+
+    postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);
+    deleteSavedTasks(dispatch, selectedProject, tasks);
   }
-}  
+}
 
 export function updateProjectName(project, newName) {
   return (dispatch) => {
-    
-    dispatch(updateProjectNameRequest(project.shortId, newName)); 
-      
+
+    dispatch(updateProjectNameRequest(project.shortId, newName));
+
     fetch(
       `projects/${project._id}`,
       {
@@ -234,7 +291,7 @@ export function postTask(projectId, task) {
       .then(data => {
         const taskId = data.shortId;
         const databaseId = data._id;
-        
+
         dispatch(postTaskSuccess(projectId, taskId, databaseId));
       })
       .catch(err => {
@@ -246,7 +303,7 @@ export function postTask(projectId, task) {
 export function updateTask(project, task, toUpdate) {
   return (dispatch) => {
     dispatch(editTask(project.shortId, task.shortId, toUpdate))
-    
+
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
       {
@@ -260,7 +317,7 @@ export function updateTask(project, task, toUpdate) {
       .then((res) => {
         'console log update success'
       })
-    }    
+    }
 }
 
 export const DELETE_PROJECT_REQUEST= 'DELETE_PROJECT_REQUEST';
@@ -270,7 +327,7 @@ export function deleteProject(project) {
       type: 'DELETE_PROJECT_REQUEST',
       project
     })
-    
+
     fetch(
       `projects/${project._id}`,
       {
@@ -288,7 +345,7 @@ export function deleteTask(project, task, shouldUpdateLocalState) {
     if (shouldUpdateLocalState) {
       dispatch(deleteTaskRequest(project.shortId, task.shortId));
     }
-    
+
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
       {
