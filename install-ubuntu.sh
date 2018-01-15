@@ -1,4 +1,4 @@
-#!/bin/sh
+
 {
     echo "This script requires superuser access to install apt packages."
     echo "You will be prompted for your password by sudo."

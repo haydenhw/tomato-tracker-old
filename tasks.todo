@@ -1,19 +1,7 @@
-***Goals for this Week***:
-  ☐ fix airbb lint errors for all files
-  ☐ knockout cleanup/refactor list
-  ☐ cleanup scss files
-  ☐ install and run a css cleanup plugin
-  ☐ center elipses for task edit menu
-  
-
-***Goals for Today***:
-  ☐ add proptypes
-  ☐ make spinner teal
-  ☐ add moz webkit prefixes for animations
-
 **Styles**:
   ☐ copy stuff from Derek's slack thread
   ☐ find icons for PCBf landing
+  
    
 **Forms**:
   ProjectTaskForms:

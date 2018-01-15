@@ -9,7 +9,7 @@ const app = express();
 // const shouldResetDb = false;
 
 const { PORT, DATABASE_URL } = require('./server-files/config');
-const { Projects } = require('./server-files/models');
+const { FeatureRequests, Projects } = require('./server-files/models');
 // const { sampleData } = require('./server-files/sampleData');
 
 const projectRouter = require('./server-files/routes/projectRouter');
@@ -27,10 +27,46 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 projectRouter.use('/:id/tasks', taskRouter);
 app.use('/projects', projectRouter);
+
+app.get('/fr', (req, res) => {
+  FeatureRequests
+    .find()
+    .exec()
+    .then(data => res.json(data))
+});
+
+app.post('/fr', (req, res) => {
+  console.log('post hit')
+  FeatureRequests
+    .create({
+      featureRequests: req.body.featureRequests
+    })
+  .then(testObj => res.status(201).json(testObj))
+  .catch(err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
+});
+
+app.put('/fr/:frId', (req, res) => {
+  console.log('put endpoint hit')
+
+  const toUpdate = {
+    featureRequests: req.body.featureRequests,
+  }
+
+  FeatureRequests
+    .findByIdAndUpdate(req.params.frId, toUpdate)
+    .exec()
+    .then(project => res.status(204).json(toUpdate))
+    .catch(err =>
+      res.status(500).json({message: 'Internal server error'})
+    );
+});
+
 app.use('*', (req, res) => {
     res.status(404).json({ message: 'Not Found' });
 });
-
 // const seedSampleData = () => {
 //     const seedData = sampleData.projects;
 //

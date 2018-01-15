@@ -8,7 +8,7 @@ export function addProject(projectName) {
     tasks: [],
     shortId: shortid.generate()
   }
-
+  
   return {
     type: "ADD_PROJECT",
     project: newProject
@@ -57,10 +57,9 @@ export function setSelectedProject(projectId) {
     dispatch({
         type: "SET_SELECTED_PROJECT",
         projectId
-    })
-
-    localStorage.prevSelectedProjectId = projectId;
-    console.log(localStorage.prevSelectedProjectId)
+    }) 
+    
+    localStorage.selectedProjectId = projectId;
   }
 }
 
@@ -73,7 +72,7 @@ export function deleteTaskRequest(projectId, taskId) {
   }
 }
 
-export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST';
+export const POST_PROJECT_REQUEST = 'POST_PROJECT_REQUEST'; 
 export function postProjectRequest(project) {
   return {
     type: 'POST_PROJECT_REQUEST',
@@ -81,7 +80,7 @@ export function postProjectRequest(project) {
   }
 }
 
-export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
+export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS'; 
 export function postProjectSuccess(projectId, databaseId) {
   return {
     type: 'POST_PROJECT_SUCCESS',
@@ -90,7 +89,7 @@ export function postProjectSuccess(projectId, databaseId) {
   }
 }
 
-export const POST_TASK_SUCCESS = 'POST_TASK_SUCCESS';
+export const POST_TASK_SUCCESS = 'POST_TASK_SUCCESS'; 
 export function postTaskSuccess(projectId, taskId, databaseId) {
   return {
     type: 'POST_TASK_SUCCESS',
@@ -100,7 +99,7 @@ export function postTaskSuccess(projectId, taskId, databaseId) {
   }
 }
 
-export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
+export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({
   type: 'FETCH_PROJECTS_SUCCESS',
   projects
@@ -109,9 +108,9 @@ export const fetchProjectsSuccess = (projects) => ({
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export function fetchProjects() {
   return (dispatch) => {
-
+    
     dispatch({ type: 'TOGGLE_FETCHING' })
-
+    
     fetch('projects')
     .then((res) => {
       return res.json();
@@ -124,15 +123,15 @@ export function fetchProjects() {
 
 export function postProject(projectName, tasks) {
   return (dispatch) => {
-
+    
     const newProject = {
       projectName,
       shortId: shortid.generate(),
       tasks: tasks || []
     }
-
+    
     dispatch(postProjectRequest(newProject));
-
+    
     fetch(
       'projects',
       {
@@ -149,18 +148,18 @@ export function postProject(projectName, tasks) {
       .then(data => {
         const projectId = data.shortId;
         const databaseId = data._id;
-
+        
         dispatch(postProjectSuccess(projectId, databaseId));
         localStorage.selectedProjectId = projectId;
       })
-
+      
   }
 }
 
 export function postProjectWithTasks(tasks) {
   return (dispatch, getState) => {
     //dispatch(submit('addProjectForm')).then(() => console.log('hello'))
-
+    
     // const newProjectName = getState().projects.queue;
     // console.log(newProjectName);
     // console.log(tasks)
@@ -170,44 +169,40 @@ export function postProjectWithTasks(tasks) {
 
 const deleteSavedTasks = (dispatch, selectedProject, tasks) => {
     // delete tasks that do not already exist in the database
-    // we assume that taks without the database created id '_id' do not yet exist in the database
-
+    // we assume that taks without the database created id '_id' do not yet exist in the database  
+      
     tasks.filter((task) => task.shouldDelete && task._id)
       .forEach((task) => dispatch(deleteTask(selectedProject, task)));
-
+      
   }
-
+  
 const postUnsavedTasks = (dispatch, selectedProjectDatabaseId, tasks) => {
   // post tasks that do not already exist in the database
-  // we assume that taks without the database created id '_id' do not yet exist in the database
+  // we assume that taks without the database created id '_id' do not yet exist in the database  
   tasks.filter((task) => !task._id)
     .forEach((task) => {
-      selectedProjectDatabaseId
-        ? dispatch(postTask(selectedProjectDatabaseId, task))
+      selectedProjectDatabaseId 
+        ? dispatch(postTask(selectedProjectDatabaseId, task)) 
         : console.error('database id has not yet updated')
   });
-}
+}      
 
 export function updateTasks(selectedProject, tasks) {
   return (dispatch, getState) => {
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
-
-    if (!selectedProject) {
-      console.error("Trying to create a task for a project that does not exists. Please create a project to add the task to")
-    }
-
+    
     dispatch(updateTasksInState(selectedProject.shortId, tasksToSubmit));
-
-    postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);
-    deleteSavedTasks(dispatch, selectedProject, tasks);
+    
+    postUnsavedTasks(dispatch, selectedProject._id, tasksToSubmit);    
+    deleteSavedTasks(dispatch, selectedProject, tasks);      
   }
-}
+}  
 
 export function updateProjectName(project, newName) {
   return (dispatch) => {
-
-    dispatch(updateProjectNameRequest(project.shortId, newName));
-
+    
+    dispatch(updateProjectNameRequest(project.shortId, newName)); 
+      
     fetch(
       `projects/${project._id}`,
       {
@@ -239,7 +234,7 @@ export function postTask(projectId, task) {
       .then(data => {
         const taskId = data.shortId;
         const databaseId = data._id;
-
+        
         dispatch(postTaskSuccess(projectId, taskId, databaseId));
       })
       .catch(err => {
@@ -251,7 +246,7 @@ export function postTask(projectId, task) {
 export function updateTask(project, task, toUpdate) {
   return (dispatch) => {
     dispatch(editTask(project.shortId, task.shortId, toUpdate))
-
+    
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
       {
@@ -265,7 +260,7 @@ export function updateTask(project, task, toUpdate) {
       .then((res) => {
         'console log update success'
       })
-    }
+    }    
 }
 
 export const DELETE_PROJECT_REQUEST= 'DELETE_PROJECT_REQUEST';
@@ -275,7 +270,7 @@ export function deleteProject(project) {
       type: 'DELETE_PROJECT_REQUEST',
       project
     })
-
+    
     fetch(
       `projects/${project._id}`,
       {
@@ -293,7 +288,7 @@ export function deleteTask(project, task, shouldUpdateLocalState) {
     if (shouldUpdateLocalState) {
       dispatch(deleteTaskRequest(project.shortId, task.shortId));
     }
-
+    
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
       {

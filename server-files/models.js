@@ -17,6 +17,13 @@ const projectSchema = mongoose.Schema({
     tasks: [taskSchema],
 });
 
+const featureRequestSchema = mongoose.Schema({
+    featureRequests: {
+        type: String, required: true,
+    },
+});
+
+const FeatureRequests = mongoose.model('featureRequests', featureRequestSchema);
 const Projects = mongoose.model('Projects', projectSchema);
 
-module.exports = { Projects };
+module.exports = { FeatureRequests, Projects };
