@@ -16,7 +16,7 @@ export const handleKeyDown = (evt) => {
       break;
       case 'G':
         if (evtobj.ctrlKey) {
-          e.preventDefault();
+          evtobj.preventDefault();
           dispatch({
             type: 'TOGGLE_CONFIG',
           });
