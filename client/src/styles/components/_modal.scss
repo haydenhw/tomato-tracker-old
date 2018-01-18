@@ -6,13 +6,13 @@
   left:0;
   transform:scale(0);
   z-index:1;
-  
+
   .modal-background {
     // display:table-cell;
     height: 100%;
     background:rgba(0,0,0,.8);
     text-align:center;
-    
+
     .modal {
       // padding-bottom: 46px;
       background:white;
@@ -20,31 +20,36 @@
       display:inline-block;
       font-family: $modal-font;
       font-weight:300;
+      font-size: 1.3em;
       min-height: 450px;
       min-width: 650px;
       padding: 106px 58px;
       padding-top: 46px;
       position: relative;
-      
+
+      @include respond-to(medium-screens) {
+        max-height: 100vh;
+      }
+
       &.fullscreen-modal  {
         .modal-close {
           // display: none;
-        } 
+        }
       }
-      
+
       .fullscreen-container {
         margin-top: 28vh;
         min-height: 45vh;
         // max-height: 56vh;
       }
-      
+
       .modal-button-bottom-right {
         position: absolute;
         right: 0;
         bottom: 0;
-        margin: 0 80px 23px 0;
-      }      
-      
+        margin: 0 80px 40px 0;
+      }
+
       .modal-close {
         position: absolute;
         top: 13px;
@@ -53,21 +58,21 @@
         float: right;
         font-size: 31px;
         font-weight: bold;
-        
+
         &:hover {
-          cursor: pointer; 
+          cursor: pointer;
         }
       }
-      
+
       .modal-button-right {
         &:hover {
           background-color: #528ff5;
           cursor: pointer;
-        }  
-      }    
+        }
+      }
     }
   }
-  
+
   &.unfold {
     transform:scaleY(.01) scaleX(0);
     animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -77,12 +82,12 @@
           height: 100%;
           width: 100%;
         }
-        
+
         transform:scale(0);
         animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
       }
     }
-    
+
     &.out {
       transform:scale(1);
       animation:unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -93,7 +98,7 @@
       }
     }
   }
-  
+
   &.roadrunner {
     display: table;
     transform:scale(1);
@@ -108,7 +113,7 @@
         animation: roadRunnerIn .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
       }
     }
-    
+
     &.out {
       animation: quickScaleDown 0s .5s linear forwards;
       .modal-background {

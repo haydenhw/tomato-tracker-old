@@ -3,7 +3,7 @@
 }
 
 html, body {
-  // background-color: $blue-grey; 
+  // background-color: $blue-grey;
   color: $faded-black;
   font-family: $main-font;
   font-size: 16px;
@@ -13,11 +13,11 @@ html, body {
 }
 
 .color-body {
-  // background-color: $blue-grey; 
+  // background-color: $blue-grey;
 }
 #root {
   padding-bottom: 40px;
-} 
+}
 
 
 input:focus,
@@ -31,10 +31,11 @@ button:focus {
   border-width: 3px;
   // background-color: red;
 }
-  
+
 label {
   display: block;
-  font-size: 20px;
+  font-size: .9em;
+  font-weight: normal;
   margin-bottom: 10px;
 }
 
@@ -58,32 +59,25 @@ button {
   font-family: 'Roboto Condensed';
 }
 
-label {
-  // font-family: 'Roboto Condensed';
-  font-size: 24px;
-  
-  font-weight: normal;
-}
-
 input::-webkit-input-placeholder {
   font-weight: $placeholder-font-weight;
   font-size: $placeholder-font-size;
   font-family: $form-font;
 }
-  
+
 input::-moz-placeholder { /* Firefox 18- */
   font-weight: $placeholder-font-weight;
   font-size: $placeholder-font-size;
   font-family: $form-font;
 }
-  
+
 input::-moz-placeholder {  /* Firefox 19+ */
   font-weight: $placeholder-font-weight;
   font-size: $placeholder-font-size;
   font-family: $form-font;
 }
-  
-input::-ms-input-placeholder {  
+
+input::-ms-input-placeholder {
   font-weight: $placeholder-font-weight;
   font-size: $placeholder-font-size;
   font-family: $form-font;

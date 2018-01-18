@@ -148,6 +148,14 @@ export default class TimeTracker extends Component {
     this.setState({ activeTaskId: selectedTaskId });
   }
 
+  setActiveAndSelectedTask = (taskId, callback) => {
+
+    this.setState({
+      activeTaskId: taskId,
+      selectedTaskId: taskId,
+    }, callback);
+  }
+
   setActiveContextMenu = (activeContextMenuParentId) => () => {
     this.setState({ activeContextMenuParentId });
   }
@@ -161,7 +169,6 @@ export default class TimeTracker extends Component {
       <TimesheetListItem
         actionIconClass="play"
         key={shortid.generate()}
-        // className="task"
         handleItemClick={this.handleTaskItemClick(shortId)}
         handlePlayClick={this.handlePlayClick(shortId)}
         isActive={(activeTaskId === shortId) && isTimerActive}
@@ -233,6 +240,7 @@ export default class TimeTracker extends Component {
              tasks={tasks}
              selectedTaskId={selectedTaskId}
              setActiveTask={this.setActiveTask.bind(this)}
+             setActiveAndSelectedTask={this.setActiveAndSelectedTask}
            />
           </div>
         </section>

@@ -92,11 +92,44 @@ class Timer extends Component {
     }
   }
 
-  handleSetStartTime = (selectedTaskId) => (newTime) => {
-    const { selectedTaskId, setStartTime } = this.props;
-    const shouldToggleTimer = Boolean(selectedTaskId);
+  handleTimerStart = () => {
+    const { setActiveAndSelectedTask, selectedTaskId, tasks, toggleTimer } = this.props;
+    let selectedTask;
 
-    setStartTime(newTime, shouldToggleTimer);
+    if (tasks.length > 0) {
+      selectedTask = tasks.find(task => task.shortId === selectedTaskId);
+    }
+
+    if (tasks.length > 0 && !selectedTask) {
+      const firstTaskId = tasks[0].shortId;
+
+      return setActiveAndSelectedTask(firstTaskId, toggleTimer);
+    }
+
+    toggleTimer();
+  }
+
+  handlePlayStopClick = () => {
+    const { isTimerActive, toggleTimer } = this.props;
+
+    if (isTimerActive)  {
+      return toggleTimer();
+    }
+
+    this.handleTimerStart();
+  }
+
+  handleSetStartTime = (selectedTaskId) => (newTime) => {
+    const { isTimerActive, setStartTime, toggleTimer } = this.props;
+
+    setStartTime(newTime, false);
+
+    if (isTimerActive)  {
+      return toggleTimer();
+    }
+
+    this.handleTimerStart();
+
   }
 
   render() {
@@ -104,7 +137,6 @@ class Timer extends Component {
       isTimerActive,
       remainingTime,
       startTime,
-      toggleTimer,
       selectedTaskId,
       task,
     } = this.props;
@@ -118,7 +150,7 @@ class Timer extends Component {
           startCount={startTime}
           time={remainingTime}
           title={task}
-          handleButtonClick={toggleTimer}
+          handleButtonClick={this.handlePlayStopClick}
         />
       </div>
     );

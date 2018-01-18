@@ -1,22 +1,21 @@
 // @import 'form';
-// @import '_variables'; 
+// @import '_variables';
 // @import '_circularDeleteButton';
 
 $form-width: 300px;
 $form-margin-left: 30%;
 
 .add-tasks-form-title {
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .form-task-list {
   // border: 1px solid #000;
   margin: 25px auto;
   width: $form-width;
-  font-size: .75em;
+  font-size: .65em;
   font-family: 'Roboto';
-  
-  
+
   .button-wrapper {
     // border: 1px solid #000;
     position: relative;
@@ -25,8 +24,8 @@ $form-margin-left: 30%;
     vertical-align: top;
     text-align: center;
     line-height: 50px;
-    height: 50px;  
-    
+    height: 50px;
+
     .task-restore {
       color: #555;
       height: auto;
@@ -36,13 +35,13 @@ $form-margin-left: 30%;
       margin-bottom: 5px;
       @include centerVertHoriz();
     }
-    
+
     .icon-close {
-      opacity: 0.6; 
+      opacity: 0.6;
       font-size: 16px;
     }
   }
-  
+
   .name-wrapper {
     // border: 1px solid #000;
     height: 50px;
@@ -50,15 +49,15 @@ $form-margin-left: 30%;
     width: 75%;
     text-align: left;
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding-left: 20px;
   }
-  
+
   span {
     position: relative;
     // top: 3px;
-  }  
-  
+  }
+
   button {
     margin: 0;
   }
@@ -80,13 +79,17 @@ $form-margin-left: 30%;
 .normal-modal {
   .form-task-list {
     max-height: 265px;
+
+    @include respond-to(medium-screens) {
+      max-height: 85px;
+    }
   }
 }
 
 .add-tasks-form {
   text-align: left;
-  margin-top: 44px;
-  
+  margin-top: 40px;
+
   .input-wrapper {
     display: inline-block;
     width: 100%;
