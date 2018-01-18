@@ -4,7 +4,7 @@ import { moveCardsKeyboard } from '../actions/projectActions';
 export const handleKeyDown = (evt) => {
   return (dispatch, getState) => {
 
-    const evtobj = window.event? event : evt;
+    const evtobj = window.event ? event : evt;
     const keycode = evtobj.keyCode;
 
     const key = keymap[keycode];

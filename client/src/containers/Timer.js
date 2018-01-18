@@ -24,42 +24,42 @@ class Timer extends Component {
       intervalId: null
     };
   }
-  
+
   componentWillMount() {
     const { intervalId, isTimerActive } = this.props;
-      
+
     if (isTimerActive === false) {
       clearInterval(intervalId)
     }
-    
+
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
       const { selectedTaskId, setActiveTask, setIntervalId } = this.props;
       const intervalId = setInterval(this.timer.bind(this), 1000);
-      
+
       setIntervalId(intervalId);
-      
+
       setActiveTask(selectedTaskId);
     }
-    
+
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && !nextProps.isTimerActive) {
       const { intervalId } = this.props;
-      
+
       clearInterval(intervalId);
     }
   }
-  
+
   doesSelectedTaskExist() {
     const { selectedTaskId, tasks } = this.props;
     const taskIds = tasks.map(task => task.shortId);
-    
-    return taskIds.includes(selectedTaskId); 
+
+    return taskIds.includes(selectedTaskId);
   }
-  
+
   timer () {
-    const { 
+    const {
       alarmSoundSrc,
       decrementTimer,
       handleTimerComplete,
@@ -67,38 +67,38 @@ class Timer extends Component {
       remainingTime,
       resetTimer,
       selectedProject,
-      selectedTaskId, 
+      selectedTaskId,
       setActiveTask,
       toggleTimer
     } = this.props;
-    
-    const { intervalId } = this.props; 
-    
+
+    const { intervalId } = this.props;
+
     decrementTimer();
-    
+
     if (selectedProject) {
       const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
-      
+
       incrementTaskTime(selectedProject, activeTask);
-    } 
-    
+    }
+
     if (remainingTime < 1) {
       const audio = new Audio(alarmSoundSrc);
       audio.play();
-      
+
       clearInterval(intervalId);
       handleTimerComplete();
       setActiveTask(null);
     }
   }
-  
+
   handleSetStartTime = (selectedTaskId) => (newTime) => {
     const { selectedTaskId, setStartTime } = this.props;
     const shouldToggleTimer = Boolean(selectedTaskId);
-    
-    setStartTime(newTime, shouldToggleTimer);  
+
+    setStartTime(newTime, shouldToggleTimer);
   }
-  
+
   render() {
     const {
       isTimerActive,
@@ -106,10 +106,9 @@ class Timer extends Component {
       startTime,
       toggleTimer,
       selectedTaskId,
-      setStartTime,
       task,
     } = this.props;
-    
+
     return (
       <div>
         <TimeDisplay
