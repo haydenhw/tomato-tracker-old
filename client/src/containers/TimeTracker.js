@@ -161,7 +161,7 @@ export default class TimeTracker extends Component {
   }
 
   renderTask (task){
-    const { changeActiveContextMenu, isTimerActive, selectedProject, tasks, toggleTimer } = this.props;
+    const { changeActiveContextMenu, isTimerActive, selectedProject } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
 
@@ -175,7 +175,6 @@ export default class TimeTracker extends Component {
         isSelected={selectedTaskId === shortId}
         title={taskName}
         time={recordedTime}
-
       >
         <ContextMenu
           className='list-item-context-menu'

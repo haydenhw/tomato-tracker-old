@@ -1,40 +1,47 @@
-**Styles**:
+
+
+☐ add default state
+☐ study current project fetch handler
+☐ add a fetch projects success handler
+
+
+**Styles**:s
   ☐ copy stuff from Derek's slack thread
   ☐ find icons for PCBf landing
-  
-   
+
+
 **Forms**:
   ProjectTaskForms:
-    
+
 **Bugs**:
 
 ########################
 **Cleanup/Refactor**:
   ☐ extract presentaional components from containers
   ☐ extract input components to separate file
-  ☐ notice that forms like SingleInputForm form have container classes defined by ternary operators. Change this so that these classes are supplied by props; 
+  ☐ notice that forms like SingleInputForm form have container classes defined by ternary operators. Change this so that these classes are supplied by props;
   ☐ review all scss files. make sure all files are using scss nesting and not just regular css. (especially for _popup-menu);
 
 **Later**:
   ☐ change all icons to icomoon
   ☐ move fonts from html file to sass files
-  
+
 Questions for Derek:
 ☐ should I add a 'press enter key to add task' message on add tasks form?
-    
+
 Questions for Kyle:
   ☐ How do you like the layout i.e that the timer is directly above the timesheet and timesheet is small?
     ☐ any alternatives?
-    ☐ Should modals and forms all have same fonts as main page? 
+    ☐ Should modals and forms all have same fonts as main page?
     ☐ try changing time while timer is runnning. Not ideal right? ask about how to handle this user action.
-    
+
 Kyle Notes:
   ☐ Projects
-    ☐ Make timer visible from projects screen 
-  ☐ negative space 
-    ☐ 600px   
+    ☐ Make timer visible from projects screen
+  ☐ negative space
+    ☐ 600px
     ☐ monochromatic theme
     ☐ switch submit and cancel button
     ☐ number font is good. play with different title fonts
-    
-Hey Derek! Sorry I've been MIA lately. Life got really hectic for awhile shortly after I started PGP. Anyway I've finally made some decent progress with the redesign of my Node capstone. Could I trouble you for some feedback on it?  
+
+Hey Derek! Sorry I've been MIA lately. Life got really hectic for awhile shortly after I started PGP. Anyway I've finally made some decent progress with the redesign of my Node capstone. Could I trouble you for some feedback on it?

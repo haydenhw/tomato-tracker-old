@@ -12,7 +12,7 @@ export const handleKeyDown = (evt) => {
     switch(key) {
       case 'ARROW_UP':
       case 'ARROW_DOWN':
-        dispatch(moveCardsKeyboard(key, evt));
+        // dispatch(moveCardsKeyboard(key, evt));
       break;
       case 'G':
         if (evtobj.ctrlKey) {
