@@ -1,0 +1,8 @@
+actions
+components
+containers
+helpers
+hocs
+reducers
+srcConfig
+styles

@@ -32,7 +32,7 @@ class App extends Component {
   componentDidMount() {
     const { fetchProjects, handleKeyDown } = this.props;
 
-		document.onkeydown = handleKeyDown;
+    document.onkeydown = handleKeyDown;
     fetchProjects();
   }
 
