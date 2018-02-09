@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import { SubmissionError, reduxForm } from 'redux-form';
+import { SubmissionError, reduxForm, formValueSelector } from 'redux-form';
 
 import {
   addTempTask,
@@ -72,14 +72,26 @@ let AddTasksFormContainer = class extends Component {
   handleFormSubmit (){
     const {
       closeModal,
+      formInputValue,
       isOnboardingActive,
       updateTasks,
       selectedProject,
       toggleOnboardMode,
       formTasks: tasks,
     } = this.props;
-
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
+
+
+    const newTasks = (formInputValue && formInputValue.length > 0)
+    ? [{
+      taskName: formInputValue,
+      key: shortid.generate(),
+      recordedTime: 0,
+      shortId: shortid.generate(),
+      shouldDelete: false
+    }, ...tasks]
+    : tasks;
+
 
     if (!tasksToSubmit.length) {
       throw new SubmissionError({
@@ -87,7 +99,7 @@ let AddTasksFormContainer = class extends Component {
       })
     }
 
-    updateTasks(selectedProject, tasks);
+    updateTasks(selectedProject, newTasks);
     isOnboardingActive ? toggleOnboardMode() : closeModal();
   }
 
@@ -155,20 +167,23 @@ const mapStateToProps = (state, ownProps) => {
 
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedProjectDatabaseId = selectedProject && selectedProject._id;
-    // console.log(formTasks)
+
   const tasks = selectedProject && (ownProps.showTasksForSelectedProject !== false)
     ? selectedProject.tasks.map(task => Object.assign(task, { shouldDelete: false }))
     : [];
-    // console.log(selectedProject && ownProps.showTasksForSelectedProject !== false)
-    // console.log(tasks)
+
+  const selector = formValueSelector('addTasks');
+  const formInputValue = selector(state, 'taskName');
+
   return {
-    selectedProject,
-    selectedProjectId,
-    selectedProjectDatabaseId,
+    formInputValue,
+    formTasks,
     isModalActive,
     isOnboardingActive,
+    selectedProject,
+    selectedProjectDatabaseId,
+    selectedProjectId,
     tasks,
-    formTasks
   }
 }
 

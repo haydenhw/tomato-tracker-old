@@ -1,9 +1,6 @@
 **Change active task on single task creation**:
-☐ investigate how task creation works
-  if lastTasks.lenght + 1 === newTasks.length then change selctedTask
-☐ implement changes
-
 ☐ prevent submit if input is not empty
+  ☐ Learn how task vilidation works
 
 ☐ change order in which tasks/ projects are stored in state
 
