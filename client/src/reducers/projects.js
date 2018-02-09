@@ -1,5 +1,5 @@
 import  * as actions from '../actions/indexActions'
-import { shiftElementsUp, shiftElementsDown } from '../helpers/customImmutable';
+import { alphaSortByProp, shiftElementsUp, shiftElementsDown } from '../helpers/customImmutable';
 
 function tasks(state, action) {
   switch(action.type) {
@@ -92,12 +92,12 @@ export function projects(state=defaultState, action) {
         isFetching: false
       }
     case actions.POST_PROJECT_REQUEST:
+      const newProjects = [action.project, ...state.items,];
+      const sortedProjects = alphaSortByProp(newProjects, 'projectName');
+      console.log(sortedProjects);
       return {
         ...state,
-        items: [
-          ...state.items,
-          action.project
-        ]
+        items: sortedProjects,
       }
     case actions.POST_PROJECT_SUCCESS:
       return {

@@ -1,10 +1,8 @@
 **Change active task on single task creation**:
-☐ prevent submit if input is not empty
-  ☐ Learn how task vilidation works
-
 ☐ change order in which tasks/ projects are stored in state
-
 ☐ update sound files
+☐  make add tasks from fullscreen
+
 
 **Styles**:s
   ☐ copy stuff from Derek's slack thread

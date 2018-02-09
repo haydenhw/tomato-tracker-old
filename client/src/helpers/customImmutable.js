@@ -26,6 +26,14 @@ export const keymap = {
   71: 'G',
 }
 
+export function alphaSortByProp(arrayOfObjects, propKey) {
+  return arrayOfObjects.slice().sort(function(a, b) {
+    var textA = a[propKey].toUpperCase();
+    var textB = b[propKey].toUpperCase();
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+}
+
 export function findIndices(arr, callback) {
   const resultArray = [];
 
