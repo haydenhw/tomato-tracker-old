@@ -24,11 +24,11 @@ let AddTasksFormContainer = class extends Component {
   constructor(props) {
     super(props);
     this.deleteButtonRefs = {};
-    // this.getInputRef = this.getInputRef.bind(this);  
+    // this.getInputRef = this.getInputRef.bind(this);
   }
-  
-  // getInputRef(el) { return this.inputRef= el } 
-  
+
+  // getInputRef(el) { return this.inputRef= el }
+
   componentDidMount() {
     const {
       isModalActive,
@@ -37,26 +37,26 @@ let AddTasksFormContainer = class extends Component {
       showTasksForSelectedProject,
       tasks
     } = this.props;
-    
+
     if (showTasksForSelectedProject || (!isOnboardingActive && isModalActive)) {
       setTempTasks(tasks);
     }
   }
-  
+
   handleAddTask({ taskName }) {
     const { addTempTask, formTasks: tasks, reset } = this.props;
     const taskNames = tasks.map(task => task.taskName);
-    
+
     if (!hasAnyValue(taskName)) {
       return null;
     }
-    
+
     if (isDuplicate(taskName, taskNames)) {
       throw new SubmissionError({
         taskName: `A task with the name '${taskName}' already exists`,
       })
-    }    
-    
+    }
+
     const newTask = {
       taskName,
       key: shortid.generate(),
@@ -64,51 +64,50 @@ let AddTasksFormContainer = class extends Component {
       shortId: shortid.generate(),
       shouldDelete: false
     }
-    
+
     addTempTask(newTask);
     reset('taskName');
   }
-  
+
   handleFormSubmit (){
-    const { 
+    const {
       closeModal,
       isOnboardingActive,
-      updateTasks, 
+      updateTasks,
       selectedProject,
-      toggleModal, 
       toggleOnboardMode,
-      formTasks: tasks, 
+      formTasks: tasks,
     } = this.props;
-    
+
     const tasksToSubmit = tasks.filter((task) => !task.shouldDelete);
-    
+
     if (!tasksToSubmit.length) {
       throw new SubmissionError({
         taskName: 'Please add at least one task'
       })
     }
-    
+
     updateTasks(selectedProject, tasks);
-    isOnboardingActive ? toggleOnboardMode() : closeModal(); 
+    isOnboardingActive ? toggleOnboardMode() : closeModal();
   }
-  
+
   handleDeleteButtonClick = (taskId) => () => {
     const { toggleShouldDelete } = this.props;
-    
+
     toggleShouldDelete(taskId);
-  }  
-  
+  }
+
   handleDeleteButtonMouseOver = (taskId) => () => {
     this.deleteButtonRefs[taskId].focus();
   }
-  
+
   handleDeleteButtonMouseOut = (taskId) => () => {
     this.deleteButtonRefs[taskId].blur();
   }
-  
+
 renderFormTask (task){
     const { shouldDelete, taskName, shortId } = task;
-    
+
     return (
       <div className="task-form-list-item" key={shortid.generate()}>
         <div className="button-wrapper" >
@@ -119,7 +118,7 @@ renderFormTask (task){
             onMouseOver={this.handleDeleteButtonMouseOver(shortId)}
             onMouseOut={this.handleDeleteButtonMouseOut(shortId)}
           >
-              { shouldDelete ? "Restore": <div className="icon-close"></div> } 
+              { shouldDelete ? "Restore": <div className="icon-close"></div> }
           </button>
         </div>
         <div className="name-wrapper">
@@ -127,15 +126,15 @@ renderFormTask (task){
         </div>
       </div>
     );
-  }  
-  
+  }
+
   render() {
     const { formAnimationName, isModalActive, isOnboardingActive } = this.props;
     return (
       <RemoteSubmitForm
         onTargetUpdate={this.handleFormSubmit.bind(this)}
         >
-          <AddTasksForm 
+          <AddTasksForm
             {...this.props}
             childContainerClass={isModalActive ? "form-container onboarding-form": "" }
             handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
@@ -147,13 +146,13 @@ renderFormTask (task){
       </RemoteSubmitForm>
     );
   }
-}  
+}
 
 const mapStateToProps = (state, ownProps) => {
   const { customForm, selectedProjectId, modal, projects } = state;
-  const { isModalActive, isOnboardingActive } = modal;  
+  const { isModalActive, isOnboardingActive } = modal;
   const formTasks = customForm.taskForm.tasks;
-  
+
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedProjectDatabaseId = selectedProject && selectedProject._id;
     // console.log(formTasks)
@@ -179,7 +178,7 @@ AddTasksFormContainer = reduxForm({
 })(AddTasksFormContainer);
 
 export default AddTasksFormContainer = connect(mapStateToProps, {
-  addTempTask, 
+  addTempTask,
   closeModal,
   deleteTask,
   focus,

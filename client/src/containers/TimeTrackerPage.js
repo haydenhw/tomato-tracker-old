@@ -12,7 +12,6 @@ import {
   setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
-  toggleSelected,
   toggleEditTaskForm,
   toggleOnboardMode,
   toggleTimer
@@ -57,7 +56,6 @@ const mapStateToProps = state => {
   const { hasFetched, isFetching } = projects;
   const { isModalActive, isModalClosing, isOnboardingActive } = modal;
   const { isTimerActive } = timer;
-
   const selectedProject = projects.items.find(project => project.shortId === selectedProjectId);
   const selectedTasks = selectedProject && selectedProject.tasks;
 
@@ -69,7 +67,6 @@ const mapStateToProps = state => {
     isOnboardingActive,
     isTimerActive,
     selectedProject,
-    selectedProjectId,
     selectedTasks,
     projects: projects.items
   }
@@ -86,8 +83,7 @@ export default connect(mapStateToProps, {
   toggleConfig,
   toggleEditTaskForm,
   toggleOnboardMode,
-  toggleSelected,
-  toggleTimer,
+  toggleTimer
 })(TimeTrackerPage);
 
 TimeTrackerPage.propTypes = {

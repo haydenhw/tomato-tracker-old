@@ -65,17 +65,14 @@ class Timer extends Component {
       handleTimerComplete,
       incrementTaskTime,
       remainingTime,
-      resetTimer,
       selectedProject,
       selectedTaskId,
       setActiveTask,
-      toggleTimer
     } = this.props;
 
     const { intervalId } = this.props;
 
     decrementTimer();
-
     if (selectedProject) {
       const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
 
@@ -92,44 +89,11 @@ class Timer extends Component {
     }
   }
 
-  handleTimerStart = () => {
-    const { setActiveAndSelectedTask, selectedTaskId, tasks, toggleTimer } = this.props;
-    let selectedTask;
-
-    if (tasks.length > 0) {
-      selectedTask = tasks.find(task => task.shortId === selectedTaskId);
-    }
-
-    if (tasks.length > 0 && !selectedTask) {
-      const firstTaskId = tasks[0].shortId;
-
-      return setActiveAndSelectedTask(firstTaskId, toggleTimer);
-    }
-
-    toggleTimer();
-  }
-
-  handlePlayStopClick = () => {
-    const { isTimerActive, toggleTimer } = this.props;
-
-    if (isTimerActive)  {
-      return toggleTimer();
-    }
-
-    this.handleTimerStart();
-  }
-
   handleSetStartTime = (selectedTaskId) => (newTime) => {
-    const { isTimerActive, setStartTime, toggleTimer } = this.props;
+    const { selectedTaskId, setStartTime } = this.props;
+    const shouldToggleTimer = Boolean(selectedTaskId);
 
-    setStartTime(newTime, false);
-
-    if (isTimerActive)  {
-      return toggleTimer();
-    }
-
-    this.handleTimerStart();
-
+    setStartTime(newTime, shouldToggleTimer);
   }
 
   render() {
@@ -137,7 +101,9 @@ class Timer extends Component {
       isTimerActive,
       remainingTime,
       startTime,
+      toggleTimer,
       selectedTaskId,
+      setStartTime,
       task,
     } = this.props;
 
@@ -150,7 +116,7 @@ class Timer extends Component {
           startCount={startTime}
           time={remainingTime}
           title={task}
-          handleButtonClick={this.handlePlayStopClick}
+          handleButtonClick={toggleTimer}
         />
       </div>
     );

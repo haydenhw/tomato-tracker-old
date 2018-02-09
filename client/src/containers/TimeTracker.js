@@ -38,7 +38,7 @@ export default class TimeTracker extends Component {
   }
 
   componentWillMount() {
-    const { isOnboardingActive, projects, selectedProject, setSelectedProject, toggleOnboardMode } = this.props;
+    const { selectedProject } = this.props;
 
     // if (isDevOnboardingActive) {
     //   // !isOnboardingActive && toggleOnboardMode();
@@ -59,24 +59,37 @@ export default class TimeTracker extends Component {
     //   return null;
     // }
 
-    if (
-      localStorage.selectedProjectId &&
-      projects.find(project => project.shortId === localStorage.selectedProjectId)
-    ) {
-      setSelectedProject(localStorage.selectedProjectId);
-    } else {
-      projects.length > 0 && setSelectedProject(projects[projects.length-1].shortId);
-    }
+    // if (
+    //   localStorage.selectedProjectId &&
+    //   projects.find(project => project.shortId === localStorage.selectedProjectId)
+    // ) {
+    //   setSelectedProject(localStorage.selectedProjectId);
+    // } else {
+    // }
 
-    this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
+    const isPrevSelectedTaskParentActive = Boolean(selectedProject.tasks.find(task => task.shortId === localStorage.prevSelectedTaskId));
+
+    if (isPrevSelectedTaskParentActive) {
+      this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { tasks } = this.props;
+    const { isTimerActive, tasks } = this.props;
 
     if ((prevProps.tasks.length !== tasks.length) && (tasks.length === 0)) {
       localStorage.setItem('prevSelectedTaskId', null);
       this.setState({ selectedTaskId: null });
+    }
+
+    if (prevProps.tasks.length + 1 === tasks.length) {
+      const newTaskId = tasks[tasks.length -1].shortId;
+
+      this.handleTaskChange(newTaskId, () => {
+        if (isTimerActive) {
+         this.setActiveTask(newTaskId);
+        }
+     });
     }
   }
 
@@ -109,7 +122,12 @@ export default class TimeTracker extends Component {
       localStorage.setItem("prevSelectedTaskId", taskId);
     }
 
+    if (callback) {
+      callback()
+    }
+
     this.setState({ selectedTaskId: taskId });
+
   }
 
   handlePlayClick = (taskId) => () => {
@@ -138,9 +156,6 @@ export default class TimeTracker extends Component {
   }
 
   handleTaskItemClick = (taskId) => () => {
-    const { toggleSelected, selectedProjectId } = this.props;
-
-    toggleSelected(selectedProjectId, taskId)
     this.handleTaskChange(taskId);
   }
 
@@ -148,20 +163,12 @@ export default class TimeTracker extends Component {
     this.setState({ activeTaskId: selectedTaskId });
   }
 
-  setActiveAndSelectedTask = (taskId, callback) => {
-
-    this.setState({
-      activeTaskId: taskId,
-      selectedTaskId: taskId,
-    }, callback);
-  }
-
   setActiveContextMenu = (activeContextMenuParentId) => () => {
     this.setState({ activeContextMenuParentId });
   }
 
   renderTask (task){
-    const { changeActiveContextMenu, isTimerActive, selectedProject } = this.props;
+    const { changeActiveContextMenu, isTimerActive, selectedProject, tasks, toggleTimer } = this.props;
     const { activeTaskId, selectedTaskId } = this.state;
     const { shortId, taskName, recordedTime } = task;
 
@@ -169,12 +176,14 @@ export default class TimeTracker extends Component {
       <TimesheetListItem
         actionIconClass="play"
         key={shortid.generate()}
+        // className="task"
         handleItemClick={this.handleTaskItemClick(shortId)}
         handlePlayClick={this.handlePlayClick(shortId)}
         isActive={(activeTaskId === shortId) && isTimerActive}
         isSelected={selectedTaskId === shortId}
         title={taskName}
         time={recordedTime}
+
       >
         <ContextMenu
           className='list-item-context-menu'
@@ -203,7 +212,7 @@ export default class TimeTracker extends Component {
       id: task.shortId
     }));
 
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId) || tasks[0];
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId) //|| tasks[0];
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     const headingClass = selectedTaskName ? "" : "grey";
@@ -226,7 +235,6 @@ export default class TimeTracker extends Component {
     const selectedProjectName = selectedProject ?  selectedProject.projectName : '';
 
     return (
-      // <div className="time-tracker">
       <div>
         <section className="timer-section">
           <div className="timer-settings-wrapper" onClick={toggleConfig}>
@@ -239,7 +247,6 @@ export default class TimeTracker extends Component {
              tasks={tasks}
              selectedTaskId={selectedTaskId}
              setActiveTask={this.setActiveTask.bind(this)}
-             setActiveAndSelectedTask={this.setActiveAndSelectedTask}
            />
           </div>
         </section>
@@ -250,7 +257,7 @@ export default class TimeTracker extends Component {
                 handleButtonClick={this.handleAddTasks.bind(this)}
                 titleText={["Tasks for project ", <span className={"grey-title-text"} key={shortid.generate()}>{selectedProject.projectName}</span>]}
                 >
-                  <List className="timesheet-list list" items={tasks.slice().reverse()} renderItem={this.renderTask.bind(this)} />
+                  <List className="timesheet-list list" items={tasks} renderItem={this.renderTask.bind(this)} />
                   <TotalTime time={secondsToHMMSS(totalTime)} />
               </Timesheet>
             </section>
