@@ -94,7 +94,7 @@ export function projects(state=defaultState, action) {
     case actions.POST_PROJECT_REQUEST:
       const newProjects = [action.project, ...state.items,];
       const sortedProjects = alphaSortByProp(newProjects, 'projectName');
-      console.log(sortedProjects);
+
       return {
         ...state,
         items: sortedProjects,
