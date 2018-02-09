@@ -23,24 +23,24 @@ let AddTasksForm = class extends Component {
       renderFormTask,
       shouldRenderSubmitButton,
       shouldAutoFocus,
-      submitButtonText, 
+      submitButtonText,
       title,
       titleAnimationName,
       titleName
     } = this.props;
-    
+
     return (
     <div className={parentContainerClass}>
       <div className={childContainerClass}>
-          {title && 
+          {title &&
             <h2 className={`form-title ${isOnboardingActive ? (titleAnimationName || "") : ""}`}>
-              {title}  
+              {title}
               {titleName && <span className='grey-title-text'>{titleName}</span>}
             </h2>
           }
           <div className={`form-field-wrapper ${isOnboardingActive ? (fieldAnimationName || "") : ""}`}>
             <label htmlFor="taskName">Tasks</label>
-            <List className="form-task-list" items={formTasks} renderItem={renderFormTask} />
+            <List className={` ${isOnboardingActive ? '' : 'normal-modal-form-task-list'} form-task-list`} items={formTasks} renderItem={renderFormTask} />
             <form className="add-tasks-form" autoComplete="off" onSubmit={handleSubmit(handleTaskSubmit)}>
              <Field
                component={Input}
@@ -52,28 +52,28 @@ let AddTasksForm = class extends Component {
             </form>
           </div>
         </div>
-      {!(shouldRenderSubmitButton === false) && 
+      {!(shouldRenderSubmitButton === false) &&
         <button className={`${isOnboardingActive ? 'fade-in-medium-delay' : 'fade-in-short-delay'} outline-button modal-button-bottom-right`} onClick={handleSubmit(handleFormSubmit)}>{submitButtonText || "Finish"}</button>
       }
-    </div>  
+    </div>
     );
   }
-}  
- 
+}
+
 const targetInfo = props => {
   return {
     targetValue: "ADD_TASKS",
-    targetPropKey: "remoteSubmitForm" 
-  } 
+    targetPropKey: "remoteSubmitForm"
+  }
 }
 
 const onTargetUpdate = props => {
   const { handleSubmit, onTargetUpdate } = props;
     handleSubmit(onTargetUpdate)();
 }
- 
+
 export default AddTasksForm = callOnTargetUpdate(targetInfo, onTargetUpdate)(AddTasksForm);
- 
+
 AddTasksForm.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func,

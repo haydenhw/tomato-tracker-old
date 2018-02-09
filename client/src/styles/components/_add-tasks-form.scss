@@ -11,10 +11,21 @@ $form-margin-left: 30%;
 
 .form-task-list {
   // border: 1px solid #000;
+  color: black;
+  height: 100%;
   margin: 25px auto;
   width: $form-width;
   font-size: .65em;
+  // font-size: .65em;
   font-family: 'Roboto';
+
+  &.normal-modal-form-task-list {
+    max-height: 80%;
+
+    @include respond-to(medium-screens) {
+      max-height: 85px;
+    }
+  }
 
   .button-wrapper {
     // border: 1px solid #000;
@@ -76,16 +87,6 @@ $form-margin-left: 30%;
   }
 }
 
-.normal-modal {
-  .form-task-list {
-    max-height: 265px;
-
-    @include respond-to(medium-screens) {
-      max-height: 85px;
-    }
-  }
-}
-
 .add-tasks-form {
   text-align: left;
   margin-top: 40px;
@@ -94,6 +95,10 @@ $form-margin-left: 30%;
     display: inline-block;
     width: 100%;
   }
+}
+
+.add-tasks-form-animation-wrapper {
+  height: 100%;
 }
 
 .form-task-list-item {

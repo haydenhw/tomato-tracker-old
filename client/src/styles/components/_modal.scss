@@ -31,6 +31,10 @@
         max-height: 100vh;
       }
 
+      &.add-task-form-modal {
+        height: 100%;
+      }
+
       &.fullscreen-modal  {
         .modal-close {
           // display: none;

@@ -148,7 +148,7 @@ renderFormTask (task){
         >
           <AddTasksForm
             {...this.props}
-            childContainerClass={isModalActive ? "form-container onboarding-form": "" }
+            childContainerClass={isModalActive ? "form-container add-task-form-container onboarding-form": "" }
             handleFormSubmit={/*handleFormSubmit ? handleFormSubmit(formTasks) :*/ this.handleFormSubmit.bind(this)}
             handleTaskSubmit={this.handleAddTask.bind(this)}
             parentContainerClass={isOnboardingActive ? "fullscreen-container": (formAnimationName || "")}

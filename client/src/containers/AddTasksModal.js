@@ -10,11 +10,11 @@ import AddTasksFormContainer from './AddTasksFormContainer';
 
 function AddTasksModal(props) {
   const { selectedProjectName } = props;
-  
+
   return (
     <AddTasksFormContainer
       fieldAnimationName="bounceInDown-second"
-      formAnimationName="bounceInDown"
+      formAnimationName="bounceInDown add-tasks-form-animation-wrapper"
       titleAnimationName="bounceInDown"
       title={"Add tasks for project "}
       titleName={selectedProjectName}
@@ -24,18 +24,18 @@ function AddTasksModal(props) {
 
 const mapStateToProps = state => {
   const { projects, selectedProjectId } = state;
-  
-  const selectedProjectName = projects.items.length > 0 
+
+  const selectedProjectName = projects.items.length > 0
   ? projects.items.find(project => project.shortId === selectedProjectId).projectName
   : null;
-  
+
   return {
-    selectedProjectName  
-   }  
-} 
+    selectedProjectName
+   }
+}
 
 export default connect(mapStateToProps, { changeModalType })(AddTasksModal);
 
 AddTasksModal.propTypes = {
-  
+
 }

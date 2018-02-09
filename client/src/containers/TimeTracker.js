@@ -267,7 +267,7 @@ export default class TimeTracker extends Component {
                 onActionButtonClick={this.handleAddTasks.bind(this)}
               />
         }
-        <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal'}`}
+        <Modal modalClass={`${isOnboardingActive ? 'fullscreen-modal' : 'normal-modal add-task-form-modal'}`}
          rootModalClass={`${ isOnboardingActive? 'unfold' : 'roadrunner'} ${ isModalClosing ? 'out' : ''}`}
         />
       </div>
