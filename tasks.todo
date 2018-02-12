@@ -1,10 +1,16 @@
 
-☐ Make entry stop from db
-  ✔ set up endpoint @done(2018-02-11 20:29)
-  ✔ test enpoint @done(2018-02-11 20:29)
-  ✔ set up helper function with env key @done(2018-02-11 20:35)
-  ☐ implement ajax call from client
+☐ Log time entries in console
+☐ research Timer component: how might I implement
+  ☐ // Task: "debug time entries" Project: "Mon ..." Start: "11:22pm"
+  ☐ // Task: "debug time entries" Project: "Mon ..." Start: "11:22pm" Stop:"3:24pm" Duration :"90min"
+  ☐ research existing helper functions
+  ☐ copy general helper functions to db
 
+  ☐ write a logger function logStart :: (task, project) => console.log("Task:", task, Moment("now"));
+  ☐ write a logger function logEnd :: (task, project) => console.log("Task:", task, Moment("now"));
+
+☐ If raw time is entered in edit time thing, interpret it as minutes instead of hours
+☐ Investigate: newly added tasks should be selected automatically
 
 **Forms**:
   ProjectTaskForms:

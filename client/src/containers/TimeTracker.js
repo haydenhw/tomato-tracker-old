@@ -83,7 +83,7 @@ export default class TimeTracker extends Component {
     }
 
     if (prevProps.tasks.length + 1 === tasks.length) {
-      const newTaskId = tasks[tasks.length -1].shortId;
+      const newTaskId = tasks[0].shortId;
 
       this.handleTaskChange(newTaskId, () => {
         if (isTimerActive) {
