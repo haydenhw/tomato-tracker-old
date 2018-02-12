@@ -73,7 +73,9 @@ projectRouter.route('/:projectId')
       .findById(req.params.projectId)
       .exec()
       .then((project) => {
-          const taskIndex = project.tasks.findIndex((task) => { return task.taskName === req.body.taskName; });
+        const taskIndex = project.tasks.findIndex((task) => {
+          return task.taskName === req.body.taskName;
+        });
 
           if (taskIndex > -1) {
               const message = 'That task already exists. Please use a different task name.';

@@ -85,9 +85,15 @@ export function projects(state=defaultState, action) {
       isFetching: !state.isFetching,
     }
     case actions.FETCH_PROJECTS_SUCCESS:
+      const projectsWithReversedTasks = action.projects.map(project => {
+        const newTasks = project.tasks.slice().reverse();
+        const newProject = Object.assign({}, project, { tasks: newTasks});
+        return newProject;
+      });
+
       return {
         ...state,
-        items: action.projects,
+        items: projectsWithReversedTasks,
         hasFetched: true,
         isFetching: false
       }
