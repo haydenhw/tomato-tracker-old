@@ -18,11 +18,10 @@ const projectRouter = require('./server-files/routes/projectRouter');
 const taskRouter = require('./server-files/routes/taskRouter');
 
 mongoose.Promise = global.Promise;
-process.env.NODE_ENV = 'production';
-console.log(process.env.NODE_ENV)
-// if (process.env.NODE_ENV === 'production') {
-    // app.use(express.static('client/build'));
-// }
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
