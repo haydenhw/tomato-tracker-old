@@ -10,7 +10,6 @@
   ☐ write a logger function logEnd :: (task, project) => console.log("Task:", task, Moment("now"));
 
 ☐ If raw time is entered in edit time thing, interpret it as minutes instead of hours
-☐ Investigate: newly added tasks should be selected automatically
 
 **Forms**:
   ProjectTaskForms:

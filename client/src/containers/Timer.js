@@ -1,8 +1,14 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
+import moment from 'moment';
 
 import store from '../redux-files/store';
+import { getTimeSinceThen } from '../helpers/time';
+
+// const lastStartTime = localStorage.getItem('lastStartTime');
+// console.log(lastStartTime)
+// console.log(getTimeSinceThen(moment(lastStartTime, 'h:mma')));
 
 import {
   decrementTimer,
@@ -15,6 +21,15 @@ import {
 } from '../actions/indexActions';
 
 import TimeDisplay from '../components/TimeDisplay';
+
+const getTimeStamp = (task, project, time, duration)  => {
+  const beginning = `Task:'${task}'  Project:'${project}' `;
+  const end = !duration && isNaN(duration)
+   ? `Start: ${time} `
+   : `Stop: ${time}  Duration:${duration}`;
+
+  return `${beginning} ${end}`;
+}
 
 class Timer extends Component {
   constructor(props) {
@@ -35,17 +50,37 @@ class Timer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { selectedProject, selectedTaskId, setActiveTask, setIntervalId } = this.props;
+
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
-      const { selectedTaskId, setActiveTask, setIntervalId } = this.props;
       const intervalId = setInterval(this.timer.bind(this), 1000);
 
-      setIntervalId(intervalId);
+      console.log(getTimeStamp(
+        selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
+        selectedProject.projectName,
+        moment().format('h:mma')
+        )
+      );
 
+      localStorage.setItem('lastStartTime', moment().format('h:mm:ssa'));
+
+      setIntervalId(intervalId);
       setActiveTask(selectedTaskId);
     }
 
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && !nextProps.isTimerActive) {
       const { intervalId } = this.props;
+      const lastStartTime = localStorage.getItem('lastStartTime');
+      const now = moment().format('hh:mm:ssa');
+      const timeSinceLastStart = getTimeSinceThen(now, lastStartTime);
+
+      console.log(getTimeStamp(
+        selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
+        selectedProject.projectName,
+        moment().format('h:mma'),
+        timeSinceLastStart,
+        )
+      );
 
       clearInterval(intervalId);
     }

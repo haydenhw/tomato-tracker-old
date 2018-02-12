@@ -63,13 +63,6 @@ export function setStartTime(startTime, shouldToggleTimer) {
   }
 }
 
-// export const START_TIMER = "START_TIMER";
-// export function startTimer() {
-//   return {
-//     type: "START_TIMER",
-//   }
-// }
-
 export const RESET_TIMER = "RESET_TIMER";
 export function resetTimer() {
   return {
