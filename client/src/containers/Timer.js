@@ -6,10 +6,6 @@ import moment from 'moment';
 import store from '../redux-files/store';
 import { getTimeSinceThen } from '../helpers/time';
 
-// const lastStartTime = localStorage.getItem('lastStartTime');
-// console.log(lastStartTime)
-// console.log(getTimeSinceThen(moment(lastStartTime, 'h:mma')));
-
 import {
   decrementTimer,
   handleTimerComplete,
@@ -55,12 +51,14 @@ class Timer extends Component {
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
       const intervalId = setInterval(this.timer.bind(this), 1000);
 
-      console.log(getTimeStamp(
-        selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
-        selectedProject.projectName,
-        moment().format('h:mma')
-        )
-      );
+      if(process.env.NODE_ENV !== 'development') {
+        console.log(getTimeStamp(
+          selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
+          selectedProject.projectName,
+          moment().format('h:mma')
+          )
+        );
+      }
 
       localStorage.setItem('lastStartTime', moment().format('h:mm:ssa'));
 
@@ -74,13 +72,15 @@ class Timer extends Component {
       const now = moment().format('hh:mm:ssa');
       const timeSinceLastStart = getTimeSinceThen(now, lastStartTime);
 
-      console.log(getTimeStamp(
-        selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
-        selectedProject.projectName,
-        moment().format('h:mma'),
-        timeSinceLastStart,
-        )
-      );
+      if(process.env.NODE_ENV !== 'development') {
+        console.log(getTimeStamp(
+          selectedProject.tasks.find(task => task.shortId === selectedTaskId).taskName,
+          selectedProject.projectName,
+          moment().format('h:mma'),
+          timeSinceLastStart,
+          )
+        );
+      }
 
       clearInterval(intervalId);
     }
