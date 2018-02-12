@@ -10,7 +10,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
-     "indent": ["error", 5, {
+     "indent": ["error", 2, {
             "SwitchCase": 1
         }],
         "max-len": "off",

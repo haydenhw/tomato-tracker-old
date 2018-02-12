@@ -3,6 +3,8 @@ const shouldDeleteDb = false;
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 
 const app = express();
 
@@ -10,7 +12,7 @@ const app = express();
 
 const { PORT, DATABASE_URL } = require('./server-files/config');
 const { FeatureRequests, Projects } = require('./server-files/models');
-// const { sampleData } = require('./server-files/sampleData');
+const stopRunningEntry = require('./server-files/stopRunningEntry');
 
 const projectRouter = require('./server-files/routes/projectRouter');
 const taskRouter = require('./server-files/routes/taskRouter');
@@ -64,9 +66,15 @@ app.put('/fr/:frId', (req, res) => {
     );
 });
 
-app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Not Found' });
+app.get(('/stop-entry'), (req, res) => {
+  res.json({ hola: 'mundo' });
+  stopRunningEntry();
 });
+
+app.use('*', (req, res) => {
+  res.status(404).json({ sorry: '404 Not Found' });
+});
+
 // const seedSampleData = () => {
 //     const seedData = sampleData.projects;
 //
@@ -106,7 +114,7 @@ let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(databaseUrl, (err) => {
+        mongoose.connect(databaseUrl, {useMongoClient: true}, (err) => {
             if (err) {
                 return reject(err);
             }

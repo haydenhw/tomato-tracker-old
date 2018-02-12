@@ -1,11 +1,9 @@
-**Change active task on single task creation**:
-☐ update sound files
-☐  make add tasks from fullscreen
 
-
-**Styles**:s
-  ☐ copy stuff from Derek's slack thread
-  ☐ find icons for PCBf landing
+☐ Make entry stop from db
+  ✔ set up endpoint @done(2018-02-11 20:29)
+  ✔ test enpoint @done(2018-02-11 20:29)
+  ✔ set up helper function with env key @done(2018-02-11 20:35)
+  ☐ implement ajax call from client
 
 
 **Forms**:
