@@ -21,6 +21,8 @@ export function handleTimerComplete() {
         type: "HANDLE_TIMER_COMPLETE"
     });
 
+    fetch('/stop-entry');
+
     setTimeout(() => dispatch(toggleDesktopNotification()), 1500)
   }
 }
