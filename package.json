@@ -34,13 +34,13 @@
   },
   "scripts": {
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
-    "server": "NODE_ENV='production' babel-node server.js",
+    "server": "NODE_ENV='production' node server.js",
     "test": "mocha",
     "lint": "eslint --ext .js --ext .jsx client/src/ || exit 0",
     "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/|| exit 0",
     "build:client": "cd client && npm run build",
-    "push:git": "git add . && git commit -m \"deploying\" && git push origin master || exit 0",
+    "commit:git": "git add . && git commit -m \"Builds for deployment\" || exit 0",
     "push:heroku": "git push heroku master",
-    "deploy": "npm run build:client && npm run push:git && npm run push:heroku"
+    "deploy": "npm run build:client && npm run commit:git && npm run commit:heroku"
   }
 }
