@@ -5,8 +5,6 @@ const user = {
   projectIds: ['projectId', 'projectId'],
 }
 
-
-
 const testTask  = {
   shortId: 'string',
   taskName: 'string',
