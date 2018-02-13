@@ -66,8 +66,7 @@ app.put('/fr/:frId', (req, res) => {
     );
 });
 
-app.get(('/stop-entry'), (req, res) => {
-  console.log('yolo')
+app.put(('/stop-entry'), (req, res) => {
   stopRunningEntry();
 });
 

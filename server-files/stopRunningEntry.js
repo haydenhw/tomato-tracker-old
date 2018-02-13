@@ -3,7 +3,7 @@ const axios = require('axios');
 
 function stopRunningEntry() {
   const apiKey = process.env.TOGGL_API_KEY;
-  console.log(apiKey);
+
   axios({
     method: 'get',
     url: 'https://www.toggl.com/api/v8/time_entries/current',

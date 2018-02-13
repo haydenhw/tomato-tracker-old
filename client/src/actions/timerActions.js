@@ -20,8 +20,10 @@ export function handleTimerComplete() {
     dispatch({
         type: "HANDLE_TIMER_COMPLETE"
     });
-    console.log('completing')
-    fetch('/stop-entry');
+
+    fetch('/stop-entry', {
+      method: 'put'
+    });
 
     setTimeout(() => dispatch(toggleDesktopNotification()), 1500)
   }
@@ -47,10 +49,10 @@ export function toggleTimer() {
   return (dispatch, getState) => {
     const { isTimerActive } = getState().timer;
 
-    console.log(isTimerActive)
     if (isTimerActive) {
-      console.log('calling endpoint')
-      fetch('/stop-entry');
+      fetch('/stop-entry', {
+        method: 'put',
+      });
     }
 
     dispatch({
