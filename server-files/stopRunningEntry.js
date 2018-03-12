@@ -35,11 +35,10 @@ function stopRunningEntry() {
     })
     .then(res => {
       const json = res.data;
-      // console.log(res.data);
       console.log(JSON.stringify(json, null, 2));
     });
   })
-  .catch(err => console.error(err))
+  .catch(err => console.log('The fetch request to toggl produced an error'))
 }
 
 module.exports = stopRunningEntry;

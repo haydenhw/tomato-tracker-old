@@ -48,7 +48,6 @@ class App extends Component {
     const isProjectRoute = /projects/.test(pathName);
 
     return (
-      // <div className={`${(pathName === '/' || pathName === '/projects') ? 'main-page' : '' }`}>
       <div>
         <Nav
           activeLink={isProjectRoute ? 'PROJECTS' : 'TIMER'}
@@ -59,6 +58,7 @@ class App extends Component {
         {this.props.children}
         {isDesktopNotificationActive
           && <Notification
+            timeout={40000}
             title="Time's Up!"
             ignore={false}
             options={{ icon: 'images/tomato-timer.png' }}

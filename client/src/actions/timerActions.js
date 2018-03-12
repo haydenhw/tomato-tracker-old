@@ -50,6 +50,7 @@ export function toggleTimer() {
     const { isTimerActive } = getState().timer;
 
     if (isTimerActive) {
+      document.title = 'Tomato Tracker';
       fetch('/stop-entry', {
         method: 'put',
       });

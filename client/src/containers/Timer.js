@@ -4,7 +4,7 @@ import { connect} from 'react-redux';
 import moment from 'moment';
 
 import store from '../redux-files/store';
-import { getTimeSinceThen } from '../helpers/time';
+import { secondsToMSS, getTimeSinceThen } from '../helpers/time';
 
 import {
   decrementTimer,
@@ -113,6 +113,8 @@ class Timer extends Component {
 
       incrementTaskTime(selectedProject, activeTask);
     }
+
+    document.title = `${secondsToMSS(remainingTime)} TT`;
 
     if (remainingTime < 1) {
       const audio = new Audio(alarmSoundSrc);
