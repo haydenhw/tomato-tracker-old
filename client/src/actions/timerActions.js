@@ -23,9 +23,12 @@ export function handleTimerComplete() {
 
     fetch('/stop-entry', {
       method: 'put'
+    })
+    .catch(err => {
+      console.log('The fetch request to toggl produced an error');
     });
 
-    setTimeout(() => dispatch(toggleDesktopNotification()), 1500)
+    setTimeout(() => dispatch(toggleDesktopNotification()), 1500);
   }
 }
 
