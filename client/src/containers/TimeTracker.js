@@ -38,34 +38,15 @@ export default class TimeTracker extends Component {
   }
 
   componentWillMount() {
-    const { selectedProject } = this.props;
+    const { projects, selectedProject, setSelectedProject } = this.props;
 
-    // if (isDevOnboardingActive) {
-    //   // !isOnboardingActive && toggleOnboardMode();
-    //   return null;
-    // }
-    //
-    // if (
-    //   (sessionStorage.isFirstSessionVisit === undefined) ||
-    //   ((projects.length === 0) && isOnboardingActive)
-    // ) {
-    //   sessionStorage.isFirstSessionVisit = false;
-    //   // toggleOnboardMode();
-    //   return null;
-    // }
-
-    // if ((projects.length === 0) && !isOnboardingActive) {
-    //   // hashHistory.push('/projects')
-    //   return null;
-    // }
-
-    // if (
-    //   localStorage.selectedProjectId &&
-    //   projects.find(project => project.shortId === localStorage.selectedProjectId)
-    // ) {
-    //   setSelectedProject(localStorage.selectedProjectId);
-    // } else {
-    // }
+    if (
+      localStorage.selectedProjectId &&
+      projects.find(project => project.shortId === localStorage.selectedProjectId)
+    ) {
+      setSelectedProject(localStorage.selectedProjectId);
+    } else {
+    }
 
     const isPrevSelectedTaskParentActive = Boolean(selectedProject.tasks.find(task => task.shortId === localStorage.prevSelectedTaskId));
 
