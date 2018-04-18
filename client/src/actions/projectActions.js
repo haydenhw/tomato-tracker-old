@@ -302,7 +302,7 @@ export function postTask(projectId, task) {
 
 export function updateTask(project, task, toUpdate) {
   return (dispatch) => {
-    dispatch(editTask(project.shortId, task.shortId, toUpdate))
+    dispatch(editTask(project.shortId, task.shortId, toUpdate));
 
     fetch(
       `projects/${project._id}/tasks/${task._id}`,
@@ -313,10 +313,7 @@ export function updateTask(project, task, toUpdate) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         })
-      })
-      .then((res) => {
-        'console log update success'
-      })
+      });
     }
 }
 
