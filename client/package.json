@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "dotenv": "2.0.0",
+    "material-ui": "^0.20.2",
     "randomcolor": "^0.5.3",
     "react": "^15.4.2",
     "react-circular-progressbar": "^0.1.4",
@@ -72,6 +73,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "jest": "node scripts/test.js",
     "test": "mocha",
     "lint": "eslint --ext .js --ext .jsx client/src/ || exit 0",
     "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/|| exit 0"

@@ -6,6 +6,7 @@ const defaultState = {
   isDesktopNotificationActive: false,
   remainingTime: null,
   startTime: 25 * 60,
+  taskStartedTime: null,
 }
 
 export const timer = (state=defaultState, action) => {
@@ -36,20 +37,20 @@ export const timer = (state=defaultState, action) => {
     case actions.RESET_TIMER:
       return {
         ...state,
-        remainingTime: state.startTime 
+        remainingTime: state.startTime
       }
-    case actions.SET_INTERVAL_ID: 
+    case actions.SET_INTERVAL_ID:
       return {
         ...state,
-        intervalId: action.intervalId 
+        intervalId: action.intervalId
       }
     case actions.SET_START_TIME:
       return {
         ...state,
-        isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,  
+        isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,
         startTime: action.startTime,
-        remainingTime: action.startTime 
-        
+        remainingTime: action.startTime
+
       }
     case actions.TOGGLE_DESKTOP_NOTIFICATION:
       return {
@@ -59,8 +60,9 @@ export const timer = (state=defaultState, action) => {
     case actions.TOGGLE_TIMER:
       return {
         ...state,
-        isTimerActive: !state.isTimerActive,  
-        remainingTime: state.startTime 
+        isTimerActive: !state.isTimerActive,
+        remainingTime: state.startTime,
+        taskStartedTime: state.isTimerActive ? null :  new Date().getTime(),
       }
     default:
       return state;

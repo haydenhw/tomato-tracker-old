@@ -1,11 +1,10 @@
 // extract nav presentational component
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
 import Notification  from 'react-web-notification';
 
 import { routeToProjectsPage, routeToTimerPage } from 'helpers/route';
-import { changeActiveLink, fetchProjects, handleKeyDown, toggleProjectNagModal } from '../actions/indexActions';
+import { changeActiveLink, fetchProjects, fetchEntries, handleKeyDown, toggleProjectNagModal } from '../actions/indexActions';
 
 import Nav from '../components/Nav';
 
@@ -18,29 +17,14 @@ class App extends Component {
     }
   }
 
-  // componentWillReceiveProps() {
-    // const { location } = this.props;
-    // const pathName = location.pathname;
-    //
-    // if((pathName === '/' || pathName === '/projects')) {
-    //   // document.body.style.backgroundColor = "#f0f4f7";
-    // } else {
-    //   document.body.style.backgroundColor = "white";
-    // }
-  // }
 
   componentDidMount() {
-    const { fetchProjects, handleKeyDown } = this.props;
+    const { fetchProjects, fetchEntries, handleKeyDown } = this.props;
 
     document.onkeydown = handleKeyDown;
+    fetchEntries();
     fetchProjects();
   }
-
-  // handleTimerLinkClick() {
-  //   const {  projects, toggleProjectNagModal } = this.props;
-  //
-  //   projects.length ? routeToTimerPage() : toggleProjectNagModal();
-  // }
 
   render() {
     const { isDesktopNotificationActive, location } = this.props;
@@ -81,6 +65,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   changeActiveLink,
   fetchProjects,
+  fetchEntries,
   handleKeyDown,
   toggleProjectNagModal
 }

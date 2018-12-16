@@ -61,3 +61,22 @@ export function timeStringToSeconds(value, inputFormat) {
 
   return hours * 3600 + minutes * 60 + seconds
 }
+
+const unixTimestampToHHMM = (unixTS) => {
+  const date = new Date(unixTS* 1000);
+  const hours = date.getHours();
+  const minutes = "0" + date.getMinutes();
+  const seconds = "0" + date.getSeconds();
+  const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  return formattedTime;
+};
+
+function militaryToStandard(input) {
+    return moment(input, 'HH:mm:ss').format('h:mm:ssa');
+}
+
+export const unixTimestampToHMM = (unixTS) => (
+  militaryToStandard(
+    unixTimestampToHHMM(unixTS)
+  )
+);
