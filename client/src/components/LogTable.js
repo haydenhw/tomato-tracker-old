@@ -1,6 +1,5 @@
 import React from 'react';
 import shortId from 'shortid';
-import { entries } from './Log.mockdata.js';
 import { getDuration, getNewRocordedTime } from '../helpers/logHelpers';
 import { secondsToHMMSS, unixTimestampToHMM } from '../helpers/time';
 
@@ -23,6 +22,12 @@ const tableHeadings = [
   'Project',
 ];
 
+const renderTableHeadings = (tableHeadings) => (
+  tableHeadings.map(heading => (
+    <TableHeaderColumn key={shortId.generate()}>{heading}</TableHeaderColumn>
+  ))
+);
+
 const renderColumn = value => (
     <TableRowColumn key={shortId.generate()}>
       {value}
@@ -33,7 +38,7 @@ const renderRow = entry => {
   const {
     endTime,
     recordedTime,
-    parentProject,
+    parentProjectName,
     startTime,
     taskName,
   } = entry;
@@ -46,7 +51,7 @@ const renderRow = entry => {
       {renderColumn(getDuration(startTime, endTime))}
       {renderColumn(secondsToHMMSS(recordedTime))}
       {renderColumn(getNewRocordedTime(recordedTime, startTime, endTime))}
-      {renderColumn(parentProject)}
+      {renderColumn(parentProjectName)}
     </TableRow>
   );
 }
@@ -55,13 +60,7 @@ const renderRows = entries => (
   entries.map(entry => renderRow(entry))
 );
 
-const renderTableHeadings = (tableHeadings) => (
-  tableHeadings.map(heading => (
-    <TableHeaderColumn key={shortId.generate()}>{heading}</TableHeaderColumn>
-  ))
-);
-
-const TableExampleSimple = () => (
+const LogTable = ({ entries }) => (
   <Table>
     <TableHeader>
       <TableRow>
@@ -74,4 +73,4 @@ const TableExampleSimple = () => (
   </Table>
 );
 
-export default TableExampleSimple;
+export default LogTable;

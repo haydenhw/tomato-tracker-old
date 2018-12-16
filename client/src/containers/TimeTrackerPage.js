@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
+  addEntry,
   deleteTask,
   decrementTimer,
   changeActiveContextMenu,
@@ -73,6 +74,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  addEntry,
   changeActiveContextMenu,
   decrementTimer,
   deleteTask,

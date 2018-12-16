@@ -95,9 +95,15 @@ export default class TimeTracker extends Component {
     toggleEditTaskForm(taskId);
   }
 
-  handleTaskChange(taskId, callback){
+  handleTaskChange(taskId, callback) {
+    const { addEntry, isTimerActive } = this.props;
+
     if (localStorage.prevSelectedTaskId !== taskId) {
       localStorage.setItem("prevSelectedTaskId", taskId);
+
+      if (isTimerActive) {
+        addEntry(taskId);
+      }
     }
 
     if (callback) {
