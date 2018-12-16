@@ -96,19 +96,15 @@ export default class TimeTracker extends Component {
   }
 
   handleTaskChange(taskId, callback){
-    const { isTimerActive } = this.props;
-    const { selectedTaskId } = this.props;
-
     if (localStorage.prevSelectedTaskId !== taskId) {
       localStorage.setItem("prevSelectedTaskId", taskId);
     }
 
     if (callback) {
-      callback()
+      callback();
     }
 
     this.setState({ selectedTaskId: taskId });
-
   }
 
   handlePlayClick = (taskId) => () => {

@@ -54,9 +54,11 @@ export function toggleTimer() {
 
     if (isTimerActive) {
       document.title = 'Tomato Tracker';
-      fetch('/stop-entry', {
-        method: 'put',
-      });
+      // dispatch create log entry
+
+      // fetch('/stop-entry', {
+      //   method: 'put',
+      // });
     }
 
     dispatch({

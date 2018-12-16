@@ -11,14 +11,12 @@ export default function Timesheet({ buttonText, children, handleButtonClick, tit
         <TimesheetColumn colNumber="1"/>
         <TimesheetColumn colNumber="2"/>
         <TimesheetColumn colNumber="3">
-          {/* <div className="timesheet-button-wrapper"> */}
             <button
               className="timesheet-add-button material-button" onClick={handleButtonClick}
             >
-                {buttonText}  
-            </button> 
-            {/* </div> */}
-        </TimesheetColumn>      
+                {buttonText}
+            </button>
+        </TimesheetColumn>
       </div>
       {children}
   </div>

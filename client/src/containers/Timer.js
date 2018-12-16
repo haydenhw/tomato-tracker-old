@@ -140,7 +140,6 @@ class Timer extends Component {
       startTime,
       toggleTimer,
       selectedTaskId,
-      setStartTime,
       task,
     } = this.props;
 
