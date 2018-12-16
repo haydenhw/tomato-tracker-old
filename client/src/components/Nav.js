@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Nav(props) {
-  const { activeLink, handleTimerLinkClick, handleProjectsLinkClck } = props;
-  
+  const { activeLink, handleLogLinkClick, handleTimerLinkClick, handleProjectsLinkClick } = props;
+
   return(
     <nav>
       <div className="nav-logo-wrapper">
@@ -16,9 +16,14 @@ export default function Nav(props) {
             Timer
           </a>
           <a className={`nav-link ${activeLink  === 'PROJECTS' ? 'active-link' : ''}`}
-            onClick={handleProjectsLinkClck}
+            onClick={handleProjectsLinkClick}
           >
             Projects
+          </a>
+          <a className={`nav-link ${activeLink  === 'LOG' ? 'active-link' : ''}`}
+            onClick={handleLogLinkClick}
+          >
+            Log
           </a>
     </nav>
   );

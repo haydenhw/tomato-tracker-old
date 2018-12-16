@@ -11,6 +11,11 @@ export function log(state=defaultState, action) {
         ...state,
         entries: action.entries,
       }
+    case actions.ADD_ENTRY:
+      return {
+        ...state,
+        entries: [action.newEntry, ...state.entries],
+      }
     default:
       return state;
   }

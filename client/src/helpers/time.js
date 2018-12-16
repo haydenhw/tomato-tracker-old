@@ -62,8 +62,8 @@ export function timeStringToSeconds(value, inputFormat) {
   return hours * 3600 + minutes * 60 + seconds
 }
 
-const unixTimestampToHHMM = (unixTS) => {
-  const date = new Date(unixTS* 1000);
+export const unixTimestampToHHMM = (unixTS) => {
+  const date = new Date(unixTS);
   const hours = date.getHours();
   const minutes = "0" + date.getMinutes();
   const seconds = "0" + date.getSeconds();

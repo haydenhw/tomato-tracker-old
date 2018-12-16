@@ -39,7 +39,6 @@ export const addEntry = (selectedTaskId) => (dispatch, getState) => {
   const state = getState();
   const newEntry = createEntry(state, selectedTaskId);
 
-  console.log(prettyPrint(state));
   dispatch({
     type: ADD_ENTRY,
     newEntry,

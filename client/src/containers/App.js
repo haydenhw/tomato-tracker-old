@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Notification  from 'react-web-notification';
 
-import { routeToProjectsPage, routeToTimerPage } from 'helpers/route';
+import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/route';
 import { changeActiveLink, fetchProjects, fetchEntries, handleKeyDown, toggleProjectNagModal } from '../actions/indexActions';
 
 import Nav from '../components/Nav';
@@ -30,13 +30,15 @@ class App extends Component {
     const { isDesktopNotificationActive, location } = this.props;
     const pathName = location.pathname;
     const isProjectRoute = /projects/.test(pathName);
+    const isLogRoute = /log/.test(pathName);
 
     return (
       <div>
         <Nav
-          activeLink={isProjectRoute ? 'PROJECTS' : 'TIMER'}
+          activeLink={isProjectRoute ? 'PROJECTS' :  isLogRoute ? 'LOG' : 'TIMER'}
           handleTimerLinkClick={routeToTimerPage}
-          handleProjectsLinkClck={routeToProjectsPage}
+          handleProjectsLinkClick={routeToProjectsPage}
+          handleLogLinkClick={routeToLogPage}
           isProjectRoute={isProjectRoute}
         />
         {this.props.children}
