@@ -1,6 +1,8 @@
+import axios from 'axios';
+
 import * as actions from '../actions/indexActions';
 import { getActiveTask, getTaskStartedTime, getSelectedTaskId, getSelectedProject } from '../selectors';
-import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
 const createEntry = (state, selectedTaskId) => {
   const {
@@ -30,8 +32,8 @@ export function* setTaskStartedTime(setToNow) {
 export function* logEntry() {
   const state = yield select();
   const selectedTaskId = getSelectedTaskId(state);
-  const newEntry = yield call(createEntry, state, selectedTaskId);
-  yield put({ type: 'ADD_ENTRY', newEntry });
+  const newLog = yield call(createEntry, state, selectedTaskId);
+  yield put({ type: 'ADD_ENTRY', newLog });
 }
 
 export function* logEntryOnTimerToggle() {
@@ -56,9 +58,23 @@ export function* logEntryOnTaskChange() {
     yield call(setTaskStartedTime, true);
 }
 
+async function requestLogs() {
+  const { data } = await axios.get('log');
+  return data;
+}
+
+export function* fetchLogs() {
+    const logs = yield call(requestLogs);
+    yield put({
+      type: 'FETCH_LOGS_SUCCESS',
+      logs
+    });
+}
+
 export default function* rootSaga() {
   yield takeEvery('TOGGLE_TIMER', logEntryOnTimerToggle);
   yield takeEvery('HANDLE_TIMER_COMPLETE', logEntryOnTimerComplete);
   yield takeEvery('SET_START_TIME', setTaskStartedTime);
   yield takeEvery('SET_SELECTED_TASK_ID', logEntryOnTaskChange);
+  yield fork(fetchLogs);
 }

@@ -56,11 +56,11 @@ const renderRow = entry => {
   );
 }
 
-const renderRows = entries => (
-  entries.map(entry => renderRow(entry))
+const renderRows = logs => (
+  logs.map(entry => renderRow(entry))
 );
 
-const LogTable = ({ entries }) => (
+const LogTable = ({ logs }) => (
   <div style={{ padding: '20px 40px' }}>
     <Table selectable={false}>
       <TableHeader
@@ -71,7 +71,7 @@ const LogTable = ({ entries }) => (
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false}>
-        {renderRows(entries)}
+        {renderRows(logs)}
       </TableBody>
     </Table>
   </div>

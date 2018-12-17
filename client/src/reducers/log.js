@@ -1,20 +1,20 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
-  entries: [],
+  logs: [],
 }
 
-export function log(state=defaultState, action) {
+export function log(state = defaultState, action) {
   switch(action.type) {
-    case actions.FETCH_ENTRIES_SUCCESS:
+    case 'FETCH_LOGS_SUCCESS':
       return {
         ...state,
-        entries: action.entries,
+        logs: action.logs,
       }
     case actions.ADD_ENTRY:
       return {
         ...state,
-        entries: [action.newEntry, ...state.entries],
+        logs: [action.newEntry, ...state.logs],
       }
     default:
       return state;

@@ -4,7 +4,14 @@ import { connect } from 'react-redux';
 import Notification  from 'react-web-notification';
 
 import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/route';
-import { changeActiveLink, fetchProjects, fetchEntries, handleKeyDown, toggleProjectNagModal } from '../actions/indexActions';
+
+import {
+  changeActiveLink,
+  fetchProjects,
+  fetchEntries,
+  handleKeyDown,
+  toggleProjectNagModal
+} from '../actions/indexActions';
 
 import Nav from '../components/Nav';
 
@@ -19,10 +26,9 @@ class App extends Component {
 
 
   componentDidMount() {
-    const { fetchProjects, fetchEntries, handleKeyDown } = this.props;
+    const { fetchProjects, handleKeyDown } = this.props;
 
     document.onkeydown = handleKeyDown;
-    fetchEntries();
     fetchProjects();
   }
 

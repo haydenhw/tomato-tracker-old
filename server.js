@@ -11,7 +11,7 @@ const app = express();
 // const shouldResetDb = false;
 
 const { PORT, DATABASE_URL } = require('./server-files/config');
-const { FeatureRequests, Projects } = require('./server-files/models');
+const { FeatureRequests, Logs } = require('./server-files/models');
 const stopRunningEntry = require('./server-files/stopRunningEntry');
 
 const projectRouter = require('./server-files/routes/projectRouter');
@@ -29,6 +29,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 projectRouter.use('/:id/tasks', taskRouter);
 app.use('/projects', projectRouter);
+
+app.get('/log', (req, res) => {
+  Logs
+    .find()
+    .exec()
+    .then(data => res.json(data.reverse()));
+});
+
+app.post('/log', (req, res) => {
+  console.log(req.body)
+  Logs
+    .create({
+      taskName: req.body.taskName,
+      startTime: req.body.startTime,
+      endTime: req.body.endTime,
+      recordedTime: req.body.recordedTime,
+      parentProjectName: req.body.parentProjectName,
+    })
+  .then(testObj => res.status(201).json(testObj))
+  .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
 
 app.get('/fr', (req, res) => {
   FeatureRequests

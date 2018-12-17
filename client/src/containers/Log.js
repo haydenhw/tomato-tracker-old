@@ -2,17 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LogTable from '../components/LogTable'
 
-const Log = ({ entries }) => {
-  return <LogTable entries={entries} />
+const Log = ({ logs }) => {
+  return <LogTable logs={logs} />
 }
 
 const mapStateToProps = state => {
   const { log } = state;
-  const { entries } = log;
-
+  const { logs } = log;
   return {
-    entries,
+    logs,
   }
+}
+
+Log.defaultProps = {
+  logs: []
 }
 
 export default connect(mapStateToProps)(Log);
