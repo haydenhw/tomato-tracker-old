@@ -6,11 +6,10 @@ import { clickedTaskId } from './clickedTaskId';
 import { config } from './config';
 import { editMenu } from './editMenu';
 import { log } from './log';
-// import { entities } from './entities';
 import { modal } from './modal';
-// import { nav } from './nav';
 import { projects } from './projects';
 import { selectedProjectId } from './selectedProjectId';
+import { selectedTaskId } from './selectedTaskId';
 import { timer } from './timer';
 
 export default combineReducers({
@@ -18,12 +17,11 @@ export default combineReducers({
     config,
     customForm,
     editMenu,
-    // entities,
     log,
     modal,
-    // nav, not currently in use!
     projects,
     selectedProjectId,
+    selectedTaskId,
     timer,
     form: formReducer
 });

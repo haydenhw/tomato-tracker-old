@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
-  addEntry,
   deleteTask,
   decrementTimer,
   changeActiveContextMenu,
   fetchProjects,
   setSelectedProject,
+  setSelectedTaskId,
   setTempTasks,
   toggleAddTasksForm,
   toggleConfig,
@@ -74,12 +74,12 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  addEntry,
   changeActiveContextMenu,
   decrementTimer,
   deleteTask,
   fetchProjects,
   setSelectedProject,
+  setSelectedTaskId,
   setTempTasks,
   toggleAddTasksForm,
   toggleConfig,

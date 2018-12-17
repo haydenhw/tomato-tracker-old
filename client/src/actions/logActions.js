@@ -38,9 +38,9 @@ export const ADD_ENTRY = "ADD_ENTRY";
 export const addEntry = (selectedTaskId) => (dispatch, getState) => {
   const state = getState();
   const newEntry = createEntry(state, selectedTaskId);
-
-  dispatch({
-    type: ADD_ENTRY,
-    newEntry,
-  });
+  //
+  // dispatch({
+  //   type: ADD_ENTRY,
+  //   newEntry,
+  // });
 }

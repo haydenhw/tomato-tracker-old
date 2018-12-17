@@ -18,7 +18,6 @@ export function toggleDesktopNotification() {
 export const HANDLE_TIMER_COMPLETE = "HANDLE_TIMER_COMPLETE";
 export function handleTimerComplete(selectedTaskId) {
   return (dispatch) => {
-    dispatch(actions.addEntry(selectedTaskId));
     dispatch({
         type: "HANDLE_TIMER_COMPLETE"
     });
@@ -49,8 +48,6 @@ export function toggleTimer(selectedTaskId) {
 
     if (isTimerActive) {
       document.title = 'Tomato Tracker';
-      dispatch(actions.addEntry(selectedTaskId))
-
       // fetch('/stop-entry', {
       //   method: 'put',
       // });

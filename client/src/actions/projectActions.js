@@ -138,6 +138,12 @@ export const fetchProjectsSuccess = (projects) => ({
   projects,
 });
 
+export const SET_SELECTED_TASK_ID = 'SET_SELECTED_TASK_ID';
+export const setSelectedTaskId = (taskId) => ({
+  type: 'SET_SELECTED_TASK_ID',
+  taskId,
+});
+
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export function fetchProjects() {
   return (dispatch) => {

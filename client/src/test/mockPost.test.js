@@ -1,20 +1,17 @@
-import { mockState } from './mockState';
-import { unixTimestampToHMM, unixTimestampToHHMM } from '../helpers/time';
-import { getDuration } from '../helpers/logHelpers';
+import 'babel-polyfill';
 
-const prettyPrint = obj => {
-  console.log(JSON.stringify(obj, null, 2));
+import { put, takeEvery, select } from 'redux-saga/effects';
+
+export function* incrementAsync() {
+  const state = yield select();
+  console.log(state);
 }
-console.log('\n\n**Logs**');
 
-
-const start = 1544986500908;
-const end = 1544986504837;
-const res = getDuration(start, end);
-console.log(unixTimestampToHMM(start))
-console.log(unixTimestampToHMM(end))
-prettyPrint(res);
-
+export default function* rootSaga() {
+  yield takeEvery('TOGGLE_TIMER', incrementAsync);
+}
+const gen = incrementAsync();
+gen.next();
 test('formats start time', async () => {
   expect(true).toBe(true);
 });

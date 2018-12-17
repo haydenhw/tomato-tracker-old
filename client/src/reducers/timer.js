@@ -11,10 +11,10 @@ const defaultState = {
 
 export const timer = (state=defaultState, action) => {
   switch(action.type) {
-    case actions.ADD_ENTRY:
+    case 'SET_TASK_STARTED_TIME':
       return {
         ...state,
-        taskStartedTime: new Date().getTime(),
+        taskStartedTime: action.time,
       }
     case actions.DECREMENT_TIMER:
       return {
@@ -44,8 +44,6 @@ export const timer = (state=defaultState, action) => {
         isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,
         startTime: action.startTime,
         remainingTime: action.startTime,
-        taskStartedTime: action.shouldToggleTimer ? new Date().getTime(): null,
-
       }
     case actions.TOGGLE_DESKTOP_NOTIFICATION:
       return {
@@ -57,7 +55,6 @@ export const timer = (state=defaultState, action) => {
         ...state,
         isTimerActive: !state.isTimerActive,
         remainingTime: state.startTime,
-        taskStartedTime: state.isTimerActive ? null :  new Date().getTime(),
       }
     default:
       return state;

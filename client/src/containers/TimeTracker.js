@@ -38,7 +38,7 @@ export default class TimeTracker extends Component {
   }
 
   componentWillMount() {
-    const { projects, selectedProject, setSelectedProject } = this.props;
+    const { projects, selectedProject, setSelectedProject, setSelectedTaskId } = this.props;
 
     if (
       localStorage.selectedProjectId &&
@@ -52,15 +52,17 @@ export default class TimeTracker extends Component {
 
     if (isPrevSelectedTaskParentActive) {
       this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
+      setSelectedTaskId(localStorage.prevSelectedTaskId)
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { isTimerActive, tasks } = this.props;
+    const { isTimerActive, tasks, setSelectedTaskId } = this.props;
 
     if ((prevProps.tasks.length !== tasks.length) && (tasks.length === 0)) {
       localStorage.setItem('prevSelectedTaskId', null);
       this.setState({ selectedTaskId: null });
+      setSelectedTaskId(null);
     }
 
     if (prevProps.tasks.length + 1 === tasks.length) {
@@ -96,15 +98,10 @@ export default class TimeTracker extends Component {
   }
 
   handleTaskChange(taskId, callback) {
-    const { addEntry, isTimerActive } = this.props;
-    const { selectedTaskId } = this.state;
+    const {  setSelectedTaskId } = this.props;
 
     if (localStorage.prevSelectedTaskId !== taskId) {
       localStorage.setItem("prevSelectedTaskId", taskId);
-
-      if (isTimerActive) {
-        addEntry(selectedTaskId);
-      }
     }
 
     if (callback) {
@@ -112,6 +109,7 @@ export default class TimeTracker extends Component {
     }
 
     this.setState({ selectedTaskId: taskId });
+    setSelectedTaskId(taskId);
   }
 
   handlePlayClick = (taskId) => () => {
