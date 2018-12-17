@@ -61,16 +61,20 @@ const renderRows = entries => (
 );
 
 const LogTable = ({ entries }) => (
-  <Table>
-    <TableHeader>
-      <TableRow>
-        {renderTableHeadings(tableHeadings)}
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {renderRows(entries)}
-    </TableBody>
-  </Table>
+  <div style={{ padding: '20px 40px' }}>
+    <Table selectable={false}>
+      <TableHeader
+        displaySelectAll={false}
+        adjustForCheckbox={false}>
+        <TableRow>
+          {renderTableHeadings(tableHeadings)}
+        </TableRow>
+      </TableHeader>
+      <TableBody displayRowCheckbox={false}>
+        {renderRows(entries)}
+      </TableBody>
+    </Table>
+  </div>
 );
 
 export default LogTable;
