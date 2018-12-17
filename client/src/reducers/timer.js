@@ -43,7 +43,8 @@ export const timer = (state=defaultState, action) => {
         ...state,
         isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,
         startTime: action.startTime,
-        remainingTime: action.startTime
+        remainingTime: action.startTime,
+        taskStartedTime: action.shouldToggleTimer ? new Date().getTime(): null,
 
       }
     case actions.TOGGLE_DESKTOP_NOTIFICATION:

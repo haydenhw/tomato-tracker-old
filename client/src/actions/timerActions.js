@@ -1,3 +1,4 @@
+import * as actions from '../actions/indexActions';
 import { timeStringToSeconds } from '../helpers/time';
 
 export const DECREMENT_TIMER = "DECREMENT_TIMER";
@@ -15,18 +16,19 @@ export function toggleDesktopNotification() {
 }
 
 export const HANDLE_TIMER_COMPLETE = "HANDLE_TIMER_COMPLETE";
-export function handleTimerComplete() {
+export function handleTimerComplete(selectedTaskId) {
   return (dispatch) => {
+    dispatch(actions.addEntry(selectedTaskId));
     dispatch({
         type: "HANDLE_TIMER_COMPLETE"
     });
 
-    fetch('/stop-entry', {
-      method: 'put'
-    })
-    .catch(err => {
-      console.log('The fetch request to toggl produced an error');
-    });
+    // fetch('/stop-entry', {
+    //   method: 'put'
+    // })
+    // .catch(err => {
+    //   console.log('The fetch request to toggl produced an error');
+    // });
 
     setTimeout(() => dispatch(toggleDesktopNotification()), 1500);
   }
@@ -40,21 +42,14 @@ export function setIntervalId(intervalId) {
   }
 }
 
-// export const TOGGLE_IS_TIMER_ACTIVE = "TOGGLE_IS_TIMER_ACTIVE";
-// export function toggleTimer() {
-//   return {
-//     type: "TOGGLE_IS_TIMER_ACTIVE"
-//   }
-// }
-
 export const TOGGLE_TIMER = "TOGGLE_TIMER";
-export function toggleTimer() {
+export function toggleTimer(selectedTaskId) {
   return (dispatch, getState) => {
     const { isTimerActive } = getState().timer;
 
     if (isTimerActive) {
       document.title = 'Tomato Tracker';
-      // dispatch create log entry
+      dispatch(actions.addEntry(selectedTaskId))
 
       // fetch('/stop-entry', {
       //   method: 'put',

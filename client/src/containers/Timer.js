@@ -1,9 +1,7 @@
 import React, { Component} from 'react';
-import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 import moment from 'moment';
 
-import store from '../redux-files/store';
 import { secondsToMSS, getTimeSinceThen } from '../helpers/time';
 
 import {
@@ -121,7 +119,7 @@ class Timer extends Component {
       audio.play();
 
       clearInterval(intervalId);
-      handleTimerComplete();
+      handleTimerComplete(selectedTaskId);
       setActiveTask(null);
     }
   }
@@ -133,12 +131,16 @@ class Timer extends Component {
     setStartTime(newTime, shouldToggleTimer);
   }
 
+  toggleTimer = () => {
+    const { selectedTaskId, toggleTimer } = this.props;
+    toggleTimer(selectedTaskId);
+  }
+
   render() {
     const {
       isTimerActive,
       remainingTime,
       startTime,
-      toggleTimer,
       selectedTaskId,
       task,
     } = this.props;
@@ -152,7 +154,7 @@ class Timer extends Component {
           startCount={startTime}
           time={remainingTime}
           title={task}
-          handleButtonClick={toggleTimer}
+          handleButtonClick={this.toggleTimer}
         />
       </div>
     );
