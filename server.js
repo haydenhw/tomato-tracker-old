@@ -34,11 +34,19 @@ app.get('/log', (req, res) => {
   Logs
     .find()
     .exec()
-    .then(data => res.json(data.reverse()));
+    .then((logs) => {
+      const limit = 5;
+      const reverseLogs = [...logs].reverse();
+      const recentLogs = (
+          reverseLogs.length > limit
+            ? reverseLogs.slice(0, limit)
+            : reverseLogs
+      );
+      return res.json(recentLogs);
+    });
 });
 
 app.post('/log', (req, res) => {
-  console.log(req.body)
   Logs
     .create({
       taskName: req.body.taskName,
@@ -58,7 +66,7 @@ app.get('/fr', (req, res) => {
   FeatureRequests
     .find()
     .exec()
-    .then(data => res.json(data))
+    .then(data => res.json(data));
 });
 
 app.post('/fr', (req, res) => {

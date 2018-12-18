@@ -34,13 +34,13 @@ const createEntry = (state, selectedTaskId) => {
   }
 }
 
-export const ADD_ENTRY = "ADD_ENTRY";
+export const ADD_LOG = "ADD_LOG";
 export const addEntry = (selectedTaskId) => (dispatch, getState) => {
   const state = getState();
   const newEntry = createEntry(state, selectedTaskId);
   //
   // dispatch({
-  //   type: ADD_ENTRY,
+  //   type: ADD_LOG,
   //   newEntry,
   // });
 }

@@ -8,23 +8,23 @@ const entry = {
   parentProjectName: 'Your Father',
 };
 
- async function requestLogs() {
+ async function fetchLogs() {
   const { data } = await axios.get('http://localhost:3002/log');
   return data;
 }
 
-const postLogs = (data) => (
+const postLog = (data) => (
   axios.post('http://localhost:3002/log', data)
 );
 
 test('fetch logs',  async function() {
-  const logs = await requestLogs();
+  const logs = await fetchLogs();
   expect(true).toBe(true);
 });
 
 test('post logs',  async function() {
-  postLogs(entry);
-  const logs = await requestLogs();
+  postLog(entry);
+  const logs = await fetchLogs();
   console.log(logs);
   expect(true).toBe(true);
 });

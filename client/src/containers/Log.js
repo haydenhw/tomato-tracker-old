@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LogTable from '../components/LogTable'
 
-const Log = ({ logs }) => {
-  return <LogTable logs={logs} />
-}
+const Log = ({ logs }) => <LogTable logs={logs} />
 
 const mapStateToProps = state => {
   const { log } = state;

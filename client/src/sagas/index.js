@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { call, fork, put, takeEvery, take, select } from 'redux-saga/effects';
 
 import * as actions from '../actions/indexActions';
+import { fetchLogs, postLog } from '../helpers/apiHelpers';
 import { getActiveTask, getTaskStartedTime, getSelectedTaskId, getSelectedProject } from '../selectors';
-import { call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
 const createEntry = (state, selectedTaskId) => {
   const {
@@ -29,11 +30,12 @@ export function* setTaskStartedTime(setToNow) {
    });
 }
 
-export function* logEntry() {
+export function* logEntry(selectedTaskId) {
   const state = yield select();
-  const selectedTaskId = getSelectedTaskId(state);
+  selectedTaskId = selectedTaskId || state.selectedTaskId.current;
   const newLog = yield call(createEntry, state, selectedTaskId);
-  yield put({ type: 'ADD_ENTRY', newLog });
+  yield put({ type: 'ADD_LOG', newLog });
+  yield fork(postLog, newLog);
 }
 
 export function* logEntryOnTimerToggle() {
@@ -54,17 +56,17 @@ export function* logEntryOnTimerComplete() {
 }
 
 export function* logEntryOnTaskChange() {
-    yield call(logEntry);
-    yield call(setTaskStartedTime, true);
+    const state = yield select();
+    const { isTimerActive } = state.timer;
+
+    if (isTimerActive) {
+      yield call(logEntry, state.selectedTaskId.last);
+      yield call(setTaskStartedTime, true);
+    }
 }
 
-async function requestLogs() {
-  const { data } = await axios.get('log');
-  return data;
-}
-
-export function* fetchLogs() {
-    const logs = yield call(requestLogs);
+export function* loadLogs() {
+    const logs = yield call(fetchLogs);
     yield put({
       type: 'FETCH_LOGS_SUCCESS',
       logs
@@ -76,5 +78,5 @@ export default function* rootSaga() {
   yield takeEvery('HANDLE_TIMER_COMPLETE', logEntryOnTimerComplete);
   yield takeEvery('SET_START_TIME', setTaskStartedTime);
   yield takeEvery('SET_SELECTED_TASK_ID', logEntryOnTaskChange);
-  yield fork(fetchLogs);
+  yield fork(loadLogs);
 }
