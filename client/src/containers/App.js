@@ -8,7 +8,6 @@ import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/
 import {
   changeActiveLink,
   fetchProjects,
-  fetchEntries,
   handleKeyDown,
   toggleProjectNagModal
 } from '../actions/indexActions';
@@ -73,7 +72,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   changeActiveLink,
   fetchProjects,
-  fetchEntries,
   handleKeyDown,
   toggleProjectNagModal
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { call, fork, put, takeEvery, take, select } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
 import * as actions from '../actions/indexActions';
 import { fetchLogs, postLog } from '../helpers/apiHelpers';
@@ -58,12 +58,14 @@ export function* logEntryOnTimerComplete() {
 export function* logEntryOnTaskChange() {
     const state = yield select();
     const { isTimerActive } = state.timer;
+    const { current, last } = state.selectedTaskId;
 
-    if (isTimerActive) {
+    if (isTimerActive && (current !== last)) {
       yield call(logEntry, state.selectedTaskId.last);
       yield call(setTaskStartedTime, true);
     }
 }
+
 
 export function* loadLogs() {
     const logs = yield call(fetchLogs);

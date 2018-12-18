@@ -11,7 +11,7 @@ export function log(state = defaultState, action) {
         ...state,
         logs: action.logs,
       }
-    case actions.ADD_LOG:
+    case 'ADD_LOG':
       return {
         ...state,
         logs: [action.newLog, ...state.logs],

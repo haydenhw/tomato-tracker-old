@@ -35,7 +35,7 @@ app.get('/log', (req, res) => {
     .find()
     .exec()
     .then((logs) => {
-      const limit = 5;
+      const limit = 100;
       const reverseLogs = [...logs].reverse();
       const recentLogs = (
           reverseLogs.length > limit
