@@ -1,3 +1,4 @@
+import { prettyPrint } from 'pretty-printy';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
@@ -39,6 +40,7 @@ export default class TimeTracker extends Component {
 
   componentWillMount() {
     const { projects, selectedProject, setSelectedProject, setSelectedTaskId } = this.props;
+    console.log(this.props);
 
     if (
       localStorage.selectedProjectId &&
@@ -158,7 +160,6 @@ export default class TimeTracker extends Component {
       <TimesheetListItem
         actionIconClass="play"
         key={shortid.generate()}
-        // className="task"
         handleItemClick={this.handleTaskItemClick(shortId)}
         handlePlayClick={this.handlePlayClick(shortId)}
         isActive={(activeTaskId === shortId) && isTimerActive}
