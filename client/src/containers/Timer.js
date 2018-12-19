@@ -1,4 +1,3 @@
-import { logPropTypes } from '../test/propTypeGen.test';
 import React, { Component} from 'react';
 import { connect} from 'react-redux';
 import moment from 'moment';
@@ -138,7 +137,6 @@ class Timer extends Component {
   }
 
   render() {
-    console.log(logPropTypes(this.props))
     const {
       isTimerActive,
       remainingTime,

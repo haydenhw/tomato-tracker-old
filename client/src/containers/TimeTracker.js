@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { hashHistory } from 'react-router';
 import shortid from 'shortid';
-
 import { secondsToHMMSS } from 'helpers/time';
 
 import ContextMenu from './ContextMenu';
