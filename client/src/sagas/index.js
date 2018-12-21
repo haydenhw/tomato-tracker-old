@@ -74,11 +74,14 @@ export function* loadLogs() {
       logs
     });
 }
-
-export default function* rootSaga() {
+export function* logOrchestrator()  {
   yield takeEvery('TOGGLE_TIMER', logEntryOnTimerToggle);
   yield takeEvery('HANDLE_TIMER_COMPLETE', logEntryOnTimerComplete);
-  yield takeEvery('SET_START_TIME', setTaskStartedTime);
   yield takeEvery('SET_SELECTED_TASK_ID', logEntryOnTaskChange);
+}
+
+export default function* rootSaga() {
   yield fork(loadLogs);
+  yield fork(logOrchestrator);
+  yield takeEvery('SET_START_TIME', setTaskStartedTime);
 }
