@@ -6,6 +6,7 @@ import rootSaga from '../sagas';
 import rootReducer from 'reducers/indexReducer';
 
 const sagaMiddleware = createSagaMiddleware();
+
 export default createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),

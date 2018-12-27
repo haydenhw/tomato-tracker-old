@@ -1,8 +1,6 @@
-import { prettyPrint } from 'pretty-printy';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
-import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 import { secondsToHMMSS } from 'helpers/time';
 
@@ -39,8 +37,6 @@ export default class TimeTracker extends Component {
 
   componentWillMount() {
     const { projects, selectedProject, setSelectedProject, setSelectedTaskId } = this.props;
-    console.log(this.props);
-
     if (
       localStorage.selectedProjectId &&
       projects.find(project => project.shortId === localStorage.selectedProjectId)
@@ -77,15 +73,6 @@ export default class TimeTracker extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-      /*  if(nextProps.tasks !== this.props.tasks) {
-      this.setState({
-      tasks: nextProps.tasks,
-      activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
-    })
-    }*/
-  }
-
   handleAddTasks() {
     const { toggleAddTasksForm } = this.props;
 
@@ -117,8 +104,9 @@ export default class TimeTracker extends Component {
     const { isTimerActive, toggleTimer } = this.props;
     const { selectedTaskId } = this.state;
 
+    // refactor to else if  block w/o return statements
     if (isTimerActive && (selectedTaskId === taskId)) {
-      toggleTimer();
+      toggleTimer(); // change to startRecordingTask
       return null;
     }
 

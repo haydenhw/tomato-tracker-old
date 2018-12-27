@@ -1,9 +1,7 @@
-import axios from 'axios';
-import { call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, select } from 'redux-saga/effects';
 
-import * as actions from '../actions/indexActions';
 import { fetchLogs, postLog } from '../helpers/apiHelpers';
-import { getActiveTask, getTaskStartedTime, getSelectedTaskId, getSelectedProject } from '../selectors';
+import { getActiveTask, getTaskStartedTime, getSelectedProject } from '../selectors';
 
 const createEntry = (state, selectedTaskId) => {
   const {
@@ -81,7 +79,7 @@ export function* logOrchestrator()  {
 }
 
 export default function* rootSaga() {
-  yield fork(loadLogs);
+  // yield fork(loadLogs);
   yield fork(logOrchestrator);
   yield takeEvery('SET_START_TIME', setTaskStartedTime);
 }

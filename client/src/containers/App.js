@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Notification  from 'react-web-notification';
-
 import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/route';
 
 import {

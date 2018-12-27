@@ -22,13 +22,6 @@ export function handleTimerComplete(selectedTaskId) {
         type: "HANDLE_TIMER_COMPLETE"
     });
 
-    // fetch('/stop-entry', {
-    //   method: 'put'
-    // })
-    // .catch(err => {
-    //   console.log('The fetch request to toggl produced an error');
-    // });
-
     setTimeout(() => dispatch(toggleDesktopNotification()), 1500);
   }
 }
@@ -48,9 +41,6 @@ export function toggleTimer(selectedTaskId) {
 
     if (isTimerActive) {
       document.title = 'Tomato Tracker';
-      // fetch('/stop-entry', {
-      //   method: 'put',
-      // });
     }
 
     dispatch({
