@@ -1,6 +1,6 @@
 import shortid from 'shortid';
+import { projectsUrl } from '../helpers/endpointHelpers';
 import { filterConsec, findIndices } from '../helpers/customImmutable';
-import { submit } from 'redux-form';
 
 export const ADD_PROJECT = "ADD_PROJECT";
 export function addProject(projectName) {
@@ -147,16 +147,18 @@ export const setSelectedTaskId = (taskId) => ({
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export function fetchProjects() {
   return (dispatch) => {
-
     dispatch({ type: 'TOGGLE_FETCHING' })
 
-    fetch('projects')
+    return fetch(projectsUrl)
     .then((res) => {
       return res.json();
     })
     .then(data => {
       dispatch(fetchProjectsSuccess(data.projects));
     })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 }
 
@@ -232,7 +234,7 @@ export function postProjectWithTasks(tasks) {
 
 const deleteSavedTasks = (dispatch, selectedProject, tasks) => {
     // delete tasks that do not already exist in the database
-    // we assume that taks without the database created id '_id' do not yet exist in the database
+    // we assume that tasks with an undefined '_id' propery do not yet exist in the database
 
     tasks.filter((task) => task.shouldDelete && task._id)
       .forEach((task) => dispatch(deleteTask(selectedProject, task)));

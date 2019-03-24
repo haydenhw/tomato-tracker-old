@@ -81,7 +81,7 @@ export function* logOrchestrator()  {
 }
 
 export default function* rootSaga() {
-  yield fork(loadLogs);
-  yield fork(logOrchestrator);
-  yield takeEvery('SET_START_TIME', setTaskStartedTime);
+  // yield fork(loadLogs);
+  // yield fork(logOrchestrator);
+  // yield takeEvery('SET_START_TIME', setTaskStartedTime);
 }

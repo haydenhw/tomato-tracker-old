@@ -15,8 +15,6 @@ const res2 = selectedTaskId(res1, {
   taskId: 'xyz',
 });
 
-console.log(res2);
-
 test('formats start time', async () => {
   expect(true).toBe(true);
 });

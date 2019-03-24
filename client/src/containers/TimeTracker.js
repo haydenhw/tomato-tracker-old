@@ -39,7 +39,6 @@ export default class TimeTracker extends Component {
 
   componentWillMount() {
     const { projects, selectedProject, setSelectedProject, setSelectedTaskId } = this.props;
-    console.log(this.props);
 
     if (
       localStorage.selectedProjectId &&
@@ -75,15 +74,6 @@ export default class TimeTracker extends Component {
         }
      });
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-      /*  if(nextProps.tasks !== this.props.tasks) {
-      this.setState({
-      tasks: nextProps.tasks,
-      activeTaskId: nextProps.tasks.length > 0 ? nextProps.tasks[0].id : null
-    })
-    }*/
   }
 
   handleAddTasks() {
@@ -260,3 +250,5 @@ export default class TimeTracker extends Component {
 TimeTracker.propTypes = {
   tasks: PropTypes.array
 }
+
+TimeTracker.displayName = 'TimeTracker';

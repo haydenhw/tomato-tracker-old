@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 export const getProjects = state => state.projects.items;
 export const getSelectedProjectId = state => state.selectedProjectId;
 export const getSelectedTaskId = state => state.selectedTaskId;
-export const getTaskStartedTime = state => state.timer.taskStartedTime;
+export const getTaskStartedTime = state =>state.timer.taskStartedTime;
 
 export const getSelectedProject = createSelector(
   getProjects,
