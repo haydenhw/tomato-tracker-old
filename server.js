@@ -7,6 +7,7 @@ require('dotenv').config();
 
 
 const app = express();
+const http = require('http').Server(app);
 
 // const shouldResetDb = false;
 
@@ -149,7 +150,7 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
             if (err) {
                 return reject(err);
             }
-            server = app.listen(port, () => {
+            server = http.listen(port, () => {
                 console.log(`Your app is listening on port ${port}`);
                 resolve();
             })
