@@ -104,7 +104,7 @@ app.put(('/stop-entry'), (req, res) => {
 });
 
 app.use('*', (req, res) => {
-  res.status(404).json({ sorry: '404 Not Found' });
+  res.status(404).json({ messageToSlef: '404 Not Found \n Perhaps you\'d rather be running in prodcution mode? Check package.json!' });
 });
 
 // const seedSampleData = () => {
