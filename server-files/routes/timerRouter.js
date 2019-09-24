@@ -23,8 +23,7 @@ const makeTimerRouter = (http) => {
     socketConnected = true;
   });
 
-  timerRouter
-    .route('/start/:id/:taskId')
+  timerRouter.route('/start/:id/:taskId')
     .post((req, res) => {
       const { id, taskId } = req.params;
       const { startTime } = req.body;
@@ -44,6 +43,12 @@ const makeTimerRouter = (http) => {
         }, 3000);
       }
 
+      res.end();
+    });
+
+  timerRouter.route('/stop')
+    .post((req, res) => {
+      cdTimer.stop();
       res.end();
     });
 
