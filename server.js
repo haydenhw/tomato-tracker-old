@@ -1,10 +1,9 @@
 const shouldDeleteDb = false;
+require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
-
 
 const app = express();
 const http = require('http').Server(app);
@@ -15,8 +14,11 @@ const { PORT, DATABASE_URL } = require('./server-files/config');
 const { FeatureRequests, Logs } = require('./server-files/models');
 const stopRunningEntry = require('./server-files/stopRunningEntry');
 
+const makeTimerRouter = require('./server-files/routes/timerRouter');
 const projectRouter = require('./server-files/routes/projectRouter');
 const taskRouter = require('./server-files/routes/taskRouter');
+
+const timerRouter = makeTimerRouter(http);
 
 mongoose.Promise = global.Promise;
 
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 projectRouter.use('/:id/tasks', taskRouter);
 app.use('/projects', projectRouter);
+app.use('/timer', timerRouter);
 
 app.get('/log', (req, res) => {
   Logs
