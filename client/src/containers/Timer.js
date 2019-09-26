@@ -5,8 +5,6 @@ import {
   setRemainingTime,
   handleTimerComplete,
   incrementTaskTime,
-  resetTimer,
-  setIntervalId,
   setStartTime,
   toggleTimer,
   startTimer,
@@ -20,7 +18,8 @@ class Timer extends Component {
     const {  selectedTaskId, setActiveTask, } = this.props;
 
     if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
-      setActiveTask(selectedTaskId);
+      // while task change when isTimerActive is disabled
+      // setActiveTask(selectedTaskId);
     }
   }
 
@@ -90,8 +89,6 @@ export default connect(mapStateToProps, {
   setRemainingTime,
   handleTimerComplete,
   incrementTaskTime,
-  resetTimer,
-  setIntervalId,
   setStartTime,
   startTimer,
   stopTimer,

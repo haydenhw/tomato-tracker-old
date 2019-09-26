@@ -40,7 +40,7 @@
     "jsdom-global": "^3.0.2",
     "json-loader": "0.5.4",
     "nock": "^10.0.5",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.12.0",
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-loader": "1.0.0",
@@ -82,7 +82,8 @@
     "redux-saga": "^0.16.2",
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "socket.io-client": "^2.3.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

@@ -1,7 +1,7 @@
 // extract nav presentational component
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Notification  from 'react-web-notification';
+import Notification from 'react-web-notification';
 
 import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/route';
 
@@ -9,9 +9,16 @@ import {
   changeActiveLink,
   fetchProjects,
   handleKeyDown,
-  toggleProjectNagModal
+  handleTimerComplete,
+  incrementTaskTime,
+  toggleProjectNagModal,
+  setTimerActive,
+  setRemainingTime,
+  setSelectedProject,
+  setSelectedTaskId,
 } from '../actions/indexActions';
 
+import io from 'socket.io-client';
 import Nav from '../components/Nav';
 
 class App extends Component {
@@ -20,13 +27,75 @@ class App extends Component {
 
     this.state = {
       showNotification: true
-    }
+    };
   }
 
+  /*
+    const { setRemainingTime, setTimerActive } = this.props;
+
+    const socket = io('/data');
+    socket.on('module', (timeData) => {
+      const { isTimerActive } = this.props;
+      const { remainingTime, taskId, projectId, } = timeData;
+
+      const activeProject = projects.find(project => project.shortId === projectId);
+      const activeTask = activeProject.tasks.find(task => task.shortId === taskId);
+
+      setRemainingTime(remainingTime);
+      incrementTask();
+
+      if (!isTimerActive) {
+        // test ->
+        setActiveProject()
+        setActiveTask()
+        setTimerActive(true);
+      }
+
+      if (remainingTime <1 ) {
+        stopTimer();
+        playSound();
+      }
+
+
+    });
+*/
+  socketStuff() {
+    const {
+      setRemainingTime,
+      setTimerActive,
+      incrementTaskTime,
+      handleTimerComplete,
+      setSelectedProject,
+      setSelectedTaskId
+    } = this.props;
+
+    const socket = io('/data');
+
+    socket.on('module', (timeData) => {
+      const { isTimerActive, projects, } = this.props;
+      const { remainingTime, projectId, taskId, } = timeData;
+
+      const activeProject = projects.find(project => project._id === projectId);
+      const activeTask = activeProject.tasks.find(task => task._id === taskId);
+
+      setRemainingTime(remainingTime);
+      incrementTaskTime(activeProject, activeTask);
+      setSelectedProject(activeProject.shortId);
+      setSelectedTaskId(activeTask.shortId);
+
+      if (!isTimerActive) {
+        setTimerActive(true);
+      }
+
+      if (remainingTime <1 ) {
+        handleTimerComplete();
+      }
+    });
+  }
 
   componentDidMount() {
     const { fetchProjects, handleKeyDown } = this.props;
-
+    this.socketStuff();
     document.onkeydown = handleKeyDown;
     fetchProjects();
   }
@@ -40,7 +109,7 @@ class App extends Component {
     return (
       <div>
         <Nav
-          activeLink={isProjectRoute ? 'PROJECTS' :  isLogRoute ? 'LOG' : 'TIMER'}
+          activeLink={isProjectRoute ? 'PROJECTS' : isLogRoute ? 'LOG' : 'TIMER'}
           handleTimerLinkClick={routeToTimerPage}
           handleProjectsLinkClick={routeToProjectsPage}
           handleLogLinkClick={routeToLogPage}
@@ -48,12 +117,12 @@ class App extends Component {
         />
         {this.props.children}
         {isDesktopNotificationActive
-          && <Notification
-            timeout={40000}
-            title="Time's Up!"
-            ignore={false}
-            options={{ icon: 'images/tomato-timer.png' }}
-          />}
+        && <Notification
+          timeout={40000}
+          title="Time's Up!"
+          ignore={false}
+          options={{ icon: 'images/tomato-timer.png' }}
+        />}
       </div>
     );
   }
@@ -61,18 +130,25 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const { projects, timer } = state;
-  const { isDesktopNotificationActive } = timer;
+  const { isTimerActive, isDesktopNotificationActive } = timer;
 
   return {
     isDesktopNotificationActive,
-    projects: projects.items
-  }
-}
+    isTimerActive,
+    projects: projects.items,
+  };
+};
 
 export default connect(mapStateToProps, {
-  changeActiveLink,
-  fetchProjects,
-  handleKeyDown,
-  toggleProjectNagModal
-}
+    changeActiveLink,
+    fetchProjects,
+    handleKeyDown,
+    handleTimerComplete,
+    incrementTaskTime,
+    setRemainingTime,
+    setTimerActive,
+    setSelectedProject,
+    setSelectedTaskId,
+    toggleProjectNagModal
+  }
 )(App);

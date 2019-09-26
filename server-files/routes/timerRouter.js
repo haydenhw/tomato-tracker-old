@@ -5,7 +5,7 @@ const { updateTask, countDownTimer } = require('../utils');
 
 const cdTimer = countDownTimer (1000);
 
-const emitTimerUpdate = (socket, remainingTime, taskId, projectId) => {
+const emitTimerUpdate = (socket, remainingTime, projectId, taskId) => {
   socket.emit('module', {
     remainingTime,
     taskId,

@@ -5,7 +5,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {
   deleteTask,
-  decrementTimer,
   changeActiveContextMenu,
   fetchProjects,
   setSelectedProject,
@@ -53,7 +52,8 @@ class TimeTrackerPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const {  modal, projects, timer, selectedProjectId } = state;
+
+  const {  modal, projects, timer, selectedProjectId, selectedTaskId } = state;
   const { hasFetched, isFetching } = projects;
   const { isModalActive, isModalClosing, isOnboardingActive } = modal;
   const { isTimerActive } = timer;
@@ -69,13 +69,13 @@ const mapStateToProps = state => {
     isTimerActive,
     selectedProject,
     selectedTasks,
+    selectedTaskId: selectedTaskId.current,
     projects: projects.items
   }
 }
 
 export default connect(mapStateToProps, {
   changeActiveContextMenu,
-  decrementTimer,
   deleteTask,
   fetchProjects,
   setSelectedProject,

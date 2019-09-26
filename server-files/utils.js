@@ -67,9 +67,7 @@ const countDownTimer = (interval) => {
     stop() {
       clearInterval(this.intervalObj);
       this.reset();
-      console.log(({
-        interval: this.intervalObj,
-      }));
+      console.log('timer stopped');
     },
   };
 };

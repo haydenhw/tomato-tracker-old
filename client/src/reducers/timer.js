@@ -1,7 +1,6 @@
 import * as actions from '../actions/indexActions';
 
 const defaultState = {
-  intervalId: null,
   isTimerActive: false,
   isDesktopNotificationActive: false,
   remainingTime: null,
@@ -16,32 +15,24 @@ export const timer = (state=defaultState, action) => {
         ...state,
         taskStartedTime: action.time,
       }
-    case actions.DECREMENT_TIMER:
+    case actions.SET_TIMER_ACTIVE:
       return {
         ...state,
-        remainingTime: state.remainingTime - 1
+        isTimerActive: action.isActive,
       }
-    case actions.HANDLE_TIMER_COMPLETE:
+    case actions.SET_REMAINING_TIME:
       return {
         ...state,
-        isDesktopNotificationActive: !state.isDesktopNotificationActive,
-        isTimerActive: !state.isTimerActive,
-        remainingTime: state.startTime,
+        remainingTime: action.time,
       }
     case actions.RESET_TIMER:
       return {
         ...state,
         remainingTime: state.startTime
       }
-    case actions.SET_INTERVAL_ID:
-      return {
-        ...state,
-        intervalId: action.intervalId
-      }
     case actions.SET_START_TIME:
       return {
         ...state,
-        isTimerActive: action.shouldToggleTimer ? !state.isTimerActive : state.isTimerActive,
         startTime: action.startTime,
         remainingTime: action.startTime,
       }
@@ -50,10 +41,18 @@ export const timer = (state=defaultState, action) => {
         ...state,
         isDesktopNotificationActive: !state.isDesktopNotificationActive
       }
-    case actions.TOGGLE_TIMER:
+    case actions.START_TIMER:
+      console.log('starting from reducer');
       return {
         ...state,
-        isTimerActive: !state.isTimerActive,
+        isTimerActive: true,
+        remainingTime: state.startTime,
+      }
+    case actions.STOP_TIMER:
+      console.log('stopping from reducer');
+      return {
+        ...state,
+        isTimerActive: false,
         remainingTime: state.startTime,
       }
     default:
