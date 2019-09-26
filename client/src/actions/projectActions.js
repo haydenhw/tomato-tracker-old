@@ -223,16 +223,18 @@ export function postProject(projectName, tasks) {
       .then((res) => {
         return res.json();
       })
-      .then(data => {
-        const projectId = data.shortId;
-        const databaseId = data._id;
+      .then(project => {
+        // add database Ids to projects and tasks
+        dispatch(postProjectSuccess(project.shortId, project._id));
+        project.tasks.forEach(task => {
+          dispatch(postTaskSuccess(project._id, task.shortId, task._id));
+        });
 
-        dispatch(postProjectSuccess(projectId, databaseId));
-        localStorage.selectedProjectId = projectId;
+        localStorage.selectedProjectId = project.shortId;
       });
-
   };
 }
+
 
 export function postProjectWithTasks(tasks) {
   return (dispatch, getState) => {

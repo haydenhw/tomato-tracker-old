@@ -22,7 +22,7 @@ const updateTask = (req, res, Projects) => {
     .findOneAndUpdate(
       { _id: req.params.id, 'tasks._id': req.params.taskId },
       { $set: toUpdate },
-      {new: true},
+      { new: true },
     )
     .exec()
     .then((proj) => {
