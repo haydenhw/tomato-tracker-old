@@ -37,7 +37,6 @@ export function queueNewProject(projectName) {
 }
 
 export const EDIT_TASK_REQUEST = 'EDIT_TASK_REQUEST';
-
 export function editTask(projectId, taskId, toUpdate) {
   return {
     type: 'EDIT_TASK_REQUEST',
@@ -150,11 +149,16 @@ export const fetchProjectsSuccess = (projects) => ({
 });
 
 export const SET_SELECTED_TASK_ID = 'SET_SELECTED_TASK_ID';
-export const setSelectedTaskId = (taskId, options = {}) => ({
-  type: 'SET_SELECTED_TASK_ID',
-  taskId,
-  playSound: options.playSound,
-});
+
+export const setSelectedTaskId = (dispatch) => (taskId, options = {}) => {
+  localStorage.setItem('prevSelectedTaskId', taskId);
+
+  dispatch({
+    type: 'SET_SELECTED_TASK_ID',
+    taskId,
+    playSound: options.playSound,
+  });
+};
 
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
