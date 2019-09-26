@@ -1,8 +1,6 @@
-import { prettyPrint } from 'pretty-printy';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
-import { hashHistory } from 'react-router';
 import shortid from 'shortid';
 import { secondsToHMMSS } from 'helpers/time';
 
@@ -16,8 +14,6 @@ import TotalTime from '../components/TotalTime';
 import Select from './Select';
 import Timer from './Timer';
 
-import {isDevOnboardingActive} from '../srcConfig/devSettings';
-
 export default class TimeTracker extends Component {
   constructor(props) {
     super(props);
@@ -25,10 +21,10 @@ export default class TimeTracker extends Component {
     const { tasks } = this.props;
 
     this.state = {
-      activeTaskId: null,
+      // while task change when isTimerActive is disabled
+      // activeTaskId: null,
       activeContextMenuParentId: null,
       clickedTaskId: null,
-      selectedTaskId: null,
       tasks: tasks,
     }
   }
@@ -39,7 +35,6 @@ export default class TimeTracker extends Component {
 
   componentWillMount() {
     const { projects, selectedProject, setSelectedProject, setSelectedTaskId } = this.props;
-
     if (
       localStorage.selectedProjectId &&
       projects.find(project => project.shortId === localStorage.selectedProjectId)
@@ -49,19 +44,16 @@ export default class TimeTracker extends Component {
     }
 
     const isPrevSelectedTaskParentActive = Boolean(selectedProject.tasks.find(task => task.shortId === localStorage.prevSelectedTaskId));
-
     if (isPrevSelectedTaskParentActive) {
-      this.setState({ selectedTaskId: localStorage.prevSelectedTaskId });
       setSelectedTaskId(localStorage.prevSelectedTaskId)
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { isTimerActive, tasks, setSelectedTaskId } = this.props;
+    const { tasks, setSelectedTaskId } = this.props;
 
     if ((prevProps.tasks.length !== tasks.length) && (tasks.length === 0)) {
       localStorage.setItem('prevSelectedTaskId', null);
-      this.setState({ selectedTaskId: null });
       setSelectedTaskId(null);
     }
 
@@ -69,9 +61,10 @@ export default class TimeTracker extends Component {
       const newTaskId = tasks[0].shortId;
 
       this.handleTaskChange(newTaskId, () => {
-        if (isTimerActive) {
-         this.setActiveTask(newTaskId);
-        }
+        // while task change when isTimerActive is disabled
+        // if (isTimerActive) {
+        //  this.setActiveTask(newTaskId);
+        // }
      });
     }
   }
@@ -89,7 +82,11 @@ export default class TimeTracker extends Component {
   }
 
   handleTaskChange(taskId, callback) {
-    const {  setSelectedTaskId } = this.props;
+    const {  setSelectedTaskId, isTimerActive, } = this.props;
+
+    if (isTimerActive) {
+      return;
+    }
 
     if (localStorage.prevSelectedTaskId !== taskId) {
       localStorage.setItem("prevSelectedTaskId", taskId);
@@ -99,13 +96,11 @@ export default class TimeTracker extends Component {
       callback();
     }
 
-    this.setState({ selectedTaskId: taskId });
     setSelectedTaskId(taskId);
   }
 
   handlePlayClick = (taskId) => () => {
-    const { isTimerActive, toggleTimer } = this.props;
-    const { selectedTaskId } = this.state;
+    const { isTimerActive, toggleTimer, selectedTaskId } = this.props;
 
     if (isTimerActive && (selectedTaskId === taskId)) {
       toggleTimer();
@@ -113,12 +108,13 @@ export default class TimeTracker extends Component {
     }
 
     if (isTimerActive && !(selectedTaskId === taskId)) {
-      this.setState({ activeTaskId: taskId })
-      this.handleTaskChange(taskId);
-      return null;
+      // while task change when isTimerActive is disabled
+      // this.setState({ activeTaskId: taskId });
+      // this.handleTaskChange(taskId);
+      // return null;
     }
 
-    this.setState({ activeTaskId: taskId }, toggleTimer)
+    this.setState({ activeTaskId: taskId }, toggleTimer);
     this.handleTaskChange(taskId);
   }
 
@@ -133,7 +129,8 @@ export default class TimeTracker extends Component {
   }
 
   setActiveTask(selectedTaskId) {
-    this.setState({ activeTaskId: selectedTaskId });
+    // while task change when isTimerActive is disabled
+    // this.setState({ activeTaskId: selectedTaskId });
   }
 
   setActiveContextMenu = (activeContextMenuParentId) => () => {
@@ -141,8 +138,8 @@ export default class TimeTracker extends Component {
   }
 
   renderTask (task){
-    const { changeActiveContextMenu, isTimerActive, selectedProject } = this.props;
-    const { activeTaskId, selectedTaskId } = this.state;
+
+    const { changeActiveContextMenu, isTimerActive, selectedProject, selectedTaskId } = this.props;
     const { shortId, taskName, recordedTime } = task;
 
     return (
@@ -151,7 +148,7 @@ export default class TimeTracker extends Component {
         key={shortid.generate()}
         handleItemClick={this.handleTaskItemClick(shortId)}
         handlePlayClick={this.handlePlayClick(shortId)}
-        isActive={(activeTaskId === shortId) && isTimerActive}
+        isActive={(selectedTaskId  === shortId) && isTimerActive}
         isSelected={selectedTaskId === shortId}
         title={taskName}
         time={recordedTime}
@@ -176,15 +173,14 @@ export default class TimeTracker extends Component {
   }
 
   renderTaskSelect() {
-    const { tasks } = this.props;
-    const { selectedTaskId } = this.state;
+    const { tasks, selectedTaskId } = this.props;
 
     const simplifiedTasks = tasks.map(task => ({
       name: task.taskName,
       id: task.shortId
     }));
 
-    const selectedTask = tasks.find(task => task.shortId === selectedTaskId) //|| tasks[0];
+    const selectedTask = tasks.find(task => task.shortId === selectedTaskId); //|| tasks[0];
     const selectedTaskName = selectedTask && selectedTask.taskName;
     const taskSelectHeading = selectedTaskName || "Click to select a task...";
     const headingClass = selectedTaskName ? "" : "grey";
@@ -201,8 +197,7 @@ export default class TimeTracker extends Component {
     }
 
   render() {
-    const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig } = this.props;
-    const { activeTaskId, selectedTaskId } = this.state;
+    const { isModalClosing, isOnboardingActive, selectedProject, tasks, toggleConfig, selectedTaskId  } = this.props;
     const totalTime = tasks.length ? tasks.map((task) => Number(task.recordedTime)).reduce((a,b) => a + b) : 0;
     const selectedProjectName = selectedProject ?  selectedProject.projectName : '';
 
@@ -215,10 +210,11 @@ export default class TimeTracker extends Component {
           <div className="timer-container">
             {tasks.length > 0 && this.renderTaskSelect()}
            <Timer
-             activeTaskId={activeTaskId}
+             // while task change when isTimerActive is disabled
+             // activeTaskId={activeTaskId}
+             // setActiveTask={this.setActiveTask.bind(this)}
              tasks={tasks}
              selectedTaskId={selectedTaskId}
-             setActiveTask={this.setActiveTask.bind(this)}
            />
           </div>
         </section>
