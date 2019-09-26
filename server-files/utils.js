@@ -1,10 +1,3 @@
-/*
- init socket
-   http as as param
-const io = require('socket.io')(http);
-
-const socket = io.of('/data');
-* */
 const updateTask = (req, res, Projects) => {
   const requiredTaskFields = ['taskName', 'recordedTime'];
 
