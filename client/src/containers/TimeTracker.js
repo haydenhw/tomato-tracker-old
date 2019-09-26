@@ -96,7 +96,7 @@ export default class TimeTracker extends Component {
       callback();
     }
 
-    setSelectedTaskId(taskId);
+    setSelectedTaskId(taskId, { playSound: true });
   }
 
   handlePlayClick = (taskId) => () => {
@@ -138,7 +138,6 @@ export default class TimeTracker extends Component {
   }
 
   renderTask (task){
-
     const { changeActiveContextMenu, isTimerActive, selectedProject, selectedTaskId } = this.props;
     const { shortId, taskName, recordedTime } = task;
 

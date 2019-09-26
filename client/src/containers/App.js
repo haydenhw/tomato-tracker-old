@@ -30,36 +30,7 @@ class App extends Component {
     };
   }
 
-  /*
-    const { setRemainingTime, setTimerActive } = this.props;
-
-    const socket = io('/data');
-    socket.on('module', (timeData) => {
-      const { isTimerActive } = this.props;
-      const { remainingTime, taskId, projectId, } = timeData;
-
-      const activeProject = projects.find(project => project.shortId === projectId);
-      const activeTask = activeProject.tasks.find(task => task.shortId === taskId);
-
-      setRemainingTime(remainingTime);
-      incrementTask();
-
-      if (!isTimerActive) {
-        // test ->
-        setActiveProject()
-        setActiveTask()
-        setTimerActive(true);
-      }
-
-      if (remainingTime <1 ) {
-        stopTimer();
-        playSound();
-      }
-
-
-    });
-*/
-  socketStuff() {
+  initTimerSocket() {
     const {
       setRemainingTime,
       setTimerActive,
@@ -95,8 +66,8 @@ class App extends Component {
 
   componentDidMount() {
     const { fetchProjects, handleKeyDown } = this.props;
-    this.socketStuff();
     document.onkeydown = handleKeyDown;
+    this.initTimerSocket();
     fetchProjects();
   }
 

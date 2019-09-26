@@ -46,7 +46,7 @@ export const timer = (state=defaultState, action) => {
       return {
         ...state,
         isTimerActive: true,
-        remainingTime: state.startTime,
+        remainingTime: state.startTime - 1,
       }
     case actions.STOP_TIMER:
       console.log('stopping from reducer');

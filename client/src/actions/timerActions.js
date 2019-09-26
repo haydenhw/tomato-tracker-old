@@ -92,7 +92,7 @@ export function startTimer(startTime, project, task) {
       type: "START_TIMER",
     });
 
-    const updatedTask = Object.assign({}, task, { startTime });
+    const updatedTask = Object.assign({}, task, { startTime: startTime - 1 });
 
     fetch(`timer/start/${project._id}/${task._id}`, {
       method: 'POST',
