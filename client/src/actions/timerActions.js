@@ -36,10 +36,14 @@ export function handleTimerComplete() {
     dispatch({
       type: 'STOP_TIMER'
     });
-
+    console.log('playing sound', Date().split(' ')[4]);
     const audio = new Audio(alarmSoundSrc);
     audio.play();
-    setTimeout(() => dispatch(toggleDesktopNotification()), 1500);
+    dispatch(toggleDesktopNotification());
+    setTimeout(
+      () => { dispatch(toggleDesktopNotification()); },
+      10000
+    )
   };
 }
 

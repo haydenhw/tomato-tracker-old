@@ -42,14 +42,14 @@ export const timer = (state=defaultState, action) => {
         isDesktopNotificationActive: !state.isDesktopNotificationActive
       }
     case actions.START_TIMER:
-      console.log('starting from reducer');
+      console.log('starting from reducer', Date().split(' ')[4]);
       return {
         ...state,
         isTimerActive: true,
         remainingTime: state.startTime - 1,
       }
     case actions.STOP_TIMER:
-      console.log('stopping from reducer');
+      console.log('stopping from reducer', Date().split(' ')[4]);
       return {
         ...state,
         isTimerActive: false,

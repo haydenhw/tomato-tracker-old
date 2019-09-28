@@ -35,8 +35,6 @@ class Timer extends Component {
 
   toggleTimer = () => {
     const { isTimerActive, startTimer, stopTimer, startTime,  selectedProject, selectedTaskId  } = this.props;
-    console.log(({ selectedTaskId }));
-    console.log(selectedProject.tasks);
     const activeTask = selectedProject.tasks.find(task => task.shortId === selectedTaskId);
     if (isTimerActive) {
       stopTimer();
