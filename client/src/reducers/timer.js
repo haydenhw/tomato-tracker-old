@@ -1,5 +1,4 @@
 import * as actions from '../actions/indexActions';
-
 const defaultState = {
   isTimerActive: false,
   isDesktopNotificationActive: false,
