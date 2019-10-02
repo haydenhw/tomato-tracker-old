@@ -150,10 +150,9 @@ export const fetchProjectsSuccess = (projects) => ({
 
 export const SET_SELECTED_TASK_ID = 'SET_SELECTED_TASK_ID';
 
-export const setSelectedTaskId = (dispatch) => (taskId, options = {}) => {
+export const setSelectedTaskId = (taskId, options = {}) => (dispatch) => {
   localStorage.setItem('prevSelectedTaskId', taskId);
-
-  dispatch({
+  return dispatch({
     type: 'SET_SELECTED_TASK_ID',
     taskId,
     playSound: options.playSound,

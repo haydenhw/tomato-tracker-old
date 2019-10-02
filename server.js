@@ -149,9 +149,6 @@ function tearDownDb() {
 }
 
 
-
-
-
 if (shouldDeleteDb === true) {
   console.log('**************** Deleting Database *********************');
   tearDownDb();
@@ -163,6 +160,7 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, { useMongoClient: true }, (err) => {
       if (err) {
+        console.error(err);
         return reject(err);
       }
       server = http.listen(port, () => {

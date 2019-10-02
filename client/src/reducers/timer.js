@@ -1,5 +1,4 @@
 import * as actions from '../actions/indexActions';
-
 const defaultState = {
   isTimerActive: false,
   isDesktopNotificationActive: false,
@@ -39,17 +38,17 @@ export const timer = (state=defaultState, action) => {
     case actions.TOGGLE_DESKTOP_NOTIFICATION:
       return {
         ...state,
-        isDesktopNotificationActive: !state.isDesktopNotificationActive
+        isDesktopNotificationActive: action.state,
       }
     case actions.START_TIMER:
-      console.log('starting from reducer');
+      console.log('starting timer', Date().split(' ')[4]);
       return {
         ...state,
         isTimerActive: true,
         remainingTime: state.startTime - 1,
       }
     case actions.STOP_TIMER:
-      console.log('stopping from reducer');
+      console.log('stopping timer', Date().split(' ')[4]);
       return {
         ...state,
         isTimerActive: false,
