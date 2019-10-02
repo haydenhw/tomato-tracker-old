@@ -21,9 +21,10 @@ export function setTimerActive(isActive) {
 
 export const TOGGLE_DESKTOP_NOTIFICATION = 'TOGGLE_DESKTOP_NOTIFICATION';
 
-export function toggleDesktopNotification() {
+export function toggleDesktopNotification(state) {
   return {
-    type: 'TOGGLE_DESKTOP_NOTIFICATION'
+    type: 'TOGGLE_DESKTOP_NOTIFICATION',
+    state,
   };
 }
 
@@ -42,9 +43,19 @@ export function handleTimerComplete() {
     });
     console.log('playing sound', Date()
       .split(' ')[4]);
+
     const audio = new Audio(alarmSoundSrc);
     audio.play();
-    dispatch(toggleDesktopNotification());
+
+    // switch to second desktop
+    axios.post(`http://${window.location.hostname}:3946`);
+
+    dispatch(toggleDesktopNotification(true));
+    setTimeout(
+      () => {
+        dispatch(toggleDesktopNotification(false));
+      }, 10000
+    );
   };
 }
 
@@ -100,6 +111,7 @@ export function startTimer(startTime, project, task) {
     dispatch({
       type: 'START_TIMER',
     });
+
 
     const updatedTask = Object.assign({}, task, { startTime: startTime - 1 });
 
