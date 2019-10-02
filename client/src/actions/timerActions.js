@@ -48,7 +48,7 @@ export function handleTimerComplete() {
     audio.play();
 
     // switch to second desktop
-    axios.post(`http://${window.location.hostname}:3946`);
+    axios.post(`http://${'localhost'}:3946`);
 
     dispatch(toggleDesktopNotification(true));
     setTimeout(

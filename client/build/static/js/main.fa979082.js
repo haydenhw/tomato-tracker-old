@@ -53009,7 +53009,7 @@
 	    audio.play();
 	
 	    // switch to second desktop
-	    _axios2.default.post('http://' + window.location.hostname + ':3946');
+	    _axios2.default.post('http://' + 'localhost' + ':3946');
 	
 	    dispatch(toggleDesktopNotification(true));
 	    setTimeout(function () {
@@ -108015,4 +108015,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.8698cae8.js.map
+//# sourceMappingURL=main.fa979082.js.map
