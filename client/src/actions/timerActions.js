@@ -1,4 +1,4 @@
-const gotoDesktop2  = () => {
+const gotoDesktop2 = () => {
   fetch(
     'desktop2',
     {
@@ -45,13 +45,9 @@ export function handleTimerComplete() {
   return (dispatch, getState) => {
     const { alarmSoundSrc } = getState().config;
 
-    dispatch({
-      type: 'HANDLE_TIMER_COMPLETE'
-    });
+    dispatch({ type: 'HANDLE_TIMER_COMPLETE' });
+    dispatch({ type: 'STOP_TIMER' });
 
-    dispatch({
-      type: 'STOP_TIMER'
-    });
     console.log('playing sound', Date()
       .split(' ')[4]);
 
@@ -118,10 +114,9 @@ export function startTimer(startTime, project, task) {
       return null;
     }
 
-    dispatch({
-      type: 'START_TIMER',
-    });
+    dispatch({ type: 'START_TIMER', });
 
+    gotoDesktop2();
 
     const updatedTask = Object.assign({}, task, { startTime: startTime - 1 });
 
@@ -144,6 +139,8 @@ export function stopTimer() {
       type: 'STOP_TIMER',
     });
 
+    gotoDesktop2();
+
     fetch('timer/stop', {
       method: 'POST',
       headers: {
@@ -155,7 +152,6 @@ export function stopTimer() {
 };
 
 export const INCREMENT_TASK_TIME = 'INCREMENT_TASK_TIME';
-
 export function incrementTaskTime(project, task) {
   return (dispatch) => {
     if (!task) {
