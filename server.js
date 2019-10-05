@@ -6,6 +6,7 @@ require('dotenv')
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 const app = express();
 const http = require('http')
@@ -34,6 +35,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 projectRouter.use('/:id/tasks', taskRouter);
 app.use('/projects', projectRouter);
 app.use('/timer', timerRouter);
+
+app.post('/desktop2', (req, res) => {
+  axios.post('http://localhost:3946', {
+    firstName: 'Fred',
+    lastName: 'Flintstone',
+  });
+  res.end();
+});
 
 app.get('/log', (req, res) => {
   Logs

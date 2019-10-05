@@ -1,4 +1,15 @@
-import axios from 'axios';
+const gotoDesktop2  = () => {
+  fetch(
+    'desktop2',
+    {
+      method: 'POST',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      })
+    });
+};
+
 import { timeStringToSeconds } from '../helpers/time';
 
 export const SET_REMAINING_TIME = 'SET_REMAINING_TIME';
@@ -47,8 +58,7 @@ export function handleTimerComplete() {
     const audio = new Audio(alarmSoundSrc);
     audio.play();
 
-    // switch to second desktop
-    axios.post(`http://${'localhost'}:3946`);
+    gotoDesktop2();
 
     dispatch(toggleDesktopNotification(true));
     setTimeout(
