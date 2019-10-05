@@ -53000,13 +53000,9 @@
 	    var alarmSoundSrc = getState().config.alarmSoundSrc;
 	
 	
-	    dispatch({
-	      type: 'HANDLE_TIMER_COMPLETE'
-	    });
+	    dispatch({ type: 'HANDLE_TIMER_COMPLETE' });
+	    dispatch({ type: 'STOP_TIMER' });
 	
-	    dispatch({
-	      type: 'STOP_TIMER'
-	    });
 	    console.log('playing sound', Date().split(' ')[4]);
 	
 	    var audio = new Audio(alarmSoundSrc);
@@ -53070,9 +53066,9 @@
 	      return null;
 	    }
 	
-	    dispatch({
-	      type: 'START_TIMER'
-	    });
+	    dispatch({ type: 'START_TIMER' });
+	
+	    gotoDesktop2();
 	
 	    var updatedTask = Object.assign({}, task, { startTime: startTime - 1 });
 	
@@ -53095,6 +53091,8 @@
 	      type: 'STOP_TIMER'
 	    });
 	
+	    gotoDesktop2();
+	
 	    fetch('timer/stop', {
 	      method: 'POST',
 	      headers: {
@@ -53106,7 +53104,6 @@
 	};
 	
 	var INCREMENT_TASK_TIME = exports.INCREMENT_TASK_TIME = 'INCREMENT_TASK_TIME';
-	
 	function incrementTaskTime(project, task) {
 	  return function (dispatch) {
 	    if (!task) {
@@ -108018,4 +108015,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.69fe202d.js.map
+//# sourceMappingURL=main.f6c89d40.js.map
