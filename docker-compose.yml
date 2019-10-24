@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    image: hayden321/tomato:1.0
     build: .
     ports:
       - "3002:3002"
