@@ -35,6 +35,7 @@
     "mongoose": "^4.8.6",
     "ramda": "^0.25.0",
     "ramda.compose": "^0.25.0",
+    "shortid": "^2.2.15",
     "socket.io": "^2.3.0"
   },
   "scripts": {

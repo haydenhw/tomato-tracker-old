@@ -20,6 +20,7 @@ import {
 
 import io from 'socket.io-client';
 import Nav from '../components/Nav';
+import { secondsToMSS } from '../helpers/time';
 
 class App extends Component {
   constructor() {
@@ -49,6 +50,7 @@ class App extends Component {
       const activeProject = projects.find(project => project._id === projectId);
       const activeTask = activeProject.tasks.find(task => task._id === taskId);
 
+      document.title = secondsToMSS(remainingTime);
       setRemainingTime(remainingTime);
       incrementTaskTime(activeProject, activeTask);
       setSelectedProject(activeProject.shortId);
