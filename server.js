@@ -7,6 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 const http = require('http')
@@ -24,11 +25,13 @@ const timerRouter = makeTimerRouter(http);
 
 mongoose.Promise = global.Promise;
 
+console.log('env ', process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
 }
 
-app.use(express.static('public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
