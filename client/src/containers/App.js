@@ -69,7 +69,6 @@ class App extends Component {
       }
 
       if (remainingTime < 1) {
-        socketInitSuccess = false;
         handleTimerComplete();
       }
     });
