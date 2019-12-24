@@ -1,6 +1,7 @@
 import * as actions from '../actions/indexActions';
 const defaultState = {
   isTimerActive: false,
+  isBackendTimerActive: false,
   isDesktopNotificationActive: false,
   remainingTime: null,
   startTime: 25 * 60,
@@ -40,6 +41,11 @@ export const timer = (state=defaultState, action) => {
         ...state,
         isDesktopNotificationActive: action.state,
       }
+    case 'ACK_BACKEND_TIMER_INIT':
+      return {
+        ...state,
+        isBackendTimerActive: true,
+      }
     case actions.START_TIMER:
       console.log('starting timer', Date().split(' ')[4]);
       return {
@@ -52,6 +58,7 @@ export const timer = (state=defaultState, action) => {
       return {
         ...state,
         isTimerActive: false,
+        isBackendTimerActive: false,
         remainingTime: state.startTime,
       }
     default:
