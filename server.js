@@ -40,7 +40,7 @@ app.use('/projects', projectRouter);
 app.use('/timer', timerRouter);
 
 app.post('/desktop2', (req, res) => {
-  axios.post('http://localhost:3946', {
+  axios.post('http://127.0.0.1:3946', {
     firstName: 'Fred',
     lastName: 'Flintstone',
   });
