@@ -32,7 +32,6 @@ const makeTimerRouter = (http) => {
         emitTimerUpdate(socket, remainingTime, id, taskId);
         req.body.recordedTime++;
         updateTask(req, res, Projects);
-        console.log(remainingTime);
       });
 
       if (socketConnected) {
