@@ -1,6 +1,6 @@
 const shortId = require('shortid');
 const axios = require('axios');
-
+const { PROJECT_URL } = require('./config');
 const tasks =  [
     'Learn Bioprocess',
     'Study Programming',
@@ -13,7 +13,7 @@ tasks.reverse();
 const generateProjectName = () => {
   const	[wkday, month, calendarDay] = Date().split(' ').slice(0,3);
   return `${wkday} ${month} ${parseInt(calendarDay)}`;
-}
+};
 
 const createTask = ({ name, key, id }) => {
     return {
@@ -59,7 +59,6 @@ const postProject = (url, newProject) => {
 };
 
 (() => {
-    const url = 'http://18.189.29.126:3002/projects';
     const _tasks = createTasks(tasks);
     const project = createProject({
         name: generateProjectName(),
@@ -67,5 +66,5 @@ const postProject = (url, newProject) => {
         tasks: _tasks,
     });
 
-    postProject(url, project);
+    postProject(PROJECT_URL, project);
 })();

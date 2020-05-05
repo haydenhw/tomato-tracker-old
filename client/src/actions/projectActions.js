@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 import { projectsUrl } from '../helpers/endpointHelpers';
-import { filterConsec, findIndices } from '../helpers/customImmutable';
+import { filterConsec
+  , findIndices } from '../helpers/customImmutable';
 
 export const ADD_PROJECT = 'ADD_PROJECT';
 

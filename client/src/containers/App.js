@@ -27,7 +27,6 @@ import { secondsToMSS } from '../helpers/time';
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
       showNotification: true
     };

@@ -5,9 +5,11 @@ import thunk from 'redux-thunk';
 import rootReducer from 'reducers/indexReducer';
 import rootSaga from '../sagas';
 import * as actions from '../actions/indexActions';
+const sagaMiddleware = createSagaMiddleware();
 
 const uiSounds = store => next => action => {
   const audio = new Audio('sound/click.mp3');
+  audio.volume = 0.3;
 
   switch (action.type) {
     case actions.START_TIMER:
@@ -29,11 +31,10 @@ const uiSounds = store => next => action => {
       break;
   }
 
-
   return next(action);
 };
 
-const sagaMiddleware = createSagaMiddleware();
+
 export default createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),

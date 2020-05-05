@@ -12,6 +12,7 @@ import {
   addProject,
   changeActiveContextMenu,
   deleteProject,
+  fetchProjects,
   setSelectedProject,
   setTempTasks,
   toggleTimer, 
@@ -44,16 +45,17 @@ class ProjectsPage extends Component {
   }
   
   componentWillMount() {
-    const { isOnboardingActive } = this.props;
+    const { isOnboardingActive  } = this.props;
     
     if (isOnboardingActive) {
       routeToTimerPage();
     } 
   }
   
-  componentWillMount() {
-    
-  }   
+  componentDidMount() {
+    const { fetchProjects } = this.props;
+    fetchProjects();
+  }
 
   handleAddButtonClick() {
     const { setTempTasks } = this.props;
@@ -217,6 +219,7 @@ export default connect(mapStateToProps, {
   addProject,
   changeActiveContextMenu,
   deleteProject,
+  fetchProjects,
   setSelectedProject,
   setTempTasks,
   toggleTimer,

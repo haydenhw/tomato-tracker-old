@@ -1,12 +1,10 @@
 /* eslint-disable no-trailing-spaces,no-underscore-dangle,no-plusplus */
-// get projects
-// filter projects that are old
-// delete filtered projects
 
 const axios = require('axios');
+const { PROJECT_URL } = require('./config');
 
 (async () => {
-  const url = 'http://18.189.29.126:3002/projects';
+  const url = PROJECT_URL ;
   const numToDelete = process.argv[2];
 
   if (numToDelete == null) {
