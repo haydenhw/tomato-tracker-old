@@ -4,7 +4,7 @@
 docker-compose build &&
 docker push hayden321/tomato:latest &&
 
-ssh -i ~/.ssh/MyKeyPair.pem ubuntu@$ec2ip4 /bin/bash <<EOF
+ssh -i ~/.ssh/MyKeyPair.pem ubuntu@$EC2IP4 /bin/bash <<EOF
     sudo docker pull hayden321/tomato:latest &&
     sudo docker container stop tomato &&
     sudo docker container rm tomato &&
