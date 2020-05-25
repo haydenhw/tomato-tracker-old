@@ -40,6 +40,10 @@ app.use('/projects', projectRouter);
 app.use('/timer', timerRouter);
 
 app.post('/desktop2', (req, res) => {
+  if (process.env.SKIP_TIMER_SCRIPT) {
+    return res.end();
+  }
+
   axios.post('http://127.0.0.1:3946', {
     firstName: 'Fred',
     lastName: 'Flintstone',
@@ -177,6 +181,8 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
       }
       server = http.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
+        console.log('\n');
+        console.log('Set environment variable SKIP_TIMER_SCRIPT=true to disable script that runs on timer start / stop');
         resolve();
       })
         .on('error', (err) => {
