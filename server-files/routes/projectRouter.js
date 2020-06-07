@@ -6,6 +6,7 @@ projectRouter.route('/')
   .get((req, res) => {
     Projects
       .find()
+      .sort({createdAt: -1})
       .exec()
       .then((projects) => {
         return res.json({ projects });

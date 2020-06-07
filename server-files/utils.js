@@ -26,7 +26,6 @@ const updateTask = (req, res, Projects) => {
     )
     .exec()
     .then((proj) => {
-      // console.log(proj);
       return res.status(204).end();
     })
     .catch((err) => {
@@ -36,6 +35,16 @@ const updateTask = (req, res, Projects) => {
 };
 
 const countDownTimer = (interval) => {
+  // try refactoring this using setTimeout recursively
+  /*
+          const setIntervalAsync = (fn, ms) => {
+          fn().then(() => {
+            setTimeout(() => setIntervalAsync(fn, ms), ms);
+          });
+        };
+
+        setIntervalAsync(() => { ...do stuff }, 3000);
+   */
   return {
     intervalObj: null,
     time: null,
@@ -44,11 +53,15 @@ const countDownTimer = (interval) => {
       this.callback = fn;
     },
     handleTick() {
-      this.callback(this.time);
-      if (this.time <= 0) {
+      if (this.time === 0) {
+        this.callback(this.time);
         this.stop();
+      } else if (this.time < 0) {
+        console.error('Timer value went below zero. Current value is ', this.time)
+      } else {
+        this.callback(this.time);
+        this.time--;
       }
-      this.time--;
     },
     start(duration) {
       this.time = duration;

@@ -45,6 +45,7 @@ class App extends Component {
     const socket = io('/data');
 
     socket.on('module', (timeData) => {
+      console.log(timeData)
       const { isTimerActive, isBackendTimerActive, projects, } = this.props;
       const { remainingTime, projectId, taskId, } = timeData;
 
@@ -67,7 +68,7 @@ class App extends Component {
         setTimerActive(true);
       }
 
-      if (remainingTime < 1) {
+      if (remainingTime === 0) {
         handleTimerComplete();
       }
     });
@@ -76,11 +77,17 @@ class App extends Component {
       alert(err);
     });
   }
-
+  initCreateProjectOnFirstDailyFocus () {
+    window.addEventListener('focus', () => {
+      console.log('jfdkfjkdkfj')
+    }) 
+  }
+  
   componentDidMount() {
     const { fetchProjects, handleKeyDown } = this.props;
     document.onkeydown = handleKeyDown;
     this.initTimerSocket();
+    this.initCreateProjectOnFirstDailyFocus();
     fetchProjects();
   }
 

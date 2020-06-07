@@ -3,7 +3,7 @@ const timerRouter = express.Router({ mergeParams: true });
 const { Projects } = require('../models');
 const { updateTask, countDownTimer } = require('../utils');
 
-const cdTimer = countDownTimer (1000);
+const cdTimer = countDownTimer(1000);
 
 const emitTimerUpdate = (socket, remainingTime, projectId, taskId) => {
   socket.emit('module', {
@@ -38,7 +38,9 @@ const makeTimerRouter = (http) => {
         cdTimer.start(startTime);
       } else {
         setTimeout(() => {
+          console.log('Client requested that timer be started but socket was not connecte yet. Retrying in 3 seconds');
           cdTimer.start(startTime);
+          
         }, 3000);
       }
 

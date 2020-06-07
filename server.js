@@ -25,7 +25,7 @@ const timerRouter = makeTimerRouter(http);
 
 mongoose.Promise = global.Promise;
 
-console.log('env ', process.env.NODE_ENV)
+process.env.NODE_ENV =  process.env.NODE_ENV || 'development';
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 }
@@ -180,9 +180,11 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
         return reject(err);
       }
       server = http.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
         console.log('\n');
+        console.log(`Your app is listening on port ${port}`);
+        console.log(`NODE_ENV set to ${process.env.NODE_ENV}`);
         console.log('Set environment variable SKIP_TIMER_SCRIPT=true to disable script that runs on timer start / stop');
+        console.log('\n');
         resolve();
       })
         .on('error', (err) => {

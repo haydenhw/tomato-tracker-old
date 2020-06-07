@@ -2,10 +2,8 @@ const shortId = require('shortid');
 const axios = require('axios');
 const { PROJECT_URL } = require('./config');
 const tasks =  [
-    'Learn Bioprocess',
-    'Study Programming',
-    'Practice Programming',
-    'Other',
+    'Work',
+    'Not Work',
 ];
 
 tasks.reverse();

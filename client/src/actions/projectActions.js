@@ -1,7 +1,6 @@
 import shortid from 'shortid';
-import { projectsUrl } from '../helpers/endpointHelpers';
-import { filterConsec
-  , findIndices } from '../helpers/customImmutable';
+import { projectsUrl } from '../constants/endpointConstants';
+import { filterConsec, findIndices } from '../helpers/customImmutable';
 
 export const ADD_PROJECT = 'ADD_PROJECT';
 
@@ -38,6 +37,7 @@ export function queueNewProject(projectName) {
 }
 
 export const EDIT_TASK_REQUEST = 'EDIT_TASK_REQUEST';
+
 export function editTask(projectId, taskId, toUpdate) {
   return {
     type: 'EDIT_TASK_REQUEST',
@@ -288,7 +288,7 @@ export function updateProjectName(project, newName) {
     dispatch(updateProjectNameRequest(project.shortId, newName));
 
     fetch(
-      `projects/${project._id}`,
+      `${projectsUrl}/${project._id}`,
       {
         method: 'PUT',
         body: JSON.stringify({ projectName: newName, }),
@@ -303,7 +303,7 @@ export function updateProjectName(project, newName) {
 export function postTask(projectId, task) {
   return (dispatch) => {
     fetch(
-      `projects/${projectId}`,
+      `${projectsUrl}/${projectId}`,
       {
         method: 'POST',
         body: JSON.stringify(task),
@@ -332,7 +332,7 @@ export function updateTask(project, task, toUpdate) {
     dispatch(editTask(project.shortId, task.shortId, toUpdate));
 
     fetch(
-      `projects/${project._id}/tasks/${task._id}`,
+      `${projectsUrl}/${project._id}/tasks/${task._id}`,
       {
         method: 'PUT',
         body: JSON.stringify(toUpdate),
@@ -355,7 +355,7 @@ export function deleteProject(project) {
     });
 
     fetch(
-      `projects/${project._id}`,
+      `${projectsUrl}/${project._id}`,
       {
         method: 'DELETE',
         headers: new Headers({
@@ -373,7 +373,7 @@ export function deleteTask(project, task, shouldUpdateLocalState) {
     }
 
     fetch(
-      `projects/${project._id}/tasks/${task._id}`,
+      `${projectsUrl}/${project._id}/tasks/${task._id}`,
       {
         method: 'DELETE',
         headers: new Headers({
