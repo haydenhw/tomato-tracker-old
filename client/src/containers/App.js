@@ -45,9 +45,8 @@ class App extends Component {
     const socket = io('/data');
 
     socket.on('module', (timeData) => {
-      console.log(timeData)
-      const { isTimerActive, isBackendTimerActive, projects, } = this.props;
-      const { remainingTime, projectId, taskId, } = timeData;
+      const { isTimerActive, isBackendTimerActive, projects } = this.props;
+      const { remainingTime, projectId, taskId } = timeData;
 
       const activeProject = projects.find(project => project._id === projectId);
       const activeTask = activeProject.tasks.find(task => task._id === taskId);
@@ -77,6 +76,7 @@ class App extends Component {
       alert(err);
     });
   }
+
   initCreateProjectOnFirstDailyFocus () {
     window.addEventListener('focus', () => {
       console.log('jfdkfjkdkfj')

@@ -14,6 +14,7 @@ const projectSchema = mongoose.Schema({
   projectName: { type: String, required: true },
   position: Number,
   shortId: { type: String, required: true },
+  isDailyProject: { type: Boolean, default: false },
   tasks: [taskSchema],
 }, { timestamps: { createdAt: 'createdAt' } });
 

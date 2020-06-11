@@ -1,8 +1,37 @@
 const express = require('express');
 const projectRouter = express.Router();
+const { createDailyProject, isTodayPDT } = require('../dailyProject');
 const { Projects } = require('../models');
 
 projectRouter.route('/')
+  .get(async (req, res, next) => {
+    const createPDTTimesatmp = (dateObj) => {
+      const offsetPDT = -7 * 60 * 60 * 1000;
+      const date = dateObj || new Date();
+      return new Date(date.getTime() + offsetPDT);
+    }
+
+    console.log('GET projects called at ', createPDTTimesatmp())
+
+    let [timeOfLastDailyProjectCreation] = await Projects.find({isDailyProject: true })
+      .sort({ _id: -1 })
+      .limit(1)
+      .select({ 'createdAt': 1 });
+
+    timeOfLastDailyProjectCreation = new Date(timeOfLastDailyProjectCreation.createdAt);
+
+    // During PST isTodayPDT will be true if timestamp is less than 12am
+    // During PDT it will be true if less than 1am
+    console.log('Timestamp of last project', createPDTTimesatmp(timeOfLastDailyProjectCreation));
+    if (!isTodayPDT(timeOfLastDailyProjectCreation)) {
+        console.log('Creating new daily project');
+        const tasks = ['Work', 'Not Work'];
+        const newProject = createDailyProject(tasks);
+        Projects.create(newProject)
+      }
+
+    next();
+  })
   .get((req, res) => {
     Projects
       .find()
@@ -41,6 +70,7 @@ projectRouter.route('/')
               position: req.body.position,
               tasks: req.body.tasks,
               shortId: req.body.shortId,
+              isDailyProject: req.body.isDailyProject,
             });
         }
       })
