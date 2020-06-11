@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-function stopRunningEntry() {
+function toggl() {
   const apiKey = process.env.TOGGL_API_KEY;
 
   axios({
@@ -41,4 +41,4 @@ function stopRunningEntry() {
   .catch(err => console.log('The fetch request to toggl produced an error'))
 }
 
-module.exports = stopRunningEntry;
+module.exports = toggl;

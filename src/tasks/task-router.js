@@ -1,8 +1,8 @@
 const express = require('express');
 
 const taskRouter = express.Router({ mergeParams: true });
-const { Projects } = require('../models');
-const { updateTask } = require('../utils');
+const { Projects } = require('../projects/project-model');
+const updateTask = require('../core/update-task');
 
 taskRouter.route('/')
   .get((req, res) => {

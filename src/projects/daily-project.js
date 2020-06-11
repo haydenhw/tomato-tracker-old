@@ -17,7 +17,7 @@ const isTodayPDT = (dateObj) => {
       dateObj.getMonth() === month &&
       dateObj.getYear() === year
     )
-  )
+  );
 
   return (
     dateObj.getDay() === day &&
