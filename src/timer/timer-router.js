@@ -13,7 +13,7 @@ const emitTimerUpdate = (socket, remainingTime, projectId, taskId) => {
     projectId,
   })
 
-  socket.emit('module', {
+  socket.emit('timerTick', {
     remainingTime,
     taskId,
     projectId,
@@ -22,7 +22,7 @@ const emitTimerUpdate = (socket, remainingTime, projectId, taskId) => {
 
 const makeTimerRouter = (http) => {
   const io = require('socket.io')(http);
-  const socket = io.of('/data');
+  const socket = io.of('/timer');
 
   let socketConnected = false;
   socket.on('connection', function (socket) {
