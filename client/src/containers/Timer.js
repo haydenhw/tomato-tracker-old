@@ -3,7 +3,6 @@ import { connect} from 'react-redux';
 
 import {
   setRemainingTime,
-  handleTimerComplete,
   incrementTaskTime,
   setStartTime,
   toggleTimer,
@@ -14,6 +13,7 @@ import {
 import TimeDisplay from '../components/TimeDisplay';
 
 class Timer extends Component {
+  // TODO delete componentWillReceiveProps
   componentWillReceiveProps(nextProps) {
     const {  selectedTaskId, setActiveTask, } = this.props;
 
@@ -87,7 +87,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   setRemainingTime,
-  handleTimerComplete,
   incrementTaskTime,
   setStartTime,
   startTimer,

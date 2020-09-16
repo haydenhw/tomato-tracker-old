@@ -40,8 +40,9 @@
   },
   "scripts": {
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
+    "dev": "PORT=3003 nodemon server.js",
     "server": "NODE_ENV='production' node server.js",
-    "deploy": "export NODE_ENV='production' && forever start server.js",
+    "deploy": "pm2 start ecosystem.config.js --env production",
     "test": "mocha",
     "lint": "eslint --ext .js --ext .jsx client/src/ || exit 0",
     "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/|| exit 0",

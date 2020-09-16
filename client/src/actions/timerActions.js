@@ -73,11 +73,6 @@ export function toggleTimer(selectedTaskId) {
 
     if (isTimerActive) {
       document.title = 'Tomato Tracker';
-      // fetch('/stop-entry', {
-      //   method: 'put',
-      // });
-    } else {
-      // send request to start timer to server
     }
 
     dispatch({

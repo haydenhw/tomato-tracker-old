@@ -13,13 +13,12 @@ const app = express();
 const http = require('http')
   .Server(app);
 
-const { PORT, DATABASE_URL } = require('./server-files/config');
-const { FeatureRequests, Logs } = require('./server-files/models');
-const stopRunningEntry = require('./server-files/stopRunningEntry');
+const { PORT, DATABASE_URL } = require('./src/config');
+const { FeatureRequests, Logs } = require('./src/models');
 
-const makeTimerRouter = require('./server-files/routes/timerRouter');
-const projectRouter = require('./server-files/routes/projectRouter');
-const taskRouter = require('./server-files/routes/taskRouter');
+const makeTimerRouter = require('./src/timer/timer-router');
+const projectRouter = require('./src/projects/project-router');
+const taskRouter = require('./src/tasks/task-router');
 
 const timerRouter = makeTimerRouter(http);
 
@@ -123,10 +122,6 @@ app.put('/fr/:frId', (req, res) => {
       res.status(500)
         .json({ message: 'Internal server error' })
     );
-});
-
-app.put(('/stop-entry'), (req, res) => {
-  stopRunningEntry();
 });
 
 app.use('*', (req, res) => {

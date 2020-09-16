@@ -23,6 +23,31 @@ import store from 'reduxFiles/store';
 import Nav from '../components/Nav';
 import { secondsToMSS } from '../helpers/time';
 
+const isTodayPDT = (dateObj) => {
+  const offsetPDT = -7 * 60 * 60 * 1000;
+  dateObj = new Date(dateObj.getTime() + offsetPDT);
+  let now = new Date();
+  now = new Date(now.getTime() + offsetPDT);
+  const day = now.getDay();
+  const month = now.getMonth();
+  const year = now.getYear();
+
+  return (
+    dateObj.getDay() === day &&
+    dateObj.getMonth() === month &&
+    dateObj.getYear() === year
+  );
+};
+
+const lastWindowFocus = {
+  getDateObj() {
+    return new Date(+localStorage.getItem('lastWindowFocus'))
+  },
+  set() {
+    localStorage.setItem('lastWindowFocus', Date.now())
+  }
+};
+
 
 class App extends Component {
   constructor() {
@@ -44,14 +69,14 @@ class App extends Component {
 
     const socket = io('/data');
 
+    // TODO refactor this using clean code principles
     socket.on('module', (timeData) => {
-      console.log(timeData)
-      const { isTimerActive, isBackendTimerActive, projects, } = this.props;
-      const { remainingTime, projectId, taskId, } = timeData;
+      const { isTimerActive, isBackendTimerActive, projects } = this.props;
+      const { remainingTime, projectId, taskId } = timeData;
 
       const activeProject = projects.find(project => project._id === projectId);
       const activeTask = activeProject.tasks.find(task => task._id === taskId);
-      
+
       document.title = secondsToMSS(remainingTime);
       setRemainingTime(remainingTime);
       incrementTaskTime(activeProject, activeTask);
@@ -68,7 +93,7 @@ class App extends Component {
         setTimerActive(true);
       }
 
-      if (remainingTime === 0) {
+      if (remainingTime === 0 && isTimerActive) {
         handleTimerComplete();
       }
     });
@@ -77,17 +102,29 @@ class App extends Component {
       alert(err);
     });
   }
-  initCreateProjectOnFirstDailyFocus () {
-    window.addEventListener('focus', () => {
-      console.log('jfdkfjkdkfj')
-    }) 
+
+  bindWindowFocusListener(callback) {
+    window.addEventListener('focus', callback)
   }
-  
+
+  fetchAndDisplayDailyProjectOnFirstDailyFocus() {
+    const fetchAndDisplayDailyProject = (dependencies) => {
+    };
+
+    const { setSelectedProject, fetchProjects } = this.props;
+    // change this to not
+    if (isTodayPDT(lastWindowFocus.getDateObj())) {
+      fetchAndDisplayDailyProject()
+    }
+  };
+
   componentDidMount() {
+
+    this.testStuff();
     const { fetchProjects, handleKeyDown } = this.props;
     document.onkeydown = handleKeyDown;
     this.initTimerSocket();
-    this.initCreateProjectOnFirstDailyFocus();
+    this.bindWindowFocusListener(this.fetchAndDisplayDailyProjectOnFirstDailyFocus);
     fetchProjects();
   }
 
