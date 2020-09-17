@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import LogTable from '../components/LogTable'
+import LogTable from './LogTable'
 
 const Log = ({ logs }) => <LogTable logs={logs} />
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { call, fork, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
-import * as actions from '../actions/indexActions';
-import { fetchLogs, postLog } from '../helpers/apiHelpers';
-import { getActiveTask, getTaskStartedTime, getSelectedTaskId, getSelectedProject } from '../selectors';
+import * as actions from '../../actions/indexActions';
+import { fetchLogs, postLog } from '../../helpers/apiHelpers';
+import { getActiveTask, getTaskStartedTime, getSelectedTaskId, getSelectedProject } from '../../selectors';
 
 const createEntry = (state, selectedTaskId) => {
   const {

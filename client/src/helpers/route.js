@@ -11,6 +11,5 @@ export const routeToProjectsPage = () => {
 }
 
 export const routeToLogPage = () => {
-  hashHistory.push('/log');
-  window.scrollTo(0,0);
+  // TODO delete references to this function
 }

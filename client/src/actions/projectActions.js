@@ -239,18 +239,6 @@ export function postProject(projectName, tasks) {
   };
 }
 
-
-export function postProjectWithTasks(tasks) {
-  return (dispatch, getState) => {
-    //dispatch(submit('addProjectForm')).then(() => console.log('hello'))
-
-    // const newProjectName = getState().projects.queue;
-    // console.log(newProjectName);
-    // console.log(tasks)
-    // dispatch(postProject(newProjectName, tasks));
-  };
-}
-
 const deleteSavedTasks = (dispatch, selectedProject, tasks) => {
   // delete tasks that do not already exist in the database
   // we assume that tasks with an undefined '_id' propery do not yet exist in the database

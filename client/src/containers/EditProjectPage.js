@@ -14,7 +14,7 @@ class EditProjectPage extends Component {
   constructor(props) {
     super(props)
 
-    const { projects, selectedProject } = props;
+    const { selectedProject } = props;
 
     this.handleEditProjectSubmit = this.handleEditProjectSubmit(selectedProject);
     this.handleRemoteSubmit = this.handleRemoteSubmit.bind(this);
@@ -55,40 +55,10 @@ class EditProjectPage extends Component {
     const { remoteSubmit } = this.props;
 
     remoteSubmit('ADD_PROJECT');
-
-
-    // setTimeout(() => remoteSubmit('ADD_TASKS'), 100)
-
   }
-  // handleEditProjectName = (project, updateProjectName) => ({ projectName }) => {
-  //   const { updateProjectName } = this.props;
-  //
-  //     if (!hasAnyValue(projectName)) {
-  //       throw new SubmissionError({
-  //         projectName: 'Project name is required'
-  //       })
-  //     }
-  //
-  //   updateProjectName(project, projectName);
-  // }
-
-  // handleNewChangesSubmit() {
-  //   const { remoteSubmit } = this.props;
-  //   console.log('asdf')
-  //
-  //   this.handleEditProjectName();
-  //   this.handleTasksSubmit();
-  //   remoteSubmit(null);
-  //
-  // handleTasksSubmit({ tasks }) {
-  //   const { updateTasks, selectedProjectId } = this.props;
-  //   updateTasks(selectedProjectId, tasks);
-
-
-  // }
 
   render() {
-    const { remoteSubmitForm, selectedProject } = this.props;
+    const { selectedProject } = this.props;
 
     if (!selectedProject) {
       return null;

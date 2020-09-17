@@ -5,7 +5,6 @@ import { customForm } from './customForm';
 import { clickedTaskId } from './clickedTaskId';
 import { config } from './config';
 import { editMenu } from './editMenu';
-import { log } from './log';
 import { modal } from './modal';
 import { projects } from './projects';
 import { selectedProjectId } from './selectedProjectId';
@@ -17,7 +16,6 @@ export default combineReducers({
     config,
     customForm,
     editMenu,
-    log,
     modal,
     projects,
     selectedProjectId,
