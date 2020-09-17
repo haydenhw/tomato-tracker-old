@@ -6,6 +6,7 @@ import Notification from 'react-web-notification';
 import { routeToLogPage, routeToProjectsPage, routeToTimerPage, } from 'helpers/route';
 
 import {
+  ackBackendTimerInit,
   changeActiveLink,
   fetchProjects,
   handleKeyDown,
@@ -19,7 +20,7 @@ import {
 } from '../actions/indexActions';
 
 import Nav from '../components/Nav';
-import { initTimerSocket } from '../services/timer-socket';
+import initTimerSocket from '../services/timer-socket';
 
 class App extends Component {
   constructor() {
@@ -77,6 +78,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
+    ackBackendTimerInit,
     changeActiveLink,
     fetchProjects,
     handleKeyDown,

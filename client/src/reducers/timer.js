@@ -41,7 +41,7 @@ export const timer = (state=defaultState, action) => {
         ...state,
         isDesktopNotificationActive: action.state,
       }
-    case 'ACK_BACKEND_TIMER_INIT':
+    case actions.ACK_BACKEND_TIMER_INIT:
       return {
         ...state,
         isBackendTimerActive: true,

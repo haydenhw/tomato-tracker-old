@@ -1,3 +1,5 @@
+import { timeStringToSeconds } from '../helpers/time';
+
 const gotoDesktop2 = () => {
   fetch(
     'desktop2',
@@ -10,7 +12,6 @@ const gotoDesktop2 = () => {
     });
 };
 
-import { timeStringToSeconds } from '../helpers/time';
 
 export const SET_REMAINING_TIME = 'SET_REMAINING_TIME';
 
@@ -159,4 +160,11 @@ export function incrementTaskTime(project, task) {
       taskId: task.shortId
     });
   };
+}
+
+export const ACK_BACKEND_TIMER_INIT = 'ACK_BACKEND_TIMER_INIT';
+export function ackBackendTimerInit() {
+  return {
+    type: 'ACK_BACKEND_TIMER_INIT'
+  }
 }
