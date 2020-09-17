@@ -13,16 +13,6 @@ import {
 import TimeDisplay from '../components/TimeDisplay';
 
 class Timer extends Component {
-  // TODO delete componentWillReceiveProps
-  componentWillReceiveProps(nextProps) {
-    const {  selectedTaskId, setActiveTask, } = this.props;
-
-    if ((this.props.isTimerActive !== nextProps.isTimerActive) && nextProps.isTimerActive) {
-      // while task change when isTimerActive is disabled
-      // setActiveTask(selectedTaskId);
-    }
-  }
-
   handleSetStartTime = () => (newTime) => {
     const { selectedTaskId, setStartTime, selectedProject } = this.props;
     const shouldToggleTimer = Boolean(selectedTaskId);

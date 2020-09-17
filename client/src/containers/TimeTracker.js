@@ -40,7 +40,6 @@ export default class TimeTracker extends Component {
       projects.find(project => project.shortId === localStorage.selectedProjectId)
     ) {
       setSelectedProject(localStorage.selectedProjectId);
-    } else {
     }
 
     const isPrevSelectedTaskParentActive = Boolean(
@@ -49,7 +48,7 @@ export default class TimeTracker extends Component {
         (task) => task.shortId === localStorage.prevSelectedTaskId
       )
     );
-    
+
     if (isPrevSelectedTaskParentActive) {
       setSelectedTaskId(localStorage.prevSelectedTaskId)
     }
@@ -92,10 +91,6 @@ export default class TimeTracker extends Component {
 
     if (isTimerActive) {
       return;
-    }
-
-    if (localStorage.prevSelectedTaskId !== taskId) {
-      localStorage.setItem("prevSelectedTaskId", taskId);
     }
 
     if (callback) {

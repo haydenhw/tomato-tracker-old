@@ -61,12 +61,12 @@ export const SET_SELECTED_PROJECT = 'SET_SELECTED_PROJECT';
 
 export function setSelectedProject(projectId) {
   return (dispatch) => {
+    localStorage.selectedProjectId = projectId;
+
     dispatch({
       type: 'SET_SELECTED_PROJECT',
       projectId
     });
-
-    localStorage.selectedProjectId = projectId;
   };
 }
 

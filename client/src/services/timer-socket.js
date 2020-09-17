@@ -34,16 +34,18 @@ const makeHandleTimerTick = (AppComponent) => (timeData) => {
   setDocumentTitleAsTime(remainingTime)
   setRemainingTime(remainingTime);
   incrementTaskTime(activeProject, activeTask);
+
+  // whatever project and task that is runnning on the backend should also be set as active on the frontend
   setSelectedProject(activeProject.shortId);
   setSelectedTaskId(activeTask.shortId);
+
+  if (!isTimerActive) {
+    setTimerActive(true);
+  }
 
   if (!isBackendTimerActive) {
     ackBackendTimerInit()
     playBackendTimerInitConfirmationSound()
-  }
-
-  if (!isTimerActive) {
-    setTimerActive(true);
   }
 
   if (remainingTime === 0 && isTimerActive) {
