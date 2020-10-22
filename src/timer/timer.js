@@ -1,18 +1,19 @@
 const countDownTimer = interval => ({
   intervalObj: null,
   time: null,
-  callback: null,
+  onTick: null,
   setHandler(fn) {
-    this.callback = fn;
+    this.onTick = fn;
   },
   handleTick() {
     if (this.time === 0) {
-      this.callback(this.time);
+      console.log('Calling "onTick" handler with time', this.time)
+      this.onTick(this.time);
       this.stop();
     } else if (this.time < 0) {
       console.error('Timer value went below zero. Current value is ', this.time);
     } else {
-      this.callback(this.time);
+      this.onTick(this.time);
       this.time--;
     }
   },

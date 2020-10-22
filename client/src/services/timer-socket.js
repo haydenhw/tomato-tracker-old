@@ -39,7 +39,11 @@ const makeHandleTimerTick = (AppComponent) => (timeData) => {
   setSelectedProject(activeProject.shortId);
   setSelectedTaskId(activeTask.shortId);
 
-  if (!isTimerActive) {
+  if (remainingTime === 0 && isTimerActive) {
+    handleTimerComplete();
+  }
+
+  if (remainingTime > 0 && !isTimerActive) {
     setTimerActive(true);
   }
 
@@ -48,9 +52,6 @@ const makeHandleTimerTick = (AppComponent) => (timeData) => {
     playBackendTimerInitConfirmationSound()
   }
 
-  if (remainingTime === 0 && isTimerActive) {
-    handleTimerComplete();
-  }
 }
 
 const initTimerSocket = (AppComponent) => {

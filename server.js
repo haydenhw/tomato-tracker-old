@@ -40,6 +40,7 @@ app.use('/timer', timerRouter);
 
 app.post('/desktop2', (req, res) => {
   if (process.env.SKIP_TIMER_SCRIPT) {
+    console.log('Skipping desktop2 POST')
     return res.end();
   }
 

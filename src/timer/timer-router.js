@@ -57,7 +57,7 @@ const makeTimerRouter = (http) => {
 
   timerRouter.route('/stop')
     .post((req, res) => {
-      console.log('Client requested that timer be stopped')
+      console.log('POST request to "/stop" endpoint received. Stopping timer')
       cdTimer.stop();
       res.end();
     });

@@ -40,13 +40,10 @@ export function toggleDesktopNotification(state) {
   };
 }
 
-export const HANDLE_TIMER_COMPLETE = 'HANDLE_TIMER_COMPLETE';
-
 export function handleTimerComplete() {
   return (dispatch, getState) => {
     const { alarmSoundSrc } = getState().config;
 
-    dispatch({ type: 'HANDLE_TIMER_COMPLETE' });
     dispatch({ type: 'STOP_TIMER' });
 
     console.log('playing sound', Date()
@@ -68,7 +65,7 @@ export function handleTimerComplete() {
 
 export const TOGGLE_TIMER = 'TOGGLE_TIMER';
 
-export function toggleTimer(selectedTaskId) {
+export function toggleTimer() {
   return (dispatch, getState) => {
     const { isTimerActive } = getState().timer;
 
@@ -107,7 +104,11 @@ export const START_TIMER = 'START_TIMER';
 export function startTimer(startTime, project, task) {
   return (dispatch) => {
     if (!task) {
-      return null;
+      return;
+    }
+
+    if (startTime === 0) {
+      return;
     }
 
     dispatch({ type: 'START_TIMER', });
@@ -148,6 +149,7 @@ export function stopTimer() {
 };
 
 export const INCREMENT_TASK_TIME = 'INCREMENT_TASK_TIME';
+
 export function incrementTaskTime(project, task) {
   return (dispatch) => {
     if (!task) {
@@ -163,8 +165,9 @@ export function incrementTaskTime(project, task) {
 }
 
 export const ACK_BACKEND_TIMER_INIT = 'ACK_BACKEND_TIMER_INIT';
+
 export function ackBackendTimerInit() {
   return {
     type: 'ACK_BACKEND_TIMER_INIT'
-  }
+  };
 }
