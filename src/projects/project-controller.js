@@ -7,6 +7,11 @@ const createDailyProjectIfNeeded = async (req, res, next) => {
     .limit(1)
     .select({ createdAt: 1 });
 
+  if (!mostRecentDailyProject) {
+      next();
+      return;
+  }
+
   const timeOfLastDailyProjectCreation = new Date(mostRecentDailyProject.createdAt);
 
   // During PST isTodayPDT will be true if timestamp is less than 12am

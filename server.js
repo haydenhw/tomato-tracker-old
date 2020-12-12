@@ -14,6 +14,7 @@ const http = require('http')
   .Server(app);
 
 const { PORT, DATABASE_URL } = require('./src/config');
+console.log({ DATABASE_URL });
 const { FeatureRequests, Logs } = require('./src/models');
 
 const makeTimerRouter = require('./src/timer/timer-router');
@@ -23,8 +24,9 @@ const taskRouter = require('./src/tasks/task-router');
 const timerRouter = makeTimerRouter(http);
 
 mongoose.Promise = global.Promise;
+mongoose.set('useUnifiedTopology', true);
 
-process.env.NODE_ENV =  process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 }
@@ -40,7 +42,7 @@ app.use('/timer', timerRouter);
 
 app.post('/desktop2', (req, res) => {
   if (process.env.SKIP_TIMER_SCRIPT) {
-    console.log('Skipping desktop2 POST')
+    console.log('Skipping desktop2 POST');
     return res.end();
   }
 
@@ -170,7 +172,7 @@ let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, { useMongoClient: true }, (err) => {
+    mongoose.connect(databaseUrl, { useNewUrlParser: true }, (err) => {
       if (err) {
         console.error(err);
         return reject(err);
